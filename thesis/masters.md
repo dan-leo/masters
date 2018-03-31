@@ -11,100 +11,24 @@ lof: false
 lot: false
 ---
 
-<!--pandoc '.\Literature Study.md' --filter pandoc-fignos --mathjax --number-sections --standalone --bibliography .\bibtex\library.bib -o thesis.pdf-->
-
 # Literature Study
 
-## Overview
+NB-IoT is on par with SigFox in terms of coverage, except that it has higher indoor penetration and bandwidth [@Lauridsen2017]. Because it is a licensed frequency, it significantly exceeds LoRa's population coverage when it comes to rural and deep indoor areas [@Persia2017]. Current NB-IoT modules do not meet the battery lifetime target[^longevity_target] although several optimizations are recommended by [@Yeoh2018a]. 
 
-### heading 3
+## Localization
 
-According to this person,
-$$
-x=2\,\sqrt{\frac{2\,\pi\,k\,T_{e}}{m_{e}}}\,\left(\frac{\Delta E}{k\,T_{e}}\right)^{2}\,a_{0}^{2}\,e^{2}\,\Omega
-$$
-
-
-Cool
-$$
-\mathbf{V}_1 \times \mathbf{V}_2 =  \begin{vmatrix} 
-\mathbf{i} & \mathbf{j} & \mathbf{k} \\
-\frac{\partial X}{\partial u} &  \frac{\partial Y}{\partial u} & 0 \\
-\frac{\partial X}{\partial v} &  \frac{\partial Y}{\partial v} & 0 \\
-\end{vmatrix}
-$$
-
-
-First of all, white text on a white background is impossible too see in this form on [Sequans](http://www.sequans.com/contact).
-
-Secondly, I'd like to enquire about AT+SQNMONI for the Sequans 3330 module. It throws a CME error "operation not supported". Is that exactly the problem?
+In the case of LoRaWAN, current hardware and software implementations limit timestamp resolution of time-of-flight (ToF) and time-difference-of-arrival (TDoA) schemes to 1 µsec, which limits localization accuracy to worse than 300 m [@Dongare2017].
 
 
 
-<!--hmm this is cool-->
 
 
+ref [Literature Study]
 
-* item 1
-* item 2
+aefaed
 
-Test cite @Harikiran2016
-
-Noice @Chavan2017a
-
-ref [#Overview]
-
-![Screenshot_20180108-17142 \label{fig_descr}](C:\Users\d7rob\MEng\Screenshot_20180108-171426.png "thesis description")
-
-See figure \ref{fig_descr}
-
-
-
-![Alt text \label{mylabel}](C:/Users/d7rob/OneDrive/Pictures/canyon.jpg){#fig:id}
-
-See figure \ref{mylabel} or +@fig:id.
-
-
-
-Random stuff  
-cool,adddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd  
-
-asd </br>
-
-bethr
-
-> block
->
-> quote
->
-> nice
-
-
-- [ ] banana
-- [ ] apple
-- [x] done
-- [ ] q
-
-
-|  a   |   b   |  c   |
-| :--: | :---: | :--: |
-|  1   | $4.12 |  2   |
-|  q   |   s   |  3   |
-
-qw
-
-
-
-You can create footnotes like this[^footnote].
-
-[^footnote]: Here is the *text* of the **footnote**.
-
-***
-
-nice
+[^longevity_target]: 10 years
 
 ---
-
-
 
 ## References

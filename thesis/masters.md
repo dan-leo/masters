@@ -120,11 +120,304 @@ Using the software, users can see all the signaling messages made by their mobil
 
 # Internal doc
 
+## New
+
+### Topic
+
+Localization NB-IoT Dash7 LoRa
+
+### Abstract
+
+Emergency response mesh network.
+
+Combine Namola and HayTag.
+
+blockchain it possibly.
+
+use stm32 2x2mm
+
+Design a wearable with improved indoor positioning by using Dash7 RSSI trilateration engines and with NB-IoT/EC-GSM--assisted--satellite localization as a fallback. Physiological signals are monitored before and during emergency events to improve false positive detection.
+
+* Is multi-modal localization necessary?
+* Do mist-computing end-nodes have to be synchronized in, for example: critical events, multi-modal locations, and individual connection pairings? If so, a block-chain based approach can enhance the authenticity?
+
+Bite-sized. Basically, the idea is to extend indoor positioning by using Dash7 RSSI trilateration engines with NB-IoT/EC-GSM--assisted--satellite localization as a fallback. Physiological signals are monitored before and during emergency events to improve false positive detection.
+
+
+
+Need anchors which can be cellphones? Based
+
+Unique direction finding?
+
+### System Overview
+
+* The system will use star or tree topologies, and mesh in edge cases.
+* NB-IoT is used for assisted GNSS/GPS/Galileo and as a fallback for Dash7.
+
 ## Ideas
 
 Ryan spoke to me. We had a great discussion. I need to paint my mind on a whiteboard, but for now I'll type here. NB-IoT not so good for emergency response. Better for monitoring. There are so many other things I can do, though. But in the end it's all about just passing the masters hey. So I do have a bunch of inside information, which could potentially be to my advantage. I'm stuck at a crossroads 3 months early says Ryan. He's looking at virtualization / SDN of MTN and 5G etc by 2022.
 
 80 references.
+
+Use Fog/mist computing and DASH7.
+
+https://medium.com/@patburns/how-to-make-better-smart-contracts-with-dash7-and-pol-cf3ca3e5a0da
+https://medium.com/@patburns/now-this-is-the-way-to-make-gps-way-better-for-lpwans-ddad647784cd
+https://medium.com/@patburns/the-indoor-outdoor-iot-2544d1026cae
+
+Capitalize on periodic nature of satellites. https://www.u-blox.com/en/assistnow
+
+https://www.mbed.com/en/
+
+http://www.st.com/en/wireless-connectivity/spirit1.html
+http://www.st.com/content/ccc/resource/sales_and_marketing/promotional_material/brochure/6c/48/c0/f1/bb/35/4a/b4/brstm32ulp.pdf/files/brstm32ulp.pdf/jcr:content/translations/en.brstm32ulp.pdf
+
+P-L496G-CELL02, based on Quectel’s BG96 modem for emerging LTE Cat M1/ NB1+2G networks. Each Pack combines an STM32L496 Discovery board and an STMod+ Cellular add-on board. 
+
+Thinus at Kamstrup always collects GPS info.
+
+The overall IDLab [research areas](https://www.uantwerpen.be/en/research-groups/idlab/research) are machine learning and data mining; semantic intelligence; distributed intelligence for IoT; cloud and big data infrastructures; multimedia coding and delivery; wireless and fixed networking;  electromagnetics, RF and high-speed circuits and systems. Within Antwerp, IDLab specifically focuses on wireless networking (in collaboration with Ghent), distributed embedded systems and stochastic modelling. 
+
+
+
+https://www.uantwerpen.be/en/research-groups/idlab/research/wireless-networking/
+
+IoT stacks:  IPSO-LWM2M/CoAP/UDP/6LoWPAN/6top/TSCH stack
+
+- Wireless communications is a catalyst for **new intelligent applications such as localization and tracking**, providing real-time insights for contextual enablers. However,  current localization methods are either inaccurate, too costly, too energy hungry or not applicable for large-scale and challenging environments.
+- **Resource constrained IoT devices & networks**: investigating ubiquitous solutions that transparently support a plethora of technologies (e.g., LoRa, DASH7, BLE, IEEE 802.15.4g), targeting co-creation of hardware prototyping and embedded protocol stack design as well as improved interactions with embedded devices.
+- **Localisation & tracking:** localizing people and things in challenging environmental conditions by leveraging on off the shelf wireless technologies (a.o. UWB, Wi-Fi, Zigbee, BLE, Sigfox, DASH7) & through large-scale validations in testbeds.
+
+GPS on a unidirectional LPWAN device with no ability to receive A-GPS ephemeris data means a cold start *of several minutes* for *each* acquisition of GPS coordinates. 
+
+http://haystacktechnologies.com/technology/ is an important resource
+
+http://www.sun.ac.za/english/Lists/news/DispForm.aspx?ID=4595 Maties ER24
+
+JP Meyers says that LoRa is meant for outdoors https://www.youtube.com/watch?v=Y9lMvyTYI3E
+
+https://en.wikipedia.org/wiki/Enhanced_9-1-1
+
+https://en.wikipedia.org/wiki/Radio_resource_location_services_protocol
+
+
+
+
+
+
+
+
+# **DASH7 Was Designed for the Internet of Things!**
+
+DASH7 is unlike any other wireless technology standard on the planet today. https://www.indiegogo.com/projects/haytag-the-world-s-smartest-pet-tag#/
+
+**• Long range.**   DASH7’s range is many times greater than its next competitors, but also works so well indoors it makes meshing obsolete. DASH7’s range in the USA is between 200 meters and 1 kilometer, but in Europe, Australia, China, and many other markets, multi-kilometer ranges are easily achievable.
+
+**• Low power.**   DASH7 uses less than 1 milliwatt of power on average. No other low power wireless standard can offer full two-way, long range communications using a solar cell like DASH7.
+
+**• Instant-on.** DASH7 was designed to “lock on” to fast moving things or people in ways that other wireless technologies cannot match. DASH7’s low latency is enabled through a unique query architecture that minimizes the elaborate hand-shaking typical in wireline-based protocols like IEEE 802.15.4, Bluetooth, or WiFi.
+
+**• Inexpensive.** DASH7 tags can be built very inexpensively using off-the-shelf components. DASH7‘s firmware stack compiles into less than 20KB, enabling the use of lower cost silicon and minimal memory. DASH7 uses a license-free, globally available frequency, 433 MHz, which reduces the need for multiple SKU’s and simplifies interoperability across vendors.
+
+**• Open source.** There is nothing proprietary about DASH7, which is a complete open standard with open source firmware. No other wireless IoT technology in the world offers this same level of openness. There is even an industry consortium, the DASH7 Alliance, to ensure interoperability across DASH7 vendors. DASH7 was also built with interoperability at the forefront of our minds.
+
+
+
+https://www.uantwerpen.be/en/research-groups/idlab/teaching/internships-and-mast/faculteit-wetenschap/
+
+## **Heterogeneous wireless networks (ORCHESTRA, MUSCLE-IoT)**
+
+**Thesis topics**
+
+*Distributed SDN controller for heterogeneous wireless networks.* Implementation of a distributed controller to manage a plethora of wireless and wired devices.
+
+*Implementation and evaluation of 60GHz handovers.* The implementation and evaluation of handovers to and from the novel 60GHz Wi-Fi technology in the NS-3 network simulator.
+
+*MAC protocol analysis on IEEE 802.11 networks.* Analysis of the impact of different versions/configurations of MAC protocols for IEEE 802.11 networks. 
+
+**Internship topics**
+
+*Distributed SDN controller for heterogeneous wireless networks.* Implementation of a distributed controller to manage a plethora of wireless and wired devices.
+
+*Implementation of ORCHESTRA in NS-3 network simulator.* The implementation and evaluation of the ORCHESTRA multi-technology management framework in the NS-3 network simulator.
+
+*MAC protocol analysis on IEEE 802.11 networks.* Analysis of the impact of different versions/configurations of MAC protocols for IEEE 802.11 networks. 
+
+*Multipath TCP in NS-3 network simulator.* Implementation and evaluation of Multipath TCP. 
+
+*Reverse engineer Google Wi-Fi.* You will get access to the Google Wi-Fi product and your goal is to reverse engineer it, in order to explain how the different features of Google Wi-Fi are implemented and accomplished.
+
+## **5G (5Guards, Smart Highway, CRAN)**
+
+**Thesis topics**
+
+*Implementation of Next Generation Interfaces for 5G system functional split.*Implementation of gNB functional split on SDR platforms.
+
+**Internship topics**
+
+*Implementation of Next Generation Interfaces for 5G system functional split.*Implementation of gNB functional split on SDR platforms.
+
+## **Low power & IoT (WiFi Halow, Battery less sensor networks, NB-IoT)**
+
+**Thesis topics**
+
+*Design and implement YANG/COMI models for 6LoWPAN networks.* Study and implement YANG/COMI-based models for 6LoWPAN.
+
+*Enabling battery-less IoT devices.* Comparing different energy harvesting sources and optimizing the performance to enable battery-less communication.
+
+*Enabling SDN capabilities in heterogeneous 6LoWPAN networks.* Study and Develop a fibbing-based approach for controlling meticulously the QoS of an heterogeneous IoT network. 
+
+*Managing flexible multimodal IoT devices.* Combining multiple emerging wireless technologies into a single multimodal device for a more flexible Internet of Things.
+
+*Modelling a fibbing-based API for 6LoWPAN networks.* Develop a fibbing-based interface for controlling meticulously the QoS of a network.
+
+*Optimizing and 6LoWPAN networks.* Develop a platform for monitor and control 6LoWPAN networks in order to offer optimized QoS. 
+
+*Optimizing 6TiSCH performance in the subGHZ band.* Study, implement and test different improvements to 6TiSCH in subGHZ band using the IEEE 802.15.4g PHY layer.
+
+*Optimizing mobile networks for IoT devices using NB-IoT.* Propose algorithm for small data transmission (UL/DL) in sleep mode UE and implement it in NS3 simulator.
+
+*Optimizing the energy efficiency of Wi-Fi HaLow for the IoT.* Make future Wi-Fi technology energy efficient to allow thousands of IoT devices to connect to a single access point.
+
+*Over-the-air firmware updates for IoT devices over cellular networks.* Propose method to perform over-the-air firmware updates and demonstrate it with real NB-IoT hardware.
+
+*Policy-based TSCH scheduling.* Research and development of state-of-the-art policy-based TSCH scheduling in power-constrained sensor networks.
+
+*TSCH scheduling in industrial areas.* Development of a TSCH scheduling function that guarantees QoS in an industrial setting with increased interference levels.
+
+**Internship topics**
+
+*Design and implement YANG/COMI models for 6LoWPAN networks.* Study and implement YANG/COMI-based models for 6LoWPAN.
+
+*Enabling battery-less IoT devices.* Comparing different energy harvesting sources and optimizing the performance to enable battery-less communication.
+
+*Enabling SDN capabilities in heterogeneous 6LoWPAN networks.* Study and Develop a fibbing-based approach for controlling meticulously the QoS of an heterogeneous IoT network. 
+
+*Managing flexible multimodal IoT devices.* Combining multiple emerging wireless technologies into a single multimodal device for a more flexible Internet of Things.
+
+*Modelling a fibbing-based API for 6LoWPAN networks.* Develop a fibbing-based interface for controlling meticulously the QoS of a network.
+
+*Optimizing and 6LoWPAN networks.* Develop a platform for monitor and control 6LoWPAN networks in order to offer optimized QoS. 
+
+*Optimizing 6TiSCH performance in the subGHZ band.* Study, implement and test different improvements to 6TiSCH in subGHZ band using the IEEE 802.15.4g PHY layer.
+
+*Optimizing mobile networks for IoT devices using NB-IoT.* Propose algorithm for small data transmission (UL/DL) in sleep mode UE and implement it in NS3 simulator.
+
+*Optimizing the energy efficiency of Wi-Fi HaLow for the IoT.* Make future Wi-Fi technology energy efficient to allow thousands of IoT devices to connect to a single access point.
+
+*Over-the-air firmware updates for IoT devices over cellular networks.* Propose method to perform over-the-air firmware updates and demonstrate it with real NB-IoT hardware.
+
+*Policy-based TSCH scheduling.* Research and development of state-of-the-art policy-based TSCH scheduling in power-constrained sensor networks.
+
+## **Nanoscale and Terrahertz communications**
+
+**Thesis topics**
+
+*Nanoscale communications for wirelessly programmable robotic materials.*Comparing wireless communication protocols that enable communication between sensors and actuators smaller than a speck of dust. 
+
+**Internship topics**
+
+*Nanoscale communications for wirelessly programmable robotic materials.*Comparing wireless communication protocols that enable communication between sensors and actuators smaller than a speck of dust. 
+
+## **Deep learning for networks**
+
+**Thesis topics**
+
+*Create a RL agent for flow scheduling in an MF-TDMA network.* Create a RL agent that will optimize flow scheduling in MF-TDMA networks to reach given mandates.
+
+*Creating resilient networks using machine learning.* Create a deep learning algorithm that allows a network manager detects failures before they happen. 
+
+*Creating resilient networks using machine learning.* Create a deep learning algorithm that allows a network manager detects failures before they happen.  
+
+*Deep learning to classify data flows in Wi-Fi and LTE networks.* Create a model using neural networks to classify different flow types like VoIP, HTTP, control, Video, …).
+
+*Evaluating and comparing state-of-art reinforcement learning algorithms.* There are many reinforcement learning algorithms but, given a problem, how do we know which is the right one? 
+
+*Predicting latency in heavily interfered wireless networks.* Using machine learning to predict the latency in a wireless network that has external interference.
+
+**Internship topics**
+
+*Create a RL agent for flow scheduling in an MF-TDMA network.* Create a RL agent that will optimize flow scheduling in MF-TDMA networks to reach given mandates.
+
+*Creating resilient networks using machine learning.* Create a deep learning algorithm that allows a network manager detects failures before they happen. 
+
+*Creating resilient networks using machine learning.* Create a deep learning algorithm that allows a network manager detects failures before they happen.  
+
+*Deep learning to classify data flows in Wi-Fi and LTE networks.* Create a model using neural networks to classify different flow types like VoIP, HTTP, control, Video, …).
+
+*Evaluating and comparing state-of-art reinforcement learning algorithms.* There are many reinforcement learning algorithms but, given a problem, how do we know which is the right one? 
+
+## **Distributed intelligence**
+
+**Thesis topics**
+
+*Efficient Generative Adversarial Nets (GANs)*
+
+*Evaluating and comparing state-of-art reinforcement learning algorithms.* There are many reinforcement learning algorithms but, given a problem, how do we know which is the right one? 
+
+*Flexible auto-encoder for semi-supervised deep learning*
+
+*Hierarchical Sequence Memory.* Analysis and experimental evaluation of neural networks based on Hierarchical Temporal Memory.
+
+*Multi-technology and multi-technique wireless indoor localization.* Evaluation of different techniques for wireless indoor localization using multiple wireless technologies.
+
+*Target Propagation for Deep Neural Networks.*
+
+**Internship topics**
+
+*Distributed Hierarchical Temporal Memory in NuPIC.* Distributing the existing reference implementation of the Hierarchical Temporal Memory machine learning algorithm across multiple cores or machines. 
+
+*Efficient Generative Adversarial Nets (GANs)*
+
+*Evaluating and comparing state-of-art reinforcement learning algorithms.* There are many reinforcement learning algorithms but, given a problem, how do we know which is the right one? 
+
+*Flexible auto-encoder for semi-supervised deep learning*
+
+*Hierarchical Sequence Memory.* Analysis and experimental evaluation of neural networks based on Hierarchical Temporal Memory.
+
+*Multi-technology and multi-technique wireless indoor localization.* Evaluation of different techniques for wireless indoor localization using multiple wireless technologies.
+
+*Target Propagation for Deep Neural Networks.*
+
+## **City of Things**
+
+**Thesis topics**
+
+*Design and implement YANG/COMI models for 6LoWPAN networks.* Study and implement YANG/COMI-based models for 6LoWPAN.
+
+*Modelling a fibbing-based API for 6LoWPAN networks.* Develop a fibbing-based interface for controlling meticulously the QoS of a network.
+
+*Optimizing and 6LoWPAN networks.* Develop a platform for monitor and control 6LoWPAN networks in order to offer optimized QoS. 
+
+*Optimizing 6TiSCH performance in the subGHZ band.* Study, implement and test different improvements to 6TiSCH in subGHZ band using the IEEE 802.15.4g PHY layer.
+
+**Internship topics**
+
+*Design and implement YANG/COMI models for 6LoWPAN networks.* Study and implement YANG/COMI-based models for 6LoWPAN.
+
+*Modelling a fibbing-based API for 6LoWPAN networks.* Develop a fibbing-based interface for controlling meticulously the QoS of a network.
+
+*Optimizing and 6LoWPAN networks.* Develop a platform for monitor and control 6LoWPAN networks in order to offer optimized QoS. 
+
+*Optimizing 6TiSCH performance in the subGHZ band.* Study, implement and test different improvements to 6TiSCH in subGHZ band using the IEEE 802.15.4g PHY layer.
+
+## Internships in cooperation with firms
+
+*Advanced NFC communication with nurse call devices.* We want to optimize the NFC communication and range between a smartphone and nurse call devices. 
+
+[*IoT sensor network for passenger counting on trains.*](http://www.esp.win.ua.ac.be/projects/show/id:1085) On-board railway IoT wireless sensor design and PoC for passenger counting and seat occupancy.
+
+*Secure BLE connectivity for patient monitoring system.* You will investigated what it takes to interface to a medical device/telemetry device using BLE. 
+
+*Linking Identity Server 4 to External Authentication services.* 
+
+*Wireless but reliable connectivity for nurse call.* You will investigate WiFi mesh technology for communication between room terminals in a hospital nurse call system. 
+
+
+
+
+
 
 
 

@@ -201,6 +201,8 @@ https://en.wikipedia.org/wiki/Enhanced_9-1-1
 
 https://en.wikipedia.org/wiki/Radio_resource_location_services_protocol
 
+https://artes.esa.int/projects/m2m-iot-maker-space-satellite-communications
+
 
 
 

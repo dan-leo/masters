@@ -1,0 +1,21 @@
+Dash7 makes it possible to communicate P2P and to compatible gateways using 
+multiple PHY/Radio layer.
+
+It can do it over LoRa and SigFox. Usually it communicates by itself using
+FSK, and NB-IoT uses MSK, too. There is not yet support for LTE Cat-M/NB.
+
+This makes it interesting, because with that barrier crossed, it means
+P2P communications using cellular technology. Something seriously overlooked.
+
+Seriously!
+
+One can make a self-healing network especially for the edge cases.
+
+How can MTN fund D7A, and myself as a sub-contractor? I'd be doing something 
+incredibly cool for not much money, but who cares? 
+It will come eventually.
+
+It will be a true multi-RAT concurrent stack, something I crave.
+
+Develop:
+	

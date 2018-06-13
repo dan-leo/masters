@@ -62,6 +62,119 @@ When measuring differential temperature variations, if spikes in temperature var
 
 # System Overview
 
+## eNodeB
+
+## EPC
+
+
+
+# Research
+
+## Github
+
+### OpenTag
+
+https://github.com/jpnorair/OpenTag
+
+Primarily used for 433 MHz communications. There are many microcontrollers and a couple radio transceivers which support it.
+
+**Tranceivers:**
+
+* ST SPIRIT1
+* TI CC430
+* TI CC110x
+
+**Microcontrollers:**
+
+* ST STM32F10x
+
+* ST STM32L1xx
+
+* TI CC430F5/6
+
+* TI MSP430F5/6
+
+* TI RF430F5978 
+
+### OSS7
+
+* https://github.com/MOSAIC-LoPoW/dash7-ap-open-source-stack
+* http://mosaic-lopow.github.io/dash7-ap-open-source-stack/docs/supported-hardware/
+
+| Platform         | MCU                                         | Radio                                                        |
+| ---------------- | ------------------------------------------- | ------------------------------------------------------------ |
+| B_L072Z_LRWAN1   | STMicroelectronics STM32L072CZ (Cortex-M0+) | Semtech SX1276                                               |
+| NUCLEO_L073RZ    | STMicroelectronics STM32L073RZ (Cortex-M0+) | Semtech SX1276 (SX1276MB1MAS shield)                         |
+| EZR32LG_WSTK6200 | Silicon Labs EZR32LG SoC (Cortex-M3)        | Silicon Labs si4460                                          |
+| EFM32GG_STK3700  | Silicon Labs Giant Gecko (Cortex-M3)        | none on-board (Texas Instruments CC1101 extension board available) |
+
+http://mosaic-lopow.github.io/dash7-ap-open-source-stack/docs/porting/
+
+
+
+## Cellular IoT modems
+
+An inexhaustible list of modems.
+
+Quectel 
+
+* BG96 modem LTE Cat-M/NB/EC-GSM
+
+* UG96 modem 2G/3G
+
+ST Micro
+
+* P-L496G-CELL0x kit (01 or 02)
+  * STM32L496 Discovery board
+  * STMod+ Cellular expansion board Quectel xG96 modem (UG or BG)
+  * Espruino embedded JavaScript engine
+
+Mediatek 
+
+* MT2625 NB-IoT R14
+  * NB-IoT modem DSP
+  * antenna RF
+  * base-band analogue front-end 
+  * RTOS
+* MT2621 NB-IoT R14/GSM/GPRS
+
+Ublox
+
+* [R412M](https://rf-design.co.za/u-blox-introduces-worlds-smallest-lte-cat-m1-nb-iot-multi-mode-module-quad-band-2g-fallback/) NB-IoT/Cat-M/2G
+
+
+
+  
+
+## LPWAN Modems
+
+ST Micro
+
+* SIRIT1 transceiver Dash7/LoRa
+  * SPSGRF-868 and SPSGRF-915 based on SPIRIT1
+    * 2-FSK, GFSK, MSK, GMSK, OOk, ASK
+
+
+Atmel
+
+* AT86RF215 Sub-1GHz/2.4GHz
+  * MR-FSK
+  * MT-OFDM
+  * MR-O-QPSK
+  * O-QPSK
+
+## Channel Access Method
+
+* [Difference between SC-FDMA and OFDM](http://www.rfwireless-world.com/Articles/difference-between-SC-FDMA-and-OFDM.html)
+  * One extra DFT module added before IFFT
+* http://www.rfwireless-world.com/Articles/difference-between-SC-FDMA-and-OFDMA.html
+* http://www.rfwireless-world.com/Articles/Difference_between_SC_and_OFDM.html
+* http://www.rfwireless-world.com/Articles/OFDM_versus_OFDMA.html
+
+## RF front-end
+
+[What's in an RF Front End?](https://www.eetimes.com/document.asp?doc_id=1276331)
+
 
 # Testing
 
@@ -199,18 +312,18 @@ JP Meyers says that LoRa is meant for outdoors https://www.youtube.com/watch?v=Y
 
 https://en.wikipedia.org/wiki/Enhanced_9-1-1
 
-https://en.wikipedia.org/wiki/Radio_resource_location_services_protocol
-
-https://artes.esa.int/projects/m2m-iot-maker-space-satellite-communications
+https://en.wikipedia.org/wiki/Radio_resource_location_services_protocol [Harald Welte](https://en.wikipedia.org/wiki/Harald_Welte) proved at [HAR2009](https://en.wikipedia.org/wiki/Hacking_at_Random) [[3\]](https://en.wikipedia.org/wiki/Radio_resource_location_services_protocol#cite_note-3) that many high-end smart-phones submit their GPS location to the mobile operator when requested. This happened without any sort of authentication. 
 
 
 
+http://wizzilab.com/wiki/#!solutions/faq.md
+
+http://www.dash7-alliance.org/wp-content/uploads/2014/08/05-UAntwerp.pdf
 
 
 
 
-
-# **DASH7 Was Designed for the Internet of Things!**
+## **DASH7 Was Designed for the Internet of Things!**
 
 DASH7 is unlike any other wireless technology standard on the planet today. https://www.indiegogo.com/projects/haytag-the-world-s-smartest-pet-tag#/
 
@@ -228,7 +341,7 @@ DASH7 is unlike any other wireless technology standard on the planet today. http
 
 https://www.uantwerpen.be/en/research-groups/idlab/teaching/internships-and-mast/faculteit-wetenschap/
 
-## **Heterogeneous wireless networks (ORCHESTRA, MUSCLE-IoT)**
+### **Heterogeneous wireless networks (ORCHESTRA, MUSCLE-IoT)**
 
 **Thesis topics**
 
@@ -250,7 +363,7 @@ https://www.uantwerpen.be/en/research-groups/idlab/teaching/internships-and-mast
 
 *Reverse engineer Google Wi-Fi.* You will get access to the Google Wi-Fi product and your goal is to reverse engineer it, in order to explain how the different features of Google Wi-Fi are implemented and accomplished.
 
-## **5G (5Guards, Smart Highway, CRAN)**
+### **5G (5Guards, Smart Highway, CRAN)**
 
 **Thesis topics**
 
@@ -260,7 +373,7 @@ https://www.uantwerpen.be/en/research-groups/idlab/teaching/internships-and-mast
 
 *Implementation of Next Generation Interfaces for 5G system functional split.*Implementation of gNB functional split on SDR platforms.
 
-## **Low power & IoT (WiFi Halow, Battery less sensor networks, NB-IoT)**
+### **Low power & IoT (WiFi Halow, Battery less sensor networks, NB-IoT)**
 
 **Thesis topics**
 
@@ -312,7 +425,7 @@ https://www.uantwerpen.be/en/research-groups/idlab/teaching/internships-and-mast
 
 *Policy-based TSCH scheduling.* Research and development of state-of-the-art policy-based TSCH scheduling in power-constrained sensor networks.
 
-## **Nanoscale and Terrahertz communications**
+### **Nanoscale and Terrahertz communications**
 
 **Thesis topics**
 
@@ -322,7 +435,7 @@ https://www.uantwerpen.be/en/research-groups/idlab/teaching/internships-and-mast
 
 *Nanoscale communications for wirelessly programmable robotic materials.*Comparing wireless communication protocols that enable communication between sensors and actuators smaller than a speck of dust. 
 
-## **Deep learning for networks**
+### **Deep learning for networks**
 
 **Thesis topics**
 
@@ -350,7 +463,7 @@ https://www.uantwerpen.be/en/research-groups/idlab/teaching/internships-and-mast
 
 *Evaluating and comparing state-of-art reinforcement learning algorithms.* There are many reinforcement learning algorithms but, given a problem, how do we know which is the right one? 
 
-## **Distributed intelligence**
+### **Distributed intelligence**
 
 **Thesis topics**
 
@@ -382,7 +495,7 @@ https://www.uantwerpen.be/en/research-groups/idlab/teaching/internships-and-mast
 
 *Target Propagation for Deep Neural Networks.*
 
-## **City of Things**
+### **City of Things**
 
 **Thesis topics**
 
@@ -404,7 +517,7 @@ https://www.uantwerpen.be/en/research-groups/idlab/teaching/internships-and-mast
 
 *Optimizing 6TiSCH performance in the subGHZ band.* Study, implement and test different improvements to 6TiSCH in subGHZ band using the IEEE 802.15.4g PHY layer.
 
-## Internships in cooperation with firms
+### Internships in cooperation with firms
 
 *Advanced NFC communication with nurse call devices.* We want to optimize the NFC communication and range between a smartphone and nurse call devices. 
 

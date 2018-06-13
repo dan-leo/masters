@@ -320,6 +320,12 @@ http://wizzilab.com/wiki/#!solutions/faq.md
 
 http://www.dash7-alliance.org/wp-content/uploads/2014/08/05-UAntwerp.pdf
 
+http://www.dash7-alliance.org/whitepapers/
+
+MatLab have a downlink waveform generator class called [NBIoTDownlinkWaveformGenerator](https://www.mathworks.com/examples/lte-system/mw/lte_product-NBIoTDownlinkWaveformGenerationExample-nb-iot-downlink-waveform-generation).
+
+It may be possible to have a single-feed antenna for both LoRa and NB-IoT as in the following paper: [Multi-feed RF front-ends and cellular antennas for next generation smartphones](https://pdfs.semanticscholar.org/ff3d/322286f70661360b0c87c4d0e49536cc2564.pdf).
+
 
 
 

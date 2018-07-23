@@ -4,7 +4,7 @@ author: Daniel Robinson
 date: June 2018
 tags: [LTE, wearables, healthcare, safety, critical, life-threatening, SDR, NB-IoT, Dash7, localization]
 abstract: |
-  Upon the quest of finding the ultimate IoT solution for emergency response, an idea was borne which uses peer-to-peer networking and a suitable long-range LPWAN. Fast localization is key, along with the capability of sending critical physiological signals. A final practical PoC can be worn and tested in the form of either a LoRa or NB-IoT based system, both with Dash7 wireless P2P networking, RSSI trilateration engines and A-GPS. The two comparable systems also aid the licensed vs unlicensed LPWAN debate. The P2P network is most useful in WAGL mode which guides a responder directly to the wearer, besides the ability to operate independently from gateways in constrained cases.
+  Upon the quest of finding the ultimate IoT solution for emergency response, an idea was borne which uses peer-to-peer networking and a suitable long-range LPWAN. Fast localization is key, along with the capability of sending critical physiological signals. A final practical PoC can be worn and tested in the form of either a LoRa or NB-IoT based system, both with Dash7 wireless P2P networking, land-based localization and A-GPS. The two comparable systems also aid the licensed vs unlicensed LPWAN debate. The P2P network is most useful in WAGL mode which guides a responder directly to the wearer, besides the ability to operate independently from gateways in constrained cases.
 
 toc: true
 lof: false
@@ -16,15 +16,17 @@ linkcolor: blue
 
 \vspace{10 mm}
 
-> *Dedicated especially to the women who fear being out there in the wild streets alone.*
+> *Dedicated especially to the women who fear the unknown out there in the wild streets.*
 
 # Introduction
 
+Ideally, the more features, the better. For the purposes of clarity, the scope of the project will remain mostly in the region of LPWAN technologies. Nevertheless, it is interesting to note that piezoelectric and thermal energy harvesting can be used, besides solar. There are existing GSM + GNSS solutions in the market today which provide satisfactory performance, but the techniques can be considered archaic and not future-proof.
+
 Around [52 people](https://africacheck.org/factsheets/south-africas-crime-statistics-201617) are murdered every day in South Africa[^inTheWorldToo]. This excludes rape, theft, assault, gang-related violence and other cases. Efforts to curb such activities are performed by the police force, neighbourhood watches, vigilantes and many other members of society. Common measures include prevention, taking control of life-threatening situations and monitoring frequent hotspots.
 
-[^inTheWorldToo]: Although system aimed for South Africa, can be used world-wide.
+[^inTheWorldToo]: Although the system is aimed for South Africa, it can be used world-wide.
 
-Since eyes and protection cannot be everywhere, lives are threatened continually. Simple proof is in how hospitals and clinics fill up with new patients daily, including victims of aforementioned cases.
+Since eyes and protection cannot be everywhere, lives are threatened continually. Simple proof is in how hospitals and clinics still fill up with new patients daily, including victims of aforementioned cases.
 
 > *The only thing necessary for the triumph of evil is for good men to do nothing. -- Edmund Burke* 
 
@@ -44,17 +46,19 @@ Haystack Technologies had created a clever Dash7 device called the [HayTag](http
 
 NB-IoT has some examples too, such as the [Connect Tag](https://www.zdnet.com/article/samsung-launches-nb-iot-gps-smart-tag), etcetra \<insert more\>
 
-Since most systems are limited to a GPS based long-range linkup solution, we explore the possibility of guiding the responder to the location of the wearer in situations where weak or no satellite signals exists, especially in the case of buildings.
+Since efforts in localization typically use GPS/GNSS, weak or no satellite signal creates a compelling case for guiding a responder to the distressed user.
+
+Adding P2P capabilities adds decentralization to the centralized nature of the system, bringing the best of both worlds into a hybrid.
 
 ## Localization
 
 The following table explains different localization modes.
 
-| Long-range linkup | Peer-to-peer/Dash7 | Location          |
-| :---------------: | :----------------: | ----------------- |
-|        No         |        Yes         | WAGL, RTLS        |
-|        Yes        |         No         | A-GPS             |
-|        Yes        |        Yes         | WAGL, RTLS, A-GPS |
+| Centralized | Decentralized | Location          |
+| :---------: | :-----------: | ----------------- |
+|     No      |      Yes      | WAGL, RTLS        |
+|     Yes     |      No       | A-GPS             |
+|     Yes     |      Yes      | WAGL, RTLS, A-GPS |
 
 
 
@@ -64,19 +68,23 @@ Cellular vs LPWAN. Licensed vs unlicensed.
 
 # Literature Review
 
-NB-IoT is not as publicized the technology it is to replace, GSM/2G/GPRS.
+NB-IoT is not as publicized as the technology it is to replace, GSM/2G/GPRS.
 
-# System Overview
+# Theoretical System Overview
 
 ## A-GPS
 
 Assisted-satellite data includes orbitals etc. This packet is about 1kB in size, and it would be good to have this data periodically in order to have a hot-start location within 20 seconds, as opposed to 2 minutes from a cold start. It also draws way too much energy.
 
+https://www.gps.gov/cgsic/meetings/2009/gakstatter1.pdf
+
+UHF/VHF data radios - Pro: proven to be very reliable for RTK, free of charge. Con: requires licensing, limited distance, user managed. • Spread-spectrum (900MHz) data radios – Pro: license-free, free of charge, proven technology. Con: very limited dist., sensitive topo/obstructions, user managed. • GSM/CDMA wireless networks - Pro: wide area coverage, license-free. Con: coverage may not exist in work area, dropped calls, cost. WiFi/WiMax?
+
 ## Cellular IoT
 
 ### EC-GSM-IoT
 
-Lower power form of GSM, with extended coverage. Unfortunately 2G is in the process of being turned of in countries around the world.
+Lower power form of GSM, with extended coverage. Unfortunately 2G is in the process of being turned off in countries around the world.
 
 ### eMTC
 
@@ -86,7 +94,7 @@ This is a high-powered form of IoT communications which includes VoLTE. Most lik
 
 NB-IoT is the 3GPP's response to emerging unlicensed LPWANs. According to Ryan vd Bergh, it should achieve mainstream adoption within 2 years time.
 
-It is simpler than eMTC, and doesn't include VoLTE. The project will focus on this technology.
+It is simpler than eMTC, and doesn't include VoLTE. On the licensed side the focus will mainly be on this technology.
 
 ## LPWAN
 
@@ -101,6 +109,59 @@ A D7 GW can do multicast, however. This is perfect for sending satellite-assit d
 ### SigFox
 
 30-50 km range in rural environments. 3-10 km in urban environments.
+
+## Physical characteristics
+
+The device must be able to be worn discretely. Having it on the wrist, arm, etc. will help to measure physiological signals as well.
+
+## Battery life
+
+Deep sleep and the varying power-saving modes are crucial to extend the battery life of the system to at least a week on standby mode ( assuming a small LiPo between 85 - 150 mAh).
+
+## Range
+
+P2P has a medium range less than what one would expect from the different types of gateways.
+
+## QoS
+
+The quality of signal, SNR etc is also important. It helps to acknowledge data packets, and use listen-before-talk to increase duty cycle limitations etc.
+
+# Simulated results
+
+Using Jupyter, Python, MatLab etc to model a system using theoretical values.
+
+# Experimental design
+
+## Hardware
+
+PCB designs to test the system.
+
+* NB-IoT (Ublox SARA R412M or BG96) + GNSS (Ublox M8N) + MCU (ATSAMD21G18a)
+* LoRaWan/Dash7/SigFox (B-L072Z-LRWAN1) + STM32L
+
+## Software
+
+* C++
+
+* Python
+
+* Whatever it takes.
+
+# Field Trials  
+
+Testing testing and more testing.
+
+# Data processing
+
+Evaluating data.
+
+# Results
+
+Successful? Comparison?
+
+# Conclusion
+
+Useful to science? Beneficial to mankind?
 
 # Appendix
 

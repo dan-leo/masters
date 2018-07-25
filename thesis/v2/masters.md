@@ -60,7 +60,7 @@ The following table explains different localization modes.
 |     Yes     |      No       | A-GPS             |
 |     Yes     |      Yes      | WAGL, RTLS, A-GPS |
 
-
+Decentralized networks can reach centralized ones by multi-hops. Using a self-healing system of updating nodes that haven't reached a centralized gateway, one can make sure that messages get through as soon as possible.
 
 ## Networking
 
@@ -69,6 +69,12 @@ Cellular vs LPWAN. Licensed vs unlicensed.
 # Literature Review
 
 NB-IoT is not as publicized as the technology it is to replace, GSM/2G/GPRS.
+
+Current literature suggests common methods such as GSM, Bluetooth and GPS. Still, there are a number of localized applications beneficial to health and safety. A GPS solar powered GSM wearable which monitors autism in children is proposed in [@Ahmed2017c], but lacks details on extending battery life, coverage etc. A thorough investigation in elderly assistance, including fall detection (also in @Chavan2017a), heartrate and movement activity, is proposed in [@Bizjak2017a].
+
+PPG sensor to detect heart attacks as in [@Valliappan2017], also uses GSM. ZigBee to base station monitors chronic diseases for elderly patients [@Jian2010]. Vital signs are monitored and sent via bluetooth in [@Wu2008a], [@Kale2017a], [@Rathi2017] and in the form of jewellery in [@Patel2018].
+
+Kalman filters in [@Wu2016]. Sarsat 406 MHz life jacket in [@Serra2011]. GSM and GPS Telemedicine in [@Suganthi.2012a] and [@Tewary2016b]. Autonomous emergency bracelet for women proposed in [@Harikiran2016]. 
 
 # Theoretical System Overview
 
@@ -139,6 +145,8 @@ PCB designs to test the system.
 * NB-IoT (Ublox SARA R412M or BG96) + GNSS (Ublox M8N) + MCU (ATSAMD21G18a)
 * LoRaWan/Dash7/SigFox (B-L072Z-LRWAN1) + STM32L
 
+![Ublox R412M + SAMD21G18a + Neo 7M](C:\GIT\masters\thesis\images\nbiot_pcb.JPG)
+
 ## Software
 
 * C++
@@ -162,6 +170,116 @@ Successful? Comparison?
 # Conclusion
 
 Useful to science? Beneficial to mankind?
+
+# Ideas, questions, thoughts and answers?
+
+* References
+* Is NB-IoT the best?
+  * Unfortunately depends on cellular operators, but everyone listens if one has money
+  * Seems to have the best link budget, and slightly better than SigFox at indoor penetration
+  * Ublox R412M has LTE Cat-NB1, Cat-M and EC-GSM.
+  * Quectel BG96 also does, but GNSS integrated as well. It is expensive at about R1000 a pop.
+  * NRF091 is still on it's way, but my favourite so far due to it's small form factor
+* LoRa?
+  * Despite it's promising characteristics, LoRaWAN is seemingly a failure
+    * No listen-before-talk, 20% success rate
+    * SF12 means one cannot send data frequently, but that's where one gets ones range.
+    * No P2P
+    * Simple, incomplete networking stack
+  * Dash7 seems to address most of it's issues.
+    * B.U.R.S.T.Y data
+    * Bidirectional, broadcasting
+    * P2P
+  * Other networking stacks?
+  * Wireless MBus?
+* SigFox?
+  * No.. low bandwidth, duty cycle limitations.
+  * Good range, but unreliable after 6kmph.
+* GNSS
+  * TrigNet base stations across SA?
+    * RTK corrections?
+  * Built-in to modem chips seem more favorable
+  * Keeping RTC alive and almanac stored will ensure a hot start of around 5 seconds.
+  * Managed to capture some data between Stellenbosch, Somerset West and Cape Town International
+  * Ublox M8N seems quite robust. An active antenna helps significantly for an ideal HDOP < 1.0
+  * Ublox M7 is discontinued.
+  * Satellite localization is definitely necessary for outdoor or the majority of use cases.
+* Indoor localization?
+  * Fingerprinting seems to be the best method
+  * Universities in the Netherlands have managed to get under 1m accuracy using Dash7
+* IMU data for dead reckoning?
+  * Pitch, Roll, Yaw from Quaternions
+  * Heading from magnetometer and GPS
+  * MPU9250 has a dedication MPU (motion processing unit) for things like number of steps etc.
+  * Could be useful to send an estimate back in real time.
+  * It can also be used to determine if the wearer has crashed/fallen and needs help.
+* What kind of battery does one need?
+  * 85mAh seems to last about 4 days using a constant BLE connection to a phone 1m away.
+  * 150mAh seems ideal for event based comms
+  * LiPo
+  * Button cell?
+  * Wireless charging?
+  * Energy harvesting?
+    * thermal potential difference
+    * piezoelectric (sound, vibrations, light)
+* Dash7 seems to solve LoRaWANs challenges?
+  * There's a very cool modem out there being the LRWAN1 which can handle SigFox and LoRa
+    * Unfortunately a dual-boot solution has to be built to accommodate both
+    * OSS-7, Haystack and Wizzilab have built a concurrent Dash7::LoRaWAN stack (must verify)
+  * To be able to reuse the RF frontend is incredibly useful to save on space and power constraints.
+  * Cortex build SoCs, and they have a private contract to integrate NB-IoT and Dash7.
+    * These things usually cost millions of dollars.
+  * Medium range, around 3km
+* How can animal tracking be applied in our system?
+  * They use VHF hand-held directional antennae to locate the animal.
+  * Seems to be a purely RSSI based system
+* How does a clap sensor apply to TOF?
+  * Interesting as clap sensor needs filters
+  * Speed of sound (340 m/s) is much slower than light and RF at 299794258 m/s.
+  * TOF requires incredible accurate RTC, and synchronized. GNSS can help perhaps, but the ionosphere also causes interference.
+* Which physiological signals could be most useful?
+  * Heightened heartrate could signal a frightened state. If IMU says that the wearer has fallen/crashed and heartrate still low, then possibly unconscious.
+  * Respiration can be determined from the IMU data as well.
+  * Skin conductivity indicates sweat and possible stress.
+* Where can I find data to test physiological signals?
+  * HealthQ
+  * They mentioned a website which I have somewhere..
+* When will I have a device ready?
+  * End of this year.
+* What do I expect a device to do?
+* Can Haystack help me?
+  * Yes, but under their PSA (professional services agreement) they keep the IP and expect about $200/hr for 100 hours of work.
+* How about an FPGA?
+  * Yes, there is even an existing SDR solution for NB-IoT, but it costs at least $500k.
+* SDR?
+  * Well, yes.. the B200 but the open source software (OpenAIR interface) doesn't have NB-IoT yet, otherwise one has to pay yet again using other sources.
+* Matlab for simulations?
+  * Not really.. there were two small things they have in their toolbox, but no-where near complete.
+* Even simulations cost money!
+* What will I use for simulations?
+  * Jupyter, python etc
+* Will I even use machine learning?
+  * It depends if I amass a huge amount of data that can only be optimized in a data science method.
+* What do I want to have done before leaving to America in August?
+  * I will buy a LTE Cat-M, Cat-NB1, EC-GSM board with GNSS and use a Hologram.io sim to test coverage in a few major cities in the U.S. like New York, Atlanta, Washington DC.
+  * I'll have a PCB design on the way from China
+  * Preliminary Lit study!!
+  * LRWAN1 board familiarity with OSS-7
+  * Wizzilab Dash7 modems work already in sending sensor data to the web. Haven't tested P2P functionality yet.
+* What am I adding to society?
+  * A solution which if taken up seriously can add peace of mind and alleviate crime starting in small towns.
+* What am I adding to science?
+  * Cortex also contributes to OSS-7. I consider it something big with a group of active developers who I am in touch with. Contributing to it will add value for science.
+  * By trying both licensed and unlicensed LPWANs one aids the debate between the two.
+  * Thomas is already comparing LoRa, SigFox, GSM and NB-IoT thouroughly and this provides a great background to the application in question.
+* Am I still on track?
+  * Well, I have a year left. I still think I can get a great deal done in this time.
+  * For these last few weeks before America?
+    * Well, at least I've gotten the Wizzikit to work, and explored some of the LRWAN1. Lit Study still needs work!, and the PCB is (can you believe) still in the process of being designed.
+    * Seriously, the weeks go by rather quickly and I do a couple of other things in the mean time.
+    * Perhaps I've taken a bit of a holiday from masters, but I'm back now!
+* Last thoughts?
+  * I think one of the things I've done is speak to numerous people about this problem, and it helps to slowly build up a clear, realistic picture of expectations and the technology.
 
 # Appendix
 

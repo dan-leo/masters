@@ -1,3 +1,5 @@
 *.pdf
 
 tex2pdf*
+.metadata
+TUINO_ZERO_96

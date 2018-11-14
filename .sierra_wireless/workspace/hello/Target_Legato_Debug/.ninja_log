@@ -1,0 +1,17 @@
+# ninja log v5
+1	190	0	Target_Legato_Debug/app/hello/obj/hi/_main.c.o	12a41655281a7cf9
+1	213	0	Target_Legato_Debug/component/bfbd1ed20fb03539d4ebf057efad2546/obj/_componentMain.c.o	c8f7447107e69a64
+0	217	0	Target_Legato_Debug/app/hello/obj/hello/_main.c.o	62c153d5d5b9dde5
+0	234	0	Target_Legato_Debug/component/bfbd1ed20fb03539d4ebf057efad2546/obj/36205588b575a3d926170cff2652e213.o	13d4c134128195ce
+0	259	0	Target_Legato_Debug/component/bcfa565285548f4f436d1b3c56a6ffc9/obj/996d729086fff7439e9f2a843bc46023.o	949459e96d2c7730
+0	266	0	Target_Legato_Debug/component/bcfa565285548f4f436d1b3c56a6ffc9/obj/_componentMain.c.o	7d684e24453ad089
+234	272	0	Target_Legato_Debug/staging/read-only/lib/libComponent_testComp.so	9fe4fb44008a4eff
+272	275	0	Target_Legato_Debug/app/hello/staging/read-only/lib/libComponent_testComp.so	bf20e91fcc53da72
+266	297	0	Target_Legato_Debug/staging/read-only/lib/libComponent_helloComponent.so	566eacd2e58c857b
+297	300	0	Target_Legato_Debug/app/hello/staging/read-only/lib/libComponent_helloComponent.so	c0da2363c99696bb
+272	305	0	Target_Legato_Debug/app/hello/obj/hi/hi	172974a37606173d
+305	307	0	Target_Legato_Debug/app/hello/staging/read-only/bin/hi	396b92f70110d71b
+297	329	0	Target_Legato_Debug/app/hello/obj/hello/hello	5fa063e3e8eae68b
+329	331	0	Target_Legato_Debug/app/hello/staging/read-only/bin/hello	8b28921416028ff1
+331	338	0	Target_Legato_Debug/app/hello/staging/info.properties	bdd6632569a599af
+338	351	0	Target_Legato_Debug/hello.wp76xx.update	c8ab6c06d81461ff

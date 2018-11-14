@@ -1,0 +1,14 @@
+# ninja log v5
+0	116	0	Target_Legato_Debug/component/8d4a9ae701e7c7a0d747e64c7eb7256c/obj/_componentMain.c.o	a7168f3bf6358e6a
+0	131	0	Target_Legato_Debug/app/exampleTester/obj/assetData/_main.c.o	ea154975c492626c
+1	370	0	Target_Legato_Debug/api/8805c89b8cf16dc9316ea7470bec4178/client/le_avdata_client.c	a9bb770b6ae91ad6
+1	370	0	Target_Legato_Debug/api/8805c89b8cf16dc9316ea7470bec4178/client/le_avdata_interface.h	a9bb770b6ae91ad6
+1	370	0	Target_Legato_Debug/api/8805c89b8cf16dc9316ea7470bec4178/client/le_avdata_messages.h	a9bb770b6ae91ad6
+370	501	0	Target_Legato_Debug/component/8d4a9ae701e7c7a0d747e64c7eb7256c/obj/3f08077ae7cbc4268b08742402a198d1.o	52ce3b4a36aae95c
+370	774	0	Target_Legato_Debug/api/8805c89b8cf16dc9316ea7470bec4178/client/le_avdata_client.c.o	2e586874704cb2d4
+774	802	0	Target_Legato_Debug/staging/read-only/lib/libComponent_assetDataComponent.so	e53e86fffbb97c15
+802	804	0	Target_Legato_Debug/app/exampleTester/staging/read-only/lib/libComponent_assetDataComponent.so	2bfaeb08ec85be1a
+802	839	0	Target_Legato_Debug/app/exampleTester/obj/assetData/assetData	82067f7c50139076
+839	841	0	Target_Legato_Debug/app/exampleTester/staging/read-only/bin/assetData	69780c84a079d56c
+841	848	0	Target_Legato_Debug/app/exampleTester/staging/info.properties	fc8d96e620341925
+848	878	0	Target_Legato_Debug/exampleTester.wp76xx.update	11aa19c3378703d0

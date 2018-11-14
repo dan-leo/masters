@@ -1,0 +1,17 @@
+version: 1.0.0
+maxFileSystemBytes: 512K
+
+executables:
+{
+	testexe = (a)
+	testexe2 = (b)
+}
+
+processes:
+{
+	run:
+	{
+		(testexe)
+		(testexe2)
+	}
+}

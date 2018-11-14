@@ -1,0 +1,1301 @@
+TTFF(Time to First Fix) = 2547ms
+Position state: 3D Fix
+Latitude(positive->north) : -33.869632
+Longitude(positive->east) : 18.616518
+hAccuracy                 : 441.18m
+Altitude  : 185.859m
+vAccuracy : 16.0m
+AltitudeOnWgs84  : 223.859m
+GPS time, Week 2006:TimeOfWeek 135795000 ms
+Time(HH:MM:SS:MS) 13:42:57:000
+Epoch Time 1529329377000 ms
+GPS time accuracy 33669ns
+UTC leap seconds in advance 18s
+Date(YYYY-MM-DD) 2018-06-18
+Position dilution of precision (PDOP) 1.900
+Horizontal dilution of precision (HDOP) 1.700
+Vertical dilution of precision (VDOP) 0.800
+Geometric dilution of precision (GDOP) invalid 65535
+Time dilution of precision (TDOP) invalid 65535
+hSpeed invalid [4294967295, 4294967295]
+vSpeed invalid [2147483647, 2147483647]
+Direction invalid [4294967295, 4294967295]
+satsInView 17 - satsTracking 10 - satsUsed 8
+[00] SVid 001 - C1 - U1 - SNR22 - Azim223 - Elev06
+[01] SVid 012 - C1 - U1 - SNR34 - Azim126 - Elev26
+[02] SVid 014 - C1 - U1 - SNR15 - Azim226 - Elev45
+[03] SVid 018 - C1 - U1 - SNR14 - Azim246 - Elev14
+[04] SVid 020 - C1 - U0 - SNR18 - Azim019 - Elev33
+[05] SVid 022 - C1 - U1 - SNR25 - Azim220 - Elev04
+[06] SVid 024 - C1 - U1 - SNR23 - Azim126 - Elev05
+[07] SVid 025 - C1 - U1 - SNR13 - Azim077 - Elev50
+[08] SVid 031 - C1 - U0 - SNR19 - Azim292 - Elev47
+[09] SVid 032 - C1 - U1 - SNR25 - Azim181 - Elev62
+[10] SVid 010 - C1 - U0 - SNR00 - Azim011 - Elev64
+[11] SVid 026 - C1 - U0 - SNR00 - Azim345 - Elev05
+[12] SVid 302 - C4 - U0 - SNR00 - Azim118 - Elev61
+[13] SVid 303 - C4 - U0 - SNR00 - Azim067 - Elev27
+[14] SVid 307 - C4 - U0 - SNR00 - Azim223 - Elev37
+[15] SVid 308 - C4 - U0 - SNR00 - Azim126 - Elev73
+[16] SVid 330 - C4 - U0 - SNR00 - Azim348 - Elev53
+TTFF(Time to First Fix) = 2547ms
+Position state: 3D Fix
+Latitude(positive->north) : -33.869632
+Longitude(positive->east) : 18.616518
+hAccuracy                 : 493.03m
+Altitude  : 185.859m
+vAccuracy : 24.0m
+AltitudeOnWgs84  : 223.859m
+GPS time, Week 2006:TimeOfWeek 135796000 ms
+Time(HH:MM:SS:MS) 13:42:58:000
+Epoch Time 1529329378000 ms
+GPS time accuracy 33669ns
+UTC leap seconds in advance 18s
+Date(YYYY-MM-DD) 2018-06-18
+Position dilution of precision (PDOP) 1.900
+Horizontal dilution of precision (HDOP) 1.700
+Vertical dilution of precision (VDOP) 0.800
+Geometric dilution of precision (GDOP) invalid 65535
+Time dilution of precision (TDOP) invalid 65535
+hSpeed invalid [4294967295, 4294967295]
+vSpeed invalid [2147483647, 2147483647]
+Direction invalid [4294967295, 4294967295]
+satsInView 17 - satsTracking 10 - satsUsed 8
+[00] SVid 001 - C1 - U1 - SNR17 - Azim223 - Elev06
+[01] SVid 012 - C1 - U1 - SNR33 - Azim126 - Elev26
+[02] SVid 014 - C1 - U1 - SNR15 - Azim226 - Elev45
+[03] SVid 018 - C1 - U1 - SNR18 - Azim246 - Elev14
+[04] SVid 020 - C1 - U0 - SNR18 - Azim019 - Elev33
+[05] SVid 022 - C1 - U1 - SNR25 - Azim220 - Elev04
+[06] SVid 024 - C1 - U1 - SNR23 - Azim126 - Elev05
+[07] SVid 025 - C1 - U1 - SNR13 - Azim077 - Elev50
+[08] SVid 031 - C1 - U0 - SNR18 - Azim292 - Elev47
+[09] SVid 032 - C1 - U1 - SNR25 - Azim181 - Elev62
+[10] SVid 010 - C1 - U0 - SNR00 - Azim011 - Elev64
+[11] SVid 026 - C1 - U0 - SNR00 - Azim345 - Elev05
+[12] SVid 302 - C4 - U0 - SNR00 - Azim118 - Elev61
+[13] SVid 303 - C4 - U0 - SNR00 - Azim067 - Elev27
+[14] SVid 307 - C4 - U0 - SNR00 - Azim223 - Elev37
+[15] SVid 308 - C4 - U0 - SNR00 - Azim126 - Elev73
+[16] SVid 330 - C4 - U0 - SNR00 - Azim348 - Elev53
+^C
+root@swi-mdm9x28:~# 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+------------ [Mon, 18 Jun 2018 14:13:11 GMT] Reset filter ------------
+Jun 18 14:13:12 | updateDaemon[654]/updateDaemon T=main | updateDaemon.c updateDaemon_MarkGood() 229 | System passed probation. Marking 'good'.
+Jun 18 14:13:12 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 1ec5b00e824957bc09a1a1a6682091a6 is still needed.
+Jun 18 14:13:12 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum b87209b23b0fd0db16329f9fdef7ba4c is still needed.
+Jun 18 14:13:12 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 7e333afee8f437f267bb1d971a51de3f is still needed.
+Jun 18 14:13:12 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum a33499c4b836b1a1637129071128ec7d is still needed.
+Jun 18 14:13:12 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 6ad92c67118ee596707ab9de38292eed is still needed.
+Jun 18 14:13:12 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum bb40cd11275158bf2136c347f2088c36 is still needed.
+Jun 18 14:13:12 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1037 | Removing unused app with MD5 sum 94ee3f8daf543369d35d868809490d3d.
+Jun 18 14:13:13 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 7475729ac07d6f35f0a7d63ef0a27954 is still needed.
+Jun 18 14:13:13 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum d8bcbd95f0e55ecb3f86e30215575d76 is still needed.
+Jun 18 14:13:13 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum bd188e5a418a93a2ff282fd9eb07ab2b is still needed.
+Jun 18 14:13:13 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 1b857c9855e20502f050cbdc63f29cc3 is still needed.
+Jun 18 14:13:13 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 5ee38660f9a5372cdebec87f4b8c3637 is still needed.
+Jun 18 14:13:13 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 91ee79f7739aab1a92f0021f681d89c1 is still needed.
+Jun 18 14:13:13 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum afdd2597d8c86b1d57d447190f37a428 is still needed.
+Jun 18 14:13:13 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 5c3ece1c95e1a4e2ae5deae6b1ce35d2 is still needed.
+Jun 18 14:13:13 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 0049325277d27153c6b8a3d0ba38a3f3 is still needed.
+Jun 18 14:13:13 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 8bd7868da7898410e1b64735246d8663 is still needed.
+Jun 18 14:13:13 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum d993fd29682d48b0f63309ebbfb4c1e4 is still needed.
+Jun 18 14:13:13 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 202585c0729df8700beac1ddffc6ff04 is still needed.
+Jun 18 14:13:13 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 73da017e80a17a7d22b58d021b14f782 is still needed.
+Jun 18 14:13:13 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum b37d6ebaaa1eecaf23379b371c52264d is still needed.
+Jun 18 14:13:13 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 47cb334bb0ba8ec92b286bc6ffd7a1e8 is still needed.
+Jun 18 14:13:13 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 3207afb8b9786aaff3ada5899f18a192 is still needed.
+Jun 18 14:13:13 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 4d7750e67a482caf41f17c4df4037953 is still needed.
+Jun 18 14:13:13 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 46bdec6aeb269460137a72fd37626e99 is still needed.
+Jun 18 14:13:13 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum cd1ab5d1bf8ac5ca32e230192b9b6c68 is still needed.
+Jun 18 14:13:13 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 396d8354ff90a2cb907b225d1c7617f5 is still needed.
+Jun 18 14:13:13 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum cbfffd86d49a1a9831b59b25bc762aac is still needed.
+Jun 18 14:13:13 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum ba3156c0837926c099a994e074b65f14 is still needed.
+Jun 18 14:13:13 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum b338bb5aca5ac52365c513f433b5b8e3 is still needed.
+Jun 18 14:14:12 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 1ec5b00e824957bc09a1a1a6682091a6 is still needed.
+Jun 18 14:14:12 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum b87209b23b0fd0db16329f9fdef7ba4c is still needed.
+Jun 18 14:14:12 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 7e333afee8f437f267bb1d971a51de3f is still needed.
+Jun 18 14:14:12 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum a33499c4b836b1a1637129071128ec7d is still needed.
+Jun 18 14:14:12 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 6ad92c67118ee596707ab9de38292eed is still needed.
+Jun 18 14:14:12 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum bb40cd11275158bf2136c347f2088c36 is still needed.
+Jun 18 14:14:12 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 7475729ac07d6f35f0a7d63ef0a27954 is still needed.
+Jun 18 14:14:12 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum d8bcbd95f0e55ecb3f86e30215575d76 is still needed.
+Jun 18 14:14:12 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum bd188e5a418a93a2ff282fd9eb07ab2b is still needed.
+Jun 18 14:14:12 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 1b857c9855e20502f050cbdc63f29cc3 is still needed.
+Jun 18 14:14:12 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 5ee38660f9a5372cdebec87f4b8c3637 is still needed.
+Jun 18 14:14:12 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 91ee79f7739aab1a92f0021f681d89c1 is still needed.
+Jun 18 14:14:12 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum afdd2597d8c86b1d57d447190f37a428 is still needed.
+Jun 18 14:14:12 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 5c3ece1c95e1a4e2ae5deae6b1ce35d2 is still needed.
+Jun 18 14:14:12 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 0049325277d27153c6b8a3d0ba38a3f3 is still needed.
+Jun 18 14:14:12 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 8bd7868da7898410e1b64735246d8663 is still needed.
+Jun 18 14:14:12 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum d993fd29682d48b0f63309ebbfb4c1e4 is still needed.
+Jun 18 14:14:12 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 202585c0729df8700beac1ddffc6ff04 is still needed.
+Jun 18 14:14:12 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 73da017e80a17a7d22b58d021b14f782 is still needed.
+Jun 18 14:14:12 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum b37d6ebaaa1eecaf23379b371c52264d is still needed.
+Jun 18 14:14:12 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 47cb334bb0ba8ec92b286bc6ffd7a1e8 is still needed.
+Jun 18 14:14:12 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 3207afb8b9786aaff3ada5899f18a192 is still needed.
+Jun 18 14:14:12 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 4d7750e67a482caf41f17c4df4037953 is still needed.
+Jun 18 14:14:12 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 46bdec6aeb269460137a72fd37626e99 is still needed.
+Jun 18 14:14:12 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum cd1ab5d1bf8ac5ca32e230192b9b6c68 is still needed.
+Jun 18 14:14:12 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 396d8354ff90a2cb907b225d1c7617f5 is still needed.
+Jun 18 14:14:12 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum cbfffd86d49a1a9831b59b25bc762aac is still needed.
+Jun 18 14:14:12 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum ba3156c0837926c099a994e074b65f14 is still needed.
+Jun 18 14:14:12 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum b338bb5aca5ac52365c513f433b5b8e3 is still needed.
+Jun 18 14:14:14 | updateDaemon[654]/updateDaemon T=main | system.c system_Snapshot() 882 | Snapshot taken of system index 37.  Current system index is now 38.
+Jun 18 14:14:14 | updateDaemon[654]/updateDaemon T=main | system.c system_SymlinkApp() 584 | Creating symlink /legato/systems/current/apps/.del.syscaller -> /legato/apps/73da017e80a17a7d22b58d021b14f782
+Jun 18 14:14:14 | updateDaemon[654]/updateDaemon T=main | supCtrl.c supCtrl_StopApp() 101 | Stopping app 'syscaller'.
+Jun 18 14:14:14 | supervisor[642]/supervisor T=main | app.c app_Stop() 2915 | Stopping app 'syscaller'
+Jun 18 14:14:14 | testexe[17791]/framework T=main | LE_FILENAME TermSignalHandler() 643 | Terminated
+Jun 18 14:14:14 | _appStopClient[18068]/framework T=main | LE_FILENAME CreateSocket() 550 | Socket opened as standard i/o file descriptor 2!
+Jun 18 14:14:14 | supervisor[642]/supervisor T=main | apps.c DeactivateAppContainer() 349 | Application 'syscaller' has stopped.
+Jun 18 14:14:14 | updateDaemon[654]/updateDaemon T=main | appUser.c appUser_Remove() 88 | Deleting user 'appsyscaller' for application 'syscaller'.
+Jun 18 14:14:14 | updateDaemon[654]/framework T=main | LE_FILENAME user_Delete() 1400 | Deleted user 'appsyscaller'.
+Jun 18 14:14:14 | updateDaemon[654]/framework T=main | LE_FILENAME sysStatus_MarkTried() 261 | Current system has been marked "tried 1".
+Jun 18 14:14:14 | avcDaemon[665]/avcDaemon T=main | avcAppUpdate.c AppUninstallHandler() 960 | Application, 'syscaller,' has been uninstalled.
+Jun 18 14:14:14 | avcDaemon[665]/avcDaemon T=main | avcAppUpdate.c AppUninstallHandler() 999 | Local Uninstall of application.
+Jun 18 14:14:14 | updateDaemon[654]/updateDaemon T=main | app.c app_RemoveIndividual() 836 | App syscaller removed.
+Jun 18 14:14:14 | updateDaemon[654]/updateDaemon T=main | updateDaemon.c StartProbation() 216 | System on probation (timer started).
+Jun 18 14:14:14 | avcDaemon[665]/avcDaemon T=main | avcAppUpdate.c GetObject9InstanceForApp() 632 | Instance exists and has been reused.
+Jun 18 14:14:14 | avcDaemon[665]/avcDaemon T=main | assetData.c assetData_DeleteInstance() 2173 | Deleting instance lwm2m/9/14
+Jun 18 14:14:14 | avcDaemon[665]/avcDaemon T=main | avcAppUpdate.c NotifyObj9List() 692 | Found 4 object 9 instances
+Jun 18 14:14:14 | avcDaemon[665]/avcDaemon T=main | avcAppUpdate.c NotifyObj9List() 693 | obj9ListLen; 52 obj9List: </lwm2m/9/0>,</lwm2m/9/1>,</lwm2m/9/2>,</lwm2m/9/11>
+Jun 18 14:14:18 | updateDaemon[654]/updateDaemon T=main | updateDaemon.c le_update_Start() 1792 | Update request accepted.
+Jun 18 14:14:18 | updateDaemon[18118]/framework T=main | LE_FILENAME user_Create() 979 | Created user 'SecurityUnpack' with uid 1024 and gid 1024.
+Jun 18 14:14:18 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 1ec5b00e824957bc09a1a1a6682091a6 is still needed.
+Jun 18 14:14:18 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum b87209b23b0fd0db16329f9fdef7ba4c is still needed.
+Jun 18 14:14:18 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 7e333afee8f437f267bb1d971a51de3f is still needed.
+Jun 18 14:14:18 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum a33499c4b836b1a1637129071128ec7d is still needed.
+Jun 18 14:14:18 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 6ad92c67118ee596707ab9de38292eed is still needed.
+Jun 18 14:14:18 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum bb40cd11275158bf2136c347f2088c36 is still needed.
+Jun 18 14:14:18 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 7475729ac07d6f35f0a7d63ef0a27954 is still needed.
+Jun 18 14:14:18 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum d8bcbd95f0e55ecb3f86e30215575d76 is still needed.
+Jun 18 14:14:18 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum bd188e5a418a93a2ff282fd9eb07ab2b is still needed.
+Jun 18 14:14:18 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 1b857c9855e20502f050cbdc63f29cc3 is still needed.
+Jun 18 14:14:18 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 5ee38660f9a5372cdebec87f4b8c3637 is still needed.
+Jun 18 14:14:18 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 91ee79f7739aab1a92f0021f681d89c1 is still needed.
+Jun 18 14:14:18 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum afdd2597d8c86b1d57d447190f37a428 is still needed.
+Jun 18 14:14:18 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 5c3ece1c95e1a4e2ae5deae6b1ce35d2 is still needed.
+Jun 18 14:14:18 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 0049325277d27153c6b8a3d0ba38a3f3 is still needed.
+Jun 18 14:14:18 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 8bd7868da7898410e1b64735246d8663 is still needed.
+Jun 18 14:14:18 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum d993fd29682d48b0f63309ebbfb4c1e4 is still needed.
+Jun 18 14:14:18 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 202585c0729df8700beac1ddffc6ff04 is still needed.
+Jun 18 14:14:18 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 73da017e80a17a7d22b58d021b14f782 is still needed.
+Jun 18 14:14:18 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum b37d6ebaaa1eecaf23379b371c52264d is still needed.
+Jun 18 14:14:18 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 47cb334bb0ba8ec92b286bc6ffd7a1e8 is still needed.
+Jun 18 14:14:18 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 3207afb8b9786aaff3ada5899f18a192 is still needed.
+Jun 18 14:14:18 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 4d7750e67a482caf41f17c4df4037953 is still needed.
+Jun 18 14:14:18 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 46bdec6aeb269460137a72fd37626e99 is still needed.
+Jun 18 14:14:18 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum cd1ab5d1bf8ac5ca32e230192b9b6c68 is still needed.
+Jun 18 14:14:18 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 396d8354ff90a2cb907b225d1c7617f5 is still needed.
+Jun 18 14:14:18 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum cbfffd86d49a1a9831b59b25bc762aac is still needed.
+Jun 18 14:14:18 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum ba3156c0837926c099a994e074b65f14 is still needed.
+Jun 18 14:14:18 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum b338bb5aca5ac52365c513f433b5b8e3 is still needed.
+Jun 18 14:14:18 | updateDaemon[654]/updateDaemon T=main | updateUnpack.c JsonDone() 899 | App with MD5 sum 73da017e80a17a7d22b58d021b14f782 already exists on target. Skipping.
+Jun 18 14:14:18 | updateDaemon[654]/updateDaemon T=main | updateUnpack.c DiscardPayloadBytes() 626 | Payload discarded: 3976/12228
+Jun 18 14:14:18 | updateDaemon[654]/updateDaemon T=main | updateUnpack.c DiscardPayloadBytes() 626 | Payload discarded: 8072/12228
+Jun 18 14:14:18 | updateDaemon[654]/updateDaemon T=main | updateUnpack.c DiscardPayloadBytes() 626 | Payload discarded: 12168/12228
+Jun 18 14:14:18 | updateDaemon[654]/updateDaemon T=main | updateUnpack.c DiscardPayloadBytes() 626 | Payload discarded: 12228/12228
+Jun 18 14:14:18 | updateDaemon[654]/updateDaemon T=main | system.c system_Snapshot() 776 | System has not yet passed probation, no snapshot taken.
+Jun 18 14:14:18 | updateDaemon[654]/updateDaemon T=main | system.c system_SymlinkApp() 584 | Creating symlink /legato/systems/current/apps/syscaller -> /legato/apps/73da017e80a17a7d22b58d021b14f782
+Jun 18 14:14:18 | updateDaemon[654]/updateDaemon T=main | appUser.c appUser_Add() 37 | Creating user 'appsyscaller' for application 'syscaller'.
+Jun 18 14:14:18 | updateDaemon[654]/framework T=main | LE_FILENAME user_Create() 979 | Created user 'appsyscaller' with uid 1029 and gid 1029.
+Jun 18 14:14:19 | updateDaemon[654]/framework T=main | LE_FILENAME sysStatus_MarkTried() 261 | Current system has been marked "tried 1".
+Jun 18 14:14:19 | avcDaemon[665]/avcDaemon T=main | avcAppUpdate.c AppInstallHandler() 852 | Application, 'syscaller,' has been installed.
+Jun 18 14:14:19 | updateDaemon[654]/updateDaemon T=main | supCtrl.c supCtrl_StartApp() 60 | Starting app 'syscaller'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | proc.c GetFaultAction() 323 | No fault action specified for process 'testexe'. Assuming 'ignore'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | proc.c GetWatchdogAction() 359 | testexe watchdogAction '' in proc section
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | proc.c GetWatchdogAction() 359 | testexe watchdogAction '' in proc section
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | proc.c GetFaultAction() 323 | No fault action specified for process 'cat'. Assuming 'ignore'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | proc.c GetWatchdogAction() 359 | cat watchdogAction '' in proc section
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | proc.c GetWatchdogAction() 359 | cat watchdogAction '' in proc section
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/dev/log' to '/legato/systems/current/appsWriteable/syscaller/dev/log'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/dev/null' to '/legato/systems/current/appsWriteable/syscaller/dev/null'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/dev/zero' to '/legato/systems/current/appsWriteable/syscaller/dev/zero'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/legato/systems/current/lib/liblegato.so' to '/legato/systems/current/appsWriteable/syscaller/lib/liblegato.so'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/ld-linux.so.3' to '/legato/systems/current/appsWriteable/syscaller/lib/ld-linux.so.3'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libc.so.6' to '/legato/systems/current/appsWriteable/syscaller/lib/libc.so.6'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libpthread.so.0' to '/legato/systems/current/appsWriteable/syscaller/lib/libpthread.so.0'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/librt.so.1' to '/legato/systems/current/appsWriteable/syscaller/lib/librt.so.1'.
+Jun 18 14:14:19 | avcDaemon[665]/avcDaemon T=main | avcAppUpdate.c AppInstallHandler() 899 | Local install, create new object9 instance.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libdl.so.2' to '/legato/systems/current/appsWriteable/syscaller/lib/libdl.so.2'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libgcc_s.so.1' to '/legato/systems/current/appsWriteable/syscaller/lib/libgcc_s.so.1'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libm.so.6' to '/legato/systems/current/appsWriteable/syscaller/lib/libm.so.6'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/usr/lib/libstdc++.so.6' to '/legato/systems/current/appsWriteable/syscaller/lib/libstdc++.so.6'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/legato/systems/current/apps/syscaller/read-only/lib/libComponent_cpuproc.so' to '/legato/systems/current/appsWriteable/syscaller/lib/
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/legato/systems/current/apps/syscaller/read-only/bin/testexe' to '/legato/systems/current/appsWriteable/syscaller/bin/testexe'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateDirLink() 1451 | Created directory link '/proc' to '/legato/systems/current/appsWriteable/syscaller/proc'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/ash' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/ash'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/busybox' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/busybox'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/busybox.nosuid' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/busybox.nosuid'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/busybox.suid' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/busybox.suid'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/cat' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/cat'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/chattr' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/chattr'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/chgrp' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/chgrp'.
+Jun 18 14:14:19 | avcDaemon[665]/avcDaemon T=main | avcAppUpdate.c GetObject9InstanceForApp() 649 | No instance mapping found, creating new.
+Jun 18 14:14:19 | avcDaemon[665]/avcDaemon T=main | assetData.c assetData_CreateInstanceById() 1990 | Creating asset instance for lwm2m/9
+Jun 18 14:14:19 | avcDaemon[665]/avcDaemon T=main | assetData.c assetData_CreateInstanceById() 2092 | Finished creating instance 15 for lwm2m/9
+Jun 18 14:14:19 | avcDaemon[665]/avcDaemon T=main | avcAppUpdate.c GetObject9InstanceForApp() 658 | Recording new instance id.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/chmod' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/chmod'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/chown' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/chown'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/cp' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/cp'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/cpio' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/cpio'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/date' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/date'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/dd' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/dd'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/df' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/df'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/dmesg' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/dmesg'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/dnsdomainname' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/dnsdomainname'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/dnsmasq_script.sh' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/dnsmasq_script.sh'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/dumpkmap' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/dumpkmap'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/echo' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/echo'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/egrep' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/egrep'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/false' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/false'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/fatattr' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/fatattr'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/fgrep' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/fgrep'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/fsync' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/fsync'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/getopt' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/getopt'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/grep' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/grep'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/gunzip' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/gunzip'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/gzip' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/gzip'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/hostapd' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/hostapd'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/hostapd_cli' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/hostapd_cli'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/hostname' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/hostname'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/kill' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/kill'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/kill.procps' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/kill.procps'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/ln' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/ln'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/login' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/login'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/login.shadow' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/login.shadow'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/ls' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/ls'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/mkdir' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/mkdir'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/mknod' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/mknod'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/mktemp' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/mktemp'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/modem-shutdown' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/modem-shutdown'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/more' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/more'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/mount' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/mount'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/mv' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/mv'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/netstat' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/netstat'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/nice' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/nice'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/pidof' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/pidof'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/pidof.procps' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/pidof.procps'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/ping' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/ping'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/ping6' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/ping6'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/printenv' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/printenv'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/ps' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/ps'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/ps.procps' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/ps.procps'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/pwd' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/pwd'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/rm' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/rm'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/rmdir' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/rmdir'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/run-parts' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/run-parts'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/sed' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/sed'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/sh' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/sh'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/sleep' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/sleep'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/stat' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/stat'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/stty' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/stty'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/su' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/su'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/su.shadow' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/su.shadow'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/sync' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/sync'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/tar' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/tar'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/touch' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/touch'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/true' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/true'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/umount' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/umount'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/uname' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/uname'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/usleep' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/usleep'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/vi' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/vi'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/watch' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/watch'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/watch.procps' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/watch.procps'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/zcat' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/zcat'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/mba.b00' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/mba.b00'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/mba.b01' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/mba.b01'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/mba.b02' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/mba.b02'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/mba.b03' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/mba.b03'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/mba.b04' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/mba.b04'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/mba.b05' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/mba.b05'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/mba.b06' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/mba.b06'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/mba.mbn' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/mba.mbn'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/mba.mdt' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/mba.mdt'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/modem.b00' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/modem.b00'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/modem.b01' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/modem.b01'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/modem.b02' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/modem.b02'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/modem.b03' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/modem.b03'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/modem.b04' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/modem.b04'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/modem.b05' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/modem.b05'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/modem.b06' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/modem.b06'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/modem.b07' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/modem.b07'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/modem.b08' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/modem.b08'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/modem.b09' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/modem.b09'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/modem.b10' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/modem.b10'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/modem.b11' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/modem.b11'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/modem.b12' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/modem.b12'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/modem.b13' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/modem.b13'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/modem.b14' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/modem.b14'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/modem.b15' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/modem.b15'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/modem.b16' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/modem.b16'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/modem.b17' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/modem.b17'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/modem.b18' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/modem.b18'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/modem.b19' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/modem.b19'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/modem.b20' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/modem.b20'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/modem.b21' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/modem.b21'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/modem.b22' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/modem.b22'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/modem.b23' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/modem.b23'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/modem.b24' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/modem.b24'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/modem.b25' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/modem.b25'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/modem.mdt' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/modem.mdt'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/ti-connectivity/wl18xx-conf.bin' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/ti-connectivity/wl
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/ti-connectivity/wl18xx-fw-4.bin' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/ti-connectivity/wl
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/ld-2.24.so' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/ld-2.24.so'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/ld-linux.so.3' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/ld-linux.so.3'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libBrokenLocale-2.24.so' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libBrokenLocale-2.24.so'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libBrokenLocale.so.1' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libBrokenLocale.so.1'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libanl-2.24.so' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libanl-2.24.so'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libanl.so.1' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libanl.so.1'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libattr.so.1' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libattr.so.1'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libattr.so.1.1.0' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libattr.so.1.1.0'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libblkid.so.1' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libblkid.so.1'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libblkid.so.1.1.0' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libblkid.so.1.1.0'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libc-2.24.so' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libc-2.24.so'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libc.so.6' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libc.so.6'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libcap.so.2' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libcap.so.2'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libcap.so.2.25' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libcap.so.2.25'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libcom_err.so.2' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libcom_err.so.2'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libcom_err.so.2.1' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libcom_err.so.2.1'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libcrypt-2.24.so' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libcrypt-2.24.so'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libcrypt.so.1' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libcrypt.so.1'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libdl-2.24.so' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libdl-2.24.so'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libdl.so.2' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libdl.so.2'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libext2fs.so.2' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libext2fs.so.2'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libext2fs.so.2.4' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libext2fs.so.2.4'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libgcc_s.so.1' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libgcc_s.so.1'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libm-2.24.so' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libm-2.24.so'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libm.so.6' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libm.so.6'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libncurses.so.5' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libncurses.so.5'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libncurses.so.5.9' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libncurses.so.5.9'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libnsl-2.24.so' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libnsl-2.24.so'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libnsl.so.1' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libnsl.so.1'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libnss_compat-2.24.so' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libnss_compat-2.24.so'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libnss_compat.so.2' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libnss_compat.so.2'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libnss_dns-2.24.so' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libnss_dns-2.24.so'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libnss_dns.so.2' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libnss_dns.so.2'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libnss_files-2.24.so' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libnss_files-2.24.so'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libnss_files.so.2' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libnss_files.so.2'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libpthread-2.24.so' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libpthread-2.24.so'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libpthread.so.0' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libpthread.so.0'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libresolv-2.24.so' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libresolv-2.24.so'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libresolv.so.2' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libresolv.so.2'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/librt-2.24.so' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/librt-2.24.so'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/librt.so.1' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/librt.so.1'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libtinfo.so.5' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libtinfo.so.5'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libtinfo.so.5.9' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libtinfo.so.5.9'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libutil-2.24.so' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libutil-2.24.so'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libutil.so.1' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libutil.so.1'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libuuid.so.1' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libuuid.so.1'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libuuid.so.1.3.0' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libuuid.so.1.3.0'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libwrap.so.0' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libwrap.so.0'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libwrap.so.0.7.6' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libwrap.so.0.7.6'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libz.so.1' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libz.so.1'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libz.so.1.2.8' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libz.so.1.2.8'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/extra/embms_kernel.ko' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18.44/extra/embms_ke
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/kernel/block/test-iosched.ko' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18.44/kernel/
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/kernel/crypto/ansi_cprng.ko' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18.44/kernel/c
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/kernel/crypto/arc4.ko' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18.44/kernel/crypto/
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/kernel/crypto/ccm.ko' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18.44/kernel/crypto/c
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/kernel/crypto/ctr.ko' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18.44/kernel/crypto/c
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/kernel/crypto/michael_mic.ko' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18.44/kernel/
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/kernel/crypto/seqiv.ko' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18.44/kernel/crypto
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/kernel/drivers/iio/imu/bmi160/bmi160.ko' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/kernel/drivers/input/misc/gpio_axis.ko' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/kernel/drivers/input/misc/gpio_event.ko' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/kernel/drivers/input/misc/gpio_input.ko' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/kernel/drivers/input/misc/gpio_matrix.ko' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.1
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/kernel/drivers/input/misc/gpio_output.ko' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.1
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/kernel/drivers/mmc/card/mmc_block_test.ko' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/kernel/drivers/mmc/card/mmc_test.ko' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18.44/
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/kernel/drivers/net/ethernet/qualcomm/emac/qcom_emac.ko' to '/legato/systems/current/appsWriteable/syscaller/usr/l
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/kernel/drivers/net/phy/at803x.ko' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18.44/ker
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/kernel/drivers/net/phy/qca8337.ko' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18.44/ke
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/kernel/drivers/net/wireless/ti/wl1251/wl1251.ko' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modu
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/kernel/drivers/net/wireless/ti/wl12xx/wl12xx.ko' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modu
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/kernel/drivers/net/wireless/ti/wl18xx/wl18xx.ko' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modu
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/kernel/drivers/net/wireless/ti/wlcore/wlcore.ko' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modu
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/kernel/drivers/net/wireless/ti/wlcore/wlcore_sdio.ko' to '/legato/systems/current/appsWriteable/syscaller/usr/lib
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/kernel/fs/quota/quota_tree.ko' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18.44/kernel
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/kernel/fs/quota/quota_v1.ko' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18.44/kernel/f
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/kernel/fs/quota/quota_v2.ko' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18.44/kernel/f
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/kernel/lib/crc7.ko' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18.44/kernel/lib/crc7.k
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/kernel/net/mac80211/mac80211.ko' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18.44/kern
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/kernel/net/netfilter/xt_physdev.ko' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18.44/k
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/kernel/net/wireless/cfg80211.ko' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18.44/kern
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/modules.alias' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18.44/modules.alias'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/modules.alias.bin' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18.44/modules.alias.bin'
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/modules.builtin' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18.44/modules.builtin'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/modules.builtin.bin' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18.44/modules.builtin.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/modules.dep' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18.44/modules.dep'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/modules.dep.bin' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18.44/modules.dep.bin'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/modules.devname' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18.44/modules.devname'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/modules.order' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18.44/modules.order'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/modules.softdep' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18.44/modules.softdep'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/modules.symbols' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18.44/modules.symbols'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/modules.symbols.bin' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18.44/modules.symbols.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/udev/rules.d/85-regulatory.rules' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/udev/rules.d/85-regulatory.rules'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/cat' to '/legato/systems/current/appsWriteable/syscaller/bin/cat'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/sh' to '/legato/systems/current/appsWriteable/syscaller/bin/sh'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1513 | Skipping file link '/proc/cpuinfo' to '/legato/systems/current/appsWriteable/syscaller/proc/cpuinfo': Already exists
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateTmpFs() 1231 | Mounted tmpfs at /legato/systems/current/appsWriteable/syscaller/tmp.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/tmp/legato/serviceDirectoryServer' to '/legato/systems/current/appsWriteable/syscaller/tmp/legato/serviceDirectoryServer'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/tmp/legato/serviceDirectoryClient' to '/legato/systems/current/appsWriteable/syscaller/tmp/legato/serviceDirectoryClient'.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | resourceLimits.c SetRLimitValue() 282 | Setting resource limit maxCoreDumpFileBytes to value 102400.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | resourceLimits.c SetRLimitValue() 282 | Setting resource limit maxFileBytes to value 102400.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | resourceLimits.c SetRLimitValue() 282 | Setting resource limit maxLockedMemoryBytes to value 8192.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | resourceLimits.c SetRLimitValue() 282 | Setting resource limit maxFileDescriptors to value 256.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | resourceLimits.c SetRLimitValue() 282 | Setting resource limit maxMQueueBytes to value 512.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | resourceLimits.c SetRLimitValue() 282 | Setting resource limit maxThreads to value 20.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | resourceLimits.c SetRLimitValue() 282 | Setting resource limit maxQueuedSignals to value 100.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | proc.c proc_Start() 1394 | Starting process 'testexe' with pid 18121
+Jun 18 14:14:19 | supervisor[18121]/supervisor T=main | proc.c proc_Start() 1359 | Execing 'testexe'
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | resourceLimits.c SetRLimitValue() 282 | Setting resource limit maxCoreDumpFileBytes to value 102400.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | resourceLimits.c SetRLimitValue() 282 | Setting resource limit maxFileBytes to value 102400.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | resourceLimits.c SetRLimitValue() 282 | Setting resource limit maxLockedMemoryBytes to value 8192.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | resourceLimits.c SetRLimitValue() 282 | Setting resource limit maxFileDescriptors to value 256.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | resourceLimits.c SetRLimitValue() 282 | Setting resource limit maxMQueueBytes to value 512.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | resourceLimits.c SetRLimitValue() 282 | Setting resource limit maxThreads to value 20.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | resourceLimits.c SetRLimitValue() 282 | Setting resource limit maxQueuedSignals to value 100.
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | proc.c proc_Start() 1394 | Starting process 'cat' with pid 18122
+Jun 18 14:14:19 | updateDaemon[654]/updateDaemon T=main | app.c app_InstallIndividual() 765 | App syscaller <73da017e80a17a7d22b58d021b14f782> installed
+Jun 18 14:14:19 | updateDaemon[654]/updateDaemon T=main | updateDaemon.c ApplyAppUpdate() 712 | App 'syscaller<73da017e80a17a7d22b58d021b14f782>' installed properly.
+Jun 18 14:14:19 | updateDaemon[654]/updateDaemon T=main | updateDaemon.c StartProbation() 216 | System on probation (timer started).
+Jun 18 14:14:19 | supervisor[18122]/supervisor T=main | proc.c proc_Start() 1359 | Execing '/bin/cat'
+Jun 18 14:14:19 | cat[18122] |  | processor	: 0 model name	: ARMv7 Processor rev 5 (v7l) BogoMIPS	: 38.40 Features	: half thumb fastmult vfp edsp neon vfpv3 tls vfpv4 idiva idivt vfpd32 lpae  CPU implementer	: 0x41 CPU architecture: 7 CPU v
+Jun 18 14:14:19 | cat[18122] |  | rdware	: Qualcomm Technologies, Inc MDM9207 Revision	: 0000 Serial		: 0000000000000000 Processor	: ARMv7 Processor rev 5 (v7l)
+Jun 18 14:14:19 | supervisor[642]/supervisor T=main | proc.c proc_SigChildHandler() 2040 | Process 'cat' (PID: 18122) has exited with exit code 0.
+Jun 18 14:14:19 | avcDaemon[665]/avcDaemon T=main | avcAppUpdate.c avcApp_SetSwUpdateState() 3022 | No update is going on. CurrentObj9 = null
+Jun 18 14:14:19 | avcDaemon[665]/avcDaemon T=main | avcAppUpdate.c avcApp_SetSwUpdateResult() 2957 | No update is going on. CurrentObj9 = null
+Jun 18 14:14:19 | avcDaemon[665]/avcDaemon T=main | avcAppUpdate.c NotifyObj9List() 692 | Found 5 object 9 instances
+Jun 18 14:14:19 | avcDaemon[665]/avcDaemon T=main | avcAppUpdate.c NotifyObj9List() 693 | obj9ListLen; 66 obj9List: </lwm2m/9/0>,</lwm2m/9/1>,</lwm2m/9/2>,</lwm2m/9/11>,</lwm2m/9/15>
+Jun 18 14:14:19 | testexe[18121]/cpuproc T=main | cpuproc.c _cpuproc_COMPONENT_INIT() 5 | Hello, world.
+Jun 18 14:14:19 | testexe[18121] |  | processor	: 0 model name	: ARMv7 Processor rev 5 (v7l) BogoMIPS	: 38.40 Features	: half thumb fastmult vfp edsp neon vfpv3 tls vfpv4 idiva idivt vfpd32 lpae  CPU implementer	: 0x41 CPU architecture: 7 C
+Jun 18 14:14:19 | testexe[18121] |  | rdware	: Qualcomm Technologies, Inc MDM9207 Revision	: 0000 Serial		: 0000000000000000 Processor	: ARMv7 Processor rev 5 (v7l)
+Jun 18 14:14:20 | avcDaemon[665]/avcDaemon T=main | assetData.c RegUpdateTimerHandler() 3262 | RegUpdate timer expired; reporting REG_UPDATE
+Jun 18 14:14:20 | avcDaemon[665]/avcDaemon T=main | assetData.c assetData_RegistrationUpdate() 1946 | unsupported function called.
+Jun 18 14:14:24 | updateDaemon[654]/updateDaemon T=main | updateDaemon.c updateDaemon_MarkGood() 229 | System passed probation. Marking 'good'.
+Jun 18 14:14:25 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 1ec5b00e824957bc09a1a1a6682091a6 is still needed.
+Jun 18 14:14:25 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum b87209b23b0fd0db16329f9fdef7ba4c is still needed.
+Jun 18 14:14:25 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 7e333afee8f437f267bb1d971a51de3f is still needed.
+Jun 18 14:14:25 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum a33499c4b836b1a1637129071128ec7d is still needed.
+Jun 18 14:14:25 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 6ad92c67118ee596707ab9de38292eed is still needed.
+Jun 18 14:14:25 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum bb40cd11275158bf2136c347f2088c36 is still needed.
+Jun 18 14:14:25 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 7475729ac07d6f35f0a7d63ef0a27954 is still needed.
+Jun 18 14:14:25 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum d8bcbd95f0e55ecb3f86e30215575d76 is still needed.
+Jun 18 14:14:25 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum bd188e5a418a93a2ff282fd9eb07ab2b is still needed.
+Jun 18 14:14:25 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 1b857c9855e20502f050cbdc63f29cc3 is still needed.
+Jun 18 14:14:25 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 5ee38660f9a5372cdebec87f4b8c3637 is still needed.
+Jun 18 14:14:25 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 91ee79f7739aab1a92f0021f681d89c1 is still needed.
+Jun 18 14:14:25 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum afdd2597d8c86b1d57d447190f37a428 is still needed.
+Jun 18 14:14:25 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 5c3ece1c95e1a4e2ae5deae6b1ce35d2 is still needed.
+Jun 18 14:14:25 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 0049325277d27153c6b8a3d0ba38a3f3 is still needed.
+Jun 18 14:14:25 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 8bd7868da7898410e1b64735246d8663 is still needed.
+Jun 18 14:14:25 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum d993fd29682d48b0f63309ebbfb4c1e4 is still needed.
+Jun 18 14:14:25 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 202585c0729df8700beac1ddffc6ff04 is still needed.
+Jun 18 14:14:25 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 73da017e80a17a7d22b58d021b14f782 is still needed.
+Jun 18 14:14:25 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum b37d6ebaaa1eecaf23379b371c52264d is still needed.
+Jun 18 14:14:25 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 47cb334bb0ba8ec92b286bc6ffd7a1e8 is still needed.
+Jun 18 14:14:25 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 3207afb8b9786aaff3ada5899f18a192 is still needed.
+Jun 18 14:14:25 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 4d7750e67a482caf41f17c4df4037953 is still needed.
+Jun 18 14:14:25 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 46bdec6aeb269460137a72fd37626e99 is still needed.
+Jun 18 14:14:25 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum cd1ab5d1bf8ac5ca32e230192b9b6c68 is still needed.
+Jun 18 14:14:25 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 396d8354ff90a2cb907b225d1c7617f5 is still needed.
+Jun 18 14:14:25 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum cbfffd86d49a1a9831b59b25bc762aac is still needed.
+Jun 18 14:14:25 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum ba3156c0837926c099a994e074b65f14 is still needed.
+Jun 18 14:14:25 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum b338bb5aca5ac52365c513f433b5b8e3 is still needed.
+Jun 18 14:15:31 | posDaemon[673]/le_pa_gnss T=unknown | pa_gnss_qmi.c UsedSvIdFound() 599 | Satellite 25 is used without being tracked
+Jun 18 14:17:13 | updateDaemon[654]/updateDaemon T=main | updateDaemon.c le_update_Start() 1792 | Update request accepted.
+Jun 18 14:17:13 | updateDaemon[18761]/framework T=main | LE_FILENAME user_Create() 979 | Created user 'SecurityUnpack' with uid 1024 and gid 1024.
+Jun 18 14:17:13 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 1ec5b00e824957bc09a1a1a6682091a6 is still needed.
+Jun 18 14:17:13 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum b87209b23b0fd0db16329f9fdef7ba4c is still needed.
+Jun 18 14:17:13 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 7e333afee8f437f267bb1d971a51de3f is still needed.
+Jun 18 14:17:13 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum a33499c4b836b1a1637129071128ec7d is still needed.
+Jun 18 14:17:13 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 6ad92c67118ee596707ab9de38292eed is still needed.
+Jun 18 14:17:13 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum bb40cd11275158bf2136c347f2088c36 is still needed.
+Jun 18 14:17:13 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 7475729ac07d6f35f0a7d63ef0a27954 is still needed.
+Jun 18 14:17:13 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum d8bcbd95f0e55ecb3f86e30215575d76 is still needed.
+Jun 18 14:17:13 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum bd188e5a418a93a2ff282fd9eb07ab2b is still needed.
+Jun 18 14:17:13 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 1b857c9855e20502f050cbdc63f29cc3 is still needed.
+Jun 18 14:17:13 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 5ee38660f9a5372cdebec87f4b8c3637 is still needed.
+Jun 18 14:17:13 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 91ee79f7739aab1a92f0021f681d89c1 is still needed.
+Jun 18 14:17:13 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum afdd2597d8c86b1d57d447190f37a428 is still needed.
+Jun 18 14:17:13 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 5c3ece1c95e1a4e2ae5deae6b1ce35d2 is still needed.
+Jun 18 14:17:13 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 0049325277d27153c6b8a3d0ba38a3f3 is still needed.
+Jun 18 14:17:13 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 8bd7868da7898410e1b64735246d8663 is still needed.
+Jun 18 14:17:13 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum d993fd29682d48b0f63309ebbfb4c1e4 is still needed.
+Jun 18 14:17:13 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 202585c0729df8700beac1ddffc6ff04 is still needed.
+Jun 18 14:17:13 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 73da017e80a17a7d22b58d021b14f782 is still needed.
+Jun 18 14:17:13 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum b37d6ebaaa1eecaf23379b371c52264d is still needed.
+Jun 18 14:17:13 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 47cb334bb0ba8ec92b286bc6ffd7a1e8 is still needed.
+Jun 18 14:17:13 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 3207afb8b9786aaff3ada5899f18a192 is still needed.
+Jun 18 14:17:13 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 4d7750e67a482caf41f17c4df4037953 is still needed.
+Jun 18 14:17:13 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 46bdec6aeb269460137a72fd37626e99 is still needed.
+Jun 18 14:17:13 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum cd1ab5d1bf8ac5ca32e230192b9b6c68 is still needed.
+Jun 18 14:17:13 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 396d8354ff90a2cb907b225d1c7617f5 is still needed.
+Jun 18 14:17:13 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum cbfffd86d49a1a9831b59b25bc762aac is still needed.
+Jun 18 14:17:13 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum ba3156c0837926c099a994e074b65f14 is still needed.
+Jun 18 14:17:13 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum b338bb5aca5ac52365c513f433b5b8e3 is still needed.
+Jun 18 14:17:13 | updateDaemon[654]/updateDaemon T=main | updateUnpack.c JsonDone() 867 | App with MD5 sum f2b94994d2b4fd22d3bfd481a98fab15 being unpacked.
+Jun 18 14:17:13 | updateDaemon[654]/updateDaemon T=main | updateUnpack.c CopyBytesToPipeline() 554 | Payload copied: 3976/12292
+Jun 18 14:17:13 | updateDaemon[654]/updateDaemon T=main | updateUnpack.c CopyBytesToPipeline() 554 | Payload copied: 8072/12292
+Jun 18 14:17:13 | updateDaemon[654]/updateDaemon T=main | updateUnpack.c CopyBytesToPipeline() 554 | Payload copied: 12168/12292
+Jun 18 14:17:13 | updateDaemon[654]/updateDaemon T=main | updateUnpack.c CopyBytesToPipeline() 554 | Payload copied: 12292/12292
+Jun 18 14:17:15 | updateDaemon[654]/updateDaemon T=main | system.c system_Snapshot() 882 | Snapshot taken of system index 39.  Current system index is now 40.
+Jun 18 14:17:15 | updateDaemon[654]/updateDaemon T=main | system.c system_SymlinkApp() 584 | Creating symlink /legato/systems/current/apps/.new.syscaller -> /legato/apps/f2b94994d2b4fd22d3bfd481a98fab15
+Jun 18 14:17:15 | updateDaemon[654]/updateDaemon T=main | supCtrl.c supCtrl_StopApp() 101 | Stopping app 'syscaller'.
+Jun 18 14:17:15 | supervisor[642]/supervisor T=main | app.c app_Stop() 2915 | Stopping app 'syscaller'
+Jun 18 14:17:15 | testexe[18121]/framework T=main | LE_FILENAME TermSignalHandler() 643 | Terminated
+Jun 18 14:17:15 | _appStopClient[18764]/framework T=main | LE_FILENAME CreateSocket() 550 | Socket opened as standard i/o file descriptor 2!
+Jun 18 14:17:15 | supervisor[642]/supervisor T=main | apps.c DeactivateAppContainer() 349 | Application 'syscaller' has stopped.
+Jun 18 14:17:15 | updateDaemon[654]/updateDaemon T=main | system.c system_SymlinkApp() 584 | Creating symlink /legato/systems/current/apps/syscaller -> /legato/apps/f2b94994d2b4fd22d3bfd481a98fab15
+Jun 18 14:17:16 | updateDaemon[654]/framework T=main | LE_FILENAME fs_TryLazyUmount() 97 | Could not lazy unmount '/legato/systems/current/appsWriteable/.new.syscaller'.  No such file or directory.
+Jun 18 14:17:16 | updateDaemon[654]/framework T=main | LE_FILENAME sysStatus_MarkTried() 261 | Current system has been marked "tried 1".
+Jun 18 14:17:16 | avcDaemon[665]/avcDaemon T=main | avcAppUpdate.c AppInstallHandler() 852 | Application, 'syscaller,' has been installed.
+Jun 18 14:17:16 | updateDaemon[654]/updateDaemon T=main | supCtrl.c supCtrl_StartApp() 60 | Starting app 'syscaller'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | proc.c GetFaultAction() 323 | No fault action specified for process 'testexe'. Assuming 'ignore'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | proc.c GetWatchdogAction() 359 | testexe watchdogAction '' in proc section
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | proc.c GetWatchdogAction() 359 | testexe watchdogAction '' in proc section
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | proc.c GetFaultAction() 323 | No fault action specified for process 'cat'. Assuming 'ignore'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | proc.c GetWatchdogAction() 359 | cat watchdogAction '' in proc section
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | proc.c GetWatchdogAction() 359 | cat watchdogAction '' in proc section
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | proc.c GetFaultAction() 323 | No fault action specified for process 'ping'. Assuming 'ignore'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | proc.c GetWatchdogAction() 359 | ping watchdogAction '' in proc section
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | proc.c GetWatchdogAction() 359 | ping watchdogAction '' in proc section
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/dev/log' to '/legato/systems/current/appsWriteable/syscaller/dev/log'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/dev/null' to '/legato/systems/current/appsWriteable/syscaller/dev/null'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/dev/zero' to '/legato/systems/current/appsWriteable/syscaller/dev/zero'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/legato/systems/current/lib/liblegato.so' to '/legato/systems/current/appsWriteable/syscaller/lib/liblegato.so'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/ld-linux.so.3' to '/legato/systems/current/appsWriteable/syscaller/lib/ld-linux.so.3'.
+Jun 18 14:17:16 | avcDaemon[665]/avcDaemon T=main | avcAppUpdate.c AppInstallHandler() 899 | Local install, create new object9 instance.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libc.so.6' to '/legato/systems/current/appsWriteable/syscaller/lib/libc.so.6'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libpthread.so.0' to '/legato/systems/current/appsWriteable/syscaller/lib/libpthread.so.0'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/librt.so.1' to '/legato/systems/current/appsWriteable/syscaller/lib/librt.so.1'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libdl.so.2' to '/legato/systems/current/appsWriteable/syscaller/lib/libdl.so.2'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libgcc_s.so.1' to '/legato/systems/current/appsWriteable/syscaller/lib/libgcc_s.so.1'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libm.so.6' to '/legato/systems/current/appsWriteable/syscaller/lib/libm.so.6'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/usr/lib/libstdc++.so.6' to '/legato/systems/current/appsWriteable/syscaller/lib/libstdc++.so.6'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/legato/systems/current/apps/syscaller/read-only/lib/libComponent_cpuproc.so' to '/legato/systems/current/appsWriteable/syscaller/lib/
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/legato/systems/current/apps/syscaller/read-only/bin/testexe' to '/legato/systems/current/appsWriteable/syscaller/bin/testexe'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateDirLink() 1451 | Created directory link '/proc' to '/legato/systems/current/appsWriteable/syscaller/proc'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/ash' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/ash'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/busybox' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/busybox'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/busybox.nosuid' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/busybox.nosuid'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/busybox.suid' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/busybox.suid'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/cat' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/cat'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/chattr' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/chattr'.
+Jun 18 14:17:16 | avcDaemon[665]/avcDaemon T=main | avcAppUpdate.c GetObject9InstanceForApp() 632 | Instance exists and has been reused.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/chgrp' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/chgrp'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/chmod' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/chmod'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/chown' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/chown'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/cp' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/cp'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/cpio' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/cpio'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/date' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/date'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/dd' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/dd'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/df' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/df'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/dmesg' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/dmesg'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/dnsdomainname' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/dnsdomainname'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/dnsmasq_script.sh' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/dnsmasq_script.sh'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/dumpkmap' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/dumpkmap'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/echo' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/echo'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/egrep' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/egrep'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/false' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/false'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/fatattr' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/fatattr'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/fgrep' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/fgrep'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/fsync' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/fsync'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/getopt' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/getopt'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/grep' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/grep'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/gunzip' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/gunzip'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/gzip' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/gzip'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/hostapd' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/hostapd'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/hostapd_cli' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/hostapd_cli'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/hostname' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/hostname'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/kill' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/kill'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/kill.procps' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/kill.procps'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/ln' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/ln'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/login' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/login'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/login.shadow' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/login.shadow'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/ls' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/ls'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/mkdir' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/mkdir'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/mknod' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/mknod'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/mktemp' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/mktemp'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/modem-shutdown' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/modem-shutdown'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/more' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/more'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/mount' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/mount'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/mv' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/mv'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/netstat' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/netstat'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/nice' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/nice'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/pidof' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/pidof'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/pidof.procps' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/pidof.procps'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/ping' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/ping'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/ping6' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/ping6'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/printenv' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/printenv'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/ps' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/ps'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/ps.procps' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/ps.procps'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/pwd' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/pwd'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/rm' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/rm'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/rmdir' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/rmdir'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/run-parts' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/run-parts'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/sed' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/sed'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/sh' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/sh'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/sleep' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/sleep'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/stat' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/stat'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/stty' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/stty'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/su' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/su'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/su.shadow' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/su.shadow'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/sync' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/sync'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/tar' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/tar'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/touch' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/touch'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/true' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/true'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/umount' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/umount'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/uname' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/uname'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/usleep' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/usleep'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/vi' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/vi'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/watch' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/watch'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/watch.procps' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/watch.procps'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/zcat' to '/legato/systems/current/appsWriteable/syscaller/usr/bin/zcat'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/mba.b00' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/mba.b00'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/mba.b01' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/mba.b01'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/mba.b02' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/mba.b02'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/mba.b03' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/mba.b03'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/mba.b04' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/mba.b04'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/mba.b05' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/mba.b05'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/mba.b06' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/mba.b06'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/mba.mbn' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/mba.mbn'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/mba.mdt' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/mba.mdt'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/modem.b00' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/modem.b00'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/modem.b01' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/modem.b01'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/modem.b02' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/modem.b02'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/modem.b03' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/modem.b03'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/modem.b04' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/modem.b04'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/modem.b05' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/modem.b05'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/modem.b06' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/modem.b06'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/modem.b07' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/modem.b07'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/modem.b08' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/modem.b08'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/modem.b09' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/modem.b09'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/modem.b10' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/modem.b10'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/modem.b11' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/modem.b11'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/modem.b12' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/modem.b12'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/modem.b13' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/modem.b13'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/modem.b14' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/modem.b14'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/modem.b15' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/modem.b15'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/modem.b16' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/modem.b16'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/modem.b17' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/modem.b17'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/modem.b18' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/modem.b18'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/modem.b19' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/modem.b19'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/modem.b20' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/modem.b20'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/modem.b21' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/modem.b21'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/modem.b22' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/modem.b22'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/modem.b23' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/modem.b23'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/modem.b24' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/modem.b24'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/modem.b25' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/modem.b25'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/image/modem.mdt' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/image/modem.mdt'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/ti-connectivity/wl18xx-conf.bin' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/ti-connectivity/wl
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/firmware/ti-connectivity/wl18xx-fw-4.bin' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/firmware/ti-connectivity/wl
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/ld-2.24.so' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/ld-2.24.so'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/ld-linux.so.3' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/ld-linux.so.3'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libBrokenLocale-2.24.so' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libBrokenLocale-2.24.so'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libBrokenLocale.so.1' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libBrokenLocale.so.1'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libanl-2.24.so' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libanl-2.24.so'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libanl.so.1' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libanl.so.1'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libattr.so.1' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libattr.so.1'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libattr.so.1.1.0' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libattr.so.1.1.0'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libblkid.so.1' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libblkid.so.1'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libblkid.so.1.1.0' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libblkid.so.1.1.0'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libc-2.24.so' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libc-2.24.so'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libc.so.6' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libc.so.6'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libcap.so.2' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libcap.so.2'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libcap.so.2.25' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libcap.so.2.25'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libcom_err.so.2' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libcom_err.so.2'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libcom_err.so.2.1' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libcom_err.so.2.1'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libcrypt-2.24.so' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libcrypt-2.24.so'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libcrypt.so.1' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libcrypt.so.1'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libdl-2.24.so' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libdl-2.24.so'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libdl.so.2' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libdl.so.2'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libext2fs.so.2' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libext2fs.so.2'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libext2fs.so.2.4' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libext2fs.so.2.4'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libgcc_s.so.1' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libgcc_s.so.1'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libm-2.24.so' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libm-2.24.so'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libm.so.6' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libm.so.6'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libncurses.so.5' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libncurses.so.5'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libncurses.so.5.9' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libncurses.so.5.9'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libnsl-2.24.so' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libnsl-2.24.so'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libnsl.so.1' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libnsl.so.1'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libnss_compat-2.24.so' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libnss_compat-2.24.so'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libnss_compat.so.2' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libnss_compat.so.2'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libnss_dns-2.24.so' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libnss_dns-2.24.so'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libnss_dns.so.2' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libnss_dns.so.2'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libnss_files-2.24.so' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libnss_files-2.24.so'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libnss_files.so.2' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libnss_files.so.2'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libpthread-2.24.so' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libpthread-2.24.so'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libpthread.so.0' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libpthread.so.0'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libresolv-2.24.so' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libresolv-2.24.so'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libresolv.so.2' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libresolv.so.2'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/librt-2.24.so' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/librt-2.24.so'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/librt.so.1' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/librt.so.1'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libtinfo.so.5' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libtinfo.so.5'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libtinfo.so.5.9' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libtinfo.so.5.9'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libutil-2.24.so' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libutil-2.24.so'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libutil.so.1' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libutil.so.1'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libuuid.so.1' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libuuid.so.1'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libuuid.so.1.3.0' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libuuid.so.1.3.0'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libwrap.so.0' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libwrap.so.0'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libwrap.so.0.7.6' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libwrap.so.0.7.6'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libz.so.1' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libz.so.1'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/libz.so.1.2.8' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/libz.so.1.2.8'.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/extra/embms_kernel.ko' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18.44/extra/embms_ke
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/kernel/block/test-iosched.ko' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18.44/kernel/
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/kernel/crypto/ansi_cprng.ko' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18.44/kernel/c
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/kernel/crypto/arc4.ko' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18.44/kernel/crypto/
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/kernel/crypto/ccm.ko' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18.44/kernel/crypto/c
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/kernel/crypto/ctr.ko' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18.44/kernel/crypto/c
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/kernel/crypto/michael_mic.ko' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18.44/kernel/
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/kernel/crypto/seqiv.ko' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18.44/kernel/crypto
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/kernel/drivers/iio/imu/bmi160/bmi160.ko' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/kernel/drivers/input/misc/gpio_axis.ko' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/kernel/drivers/input/misc/gpio_event.ko' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/kernel/drivers/input/misc/gpio_input.ko' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/kernel/drivers/input/misc/gpio_matrix.ko' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.1
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/kernel/drivers/input/misc/gpio_output.ko' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.1
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/kernel/drivers/mmc/card/mmc_block_test.ko' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/kernel/drivers/mmc/card/mmc_test.ko' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18.44/
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/kernel/drivers/net/ethernet/qualcomm/emac/qcom_emac.ko' to '/legato/systems/current/appsWriteable/syscaller/usr/l
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/kernel/drivers/net/phy/at803x.ko' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18.44/ker
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/kernel/drivers/net/phy/qca8337.ko' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18.44/ke
+Jun 18 14:17:16 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/kernel/drivers/net/wireless/ti/wl1251/wl1251.ko' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modu
+Jun 18 14:17:17 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/kernel/drivers/net/wireless/ti/wl12xx/wl12xx.ko' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modu
+Jun 18 14:17:17 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/kernel/drivers/net/wireless/ti/wl18xx/wl18xx.ko' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modu
+Jun 18 14:17:17 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/kernel/drivers/net/wireless/ti/wlcore/wlcore.ko' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modu
+Jun 18 14:17:17 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/kernel/drivers/net/wireless/ti/wlcore/wlcore_sdio.ko' to '/legato/systems/current/appsWriteable/syscaller/usr/lib
+Jun 18 14:17:17 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/kernel/fs/quota/quota_tree.ko' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18.44/kernel
+Jun 18 14:17:17 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/kernel/fs/quota/quota_v1.ko' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18.44/kernel/f
+Jun 18 14:17:17 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/kernel/fs/quota/quota_v2.ko' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18.44/kernel/f
+Jun 18 14:17:17 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/kernel/lib/crc7.ko' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18.44/kernel/lib/crc7.k
+Jun 18 14:17:17 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/kernel/net/mac80211/mac80211.ko' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18.44/kern
+Jun 18 14:17:17 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/kernel/net/netfilter/xt_physdev.ko' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18.44/k
+Jun 18 14:17:17 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/kernel/net/wireless/cfg80211.ko' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18.44/kern
+Jun 18 14:17:17 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/modules.alias' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18.44/modules.alias'.
+Jun 18 14:17:17 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/modules.alias.bin' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18.44/modules.alias.bin'
+Jun 18 14:17:17 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/modules.builtin' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18.44/modules.builtin'.
+Jun 18 14:17:17 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/modules.builtin.bin' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18.44/modules.builtin.
+Jun 18 14:17:17 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/modules.dep' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18.44/modules.dep'.
+Jun 18 14:17:17 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/modules.dep.bin' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18.44/modules.dep.bin'.
+Jun 18 14:17:17 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/modules.devname' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18.44/modules.devname'.
+Jun 18 14:17:17 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/modules.order' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18.44/modules.order'.
+Jun 18 14:17:17 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/modules.softdep' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18.44/modules.softdep'.
+Jun 18 14:17:17 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/modules.symbols' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18.44/modules.symbols'.
+Jun 18 14:17:17 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/modules/3.18.44/modules.symbols.bin' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/modules/3.18.44/modules.symbols.
+Jun 18 14:17:17 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/lib/udev/rules.d/85-regulatory.rules' to '/legato/systems/current/appsWriteable/syscaller/usr/lib/udev/rules.d/85-regulatory.rules'.
+Jun 18 14:17:17 | avcDaemon[665]/avcDaemon T=main | avcAppUpdate.c avcApp_SetSwUpdateState() 3022 | No update is going on. CurrentObj9 = null
+Jun 18 14:17:17 | avcDaemon[665]/avcDaemon T=main | avcAppUpdate.c avcApp_SetSwUpdateResult() 2957 | No update is going on. CurrentObj9 = null
+Jun 18 14:17:17 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/cat' to '/legato/systems/current/appsWriteable/syscaller/bin/cat'.
+Jun 18 14:17:17 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/ping' to '/legato/systems/current/appsWriteable/syscaller/bin/ping'.
+Jun 18 14:17:17 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/bin/sh' to '/legato/systems/current/appsWriteable/syscaller/bin/sh'.
+Jun 18 14:17:17 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1513 | Skipping file link '/proc/cpuinfo' to '/legato/systems/current/appsWriteable/syscaller/proc/cpuinfo': Already exists
+Jun 18 14:17:17 | supervisor[642]/supervisor T=main | app.c CreateTmpFs() 1231 | Mounted tmpfs at /legato/systems/current/appsWriteable/syscaller/tmp.
+Jun 18 14:17:17 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/tmp/legato/serviceDirectoryServer' to '/legato/systems/current/appsWriteable/syscaller/tmp/legato/serviceDirectoryServer'.
+Jun 18 14:17:17 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/tmp/legato/serviceDirectoryClient' to '/legato/systems/current/appsWriteable/syscaller/tmp/legato/serviceDirectoryClient'.
+Jun 18 14:17:17 | supervisor[642]/supervisor T=main | resourceLimits.c SetRLimitValue() 282 | Setting resource limit maxCoreDumpFileBytes to value 102400.
+Jun 18 14:17:17 | supervisor[642]/supervisor T=main | resourceLimits.c SetRLimitValue() 282 | Setting resource limit maxFileBytes to value 102400.
+Jun 18 14:17:17 | supervisor[642]/supervisor T=main | resourceLimits.c SetRLimitValue() 282 | Setting resource limit maxLockedMemoryBytes to value 8192.
+Jun 18 14:17:17 | supervisor[642]/supervisor T=main | resourceLimits.c SetRLimitValue() 282 | Setting resource limit maxFileDescriptors to value 256.
+Jun 18 14:17:17 | supervisor[642]/supervisor T=main | resourceLimits.c SetRLimitValue() 282 | Setting resource limit maxMQueueBytes to value 512.
+Jun 18 14:17:17 | supervisor[642]/supervisor T=main | resourceLimits.c SetRLimitValue() 282 | Setting resource limit maxThreads to value 20.
+Jun 18 14:17:17 | supervisor[642]/supervisor T=main | resourceLimits.c SetRLimitValue() 282 | Setting resource limit maxQueuedSignals to value 100.
+Jun 18 14:17:17 | supervisor[642]/supervisor T=main | proc.c proc_Start() 1394 | Starting process 'testexe' with pid 18772
+Jun 18 14:17:17 | supervisor[642]/supervisor T=main | resourceLimits.c SetRLimitValue() 282 | Setting resource limit maxCoreDumpFileBytes to value 102400.
+Jun 18 14:17:17 | supervisor[642]/supervisor T=main | resourceLimits.c SetRLimitValue() 282 | Setting resource limit maxFileBytes to value 102400.
+Jun 18 14:17:17 | supervisor[642]/supervisor T=main | resourceLimits.c SetRLimitValue() 282 | Setting resource limit maxLockedMemoryBytes to value 8192.
+Jun 18 14:17:17 | supervisor[642]/supervisor T=main | resourceLimits.c SetRLimitValue() 282 | Setting resource limit maxFileDescriptors to value 256.
+Jun 18 14:17:17 | supervisor[642]/supervisor T=main | resourceLimits.c SetRLimitValue() 282 | Setting resource limit maxMQueueBytes to value 512.
+Jun 18 14:17:17 | supervisor[642]/supervisor T=main | resourceLimits.c SetRLimitValue() 282 | Setting resource limit maxThreads to value 20.
+Jun 18 14:17:17 | supervisor[642]/supervisor T=main | resourceLimits.c SetRLimitValue() 282 | Setting resource limit maxQueuedSignals to value 100.
+Jun 18 14:17:17 | supervisor[642]/supervisor T=main | proc.c proc_Start() 1394 | Starting process 'cat' with pid 18773
+Jun 18 14:17:17 | supervisor[642]/supervisor T=main | resourceLimits.c SetRLimitValue() 282 | Setting resource limit maxCoreDumpFileBytes to value 102400.
+Jun 18 14:17:17 | supervisor[642]/supervisor T=main | resourceLimits.c SetRLimitValue() 282 | Setting resource limit maxFileBytes to value 102400.
+Jun 18 14:17:17 | supervisor[642]/supervisor T=main | resourceLimits.c SetRLimitValue() 282 | Setting resource limit maxLockedMemoryBytes to value 8192.
+Jun 18 14:17:17 | supervisor[642]/supervisor T=main | resourceLimits.c SetRLimitValue() 282 | Setting resource limit maxFileDescriptors to value 256.
+Jun 18 14:17:17 | supervisor[642]/supervisor T=main | resourceLimits.c SetRLimitValue() 282 | Setting resource limit maxMQueueBytes to value 512.
+Jun 18 14:17:17 | supervisor[642]/supervisor T=main | resourceLimits.c SetRLimitValue() 282 | Setting resource limit maxThreads to value 20.
+Jun 18 14:17:17 | supervisor[642]/supervisor T=main | resourceLimits.c SetRLimitValue() 282 | Setting resource limit maxQueuedSignals to value 100.
+Jun 18 14:17:17 | supervisor[642]/supervisor T=main | proc.c proc_Start() 1394 | Starting process 'ping' with pid 18774
+Jun 18 14:17:17 | updateDaemon[654]/updateDaemon T=main | app.c app_InstallIndividual() 765 | App syscaller <f2b94994d2b4fd22d3bfd481a98fab15> installed
+Jun 18 14:17:17 | updateDaemon[654]/updateDaemon T=main | updateDaemon.c ApplyAppUpdate() 712 | App 'syscaller<f2b94994d2b4fd22d3bfd481a98fab15>' installed properly.
+Jun 18 14:17:17 | updateDaemon[654]/updateDaemon T=main | updateDaemon.c StartProbation() 216 | System on probation (timer started).
+Jun 18 14:17:17 | supervisor[18772]/supervisor T=main | proc.c proc_Start() 1359 | Execing 'testexe'
+Jun 18 14:17:17 | supervisor[18774]/supervisor T=main | proc.c proc_Start() 1359 | Execing '/bin/ping'
+Jun 18 14:17:17 | avcDaemon[665]/avcDaemon T=main | avcAppUpdate.c NotifyObj9List() 692 | Found 5 object 9 instances
+Jun 18 14:17:17 | avcDaemon[665]/avcDaemon T=main | avcAppUpdate.c NotifyObj9List() 693 | obj9ListLen; 66 obj9List: </lwm2m/9/0>,</lwm2m/9/1>,</lwm2m/9/2>,</lwm2m/9/11>,</lwm2m/9/15>
+Jun 18 14:17:17 | supervisor[18773]/supervisor T=main | proc.c proc_Start() 1359 | Execing '/bin/cat'
+Jun 18 14:17:17 | cat[18773] |  | processor	: 0 model name	: ARMv7 Processor rev 5 (v7l) BogoMIPS	: 38.40 Features	: half thumb fastmult vfp edsp neon vfpv3 tls vfpv4 idiva idivt vfpd32 lpae  CPU implementer	: 0x41 CPU architecture: 7 CPU v
+Jun 18 14:17:17 | cat[18773] |  | rdware	: Qualcomm Technologies, Inc MDM9207 Revision	: 0000 Serial		: 0000000000000000 Processor	: ARMv7 Processor rev 5 (v7l)
+Jun 18 14:17:17 | supervisor[642]/supervisor T=main | proc.c proc_SigChildHandler() 2040 | Process 'cat' (PID: 18773) has exited with exit code 0.
+Jun 18 14:17:17 | testexe[18772]/cpuproc T=main | cpuproc.c _cpuproc_COMPONENT_INIT() 5 | Hello, world.
+Jun 18 14:17:17 | testexe[18772] |  | processor	: 0 model name	: ARMv7 Processor rev 5 (v7l) BogoMIPS	: 38.40 Features	: half thumb fastmult vfp edsp neon vfpv3 tls vfpv4 idiva idivt vfpd32 lpae  CPU implementer	: 0x41 CPU architecture: 7 C
+Jun 18 14:17:17 | testexe[18772] |  | rdware	: Qualcomm Technologies, Inc MDM9207 Revision	: 0000 Serial		: 0000000000000000 Processor	: ARMv7 Processor rev 5 (v7l)
+Jun 18 14:17:17 | ping[18774] |  | PING 8.8.8.8 (8.8.8.8): 56 data bytes 64 bytes from 8.8.8.8: seq=0 ttl=59 time=626.084 ms
+Jun 18 14:17:18 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=1 ttl=59 time=615.617 ms
+Jun 18 14:17:19 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=2 ttl=59 time=594.931 ms
+Jun 18 14:17:20 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=3 ttl=59 time=612.952 ms
+Jun 18 14:17:21 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=4 ttl=59 time=612.526 ms
+Jun 18 14:17:22 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=5 ttl=59 time=612.259 ms
+Jun 18 14:17:23 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=6 ttl=59 time=633.168 ms
+Jun 18 14:17:24 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=7 ttl=59 time=631.290 ms
+Jun 18 14:17:25 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=8 ttl=59 time=610.815 ms
+Jun 18 14:17:26 | updateDaemon[654]/updateDaemon T=main | updateDaemon.c updateDaemon_MarkGood() 229 | System passed probation. Marking 'good'.
+Jun 18 14:17:26 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 1ec5b00e824957bc09a1a1a6682091a6 is still needed.
+Jun 18 14:17:26 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum b87209b23b0fd0db16329f9fdef7ba4c is still needed.
+Jun 18 14:17:26 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 7e333afee8f437f267bb1d971a51de3f is still needed.
+Jun 18 14:17:26 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum a33499c4b836b1a1637129071128ec7d is still needed.
+Jun 18 14:17:26 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum f2b94994d2b4fd22d3bfd481a98fab15 is still needed.
+Jun 18 14:17:26 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 6ad92c67118ee596707ab9de38292eed is still needed.
+Jun 18 14:17:26 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum bb40cd11275158bf2136c347f2088c36 is still needed.
+Jun 18 14:17:26 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 7475729ac07d6f35f0a7d63ef0a27954 is still needed.
+Jun 18 14:17:26 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum d8bcbd95f0e55ecb3f86e30215575d76 is still needed.
+Jun 18 14:17:26 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum bd188e5a418a93a2ff282fd9eb07ab2b is still needed.
+Jun 18 14:17:26 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 1b857c9855e20502f050cbdc63f29cc3 is still needed.
+Jun 18 14:17:26 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 5ee38660f9a5372cdebec87f4b8c3637 is still needed.
+Jun 18 14:17:26 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 91ee79f7739aab1a92f0021f681d89c1 is still needed.
+Jun 18 14:17:26 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum afdd2597d8c86b1d57d447190f37a428 is still needed.
+Jun 18 14:17:26 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 5c3ece1c95e1a4e2ae5deae6b1ce35d2 is still needed.
+Jun 18 14:17:26 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 0049325277d27153c6b8a3d0ba38a3f3 is still needed.
+Jun 18 14:17:26 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 8bd7868da7898410e1b64735246d8663 is still needed.
+Jun 18 14:17:26 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum d993fd29682d48b0f63309ebbfb4c1e4 is still needed.
+Jun 18 14:17:26 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 202585c0729df8700beac1ddffc6ff04 is still needed.
+Jun 18 14:17:26 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1037 | Removing unused app with MD5 sum 73da017e80a17a7d22b58d021b14f782.
+Jun 18 14:17:26 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum b37d6ebaaa1eecaf23379b371c52264d is still needed.
+Jun 18 14:17:26 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 47cb334bb0ba8ec92b286bc6ffd7a1e8 is still needed.
+Jun 18 14:17:26 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 3207afb8b9786aaff3ada5899f18a192 is still needed.
+Jun 18 14:17:26 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 4d7750e67a482caf41f17c4df4037953 is still needed.
+Jun 18 14:17:26 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 46bdec6aeb269460137a72fd37626e99 is still needed.
+Jun 18 14:17:26 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum cd1ab5d1bf8ac5ca32e230192b9b6c68 is still needed.
+Jun 18 14:17:26 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum 396d8354ff90a2cb907b225d1c7617f5 is still needed.
+Jun 18 14:17:26 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum cbfffd86d49a1a9831b59b25bc762aac is still needed.
+Jun 18 14:17:26 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum ba3156c0837926c099a994e074b65f14 is still needed.
+Jun 18 14:17:26 | updateDaemon[654]/updateDaemon T=main | system.c system_RemoveUnusedApps() 1046 | App with MD5 sum b338bb5aca5ac52365c513f433b5b8e3 is still needed.
+Jun 18 14:17:26 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=9 ttl=59 time=630.048 ms
+Jun 18 14:17:27 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=10 ttl=59 time=609.955 ms
+Jun 18 14:17:28 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=11 ttl=59 time=629.497 ms
+Jun 18 14:17:29 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=12 ttl=59 time=599.197 ms
+Jun 18 14:17:30 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=13 ttl=59 time=690.049 ms
+Jun 18 14:17:31 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=14 ttl=59 time=628.524 ms
+Jun 18 14:17:32 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=15 ttl=59 time=605.996 ms
+Jun 18 14:17:33 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=16 ttl=59 time=605.553 ms
+Jun 18 14:17:34 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=17 ttl=59 time=585.135 ms
+Jun 18 14:17:35 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=18 ttl=59 time=584.721 ms
+Jun 18 14:17:36 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=19 ttl=59 time=604.293 ms
+Jun 18 14:17:37 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=20 ttl=59 time=583.876 ms
+Jun 18 14:17:38 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=21 ttl=59 time=604.853 ms
+Jun 18 14:17:39 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=22 ttl=59 time=614.194 ms
+Jun 18 14:17:40 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=23 ttl=59 time=634.369 ms
+Jun 18 14:17:41 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=24 ttl=59 time=612.056 ms
+Jun 18 14:17:42 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=25 ttl=59 time=620.932 ms
+Jun 18 14:17:43 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=26 ttl=59 time=651.616 ms
+Jun 18 14:17:45 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=27 ttl=59 time=868.127 ms
+Jun 18 14:17:45 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=28 ttl=59 time=607.740 ms
+Jun 18 14:17:46 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=29 ttl=59 time=567.360 ms
+Jun 18 14:17:47 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=30 ttl=59 time=636.870 ms
+Jun 18 14:17:48 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=31 ttl=59 time=576.188 ms
+Jun 18 14:17:49 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=32 ttl=59 time=595.721 ms
+Jun 18 14:17:50 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=33 ttl=59 time=575.295 ms
+Jun 18 14:17:51 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=34 ttl=59 time=594.833 ms
+Jun 18 14:17:52 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=35 ttl=59 time=594.439 ms
+Jun 18 14:17:53 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=36 ttl=59 time=573.835 ms
+Jun 18 14:17:54 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=37 ttl=59 time=564.831 ms
+Jun 18 14:17:55 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=38 ttl=59 time=564.097 ms
+Jun 18 14:17:56 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=39 ttl=59 time=622.513 ms
+Jun 18 14:17:57 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=40 ttl=59 time=610.628 ms
+Jun 18 14:17:58 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=41 ttl=59 time=761.608 ms
+Jun 18 14:17:59 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=42 ttl=59 time=679.661 ms
+Jun 18 14:18:00 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=43 ttl=59 time=609.028 ms
+Jun 18 14:18:01 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=44 ttl=59 time=588.631 ms
+Jun 18 14:18:02 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=45 ttl=59 time=589.610 ms
+Jun 18 14:18:03 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=46 ttl=59 time=608.071 ms
+Jun 18 14:18:04 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=47 ttl=59 time=566.873 ms
+Jun 18 14:18:05 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=48 ttl=59 time=605.527 ms
+Jun 18 14:18:06 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=49 ttl=59 time=563.455 ms
+Jun 18 14:18:07 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=50 ttl=59 time=584.323 ms
+Jun 18 14:18:08 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=51 ttl=59 time=622.269 ms
+Jun 18 14:18:09 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=52 ttl=59 time=601.801 ms
+Jun 18 14:18:10 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=53 ttl=59 time=621.533 ms
+Jun 18 14:18:11 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=54 ttl=59 time=641.108 ms
+Jun 18 14:18:12 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=55 ttl=59 time=620.520 ms
+Jun 18 14:18:13 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=56 ttl=59 time=581.387 ms
+Jun 18 14:18:14 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=57 ttl=59 time=590.020 ms
+Jun 18 14:18:15 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=58 ttl=59 time=618.595 ms
+Jun 18 14:18:16 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=59 ttl=59 time=617.216 ms
+Jun 18 14:18:17 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=60 ttl=59 time=594.525 ms
+Jun 18 14:18:18 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=61 ttl=59 time=614.790 ms
+Jun 18 14:18:19 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=62 ttl=59 time=593.491 ms
+Jun 18 14:18:20 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=63 ttl=59 time=613.142 ms
+Jun 18 14:18:21 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=64 ttl=59 time=612.674 ms
+Jun 18 14:18:22 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=65 ttl=59 time=572.137 ms
+Jun 18 14:18:23 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=66 ttl=59 time=591.656 ms
+Jun 18 14:18:24 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=67 ttl=59 time=562.583 ms
+Jun 18 14:18:25 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=68 ttl=59 time=621.611 ms
+Jun 18 14:18:26 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=69 ttl=59 time=600.188 ms
+Jun 18 14:18:27 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=70 ttl=59 time=629.503 ms
+Jun 18 14:18:28 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=71 ttl=59 time=638.913 ms
+Jun 18 14:18:29 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=72 ttl=59 time=586.970 ms
+Jun 18 14:18:30 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=73 ttl=59 time=596.354 ms
+Jun 18 14:18:31 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=74 ttl=59 time=615.945 ms
+Jun 18 14:18:32 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=75 ttl=59 time=575.310 ms
+Jun 18 14:18:34 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=76 ttl=59 time=1719.457 ms
+Jun 18 14:18:34 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=77 ttl=59 time=719.653 ms
+Jun 18 14:18:35 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=78 ttl=59 time=567.988 ms
+Jun 18 14:18:36 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=79 ttl=59 time=546.670 ms
+Jun 18 14:18:37 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=80 ttl=59 time=575.379 ms
+Jun 18 14:18:38 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=81 ttl=59 time=573.667 ms
+Jun 18 14:18:39 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=82 ttl=59 time=552.585 ms
+Jun 18 14:18:40 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=83 ttl=59 time=531.316 ms
+Jun 18 14:18:41 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=84 ttl=59 time=569.308 ms
+Jun 18 14:18:42 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=85 ttl=59 time=638.855 ms
+Jun 18 14:18:43 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=86 ttl=59 time=568.281 ms
+Jun 18 14:18:44 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=87 ttl=59 time=557.815 ms
+Jun 18 14:18:45 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=88 ttl=59 time=627.529 ms
+Jun 18 14:18:46 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=89 ttl=59 time=588.636 ms
+Jun 18 14:18:47 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=90 ttl=59 time=547.087 ms
+Jun 18 14:18:48 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=91 ttl=59 time=546.082 ms
+Jun 18 14:18:49 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=92 ttl=59 time=564.094 ms
+Jun 18 14:18:50 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=93 ttl=59 time=544.849 ms
+Jun 18 14:18:51 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=94 ttl=59 time=543.494 ms
+Jun 18 14:18:52 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=95 ttl=59 time=561.555 ms
+Jun 18 14:18:53 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=96 ttl=59 time=581.156 ms
+Jun 18 14:18:54 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=97 ttl=59 time=560.639 ms
+Jun 18 14:18:55 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=98 ttl=59 time=560.124 ms
+Jun 18 14:18:56 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=99 ttl=59 time=579.685 ms
+Jun 18 14:18:57 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=100 ttl=59 time=578.628 ms
+Jun 18 14:18:58 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=101 ttl=59 time=567.948 ms
+Jun 18 14:18:59 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=102 ttl=59 time=567.484 ms
+Jun 18 14:19:00 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=103 ttl=59 time=597.093 ms
+Jun 18 14:19:01 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=104 ttl=59 time=576.566 ms
+Jun 18 14:19:02 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=105 ttl=59 time=547.627 ms
+Jun 18 14:19:03 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=106 ttl=59 time=565.644 ms
+Jun 18 14:19:04 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=107 ttl=59 time=694.947 ms
+Jun 18 14:19:05 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=108 ttl=59 time=554.429 ms
+Jun 18 14:19:06 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=109 ttl=59 time=553.745 ms
+Jun 18 14:19:07 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=110 ttl=59 time=533.298 ms
+Jun 18 14:19:08 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=111 ttl=59 time=552.871 ms
+Jun 18 14:19:09 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=112 ttl=59 time=532.480 ms
+Jun 18 14:19:10 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=113 ttl=59 time=533.488 ms
+Jun 18 14:19:11 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=114 ttl=59 time=531.890 ms
+Jun 18 14:19:12 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=115 ttl=59 time=551.710 ms
+Jun 18 14:19:13 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=116 ttl=59 time=550.843 ms
+Jun 18 14:19:15 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=117 ttl=59 time=896.711 ms
+Jun 18 14:19:15 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=118 ttl=59 time=624.960 ms
+Jun 18 14:19:16 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=119 ttl=59 time=592.998 ms
+Jun 18 14:19:18 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=120 ttl=59 time=762.775 ms
+Jun 18 14:19:18 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=121 ttl=59 time=582.153 ms
+Jun 18 14:19:19 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=122 ttl=59 time=621.780 ms
+Jun 18 14:19:20 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=123 ttl=59 time=621.291 ms
+Jun 18 14:19:21 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=124 ttl=59 time=622.172 ms
+Jun 18 14:19:22 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=125 ttl=59 time=620.819 ms
+Jun 18 14:19:23 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=126 ttl=59 time=619.472 ms
+Jun 18 14:19:24 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=127 ttl=59 time=636.731 ms
+Jun 18 14:19:25 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=128 ttl=59 time=615.466 ms
+Jun 18 14:19:26 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=129 ttl=59 time=616.448 ms
+Jun 18 14:19:27 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=130 ttl=59 time=613.751 ms
+Jun 18 14:19:28 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=131 ttl=59 time=613.220 ms
+Jun 18 14:19:30 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=132 ttl=59 time=712.921 ms
+Jun 18 14:19:30 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=133 ttl=59 time=622.419 ms
+Jun 18 14:19:31 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=134 ttl=59 time=601.619 ms
+Jun 18 14:19:32 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=135 ttl=59 time=602.882 ms
+Jun 18 14:19:33 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=136 ttl=59 time=601.809 ms
+Jun 18 14:19:34 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=137 ttl=59 time=600.920 ms
+Jun 18 14:19:36 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=139 ttl=59 time=608.663 ms
+Jun 18 14:19:37 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=140 ttl=59 time=588.477 ms
+Jun 18 14:19:38 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=141 ttl=59 time=605.681 ms
+Jun 18 14:19:39 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=142 ttl=59 time=626.772 ms
+Jun 18 14:19:40 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=143 ttl=59 time=574.852 ms
+Jun 18 14:19:41 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=144 ttl=59 time=614.466 ms
+Jun 18 14:19:42 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=145 ttl=59 time=573.971 ms
+Jun 18 14:19:43 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=146 ttl=59 time=614.833 ms
+Jun 18 14:19:44 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=147 ttl=59 time=584.121 ms
+Jun 18 14:19:45 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=148 ttl=59 time=572.689 ms
+Jun 18 14:19:46 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=149 ttl=59 time=610.912 ms
+Jun 18 14:19:47 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=150 ttl=59 time=571.577 ms
+Jun 18 14:19:48 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=151 ttl=59 time=610.500 ms
+Jun 18 14:19:49 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=152 ttl=59 time=608.477 ms
+Jun 18 14:19:50 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=153 ttl=59 time=588.124 ms
+Jun 18 14:19:51 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=154 ttl=59 time=587.617 ms
+Jun 18 14:19:52 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=155 ttl=59 time=597.278 ms
+Jun 18 14:19:53 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=156 ttl=59 time=616.807 ms
+Jun 18 14:19:54 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=157 ttl=59 time=617.607 ms
+Jun 18 14:19:55 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=158 ttl=59 time=597.146 ms
+Jun 18 14:19:56 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=159 ttl=59 time=595.765 ms
+Jun 18 14:19:57 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=160 ttl=59 time=614.861 ms
+Jun 18 14:19:58 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=161 ttl=59 time=603.389 ms
+Jun 18 14:19:59 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=162 ttl=59 time=600.347 ms
+Jun 18 14:20:00 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=163 ttl=59 time=569.674 ms
+Jun 18 14:20:01 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=164 ttl=59 time=569.500 ms
+Jun 18 14:20:02 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=165 ttl=59 time=588.871 ms
+Jun 18 14:20:03 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=166 ttl=59 time=608.342 ms
+Jun 18 14:20:04 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=167 ttl=59 time=587.856 ms
+Jun 18 14:20:05 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=168 ttl=59 time=568.835 ms
+Jun 18 14:20:06 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=169 ttl=59 time=607.396 ms
+Jun 18 14:20:07 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=170 ttl=59 time=605.135 ms
+Jun 18 14:20:08 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=171 ttl=59 time=626.894 ms
+Jun 18 14:20:10 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=172 ttl=59 time=774.432 ms
+Jun 18 14:20:10 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=173 ttl=59 time=631.454 ms
+Jun 18 14:20:11 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=174 ttl=59 time=631.272 ms
+Jun 18 14:20:12 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=175 ttl=59 time=611.158 ms
+Jun 18 14:20:13 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=176 ttl=59 time=631.903 ms
+Jun 18 14:20:14 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=177 ttl=59 time=640.281 ms
+Jun 18 14:20:15 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=178 ttl=59 time=629.738 ms
+Jun 18 14:20:16 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=179 ttl=59 time=630.638 ms
+Jun 18 14:20:17 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=180 ttl=59 time=610.184 ms
+Jun 18 14:20:18 | posDaemon[673]/le_pa_gnss T=unknown | pa_gnss_qmi.c UsedSvIdFound() 599 | Satellite 307 is used without being tracked
+Jun 18 14:20:18 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=181 ttl=59 time=589.416 ms
+Jun 18 14:20:19 | posDaemon[673]/le_pa_gnss T=unknown | pa_gnss_qmi.c UsedSvIdFound() 599 | Satellite 307 is used without being tracked
+Jun 18 14:20:19 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=182 ttl=59 time=608.146 ms
+Jun 18 14:20:20 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=183 ttl=59 time=606.999 ms
+Jun 18 14:20:21 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=184 ttl=59 time=625.871 ms
+Jun 18 14:20:22 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=185 ttl=59 time=604.026 ms
+Jun 18 14:20:23 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=186 ttl=59 time=583.734 ms
+Jun 18 14:20:24 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=187 ttl=59 time=603.315 ms
+Jun 18 14:20:25 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=188 ttl=59 time=602.705 ms
+Jun 18 14:20:26 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=189 ttl=59 time=582.264 ms
+Jun 18 14:20:27 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=190 ttl=59 time=581.860 ms
+Jun 18 14:20:28 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=191 ttl=59 time=633.531 ms
+Jun 18 14:20:29 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=192 ttl=59 time=651.094 ms
+Jun 18 14:20:30 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=193 ttl=59 time=610.700 ms
+Jun 18 14:20:31 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=194 ttl=59 time=630.470 ms
+Jun 18 14:20:32 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=195 ttl=59 time=611.263 ms
+Jun 18 14:20:34 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=196 ttl=59 time=780.380 ms
+Jun 18 14:20:34 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=197 ttl=59 time=619.420 ms
+Jun 18 14:20:35 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=198 ttl=59 time=616.774 ms
+Jun 18 14:20:38 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=199 ttl=59 time=1748.628 ms
+Jun 18 14:20:38 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=200 ttl=59 time=775.795 ms
+Jun 18 14:20:38 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=201 ttl=59 time=605.437 ms
+Jun 18 14:20:39 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=202 ttl=59 time=605.065 ms
+Jun 18 14:20:40 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=203 ttl=59 time=594.603 ms
+Jun 18 14:20:41 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=204 ttl=59 time=594.515 ms
+Jun 18 14:20:42 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=205 ttl=59 time=613.124 ms
+Jun 18 14:20:44 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=206 ttl=59 time=650.372 ms
+Jun 18 14:20:44 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=207 ttl=59 time=639.603 ms
+Jun 18 14:20:46 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=208 ttl=59 time=689.688 ms
+Jun 18 14:20:46 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=209 ttl=59 time=627.055 ms
+Jun 18 14:20:47 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=210 ttl=59 time=606.557 ms
+Jun 18 14:20:48 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=211 ttl=59 time=586.211 ms
+Jun 18 14:20:49 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=212 ttl=59 time=605.229 ms
+Jun 18 14:20:50 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=213 ttl=59 time=604.817 ms
+Jun 18 14:20:51 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=214 ttl=59 time=604.398 ms
+Jun 18 14:20:52 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=215 ttl=59 time=605.054 ms
+Jun 18 14:20:53 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=216 ttl=59 time=604.338 ms
+Jun 18 14:20:54 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=217 ttl=59 time=623.367 ms
+Jun 18 14:20:55 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=218 ttl=59 time=600.951 ms
+Jun 18 14:20:56 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=219 ttl=59 time=601.667 ms
+Jun 18 14:20:57 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=220 ttl=59 time=600.939 ms
+Jun 18 14:20:58 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=221 ttl=59 time=599.109 ms
+Jun 18 14:20:59 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=222 ttl=59 time=608.955 ms
+Jun 18 14:21:01 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=223 ttl=59 time=718.439 ms
+Jun 18 14:21:01 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=224 ttl=59 time=618.047 ms
+Jun 18 14:21:03 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=225 ttl=59 time=637.610 ms
+Jun 18 14:21:03 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=226 ttl=59 time=618.192 ms
+Jun 18 14:21:05 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=227 ttl=59 time=636.829 ms
+Jun 18 14:21:05 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=228 ttl=59 time=615.527 ms
+Jun 18 14:21:07 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=229 ttl=59 time=684.160 ms
+Jun 18 14:21:07 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=230 ttl=59 time=603.504 ms
+Jun 18 14:21:08 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=231 ttl=59 time=622.054 ms
+Jun 18 14:21:10 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=232 ttl=59 time=640.573 ms
+Jun 18 14:21:10 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=233 ttl=59 time=620.065 ms
+Jun 18 14:21:11 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=234 ttl=59 time=619.614 ms
+Jun 18 14:21:13 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=235 ttl=59 time=639.189 ms
+Jun 18 14:21:14 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=236 ttl=59 time=638.714 ms
+Jun 18 14:21:15 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=237 ttl=59 time=627.648 ms
+Jun 18 14:21:16 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=238 ttl=59 time=637.477 ms
+Jun 18 14:21:16 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=239 ttl=59 time=596.017 ms
+Jun 18 14:21:17 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=240 ttl=59 time=614.574 ms
+Jun 18 14:21:18 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=241 ttl=59 time=594.179 ms
+Jun 18 14:21:19 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=242 ttl=59 time=603.048 ms
+Jun 18 14:21:21 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=243 ttl=59 time=641.406 ms
+Jun 18 14:21:22 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=244 ttl=59 time=620.941 ms
+Jun 18 14:21:23 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=245 ttl=59 time=620.487 ms
+Jun 18 14:21:24 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=246 ttl=59 time=700.089 ms
+Jun 18 14:21:25 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=247 ttl=59 time=629.706 ms
+Jun 18 14:21:26 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=248 ttl=59 time=620.562 ms
+Jun 18 14:21:26 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=249 ttl=59 time=609.776 ms
+Jun 18 14:21:27 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=250 ttl=59 time=568.471 ms
+Jun 18 14:21:29 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=251 ttl=59 time=1267.852 ms
+Jun 18 14:21:30 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=252 ttl=59 time=624.616 ms
+Jun 18 14:21:31 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=253 ttl=59 time=714.023 ms
+Jun 18 14:21:31 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=254 ttl=59 time=603.691 ms
+Jun 18 14:21:33 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=255 ttl=59 time=643.227 ms
+Jun 18 14:21:34 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=256 ttl=59 time=612.733 ms
+Jun 18 14:21:35 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=257 ttl=59 time=612.339 ms
+Jun 18 14:21:36 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=258 ttl=59 time=611.944 ms
+Jun 18 14:21:36 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=259 ttl=59 time=590.721 ms
+Jun 18 14:21:38 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=260 ttl=59 time=621.061 ms
+Jun 18 14:21:38 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=261 ttl=59 time=599.698 ms
+Jun 18 14:21:40 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=262 ttl=59 time=628.245 ms
+Jun 18 14:21:40 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=263 ttl=59 time=596.935 ms
+Jun 18 14:21:41 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=264 ttl=59 time=595.975 ms
+Jun 18 14:21:42 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=265 ttl=59 time=594.822 ms
+Jun 18 14:21:44 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=266 ttl=59 time=1124.200 ms
+Jun 18 14:21:45 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=267 ttl=59 time=663.952 ms
+Jun 18 14:21:46 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=268 ttl=59 time=623.068 ms
+Jun 18 14:21:46 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=269 ttl=59 time=592.939 ms
+Jun 18 14:21:48 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=270 ttl=59 time=612.902 ms
+Jun 18 14:21:49 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=271 ttl=59 time=611.516 ms
+Jun 18 14:21:49 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=272 ttl=59 time=571.070 ms
+Jun 18 14:21:50 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=273 ttl=59 time=589.712 ms
+Jun 18 14:21:51 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=274 ttl=59 time=587.865 ms
+Jun 18 14:21:52 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=275 ttl=59 time=585.723 ms
+Jun 18 14:21:53 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=276 ttl=59 time=585.554 ms
+Jun 18 14:21:55 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=277 ttl=59 time=605.148 ms
+Jun 18 14:21:55 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=278 ttl=59 time=584.728 ms
+Jun 18 14:21:56 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=279 ttl=59 time=584.294 ms
+Jun 18 14:21:57 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=280 ttl=59 time=563.861 ms
+Jun 18 14:21:59 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=281 ttl=59 time=1013.344 ms
+Jun 18 14:22:00 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=282 ttl=59 time=633.174 ms
+Jun 18 14:22:00 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=283 ttl=59 time=582.682 ms
+Jun 18 14:22:01 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=284 ttl=59 time=582.410 ms
+Jun 18 14:22:02 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=285 ttl=59 time=561.908 ms
+Jun 18 14:22:03 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=286 ttl=59 time=581.243 ms
+Jun 18 14:22:05 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=287 ttl=59 time=621.108 ms
+Jun 18 14:22:05 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=288 ttl=59 time=580.129 ms
+Jun 18 14:22:07 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=289 ttl=59 time=598.532 ms
+Jun 18 14:22:08 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=290 ttl=59 time=598.022 ms
+Jun 18 14:22:09 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=291 ttl=59 time=597.615 ms
+Jun 18 14:22:10 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=292 ttl=59 time=597.218 ms
+Jun 18 14:22:11 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=293 ttl=59 time=606.740 ms
+Jun 18 14:22:12 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=294 ttl=59 time=585.292 ms
+Jun 18 14:22:13 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=295 ttl=59 time=585.306 ms
+Jun 18 14:22:14 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=296 ttl=59 time=993.949 ms
+Jun 18 14:22:15 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=297 ttl=59 time=653.152 ms
+Jun 18 14:22:16 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=298 ttl=59 time=601.139 ms
+Jun 18 14:22:17 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=299 ttl=59 time=731.317 ms
+Jun 18 14:22:18 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=300 ttl=59 time=589.528 ms
+Jun 18 14:22:19 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=301 ttl=59 time=589.085 ms
+Jun 18 14:22:20 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=302 ttl=59 time=588.611 ms
+Jun 18 14:22:21 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=303 ttl=59 time=588.304 ms
+Jun 18 14:22:22 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=304 ttl=59 time=587.979 ms
+Jun 18 14:22:23 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=305 ttl=59 time=607.778 ms
+Jun 18 14:22:23 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=306 ttl=59 time=566.419 ms
+Jun 18 14:22:25 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=307 ttl=59 time=605.685 ms
+Jun 18 14:22:26 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=308 ttl=59 time=604.363 ms
+Jun 18 14:22:27 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=309 ttl=59 time=603.488 ms
+Jun 18 14:22:28 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=310 ttl=59 time=602.981 ms
+Jun 18 14:22:29 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=311 ttl=59 time=1131.161 ms
+Jun 18 14:22:30 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=312 ttl=59 time=670.842 ms
+Jun 18 14:22:31 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=313 ttl=59 time=620.564 ms
+Jun 18 14:22:32 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=314 ttl=59 time=640.283 ms
+Jun 18 14:22:33 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=315 ttl=59 time=619.693 ms
+Jun 18 14:22:34 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=316 ttl=59 time=619.629 ms
+Jun 18 14:22:35 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=317 ttl=59 time=638.298 ms
+Jun 18 14:22:36 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=318 ttl=59 time=637.304 ms
+Jun 18 14:22:37 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=319 ttl=59 time=635.834 ms
+Jun 18 14:22:38 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=320 ttl=59 time=614.273 ms
+Jun 18 14:22:39 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=321 ttl=59 time=613.089 ms
+Jun 18 14:22:40 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=322 ttl=59 time=611.336 ms
+Jun 18 14:22:41 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=323 ttl=59 time=610.852 ms
+Jun 18 14:22:42 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=324 ttl=59 time=610.639 ms
+Jun 18 14:22:43 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=325 ttl=59 time=629.743 ms
+Jun 18 14:22:44 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=326 ttl=59 time=1232.479 ms
+Jun 18 14:22:45 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=327 ttl=59 time=629.628 ms
+Jun 18 14:22:46 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=328 ttl=59 time=598.272 ms
+Jun 18 14:22:47 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=329 ttl=59 time=616.862 ms
+Jun 18 14:22:48 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=330 ttl=59 time=595.503 ms
+Jun 18 14:22:49 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=331 ttl=59 time=644.208 ms
+Jun 18 14:22:50 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=332 ttl=59 time=753.651 ms
+Jun 18 14:22:51 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=333 ttl=59 time=572.067 ms
+Jun 18 14:22:52 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=334 ttl=59 time=631.640 ms
+Jun 18 14:22:53 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=335 ttl=59 time=591.108 ms
+Jun 18 14:22:54 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=336 ttl=59 time=630.657 ms
+Jun 18 14:22:55 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=337 ttl=59 time=620.218 ms
+Jun 18 14:22:56 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=338 ttl=59 time=620.753 ms
+Jun 18 14:22:57 | ping[18774] |  | 64 bytes from 8.8.8.8: seq=339 ttl=59 time=639.380 ms
+Jun 18 14:22:57 | supervisor[642]/supervisor T=main | app.c app_Stop() 2915 | Stopping app 'syscaller'
+Jun 18 14:22:57 | testexe[18772]/framework T=main | LE_FILENAME TermSignalHandler() 643 | Terminated
+Jun 18 14:22:57 | _appStopClient[19995]/framework T=main | LE_FILENAME CreateSocket() 550 | Socket opened as standard i/o file descriptor 2!
+Jun 18 14:22:57 | supervisor[642]/supervisor T=main | apps.c DeactivateAppContainer() 349 | Application 'syscaller' has stopped.
+Jun 18 14:35:39 | supervisor[642]/supervisor T=main | apps.c appCtrl_Stop() 1550 | Application 'syscaller' is not running and cannot be stopped.
+Jun 18 14:35:39 | supervisor[642]/supervisor T=main | app.c CreateTmpFs() 1231 | Mounted tmpfs at /legato/systems/current/appsWriteable/syscaller/tmp.
+Jun 18 14:35:39 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/tmp/legato/serviceDirectoryServer' to '/legato/systems/current/appsWriteable/syscaller/tmp/legato/serviceDirectoryServer'.
+Jun 18 14:35:39 | supervisor[642]/supervisor T=main | app.c CreateFileLink() 1583 | Created file link '/tmp/legato/serviceDirectoryClient' to '/legato/systems/current/appsWriteable/syscaller/tmp/legato/serviceDirectoryClient'.
+Jun 18 14:35:39 | supervisor[642]/supervisor T=main | resourceLimits.c SetRLimitValue() 282 | Setting resource limit maxCoreDumpFileBytes to value 102400.
+Jun 18 14:35:39 | supervisor[642]/supervisor T=main | resourceLimits.c SetRLimitValue() 282 | Setting resource limit maxFileBytes to value 102400.
+Jun 18 14:35:39 | supervisor[642]/supervisor T=main | resourceLimits.c SetRLimitValue() 282 | Setting resource limit maxLockedMemoryBytes to value 8192.
+Jun 18 14:35:39 | supervisor[642]/supervisor T=main | resourceLimits.c SetRLimitValue() 282 | Setting resource limit maxFileDescriptors to value 256.
+Jun 18 14:35:39 | supervisor[642]/supervisor T=main | resourceLimits.c SetRLimitValue() 282 | Setting resource limit maxMQueueBytes to value 512.
+Jun 18 14:35:39 | supervisor[642]/supervisor T=main | resourceLimits.c SetRLimitValue() 282 | Setting resource limit maxThreads to value 20.
+Jun 18 14:35:39 | supervisor[642]/supervisor T=main | resourceLimits.c SetRLimitValue() 282 | Setting resource limit maxQueuedSignals to value 100.
+Jun 18 14:35:39 | supervisor[642]/supervisor T=main | proc.c proc_Start() 1394 | Starting process 'testexe' with pid 22697
+Jun 18 14:35:39 | supervisor[22697]/supervisor T=main | proc.c proc_Start() 1359 | Execing 'testexe'
+Jun 18 14:35:39 | supervisor[642]/supervisor T=main | resourceLimits.c SetRLimitValue() 282 | Setting resource limit maxCoreDumpFileBytes to value 102400.
+Jun 18 14:35:39 | supervisor[642]/supervisor T=main | resourceLimits.c SetRLimitValue() 282 | Setting resource limit maxFileBytes to value 102400.
+Jun 18 14:35:39 | supervisor[642]/supervisor T=main | resourceLimits.c SetRLimitValue() 282 | Setting resource limit maxLockedMemoryBytes to value 8192.
+Jun 18 14:35:39 | supervisor[642]/supervisor T=main | resourceLimits.c SetRLimitValue() 282 | Setting resource limit maxFileDescriptors to value 256.
+Jun 18 14:35:39 | supervisor[642]/supervisor T=main | resourceLimits.c SetRLimitValue() 282 | Setting resource limit maxMQueueBytes to value 512.
+Jun 18 14:35:39 | supervisor[642]/supervisor T=main | resourceLimits.c SetRLimitValue() 282 | Setting resource limit maxThreads to value 20.
+Jun 18 14:35:39 | supervisor[642]/supervisor T=main | resourceLimits.c SetRLimitValue() 282 | Setting resource limit maxQueuedSignals to value 100.
+Jun 18 14:35:39 | supervisor[642]/supervisor T=main | proc.c proc_Start() 1394 | Starting process 'cat' with pid 22698
+Jun 18 14:35:39 | supervisor[642]/supervisor T=main | resourceLimits.c SetRLimitValue() 282 | Setting resource limit maxCoreDumpFileBytes to value 102400.
+Jun 18 14:35:39 | supervisor[642]/supervisor T=main | resourceLimits.c SetRLimitValue() 282 | Setting resource limit maxFileBytes to value 102400.
+Jun 18 14:35:39 | supervisor[642]/supervisor T=main | resourceLimits.c SetRLimitValue() 282 | Setting resource limit maxLockedMemoryBytes to value 8192.
+Jun 18 14:35:39 | supervisor[642]/supervisor T=main | resourceLimits.c SetRLimitValue() 282 | Setting resource limit maxFileDescriptors to value 256.
+Jun 18 14:35:39 | supervisor[642]/supervisor T=main | resourceLimits.c SetRLimitValue() 282 | Setting resource limit maxMQueueBytes to value 512.
+Jun 18 14:35:39 | supervisor[642]/supervisor T=main | resourceLimits.c SetRLimitValue() 282 | Setting resource limit maxThreads to value 20.
+Jun 18 14:35:39 | supervisor[642]/supervisor T=main | resourceLimits.c SetRLimitValue() 282 | Setting resource limit maxQueuedSignals to value 100.
+Jun 18 14:35:39 | supervisor[642]/supervisor T=main | proc.c proc_Start() 1394 | Starting process 'ping' with pid 22699
+Jun 18 14:35:39 | supervisor[22699]/supervisor T=main | proc.c proc_Start() 1359 | Execing '/bin/ping'
+Jun 18 14:35:39 | supervisor[22698]/supervisor T=main | proc.c proc_Start() 1359 | Execing '/bin/cat'
+Jun 18 14:35:39 | cat[22698] |  | processor	: 0 model name	: ARMv7 Processor rev 5 (v7l) BogoMIPS	: 38.40 Features	: half thumb fastmult vfp edsp neon vfpv3 tls vfpv4 idiva idivt vfpd32 lpae  CPU implementer	: 0x41 CPU architecture: 7 CPU v
+Jun 18 14:35:39 | cat[22698] |  | rdware	: Qualcomm Technologies, Inc MDM9207 Revision	: 0000 Serial		: 0000000000000000 Processor	: ARMv7 Processor rev 5 (v7l)
+Jun 18 14:35:39 | supervisor[642]/supervisor T=main | proc.c proc_SigChildHandler() 2040 | Process 'cat' (PID: 22698) has exited with exit code 0.
+Jun 18 14:35:39 | testexe[22697]/cpuproc T=main | cpuproc.c _cpuproc_COMPONENT_INIT() 5 | Hello, world.
+Jun 18 14:35:39 | testexe[22697] |  | processor	: 0 model name	: ARMv7 Processor rev 5 (v7l) BogoMIPS	: 38.40 Features	: half thumb fastmult vfp edsp neon vfpv3 tls vfpv4 idiva idivt vfpd32 lpae  CPU implementer	: 0x41 CPU architecture: 7 C
+Jun 18 14:35:39 | testexe[22697] |  | rdware	: Qualcomm Technologies, Inc MDM9207 Revision	: 0000 Serial		: 0000000000000000 Processor	: ARMv7 Processor rev 5 (v7l)
+Jun 18 14:35:40 | ping[22699] |  | PING 8.8.8.8 (8.8.8.8): 56 data bytes 64 bytes from 8.8.8.8: seq=0 ttl=59 time=924.786 ms
+Jun 18 14:35:41 | ping[22699] |  | 64 bytes from 8.8.8.8: seq=1 ttl=59 time=620.246 ms
+Jun 18 14:35:42 | ping[22699] |  | 64 bytes from 8.8.8.8: seq=2 ttl=59 time=618.437 ms
+Jun 18 14:35:43 | ping[22699] |  | 64 bytes from 8.8.8.8: seq=3 ttl=59 time=598.155 ms
+Jun 18 14:35:44 | ping[22699] |  | 64 bytes from 8.8.8.8: seq=4 ttl=59 time=787.907 ms
+Jun 18 14:35:45 | ping[22699] |  | 64 bytes from 8.8.8.8: seq=5 ttl=59 time=617.245 ms
+Jun 18 14:35:46 | ping[22699] |  | 64 bytes from 8.8.8.8: seq=6 ttl=59 time=637.166 ms
+Jun 18 14:35:47 | ping[22699] |  | 64 bytes from 8.8.8.8: seq=7 ttl=59 time=618.027 ms
+Jun 18 14:35:48 | ping[22699] |  | 64 bytes from 8.8.8.8: seq=8 ttl=59 time=636.662 ms
+Jun 18 14:35:49 | ping[22699] |  | 64 bytes from 8.8.8.8: seq=9 ttl=59 time=593.913 ms
+Jun 18 14:35:50 | ping[22699] |  | 64 bytes from 8.8.8.8: seq=10 ttl=59 time=632.921 ms
+Jun 18 14:35:51 | ping[22699] |  | 64 bytes from 8.8.8.8: seq=11 ttl=59 time=633.035 ms
+Jun 18 14:35:52 | ping[22699] |  | 64 bytes from 8.8.8.8: seq=12 ttl=59 time=630.985 ms
+Jun 18 14:35:53 | ping[22699] |  | 64 bytes from 8.8.8.8: seq=13 ttl=59 time=610.552 ms
+Jun 18 14:35:54 | ping[22699] |  | 64 bytes from 8.8.8.8: seq=14 ttl=59 time=630.137 ms
+Jun 18 14:35:55 | ping[22699] |  | 64 bytes from 8.8.8.8: seq=15 ttl=59 time=629.565 ms
+Jun 18 14:35:56 | ping[22699] |  | 64 bytes from 8.8.8.8: seq=16 ttl=59 time=629.101 ms
+Jun 18 14:35:57 | ping[22699] |  | 64 bytes from 8.8.8.8: seq=17 ttl=59 time=628.738 ms
+Jun 18 14:35:58 | supervisor[642]/supervisor T=main | app.c app_Stop() 2915 | Stopping app 'syscaller'
+Jun 18 14:35:58 | testexe[22697]/framework T=main | LE_FILENAME TermSignalHandler() 643 | Terminated
+Jun 18 14:35:58 | _appStopClient[22788]/framework T=main | LE_FILENAME CreateSocket() 550 | Socket opened as standard i/o file descriptor 2!
+Jun 18 14:35:58 | supervisor[642]/supervisor T=main | apps.c DeactivateAppContainer() 349 | Application 'syscaller' has stopped.

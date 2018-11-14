@@ -1,0 +1,10 @@
+# ninja log v5
+0	133	0	Target_Legato_Debug/app/syscaller/obj/testexe/_main.c.o	8586392b7b0804b7
+0	153	0	Target_Legato_Debug/component/44c8bafb671a741f039a362bbe1b6a88/obj/e8dc78d7a117a3b431986a1e9223755d.o	c2de3eadf35415da
+0	160	0	Target_Legato_Debug/component/44c8bafb671a741f039a362bbe1b6a88/obj/_componentMain.c.o	4a54ed4b465e9ad
+160	187	0	Target_Legato_Debug/staging/read-only/lib/libComponent_cpuproc.so	e3c0a5abdf6787c6
+187	189	0	Target_Legato_Debug/app/syscaller/staging/read-only/lib/libComponent_cpuproc.so	bdfcb7cc69784565
+187	213	0	Target_Legato_Debug/app/syscaller/obj/testexe/testexe	d27510f588230590
+213	215	0	Target_Legato_Debug/app/syscaller/staging/read-only/bin/testexe	6bde461e4bb9ea3c
+215	223	0	Target_Legato_Debug/app/syscaller/staging/info.properties	79b60b8c77313e
+223	235	0	Target_Legato_Debug/syscaller.wp76xx.update	39c47f594f3084bc

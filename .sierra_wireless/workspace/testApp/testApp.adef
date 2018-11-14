@@ -1,0 +1,15 @@
+version: 1.0.0
+maxFileSystemBytes: 512K
+
+executables:
+{
+	testexe = (testComp)
+}
+
+processes:
+{
+	run:
+	{
+		(testexe)
+	}
+}

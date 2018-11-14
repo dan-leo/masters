@@ -1,0 +1,82 @@
+TTFF(Time to First Fix) = 2547ms
+Position state: 3D Fix
+Latitude(positive->north) : -33.869632
+Longitude(positive->east) : 18.616518
+hAccuracy                 : 441.18m
+Altitude  : 185.859m
+vAccuracy : 16.0m
+AltitudeOnWgs84  : 223.859m
+GPS time, Week 2006:TimeOfWeek 135795000 ms
+Time(HH:MM:SS:MS) 13:42:57:000
+Epoch Time 1529329377000 ms
+GPS time accuracy 33669ns
+UTC leap seconds in advance 18s
+Date(YYYY-MM-DD) 2018-06-18
+Position dilution of precision (PDOP) 1.900
+Horizontal dilution of precision (HDOP) 1.700
+Vertical dilution of precision (VDOP) 0.800
+Geometric dilution of precision (GDOP) invalid 65535
+Time dilution of precision (TDOP) invalid 65535
+hSpeed invalid [4294967295, 4294967295]
+vSpeed invalid [2147483647, 2147483647]
+Direction invalid [4294967295, 4294967295]
+satsInView 17 - satsTracking 10 - satsUsed 8
+[00] SVid 001 - C1 - U1 - SNR22 - Azim223 - Elev06
+[01] SVid 012 - C1 - U1 - SNR34 - Azim126 - Elev26
+[02] SVid 014 - C1 - U1 - SNR15 - Azim226 - Elev45
+[03] SVid 018 - C1 - U1 - SNR14 - Azim246 - Elev14
+[04] SVid 020 - C1 - U0 - SNR18 - Azim019 - Elev33
+[05] SVid 022 - C1 - U1 - SNR25 - Azim220 - Elev04
+[06] SVid 024 - C1 - U1 - SNR23 - Azim126 - Elev05
+[07] SVid 025 - C1 - U1 - SNR13 - Azim077 - Elev50
+[08] SVid 031 - C1 - U0 - SNR19 - Azim292 - Elev47
+[09] SVid 032 - C1 - U1 - SNR25 - Azim181 - Elev62
+[10] SVid 010 - C1 - U0 - SNR00 - Azim011 - Elev64
+[11] SVid 026 - C1 - U0 - SNR00 - Azim345 - Elev05
+[12] SVid 302 - C4 - U0 - SNR00 - Azim118 - Elev61
+[13] SVid 303 - C4 - U0 - SNR00 - Azim067 - Elev27
+[14] SVid 307 - C4 - U0 - SNR00 - Azim223 - Elev37
+[15] SVid 308 - C4 - U0 - SNR00 - Azim126 - Elev73
+[16] SVid 330 - C4 - U0 - SNR00 - Azim348 - Elev53
+TTFF(Time to First Fix) = 2547ms
+Position state: 3D Fix
+Latitude(positive->north) : -33.869632
+Longitude(positive->east) : 18.616518
+hAccuracy                 : 493.03m
+Altitude  : 185.859m
+vAccuracy : 24.0m
+AltitudeOnWgs84  : 223.859m
+GPS time, Week 2006:TimeOfWeek 135796000 ms
+Time(HH:MM:SS:MS) 13:42:58:000
+Epoch Time 1529329378000 ms
+GPS time accuracy 33669ns
+UTC leap seconds in advance 18s
+Date(YYYY-MM-DD) 2018-06-18
+Position dilution of precision (PDOP) 1.900
+Horizontal dilution of precision (HDOP) 1.700
+Vertical dilution of precision (VDOP) 0.800
+Geometric dilution of precision (GDOP) invalid 65535
+Time dilution of precision (TDOP) invalid 65535
+hSpeed invalid [4294967295, 4294967295]
+vSpeed invalid [2147483647, 2147483647]
+Direction invalid [4294967295, 4294967295]
+satsInView 17 - satsTracking 10 - satsUsed 8
+[00] SVid 001 - C1 - U1 - SNR17 - Azim223 - Elev06
+[01] SVid 012 - C1 - U1 - SNR33 - Azim126 - Elev26
+[02] SVid 014 - C1 - U1 - SNR15 - Azim226 - Elev45
+[03] SVid 018 - C1 - U1 - SNR18 - Azim246 - Elev14
+[04] SVid 020 - C1 - U0 - SNR18 - Azim019 - Elev33
+[05] SVid 022 - C1 - U1 - SNR25 - Azim220 - Elev04
+[06] SVid 024 - C1 - U1 - SNR23 - Azim126 - Elev05
+[07] SVid 025 - C1 - U1 - SNR13 - Azim077 - Elev50
+[08] SVid 031 - C1 - U0 - SNR18 - Azim292 - Elev47
+[09] SVid 032 - C1 - U1 - SNR25 - Azim181 - Elev62
+[10] SVid 010 - C1 - U0 - SNR00 - Azim011 - Elev64
+[11] SVid 026 - C1 - U0 - SNR00 - Azim345 - Elev05
+[12] SVid 302 - C4 - U0 - SNR00 - Azim118 - Elev61
+[13] SVid 303 - C4 - U0 - SNR00 - Azim067 - Elev27
+[14] SVid 307 - C4 - U0 - SNR00 - Azim223 - Elev37
+[15] SVid 308 - C4 - U0 - SNR00 - Azim126 - Elev73
+[16] SVid 330 - C4 - U0 - SNR00 - Azim348 - Elev53
+^C
+root@swi-mdm9x28:~# 

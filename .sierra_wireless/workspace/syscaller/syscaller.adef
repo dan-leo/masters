@@ -1,0 +1,28 @@
+version: 1.0.0
+maxFileSystemBytes: 512K
+
+executables:
+{
+	testexe = (cpuproc)
+}
+
+processes:
+{
+	run:
+	{
+		(testexe)
+		(/bin/cat /proc/cpuinfo)
+		(/bin/ping 8.8.8.8)
+	}
+}
+
+requires:
+{
+	file:
+	{
+		/bin/sh /bin/sh
+		/bin/cat /bin/cat
+		/proc/cpuinfo /proc/cpuinfo
+		/bin/ping /bin/ping
+	}
+}

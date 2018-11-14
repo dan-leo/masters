@@ -1,0 +1,25 @@
+# ninja log v5
+1	180	0	Target_Legato_Debug/component/93c19d2a33bd99e2d4c37c3ec0869440/obj/a470d91abeea0618f42c92da93fbcc31.o	26c7d25ce679d75
+0	225	0	Target_Legato_Debug/component/37489c23d0c01219e3a3828d47864242/obj/0b5353ad0441e1e1386b67b1126a8377.o	e8b08806b3539436
+1	270	0	Target_Legato_Debug/component/37489c23d0c01219e3a3828d47864242/obj/_componentMain.c.o	747cf5d665f0561b
+0	282	0	Target_Legato_Debug/component/c165f3178eb73448ddfb15b70242ef1a/obj/51f020a4afc6c49abdc2f731d158481f.o	88daa7df735ac9da
+1	302	0	Target_Legato_Debug/component/93c19d2a33bd99e2d4c37c3ec0869440/obj/_componentMain.c.o	258b64276b95580d
+0	313	0	Target_Legato_Debug/component/c165f3178eb73448ddfb15b70242ef1a/obj/_componentMain.c.o	a06cef576f7459ef
+180	385	0	Target_Legato_Debug/component/2d50fdf396a69c92c8b290b4307035a9/obj/20c2e76447807644faff2fe4a1d07270.o	1e0ad2cc1c41a6b3
+302	393	0	Target_Legato_Debug/staging/read-only/lib/libComponent_d.so	1b3c81645d7d1f34
+393	396	0	Target_Legato_Debug/app/fourComp/staging/read-only/lib/libComponent_d.so	d384191fcb96aba9
+225	429	0	Target_Legato_Debug/component/2d50fdf396a69c92c8b290b4307035a9/obj/_componentMain.c.o	e9a5fdc942f1423f
+270	457	0	Target_Legato_Debug/app/fourComp/obj/testexe2/_main.c.o	639180d387353542
+393	461	0	Target_Legato_Debug/staging/read-only/lib/libComponent_c.so	f2aea598d3266fd4
+462	468	0	Target_Legato_Debug/app/fourComp/staging/read-only/lib/libComponent_c.so	a411a0818644115a
+462	503	0	Target_Legato_Debug/staging/read-only/lib/libComponent_b.so	2f53b8f744eb17d
+503	507	0	Target_Legato_Debug/app/fourComp/staging/read-only/lib/libComponent_b.so	5329fb568a56116b
+461	514	0	Target_Legato_Debug/staging/read-only/lib/libComponent_a.so	7b97b758d7d4fde7
+514	517	0	Target_Legato_Debug/app/fourComp/staging/read-only/lib/libComponent_a.so	6427d8b10fe608cc
+282	522	0	Target_Legato_Debug/app/fourComp/obj/testexe/_main.c.o	56c196ab60d9b5c4
+503	537	0	Target_Legato_Debug/app/fourComp/obj/testexe2/testexe2	358bb647426c9833
+537	539	0	Target_Legato_Debug/app/fourComp/staging/read-only/bin/testexe2	66677fb0586aeebe
+522	552	0	Target_Legato_Debug/app/fourComp/obj/testexe/testexe	207f3cc1c4586aae
+552	554	0	Target_Legato_Debug/app/fourComp/staging/read-only/bin/testexe	1692ffafcafd81b4
+554	560	0	Target_Legato_Debug/app/fourComp/staging/info.properties	89208ca9726c0fed
+560	574	0	Target_Legato_Debug/fourComp.wp76xx.update	fff8769a943207be

@@ -1128,7 +1128,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="framework-arduinosam/cores/sam|framework-arduinosam/cores/sodaq|framework-arduinosam/cores/adafruit" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="libraries/TUINO_ZERO_96|framework-arduinosam/cores/sam|framework-arduinosam/cores/sodaq|framework-arduinosam/cores/adafruit" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -2261,7 +2261,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="framework-arduinosam/cores/sam|framework-arduinosam/cores/sodaq|framework-arduinosam/cores/adafruit" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="libraries/TUINO_ZERO_96|framework-arduinosam/cores/sam|framework-arduinosam/cores/sodaq|framework-arduinosam/cores/adafruit" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>

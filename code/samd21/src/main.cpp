@@ -1,5 +1,4 @@
-
-#include <Arduino.h>
+#include <fusion.h>
 
 boolean AT_enable = true;
 boolean AT_REPLY_enable = true;
@@ -25,24 +24,22 @@ boolean MQTT_enabled = true;
 void setup() {
   // initialize digital pin LED_BUILTIN as an output.
   pinMode(LED_BUILTIN, OUTPUT);
+
+  Serial.begin(115200);
   Serial1.begin(115200);
+  //  Serial2.begin(115200);
 //  while (!SerialUSB);
   SerialUSB.begin(115200);
-//  Serial2.begin(115200);
-  Serial.begin(115200);
 //  // Assign pins RX & TX SERCOM functionality
 //  pinPeripheral(PIN_SERIAL2_RX, PIO_SERCOM);
 //  pinPeripheral(PIN_SERIAL2_TX, PIO_SERCOM);
+
+  dht.begin();
+
   SerialUSB.println(F("READY"));
-  Serial1.print(F("\x1A"));
-  Serial1.print(F("AT\r\n"));
-  SerialUSB.println(Serial1.readString()); Serial1.print(F("AT+qmtdisc=0\r\n"));
-  SerialUSB.println(Serial1.readString()); Serial1.print(F("AT+QIDNSCFG=1,\"8.8.8.8\",\"8.8.4.4\"\r\n"));
-  SerialUSB.println(Serial1.readString()); Serial1.print(F("AT+QIDNSCFG=1,\"8.8.8.8\",\"8.8.4.4\"\r\n"));
-  SerialUSB.println(Serial1.readString()); Serial1.print(F("at+qmtopen=0,\"demo.thingsboard.io\",1883\r\n"));
-  SerialUSB.println(Serial1.readString()); Serial1.print(F("at+qmtconn=0,\"demo.thingsboard.io\",\"KD0wEWeMIMrNHFcQngaI\",\"\"\r\n"));
-  pinMode(A0, INPUT);
-  pinMode(A1, INPUT);
+
+  setup_mqtt();
+
 }
 
 // the loop function runs over and over again forever
@@ -84,19 +81,36 @@ void loop() {
 	}
 
 	static unsigned long ms = millis();
-	if (millis() - ms > 1000) {
+	if (millis() - ms > 5000) {
 		ms = millis();
 		if (PING_enabled) Serial1.print(F("AT+QPING=1,\"1.1.1.1\",1,1\r\n"));
 		if (MQTT_enabled) {
-			Serial1.print(F("AT+QMTPUB=0,0,0,0,\"v1/devices/me/telemetry\"\r\n"));
-			delay(50);
-			Serial1.print(F("{\"temperature\":"));
-			//37.00
-			Serial1.print(analogRead(A0)/10);
-			Serial1.print(F(",\"humidity\":"));
-			//77.00
-			Serial1.print(analogRead(A1)/10);
-			Serial1.print(F("}\x1A"));
+			send_mqtt();
 		}
 	}
 }
+
+/*
+ *
+at+qmtsub=0,4,"v1/devices/me/rpc/request/+",2
+
+OK
+
++QMTSUB: 0,4,0,1
+AT+QMTPUB=0,0,0,0,"v1/devices/me/telemetry"
+
+> {"temperature":36.00,"humidity":78.00}
+
+OK
+
++QMTPUB: 0,0,0
+
++QMTRECV: 0,1,"v1/devices/me/rpc/request/11","{"method":"setValue","params":true}"
+
++QMTRECV: 0,2,"v1/devices/me/rpc/request/12","{"method":"setValue","params":false}"
+
++QMTRECV: 0,3,"v1/devices/me/rpc/request/13","{"method":"setValue","params":true}"
+
++QMTRECV: 0,4,"v1/devices/me/rpc/request/14","{"method":"setValue","params":false}"
+ *
+ */

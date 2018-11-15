@@ -7,6 +7,8 @@ boolean SERIAL_REPLY_enable = true;
 boolean PING_enabled = false;
 boolean MQTT_enabled = true;
 
+String str_quec = "";
+
 
 //#include "wiring_private.h"
 //
@@ -53,6 +55,7 @@ void loop() {
 
 	int c_usb = SerialUSB.read();
 	int c_quec = Serial1.read();
+//	String str_quec = Serial1.readStringUntil('\n');
 //	int c_mura = Serial2.read();
 	int c_ser = Serial.read();
 	if (c_usb > 0) {
@@ -71,8 +74,24 @@ void loop() {
 		}
 	}
 	if (c_quec > 0) {
-		if (AT_REPLY_enable) SerialUSB.write(c_quec);
+		str_quec.concat((char)c_quec);
+		if (c_quec == '\n') {
+			if (AT_REPLY_enable) SerialUSB.print(str_quec);
+			if (str_quec.indexOf(F("+QMTRECV")) >= 0){
+				if (str_quec.indexOf(F("setValue")) > 0) {
+					int p = str_quec.indexOf(F("params"));
+					if (p > 0) {
+						String str_bool = str_quec.substring(p + 8, str_quec.indexOf('}'));
+//						SerialUSB.println(str_bool);
+						if (str_bool.equals("true")) digitalWrite(LED_BUILTIN, HIGH);
+						else if (str_bool.equals("false")) digitalWrite(LED_BUILTIN, LOW);
+					}
+				}
+			}
+			str_quec = "";
+		}
 	}
+
 //	if (c_mura > 0) {
 //		if (MURATA_REPLY_enable) SerialUSB.write(c_mura);
 //	}

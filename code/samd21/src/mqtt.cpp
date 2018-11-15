@@ -8,13 +8,15 @@
 #include <fusion.h>
 
 void setup_mqtt() {
-	Serial1.print(F("\x1A"));
-	Serial1.print(F("AT\r\n"));
+	Serial1.print(F("\x1A\x1A"));
+	SerialUSB.println(Serial1.readString()); Serial1.print(F("AT\r\n"));
+	SerialUSB.println(Serial1.readString()); Serial1.print(F("at+cops?\r\n"));
+	SerialUSB.println(Serial1.readString()); Serial1.print(F("at+qnwinfo\r\n"));
 	SerialUSB.println(Serial1.readString()); Serial1.print(F("AT+qmtdisc=0\r\n"));
-	SerialUSB.println(Serial1.readString()); Serial1.print(F("AT+QIDNSCFG=1,\"8.8.8.8\",\"8.8.4.4\"\r\n"));
 	SerialUSB.println(Serial1.readString()); Serial1.print(F("AT+QIDNSCFG=1,\"8.8.8.8\",\"8.8.4.4\"\r\n"));
 	SerialUSB.println(Serial1.readString()); Serial1.print(F("at+qmtopen=0,\"demo.thingsboard.io\",1883\r\n"));
 	SerialUSB.println(Serial1.readString()); Serial1.print(F("at+qmtconn=0,\"demo.thingsboard.io\",\"KD0wEWeMIMrNHFcQngaI\",\"\"\r\n"));
+	SerialUSB.println(Serial1.readString()); Serial1.print(F("at+qmtsub=0,1,\"v1/devices/me/rpc/request/+\",2\r\n"));
 //	pinMode(A0, INPUT);
 //	pinMode(A1, INPUT);
 }

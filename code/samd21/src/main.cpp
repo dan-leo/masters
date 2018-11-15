@@ -1,5 +1,9 @@
 #include <fusion.h>
 
+#define pinDHT    2
+#define pinBuzzer 3
+#define pinLED    13
+
 boolean AT_enable = true;
 boolean AT_REPLY_enable = true;
 //boolean MURATA_REPLY_enable = true;
@@ -26,6 +30,10 @@ String str_quec = "";
 void setup() {
   // initialize digital pin LED_BUILTIN as an output.
   pinMode(LED_BUILTIN, OUTPUT);
+  pinMode(pinBuzzer, OUTPUT);
+  digitalWrite(pinBuzzer, HIGH);
+  delay(10);
+  digitalWrite(pinBuzzer, LOW);
 
   Serial.begin(115200);
   Serial1.begin(115200);
@@ -78,13 +86,20 @@ void loop() {
 		if (c_quec == '\n') {
 			if (AT_REPLY_enable) SerialUSB.print(str_quec);
 			if (str_quec.indexOf(F("+QMTRECV")) >= 0){
-				if (str_quec.indexOf(F("setValue")) > 0) {
+				if (str_quec.indexOf(F("setLED")) > 0) {
 					int p = str_quec.indexOf(F("params"));
 					if (p > 0) {
 						String str_bool = str_quec.substring(p + 8, str_quec.indexOf('}'));
-//						SerialUSB.println(str_bool);
 						if (str_bool.equals("true")) digitalWrite(LED_BUILTIN, HIGH);
 						else if (str_bool.equals("false")) digitalWrite(LED_BUILTIN, LOW);
+					}
+				}
+				if (str_quec.indexOf(F("setBuzzer")) > 0) {
+					int p = str_quec.indexOf(F("params"));
+					if (p > 0) {
+						String str_bool = str_quec.substring(p + 8, str_quec.indexOf('}'));
+						if (str_bool.equals("true")) digitalWrite(pinBuzzer, HIGH);
+						else if (str_bool.equals("false")) digitalWrite(pinBuzzer, LOW);
 					}
 				}
 			}

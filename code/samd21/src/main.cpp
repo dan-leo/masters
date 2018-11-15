@@ -11,6 +11,8 @@ boolean SERIAL_REPLY_enable = true;
 boolean PING_enabled = false;
 boolean MQTT_enabled = true;
 
+int led_state = LOW;
+
 String str_quec = "";
 
 
@@ -90,8 +92,9 @@ void loop() {
 					int p = str_quec.indexOf(F("params"));
 					if (p > 0) {
 						String str_bool = str_quec.substring(p + 8, str_quec.indexOf('}'));
-						if (str_bool.equals("true")) digitalWrite(LED_BUILTIN, HIGH);
-						else if (str_bool.equals("false")) digitalWrite(LED_BUILTIN, LOW);
+						if (str_bool.equals("true")) led_state = HIGH;
+						else if (str_bool.equals("false")) led_state = LOW;
+						digitalWrite(LED_BUILTIN, led_state);
 					}
 				}
 				if (str_quec.indexOf(F("setBuzzer")) > 0) {

@@ -7,6 +7,8 @@
 
 #include <fusion.h>
 
+extern int led_state;
+
 void setup_mqtt() {
 	Serial1.print(F("\x1A\x1A"));
 	SerialUSB.println(Serial1.readString()); Serial1.print(F("AT\r\n"));
@@ -22,12 +24,14 @@ void setup_mqtt() {
 }
 
 void send_mqtt() {
+	digitalWrite(LED_BUILTIN, !led_state);
 	Serial1.print(F("AT+QMTPUB=0,0,0,0,\"v1/devices/me/telemetry\"\r\n"));
 	// Reading temperature or humidity takes about 250 milliseconds!
 	// Sensor readings may also be up to 2 seconds 'old' (its a very slow sensor)
 	float h = dht.readHumidity();
 	// Read temperature as Celsius (the default)
 	float t = dht.readTemperature();
+	float hic = dht.computeHeatIndex(t, h, false);
 
 	// Check if any reads failed and exit early (to try again).
 	if (isnan(h) || isnan(t)) {
@@ -38,11 +42,12 @@ void send_mqtt() {
 
 	Serial1.print(F("{\"temperature\":")); //37.00
 	//	Serial1.print(analogRead(A0)/10);
-	Serial1.print(t);
+	Serial1.print(hic);
 	Serial1.print(F(",\"humidity\":")); //77.00
 	//	Serial1.print(analogRead(A1)/10);
 	Serial1.print(h);
 	Serial1.print(F("}\x1A"));
+	digitalWrite(LED_BUILTIN, led_state);
 }
 
 

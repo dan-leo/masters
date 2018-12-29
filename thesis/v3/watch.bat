@@ -2,7 +2,7 @@
 echo "Welcome to the pandoc-watcher-compiler, by Daniel Robinson"
 :loop  
 timeout -t 1 >nul  
-for %%i in (masters2.md) do echo %%~ai|find "a">nul || goto :loop
+for %%i in (masters3.md) do echo %%~ai|find "a">nul || goto :loop
 
 set STARTTIME=%TIME%
 echo %STARTTIME% file was changed
@@ -34,5 +34,5 @@ rem "echo Finish   : %ENDTIME%"
 rem "echo          ---------------"
 echo %ENDTIME% finished compiling in %DURATION% 
 
-attrib -a masters2.md
+attrib -a masters3.md
 goto :loop

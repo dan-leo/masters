@@ -6,7 +6,7 @@ Good morning everyone. My name is Daniel Robinson. Am currently studying for a m
 
 South Africa has vulnerable people subject to crimes, theft and accidents. There's great potential to solve problems in that sector.
 
-*Tell brief story about Hannah Cornelius who was kidnapped, raped, murdered. Also about the safety app Namola which sends your location immediately and gets you in touch with a control centre in seconds.* This is great, but in the case of cellphone theft, or a stressful situation, there may not even be time to do that. Imagine a discrete wearable which can sense the heightened heart rate and is trained for these situations. It's inspiring, but I'm not sure if I'll reach that point yet. At least there are a myriad of things wearables can do for us in future, and that I can look into.
+Some of you may know the story about Hannah Cornelius last year. A student at the university, she was kidnapped, raped, and murdered. I always wondered if there could be something out there that could help prevent it. Also about the safety app Namola which sends your location immediately and gets you in touch with a control centre in seconds. I can even do a demo briefly. Give it about 15 seconds. This is great, but in the case of cellphone theft, or a stressful situation, there may not even be time to do that. Imagine a discrete wearable which can sense the heightened heart rate and is trained for these situations. It's inspiring, but I'm not sure if I'll reach that point yet. At least there are a myriad of things wearables can do for us in future, and that I can look into.
 
 ## Objectives
 
@@ -37,7 +37,7 @@ Wearables have strict metrics that are not easy to satisfy, as all components ha
 
 This use case overlaps with asset tracking, healthcare and safety & security. If successful, it can provide yet another incentive for cellular carriers in SA to roll out this technology, and/or commercialization.
 
-Nevertheless a generic point of view that considers the other use cases will help to customize the technology for many of the 455 public enterprises in SA.
+Nevertheless a generic point of view that considers the other use cases will help to customize the technology for many of the public enterprises in SA.
 
 ### Requirements
 

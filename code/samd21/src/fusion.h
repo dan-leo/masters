@@ -15,5 +15,6 @@ extern DHT dht;
 
 void setup_mqtt();
 void send_mqtt();
+void send_mqtt_button(boolean state);
 
 #endif /* LIBRARIES_FUSION_FUSION_H_ */

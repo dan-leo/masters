@@ -16,7 +16,7 @@ linkcolor: blue
 
 \vspace{10 mm}
 
-> *Dedicated to all who lost their lives.*
+> *Dedicated to all who lost their lives when help could have been at hand.*
 
 # Introduction
 
@@ -50,7 +50,7 @@ What are the typical use cases for wearables, and what are the requirements for 
 3. Choose a technology that satisfies the specific requirements. This is how NB-IoT applies to wearables.
    1. **NB-IoT**
    2. **GPS**
-   3. **Dash7. It uses stealth an no discovery beacons, so it won't transmit until in a known environment.**
+   3. **Dash7. It uses stealth and no discovery beacons, so it won't transmit until in a known environment.**
 4. Choose a device
    1. **Nordic have the right sized device. It will be used in the next version.**
    2. What challenges are there when working with a specific device
@@ -95,19 +95,23 @@ There are over 30 IoT platforms available and the number continues to rise. Only
 
 Theoretically it is possible to extend terrestrial NB-IoT coverage to world-wide using a constellation of LEO satellites [@Cluzel2018a].
 
-An Early Data Transmission (EDT) mechanism during the random access procedure will improve the device battery life by 3 years and reduces the message latency by up to 3 seconds especially in challenging radio conditions. The values at 164 dB are simulated [@Hoglund2018a]. The Back-off mechanism will increase capacity by 3-6% according to simulations [@Zhao2017].
+An Early Data Transmission (EDT) mechanism during the random access procedure will improve the device battery life by 3 years and reduces the message latency by up to 3 seconds especially in challenging radio conditions. The values at 164 dB are simulated [@Hoglund2018a]. The Back-off mechanism will increase capacity by 3-6% according to simulations [@Zhao2017]. SC-FDMA with Index Modulation increases energy efficiency by 50% [@Chafii2018b].
 
-There are great cellular-IoT possibilities when dropping 3GPP standards and redesigning the protocol from scratch such that there's up to 260% improvement over NB-IoT and other cellular standards. It's a connectionless protocol that can serve millions with only 10 MHz of bandwidth. When using the control plane data transmission scheme, NB-IoT is able to offer system capacities relatively close to the 5G protocol proposal [@Tavares2017a].
+There are great cellular-IoT possibilities when dropping 3GPP standards and redesigning the protocol from scratch such that there's up to 260% improvement over NB-IoT and other cellular standards. It's a connectionless protocol that can serve millions with only 10 MHz of bandwidth. When using the control plane data transmission scheme, NB-IoT is able to offer system capacities relatively close to this 5G protocol proposal [@Tavares2017a].
 
-NB-IoT supports mobility only with cell-reselection in idle state. Test-bed results provide cell-reselection optimization [@Moon2018a].
+NB-IoT supports mobility only with cell-reselection in idle state. Test-bed and field results provide cell-reselection mobility optimization [@Moon2018a].
 
- [@].
+Considering coexistence between NB-IoT and LTE, throughput loss shouldn't exceed 5% [@Wang2016a].
 
- [@].
+NB-IoT is ideal for guaranteed QoS [@Gaddam2018b] such as in air pollution sensors [@Duangsuwan2018b]. What about 2G/GPRS?
 
- [@].
+Device-to-Device (D2D) communication is specified in NB-IoT. In forest terrain, a range of 2km would be achieved at the 164 dB path-loss limit [@Hejselbaek2018a].
 
- [@].
+NB-IoT OTDOA has been realized in an RF-SoC with sub-150m accuracy. EC-GSM also seems to be a narrow band cellular IoT standard [@Korb2018a].
+
+
+
+
 
 
 

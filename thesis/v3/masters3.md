@@ -12,11 +12,72 @@ lot: false
 link-citations: true
 csl: ieee.csl
 linkcolor: blue
++ni: NB-IoT
 ---
 
 \vspace{10 mm}
 
-> *Dedicated to all who lost their lives when help could have been at hand.*
+> *Dedicated to all who lost their lives when help could have been at hand.* +ni
+
+# Abbreviations
+
+3GPP 3rd Generation Partnership Project
+4G 4th Generation Mobile Communication Technology
+AWGN Additive White Gaussian Noise
+BPSK Binary Phase Shift Keying
+CIoT Cellular IoT
+CP Cyclic Prefix
+dBm Power in decibels (dB) referenced to one milliwatt (mW)
+DMRS Demodulation Reference Signal
+DL Downlink
+DVB-S2 Digital Video Broadcasting - Satellite - Second Generation
+eNB or eNodeB Evolved Node B, LTE basestation
+E-UTRA Evolved Universal Terrestrial Radio Access
+GEO Geostationary Earth Orbit (35 786 kilometers)
+HARQ Hybrid Automatic Repeat reQuest
+ICI Inter Carrier Interference
+IEEE Institute of Electrical and Electronics Engineers
+IoT Internet of the Things
+ISI Inter Symbol Interference
+ITU-R The Radiocommunication sector of the International
+Telecommunication Union
+kbps Kilobits per second
+Ku-band Ku frequency band according to IEEE standard (12 to 18 GHz)
+LPWAN Low-Power Wide-Area Network
+LTE Long Term Evolution
+LTE-A LTE-Advanced
+LTE-M LTE Category-M specification for Machine Type Communication
+M2M Machine to Machine
+MAC Media/Medium Access Control
+Mbps Megabits per second
+MTC Machine-Type Communication
+NAS Non-stratum Access
+NB-IoT Narrowband Internet of Things
+NPBCH Narrowband Physical Broadcast Channel
+NPDSCH Narrowband Physical Downlink Shared Channel
+NPRACH Narrowband Physical Random Access Channel
+NPSS Narrowband Primary Synchronization Signal
+NPUSCH Narrowband Physical Uplink Shared Channel
+NSSS Narrowband Secondary Synchronization Signal
+OFDM Orthogonal Frequency-Division Multiplexing
+OFDMA Orthogonal Frequency-Division Multiple Access
+PAPR Peak-to-Average Power Ratio
+PDU Protocol Data Unit
+PDCP Packet Data Convergence Protocol
+PRB Physical Resource Block
+PSK Phase Shift Keying
+QoS Quality of Service
+QAM Quadrature Amplitude Modulation
+QPSK Quadrature Phase Shift Keying
+RRC Radio Resource Control
+RLC Radio Link Control
+S-band S frequency band according to IEEE standard (2 to 4 GHz)
+SC-FDMA Single Carrier Frequency Division Multiple Access
+TTI Transmission Time Interval
+UE User Equipment
+UHF Ultra High Frequency -band (according to IEEE standard 300 - 1000 MHz)
+UL Uplink
+UMTS Universal Mobile Telecommunications System
 
 # Introduction
 
@@ -91,9 +152,11 @@ The market is conceptually the application of research. Proprietary.
 
 # Literature Study
 
-There are over 30 IoT platforms available and the number continues to rise. Only a few are capable of device control and real-time analysis. It is seen as the "backbone" in a centralized system [@Hejazi2018a].
+Imagine how interested cellular providers would be in using LEO constellations as a cheaper way of providing blanket coverage than terrestrial networks, especially when considering the unique topographies of cliffs, valleys and steep slopes. It does seem to be the way forward considering the difficulties already had in South Africa. Currently, terrestrial wireless network can only cover around 20% of territory in China and the U.S.  [@Qu2017c].
 
-Theoretically it is possible to extend terrestrial NB-IoT coverage to world-wide using a constellation of LEO satellites [@Cluzel2018a].
+Theoretically it is possible to extend terrestrial NB-IoT coverage to world-wide using a constellation of LEO satellites [@Cluzel2018a]. The narrow-band timing-advance method (NB-TA) extends cell radius beyond the 3GPP limit of 35km [@Ha2018a].
+
+There are over 30 IoT platforms available and the number continues to rise. Only a few are capable of device control and real-time analysis. It is seen as the "backbone" in a centralized system [@Hejazi2018a].
 
 An Early Data Transmission (EDT) mechanism during the random access procedure will improve the device battery life by 3 years and reduces the message latency by up to 3 seconds especially in challenging radio conditions. The values at 164 dB are simulated [@Hoglund2018a]. The Back-off mechanism will increase capacity by 3-6% according to simulations [@Zhao2017]. SC-FDMA with Index Modulation increases energy efficiency by 50% [@Chafii2018b].
 
@@ -108,6 +171,10 @@ NB-IoT is ideal for guaranteed QoS [@Gaddam2018b] such as in air pollution senso
 Device-to-Device (D2D) communication is specified in NB-IoT. In forest terrain, a range of 2km would be achieved at the 164 dB path-loss limit [@Hejselbaek2018a].
 
 NB-IoT OTDOA has been realized in an RF-SoC with sub-150m accuracy. EC-GSM also seems to be a narrow band cellular IoT standard [@Korb2018a].
+
+Data prediction alleviates tight restrictions imposed by LPWAN networks, such as SigFox [@Karg2018a].
+
+There is a saturation of human-to-human communications (H2H). hence machine-to-machine (M2M) or IoT is the new frontier for mobile operators [@Wang2017e].
 
 
 

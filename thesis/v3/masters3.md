@@ -1,3 +1,23 @@
+---
+title: Choosing an LTE/LPWAN Wireless Technology for Wearables in South Africa
+author: Daniel Robinson
+date: Jan 2019
+tags: [LTE, wearables, healthcare, safety, critical, life-threatening, SDR, NB-IoT, Dash7, localization]
+abstract: |
+  There are multiple wireless network contenders each suitable for certain use cases. The following: NB-IoT, GPRS, LoRaWAN, SigFox and Dash7 are investigated. A winner is chosen and a useful proof of concept is designed and developed. The results of this research can be applied broadly to wireless development, as wearable design overlaps with battery-life, range, reliability etcetera which overlaps with other use cases.
+
+toc: true
+lof: false
+lot: false
+link-citations: true
+csl: ieee.csl
+linkcolor: blue
+---
+
+\vspace{10 mm}
+
+> *Dedicated to all who lost their lives.*
+
 # Introduction
 
 **This will be the structure of the literature study and design chapters**
@@ -70,6 +90,26 @@ The market is conceptually the application of research. Proprietary.
 
 
 # Literature Study
+
+There are over 30 IoT platforms available and the number continues to rise. Only a few are capable of device control and real-time analysis. It is seen as the "backbone" in a centralized system [@Hejazi2018a].
+
+Theoretically it is possible to extend terrestrial NB-IoT coverage to world-wide using a constellation of LEO satellites [@Cluzel2018a].
+
+An Early Data Transmission (EDT) mechanism during the random access procedure will improve the device battery life by 3 years and reduces the message latency by up to 3 seconds especially in challenging radio conditions. The values at 164 dB are simulated [@Hoglund2018a]. The Back-off mechanism will increase capacity by 3-6% according to simulations [@Zhao2017].
+
+There are great cellular-IoT possibilities when dropping 3GPP standards and redesigning the protocol from scratch such that there's up to 260% improvement over NB-IoT and other cellular standards. It's a connectionless protocol that can serve millions with only 10 MHz of bandwidth. When using the control plane data transmission scheme, NB-IoT is able to offer system capacities relatively close to the 5G protocol proposal [@Tavares2017a].
+
+NB-IoT supports mobility only with cell-reselection in idle state. Test-bed results provide cell-reselection optimization [@Moon2018a].
+
+ [@].
+
+ [@].
+
+ [@].
+
+ [@].
+
+
 
 > Background on how these technologies work. Basestation side? What do I know? Put into words, questions..
 
@@ -173,3 +213,6 @@ Vodacom has NB-IoT coverage in Cape Town at the CTICC and inside an office at it
 # Conclusion
 
 The end.
+
+# References
+

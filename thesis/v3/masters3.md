@@ -17,67 +17,7 @@ linkcolor: blue
 
 \vspace{10 mm}
 
-> *Dedicated to all who lost their lives when help could have been at hand.* +ni
-
-# Abbreviations
-
-3GPP 3rd Generation Partnership Project
-4G 4th Generation Mobile Communication Technology
-AWGN Additive White Gaussian Noise
-BPSK Binary Phase Shift Keying
-CIoT Cellular IoT
-CP Cyclic Prefix
-dBm Power in decibels (dB) referenced to one milliwatt (mW)
-DMRS Demodulation Reference Signal
-DL Downlink
-DVB-S2 Digital Video Broadcasting - Satellite - Second Generation
-eNB or eNodeB Evolved Node B, LTE basestation
-E-UTRA Evolved Universal Terrestrial Radio Access
-GEO Geostationary Earth Orbit (35 786 kilometers)
-HARQ Hybrid Automatic Repeat reQuest
-ICI Inter Carrier Interference
-IEEE Institute of Electrical and Electronics Engineers
-IoT Internet of the Things
-ISI Inter Symbol Interference
-ITU-R The Radiocommunication sector of the International
-Telecommunication Union
-kbps Kilobits per second
-Ku-band Ku frequency band according to IEEE standard (12 to 18 GHz)
-LPWAN Low-Power Wide-Area Network
-LTE Long Term Evolution
-LTE-A LTE-Advanced
-LTE-M LTE Category-M specification for Machine Type Communication
-M2M Machine to Machine
-MAC Media/Medium Access Control
-Mbps Megabits per second
-MTC Machine-Type Communication
-NAS Non-stratum Access
-NB-IoT Narrowband Internet of Things
-NPBCH Narrowband Physical Broadcast Channel
-NPDSCH Narrowband Physical Downlink Shared Channel
-NPRACH Narrowband Physical Random Access Channel
-NPSS Narrowband Primary Synchronization Signal
-NPUSCH Narrowband Physical Uplink Shared Channel
-NSSS Narrowband Secondary Synchronization Signal
-OFDM Orthogonal Frequency-Division Multiplexing
-OFDMA Orthogonal Frequency-Division Multiple Access
-PAPR Peak-to-Average Power Ratio
-PDU Protocol Data Unit
-PDCP Packet Data Convergence Protocol
-PRB Physical Resource Block
-PSK Phase Shift Keying
-QoS Quality of Service
-QAM Quadrature Amplitude Modulation
-QPSK Quadrature Phase Shift Keying
-RRC Radio Resource Control
-RLC Radio Link Control
-S-band S frequency band according to IEEE standard (2 to 4 GHz)
-SC-FDMA Single Carrier Frequency Division Multiple Access
-TTI Transmission Time Interval
-UE User Equipment
-UHF Ultra High Frequency -band (according to IEEE standard 300 - 1000 MHz)
-UL Uplink
-UMTS Universal Mobile Telecommunications System
+> *Dedicated to all who lost their lives when help could have been at hand.*
 
 # Introduction
 
@@ -284,6 +224,71 @@ Vodacom has NB-IoT coverage in Cape Town at the CTICC and inside an office at it
 # Conclusion
 
 The end.
+
+\newpage
+\onecolumn
+
+# Abbreviations
+
+```tex
+3GPP 			3rd Generation Partnership Project
+4G 				4th Generation Mobile Communication Technology
+AWGN 			Additive White Gaussian Noise
+BPSK 			Binary Phase Shift Keying
+CIoT 			Cellular IoT
+CP 				Cyclic Prefix
+dBm 			Power in decibels (dB) referenced to one milliwatt (mW)
+DMRS 			Demodulation Reference Signal
+DL 				Downlink
+DVB-S2 			Digital Video Broadcasting - Satellite - Second Generation
+eNB or eNodeB 	Evolved Node B, LTE basestation
+E-UTRA 			Evolved Universal Terrestrial Radio Access
+GEO 			Geostationary Earth Orbit (35 786 kilometers)
+HARQ 			Hybrid Automatic Repeat reQuest
+ICI 			Inter Carrier Interference
+IEEE 			Institute of Electrical and Electronics Engineers
+IoT 			Internet of the Things
+ISI 			Inter Symbol Interference
+ITU-R 			The Radiocommunication sector of the International Telecommunication Union
+kbps 			Kilobits per second
+Ku-band 		Ku frequency band according to IEEE standard (12 to 18 GHz)
+LPWAN 			Low-Power Wide-Area Network
+LTE 			Long Term Evolution
+LTE-A 			LTE-Advanced
+LTE-M 			LTE Category-M specification for Machine Type Communication
+M2M 			Machine to Machine
+MAC 			Media/Medium Access Control
+Mbps 			Megabits per second
+MTC 			Machine-Type Communication
+NAS 			Non-stratum Access
+NB-IoT 			Narrowband Internet of Things
+NPBCH 			Narrowband Physical Broadcast Channel
+NPDSCH 			Narrowband Physical Downlink Shared Channel
+NPRACH 			Narrowband Physical Random Access Channel
+NPSS 			Narrowband Primary Synchronization Signal
+NPUSCH 			Narrowband Physical Uplink Shared Channel
+NSSS 			Narrowband Secondary Synchronization Signal
+OFDM 			Orthogonal Frequency-Division Multiplexing
+OFDMA 			Orthogonal Frequency-Division Multiple Access
+PAPR 			Peak-to-Average Power Ratio
+PDU 			Protocol Data Unit
+PDCP 			Packet Data Convergence Protocol
+PRB 			Physical Resource Block
+PSK 			Phase Shift Keying
+QoS 			Quality of Service
+QAM 			Quadrature Amplitude Modulation
+QPSK 			Quadrature Phase Shift Keying
+RRC 			Radio Resource Control
+RLC 			Radio Link Control
+S-band 			S frequency band according to IEEE standard (2 to 4 GHz)
+SC-FDMA 		Single Carrier Frequency Division Multiple Access
+TTI 			Transmission Time Interval
+UE 				User Equipment
+UHF 			Ultra High Frequency -band (according to IEEE standard 300 - 1000 MHz)
+UL 				Uplink
+UMTS 			Universal Mobile Telecommunications System
+```
+\twocolumn
 
 # References
 

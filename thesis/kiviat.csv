@@ -1,0 +1,6 @@
+;Dash7;NB-IoT;GPRS; Sigfox;LoRaWAN
+Range;2;3;2;5;3
+Coverage;1;2;5;4;3
+Battery life;5;4;2;3;3
+Data rate;5;5;5;1;3
+Localization;5;4;4;1;1

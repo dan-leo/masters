@@ -39,3 +39,4 @@ I was actually in their head office recently and spent a few hours testing there
 > Don't have to prove other use cases besides wearables. Simulations. Hybrid between mathematical model and simulations. Empirical field measurements.
 >
 > End-feb. Don't think about rel too much. 
+

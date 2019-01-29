@@ -1,10 +1,10 @@
 ---
-title: Choosing an LTE/LPWAN Wireless Technology for Wearables in South Africa
+title: NB-IoT vs Dash7 in ambulatory wearable applications
 author: Daniel Robinson
 date: Jan 2019
 tags: [LTE, wearables, healthcare, safety, critical, life-threatening, SDR, NB-IoT, Dash7, localization]
 abstract: |
-  There are multiple wireless network contenders each suitable for certain use cases. The following: NB-IoT, GPRS, LoRaWAN, SigFox and Dash7 are investigated. A winner is chosen and a useful proof of concept is designed and developed. The results of this research can be applied broadly to wireless development, as wearable design overlaps with battery-life, range, reliability etcetera which overlaps with other use cases.
+  NB-IoT, GPRS, LoRaWAN, SigFox and Dash7 are among a few wireless technologies contending for a dominant market share in the IoT sphere. Each fulfills a niche in different user applications, yet common drawbacks limit the chance of taking the lions share. In wearables,
 
 toc: true
 lof: false
@@ -13,293 +13,137 @@ link-citations: true
 csl: ieee.csl
 linkcolor: blue
 +ni: NB-IoT
+++: +
 ---
 
 \vspace{10 mm}
 
-> *Dedicated to all who lost their lives when help could have been at hand.*
+> *Dedicated to bidirectionality*
 
 # Introduction
 
-**This will be the structure of the literature study and design chapters**
+The scope of this thesis is limited to the use of bidirectional wireless networks in wearables. Unidirectionality 
 
-What technologies are available, and what do they offer?
-
-- These are the limitations. 
-- Based on those limitations, NB-IoT is chosen / justified
-
-Which NB-IoT devices are available?
-
-What devices are readily available, and how do they differ?
-
-> Technologies? Choose a technology. Devices? Choose a device.
+In terms of data transmission, unidirectionality means that it is sent in one direction only. Since the role of an endpoint is to capture data and react on it, it makes sense that an endpoint would transmit its data towards a central node. This is true in the case of LoRaWAN and SigFox.
 
 
 
-
-
-What are the typical use cases for wearables, and what are the requirements for wireless applications.
-
-1. Application requirements (wearables)
-   1. Use cases requirements
-      1. **It must satisfy battery life, range, reliability and localization.**
-      2. **Size is not the focus as it takes business, money, effort.**
-2. Available technologies to satisfy those requirements
-   1. **There are currently wearables that use bluetooth. Satellite phones. GSM wearables. GPS.**
-   2. **In terms of localization, there's satellite, TOF, TDOA, GPS**
-   3. **In wireless networking terms there's LTE-M, GSM, NB-IoT, LoRaWAN, SigFox, Dash7, weightless, RPMA**
-   4. **There are multiple LPWAN technologies [@Malik2018b]**
-3. Choose a technology that satisfies the specific requirements. This is how NB-IoT applies to wearables.
-   1. **NB-IoT**
-   2. **GPS**
-   3. **Dash7. It uses stealth and no discovery beacons, so it won't transmit until in a known environment.**
-4. Choose a device
-   1. **Nordic have the right sized device. It will be used in the next version.**
-   2. What challenges are there when working with a specific device
-      1. Power levy, quirks, too big
-   3. Section to compare. As part of this evaluation of the technology, table to compare the different aspects of technologies that one cares about on vertical axis and properties one wants to explore on horizontal axis. Oxo chart.
-      1. Do the same for different devices
-         1. Traits, characteristics
-         2. Highlight the weak, strong points
-
-A personal challenge is to separate literature aspect into chapter 2 and design into chapter 3. It's about gathering information and making choices, and making logical conclusions about those choices. So the one chapter is background information, and the other is about decision making which is synthesis which is design. Must think about this distinction as I write. When regarding a sentence, ask if it is literature i.e. "did I take the information from somewhere else?" or is it applying information to make a choice. Essentially, "This is the literature, here's my design".
-
-Literature sections:
-
-* application
-* technology
-* device that one wants. Or put device literature in design chapter.
-
-Design section:
-
-* mirror structure exactly the same
-  * design section on application. This may be empty. More about the background info.
-  * design section on technology
-  * design section on device
-
-Application description in chapter 1.
-
-Wireless technologies in chapter 2, also what other people have done that is similar to what I am trying to do. Related work. Similar stuff evaluating the same type of thing. At least what others have done. Other technology applications for wearables. Concept and broad idea of wearables put in lit study. 
-
-Very broad context and background, very focused related work, very focused study of the literature on the technology, application of this knowledge and this background into a design.
-
-Do before mid January. 
-
-Don't focus too much on market activity. I'm doing research. I'm looking at literature.
-
-The market is conceptually the application of research. Proprietary. 
-
-
+it can be considered that their are two modes of operation. In the first, data the device will be event triggered or send data periodically 
 
 # Literature Study
 
-Imagine how interested cellular providers would be in using LEO constellations as a cheaper way of providing blanket coverage than terrestrial networks, especially when considering the unique topographies of cliffs, valleys and steep slopes. It does seem to be the way forward considering the difficulties already had in South Africa. Currently, terrestrial wireless network can only cover around 20% of territory in China and the U.S.  [@Qu2017c].
+The first wearable in history was used to tell the time. Five hundred years ago, German inventor Paul Henlein created small watches which hung from the neck as pendants. It evolved fashionably into pocket watches for waistcoats, a form of bracelet for women, and became smaller and more precise over time. By 1904, it kept an aviator's hands free as a wristwatch when piloting a plane. This form of autonomy has grown into the diverse field one sees today. For example, they are used as advanced wearables
+• Health/fitness sensor and monitor devices
+• Wireless payment enabled devices
 
-Theoretically it is possible to extend terrestrial NB-IoT coverage to world-wide using a constellation of LEO satellites [@Cluzel2018a]. The narrow-band timing-advance method (NB-TA) extends cell radius beyond the 3GPP limit of 35km [@Ha2018a].
+> Wearables make technology pervasive by incorporating it into daily life. Through the history and development of wearable computing, pioneers have attempted to enhance or extend the functionality of clothing, or to create wearables as accessories able to provide users with sousveillance — the recording of an activity typically by way of small wearable or portable personal technologies. Tracking information like movement, steps, and heart rate is part of the quantified self movement.
 
-There are over 30 IoT platforms available and the number continues to rise. Only a few are capable of device control and real-time analysis. It is seen as the "backbone" in a centralized system [@Hejazi2018a].
+> The origins of modern wearable technology are influenced by both of these responses to the vision of ubiquitous computing. One early piece of widely adopted wearable technology was the calculator watch, which was introduced in the 1980s. An even earlier wearable technology was the hearing aid.
 
-An Early Data Transmission (EDT) mechanism during the random access procedure will improve the device battery life by 3 years and reduces the message latency by up to 3 seconds especially in challenging radio conditions. The values at 164 dB are simulated [@Hoglund2018a]. The Back-off mechanism will increase capacity by 3-6% according to simulations [@Zhao2017]. SC-FDMA with Index Modulation increases energy efficiency by 50% [@Chafii2018b].
+Adding bluetooth has created another leap where data can be collected and linked to a smartphone, extending its functionality.
 
-There are great cellular-IoT possibilities when dropping 3GPP standards and redesigning the protocol from scratch such that there's up to 260% improvement over NB-IoT and other cellular standards. It's a connectionless protocol that can serve millions with only 10 MHz of bandwidth. When using the control plane data transmission scheme, NB-IoT is able to offer system capacities relatively close to this 5G protocol proposal [@Tavares2017a].
+Bluetooth wearables have been well refined, as the bidirectional protocol has been slimmed down to even the BLE low energy form. They last a reasonable amount of time, and the datarate even allows for voice communications amongst many others. However, even as manufacturers claim, it  really is a short range radio technology, with a reasonable expectation of around 10m.
 
-NB-IoT supports mobility only with cell-reselection in idle state. Test-bed and field results provide cell-reselection mobility optimization [@Moon2018a].
+One can also look at Zigbee etc for home automation, yet tied to a central gateway node.
 
-Considering coexistence between NB-IoT and LTE, throughput loss shouldn't exceed 5% [@Wang2016a].
+The problem with bluetooth wearables is that it is ultimately tied to the high-powered battery life of a cellphone, which doesn't last more than 1-2 days. In our culture, we're used to charging a phone every night as we've become increasingly attached to the every day functionality augmentation it offers. Emails on the go, calls over coffee, company-wide decisions can be made at a few clicks.
 
-NB-IoT is ideal for guaranteed QoS [@Gaddam2018b] such as in air pollution sensors [@Duangsuwan2018b]. What about 2G/GPRS?
+To release a wearable from the short range shackles of bluetooth and similar, one should consider LPWAN technologies.
 
-Device-to-Device (D2D) communication is specified in NB-IoT. In forest terrain, a range of 2km would be achieved at the 164 dB path-loss limit [@Hejselbaek2018a].
+Combinations mean multiple radios, which exist outside the scope as although possible to enhance functionality, it is already more expensive.
 
-NB-IoT OTDOA has been realized in an RF-SoC with sub-150m accuracy. EC-GSM also seems to be a narrow band cellular IoT standard [@Korb2018a].
+A major use case for wearables is asset tracking.
 
-Data prediction alleviates tight restrictions imposed by LPWAN networks, such as SigFox [@Karg2018a].
+A SigFox wearable is fine in ambulatory cases, provided emergency services reach the source of the distress signal within an hour. This is if a GPS location is sent every 30 seconds, until the daily 144 message limit has been used up.
 
-There is a saturation of human-to-human communications (H2H). hence machine-to-machine (M2M) or IoT is the new frontier for mobile operators [@Wang2017e].
+A LoRaWAN wearable is similar to the SigFox one, except one will be able to send more data at less range.
 
-It is theoretically possible to extend NB-IoT terrestrial coverage by using LEO satellites [@Cluzel2018a].
+A GPRS wearable will have high battery consumption during the (on average) 1 minute long transmission sequence.
 
-Simulation results indicate the feasibility to achieve a position accuracy below 50 meters, by covering a system bandwidth of 10 MHz with two consecutive hops [@Peral-Rosado2017].
+An NB-IoT wearable will be fine as long as there's coverage.
 
-NB-IoT has reliable persistent two-way communication which will drive future IoT application [@Rakic2017].
+Likewise for a Dash7 wearable.
 
+As we can see in the kiviet diagram, there is no clear winner.
 
-
-> Background on how these technologies work. Basestation side? What do I know? Put into words, questions..
-
-> What's available? How they seem/work? Jeopardy: what is the question that one is answering? Response..
-
-|||||||||||||||||||||||||||||
+\onecolumn
 
 
 
-The literature study shows the research and background info.
+Table: Brief comparison of different wireless technologies
 
-![Image result for 3d print iot wearable](https://zdnet2.cbsistatic.com/hub/i/2015/02/26/9fa8bb68-3f6f-4d26-ba34-dcf8bc8da797/2c300df04c162d6ffc7f82408b145c39/iot-bd-hype.jpg)
+|                 | Range      | Bidirectional | Power saving limitation                                   | Major drawback                    |
+| --------------- | ---------- | ------------- | --------------------------------------------------------- | --------------------------------- |
+| Bluetooth / BLE | 10 - 100m  | Yes           | None                                                      | Extremely low range               |
+| LoRaWAN         | 2 - 7km    | No            |                                                           | Poor scalability.                 |
+| SigFox          | 3 - 50km   | No            | A few seconds to transmit a message                       | Only 144 12-byte messages per day |
+| GPRS            |            |               | Constant synchronisation when active. No PSM, eDRX. Heavy | Sunsetting technology             |
+| NB-IoT          | 2-5km      | Yes           | Edge cases                                                | Slow roll-out                     |
+| Dash7           | 0.2 - 2 km | Yes           | None                                                      | No public coverage                |
 
-## Application
+Table: LPWAN limitations in localization
 
-### typical use cases, requirements
+|         | Localization     | RSSI | TOF/TDoA | Limitation                   |
+| ------- | ---------------- | ---- | ---------------------------- | ---------------------------- |
+| SigFox  | RSSI ++ GPS/GNSS | > 500m | No | > 500m and periodic checking |
+| LoRaWAN | RSSI ++ GPS?     |  | > 925m | > 925m                       |
+| GPRS    |                  | 50 - 2000m |  |                              |
+| Dash7   | RSSI ++ A-GPS    | Yes  |   |                              |
+|         |                  |      |      |                              |
 
-What are the typical use cases for wearables? Location tracking can assist in knowing where employees are at work, and to ensure the safety of lone workers.
+Use cases
 
-In health, wearables can be used to monitor physiological signals in hospitals as well as during day-to-day activities.
+- predictive maintenance
+- tracking
+- Smart Lost and Found
+- Drones
+- Mobile Advertising
+- Social Discovery
+- Environmental Control Systems
+- Industrial Automation Systems
 
-### requirements
+![Kiviet comparing different technologies](C:\Users\d7rob\AppData\Roaming\Typora\typora-user-images\1547712492084.png)
 
-What are the requirements for wireless applications? Long battery life would be ideal, but the minimum would be daily charging. Wireless wearables range from bluetooth (short range) to satellite (long range).
-
-In terms of localization:
-
-* CSI fingerprinting
-* RSSI trilateration
-* TOF, AOA
-
-## Technology
-
-What wireless technologies can be used for wearables? An inexhaustible list can be found in the appendix, but the following will be focused on. For licensed frequencies, LTE Cat-M, LTE Cat-NB1 and EC-GSM, and for unlicensed frequencies LoRa, SigFox and Dash7.
-
-**Cellular IoT**
-
-EC-GSM aims to improve on the battery life limitations of 2G/GPRS. Lower power form of GSM, with extended coverage. Unfortunately 2G is in the process of being turned off in countries around the world.
-
-eMTC or LTE Cat-M is a high-powered form of IoT communications which includes VoLTE. Designed to replace mainstream 2G/GPRS.
-
-NB-IoT or LTE Cat-NB is the 3GPP's response to emerging unlicensed LPWANs. According to Ryan vd Bergh (April 2018) it should achieve mainstream adoption within 2 years time in South Africa. It is simpler than eMTC, and doesn't include VoLTE.
-
-**LPWANs**
-
-SigFox uses an ultra-narrow band using a phase modulation over carrier. This way it is highly immune to noise. Since it has such low bandwidth and data rate, it takes about two seconds to transmit a 12 byte payload. The duty cycle limitations mean one can only transmit 140 messages per day.
-
-- Good range, but unreliable after 6kmph
-
-Despite it's promising characteristics, LoRaWAN is seemingly a failure
-
-- No listen-before-talk, 20% success rate
-- SF12 means one cannot send data frequently, but that's where one gets ones range.
-- No P2P
-- Simple, incomplete networking stack
-
-Dash7 seems to address most of it's issues.
-
-- B.U.R.S.T.Y data
-- Bidirectional, broadcasting
-- P2P
-
-## Device
-
-*These are the devices out there and this is what they offer.*
-
-* Quectel
-* Ublox
-* Sierra Wireless
-* Nordic Semi
-* Telit
-* SimCom
+\twocolumn
 
 # Design
 
-## Application
+https://www.electronicdesign.com/displays/designing-low-power-displays-battery-powered-iot
 
-Starts off as a box. Refined and revised until discrete -- goal.
+https://bengoncalves.wordpress.com/2015/10/01/oled-display-and-arduino-with-power-save-mode/
 
-## Technology
+https://learn.sparkfun.com/tutorials/reducing-arduino-power-consumption/all
 
-PCB prototype using multiple technologies. NB-IoT, GSM, LoRa, SigFox and Dash7. The prototype facilitates concurrent testing of multiple RATs (radio access technologies).
+https://www.electro-tech-online.com/articles/achieving-low-power-on-adafruit-trinket.830/
 
-## Device
+https://community.atmel.com/forum/samd21-sleep-current
 
-Multiple technologies were simplified to require only two radio modems.
+[nrf52832 is BLE and is quite awesome, but the extra features are perhaps unecessary](https://learn.sparkfun.com/tutorials/nrf52832-breakout-board-hookup-guide/all#adding-arduino-compatibility) The board can even take Arduino, that being said. Look at Arduino Primo with the nrf52 + wifi
 
-* Quectel BG96
-  * NB-IoT, GSM, (LTE Cat-M), GNSS/GPS
-* Murata CMWX1ZZAB-078
-  * LoRa, SigFox, Dash7
+Charging LiPo with TP4056. Or TPS61200  https://github.com/sparkfun/LiPower_Boost_Converter
 
-Quite a bit of effort was spent on the design of this PCB. It is highly configurable, and the goal is to test the different technologies near simultaneously to prove that NB-IoT and Dash7 are of the best.
+stm32duino
 
-Different metrics will be used, such as SNR, range, packet delivery ratio etc.
+https://lcsc.com/product-detail/ST-Microelectronics_STMicroelectronics_STM32F103C8T6_STM32F103C8T6_C8734.html $1.9 or less.. $1.4 for 10+
 
-It will also require a cloud platform to gather the data via MQTT or similar lightweight protocols. Thingsboard provides a great framework, as long as it is reliable.
+https://lcsc.com/product-detail/ATMEL-AVR_ATMEL_ATSAMD21G18A-AU_ATSAMD21G18A-AU_C78624.html $4.3 or less.. $3.7 for 10+
 
-For processing, one can use Python - Jupyter.
+http://wiki.stm32duino.com/index.php?title=Eclipse_%2B_PlatformIO
 
-# Field trials
+https://community.particle.io/t/tutorial-using-eclipse-st-link-v2-openocd-to-debug/10042
 
-*Matching requirements with specifications.*
+[stm32 has built-in RTC](http://www.stm32duino.com/viewtopic.php?f=13&t=924)
 
-Field trials can be performed mainly in Stellenbosch, since there is SigFox, LoRaWAN, GSM, and NB-IoT (MTN), coverage. Dash7 is a more local setup which can be done anywhere.
+[stm32 schematic](https://robotdyn.com/pub/media/0G-00005692==STM32F103C8T6-STM32MiniSystem/DOCS/Schematic==0G-00005692==STM32F103C8T6-STM32MiniSystem.pdf)
 
-Vodacom has NB-IoT coverage in Cape Town at the CTICC and inside an office at its HQ in Century City.
+stm32f103 has CAN protocol.  with 64
+or 128 KB Flash, USB, CAN, 7 timers, 2 ADCs, 9 com. interfaces. 72MHz. 20 kbytes SRAM
 
-# Conclusion
+https://github.com/blacksphere/blackmagic/wiki
 
-The end.
 
-\newpage
-\onecolumn
 
-# Abbreviations
 
-```tex
-3GPP 			3rd Generation Partnership Project
-4G 				4th Generation Mobile Communication Technology
-AWGN 			Additive White Gaussian Noise
-BPSK 			Binary Phase Shift Keying
-CIoT 			Cellular IoT
-CP 				Cyclic Prefix
-dBm 			Power in decibels (dB) referenced to one milliwatt (mW)
-DMRS 			Demodulation Reference Signal
-DL 				Downlink
-DVB-S2 			Digital Video Broadcasting - Satellite - Second Generation
-eNB or eNodeB 	Evolved Node B, LTE basestation
-E-UTRA 			Evolved Universal Terrestrial Radio Access
-GEO 			Geostationary Earth Orbit (35 786 kilometers)
-HARQ 			Hybrid Automatic Repeat reQuest
-ICI 			Inter Carrier Interference
-IEEE 			Institute of Electrical and Electronics Engineers
-IoT 			Internet of the Things
-ISI 			Inter Symbol Interference
-ITU-R 			The Radiocommunication sector of the International Telecommunication Union
-kbps 			Kilobits per second
-Ku-band 		Ku frequency band according to IEEE standard (12 to 18 GHz)
-LPWAN 			Low-Power Wide-Area Network
-LTE 			Long Term Evolution
-LTE-A 			LTE-Advanced
-LTE-M 			LTE Category-M specification for Machine Type Communication
-M2M 			Machine to Machine
-MAC 			Media/Medium Access Control
-Mbps 			Megabits per second
-MTC 			Machine-Type Communication
-NAS 			Non-stratum Access
-NB-IoT 			Narrowband Internet of Things
-NPBCH 			Narrowband Physical Broadcast Channel
-NPDSCH 			Narrowband Physical Downlink Shared Channel
-NPRACH 			Narrowband Physical Random Access Channel
-NPSS 			Narrowband Primary Synchronization Signal
-NPUSCH 			Narrowband Physical Uplink Shared Channel
-NSSS 			Narrowband Secondary Synchronization Signal
-OFDM 			Orthogonal Frequency-Division Multiplexing
-OFDMA 			Orthogonal Frequency-Division Multiple Access
-PAPR 			Peak-to-Average Power Ratio
-PDU 			Protocol Data Unit
-PDCP 			Packet Data Convergence Protocol
-PRB 			Physical Resource Block
-PSK 			Phase Shift Keying
-QoS 			Quality of Service
-QAM 			Quadrature Amplitude Modulation
-QPSK 			Quadrature Phase Shift Keying
-RRC 			Radio Resource Control
-RLC 			Radio Link Control
-S-band 			S frequency band according to IEEE standard (2 to 4 GHz)
-SC-FDMA 		Single Carrier Frequency Division Multiple Access
-TTI 			Transmission Time Interval
-UE 				User Equipment
-UHF 			Ultra High Frequency -band (according to IEEE standard 300 - 1000 MHz)
-UL 				Uplink
-UMTS 			Universal Mobile Telecommunications System
-```
-\twocolumn
 
 # References
 

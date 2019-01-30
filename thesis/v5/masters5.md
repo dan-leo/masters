@@ -1,5 +1,5 @@
 ---
-title: NB-IoT in standalone bidirectional IoT and wearable applications
+title: NB-IoT and Dash7 for localized wearables
 author: Daniel Robinson, Prof MJ Booysen
 date: Stellenbosch University, Jan 2019
 tags: [LTE, wearables, healthcare, safety, critical, life-threatening, SDR, NB-IoT, Dash7, localization]
@@ -37,13 +37,34 @@ For this, one desires a truly standalone solution. In a city, Wifi or Bluetooth 
 
 IoT typically uses GSM or LPWAN networks to connect endpoints to the internet. GSM is great for bi-directionality, especially in  real-time applications as it is 'always-on' with constant synchronization on the physical RF layer between tower and endpoint. In battery-powered use cases, it is considered power hungry and takes approximately a minute to complete the network registration steps, packet switched context and tcp socket setup from modem boot. This is useful for data sent or received periodically. Unfortunately, it is also a sunsetting technology being switched off in certain countries around the world. Although, in SA it is still a great source of revenue for cellular service providers as many of the general population still use 'cheap' cellphones that can only call or SMS. LPWAN networks such as SigFox or LoRaWAN have great low battery usage, however are restricted by RF duty cycle limitations on the unlicensed frequency bands such as ISM that restrict the number of messages that can be sent per day. They can request a reply from the server, but most of the time the data transmission is unidirectional -- from endpoint to gateway. They can request a reply, but not passively listen for one from a gateway on demand. LoRaWAN also has low setup costs via the ability to install inexpensive public gateways with TTN (The Things Network). And SigFox has high range due to its ultra-narrow (carrier-phase) bandwidth.
 
-![LTE variant of the Apple Watch Series 4](C:\GIT\masters\thesis\images\applewatch.JPG)
+![LTE variant of the Apple Watch Series 4](C:\GIT\masters\thesis\images\applewatch.JP)
 
 NB-IoT is the cellular-IoT response to LPWAN networks. It benefits from licensed frequencies which don't have restrictions on data throughput, except in monetary terms. Being bidirectional, it wins in localized and actuator control use cases. In localization, this is especially true in the case of assisted GPS/GNSS where sending ephemeral and almanac data from the internet via multi-cast to end points will enable a hot start of a few seconds as opposed to a few minutes. It saves precious battery life since GPS/GNSS broadcasts are sent from satellites at a rate of 50 bits per second. GPS/GNSS is becoming cheaper as time progresses, lowering the need for expensive TOF, TDoA, AoA (terrestrial localization) needs. NB-IoT is unique that it gains TDoA and AoA from a mere software upgrade of existing cellphone towers and eNodeBs, yet there are still licensing costs which can exceed a few million ZAR a year. With nationwide adoption from a demand in use cases, it becomes more viable for cellphone service providers to roll out coverage. NB-IoT touts that it is an easy software upgrade, but the current situation in South Africa with ICASA and licensing costs still make this expensive. Luckily it only requires one 200kHz channel out of many, and GSM/GPRS can be re-farmed to use it. Certainly less than the 1.4 MHz required by LTE-M. LTE-M does seem useful as well, yet it doesn't have as much range or power-saving capability as NB-IoT.
 
 Another mysterious contender is Dash7. It has its origins in the ISO 18000-7 standard for active RFID, intended by the US Department of Defense for container inventory and grew to become a medium range bidirectional wireless network system [@Weyn2015]
 
-Seeing NB-IoT and Dash7 as viable in IoT and wearables will fuel use cases. Use case demand is directly proportional to coverage, and vice versa.
+*It's easy to get stuck into the literature with all the crap that people say. What are we really interested here?*
+
+**Is NB-IoT good? Is it better?**
+
+## Problem statement
+
+Seeing NB-IoT and Dash7 as viable in IoT and wearables will fuel use cases for them. Use case demand is directly proportional to coverage, and vice versa. At the moment, research seems promising but there is not enough tangible evidence proving the viability of technology for use cases, and for cellular service providers to roll out coverage.
+
+Thomas has done some general tests in LPWAN and NB-IoT. But the NB-IoT investigation is not deep enough to make a conclusive argument. According to him, the battery life is poor due to network-determined power saving factors. This paper looks deeper into those metrics.
+
+How do we segment the kind of IoT that listens for messages from the internet? It's all very good to have one way transmissions, and LoRaWAN and SigFox seem sufficient.
+
+NB-IoT seems to be an all-rounder for IoT.
+
+What are the requirements for localized wearables?
+
+* Accuracy < 10m
+
+Title ideas:
+
+* NB-IoT in standalone bidirectional IoT and wearable applications
+* NB-IoT and Dash7 for localized wearables
 
 # Lit Study
 
@@ -66,6 +87,8 @@ First, the technologies must be connected to the internet.
 End-2017, MTN set up a ZTE NB-IoT basestation in Stellenbosch for the use of research and testing. Unfortunately due to technical difficulties, a connection was unable to be made until July 2018. Nevertheless, a few tests were done at MTN's testplant in Johannesburg for two weeks during April. One of four faraday cages were made available, and also included LTE-M and GSM to test.
 
 Vodacom have coverage in Gauteng with 1200 Huawei basestations, however Cape Town is quite limited, with currently only two working at Century city and the CTICC.
+
+Build a HayTag. Build an NB-IoT tag.
 
 ## NB-IoT modems
 
@@ -100,3 +123,31 @@ Nordic nrf91 has yet to be tested.
 Design a PCB to take these multiple wireless technologies. Do merely network tests.
 
 It will be on a two layer board.
+
+![latest_PCB2](C:\GIT\masters\thesis\images\latest_PCB2.JPG)
+
+
+
+## Current usage
+
+Eevblog current monitor.
+
+## Localization
+
+GPS/GNSS.
+
+## Cloud
+
+GCP. Thingsboard.
+
+# Communication
+
+Ethernet, wifi..
+
+MQTT
+
+# Measurements
+
+Dash7 has only 250m range NLOS at 10dBm. What about at the 27dBm limit?
+
+NB-IoT has 5km range.

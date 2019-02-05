@@ -13,8 +13,15 @@ link-citations: true
 csl: ieee.csl
 linkcolor: blue
 +ni: NB-IoT
++lr: LoRa
++lw: LoRaWAN
 ++: +
 ---
+
+# Keywords
+
+- IoMT
+- 
 
 # Introduction
 
@@ -28,6 +35,8 @@ A common saying in today's world is "there's an app for that". This implies that
 - WiFi is low powered but short range
 
 That's where the internet-of-things (IoT) and wearables come in. 
+
+
 
 Typical wearable applications use Bluetooth paired with a cellphone. Fitness tracking ones by Garmin, Fitbit etcetera use it to synchronize data with the cloud and apps to show progress. Insurance companies have taken this a step further (such as Discovery Health in South Africa) to use this data to incentivize an active exercising lifestyle (in the form of vitality rewards[^vitality]), which lowers premiums and ultimately lowers risk for life insurance / medical aid claims. Virgin Active, for example, offers gym facilities to enable this active lifestyle. Bluetooth also offers convenience by not having wires in other accessories such as headphones, car radios, speakers, keyboards and mice.
 
@@ -73,11 +82,43 @@ Title ideas:
 
 # Lit Study
 
+## Patrick Burns
+
+https://medium.com/@patburns/announcing-haystacks-lorawan-replacement-program-1a72cb4cf201
+
+LPWAN technologies operating in unlicensed radio spectrum will eventually dominate the enterprise and industrial IoT arena. Semtech is running at the front of the pack with LoRa. SigFox?
+
+LoRaWAN is basically a one-way, barebones networking stack that enables tags to upload small bits of data to the cloud. It’s not secure, it doesn’t work in real-time, it’s expensive to maintain, and you can’t really send commands to a LoRa endpoint with it. Still, a few companies you’ve heard of appear to be trying it despite the risks.
+
+- **Compatibility and co-existence with LoRaWAN**
+- **Complete bi-directional communications vs. LoRaWAN one-way**
+- **Real-time indoor location with up to one meter precision**
+- **Over-the-air firmware updates for easier maintenance and better security**
+- **Real-time endpoint queries and commands**
+- **50% greater range vs. LoRaWAN**
+- **200% greater system density vs. LoRaWAN**
+
+So to sum things up, with Haystack your LoRa solution has much better range, costs less, is more secure, can do high-precision indoor location, and can still work with “legacy” LoRaWAN gateways.
+
+Listen-before-talk operations
+
+Anyone contemplating a LoRaWAN implementation is exposed to serious security risks.[http://bit.ly/2Lorasec](http://bit.ly/2Lorasec)
+
+indoor location example, using node-to-node multilateration
+
+LoRaWAN is not a serious IoT protocol.
+
+Dash7 networking already supports all the requirements of the NB-IoT draft spec, and it is capable of providing LPWAN and LPLAN features to NB-IoT.
+
 ## Indoors
 
 Looking at the technologies which work well indoors is a great way to visualize the problem from this perspective, and the same when looking outdoors.
 
 Indoors we have WiFi, Bluetooth, ZigBee and other short-range wireless networks
+
+## Outdoors
+
+Outdoors we have GSM/GPRS, NB-IoT, SigFox, LoRaWAN
 
 
 
@@ -89,9 +130,19 @@ Unfortunately, one has to sacrifice range for accuracy.
 
 Satellites, on the other hand are in stable LEO or geostationary orbits and a constellation of satellites can keep in constant synchronization using atom clocks . One retains accuracy, even over long distances due to the ultra high precision of the clocks. This is useful for the outdoors.
 
+Besides having the ability to measure RSSI which seems quite standard in wireless networks, NB-IoT is also lucky to have the benefits re-using the Timing-Advance (TDoA) hardware when upgrading cellphone towers with the capability. This means that one can reasonably approximate the position of an endpoint to within a 1000m.
+
 ## The indoor-outdoor realm
 
 This is considered to be a third realm which is hard to get a wireless technology / localization to work well in both.
+
+## RSSI triangulation
+
+RSSI triangulation is too hard.
+
+## AoA
+
+
 
 ## Questions?
 
@@ -204,3 +255,60 @@ One can listen to an NB-IoT base station for satellite updates, and Dash7 gatewa
 Seeing NB-IoT and Dash7 as viable in IoT and wearables will fuel use cases for them. Use case demand is directly proportional to coverage, and vice versa. At the moment, current research seems promising but having tangible evidence such as this proves the viability of the technology for other use cases as well, and for cellular service providers to roll out coverage.
 
 The proposal in this paper suggests an ultra-low power consumption configuration to allow a device 
+
+
+
+# Questions
+
+How come Dash7 can communicate more than LoRaWAN?
+
+LoRaServer can interface with Class B and C gateways..
+
+- Is it worth setting up? No. Time and budget constraints.
+
+LoRaWAN can transmit more often than every few minutes?
+
+NB-IoT P2P? 
+
+* Yes, it is included in the spec in future
+* One could also re-use the RF frontend and add Dash7
+
+Cortus?
+
+# Thinus feedback
+
+![Thinus Booysen (thinusbooysen@gmail.com)](https://lh3.googleusercontent.com/a-/AAuE7mCc6ScDT93ghh-Ez83q5GCvHnfmHQQ6NRppMZLzTQ=s32-c-k-no) So, it is about comparing the technologies for outdoor&indoor localisation and about proposing a new method of doing localisation using them? (please help me right if any part of that is wrong)
+
+Yes.. that is essentially the essence of it
+
+NB-IoT has the ability for multicast in release 14 I believe, and to reuse it to send periodic GPS/GNSS data save much preprocessing time for end units
+
+If I can prove that it works now for at least 1 or a few devices then it is entirely scalable
+
+Same for Dash7.. I can work on doing exactly that, although the range is considered medium and not long like NB-IoT, SigFox etc. On the other, there's something else one can do with it indoors
+
+Still toying a little with the idea, but being in range of beacons indoors could be useful for malls, warehouses etc..
+
+The beacons have enough power to transmit advertising packets, but the endpoints only have to listen every now and then, which saves power. Instead of transmitting a tx request.
+
+Otherwise, what if endpoints can communicate P2P with each other? Although they'd still need some kind of anchorage, at least one peer to say "I'm exactly here, because I got a satellite lock"..
+
+It's all to solve, "where is it? I want to know now" without waiting for the next periodic transmission in the case of unidirectional LPWANs such as SigFox and LoRaWAN
+
+So in that sense, it can also be crucial to critical IoT when having bidirectionality
+
+What's the next steps, you may ask?
+
+Well, luckily I already have a PCB with NB-IoT and Dash7 built-in. The NB-IoT should not require too much work to get a working PoC. The Dash7 might require more effort, though
+
+![Thinus Booysen (thinusbooysen@gmail.com)](https://lh3.googleusercontent.com/a-/AAuE7mCc6ScDT93ghh-Ez83q5GCvHnfmHQQ6NRppMZLzTQ=s32-c-k-no)Yes. I am very happy with this direction, especially if it gets you excited, and it obviously has driven you to type something up. So if you believe it could work, by all means go ahead. 
+
+I can also do simulations for the future features such as multicast in scalable situations.. estimate the average latency, responsiveness, reliability, positional accuracy..
+
+So yes, it is quite interesting
+
+And it took me a while to notice this gap in what is currently the norm
+
+So I'll keep at it :)
+
+![Thinus Booysen (thinusbooysen@gmail.com)](https://lh3.googleusercontent.com/a-/AAuE7mCc6ScDT93ghh-Ez83q5GCvHnfmHQQ6NRppMZLzTQ=s32-c-k-no)Great. Now, hunt it down and finish it off. 

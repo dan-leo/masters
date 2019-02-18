@@ -2,6 +2,371 @@
 
 This is a summary of all that Pat Burns is saying on medium and about Haystack. Each heading is a different topic.
 
+# Indoor-Outdoor
+
+**The Indoor-Outdoor IoT**
+
+*Thoughts on an IoT blindspot*
+
+**Two IoT Arenas**
+
+- Companies competing to sell you their wireless IoT connectivity technology can be thought of as competing in one of two separate “arenas”: an **indoor arena** or an **outdoor arena**.
+- The **indoor arena** is typically dominated by low power, local area networking (LPLAN) technologies focusing on home automation. ZigBee, Z-Wave, and Control4 are well known examples. Use cases beyond home automation include enterprise/industrial automation, whose users reluctantly adopt the same tech (e.g. Zigbee smart meters) or proprietary alternatives (e.g. Honeywell alarm systems). Most operate in the tragically overcrowded 2.45GHz unlicensed band. Short range, high levels of interference (and returned merchandise), weak battery life. And 99% of their customers are using these technologies for indoor use cases.
+- Some of these offer real-time indoor location capabilities to help find an object located in a building or warehouse to within a few feet of precision. Since GPS can’t work indoors, this is how it’s done. Some of these also offer mesh networking features, sometimes as a way to overcome the innate short range of the technology, but usually disguised under a marketing gimmick known as “self-healing.”
+- WiFi is making a new push at joining the indoor IoT arena with a reasonable likelihood of success due to access point footprint, though not sufficiently low power to make a serious run at battery-powered endpoints.
+- Omitted here: one-way passive RFID (great, niche technology) and one-way Bluetooth low energy (hyper-short range personal area networking, not even local area networking).
+- The **outdoor arena** is where the most intense IoT connectivity battles are taking place today. Cellular and satcom have promised long range/wide area IoT for years resulting in steady but low volume success, and almost always tied to use cases where mains electric power is available at the endpoint. Battery-based versions of these have largely failed so far due to form factor, price point, and of course battery life weaknesses. Viable outdoor solutions using battery power (e.g. LPWAN’s) are relative newcomers disrupting the outdoor arena.
+- New entrants to the outdoor arena are arriving via **long range, low power wide area networking** (LPWAN) technologies, which are challenging the need for mains power in long-range outdoor IoT use cases. LoRa and SigFox in unlicensed bands, and NB-IoT, LTE Cat-M, and other LTE-based efforts in licensed bands). All carry question marks regarding actual vs. promised performance (e.g. NB-IoT) or scalability claims (e.g. LoRa) pending broader adoption, but there is sufficient evidence now to argue we are really turning a corner in bridging low power with long, multi-kilometer range. But nearly all LPWAN use cases being talked about are outdoor-only.
+
+**The Indoor-Outdoor Orphans **
+
+- One challenge to the two-arena segmentation approach of the IoT is those **use cases that straddle both indoor and outdoor arenas**.
+- Three immediate examples come to mind:
+
+1. **Supply chain.** Precisely locating cartons of high-value pharmaceuticals during shipment or while stored in a warehouse or medical facility.
+2. **Access control**. Precisely locating an outside contractor or hospital patient within a secure building as well as within a campus or metropolitan area.
+3. **IT asset management.** Precisely locating a laptop with PCI or PHI data as it moves within your 10-story headquarters building as well as around a large campus.
+
+- Today, use cases that by definition straddle both arenas must instead compromise and play in one arena. Example: tracking cattle on a ranch via short-range ZigBee chokepoints scattered around a ranch. Provides nominal and non-real-time visibility into the location/health of the cow, but well short of what ranchers really need (e.g. being able to find a lost cow somewhere on a 1,000 acre ranch or to know.)
+- LPWAN solutions for outdoor location rely on GPS. Good for outdoor location, but no good for indoor location. While LPWAN’s can and will be used for indoor sensing applications (e.g. what is the temperature of the sensor in the walk-in freezer?), precise indoor *location* (e.g. where is Mike’s laptop) is unaddressed in any of the new or emerging LPWAN networking protocols. *NB: real-time* [*trilateration*](http://bit.ly/2aE0qWl) *via networking stacks like LoRaWAN is unavailable at this time thus GPS is the near-universal means to achieving real-time outdoor location precision among LPWAN’s.*
+- Low power indoor LAN solutions usually rely on received signal strength or time-based location systems, relying on a series of reference points to assist in calibration. But low power LAN’s (short range, remember) cannot address outdoor use cases.
+- **Thus, indoor-outdoor use cases are a “blind spot” for the IoT,** with few straightforward solutions for addressing both short of using multiple radios and **exposing a horizontal application opportunity.**
+- Indoor-outdoor feature set requirements: long range-capable, fully bi-directional comms, low power, low price point, and **real-time indoor location capabilities**. *NB: Increasingly, and for multiple reasons, real-time comms will be required for both indoor and outdoor use cases, but this is subject of* [*another post*](http://bit.ly/1N3MSmv)*.*
+
+**A Third IoT Arena**
+
+- With LPWAN’s, it’s easy to redraw our landscape maps and create a de facto third, hybrid arena that bridges the first two, which I’ll just call “**indoor-outdoor IoT**.”
+- Indoor-outdoor IoT use cases require a) long range, low power outdoor connectivity b) outdoor location precision, typically via GPS, c) low power indoor connectivity and d) indoor location precision to ~1 meter or less, typically via a real-time, reference point-based system.
+- LPWAN’s are a huge step towards solving for the indoor-outdoor IoT. But as solutions today, they are incomplete.
+
+**Potential Remedies **
+
+1. Using multiple radios is the traditional solution to bridging use cases like these. To cite one obvious example: smartphones host both long range (LTE) and short range (WiFi, BT, NFC) connectivity options, albeit in a package priced at hundreds of dollars. Multiple radios add to an endpoint’s bill of materials, and in addition often require additional memory as well as antenna and other sacrifices. Hypothetically, an endpoint could contain both a Zigbee and a NB-IoT radio, but this means creating two parallel access point systems, among other drawbacks.
+2. Reflashing existing silicon and re-using existing antenna in order to accommodate a software-defined radio is a slightly better solution. It might mean limiting your radio choices to those available using an existing antenna or might mean re-designing the antenna to accommodate both radios. It might also mean adding additional memory, which may or may not fit your budget. But it still requires parallel access point systems, etc.
+3. Same as #2, but interleave an existing firmware stack (e.g. LoRaWAN, NB-IoT) with additional features to accommodate real-time indoor location. **In other words, the long-range, low power WAN capability operates in its “native” mode unless it’s asked to operate in enhanced mode in order to facilitate indoor location.** Or vice-versa. This is the [approach](http://bit.ly/haystackiot) we are taking at [my company](http://bit.ly/2aSPRzX) and has the added benefit of requiring only minimal incremental memory if any, since our stack already compiles into less than 20kb.
+
+**Takeaways …**
+
+- **A two-arena segmentation model giving way, in the short term, to a three arena model** as as a) there are use cases that straddle both the indoor and outdoor arenas and b) we now have technologies that can solve for both. **The three-arena model will morph into a single arena in the long run. Or sooner.**
+- The market opportunity of the indoor-outdoor arena is significant even in the short term. The sheer number of measurable things and people that move between indoor to outdoor environments is very large.
+- If you are reading this and daydreaming about use cases that fall within this third indoor-outdoor arena, “[things that move](http://bit.ly/1J3BlEf)” is a good attribute for helping to identify use cases. Things that are battery powered are a close second.
+- Companies in the outdoor arena at a minimum should be examining opportunities in the indoor-outdoor IoT. More aggressive participants may realize that there is little preventing them — from a technology standpoint — from competing directly in the indoor arena.
+- Companies competing in the indoor arena should therefore expect encroachment by LPWAN’s capable of competing indoors. Since most LPWAN’s — all things being equal — offer better indoor signal propagation and rough pricing parity, indoor arena participants will want to consider adding LPWAN capabilities to their product lines.
+- **Bonus takeaway:** solving for the indoor-outdoor IoT helps to solve for some deeper business process/big data challenges that the first two arenas can’t really solve on their own: associating a mobile person or thing with a fixed person or thing.
+
+# Augmented reality
+
+**Why Pokemon Go Will Make You Rethink the Internet of Things**
+
+Pokemon Go already looks like a pretty major technology shift. Commercially, it’s one of the most successful mobile games of all time, people are literally [crashing](http://bit.ly/2bVObZi) into each other while playing, and the controversial headlines practically [write](http://bit.ly/2bFjTet) themselves.
+
+But the technology industry impact of Pokemon Go goes beyond just gameplay. At its core, Pokemon does a good job of integrating real-world paradigms like smartphone maps and cameras with virtual paradigms like animated cartoon characters — excuse me “[fictional creatures](https://en.wikipedia.org/wiki/List_of_Pok%C3%A9mon)” — and making it all work together in a brilliant way. The game’s goal: capture as many characters around your town/city/country as possible, do battle with others, earn points and status, and so forth. If technology is part of your livelihood or you have no hobbies, I recommend trying it.
+
+Why? Because Pokemon Go showcases the **parallel challenges for both**[**augmented reality**](http://bit.ly/2c6tsjg) **(AR) as well as the Internet of Things.**
+
+** Augmented Reality 1.0 **
+
+Pokemon Go utilizes AR and while today it is uncommon to see AR in the IoT, it will play an important role the future as the simplicity of just pointing your smartphone at a “thing” and viewing its “information shadow” overlaid on your screen has many potential applications for the IoT. You know, like this:
+
+
+
+![img](https://cdn-images-1.medium.com/max/800/1*8nUcbPXNsra7iWyNDZKLUg.jpeg)
+
+Terminator vision, via Jim Cameron
+
+Information shadows include text and “virtual object” images that are superimposed over real-world images displayed on your smartphone screen, smart glass lenses, or other visually-based user interfaces. Here’s another example:
+
+
+
+![img](https://cdn-images-1.medium.com/max/800/1*NdfkzjUhXIcCiliVey_tWw.jpeg)
+
+Information shadows in “Iron Man“
+
+My experience with Pokemon Go suggests the game is a *so-so* example of augmented reality, *not a great example*.
+
+
+
+![img](https://cdn-images-1.medium.com/max/800/1*iW0ln_6zBGA_KWysu46bcA.jpeg)
+
+AR implemented in Pokemon Go. The bird’s name is Pidgey.
+
+Throwing a ball at a Pokemon juxtaposed on the actual sidewalk in front of you is neat and adds to the fun, but to me there is no inherent need for AR in this game. Yet this will be the first AR experience for many and Pokemon Go also makes extensive use of maps and “virtual objects” that are placed at fixed geographic locations on a map. So this is all very IoT-ey.
+
+AR matters for the IoT in particular because it provides a powerful paradigm for interacting with endpoints. Browser-based IoT interfaces are normal today, but the user experience for users that are close to the actual IoT endpoints can’t compare with a the intimacy and interaction opportunities for pointing a smartphone at a thing and being able to interact with its information shadow. This matters more and more as users “in the field” depend on the IoT: field service techs, truck drivers, nurses, soldiers, firefighters, oil rig workers, and many more. Putting aside their access to reliable and low-latency cloud services, the ability to point a phone and begin interacting with an endpoint via AR creates big opportunities for developers.
+
+One more point about the coming collision of AR and the IoT: AR is about placing virtual objects and information shadows on top of real world objects, e.g. Pokemon Go. The IoT is focus today on adding non-AR digital information (e.g. sensor logs) to real-world objects. In both cases, the technologies seek to enhance our interaction with the real/physical world. AR provides a new interaction paradigm that gels nicely with the needs of IoT users, albeit with local/on-premises users in mind. **Similarly, IoT endpoints provide a new dimension of data that improves the performance of AR in many situations.**
+
+
+
+![img](https://cdn-images-1.medium.com/max/800/1*D9mLk6HfVTSecpB_jMaGEQ.png)
+
+You can sort of *tell* when people are playing Pokemon Go …
+
+** AR for IoT Needs Fixing **
+
+Obviously, AR is not right for all applications, but for many it will become an essential part of the IoT user experience. But before this happens for the IoT, the state of AR will have to overcome several hurdles:
+
+** 1. Poor Location Precision **
+
+If your smartphone thinks you are standing somewhere you are not, your smartphone (using its onboard compass) is probably also going to think you are pointing your phone at something you are not. This is a problem for many AR implementations today — which rely on your phone’s compass and geolocation capabilities, including GPS — seeking to serve accurate AR information shadows.
+
+Unfortunately, location precision in smartphones remains surprisingly weak. Plus or minus an average of 30 meters, due to a [variety of factors](http://www.mobilemarketer.com/cms/news/research/22928.html). My own experience using the map feature in Yelp, for example, is that the location precision in my iPhone is usually “good enough”.
+
+
+
+![img](https://cdn-images-1.medium.com/max/800/1*5dA6OdVsthLZblcI-SJgRw.jpeg)
+
+Compass + GPS = Outdoor AR in Yelp
+
+However for applications where hyper-accurate and precise location can be mission-critical — like mobile advertising or augmented reality IoT applications— even a few meters of variance can lead to errors and failure. With Pokemon Go, I found outdoor location precision to be erratic at times, but indoor location precision was always a disaster. GPS doesn’t work indoors, cellular trilateration is an unsatisfactory substitute, and WiFi location can actually result in even worse location precision. I fully expect the Bluetooth minions to be working to fix some of this, as everything looks like a nail when you think you have a hammer, but even this provides only a partial solution to both the location problem as well as broader AR bugs discussed below.
+
+** 2. Reliance On The Cloud **
+
+If you point your phone at a thing and it only serves up an information shadow when a cloud server in, say, Ashland, Oregon is available, your AR experience will correlate with your ability to connect with that server. For me, this was the most frustrating aspect of playing Pokemon Go and it wasn’t limited to the AR features. Maybe the lag is just an [overloaded data center](http://www.comscore.com/Insights/Blog/Pokemon-GO-Captures-55-Million-Mobile-Users-in-July-Ranking-13th-Among-All-Apps)phenomenon, but if the vision for AR is to rely on a cloud lookup every time we point our phones at something in order to view its “information shadow”, this AR business is going to [take a while](http://bit.ly/1knol10).
+
+** 3. Poor Mobile Resolution **
+
+If you point your phone at something while you are moving at 20 mph in an attempt to view its AR information shadow, just know that Apple Maps will think you are somewhere different from where you were three seconds ago and your AR experience will likely vary. Same thing if you are standing still and you are pointing your phone at a moving object like a Ferrari or a dog running down the street.
+
+
+
+![img](https://cdn-images-1.medium.com/max/800/1*-R0vPtmOwkbBzj83bP3vyA.jpeg)
+
+AR works great when this thing is parked, not so much when it is moving …
+
+The weak mobile capabilities of AR today is a subset of point #1 above and may be a less urgent bug/feature in Pokemon Go but nonetheless, it is of increasing importance for the IoT when required to connect under low power with a moving object (e.g. a car, bike, drone) or to connect while moving with a stationary object (e.g. highway infrastructure). **Good augmented reality**on smartphones — not necessarily the AR-lite on Pokemon Go — depends on precise, accurate location to determine where you are and in turn, at what are you pointing your phone. Today, [this is hard](http://bit.ly/1J3BlEf) with current smartphone and most IoT technologies.
+
+** The Ideal AR Experience **
+
+I have not seen criteria for an “ideal” AR user experience vis-a-vis the IoT so here goes:
+
+1. **Pointing my phone at a thing and receiving a real-time information shadow about it, not a different thing located four feet away, while**
+2. **Querying or controlling the thing in real-time, and**
+3. **Without relying on a cloud connection, and with**
+4. **No regard to whether I am moving or standing still.**
+
+The AR in Pokemon Go does not meet the “ideal” criteria, but the game does provide a reference for future AR applications as well as a simulation of a wide area, open loop, multi-user AR IoT application that requires users to locate an object and interact with it, similar to the way public IoT networks will operate.
+
+** Simultaneously Improving AR and IoT Performance **
+
+At least part of the answer for better AR lies in work already underway with low power sensors and wireless communications.
+
+1. **RTLS.** Some IoT endpoints outfitted with real-time, P2P wireless connectivity offer a bonus feature called real-time location services, or RTLS. A group of things scattered throughout a building can communicate amongst themselves in real-time and, using the strength of their radio signals and basic geometry, can help determine the location of a smartphone or any mobile endpoint **to within one meter**. This is generally very useful given the state of location precision generally, but particularly useful indoors, where location remains largely unresolved despite the best efforts of the WiFi community and others. Specifically, consumer apps like mobile advertising and industrial apps like in-person measurements of environmental sensors on pieces of industrial equipment will benefit tremendously from this improvement.
+2. **P2P.** Again, some types of low power IoT endpoints offer real-time, peer-to-peer networking. The ability to query a thing in real-time, **without the need for a cloud lookup**, brings obvious decreases in latency, but it also creates opportunities to directly query or control the thing being viewed. You can easily imagine AR-enabled IoT apps that are interactive and do more than just passively view endpoint data via a smartphone and provide entire user experiences, not dissimilar from the virtual experience of Pokemon Go, without the need for a [cloud](http://bit.ly/1knol10) connection.
+3. **Instant-on Connections.** A satisfactory AR experience enabled by IoT endpoints should not require lengthy handshaking or setup times every time a user comes into contact with an endpoint. Connections should be more or less instant. This is similarly true for connecting with moving objects or connecting with stationary objects while you are [moving](http://bit.ly/1LX6oNp). Some low power IoT technologies offer such an instant-on feature.
+
+** The Near-Term Steps to Better AR **
+
+Why all wireless IoT protocols weren’t designed with RTLS, P2P, or instant-on is the subject of an [earlier post](http://bit.ly/1hExgtG). Unfortunately, most low power wireless IoT implementations are not real-time and two-way in any meaningful sense: some continually broadcast a one-way unique ID (Bluetooth) that requires a cloud lookup, and other two-way technologies like WiFi can take minutes just to get a two-way conversation going, forget about something as real-time and interactive as AR.
+
+Getting to a real-time, P2P AR will require silicon support on the smartphone to support it. Today, getting new silicon onto a smartphone is like getting an expedition of 50 cats safely to the summit of Everest, therefore I see two paths to AR 2.0 while relying only existing silicon on a smartphone:
+
+- **LTE.** The cellular industry is doing its utmost to convince us all that they will finally deliver a wireless IoT standard that allows endpoints to communicate over several miles while preserving battery life of 3–5 years. And all with a chip that costs one dollar. Alas, these chips are not available today — yes I am shocked, shocked — and it could be years before they are, but when the time comes for NB-IoT (the most interesting of the various LTE-based IoT standards now in the works), it is possible — [with help from a real-time networking stack](http://bit.ly/2aSPRzX), which NB-IoT lacks — to perform direct, P2P AR using your phone. LTE is everywhere on smartphones so this approach makes a lot of sense on the phone, but the idea of cellular carriers charging subscriptions for thousands of endpoints in an industrial plant, for example, is more fantasy than probability.
+- **NFC.** I’ve written about this [before](http://bit.ly/1NifkBs), but the [NFC](http://bit.ly/2bTnxQE) chip in most smartphones now can be re-purposed to support other frequencies and protocols including sub-1GHz frequencies where LPWAN technologies like LoRa or SigFox deploy. Retrofitting NFC to support one or more of these would be an IoT game changer and would cost next to nothing.
+
+** Some Final Thoughts on IoT Application Opportunities with Next-gen AR **
+
+- I am convinced, based really on my own experience with “AR-lite” in Pokemon Go, that AR is coming in a big way for the IoT, technology limitations notwithstanding. The cloud will probably serve as AR’s IoT training wheels at least initially, but real-time P2P connections are where the most exciting applications will be built.
+- Pokemon Go deals primarily with “virtual objects”, while the IoT deals with physical objects or things. Overlaying a virtual object on a physical IoT endpoint is something for developers to contemplate, **as well as overlaying a physical IoT endpoint on a virtual object**. Adding, for example, a low power wireless endpoint at the same location where a Pokestop is located presents interesting opportunities for game developers and IoT developers alike.
+- “Gamification” of the IoT is also intriguing from the perspective of mobile endpoints. In the Pokemon paradigm, there is no reason your dog could not be a mobile Pokestop. Or your car. Or your drone. Or you.
+- Final-final thought: for the first time, I am considering the possibility that the entertainment industry might have a role to play in the IoT. By driving innovations in AR and through the sheer force of millions of AR users, the gaming industry has enough heft to demand real-world connectivity to their AR games. Nintendo, for example, is about to release a [Pokemon Go Plus](http://bit.ly/2cb7D3a) wearable device to help you play the game without using your phone. Extending this concept beyond the wearable will spawn a new category of hybrid AR/IoT gaming.
+
+# Unified networking
+
+Bridging the gap between LPLAN and LPWAN.
+
+**How To Disrupt The Internet of Things With Unified Networking**
+
+# IoT backchannel
+
+Good for security
+
+# Kill switch
+
+**How To Build an IoT Kill Switch**
+
+The idea of a “kill switch” for machines that cannot otherwise be disabled via conventional means is not a new one, but it is a trendy topic today. Conversations about the [future](http://bit.ly/muskrobot) of AI commonly include the word “apocalypse” as machines both big and small are becoming massively more intelligent, autonomous, and in some cases, dangerous to human life.
+
+If you agree with this, you might also agree that it’s worth getting in front of this before your government steps in to “help”. Multiple groups like [Google](https://www.weforum.org/agenda/2016/06/does-ai-need-a-kill-switch/)are exploring kill switches from what appears to be a software-centric or even cloud-centric perspective, which is important. However if the single radio (e.g. the wifi radio in your wifi camera) in your IoT device has been hijacked by something like a Mirai botnet, there may be no way to execute the kill switch.
+
+Thanks to some innovations in low power wireless radios, better networking software, and more powerful ARM-based chips, an IoT kill switch is not only viable across a wide range of devices, but it is inexpensive and low hassle. It also need not impact form factor or usability in any meaningful way. Here is our view of the challenges and opportunities with IoT kill switches, which starts with better security capabilities for IoT devices more broadly:
+
+*UPDATE: here is the* [*European Parliament*](http://bbc.in/2jEgEDE) *calling for kill switches on a certain category of IoT devices.*
+
+*UPDATE II:* [*follow-up on why*](https://medium.com/@patburns/thesisthewaythegovernmentwillsaveiotsecurity-1b51969cd21d#.iuqfp2b2v) *kill switches are likely to be a central part of near-term regulatory framework for IoT security.*
+
+# Synchronization
+
+**5 Reasons You Should Care About Synchronizing the IoT**
+
+*The clocks on your IoT devices are way more important than you think*
+
+
+
+![img](https://cdn-images-1.medium.com/max/1000/1*ddiyJUPtU5aB1whGwddnAA.jpeg)
+
+Unless you are a networking nerd, **synchronization** is probably more familiar as a term used with wristwatches or iTunes than as an IoT term, but the future of the IoT may actually depend on this topic.
+
+Synchronization — the way an IoT device adjusts its internal clock in order to align with the clocks of other devices in a network — lies (surprisingly) at the center of many of today’s IoT challenges, particularly for low-power IoT. Clocks help devices pinpoint the moment when, for example, a sensor measurement is going to be shared with the network. If your device’s clock is out sync with those of other devices in the network, it will miss messages, collide with other messages being sent by other devices, or waste energy trying to get back in sync.
+
+Clocks drift out of synchronization, especially those using low cost, commodity computing parts like we in the low power IoT like to do. So to keep networking running efficiently, clocks need to be synchronized in order to make the data flow in a reliable way.
+
+More than a few inventors of wireless IoT technologies didn’t focus too intensely on synchronization, perhaps because they were using [TCP/IP](http://bit.ly/2TCPIPdef) as their networking model, which while I’m thinking about it reminds me — even if slightly off topic — of this:
+
+
+
+![img](https://cdn-images-1.medium.com/max/800/1*C-8Uc8LMG1BQ0V30w9CesQ.png)
+
+Most “low power” IoT protocols implemented something similarly byzantine when they designed their method for network sync. For example, here is a picture of [6lowPAN](http://bit.ly/1P6RrM4) — which famously claims to be a low power means of implementing IPv6 on a wireless network — initiating the sync process:
+
+
+
+![img](https://cdn-images-1.medium.com/max/800/1*0l9NidoMUGqYCOzg3Zx3NQ.png)
+
+For 6lowPAN, this process is repeated many times — let’s refer to it as “strobing” — until the endpoint has synchronized its listening cycle with the host. Unfortunately, with 6lowPAN all this “strobing” takes power, can only be done one endpoint at a time, and if the data rate is low the endpoint will burn up lots of battery life as it listens and strobes.
+
+**For 6lowPAN and others in the IoT using “old school” network sync, the cost of not getting it right is high for at least five reasons:**
+
+1. **Battery life.** Like politicians promising to change Washington, most low power IoT technologies don’t tell the truth about battery life. Cellular people you already know who you are. ZigBee, Thread and others are also guilty because **bad sync processes do to batteries what badly under-inflated tires do to your car’s gas mileage**. Multi-year battery life is what makes the low power IoT … low power. Bad sync = bad battery life.
+2. **Connection time.** Some wireless technologies can take many seconds or even minutes to connect, due almost entirely to weak synchronization schemes. For an on-demand world where we expect immediate results when it comes to IoT, a bad sync method in a mission critical environment can render obsolete information created only seconds earlier. Smart city or public safety applications, for example, are poorly served with slow-sync technologies. Slow-sync protocols are also a no-go for IoT control apps like implementing a [kill switch](http://bit.ly/iotkillswitch) on a piece of industrial equipment.
+3. **Dense-packed endpoint environments.** Environments with lots of endpoints are intimidating to IoT protocols with weak sync schemes. As in, they shouldn’t even get into the ring to pretend to compete. Imagine trying to run a query in a warehouse with 2,000 endpoints and establishing sync with each endpoint— one-by-one — in order to engage in a group broadcast or to query a group of endpoints or to send out a security patch. Industrial IoT environments are particularly sensitive to this issue.
+4. **Indoor location.** A growing part of the battery-powered IoT has to do with locating things. Outdoors, we seem to be relying more and more on GPS, but indoors is another matter. Being able to locate something indoors in any kind of real-time way requires fast synchronization with a gateway/access point or, more importantly, with other endpoints on a peer-to-peer basis. Slow-sync protocols are a no-go for these applications.
+5. **Security.** IoT technologies with weak sync schemes take longer to exchange keys and are more vulnerable to unwanted discovery and spoofing. Fast-sync protocols are also better able to support [two-factor authentication](http://bit.ly/2ivKCfM) and can remain in a quiet/listen-before-talk mode that protects privacy and inhibits unauthorized discovery.
+
+** Solving For Fast Group Synchronization in a Low Power IoT Network**
+
+Back in 2011 when we started [Haystack](http://www.haystacktechnologies.com/), the issue of synchronization was front-and-center as we gathered requirements for the technology we invented, DASH7. Unlike the slow, serial method used by 6lowPAN and others, we employ a different scheme using a flood of “background frames” and the picture looks like this:
+
+
+
+![img](https://cdn-images-1.medium.com/max/800/1*FhTenEmeyy7MzXCujZmppw.png)
+
+Unlike 6lowPAN (sorry to keep picking on them, but trying to keep this brief), any number of endpoints can listen simultaneously for background frames and advertising protocol data. All endpoints can receive the request, all can send responses, and all are then synchronized to each other. **This is the fastest, most efficient method of group synchronization available in the low power IoT today.**
+
+We are not the first company to attempt fast group synchronization via low power advertising, but we’re the first to do it in a (patented) way that actually works. For more information on how Haystack’s group synchronization works [click here](http://bit.ly/2haytech).
+
+# Cellular IoT challenges
+
+
+
+**How To Save Cellular IoT From Itself**
+
+Step 1: Remove the“wires” from wireless technology
+
+Wireless carriers like to hype new data capabilities. If you know technologies like [WiMax](https://en.wikipedia.org/wiki/WiMAX) or [CDPD](https://en.wikipedia.org/wiki/Cellular_digital_packet_data), you know how the cellular industry can overpromise. And if you are working in the IoT, you are probably hearing industry propaganda about their upcoming “low power wide area networking” (LPWAN) IoT technologies. LTE Cat M1 (especially in the USA) and LTE NB-IoT (Europe and elsewhere) are their emerging radio standards. And to compound the FUD even further, these are soon to be upstaged by a 5G LTE, which you can pre-order today for delivery in Q2 in 2026.
+
+Huge bets are being placed on the success of LTE in the IoT, and while LTE will have success in the LPWAN arena, many investors will be disappointed. Here are a few thoughts on why and one recommendation for shoring things up.
+
+**Cellular IoT Will Target Consumer Markets**
+
+The strengths that carriers bring to LPWAN’s — and this is just shorthand, you can read more [here](http://bit.ly/2hMx6BZ) and [here](http://haystacktechnologies.com/the-myth-of-nb-iot/) — is going to be in the simplicity of system setup and management, their massive customer installed bases, and the ability to bundle IoT solutions into a customer’s monthly bill with other offerings. Total cost of ownership will be high relative to non-cellular LPWAN substitutes and battery life will disappoint. This has one target segment written all over it: consumers.
+
+Weak battery life and high TCO is something carrier marketing departmetns can finesse with consumers. That monthly bill is a marketer’s Disney World of possibilities. And if they are mad, they can always call customer service …
+
+** Industrial + Enterprise Markets Are Challenging for Cellular IoT**
+
+Enterprise and industrial customers (I’ll just say enterprise for the sake of brevity) in the overwhelming majority of cases require a different product and ultimately, different distribution channels. But this won’t stop the carrier sales and marketing departments because their new LTE IoT story is a hammer for which there are no nails that are impervious to their pounding.
+
+Addressing enterprise markets with LTE-based LPWAN’s, as I’ve [noted](http://bit.ly/2gVYjjF)previously, is fraught with risks. I won’t say there is no enterprise opportunity, rather it’s just not going to be the sweet spot. And for investors in cellular IoT, this is a problem as the lion’s share of IoT revenues lies not in consumer, but in enterprise/industrial IoT markets.
+
+** To Penetrate The Enterprise, Look At Your Stack**
+
+So, for the hard-nosed cellular IoT strategists out there who both intend to invade the enterprise but who recognize the weaknesses of the current LTE products, focus first on your networking stack.
+
+**TCP/IP was built for AC-powered networks with wires.** Like the internet. For streaming huge files via HTTP or FTP. **It was not designed for wireless networks** **and it was most definitely not designed for low power wireless sensor networks.** It is bandwidth intensive, power hungry, and by today’s standards, almost comical in the way it establishes a connection between two computers. But legions of developers know TCP/IP so … in their eyes many IoT problems are just nails waiting for the TCP/IP hammer.
+
+Since the LTE community has for years had the luxury of working with large amounts of wireless bandwidth for carrying voice calls or streaming video, we should not be too shocked that they want to try TCP/IP for the IoT.
+
+For AC-powered IoT conections with lots of available wireless bandwidth, this might be fine. In fact, cellular carriers for years have touted their “M2M” capabilities that do just this.
+
+**But there’s nothing “low power” about cellular’s M2M past** and nothing low power about TCP/IP. But this is not another low power rant — we will all just have to see for ourselves just how many “years” of battery life we see from our forthcoming LTE-based IoT devices, but I tend to think they are talking in dog years while we are talking about human years.
+
+**No the real issue with TCP/IP is how it won’t (really) support LTE’s inevitable foray into the enterprise.**
+
+> *Bonus Thought: anyone who uses the term “TCP/IP” in conjunction with “low power wireless networking” is most likely exaggerating battery life and likely in a big way.*
+
+**Augmenting or Replacing TCP/IP for LPWAN’s**
+
+To provide the enterprise with the type of application functionality they need for their LPWAN deployments, the cellular industry must look beyond TCP/IP.
+
+For example, a real-world IoT pain point we at Haystack see every day is how to solve for indoor location using a LPWAN technology. Lately, we’ve seen lots of interest in Semtech’s LoRa product but also other sub-1GHz technologies. **Now, we’re being asked to solve for this for LTE**. So here are a few slides that describe our approach:
+
+**Basically, we advocate the bolt-on of a companion (< 30 KB) real-time low power networking stack to LTE** in order to enable real-time indoor location for applications like supply chain, IT asset tracking, healthcare, and much more. In addition, this solves for the problem of the [“indoor-outdoor”](http://bit.ly/2b65gRQ)IoT, where assets, people, and things may move from wide area (WAN) environments and into local area (LAN) environments and still require connectivity and location in both cases. More on this [here](http://bit.ly/2b65gRQ).
+
+A related problem with using TCP/IP in these cellular devices is peer-to-peer networking. If you are like me and think the cloud [is way overhyped](http://bit.ly/1knol10) as an IoT tool, the ability to interrogate a LTE-based IoT endpoint on a P2P basis and in real-time will be a significant part of your solution. A weakness for the LTE IoT is its inherent “cloud”-centric nature when the rest of the world is moving to “fog” computing. (Or, if you work with [Haystack](http://bit.ly/2haytech), we take computing all the way to the endpoint, but this is another topic altogether …) The move towards the fog is especially acute in enterprise markets which turns the cloud into a sort of millstone hanging around the neck of an LTE IoT industry that can’t, almost by definition, de-cloud itself.
+
+Final note: telco’s parting ways with the networking stack that got them to the dance will be hard, but with the IoT it’s clearly time to reassess.
+
+# IoT cost
+
+**Is The IoT Just Too Expensive?**
+
+In a [study](http://www.huffingtonpost.co.uk/simon-segars/the-economist-intelligenc_b_15108766.html) sponsored by ARM and IBM that should come as a frigid splash of arctic seawater on the IoT hype curve, the price of IoT infrastructure, more than security concerns, is slowing IoT rollouts across the industry.
+
+
+
+![img](https://cdn-images-1.medium.com/max/800/1*oxFszCxxKPQJAOdeIbzqdw.png)
+
+Three takeaways:
+
+1. The report doesn’t divulge details on the definition of “IoT infrastructure”, but this won’t come as good news to advocates of bringing [high cost](http://bit.ly/2LTEDASH7)connectivity into the enterprise. If you are analyst looking for data to help you scrutinize cellular’s [IoT forecasts](http://bit.ly/2mTXw7j) for the enterprise, I’d call the EIU and ask if you can buy their crosstabs.
+2. Security amazingly does not get the priority it deserves, indicating the majority of the respondents think they have not been hacked yet or their future IoT system won’t be hacked.
+3. The lack of standards in what we are now calling the IoT (I exclude traditional IoT technologies like passive RFID from this mix) seems to be bothering surprisingly few people. The reality is that the IoT is in a state of standards anarchy right now apart from some application layer interoperability happening in cases like Alljoyn. Below the application layer, there is no consensus or de facto standard in the low power wireless WAN sector and it could be years — many years, in fact — away. The low power PAN sector is dominated by Bluetooth low energy but that’s only “IoT” in the most limited sense given its tiny range. The low power LAN space remains a home automation mosh pit. In other words, any vision of ubiquitous LAN- or WAN-based IoT interoperability is years and likely more than a decade away.
+
+# MQTT
+
+ALP / NDEF
+
+CBOR
+
+
+
+# IoT broadcasting
+
+TCP/IP handles large data, but only between two devices
+
+Sending a wireless message simultaneously from a gateway to lots of low power IoT devices should be a no-brainer, but for many networking technologies, it is brutally difficult or just impossible.
+
+Some networking stacks can’t even try: battery powered LoRaWAN and Sigfox endpoints the easiest examples. Other protocols do it one endpoint at a time — 6lowPAN is one example — but that really isn’t broadcast, is it?
+
+When do low power IoT networks need broadcast (messaging simultaneously to all devices in range) or multicast (messaging to multiple devices, but perhaps not all, devices in range) capability? Here are three quick examples:
+
+1. **Location Queries**. Asking for the locations of a each cow in a herd of 500 cows. Or each shipping container in a yard. If you want real-time results, you’ll want a way to broadcast your query to everyone in real time.
+2. **Implementing GPS.** [We recommend](https://hackernoon.com/now-this-is-the-way-to-make-gps-way-better-for-lpwans-ddad647784cd) the use of assisted GPS (A-GPS) when deploying GPS over a LPWAN endpoint. It’s definitely possible to do it without A-GPS, but the battery savings and performance boost using A-GPS is material.
+3. **Firmware Updates.** The soft, white underbelly of today’s IoT is over-the-air (OTA) firmware updates, where so many devices are difficult to patch wirelessly or just don’t support OTA updates at all. (Shoulder shrugging is not a solution …) And no one wants to update endpoint firmware with a USB cable.
+
+There are more use cases for broadcast, but these are good for starters.
+
+We are implementing queries to some battery-powered LoRa devices running Haystack + DASH7 using the popular [MQTT](https://en.wikipedia.org/wiki/MQTT)publish-subscribe application. MQTT is not typically used for queries, but with the compression capabilities of Common Business Object Representation (CBOR), it is possible to do it with [Haystack](http://bit.ly/2haytech) + DASH7 with good results.
+
+# LPWAN vs short range
+
+**Is This The End Of The “Old” IoT?**
+
+The analyst firm ABI sees [LPWAN’s encroaching on short range wireless](http://prn.to/2qWOuvr)technologies — which you may know is [not exactly a new idea](http://bit.ly/2cHRXFH). The easy question is: why would you pick short range technologies like Thread or ZigBee if you could get better range/signal propagation more or less for free using an LPWAN technology?
+
+Bluetooth has a great chokehold on Personal Area Networks and while I have never seen WiFi as a viable solution for low power devices it dominates in mains-powered LAN connectivity. The remaining collage of short range wireless technologies, many operating at 2.4 GHz, remain ripe for disruption.
+
+With luck, we may be approaching a more “[unified](http://bit.ly/2cHRXFH)” networking vision for the IoT that allows us to deploy a more limited number (not just one!) of wireless radio technologies in order to address both long range (WAN) and shorter range (LAN) use cases. Not only does this make IoT LAN’s better, it addresses use cases that straddle the LAN/WAN “dividing” line or that may [transition between indoor (e.g. warehouse) and outdoor](http://bit.ly/2b65gRQ) (wide area asset tracking) use cases.
+
+This encroachment by LPWAN’s to me is inevitable and will happen more suddenly than most of us expect. You could say it’s a “new IoT” that is replacing years-old IoT technologies that were designed in a different era.
+
+# LPWANs
+
+**Free Advice: Pick A LPWAN That Will Survive**
+
+Here’s a new analyst firm with an [intriguing report](http://www.prnewswire.com/news-releases/survival-of-the-timeliestcan-unlicensed-lpwa-beat-nb-iot-300484340.html) on LPWAN’s. I scanned the abstract but three things caught my eye:
+
+1. **There can be only one LPWAN winner in the unlicensed spectrum.** If wireless history is a guide, there will most likely be a single “big” winner for low power, wide area narrowband connectivity. Same as it was for local area wireless broadband (WiFi) or personal area broadband (Bluetooth). The licensed vs. unlicensed distinction, for me, is driven by today’s wireless carriers who present themselves as a serious potential distribution channel for *low power* IoT connectivity, which is very much [TBD](http://bit.ly/2t4kIGw). Moreover, [some](http://bit.ly/2sBfHBv) of the larger carriers are skipping an LTE-based LPWAN option and embracing non-LTE LPWAN’s instead. Which frequency band(s) the LPWAN operates within — licensed or unlicensed — is immaterial to whether it is the big winner.
+2. **There’s a shakeout/consolidation coming in low power wireless protocols.** I won’t list them but there are plenty. This report calls out the technology Haystack invented and patented, [DASH7](http://bit.ly/2haytech), as one that will survive. There are good reasons for this [here](http://bit.ly/lorawan) and [here](http://bit.ly/2pBcYqp) and [here](http://bit.ly/2uRSqfA).
+3. **Bigger-than-exepcted opportunity for module vendors.** Here’s the quote:
+
+> “According to Mobile Experts, connectivity module revenue will grow from about $1B in 2016 to about $33B in 2021, with volume growth in multiple markets clearly overcoming the drop in device pricing. At a semiconductor level, the revenue for MCUs and RF solutions will grow to more than $1B by 2021.”
+
+33x better performance by module vendors vs. semiconductor vendors means … module vendors have more upside than I thought. FWIW the modules we work with don’t have a 33x price delta (in 2017) over the sum of individual components, etc. but the 33x could be driven by a) inflated cellular module pricing or b) expected cost reductions in components vs. module retail pricing, or c) higher than expected heterogeneity of use cases and customer volumes that drive thousands of small deployments where (overpriced) modules are the preferred go-to-market route vs. individual components. I’d go with c) if I had to pick …
+
+A side note: this report claims to use a bottoms-up forecasting methodology for the LPWAN market based, it appears, on face-to-face interviews and other exploratory methods. After the cascade of IoT forecasts showing billions or trillions of devices by next year — or maybe it was 2020— it is refreshing to this approach.
+
 # 5G + IoT
 
 **A Match Made In Hell: 5G and IoT**
@@ -65,6 +430,81 @@ For the full shock value of this exploit, here’s a short video by the firm tha
 Bluetooth is not alone in this ease of discovery. WiFi and IEEE 802.15.4xx are just two examples of stacks (or semi-stacks) that weren’t conceived with the modern IoT in mind. Even more recent attempts like LoRaWAN were architected without thinking this through.
 
 In the world of IoT wireless protocol development, device discovery seems to (usually) be the job given the guys who weren’t smart enough to work on documentation. But if we are just seeing the beginning of hacks like Blueborne — as the author of the vulnerabilty suggests — the solution to limiting IoT device discovery is a billion dollar opportunity.
+
+# Here Are My Quick Reactions To The Verizon IoT Announcement
+
+# LTE-M criticism
+
+1. [**Here**](http://vz.to/2nTO6LD) **is the announcement**
+2. **No multi-year battery life.** Usually when an LPWAN technology launches or tries to make waves, it emphasizes the “LP” (low power) part of the acronym. Verizon wisely and tellingly characterizes CAT M1’s battery store like this:
+
+> “Verizon maintains a strong leadership position in IoT technology and solutions with a history of firsts, including the first deployment of 4G LTE, LTE Cat 1 and now LTE Cat M1. A game-changer for the industry, Cat M1 is a new class of LTE chipset that is designed for sensors. **They require less power, offer extended battery life** and support an array of use cases ranging from water meters to asset trackers to consumer electronics.”
+
+If you’ve been in the low power IoT industry for a while, the industry vernacular for talking about “low power” is in terms of **years** of battery life. So absence of that term “years” confirms what many of us working ([and blogging](http://bit.ly/2LTEDASH7)) in this area have known for some time: LTE CAT M1 battery life is at best measured in months and is really more appropriate for fixed use cases where devices have access to mains/AC power. For you folks hoping to use LTE Cat M1 for battery powered use cases, it may be time to look elsewhere. Or **if you want to go ahead with a battery powered use case, your customers should be A-OK with frequent battery recharges/replacements.**
+
+But I think this is the point where we can stop calling LTE Cat M1 “LPWAN”. Maybe Medium Power WAN? Anyone?
+
+**3. Verizon smartly publishes its “best case” pricing per endpoint:**
+
+> “The” low bandwidth use cases for Cat M1 chipsets demand new types of data plans, including **low rate, multi-year plans** to match the longer useful life of devices. Cat M1 devices can economically scale on Verizon’s wireless network on [data plans ](https://www.verizonwireless.com/biz/plans/m2m-business-plans/)that are **as low as $2 per month per device**, with customized options available for bulk activations and volume purchases.”
+
+No use hiding your pricing — we were all [expecting the wors](http://bit.ly/2mXVVPy)t! — and probably good for Verizon to at least test at this level. $2.00 per month gets you 200KB of data — presumably this is going both from the endpoint to gateway as well as vice-versa.
+
+Since LTE Cat M1 is using TCP/IP, which is like the [C-3PO](https://en.wikipedia.org/wiki/C-3PO) of networking protocols —unnecessarily verbose, using 10x the words necessary to communicate a point — it is conceivable that your 200KB could be flushed in seconds over HTTP, or perhaps in just a message or two per day using something like MQTT or UDP.
+
+Just a hunch, but the $2.00 per month plan might be a “teaser” and they really want to “upsell” you on a richer plan with “more data”:
+
+
+
+![img](https://cdn-images-1.medium.com/max/800/1*KnwOTy0KMOCA9dYve4pxow.png)
+
+According to the text quoted above, the low rate is for a multi-year plan — “to match the longer useful life of devices” — so if multiple years is a minimum of two, your minimum subscription investment would appear to be $48, but more likely $72 or even $120.
+
+Then this bit of text caught my eye:
+
+
+
+![img](https://cdn-images-1.medium.com/max/800/1*KF1-I06dYScdE9KmbSQIjA.png)
+
+I didn’t call my Verizon rep to talk about the details, but seems like a safe bet that your minimum service commitment per endpoint will be north of $48.00, perhaps much higher.
+
+And we haven’t even seen hardware device pricing yet.
+
+I’ve worked for years in and with telco’s and the byzantine pricing part of their business drives me crazy. I see the fingerprints of Verizon finance all over this, but this is not a pricing plan designed to get lots of developers in the door.
+
+One bit of speculation: there’s an automotive market opportunity being targeted here.
+
+**4. Lots of partners**
+
+If you read the announcement, you will see a bevy of recognition from brand name silicon and module makers. As you’d expect from Verizon and also a reminder never to underestimate the power carriers have not only as distribution channels but also over their suppliers. All things being equal, carriers should be able to move IoT markets given their place in the ecosystem.
+
+**5. Friday announcement**
+
+If I were announcing a dramatic entry into the IoT, I would not announce on a Friday. Unless I was lacking confidence (or internal consensus) in what I was launching …
+
+**Closing thought:**
+
+I’ll try to dive in further to this in a subsequent post. But for now, **I think this is a significant announcement for the IoT**, but probably not for the reasons the cellular community expects. If you were/are a developer advocating LTE Cat M1 as a LPWAN solution, it might be time to expand your portfolio. If you are on the customer side and looking for a battery powered answer to your IoT problem, this is probably not your answer.
+
+If you are interested in LPWAN’s you may want to read what we have to say [here](http://bit.ly/2nNFOFP) and [here](http://bit.ly/2lbtWLF) or at our [website](http://bit.ly/2haytech). Haystack offers a lightweight, low power, low latency firmware stack that works across LPWAN’s (and LTE Cat M1) in ways TCP/IP or LoRaWAN cannot. So email me if you are in a jam …pat at haystacktechnologies dot com or @patdash7
+
+# NB-IoT positivity
+
+**Does China Have an Unfair Competitive Advantage in IoT?**
+
+Here are the folks at research firm Rethink Research discussing [Huawei’s warning](http://bit.ly/2oOqU2f) that this LTE NB-IoT hype is just a little overdone and that the technology for now is mainly for smart meters.
+
+The warning about NB-IoT use case limitations is something [I’ve mentioned](http://bit.ly/2LTEDASH7)previously, but what caught my eye was some stark differences on pricing.
+
+As I mentioned last week, Verizon announced plans to charge **$2 per month**for its entry level (i.e. smart meter/once per day message) per LTE CAT M1 endpoint in the USA, but this is positively affordable compared to Deutsche Telekom’s NB-IoT pricing of [EUR 9.95 per month for each connected machine](http://bit.ly/2nyTCV8). (!)
+
+I wonder what Verizon and DT customers will think when they learn that China Telecom will charge **$0.15 per month per smart meter for its NB-IoT endpoint?**
+
+> Smart meters will only be transmitting incredibly small amounts of data on an operator’s network. Xujianmin suggested that China Telecom will be charging $0.15 per month per smart meter device connection.
+
+Now, applying pricing in China to pricing in the U.S. and Germany is not necessarily apples-to-apples, and China may simply be selling NB-IoT services below cost in order to grab market share, stimulate a nascent industry, etc. But global cellular LPWAN markets are all launching at around the same time, have common infrastructure and silicon providers, and … a 1,333% difference between Verizon in the USA and China Mobile in China is kind of shocking, no? A 7,026% difference between Deutsche Telekom and China Mobile is … beyond shocking.
+
+So either a) China Mobile is radically selling below cost, b) China Mobile has an amazing unfair cost structure advantage vis-a-vis the rest of the world’s carriers, or c) Verizon and DT finance departments don’t do marketing. Whatever the case, I think cellular IoT pricing is one of its biggest challenges, especially in commercial/industrial markets and China Mobile just highlighted this for the world to see.
 
 # NB-IoT criticism
 
@@ -146,6 +586,59 @@ So to avoid battery meltdown on your GPS-enabled mobile IoT device, hot starts a
 Low Power Wide Area Networking technologies are about battery powered devices that can communicate over long distances and deliver long — as in multi-year — battery life. Today, lots of LPWAN technologies are being deployed in fixed use cases — meter reading, for example — and simply send a message once a day back to a host reporting on the day’s usage. Water meters, for example.
 
 But deploying LPWAN’s for real-time outdoor location is another matter. While there are multiple techniques for deriving location without GPS, most LPWAN protocols at best offer a high-latency, low accuracy form of location that would be hard to characterize as real-time. Adding GPS to these requires the GPS receiver to be active and, in most cases, in a perpetual state of looking for satellite signals. Even invoking GPS based on an event (e.g. movement) is full of risks like false positives that will also deplete a battery. A-GPS mitigates this power draw problem but … supporting it correctly remains elusive for many (but not all) LPWAN protocols. It is unclear whether this is the driver behind the Samsung NB-IoT battery life issue, but I look forward to hearing more detail from those closer to that product.
+
+**Looks Like More Forking Going On In The IoT**
+
+If you follow the hype on NB-IoT, you may have heard of the [dispute between Ericsson and Huawei](http://www.lightreading.com/iot/nb-iot/ericsson-huawei-incompatibility-threatens-nb-iot---sources/d/d-id/732345), which is throwing wrenches in lots of frothy cellular IoT forecasts.
+
+This kind of dispute is not uncommon in standards bodies, and it’s not uncommon for vendors to start selling equipment using non-final draft specifications of a standard with the intention of making the equipment standards compliant — maybe via a firmware upgarde — once the standard is baked, ratified, and adopted.
+
+It’s different, though, when two vendors don’t see eye-to-eye and just start selling incompatible hardware that no firmware upgrade will resolve down the road. Which is what appears to be happening here. So in addition to high silicon costs and questions about battery life, plus [TBD competitiveness around monthly subscription costs](http://bit.ly/2LTEDASH7), there is the basic question of “How would you like to be locked into Huawei/Ericsson’s proprietary flavor of NB-IoT?”
+
+If you are a carrier that has participated in the NB-IoT hype-a-pallooza, this might make for a fun topic at a board of directors meeting. Or some really interesting sales calls with customers.
+
+I would never recommend counting the carriers out of the IoT — many are too big and too threatened by the IoT to stand idle. But the challenges of a) a CAT M1 standard that is. not. low. power, and b) [technical](http://bit.ly/2mTXw7j) and standardization questions about NB-IoT, puts carriers in a quandary. Stick to your LTE guns or diversify and embrace another LPWAN technology?
+
+Oh and for direct competitors to cellular carriers who like to charge monthly subscriptions, your competitors’ unbending loyalty to LTE looks like an opportunity to be exploited.
+
+**How To Solve The Cellular IoT Prisoner’s Dilemma**
+
+
+![img](https://cdn-images-1.medium.com/max/1000/1*bOwamb03P4-c8HdYB5lilw.jpeg)
+
+It seems like we are finally getting clarity on features and pricing not just for high powered cellular IoT like LTE CAT M1, but also the long-awaited NB-IoT as well. NB-IoT famously claims to be a low power, wide area networking (LPWAN) technology.
+
+[This piece](http://www.lightreading.com/iot/nb-iot/nb-iot-gets-insecurity-complex/a/d-id/733454?page_number=1) in Lightreading: “NB-IoT Gets Insecurity Complex” builds on other research we have seen that basically confirms that not only are NB-IoT modules not going to price at $1 each (what we were told just [six](http://www.nickhunn.com/nb-iot-is-dead-long-live-nb-iot/comment-page-1/#comment-118098) months ago) or even $5 each, but much, much more:
+
+> “A likelier explanation is that customers are not ready for NB-IoT prices. Modules still cost somewhere between €10 ($11.25) and €15 ($16.87), according to Deutsche Telekom, against an industry target of just $5.”
+
+It is worth noting that the article quotes pricing for NB-IoT “modules” — not completed devices. And NB-IoT *modules* are arriving at price points that are 2–3x or more over what was promised. Assuming the *lower end* of Deutsche Telekom’s per-module cost of $11.25 and adding additional bill of materials, packaging, shipping, taxes and other costs required to ship a completed device, and you likely end up with per endpoint costs of $20, probably more. And that’s before the concept of profit even kicks in. The commercial/industrial appetite at these levels, even amortized via a monthly subscription, is quite limited.
+
+As I’ve mentioned [before](https://medium.com/@patburns/here-are-my-quick-reactions-to-the-verizon-iot-announcement-808da1692f8c), my experience with IoT products that come with this kind of premium pricing is that they self-segment into corners of the market where ease of use/ease of implementation cancels out the sins of high device or monthly subscription costs. Certain small business and consumer segments are the most likely targets for a premium product like this, while commercial and industrial customers with rudimentary systems integration capabilities and who don’t necessarily trust their carrier with their data will be slow to adopt. Obviously, the “[forking](https://hackernoon.com/looks-like-more-forking-going-on-in-the-iot-946a7220e967)” going on in the NB-IoT standardization community does little to assuage the worries of enterprise customers:
+
+> The industry’s reactions to those reports are what betray the insecurity. Talk of interoperability problems between equipment vendors [Ericsson AB](http://www.lightreading.com/complink_redirect.asp?vl_id=1879) (Nasdaq: ERIC) and [Huawei Technologies Co. Ltd.](http://www.lightreading.com/complink_redirect.asp?vl_id=2430) is now rife at industry events. Numerous industry experts have also flagged the issue in discussions with Light Reading. Yet Ericsson and Huawei have pleaded ignorance, while operators have either denied there are problems or declined to comment.
+
+> The timing of one recent statement on interoperability also looks odd. Vodafone this week said it was carrying out NB-IoT interoperability tests more than two months after it was supposed to have launched commercial services in some European markets, and having never previously acknowledged that interoperability is a concern. Those tests have shown that all is tickety-boo, it insists.
+
+But assume that the standards folks get their work done sooner or later. Ease of use or ease of implementation still assumes, in the LPWAN space, that the customers can “plug and play” an IoT device (or thereabouts) and not need to worry about maintenance, etc. **Which brings us to the money question: battery life performance.** Dead batteries are the maintenance bane of IoT network operators everywhere. For now, NB-IoT is deploying TCP/IP as its networking stack, and TCP/IP is no friend to battery life. A real risk, therefore, for NB-IoT is that it ends up as a high powered backhaul or mains-only solution similar to its LTE Cat M1 cousin which is also showing its true colors as a high priced/high power solution. Or NB-IoT ends up as a repeat of previous high powered, high priced [consumer GPRS misfires](http://www.sandiegouniontribune.com/business/technology/sdut-Qualcomm-Tagg-Pet-Tracker-Private-Equity-2013jul10-story.html).
+
+**If NB-IoT does not deliver multi-year battery life as promised — and I do not believe it will — the cellular industry has a bit of a situation on its hands.**
+
+NB-IoT is really a “we-can-just-do-a-simple-base-station-firmware-upgrade-and-deliver-low-power-wide-area-IoT” pitch to analysts who track LTE. Free money! But without a technology to actually, you know, deliver the broader LPWAN market opportunity, the pitch is moot. So analysts might rethink their cellular LPWAN forecasts absent one or more of the following moves:
+
+1. **Embrace an additional, non-LTE radio option like LoRa or Sigfox.** Or another emerging LPWAN PHY layer technology. Even if only as an “interim” solution until the LTE-based LPWAN woes can be resolved, assuming they can. If there’s a market worth going after — and there is — it’s probably not worth sacrificing early market share to wait years for your preferred radio technology to be ready for prime time.
+2. **Align per-month endpoint pricing** to provide something closer (on a present value basis) to parity for a comparable, easy-to-use technology from an unlicensed band, e.g. LoRa. While this could help preserve earlier unit forecasts, it may be get howls from cellular finance departments. But if you can’t compete on battery life, at least soften the price blow if you are serious about competing for customers.
+3. **Re-orient internal mindsets** from steadfast allegiance to LTE and instead embrace a more open-ish model, perhaps along the lines of [Made for iPhone](https://developer.apple.com/programs/mfi/), where carriers embrace multiple radio technologies and devices and provide a common networking layer to minimize maintenance and support. Like [this](https://www.slideshare.net/haystacktech/bringing-better-networking-to-lte-iot) one.
+
+Others have offered [suggestions](https://iotbusinessnews.com/2017/04/26/37988-iot-will-little-impact-revenue-mobile-operators/) to help carriers out of this dilemma, and the answers don’t appear simple. And while I shouldn’t be surprised, I am nonetheless astonished that the LTE community has even come to this point given its massive resources and market power. What happened? Here’s an excerpt from the same piece:
+
+> What seems undeniable is that NB-IoT was a rushed job following an abrupt rethink by the cellular industry on the need for a so-called low-power, wide-area (or LPWA) technology. Two and a half years ago, cellular industry folk at the [GSM Association (GSMA)](http://www.lightreading.com/complink_redirect.asp?vl_id=7572) were “dismissive” of LPWA, according to Tom Rebbeck, a director at the [Analysys Mason](http://www.lightreading.com/complink_redirect.asp?vl_id=11510) market research business. “Then within a year they had turned around because they saw the momentum behind Sigfox and LoRa,” he says.
+
+I won’t underestimate their ability to turn the ship around, but based on what I hear from colleagues working on 5G (coming to your town in how many years? Five? Ten?), the cellular industry mindset appears to be one of doubling down on the current roadmap, which will be no friend to low power endpoints.
+
+So maybe low power IoT was not so important to the cellular community after all and all the hype was … just that. Regardless, this represents a great opportunity for non-LTE LPWAN radios, LPWAN networking technologies, and network operators not saddled with LTE-or-die obligations. And it’s still early enough for carriers to re-think their plan.
+
+
 
 # Final thoughts
 
@@ -263,8 +756,66 @@ A few end-of-year thoughts on P2P and LPWAN’s:
 - A decentralized physical network topology eliminates the “hub” and instead relies on endpoints to communicate on a peer-to-peer basis and in some cases “hopping” or “meshing” a message from its origin to its destination.
 - While “meshing” was at least theoretically implemented with certain IEEE 802.15.4 protocols like ZigBee, we have yet to see meshing with longer range, low power LPWAN radios like LoRa. Nor are we likely to see it given the overhead it requires and the strength of signal propagation seen by LPWAN radios. In reality, meshing for 2.4GHz protocols was more a marketing gimmick driven by poor signal propagation than an actual need for “meshing” — that is to say, if 2.4GHz could have done the job in getting messages directly from an endpoint to the gateway via better signal propagation, there would have been little need for meshing.
 
+# Localization battery life
+
+**One More Thing …**
+
+AA batteries are too large for some use cases and here at Haystack we do work with coin cell batteries at the endpoint. A couple of things I wanted to at least hint at here:
+
+- Coin cell batteries are generally not designed for long discharges. I haven’t seen any LoRaWAN + GPS devices with coin cell batteries and I doubt that I ever will.
+- Deploying on-demand A-GPS on a coin cell-based LPWAN device — which has only 620 milliamp hours using a CR 2450 coin cell — still delivers remarkable battery life using Haystack/DASH7:
+
+
+
+![img](https://cdn-images-1.medium.com/max/800/1*OND3fzjbUfn33QQpbLZx1A.png)
+
+Maybe we’ll do another post on coin cell form factors …
 
 # Trilateration
+
+**For Outdoor LPWAN Location Start With RSSI**
+
+I’ll explain how to overcome GPS hell on a LPWAN device below, but the first step in getting around the seemingly massive obstacles starts by not using GPS at all. Instead, we recommend allowing a gateway to take received signal strength indicator (RSSI) measurements from a mobile device and in some cases [trilaterating](http://bit.ly/2aE0qWl) (similar to triangulation) their measurements using multiple gateways.
+
+
+
+![img](https://cdn-images-1.medium.com/max/600/1*zH17V2lqvN4oaD5Lh-XWsg.png)
+
+Example of Non-GPS trilateration over cellular
+
+Theoretically, even some of the notoriously bad networking stacks like LoRaWAN or Sigfox can do something like this (LoRaWAN [tries to market](https://hackernoon.com/this-iot-technology-pretends-to-be-something-its-not-b09319efb320)trilateration using a time-based method called Time Difference of Arrival, since the protocol can’t support RSSI, which is a superior approach for reasons I don’t have room for here.) With LoRaWAN your mobile device a) will need plenty of LoRaWAN gateways in range, b) better stand still for 30 minutes, and c) will not know if your location beacon was received by the gateway. (LoRaWAN packet loss is legendary.)
+
+Our experience with trilateration is that the accuracy of the estimated location can vary from surprisingly accurate — say, within 25 meters — or wildly off — by a mile or more— depending on the number of available gateways, terrain, RF environment, movement of the mobile device or the gateway, and more.
+
+There’s nothing wrong with RSSI-based trilateration, in fact we recommend it as part of your outdoor (and indoor) location technology portfolio, but implemented with one-way LPWAN protocols won’t work for most of us. Haystack does this with DASH7 in a far more efficient and relevant way, as you’ll see below.
+
+**The Importance of Real-Time Location**
+
+We hear about asset tracking every day at Haystack but ultimately it’s about asset tracking in **real-time**. That is, answering the everyday question “Where is it?” As in, “Where is my power drill?” or “Where is my bag of electronic equipment?” or “Where is my husband?”
+
+
+
+![img](https://cdn-images-1.medium.com/max/600/1*ioJHoLBQAGvf68AwqZaxbA.jpeg)
+
+Some customers want to know the location of things and don’t like being told to wait
+
+Rarely or never is the question: “I am looking for my champion Poodle, but hey no rush! Just get back to me with an approximate location sometime in the next 30 minutes or the next day and that will be just fine …” No, the question is almost invariably “I need to find my Poodle … RIGHT NOW.” And for most use cases, the end user wants to repeat the question again two minutes later. And again. And again. When you think about it, anything that is mobile that is worth enabling with a LPWAN tracking device is usually valuable enough to require asking this question and receiving an answer in real-time. Unless you don’t really love your Poodle.
+
+So at Haystack we’ve invented a [portfolio](http://bit.ly/2haytech) of solutions to help the LPWAN + GPS community that are uniquely achievable via the networking firmware stack Haystack invented and patented, DASH7.
+
+**The Importance of On-Demand in the IoT**
+
+I’ve written before about the importance of allowing endpoints to remain in a “[listen-before-talk](https://medium.com/@patburns/why-the-internet-of-things-is-going-nowhere-112540e79ae)” mode rather than engaging in constant chattering and needless handshaking. Benefits include power savings, real-time queries, [real-time location](https://medium.com/@patburns/the-indoor-outdoor-iot-2544d1026cae), better privacy and [security](https://medium.com/the-startup-magazine-collection/a-simple-proposal-to-improve-security-for-the-internet-of-things-4fcc0663f70e) options, and more. But when dealing with a feature as power-intensive as GPS, on-demand capabilities become paramount.
+
+**On-Demand RSSI Queries**
+
+As a first step in answering the “where is it right now?” question, we recommend starting with an on-demand RSSI query. Rather than invoking GPS on a mobile device, it may just be more practical to “probe” for a device’s location using a simple test of signal strength from a gateway that serves as a proxy for whether the mobile object (in the above use case, a chainsaw) is within an acceptable distance from the gateway/access point. A strong signal whose value is ≥x may give an owner peace of mind that the chainsaw is nearby.
+
+
+
+![img](https://cdn-images-1.medium.com/max/600/1*5OyIdzEBDP6MI29CHaesUw.png)
+
+A weaker signal whose value is ≤x might trigger either a trilateration sequence, e.g. for a device that is moving use repeated queries to the mobile device to measure changes in signal strength and for a fixed device use either a mobile gateway or multiple gateways. For those of you familiar with geofences, it’s possible to construct one using RSSI values.
 
 **Confirming the RSSI Alert Without GNSS/GPS**
 
@@ -302,11 +853,97 @@ We are not actively supporting TDOA commercially (yet) but expect to do so later
 
 Using the DASH7 Advertising Protocol is not the only path to implementing a real-time geofence with DASH7. For example, environmental sensor triggers may initiate a geolocation process or heuristics about the underlying asset may cause intelligent interrogation of the endpoint which, in combination with a geofence, creates additional paths
 
+# Assisted-GPS
+
+**On-Demand Assisted GPS**
+
+But let’s say you are modeling GPS usage for an upcoming LPWAN project but you are concerned that the end users you have in mind might not read your documentation that says to use GPS sparingly and instead might pummel the battery with nonstop queries. Think lost dementia patients, lost family dogs, a lost vintage Fender Stratocaster pre-performance at Lollapalooza, etc. Or that obstructions might be more common than normal and acquisition times might be longer. Even on-demand GPS (along with on-demand RSSI probing or geofencing) with Haystack might not be enough to prevent a fast dead battery.
+
+One of the more exciting things we are implementing at Haystack is Assisted GPS or “A-GPS”. If you are interested in learning more about A-GPS go [here](http://bit.ly/2p1E6hh), or if you prefer pictures, here is one:
+
+
+
+![img](https://cdn-images-1.medium.com/max/600/1*HaxwIymUtQzPzVoGvN4eeA.png)
+
+Basically A-GPS is a way of providing information to a LPWAN device, via a gateway, to help it acquire GPS satellite coordinates much more quickly than without A-GPS. As in, **shrinking acquisition and processing time from 2 minutes to 20 seconds.**
+
+A-GPS information includes information about the location of all 32 satellites orbiting the earth for a given time of day and location, time, satellite health information, etc. The total data payload is typically around 1KB. A-GPS is used extensively in cellular telephony and is one of the reasons it doesn’t take your iPhone two minutes to acquire GPS coordinates when you use Apple Maps.
+
+**But to send A-GPS information to mobile LPWAN devices requires a fully two-way networking communications protocol, preferably with robust multicast and broadcast capabilities, like the kind you get with Haystack.**For example, rather than have a group of LPWAN cow tracking devices attempting unassisted GPS location acquisition, a DASH7 gateway can simply multicast A-GPS information as it becomes available. Endpoints could request A-GPS information individually but multicast is faster and more efficient.
+
+As is probably obvious by now, A-GPS is a no-go with LoRaWAN, Sigfox, and other one-way or similar protocols. But using the same lost chainsaw example from above shows how impressive the battery life extension with A-GPS can be using Haystack:
+
+
+
+![img](https://cdn-images-1.medium.com/max/800/1*HLjmg2t8SUTHnYWVWDfI-w.png)
+
+There are multiple providers of A-GPS information that your LPWAN gateway can access. Here’s [one from u-Blox](http://bit.ly/2pPSUDJ) who offer their A-GPS location services free to their OEM customers.
+
+Needless to say, we are big advocates of A-GPS for LPWAN’s for those customers looking for high precision outdoor location.
+
 # Geolocation
 
-**One IoT Technology Responds To A Geolocation Dilemma**
 
 
+**Now THIS is the Way to Make GPS Way Better for the IoT**
+
+
+![img](https://cdn-images-1.medium.com/max/800/1*MmUzJp2NFUK1tmwn2Urx1Q.png)
+
+The IoT doesn’t appear on award-winning TV that often, but if you liked the TV series “Breaking Bad”, you might also be watching its [prequel](http://www.amc.com/shows/better-call-saul), “Better Call Saul”. Without giving away the plot, this season a small, long-range GPS tracking device is prominently featured in multiple episodes and, well, **the battery doesn’t last very long**.
+
+You can watch for yourself — I highly recommend it for both the screenwriting and the acting — but I’m glad to see the issue getting popular visibility because in the LPWAN (Low Power Wide Area Network) corner of the IoT where some of us live, we have yet to have “the talk” about a huge challenge: **GPS melts LPWAN battery life**.
+
+So this piece is about implementing GPS in the low power IoT. As you probably know, LPWAN’s are supposed to be low power devices which implies … no AC power connection. If you are thinking about fixed or non-mobile LPWAN endpoints, then you have no need for GPS and reading this article is probably a distraction from being productive. **But if you are deploying mobile LPWAN endpoints, read on**.
+
+**Asset Tracking**
+
+A major use case for LPWAN’s is what analysts boringly refer to as “asset tracking”. In my native pleb-speak this translates to “where is my stuff?” Tools, dogs, cows, bicycles, weapons, shipping containers, Alzheimer’s patients … the list of asset tracking use cases is extremely long.
+
+I’ve touched on locating things in the IoT [here](https://medium.com/@patburns/the-indoor-outdoor-iot-2544d1026cae) and here and I’ve noticed how some LPWAN technologies make [ridiculous claims](http://bit.ly/2nNFOFP) about their ability to locate things outdoors. But here’s a fact: **deploying GPS on a LPWAN device is hard.**
+
+**GPS — LPWAN Facts**
+
+Many developers *think* they know how GPS works but if you have doubts and think you could use a refresher, try [this](http://bit.ly/2p1nvfY). To compute its location, **an IoT device needs to acquire GPS signals from at least three but ideally four out of 32 GPS satellites** orbiting the earth.
+
+
+
+![img](https://cdn-images-1.medium.com/max/600/1*RPFWYsReSn3OgR0D7qDCsg.gif)
+
+32 birds, orbiting on six separate planes
+
+But what most also don’t know is that GPS is a **very slow communication channel** — just 50 bps! — which means the amount of time your little mobile LPWAN device must be “on” in order to receive GPS messages (technically 37,500 bits per message, per satellite) can be multiple *minutes* in order to acquire the GPS coordinates being sought.
+
+**Battery-consuming factors:**
+
+1. **Flutter.** If your LPWAN device has an obstructed view of a satellite (chainsaws may be locked in a shed or the passenger seat of a pickup truck) or the device is moving (highway overpasses, tall buildings, etc.) a GPS receiver can experience “flutter”, causing the receiver to work overtime to search for error-free GPS packets. If the flutter is bad enough, this can take a LONG TIME and further deplete your battery in the process.
+2. **GPS “idling”.** GPS receivers don’t do a good job of retaining satellite location information while in a low power state. If you want to keep satellite location data fresh in your mobile device’s memory so that the next time your device tries to acquire GPS info it can do it faster, you’ll need to budget a continual flow of power — approximately 0.44 milliamps on average — or risk needing to acquire GPS from a “cold start”. GPS satellite info has a shelf-life of four hours so at a minimum you will need “fresh” satellite info at that interval. The 0.44 milliamp average is a weighted average of idle power and GPS on time for a system sampling GPS every 30 minutes.
+3. **The radio.** Acquiring GPS coordinates is not enough as you’ll have to transmit them to a gateway. This is in addition to any other messaging your device might do.
+4. **The MCU and the rest.** Your mobile device needs to do everyday computing tasks managing whatever onboard sensors, radios, memory, etc. it is carrying. This burns battery life.
+
+So it’s no wonder we haven’t seen more action with GPS and LPWAN’s. Practically speaking, for most LPWAN protocols (but not all!), GPS is like going swimming with a 35-pound kettlebell tied to your ankle.
+
+**On-Demand GPS**
+
+If your on-demand RSSI query shows a signal that is ≤x (i.e. meaning it is located somewhere outside your geofence) and you want more precise location coordinates, you can invoke a GPS receiver on a LPWAN device.
+
+Assuming a 16 milliamp GPS receiver and an AA battery, **invoking standard GPS on a LPWAN device is something most developers will want to do only sparingly** or, if you plan to execute repeated queries, ideally when an item occasionally goes missing and not daily or even weekly. So for example, let’s say the chainsaw on a construction job site goes missing on average once every two weeks and the end user — frantic at the thought of having to tell the boss that he spent an hour looking unsuccessfully for the chainsaw again and couldn’t find it — invoked GPS five different times before recovering the chainsaw. **Using** [**DASH7 technology from Haystack**](http://bit.ly/2haytech)**, using an on-demand GPS approach is much better than the beacon approach:**
+
+
+
+![img](https://cdn-images-1.medium.com/max/800/1*aBPz08hz7k30rdJXAiatYA.png)
+
+It’s important to repeat that 750 days battery life modeled here is theoretical and doesn’t take into account flutter, other device duties, etc. but **using an on-demand (real-time query) approach to invoking GPS is vastly better than the concept of the same device acquiring and beaconing GPS coordinates at preset intervals.**
+
+- If you plan to deploy location-based services with your LPWAN, your choice of networking protocol has major consequences in terms of basic feature set, performance, and the breadth of use cases you can support.
+- If you plan to deploy GPS over an LPWAN, there are few downsides to deploying A-GPS and plenty of upsides.
+- Obviously there is more than location to consider in an LPWAN product. For example, being able to send a command in real-time or the ability to ship over-the-air security patches or firmware upgrades is important, too. But if your LPWAN solution calls for high-reliability/high-precision outdoor ([or indoor](https://medium.com/@patburns/the-indoor-outdoor-iot-2544d1026cae)!) location, the right option is pretty obvious:
+
+
+
+![img](https://cdn-images-1.medium.com/max/800/1*v4FfuGDCHCs2nxm9SUR3tA.png)
+
+- If you are in an outdoor or indoor location jam and need someone to talk to, email me at pat at haystacktechnologies dot com or visit our [website](http://www.haystacktechnologies.com/).
 
 # Geofencing
 
@@ -348,13 +985,84 @@ In the annals of mobile asset tracking history, the “dominant” wireless tech
 
 ![img](https://cdn-images-1.medium.com/max/800/1*qTCvC60v0qYy3SMk-FYz0g.png)
 
-Cellular-based Geofencing
+**Cellular-based Geofencing**
 
 **Conclusion**
 
 Geofencing is an exciting opportunity for mobile asset tracking over LPWAN systems, but the importance of the [right](http://bit.ly/2haytech) networking stack cannot be overstated. A unidirectional protocol is a poor choice for most LPWAN implementations but in particular those seeking to implement geofencing. A bi-directional protocol that supports multicasting/broadcasting as well as low power wakeup is, for the LPWAN world, essential.
 
 # LoRaWAN geolocation / tracking
+
+**This IoT Technology Pretends To Be Something It’s Not**
+
+I’ve written before about Low Power Wide Area Networks (LPWAN’s) and the pros and cons of [cellular](http://bit.ly/2mTXw7j)-based LPWAN’s as well as the same for those non-cellular technologies operating in unlicensed radio spectrum.
+
+One technology we at [Haystack](http://bit.ly/2aSPRzX) like is Semtech’s [LoRa](http://bit.ly/2oal5bq) LPWAN radio. Long range, low power, and reasonable-ish pricing. Some freeware they helped create called LoRaWAN, however, is [not good](http://bit.ly/lorawan). We get a steady stream of LoRaWAN refugees who, eager to build a long-range device with multi-year battery life, believed the various misleading statements about its two-way communications capabilities (sorry, not happening), security (really bad), ability to update firmware (you can’t, practically speaking), and a few others. As I’ve said before, serious developers don’t use LoRaWAN and sooner or later, the good ones figure out the truth of LoRaWAN and bail.
+
+But it gets worse.
+
+Recently at least one prominent company announced [plans](http://bit.ly/2o6LGWX) to work on geolocation with this same team, something Semtech announced [last summer](http://bit.ly/2o6LGWX):
+
+> “LoRa technology has a GPS-free geolocation functionality (LoRa geolocation) that enables a wide range of applications required to determine location as part of the platform.”
+
+Literally speaking, there’s nothing incorrect in the above statement: a LoRa radio can indeed support GPS-free location. In their announcement, they recommend using a time-based approach called Time Difference of Arrival in order to determine the location of a mobile device relative to two or more base stations. Is this the best approach among non-GPS location methodologies? No. But it’s true you don’t need a GPS receiver to acquire location coordinates … you just use the [synchronized clocks](http://bit.ly/2lbtWLF) on the devices in your LoRa network to make (hopefully) a pretty good guess. (Simply put, if Gateway A is located one mile from an endpoint and Gateway B is located two miles from the same endpoint, it will take longer for the message from the endpoint to reach Gateway B. Then use geometry.)
+
+But where this is all misleading is not in the claims about the Semtech radio itself — which we like and work with every day — but in the networking software stack that sits above the radio. Unwitting LoRa developers find themselves led to use the LoRaWAN freeware that is often marketed alongside LoRa, which is the geolocation equivalent of recommending solitaire as the killer app for a supercomputer.
+
+I’ve written on the [pitfalls of LoRaWAN](http://bit.ly/2hjJE5T) before, but to summarize, here are the basics you need to know before trying LoRaWAN for geolocation on battery powered LoRa IoT devices:
+
+1. **One-way only.** LoRaWAN only communicates in one direction: from the endpoint to the gateway, and not vice-versa. This means there’s no practical way to ask the device a question like “where are you?” and get an answer. There’s also no way to know if the message sent by a endpoint was received by the access point or gateway.
+2. **Not real-time.** You can program a LoRaWAN device to “beacon” every 30 minutes or so, but similar to #1 above, you can’t do a real-time query like “where is my lost dog?” Combine this with the high failure rate of messages sent via LoRaWAN, and you could wait hours to locate a mobile device.
+3. **No real-time indoor location, either.** Because LoRaWAN has no peer-to-peer capability and is not real-time, you can forget about locating a mobile endpoint indoors in real-time. So if that laptop with sensitive customer data goes missing in your building, good luck finding it via LoRaWAN. (More on this [here](http://bit.ly/2b65gRQ).)
+4. **Limited location support.** LoRaWAN precludes the use of a Received Signal Strength Indicator (RSSI) which on radios like LoRa is a far more accurate approach to determining location via trilateration/triangulation. In addition, the accuracy of time-based location approaches (like TDOA) correlate positively with available bandwidth and signal-to-noise ratio (SNR) — both of which are quite low on LoRa. In other words, their default GPS-less approach is not very accurate.
+5. **Huge latency**. Even if you program your LoRaWAN endpoint to create an alert based on some event (e.g. temperature deviation), the minimum latency between initiating the alert and sending the alert is more than **two minutes**. If you are attempting to locate something important — like an Alzheimer’s patient or the family dog — that two minute lag might just be less than acceptable.
+
+So just to illustrate how absurd the LoRaWAN “geolocation” approach is, a LoRaWAN-based solution might hypothetically work where: a) your mobile endpoint is standing still, ideally for a few hours, b) you don’t need to know its location coordinates in real-time, c) you are OK waiting until the next beacon 30 minutes from now, d) you don’t need very accurate location coordinates, and e) you don’t want to locate anything indoors.
+
+Other than that, it’s great for geolocation.
+
+But this gets to the heart of the issue of developing for the mobile IoT, which I’ve written about [here](http://bit.ly/1J3BlEf) and [here](http://bit.ly/2b65gRQ): solving for the battery powered LPWAN (e.g. combining long range and multi-year battery life) is not enough when the LPWAN is being deployed on a mobile device. The case of geolocation via LoRaWAN is a perfect example of a LPWAN networking stack that was (expediently) developed without — among a long list of oversights — contemplating the “killer” app for LPWAN’s: **mobile, battery-powered devices**. I’m convinced LoRaWAN was a demo built over a weekend over beer, bad Chinese takeout, and too much Toblerone that some product manager decided to commercialize without informing engineering.
+
+LoRa is a good radio technology. But if you want to do location — indoors or outdoors — over LoRa, don’t use LoRaWAN. [Here’s a much better way](http://bit.ly/2haytech).
+
+Update: [more thoughts here](http://bit.ly/2pBcYqp) on implementing GPS over LPWAN’s.
+
+**Let’s Try This With LoRaWAN**
+
+We could pick on Sigfox here, but that would be too easy so let’s further illustrate the battery impact of GPS on a LPWAN device by assuming you are using a one-way LPWAN networking stack for Semtech LoRa devices called [LoRaWAN](https://medium.com/@patburns/announcing-haystacks-lorawan-replacement-program-1a72cb4cf201). Since it’s a one-way device, assume it emits a periodic one-way beacon with GPS coordinates every 30 minutes to track a valuable piece of construction equipment at a job site. Why use a beacon? Because with a one-way protocol like LoRaWAN there is no way to query “Where is my chainsaw?” if the chainsaw goes missing.
+
+So assuming an acquisition time of 2 minutes for all four satellites multiplied by 48 times per day, your GPS module is already working a total of more than 1.5 hours a day. Divide the 1,000 hours of your AA battery by 1.5 hours of GPS duty per day and **you might get just over one month of battery life.**
+
+
+
+![img](https://cdn-images-1.medium.com/max/800/1*3RoC_WDTcBtoJXqqHWvR6g.png)
+
+But, alas, even those 42 days are only theoretical since this calculation doesn’t include a number of other battery-consuming factors.
+
+**I Found It: a GPS-Enabled LoRaWAN Device …**
+
+It advertises **10 hours** (yes, hours, not years) of battery life:
+
+
+
+![img](https://cdn-images-1.medium.com/max/800/1*K9TmCtG2dIDN2C-qvJdVPA.png)
+
+[**FIELD_TEST_DEVICE_LoRaWAN_868 - Adeunis RF**
+*Field Test Device - Network validation, prior to your solution deployment The LoRaWAN Field Test Device by ADEUNIS RF…*www.adeunis-rf.com](http://www.adeunis-rf.com/en/products/lorawan-products/field_test_device_lorawan_868)
+
+Yes, it’s a field testing device and not a “true” mobile endpoint. But … this is the only LoRaWAN GPS out there that I see.
+
+Update: Found [another](http://www.globalsat.com.tw/s/2/product-199335/LoRaWAN%E2%84%A2-Compliant-GPS-Tracker-LT-100H-LT-100E.html) device with a 820 mAh battery which might last three weeks.
+
+
+
+![img](https://cdn-images-1.medium.com/max/800/1*tYy6lFfy-WRyX3ytN_BTJg.png)
+
+Note: GPS devices whose batteries survive three weeks have been tried before in the cellular community with [well-known](http://www.sandiegouniontribune.com/business/technology/sdut-Qualcomm-Tagg-Pet-Tracker-Private-Equity-2013jul10-story.html) results.
+
+If I learn about more of these I will post them here. But now, come on people, LoRaWAN [wasn’t made for GPS](https://hackernoon.com/now-this-is-the-way-to-make-gps-way-better-for-lpwans-ddad647784cd) and it isn’t a networking stack for [people building serious IoT products](https://medium.com/@patburns/announcing-haystacks-lorawan-replacement-program-1a72cb4cf201).
+
+**One IoT Technology Responds To A Geolocation Dilemma**
 
 In a book I’ve read aloud at least 500 times called the [Pig’s Picnic](http://amzn.to/2HWqgGA), a pig (Mr. Pig) wants to look his best when he asks Miss Pig to join him for a picnic. So after obsessing about which bow tie to wear, he takes advice from his friends Lion, Fox, and Zebra and borrows something special from each of them. A foxy tail from Fox. A beautiful head of hair from Lion. And stripes from Zebra. Newly outfitted with delusions of hotness, Mr. Pig shows up at Miss Pig’s doorstep for their date. When she sees the unrecognizable creature in her doorway she squeals, threatens to call her friend Mr. Pig, and slams the door. Mr. Pig runs home, strips off his borrowed finery, and hurries back to Miss Pig’s house with open arms. To children (and those adults out there who identify as children), the moral of this story is “you’re OK just the way you are.”
 
@@ -406,6 +1114,36 @@ Two notes:
 Despite efforts by Bluetooth tracking companies to [pretend](http://bit.ly/2t1RML3) their devices can be found over large geographic areas, Bluetooth is too short range for most commercial or industrial asset tracking, so the subject of geofences there is moot. And passive RFID (EPC Gen 2) is not typically used for mobile asset tracking, either.
 
 But with newer LPWAN technologies and better networking software, mobile asset tracking is about to become much more interesting and geofences will play an important role.
+
+**A Bluetooth Tracker Pretends To Do LPWAN Geolocation And … Tragedy**
+
+There’s [one LPWAN technology, LoRaWAN,](http://bit.ly/2sWkq0w) that pretends to offer real-time geolocation when for all practical purposes it does not. Still, a few of its backers promote this capability — which is at best characterized as a hack — and hope customers don’t get wise until after the implementation. [Other bloggers](https://www.linkedin.com/pulse/calling-iot-connectivity-bluff-while-crossing-chasm-james-newton) are catching on as well:
+
+
+
+![img](https://cdn-images-1.medium.com/max/800/1*ehCow1vxduq5bB2wEzh-5w.png)
+
+But even worse is a *short range* technology that pretends to be a wide area geolocation technology as well. [Here is a tragic case](http://www.news-journalonline.com/news/20170713/public-invited-to-help-search-for-missing-vet-harold-cantrell) of a Bluetooth tracker, advertised as having a wide area geolocation capability, failing to locate a lost Alzheimer’s patient after **17 days**. 17 days and counting. And they still can’t find him.
+
+Lost car keys are one thing and Bluetooth is not bad for finding low value items wedged beneath your living room seat cushions. And if you want to *pretend* that you really do love your mother-in-law’s spoiled dog, give her a bluetooth tracker as a gift and then feign shock when she can’t find him when he goes missing. (OK — that wasn’t nice.) Bluetooth has its uses in the IoT.
+
+**But marketing a short range technology like this as a wide area tracking device and allowing (or at a minimum, not warning against) its use on human beings crosses a bright line.** I don’t know the fate of this Alzheimer’s patient and hope and pray he will be found safe and sound, but folks in the Bluetooth tracking business should be paying attention.
+
+With an average range of about 30 feet, using Bluetooth to track something — especially something very valuable — over wide areas is just usually not done. Bluetooth is a Personal Area Networking technology — as in, a FitBit or a Sonos speaker — and certainly not a Wide Area Networking technology. In my experience, the handful of people I have seen putting Bluetooth trackers on dogs or bikes do so based on utter technical naiveté, bad marketing hype, or hearsay from other uninformed users. Like “My brother-in-law told me I could use it on my dog and if she went missing the Bluetooth tracker would find her via satellite. Or via the cell phone network.”
+
+The community finding feature that this article references what provides the makers of this Bluetooth tracker with the weak “cover” for the wide area networking claims. (There are other Bluetooth folks out there doing the same thing, last time I checked.) Unfortunately, without massive numbers of concurrent users actively invoking their tracking app, the probability of a detection is — as the 12 day delay in locating the missing patient demonstrates — very, very small.
+
+How small?
+
+Covering the city of Daytona Beach (where the Alzheimer’s patient went missing) requires enough active users — each with ~2,800 square feet (that’s 30 feet² x π) of Bluetooth “coverage” — to cover 65 square miles of city (1.8 billion square feet). Or **about 647,000 concurrent users just in Daytona**Beach. All distributed evenly throughout the city, all with ~30 feet of Bluetooth coverage, all with their phones turned on and the tracking app enabled. And all of this assumes the patient didn’t run off to another town nearby.
+
+And this is made somewhat more problematic by the U.S. Census Bureau, which says **the total population of Daytona Beach is 63,000 people**.
+
+End user confusion about how wireless technologies work is pretty rampant. High powered cellular technology is the paradigm that I have observed makes some of this possible. Misconceptions about how GPS works are even more abundant. Bluetooth radio spec sheets claim certain capabilities, often based on “best case” conditions that don’t reflect a real world environment. And in a rush to turn Bluetooth into a relevant Internet of Things technology, hacks were invented to make it sound more compelling as a tracking technology than it really is.
+
+It is possible the Bluetooth tracking company here warned their customers against tracking humans with their product (I didn’t see it on their website …), but when you market a community finding feature replete with “success stories” of objects like lost bicycles, and then claim that the range is potentially “limitless”, people are going to take your word for it and get creative.
+
+If you want real-time tracking over wide areas using a device that provides multi-year battery life and GPS-based location, there are more [serious technologies](http://bit.ly/2pBcYqp) out there than Bluetooth.
 
 # Generic "dumb" geofencing
 
@@ -535,13 +1273,131 @@ A series of fenced sections in a depot, all managed with a single gateway and mu
 
 A side note on GPS: the normalization of “GPS” is also something that many in the IoT overlook: buyers in both enterprise and consumer markets are familiar with the paradigm of GPS and expect GPS-like levels of precision in their mobile asset tracking deployments. It is certainly possible to utilize non-GPS approaches to outdoor location, but give the falling costs of GPS components, the availability of networking stacks like Haystack’s DASH7, combined with the additional costs of implementing a non-GPS location solution, the list of reasons to withhold GPS from end users is growing shorter. Adding GPS/GNSS to your LPWAN feature set is something your customers can relate to way, way better than some of the other nerd-speak in your product specification sheet.
 
-# Cloud
+# Cloud criticism
 
 Anchor gateways.
 
+**Why The Internet of Things and the Cloud Should Break Up**
+
+Some innovations are so good they make it *too* easy. Parabolic [skis](http://nyti.ms/1MhrXZ7) and [AutoTune](http://www.theverge.com/2014/7/9/5884649/untouched-britney-spears-vocal-track-no-autotune), to name just two. For the Internet of Things, it’s the cloud that is making things way too easy.
+
+For IoT developers, the cloud is like beer in a college dorm: a cold one is around every corner you turn and … beer just becomes a constant of academic life. At least this is the way it works in America. So when an IoT developer is offered free cloud-based frameworks, databases, analytics, etc., reactions like “Hey look at all this cool cloud stuff! I think I’ll use it to build an IoT product!” is more norm than exception.
+
+But like that one guy in your dorm who had a hard time saying no and then quietly dropped out before the end of his freshman year, IoT developers risk a similar fate if they become too dependent upon the cloud.
+
+
+
+![img](https://cdn-images-1.medium.com/max/600/1*hbQ-aoidyiGlx8uWk2bpEw.gif)
+
+**Admit It: The IoT Has A Problem**
+
+In case you weren’t paying attention, the IoT and the cloud have advanced to what can only be described as a very intimate relationship. Consider:
+
+- A Nest thermostat has a WiFi radio and is accessed via your smartphone, which also has WiFi. Yet for your smartphone to access your Nest thermostat, it does so via a long-distance internet session with a Nest [cloud](http://www.groovypost.com/howto/fix-annoying-nest-thermostat-issues-that-google-wont/) server, even though it would be faster and more reliable to connect your thermostat and smartphone on a peer-to-peer basis.
+- Cloud-based IoT “developer platforms” [pop up](http://www.forbes.com/sites/janakirammsv/2015/04/13/6-iot-startups-that-make-connecting-things-to-the-cloud-a-breeze/) weekly, no doubt due to low entry barriers provided by the cloud, the extreme example being the shark-jumping [salesforce-for-iot](http://www.govtech.com/products/Salesforce-Launches-Internet-of-Things-City-Cloud.html) platform. According to one [survey](http://www.businesscloudnews.com/files/2015/07/IoT_Outlook_2015_Survey_Report_Hi_res_IBM.pdf) of 651 developers and IT professionals by IBM (not an unbiased source, but directionally consistent with my own experience), 75% were using some form of cloud-based development platform for an IoT project.
+- Microsoft, [GE](http://www.informationweek.com/cloud/ge-charges-into-iot-cloud-analytics-space-/d/d-id/1322548), and others each sell “industrial cloud” platforms with the aim of enabling legions of manufacturing companies to bring the IoT to their factories and products via the cloud. Features run the full gamut from controlling and configuring endpoints to analytics.
+- A FitBit wristband connects via Bluetooth with your smartphone but sends your activity data to a FitBit cloud app. Does your personal health data *really* need to sit in the cloud or can you extract sufficient value from it by simply keeping the data stored locally on your smartphone?
+- Next-gen IoT computing platforms that include augmented reality already use a round trip to the cloud in order to resolve some objects discovered in an AR headset. For mobile devices engaged in real-time cognitive assistance that rely on IoT devices to help do their jobs, the cloud doesn’t exactly speed things up. You can learn more [here](http://fortune.com/2015/10/12/ptc-buys-vuforia-from-qualcomm/).
+
+> “I really worry about everything going to the cloud. I think it’s going to be horrendous. I think there are going to be a lot of horrible problems in the next five years.”— Steve Wozniak, 2012
+
+For most of the IT industry — let’s just get this on the table — the cloud today is the hammer and there’s almost nothing that isn’t a nail. And the cloud is an easy place to build an IoT application and operates without the messy hassles of embedded software, endpoint security, FCC regulations, or [fertility](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3778601/) risks, to name a few. And more and more, the cloud is a norm that pervades the IoT with increasing risk.
+
+
+
+![img](https://cdn-images-1.medium.com/max/600/1*-8r2nQP9JS-_ZO_YDLGXtA.gif)
+
+** How The Cloud Is Infecting the IoT**
+
+The popularity of the cloud in the IoT is the result of several colliding realities:
+
+1. **It’s cheap and everywhere.**Like beer in your dorm, the cloud today is so popular and so well-capitalized that infecting the IoT was only a matter of when, not if. Spin-offs like cloud analytics or cloud perimeter security (no laughing!) are simply too affordable and too visible to pass up. Traditional enterprise IoT pilots that used to cost $250,000 in enterprise software and systems integration services can be executed at a fraction of this price now due to the cloud.
+2. **Tools.** Compared to older desktop-based tools, cloud-based environments and API’s are vastly simpler to use and integrate while offering robust functionality. [Heroku](https://www.heroku.com/), to cite just one example, is a complete but inexpensive cloud-based environment used by a number of IoT companies for deploying Ruby- or Python-based applications in the cloud and it is popular with novice and elite users alike.
+3. **Weak endpoints and edges.** Endpoints that don’t do analytics, support real-time queries, or even support full two-way messaging tend to spew data remorselessly to an edge router and/or the cloud. Bluetooth, ZigBee, 6lowPAN, and others are all guilty as charged and as a result, they end up driving their users to the cloud.
+4. **Cupertino.** It is hard to recall another company’s passivity stunting an industry’s growth the way Apple has for the IoT. First, Apple takes pride in a “slow follower” wireless strategy, unwittingly resulting in an IoT industry where 90% of new hardware devices rely on 1990's-era Bluetooth or WiFi just to ensure iPhone connectivity. Second, When it embraces a new wireless technology, the pace is plodding: the API for NFC remains closed, for example, preventing non-payment IoT use cases for NFC from seeing the light of day with the iPhone. Third, Apple just redefines what it means to be a great hardware company by layering cloud-based services on top of its [dominant](http://techcrunch.com/2015/02/26/apple-eating-all-the-profits/) hardware platforms, a lesson that is lost on few IoT hardware entrepreneurs.
+5. **Mountain View.** This may come as a shock, but there are those who would drive your data to the cloud for purposes of finding new ways to sell you stuff. Yes, I know I am sticking my neck out here, but some companies are pushing your data to the cloud not because they have to, but because it’s profitable to do so or represents future revenue streams. It probably has the ancillary result of making some IoT products less expensive today, though, so we’ve got that going for us.
+
+
+
+![img](https://cdn-images-1.medium.com/max/600/1*Sz337SDthl7_A4ziUO-SRw.gif)
+
+** Why Your IoT-Cloud Relationship (Probably) Isn’t Healthy**
+
+A few years ago, a rock-climbing buddy of mine who was in what some might call a tragically unhealthy relationship ignored warnings from me and others and got married on a whim. Well, the wedding reception was epic, and two months later (that’s 2 months) the whole thing came crashing down and he was back on the street — single again. With the IoT and the cloud, it is IT departments, not fellow rock climbers, waving red flags:
+
+1. **It’s not secure.** This one is hard to overstate as crummy IoT security is the sordid “yeah, but” in so many discussions about the IoT. IDC [predicts](https://www.idc.com/getdoc.jsp?containerId=prUS25291514) that nearly every IT network will have an IoT security breach by the end of 2016 and IT departments are in full [freakout](http://h20195.www2.hp.com/V2/GetDocument.aspx?docname=4AA5-4759ENW&cc=us&lc=en) mode [now](http://thehill.com/blogs/congress-blog/technology/257814-internet-of-things-use-it-with-extreme-care). Endpoint security is [comically](http://bit.ly/1WQYcXC) bad and compounded with a [hacker-friendly](https://www.symantec.com/content/en/us/enterprise/media/security_response/whitepapers/insecurity-in-the-internet-of-things.pdf) cloud, what could go wrong? Maybe your company can get some free PR on [60 Minutes](http://www.cbsnews.com/news/car-hacked-on-60-minutes/).
+2. **It may not be reliable.** If your IoT system relies on a cloud that you don’t own or control and the cloud fails, then what? Tracking a sales pipeline via the [cloud](http://techcrunch.com/2015/10/09/the-dog-ate-our-homework-google-drive-is-down/?ncid=tcdaily#.elat5p:I4ob) is one thing, managing [a fleet of vehicles](http://highscalability.com/blog/2015/9/21/uber-goes-unconventional-using-driver-phones-as-a-backup-dat.html), a mission-critical city power grid, or perishable flu vaccines in the cloud, that’s different.
+3. **It’s not real-time.** IoT apps that require real-time responses can’t tolerate the extra seconds or minutes required for a cloud lookup. Ditto real-time analytics. The cloud = increased latency.
+4. **It may not be faithful.** The integrity of your data in the cloud is only as good as the people and systems hosting it. Sensors in your manufacturing facility in Taipei showing you running at 50% below your normal run rate or showing a supply chain hiccup? Hedge funds and competitors enjoy learning about this kind thing! The cloud is the jackpot of data repositories and it’s where hackers focus.
+5. **Getting out may be easier than getting in.** Once you’ve married a cloud service, how easy will it be to disengage/migrate to another solution at some future date? Is standardization and interoperability in a state that will increase the risk of vendor lock-in? What if the cloud vendor is bought by your competitor and changes policies?
+
+> “Vendor [lock-in](http://fortune.com/2015/09/21/cio-challenge-priorities/) is a concern, it always is. Today’s leading-edge cloud companies are tomorrow’s dinosaurs.” — AstraZenica CIO David Smoley
+
+
+
+
+
+**How To Unbundle The Cloud and the IoT**
+
+De-clouding your IoT roadmap means substituting some or all of the cloud with … something else. So let’s start with:
+
+**A new golden rule of IoT network design** is to store sensor data as close as possible to its point of origin and limit its sharing across the network unless absolutely necessary. This was previously not really practical with 1990’s-era endpoint technologies, but today if an endpoint can run its own analytics and other applications autonomously, what is the point of sending the data upstream at all, much less all the way to the cloud? If for no other reason, the IoT golden rule should be applied for the sake of IoT security and privacy.
+
+
+
+![img](https://cdn-images-1.medium.com/max/1000/1*0NsEcd0YBrP-6F5tZKLmOA.png)
+
+**The endpoint is key to the golden rule.** Better processors, cheaper memory, and better networking stacks from companies like [Haystack](http://www.haystacktechnologies.com/) are evolving endpoints from dumb terminals to independent, distributed computing devices with real-time query (think [Google](http://bit.ly/1N3MSmv) for the IoT) and NoSQL-like filesystem support. Endpoint-centric designs also have the bonus of being [more stealthy and secure](http://bit.ly/1WQYcXC), faster, cheaper, and better stewards of battery life and wireless [bandwidth](http://bit.ly/haystackiot). In short, good IoT network design should begin with the endpoint in mind and “dumb” endpoint technologies that beacon or create unnecessary [security](http://wrd.cm/1ik7UB4) risks should be phased out.
+
+**Endpoint-centric design brings us closer to a P2P IoT.** If you envision a future with IoT devices that can operate more or less autonomously using artificial intelligence, intelligent agents, or [blockchain](http://blogs.wsj.com/cio/2015/07/27/blockchain-in-the-corporate-environment-has-big-potential-but-faces-implementation-challenges/)-based contracts, it means reducing (or eliminating) our dependence on clouds and edge gateways and allowing devices to communicate on a peer-to-peer basis to do their jobs. This could be a separate post unto itself, but here are just a few examples of P2P IoT application opportunities:
+
+- Driverless cars and drones communicating with smart city infrastructure. You need immediate, [low latency](http://bit.ly/1LX6oNp) info about the icy bridge or railroad track you are about to cross. Waiting 2–3minutes for a cloud app to make time for you is a non-starter. Actually, any [moving thing](http://bit.ly/1LX6oNp) that communicates with a fixed thing using low power wireless needs P2P.
+- Moisture sensors coordinating in a cornfield to better manage irrigation. Where water is scarce, programs residing on endpoints bid and arbitrate in order to optimize for food production.
+- Access control. Second-factor authentication. The P2P IoT as an additional security layer for data centers and other computing devices.
+- Supply chain networks. Chain-of-custody tracking. A nurse querying the temperature history of a carton of flu vaccine can do so without the cloud.
+- [Bitcoin](https://news.bitcoin.com/programmable-economy-internet-things-bitcoin-transforming-future/). P2P payments. Autonomous, battery-powered, wireless things will bid, negotiate, and execute financial transactions based on the condition of what or who they are sensing.
+- Augmented reality [wearables](http://recode.net/2015/07/30/google-glass-isnt-dead-but-its-all-about-the-enterprise-for-now/).
+
+**Most of today’s wireless IoT technologies were not designed for P2P:**
+
+- Bluetooth low energy is basically a one-way beaconing technology so is not P2P. It’s sister standard, Bluetooth 4.0, can “pair” with another Bluetooth 4.0 device but it’s a long, laborious process that is neither real-time nor low power and is full of security [vulnerabilities](https://blog.kaspersky.com/bluetooth-security/1637/). Bluetooth’s short range and poor signal propagation make it a poor choice for anything but the shortest range IoT projects.
+- ZigBee and 6lowPAN tout “meshing” as a way for their short range technologies to daisy-chain messages to an edge gateway. This might qualify as “P2P-lite” but for private networks only since the feature is useless in public network scenarios like driverless cars or AR wearables where true P2P discovery and authentication must occur almost instantly. These technologies are also good if you are OK with hackers being able to [easily find and exploit](http://www.networkworld.com/article/2969402/microsoft-subnet/researchers-exploit-zigbee-security-flaws-that-compromise-security-of-smart-homes.html) their endpoints.
+- WiFi supports mesh networking as well and [recently](http://siliconangle.com/blog/2015/07/14/wi-fi-alliance-rolls-out-p2p-standard-for-the-internet-of-things/) announced plans for better P2P support, though its [woeful security](http://bit.ly/1WQYcXC) and high power consumption make it rarer and rarer in IoT deployments. WiFi, too, suffers from molasses-like discovery and authentication which is a non-starter for most IoT networks, especially public ones. I do not expect WiFi to find its way into serious P2P IoT discussions despite its ubiquity on smartphones.
+- Newer wireless IoT technologies like [DASH7](http://haystacktechnologies.com/products-and-services/what-is-dash7/) were built directly for P2P and provide “instant-on” connections in public and private IoT networks. The technology is still young, but it gets P2P more right than any other low power wireless IoT technology. DASH7 does not currently support meshing (it supports 2-hop, which is typically more than sufficient) but since it uses [longer range](http://bit.ly/haystackiot) physical layer technologies, meshing is almost always unnecessary.
+
+> “Quite a lot of this content won’t be sent over the network to be processed by the ‘enterprise-based’ cloud infrastructure. Rather, you will need cloud computing-like processing at the edge … Quite simply, this is a big deal.” — Vernon Turner, SVP @ [IDC](http://www.eweek.com/networking/fog-computing-aims-to-reduce-processing-burden-of-cloud-systems.html).
+
+
+
+![img](https://cdn-images-1.medium.com/max/800/1*LE5-XCulhpSham923XeEMQ.png)
+
+**When endpoints are not enough, then add the edge.** For processes that can’t logically reside entirely at the endpoint, the edge gateway (or edge router or server) is their next logical home in the network. An edge gateway can interact with endpoints, host applications like [analytics](http://www.networkworld.com/article/2996086/internet-of-things/cisco-acquires-iot-analytics-company.html), store data, manage security, and more. There are no rules about the size or capabilities of edge gateways — they can be very simple or very large computing devices or may be a component of a much larger computing device. But the essential point in all of this is that the edge gateway is controlled and maintained locally and not in the cloud and not by a third party.
+
+**Think of the edge as a “**[**cloudlet**](https://en.wikipedia.org/wiki/Cloudlet)**”.** Smart cloud vendors will help customers bring cloud functionality to their edge devices as functionality that is usually delegated to the cloud can often be executed at the edge gateway. Gateway hardware is cheap and powerful, and much of what resides in the cloud can be placed at the edge for an increasingly ridiculous low price. Cisco, IBM, and a few others are trying to make “[fog computing](http://www.wsj.com/articles/SB10001424052702304908304579566662320279406)” a trendy term and … this is all for the better. And for those legacy firms doing yoga moves to transition into this cloud thing, it’s possible that your product lines can more easily make a more successful and shorter leap to the edge/fog.
+
+**The “Intranet of Things” is already here.** Remember that the IoT is not new. Barcode and RFID networks have used fog computing for decades and hundreds of building automation, defense, manufacturing, and other types of local IoT networks existed before the cloud became a trend.
+
+**Special reminder to** [**cloud people**](http://sv6.imageupload.be/wp-content/uploads/2012/07/Partly-Cloudy.jpg) **reading this with clenched teeth:**helping your customers to keep more of their data at the edge of their network is a *good* thing for you. If you keep what belongs in the cloud in the cloud (e.g. global network analytics) and what belongs at the edge at the edge, your customers (and their CSO’s and PR people) will thank you for it. Some of you already market “private clouds” or “hybrid clouds”, so marketing “local clouds” may be easier than you think. And keep in mind that [40%](https://www.idc.com/getdoc.jsp?containerId=prUS25291514) of all IoT data is predicted to be “stored, processed, analyzed, and acted upon close to, or at the edge, of the network,” by 2018 according to IDC.
+
+
+
+![img](https://cdn-images-1.medium.com/max/800/1*P8AzYL3vE05AVXgtrAQnrA.png)
+
+**When the edge is still not enough, it’s OK to look to the cloud.** The cloud has a role to play in the IoT, and where processes cannot be practically executed at the endpoint or the edge, the cloud may be the only reasonable choice. Batching data from gateways around the world for non-real time, non-mission critical analysis is one example of a “smart” cloud+IoT process. Controlling, configuring, and querying endpoints via a cloud-based application is not, however.
+
+**Pilot in the cloud, deploy in the fog.** The cloud is a fast and affordable way to prototype, demonstrate, and pilot, but it is the IoT’s [Faustian bargain](https://en.wikipedia.org/wiki/Deal_with_the_Devil). For projects requiring scale, it’s a good idea, again, to default to the endpoint and/or the edge gateway and then ask how the cloud can complement them, not vice-versa.
+
+**If you deploy in the cloud, have a Plan B.** If the temptation to deploy in the cloud is too great, at least be able to articulate how the system will function in the case of a cloud outage, hack, or other “unforeseen” event. At a minimum, a Plan B lays the groundwork for a future phase you may need in order to reduce your IoT system’s exposure to the cloud. You know, the phase that happens after your cloud IoT system is hacked and your board of directors asks “so now what?”.
+
+** So Now What?**
+
+The cloud is a useful tool for jump-starting IoT initiatives and has an important role to play in non-real time analytics. But it is inevitable — if only for the sake of security — that the IoT as an industry will go through a kind of cloud “detox” that results in a healthier and more resilient IoT where the cloud is deployed with eyes wide open to the accompanying risks. If your organization is talking about designing an IoT network and you are hearing or seeing the word “cloud”, it’s worth raising your hand and asking questions like “Is there a good reason not to execute this (insert process/feature) at the edge, rather that in the cloud?” or “Are we able to deploy stealthy endpoints that don’t over-share data?”
+
+The momentum behind the cloud is strong and some of you may encounter resistance to arguments for pushing IoT functionality to the edge. If so, you can always take comfort in the fact that endpoints are only increasing in functionality, security “accidents” in the cloud will only become more numerous and more lethal, and that in the history of computing, the arc of history [clearly](http://www.techspot.com/article/874-history-of-the-personal-computer/) supports the inevitability of more autonomous IoT endpoints.
+
 # IoMT
 
-Why Movement is Important to the IoT
+**Why Movement is Important to the IoT**
 
 An Internet of Moving Things is at its core a network of physical objects that are mobile or moveable and can be wirelessly measured or controlled. Amazingly, the designers of today’s IoT gave little or no thought to connecting things that move and today we are stuck with wireless IoT technologies that require a lengthy pairing ritual that renders them nearly useless for connecting with a moving thing. **Yet solving for moving things is of critical importance to the future of the IoT because:**
 
@@ -553,7 +1409,7 @@ An Internet of Moving Things is at its core a network of physical objects that a
 6. **Battery life.** Movement can be an important power saving tool for managing sleep/wake cycles battery-powered devices. A mobile device that doesn’t move might sleep more than one constantly on the move.
 7. **Movement changes risk.** A moving thing may set in motion other events — or at least the potential for other events to occur. A moving car or bicycle or fighter jet is far more likely to crash or experience mechanical failure than one that is parked.
 
-Moving Things Are Already Making Today’s IoT Obsolete
+**Moving Things Are Already Making Today’s IoT Obsolete**
 
 While the mobile internet is expected to be [10x the size](http://techcrunch.com/gallery/mary-meeker-internet-trends/slide/7/) of the desktop internet, the forecasts seem not to have affected most of the folks working on the IoT.
 
@@ -569,7 +1425,7 @@ For local area networks like your house where endpoints and access points are mo
 
 *Note to cellular people reading this: you can drive a drone from afar using cellular, but expecting the rest of the IoT to deploy high-cost and high-powered cellular at the endpoint is fantasy apart from some niche use cases where cost and battery life are not important.*
 
-A Fast Moving World Needs an IoT That Can Keep Up
+**A Fast Moving World Needs an IoT That Can Keep Up**
 
 Drones are just one example of a world of moving things challenging the capabilities of today’s IoT. Here are roughly four categories of things to solve for:
 
@@ -655,7 +1511,7 @@ There are things that don’t move on their own but get moved around:
 
 A large part of an Internet of Moving Things is just using mobile IoT gateways to measure fixed things. These cover a diverse array of applications and industries and many will be without mains power and require a battery, which in turn means the endpoint can’t use a power-thirsty wireless technology lest it require frequent battery changes or recharges — the near-universal achilles heel of IoT endpoints.
 
-Four Killer Apps for the Internet Of Moving Things
+**Four Killer Apps for the Internet Of Moving Things**
 
 I meet many developers with cool IoT ideas and here are a few that I consider to be killer apps for an Internet of Moving Things:
 
@@ -683,7 +1539,7 @@ I meet many developers with cool IoT ideas and here are a few that I consider to
 
 **E-commerce.** A killer mobile IoT opportunity — perhaps with a longer time horizon? — is in the area of e-commerce, where everything from the handbag carried by a woman walking her dog to passing buses will effectively become a query-able, wireless IoT endpoint. Soon, we will be able to learn the make and model of a cool mountain bike as it passes by or capture a promo code as we pass a billboard on a highway.
 
-How To Get The IoT Moving
+**How To Get The IoT Moving**
 
 
 
@@ -700,7 +1556,7 @@ The big question to explore: what is the best wireless connectivity option to ad
 7. **Low Power.** Since most IoT endpoints, either fixed or mobile, are battery powered, low power remains a must-have for nearly all devices in the Internet of Moving Things. For niche devices or mobile IoT gateways (like a smartphone) that customers are already resigned to recharging every day or two (cellular technology is notoriously high power), this requirement does not apply. For 99% of other IoT endpoints, multi-year battery life is non-negotiable.
 8. **Low Cost.** Like low power, the non-ascendancy of cellular as a mass market IoT technology is also attributed to the high costs of cellular chipsets and the recurring monthly fees from cellular carriers working to amortize the high capital costs of running a cellular network. Suggested retail price for battery powered IoT modules should be less than $10 based on my own discussions with hundreds of developers and customers, many of whom have a target price point well below $10.
 
-Preparing Your Company For The Internet of Moving Things
+**Preparing Your Company For The Internet of Moving Things**
 
 If your company is throwing elbows and punches inside the mosh pit of home automation, perhaps the Internet of Moving Things is not your biggest priority. However if your company is investing in smart cities, driverless cars, drones, wearables, or any of the other industries mentioned above, you should be taking note of the shortcomings of the most common wireless IoT technologies in the marketplace as it relates to movement. In some cases it may be possible to demand incumbents update their technologies to better support movement, in other cases the right decision will be to start afresh. My company, [Haystack](http://www.haystacktechnologies.com/), is one of the few in the IoT marketplace that designed its IoT networking stack (based on [DASH7](http://haystacktechnologies.com/products-and-services/what-is-dash7-2/)) with the Internet of Moving Things in mind from the beginning.
 
@@ -709,9 +1565,36 @@ But one thing is certain: a failure to address movement will bode poorly not ony
 
 # Security
 
-A Simple Proposal To Improve Security for the Internet of Things.
+**How You Can Prevent An IoT Security Nightmare**
 
-A small change can help stop big hackers.
+*Adding a “secret” connection to your IoT device will make a difference*
+
+Today we published what is probably one of our most important presentations. The topic is IoT security and we break some important new ground while offering something that almost everyone in the IoT space should find useful.
+
+Two-factor authentication is common in e-commerce today — if you try logging into your bank’s website from a new computer, you are usually asked to prove you are who you are via a userid and password, but also via a second authentication credential that is sent to me via SMS text or email.
+
+
+
+![img](https://cdn-images-1.medium.com/max/800/1*3S47y45QtRa_RSWsNQtP2A.png)
+
+The core thesis of our presentation is that there is an opportunity to outfit wireless IoT endpoints with a *second* wireless link whose primary job is to support two-factor authentication.
+
+
+
+![img](https://cdn-images-1.medium.com/max/600/1*H9iFYCxCQQEac8arNUODzA.png)
+
+I have written on IoT security [before](http://bit.ly/1WQYcXC), focusing on the benefits of listen-before-talk and the idea that endpoints shouldn’t talk more than necessary for a whole list of reasons. But combining this with a back channel for endpoints provides for unique opportunities to secure the endpoint and to make them more efficient. We think back channels are of immediate benefit to WiFi endpoints like IP cameras, but there is no practical limitation of where you can deploy a back channel given the range/signal propagation of LPWAN technologies.
+
+If you design or sell endpoints that are likely to be vulnerable to hacking (this is basically everyone today), a back channel could make a huge difference in your security story but could make your IoT story vastly more compelling.
+
+If you work in IoT or follow the news, IoT security is a huge challenge. Last fall, the Mirai botnet attack took down the internet in parts of the US and it only used ~100,000 hijacked cameras, DVR’s, and routers. It’s safe to say there are other botnet armies lying in wait out there, perhaps much larger than what we saw last fall, along with scads of other security and privacy problems that the IoT has not tackled. Some of this is due to crummy ways wireless IoT protocols (not Haystack’s) were engineered, and some is just plain human screw-ups. But scanning the news while building this presentation, to me it’s clear that adding two-factor authentication to the IoT is a big step towards responsibly addressing what is today an IoT security quagmire.
+
+
+
+
+**A Simple Proposal To Improve Security for the Internet of Things.**
+
+**A small change can help stop big hackers.**
 
 Almost every IoT security breach in [recent news](http://securityaffairs.co/wordpress/39143/security/drone-internet-of-things.html) can be traced to the poor architecture of the [wireless protocol](http://www.iotevolutionworld.com/smart-transport/articles/408425-the-jeep-car-hack-target-moment-the-internet.htm) used by the device. But unlike fighter pilots who maintain radio silence in order to avoid detection by the enemy, it is surprising how few IoT technologies were designed with even a minimum level of stealth in mind.
 
@@ -749,7 +1632,7 @@ Most wireless IoT endpoints in the marketplace today fall into the chatterbox or
 
 **Be stealthy.**
 
-Why Stealthy IoT Endpoint Design Matters
+**Why Stealthy IoT Endpoint Design Matters**
 
 > “Properly implemented strong crypto systems are one of the few things that you can rely on. Unfortunately, endpoint security is so terrifically weak that NSA can frequently find ways around it.” — Edward Snowden
 
@@ -773,7 +1656,7 @@ There is no technical reason that the Internet of Things cannot embrace silence,
 
 > **Put simply, IoT wireless endpoint design that does not embrace stealth is inherently less secure and less private.**
 
-Principles of Stealthy IoT Endpoint Design
+**Principles of Stealthy IoT Endpoint Design**
 
 There is no global consensus on how best to implement wireless IoT endpoint security. Competing vendors claim to solve for slices of what amounts to a [massive challenge](http://www.securityweek.com/massive-challenge-securing-internet-things), but reasonable people should be able to agree on first principles of next-gen IoT endpoint design in order to achieve stealth:
 
@@ -797,7 +1680,7 @@ There is no global consensus on how best to implement wireless IoT endpoint secu
 
 It is worth mentioning that almost by definition achieving stealth results in an endpoint consuming less power. Similarly, stealthy endpoints that speak when queried are better stewards of scarce radio spectrum. So while stealth is an important next step in IoT security, it simultaneously solves for other IoT usability and scalability goals.
 
-How We Can Bring Stealth to the IoT … Now
+**How We Can Bring Stealth to the IoT … Now**
 
 If security is such a big deal for the IoT — and there are [more than a few](http://www.networkworld.com/article/2921004/internet-of-things/beware-the-ticking-internet-of-things-security-time-bomb.html)[experts](http://www.zdnet.com/article/internet-of-things-you-have-even-worse-security-problems/) who think it is — then we should be taking steps now towards implementing stealthier endpoints.
 
@@ -815,7 +1698,7 @@ If security is such a big deal for the IoT — and there are [more than a fe
 
 # Real-time
 
-Real-Time Is A Must-Have for the IoT
+**Real-Time Is A Must-Have for the IoT**
 
 Today’s internet is mostly [real-time](https://en.wikipedia.org/wiki/Real-time_computing) (for a good time waster, [check this out](http://pennystocks.la/internet-in-real-time/)) and the Internet of Things needs to be real-time, too. If you disagree with this statement you are either invested in non-real-time technologies or you still watch the CBS Evening News at 6 p.m. on Channel 2 with your black and white television. **The importance of real-time data — with a real-time query capability that is transacted at the edge of the network — should be obvious** to anyone familiar with the scalability and operating challenges of future IT networks. Just in terms of time, consider industrial, commercial, and public safety applications where minutes or seconds of latency can render data non-actionable and often worthless.
 
@@ -836,7 +1719,7 @@ But the response to this request using today’s IoT connectivity options would 
 
 *Result: “Will do, sir, but we have 50,000 endpoints in the area so we should be able to get the data to you by Friday around lunchtime.”*
 
-Beyond Real-Time Networking
+**Beyond Real-Time Networking**
 
 The practical benefits of a real-time IoT at the network’s edge mentioned so far are really just the start and the ability to query endpoints directly — with or without the cloud — gives rise to entirely new opportunities. For endpoints in public networks, we will see **public API’s and paywalls for individual IoT endpoints**. **Advertising or e-commerce in association with specific endpoints.** **Endpoints that behave in unique ways when queried by or in the physical presence of another unique endpoint or person.** For private networks, business intelligence applications can now bypass the latency of today’s wireless IoT technologies and see faster (in a few seconds, in most cases) and more meaningful reporting. Just as some of today’s biggest web-based phenomenon like YouTube or Facebook would likely not exist had Google not perfected the indexing of the web, some of the biggest innovations in the IoT await the ability to spider and search wireless endpoints.
 
@@ -865,7 +1748,7 @@ Just how serious is the risk of an IoT data tsunami?
 
 **“We live in a real world where bandwidth is neither infinite nor free. There’s a lot of data being generated. We talk about 50 billion sensors by 2020. If you look today at all the sensors that are out there, they’re generating 2 exabytes of data. It’s too much data to send to the cloud. There’s not enough bandwidth, and it costs too much money.” —** [**Todd Baker**](http://www.biztechmagazine.com/article/2014/08/fog-computing-keeps-data-right-where-internet-things-needs-it)**, OIX product management head @ Cisco**
 
-Today’s Wireless Is Killing the IoT
+**Today’s Wireless Is Killing the IoT**
 
 To pinpoint the origins of the data tsunami, go to the source: the wireless IoT endpoint. Wireless endpoints are essentially a computer chip, a **radio**, an antenna, one or more sensors, some memory, and a power supply. Endpoints can be very tiny or quite large and can be standalone or integrated with other devices, but all share these basic attributes. **The purpose of an endpoint is simple: to sense its environment and report to the network as programmed.**
 
@@ -875,7 +1758,7 @@ The radio in an endpoint can employ one of a number of low power wireless commun
 
 Unfortunately, as the data tsunami is upon us, technologies like [Bluetooth](https://en.wikipedia.org/wiki/Bluetooth), [6lowPAN](https://en.wikipedia.org/wiki/6LoWPAN), [ZigBee](https://en.wikipedia.org/wiki/ZigBee) and others are utterly unfit to the task of the next phase of the IoT.
 
-Where The Tsunami Is Happening
+**Where The Tsunami Is Happening**
 
 ![img](https://cdn-images-1.medium.com/max/800/1*xjB7g0GluWNb7i2tR8-71Q.jpeg)
 
@@ -885,7 +1768,7 @@ Where The Tsunami Is Happening
 
 That none of today’s protocols seriously contemplated a Google-like future for the IoT is astonishing. Searching in real-time for objects in the Internet of Things using simple or complex queries — and thereby pushing the maximum amount of data cleansing and analysis to the edge of the network — didn’t make anyone’s priority list 10–20 years ago?
 
-The IoT Needs A Google
+**The IoT Needs A Google**
 
 The data tsunami is a complex business and technical problem, and Occam’s Razor says to use the simplest approach to solve complex problems. The simplest approach to solving the IoT data tsunami is to **fundamentally rethink the role of IoT endpoints**. Today’s endpoints can often be (simply) abstracted into something like this:
 
@@ -923,7 +1806,7 @@ The IoT endpoint architecture of the future would ideally be (again simply) abst
 
 How much range is possible? **We recently tested a beta version of our upcoming product,** [**HayTag**](http://www.haytagstore.com/)**, at a range of** **more than two miles (3.2 km)**in San Mateo, California using 433 MHz under strict (less than 1 miliwatt) FCC power limits and using an antenna contained in a tag that is about the size of a poker chip. Its indoor performance—the ability to maneuver through walls, HVAC ducts, metal plumbing fixtures, and even human flesh — shows great promise.
 
-How To Add A Google To the IoT
+**How To Add A Google To the IoT**
 
 Querying an IoT network Google-style may seem obvious or easy, but it’s also possible that it wasn’t built (until now) because it is hard to do. At a company I co-founded, [Haystack](http://www.haystacktechnologies.com/), **we designed an endpoint device filesystem and low latency, query-based device architecture to enable exactly this kind of real time data retrieval.** The technology, called [**DASH7**](https://en.wikipedia.org/wiki/DASH7), does this (and more) uniquely in the marketplace:
 
@@ -985,7 +1868,7 @@ A hub is a fixed piece of hardware (like the Cisco router in your home or office
 
 The more sensational IoT success stories of the last decade like [RFID tags at Wal-Mart](http://online.wsj.com/news/article_email/at-zara-fast-fashion-meets-smarter-inventory-1410884519-lMyQjAxMTA0MDEwNzExNDcyWj?tesla=y) were built around plus-sized enterprise software, short range wireless connections, and ugly and overpriced hardware.
 
-How The IoT Was Blindsided
+**How The IoT Was Blindsided**
 
 Once upon a time, some people in the Defense Department created the [internet](https://en.wikipedia.org/wiki/ARPANET). Then when that turned out pretty well, some other people decided to try to create a wireless version of the internet and invented technologies like WiFi. Still others invented more ways of connecting gadgets to this internet thing and built technologies like Bluetooth and ZigBee. All of this happened a long time ago before [MIT](https://en.wikipedia.org/wiki/Internet_of_Things#Early_history) even coined the term “internet of things”.
 
@@ -1047,7 +1930,7 @@ Put bluntly, if we keep doing what we are doing now, much of the IoT we are all 
 
 # Present
 
-Today’s IoT Is Pretty Damn Noisy
+**Today’s IoT Is Pretty Damn Noisy**
 
 # Future
 
@@ -1064,13 +1947,69 @@ What does this next generation option look like? For starters:
 
 If you agree that to ship the next 10 billion IoT devices there has to be a better way to connect IoT hardware endpoints, then keep reading.
 
-Why The Internet of Things Is Going Nowhere
+**Why The Internet of Things Is Going Nowhere**
 
 The next phase of the IoT is stuck unless we replace crummy outdated technology
 
+# LoRaWAN to Haystack
+
+**Announcing Haystack’s LoRaWAN Replacement Program**
+
+We are excited to announce the availability of the Haystack Software Developer Toolkit for Semtech’s [LoRa®](https://www.globenewswire.com/Tracker?data=udBXzEs0D_wRfZA_4U8t8qpgv3tg2yC3PkzMj3JXDDe1_6FXbNR4to8i4-UC5nD7kNav90ZJyDJbt0oMmJzKGSwUecxd3Z9aVdBd161dwnUvcEpgOA2QJqGBmjN3WBBZaw8LukpG34aFKBCNJNC2cg==) wireless IoT platform.
+
+First, let me emphasize that *we like LoRa.* We believe LPWAN technologies operating in unlicensed radio spectrum will eventually dominate the enterprise and industrial IoT arena and for now, Semtech is running at the front of the pack with LoRa. *(Note to IoT analysts: enterprise and industrial are where those extra commas in your IoT forecasts come from.)*
+
+Despite LoRa’s front-runner status, some LoRa networking freeware called LoRaWAN is still alive. LoRaWAN is basically a one-way, barebones networking stack that enables tags to upload small bits of data to the cloud. It’s not secure, it doesn’t work in real-time, it’s expensive to maintain, and you can’t really send commands to a LoRa endpoint with it. Still, a few companies you’ve heard of appear to be trying it despite the risks.
+
+So we are here to help. Haystack’s SDK for LoRa solves for those risks while providing additional features that are unmatched by anyone in the industry. Including:
+
+- **Total compatibility and co-existence with LoRaWAN**
+- **Complete bi-directional communications vs. LoRaWAN one-way**
+- **Real-time indoor location with up to one meter precision**
+- **Over-the-air firmware updates for easier maintenance and better security**
+- **Real-time endpoint queries and commands**
+- **50% greater range vs. LoRaWAN**
+- **200% greater system density vs. LoRaWAN**
+
+So to sum things up, with Haystack your LoRa solution has much better range, costs less, is more secure, can do high-precision indoor location, and can still work with “legacy” LoRaWAN gateways.
+
+**Security**
+
+We believe Haystack’s security story is unmatched among low power IoT networking stacks. Haystack enables two-factor authentication, an encyrpted MAC address, listen-before-talk operations, AES/CCM 128-bit crypto, and methods for public key exchanges. We have not solved everything about IoT security, but we don’t think anyone has come this far.
+
+Anyone contemplating a LoRaWAN implementation is exposed to serious security risks.
+
+UPDATE: More LoRaWAN security risks <http://bit.ly/2Lorasec>
+
+**The SDK**
+
+The Haystack SDK for LoRa includes:
+
+1. Haystack OpenTag firmware for LoRa
+2. LoRaWAN integration (optional)
+3. Haystack sample apps for LoRa, including:
+
+- indoor location example, using node-to-node multilateration with seamless LoRaWAN integration
+- ultra-low-power wireless TTY example
+- ultra-low-power bulk data transfer
+
+**Availability**
+
+The Haystack SDK for LoRa is available today to Haystack subscribers. For all subscription details, [click here](http://haystacktechnologies.com/products-services/#products_TechnologyLicensing).
+
+**Resources**
+
+For more information on LoRa technology, visit [Semtech’s site](http://bit.ly/semtechlora).
+
+For a comparison between Haystack and LoRaWAN:
+
+For more on Haystack security capabilities, [click here](http://bit.ly/iotkillswitch).
+
+*Our media contact is Jennifer Skorlich (650) 302–1716 or media@haystacktechnologies.com*
+
 # NFC
 
-Hiding In Plain Sight: Game-Changing Plumbing for the IoT
+**Hiding In Plain Sight: Game-Changing Plumbing for the IoT**
 
 Apple’s decision to finally implement a mobile payments technology called [Near-Field Communication](http://en.wikipedia.org/wiki/Near_field_communication) (NFC) for both the [iPhone](http://www.engadget.com/2014/09/16/iphone-6-and-6-plus-review/) 6 *and* the [Apple Watch](http://www.apple.com/watch/?cid=wwa-us-kwg-watch-com)is a major event in the history of e-commerce and computing. Companies in the retail, telecom, banking, transportation, security, and gaming industries— to name a few — are all re-calibrating strategies in light of the news. Future iPads, Macs, and even Beats headphones will likely be NFC-enabled with better “pairing” between Apple products, but potentially mobile payments and wireless charging as well. Developers —and basically the entire computing industry— must now ask how future products will take advantage of NFC. 
 
@@ -1111,7 +2050,7 @@ All of this long range and low cost goodness requires a **communications protoco
 
 # Dash7 protocol
 
-DASH7 Advertising Protocol Basics
+**DASH7 Advertising Protocol Basics**
 
 A defining feature of DASH7 — and the path to solving for high-precision LPWAN location and real-time geofence alerts — is its low power wakeup, also referred to as “instant-on.” Instant-on allows DASH7 endpoints to remain in a low power “listen” mode and avoid the kind of power-intensive synchronization and other overhead that is standard in more high-powered wireless protocols.
 
@@ -1254,6 +2193,10 @@ One exciting aspect of the iPhone 6 that has gone unnoticed is its potential to 
 It’s been more than two weeks since Apple launched the iPhone 6 and so far, no big headlines about the IoT. Bigger screen size, better camera, increased storage, and mobile payments via [Apple Pay](https://www.apple.com/iphone-6/apple-pay/)—something many of us wish Apple had launched years ago — but the proverbial lump of coal for the IoT.
 
 # References
+
+[https://www.slideshare.net/haystacktech/how-to-disrupt-the-internet-of-things-with-unified-networking](https://www.slideshare.net/haystacktech/how-to-disrupt-the-internet-of-things-with-unified-networking)
+
+[https://hackernoon.com/looks-like-more-forking-going-on-in-the-iot-946a7220e967](https://hackernoon.com/looks-like-more-forking-going-on-in-the-iot-946a7220e967)
 
 [https://medium.com/@patburns/5-reasons-the-iphone-6-will-save-the-internet-of-things-7ac8b96fbd5](https://medium.com/@patburns/5-reasons-the-iphone-6-will-save-the-internet-of-things-7ac8b96fbd5)
 

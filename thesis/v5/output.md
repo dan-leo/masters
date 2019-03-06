@@ -229,18 +229,6 @@ Indoors we have WiFi, Bluetooth, ZigBee and other short-range wireless networks
 
 Outdoors we have GSM/GPRS, NB-IoT, SigFox, LoRaWAN
 
-
-
-## Terrestrial vs satellite localization
-
-TDoA, ToF, Aoa, RSSI, are all land-based techniques for pinpointing the location of an endpoint. They require real-time clocks accurate to the millionth of a second as well as expensive gateway hardware. Depending on the frequencies, wireless network and modulation, one can get different ranges. This is useful for the indoors.
-
-Unfortunately, one has to sacrifice range for accuracy.
-
-Satellites, on the other hand are in stable LEO or geostationary orbits and a constellation of satellites can keep in constant synchronization using atom clocks . One retains accuracy, even over long distances due to the ultra high precision of the clocks. This is useful for the outdoors.
-
-Besides having the ability to measure RSSI which seems quite standard in wireless networks, NB-IoT is also lucky to have the benefits re-using the Timing-Advance (TDoA) hardware when upgrading cellphone towers with the capability. This means that one can reasonably approximate the position of an endpoint to within a 1000m.
-
 ## The indoor-outdoor realm
 
 This is considered to be a third realm which is hard to get a wireless technology / localization to work well in both.
@@ -446,34 +434,6 @@ Seeing NB-IoT and Dash7 as viable in IoT and wearables will fuel use cases for t
 The proposal in this paper suggests an ultra-low power consumption configuration to allow a device 
 
 
-
-# Questions
-
-How come Dash7 can communicate more than LoRaWAN?
-
-LoRaServer can interface with Class B and C gateways..
-
-- Is it worth setting up? No. Time and budget constraints.
-
-LoRaWAN can transmit more often than every few minutes?
-
-NB-IoT P2P? 
-
-* Yes, it is included in the spec in future
-* One could also re-use the RF frontend and add Dash7
-* MSK downlink, OFDM uplink
-
-Cortus?
-
-Can we prove that NB-IoT truly is low powered?
-
-Is RTK too short range?
-
-NB-IoT broadcast?
-
-NB-IoT P2P?
-
-Am I refining asset tracking for NB-IoT?
 
 # Summary
 

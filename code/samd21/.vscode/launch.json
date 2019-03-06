@@ -1,0 +1,34 @@
+// AUTOMATICALLY GENERATED FILE. PLEASE DO NOT MODIFY IT MANUALLY
+
+// PIO Unified Debugger
+//
+// Documentation: https://docs.platformio.org/page/plus/debugging.html
+// Configuration: https://docs.platformio.org/page/projectconf/section_env_debug.html
+
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "platformio-debug",
+            "request": "launch",
+            "name": "PIO Debug",
+            "executable": "c:/GIT/masters/code/samd21/.pioenvs/mzeroUSB/firmware.elf",
+            "toolchainBinDir": "C:/Users/d7rob/.platformio/packages/toolchain-gccarmnoneeabi@1.40804.0/bin",
+            "svdPath": "C:/Users/d7rob/.platformio/platforms/atmelsam/misc/svd/ATSAMD21G18A.svd",
+            "preLaunchTask": {
+                "type": "PlatformIO",
+                "task": "Pre-Debug"
+            },
+            "internalConsoleOptions": "openOnSessionStart"
+        },
+        {
+            "type": "platformio-debug",
+            "request": "launch",
+            "name": "PIO Debug (skip Pre-Debug)",
+            "executable": "c:/GIT/masters/code/samd21/.pioenvs/mzeroUSB/firmware.elf",
+            "toolchainBinDir": "C:/Users/d7rob/.platformio/packages/toolchain-gccarmnoneeabi@1.40804.0/bin",
+            "svdPath": "C:/Users/d7rob/.platformio/platforms/atmelsam/misc/svd/ATSAMD21G18A.svd",
+            "internalConsoleOptions": "openOnSessionStart"
+        }
+    ]
+}

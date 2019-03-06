@@ -431,9 +431,9 @@ Bluetooth is not alone in this ease of discovery. WiFi and IEEE 802.15.4xx are j
 
 In the world of IoT wireless protocol development, device discovery seems to (usually) be the job given the guys who weren’t smart enough to work on documentation. But if we are just seeing the beginning of hacks like Blueborne — as the author of the vulnerabilty suggests — the solution to limiting IoT device discovery is a billion dollar opportunity.
 
-# Here Are My Quick Reactions To The Verizon IoT Announcement
-
 # LTE-M criticism
+
+**Here Are My Quick Reactions To The Verizon IoT Announcement**
 
 1. [**Here**](http://vz.to/2nTO6LD) **is the announcement**
 2. **No multi-year battery life.** Usually when an LPWAN technology launches or tries to make waves, it emphasizes the “LP” (low power) part of the acronym. Verizon wisely and tellingly characterizes CAT M1’s battery store like this:
@@ -2205,4 +2205,40 @@ https://medium.com/iotforall/why-you-can-t-google-the-internet-of-things-1f12072
 https://medium.com/the-startup-magazine-collection/a-simple-proposal-to-improve-security-for-the-internet-of-things-4fcc0663f70e
 
 [https://medium.com/@patburns/how-to-solve-for-geofencing-in-the-low-power-iot-94567de29eaf](https://medium.com/@patburns/how-to-solve-for-geofencing-in-the-low-power-iot-94567de29eaf)
+[https://medium.com/@patburns/a-new-way-to-think-about-the-p2p-iot-5fde27e96833](https://medium.com/@patburns/a-new-way-to-think-about-the-p2p-iot-5fde27e96833)
+[https://medium.com/@patburns/maybe-we-need-a-lost-and-found-for-nukes-c0966dd2759b](https://medium.com/@patburns/maybe-we-need-a-lost-and-found-for-nukes-c0966dd2759b)
+[https://medium.com/@patburns/how-to-predict-if-your-iot-device-will-steal-from-you-9a8c3ac8091c](https://medium.com/@patburns/how-to-predict-if-your-iot-device-will-steal-from-you-9a8c3ac8091c)
+[https://medium.com/@patburns/how-to-make-better-cryptocurrencies-with-pol-and-dash7-cccb8cf85e26](https://medium.com/@patburns/how-to-make-better-cryptocurrencies-with-pol-and-dash7-cccb8cf85e26)
+[https://medium.com/@patburns/how-to-make-better-smart-contracts-with-dash7-and-pol-cf3ca3e5a0da](https://medium.com/@patburns/how-to-make-better-smart-contracts-with-dash7-and-pol-cf3ca3e5a0da)
+[https://medium.com/@patburns/one-iot-technology-responds-to-a-geolocation-dilemma-984a928cd563](https://medium.com/@patburns/one-iot-technology-responds-to-a-geolocation-dilemma-984a928cd563)
+[https://medium.com/@patburns/heres-something-entertaining-in-the-iot-eb17dfc98a15](https://medium.com/@patburns/heres-something-entertaining-in-the-iot-eb17dfc98a15)
+[https://medium.com/@patburns/verizon-and-at-t-are-taking-a-pass-on-nb-iot-69edae3a053c](https://medium.com/@patburns/verizon-and-at-t-are-taking-a-pass-on-nb-iot-69edae3a053c)
+[https://medium.com/@patburns/the-really-hard-thing-about-gps-and-the-iot-52706b6f256e](https://medium.com/@patburns/the-really-hard-thing-about-gps-and-the-iot-52706b6f256e)
+[https://medium.com/@patburns/the-billion-dollar-iot-device-discovery-opportunity-8615893e6df8](https://medium.com/@patburns/the-billion-dollar-iot-device-discovery-opportunity-8615893e6df8)
+[https://medium.com/@patburns/a-match-made-in-hell-5g-and-iot-5bd4d83cd283](https://medium.com/@patburns/a-match-made-in-hell-5g-and-iot-5bd4d83cd283)
+[https://medium.com/@patburns/can-the-iot-predict-earthquakes-3f46428c3fe8](https://medium.com/@patburns/can-the-iot-predict-earthquakes-3f46428c3fe8)
+[https://medium.com/@patburns/another-technology-pretends-to-do-lpwan-geolocation-bc485964157c](https://medium.com/@patburns/another-technology-pretends-to-do-lpwan-geolocation-bc485964157c)
+[https://medium.com/@patburns/free-advice-pick-a-lpwan-that-will-survive-658cec052fab](https://medium.com/@patburns/free-advice-pick-a-lpwan-that-will-survive-658cec052fab)
+[https://medium.com/@patburns/how-to-solve-the-cellular-iot-prisoners-dilemma-546326d18c79](https://medium.com/@patburns/how-to-solve-the-cellular-iot-prisoners-dilemma-546326d18c79)
+[https://medium.com/@patburns/this-qualifies-as-important-research-about-the-iot-1cb2860722ff](https://medium.com/@patburns/this-qualifies-as-important-research-about-the-iot-1cb2860722ff)
+[https://medium.com/@patburns/this-is-the-best-way-to-do-iot-broadcasts-fb0fdde33455](https://medium.com/@patburns/this-is-the-best-way-to-do-iot-broadcasts-fb0fdde33455)
+[https://medium.com/@patburns/is-this-the-end-of-the-old-iot-86c1f4f27c6c](https://medium.com/@patburns/is-this-the-end-of-the-old-iot-86c1f4f27c6c)
+[https://medium.com/@patburns/mqtt-dash7-1ee24e5aa1d8](https://medium.com/@patburns/mqtt-dash7-1ee24e5aa1d8)
+[https://medium.com/@patburns/i-found-it-a-gps-enabled-lorawan-device-8e9443856b7](https://medium.com/@patburns/i-found-it-a-gps-enabled-lorawan-device-8e9443856b7)
+[https://medium.com/@patburns/now-this-is-the-way-to-make-gps-way-better-for-lpwans-ddad647784cd](https://medium.com/@patburns/now-this-is-the-way-to-make-gps-way-better-for-lpwans-ddad647784cd)
+[https://medium.com/@patburns/does-china-have-an-unfair-competitive-advantage-in-iot-1ede9ef8aee4](https://medium.com/@patburns/does-china-have-an-unfair-competitive-advantage-in-iot-1ede9ef8aee4)
+[https://medium.com/@patburns/here-are-my-quick-reactions-to-the-verizon-iot-announcement-808da1692f8c](https://medium.com/@patburns/here-are-my-quick-reactions-to-the-verizon-iot-announcement-808da1692f8c)
+[https://medium.com/@patburns/this-iot-technology-pretends-to-be-something-its-not-b09319efb320](https://medium.com/@patburns/this-iot-technology-pretends-to-be-something-its-not-b09319efb320)
+[https://medium.com/@patburns/is-the-iot-just-too-expensive-a621e18654fb](https://medium.com/@patburns/is-the-iot-just-too-expensive-a621e18654fb)
+[https://medium.com/@patburns/how-to-save-cellular-iot-from-itself-d54ba49c6d53](https://medium.com/@patburns/how-to-save-cellular-iot-from-itself-d54ba49c6d53)
+[https://medium.com/@patburns/5reasonsyoushouldcareaboutsynchronizingtheiot-bdbd011c3c40](https://medium.com/@patburns/5reasonsyoushouldcareaboutsynchronizingtheiot-bdbd011c3c40)
+[https://medium.com/@patburns/announcing-haystacks-lorawan-replacement-program-1a72cb4cf201](https://medium.com/@patburns/announcing-haystacks-lorawan-replacement-program-1a72cb4cf201)
+[https://medium.com/@patburns/how-to-build-an-iot-kill-switch-9b55429088a4](https://medium.com/@patburns/how-to-build-an-iot-kill-switch-9b55429088a4)
+[https://medium.com/@patburns/how-you-can-prevent-an-iot-security-nightmare-cbbf05a0f36b](https://medium.com/@patburns/how-you-can-prevent-an-iot-security-nightmare-cbbf05a0f36b)
+[https://medium.com/@patburns/how-to-disrupt-the-internet-of-things-with-unified-networking-7fbfdeca6bdd](https://medium.com/@patburns/how-to-disrupt-the-internet-of-things-with-unified-networking-7fbfdeca6bdd)
+[https://medium.com/@patburns/why-pokemon-go-will-make-you-rethink-the-internet-of-things-7b45b5c8bae1](https://medium.com/@patburns/why-pokemon-go-will-make-you-rethink-the-internet-of-things-7b45b5c8bae1)
+[https://medium.com/@patburns/the-indoor-outdoor-iot-2544d1026cae](https://medium.com/@patburns/the-indoor-outdoor-iot-2544d1026cae)
+[https://medium.com/@patburns/why-the-internet-of-things-and-the-cloud-should-break-up-8aa6ec563a81](https://medium.com/@patburns/why-the-internet-of-things-and-the-cloud-should-break-up-8aa6ec563a81)
+[https://medium.com/@patburns/why-the-internet-of-things-is-going-nowhere-112540e79ae](https://medium.com/@patburns/why-the-internet-of-things-is-going-nowhere-112540e79ae)
+[https://medium.com/@patburns/5-reasons-the-iphone-6-will-save-the-internet-of-things-7ac8b96fbd5](https://medium.com/@patburns/5-reasons-the-iphone-6-will-save-the-internet-of-things-7ac8b96fbd5)
 

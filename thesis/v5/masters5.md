@@ -1,5 +1,5 @@
 ---
-title: NB-IoT and Dash7 bi-directional LPWANs in satellite localization
+title: Investigating LPWAN optimization of satellite localization in LTE NB-IoT and Dash7 Alliance Protocol
 author: Daniel Robinson, Prof MJ Booysen
 date: Stellenbosch University, March 2019
 tags: [LTE, wearables, healthcare, safety, critical, life-threatening, SDR, NB-IoT, Dash7, localization]
@@ -20,7 +20,7 @@ linkcolor: blue
 
 # Abstract
 
-In this thesis, we are trying to solve for localization using LPWANs. Bidirectionality has multiple benefits.
+In this thesis, we are trying to solve for a better form of localization using LPWANs. Bidirectionality has multiple benefits.
 
 # Introduction
 
@@ -28,7 +28,7 @@ This thesis is split up into sections, where the literature study introduces var
 
 The appendix contains scripts, schematics and more documenting the entire process for the reader to reproduce.
 
-The aim of the thesis is to identify how much of a benefit a bidirectional LPWAN has in localization as opposed to a unidirectional one.
+The aim of the thesis is to identify how much of a benefit bidirectional LPWANs have in localization as opposed to a unidirectional one.
 
 Consider a unidirectional wireless network that, although it has many kilometers of range, has limited capability in receiving downlink messages from gateways. Adding a GPS/GNSS module is increasingly trivial and inexpensive these days [@Allan2013], although one still has to deal with the occasional cold start and periodic receive windows to determine the whereabouts of the device in question [@Bulusu2000]. To avoid using the receive windows unless necessary, one can easily know when a device is static by observing movement via an accelerometer or similar [@Bujari2012], but purposefully locomotive devices require more computationally expensive means such as dead reckoning to determine if the endpoint has moved significantly to require another GPS/GNSS location update [@Goyal2011]. 
 
@@ -270,6 +270,20 @@ There exist many devices to test:
 ## PCB hardware
 
 Useful to monitor the current directly. The BG96 will be used as it has GPS on-board as well as NB-IoT.
+
+## RF attenuation
+
+Added UFL connector instead of.
+
+-140 + 66 dBm,
+
+, +17 trace cut
+
+0 dBm trace 2 cut
+
+-70 dBm @ zte antenna
+
+
 
 # Field Tests
 

@@ -1,10 +1,10 @@
 ---
-title: 3GPP Narrowband LTE for IoT in South Africa
+title: 3GPP Narrowband LTE evaluation for IoT in South Africa
 author: Daniel Robinson, Prof MJ Booysen
 date: Stellenbosch University, March 2019
 tags: [LTE, NB-IoT]
 abstract: |
-  2G/GPRS is a sun-setting technology leaving behind a void for LPWANs such as LoRaWAN and SigFox to fill. The viability of NB-IoT being such a technology for South Africa is investigated. Tests aimed to create a generic framework for multiple endpoint manufacturers and base station vendors to compare capabilities. The results proved promising.
+  2G/GPRS is a sun-setting technology leaving behind a void for LPWANs such as LoRaWAN and SigFox to fill. The viability of NB-IoT being such a technology for South Africa is investigated. Multiple endpoint manufacturers and base station vendors are tested to compare capabilities with respect to cost, time, power consumption and signal strength. The results proved promising.
 
 toc: true
 lot: true
@@ -110,6 +110,7 @@ https://www.flickswitch.co.za/nb-iot-rollout-in-south-africa/
 - Research Question
 
 - - Is NB-IoT a viable alternative to GPRS, SigFox and LoRaWAN in South Africa?
+  - How does NB-IoT perform?
 
 - Research/ Problem Statement
 
@@ -170,7 +171,9 @@ Rate Matching
 
 Interleaving
 
+The **PCI** value is created from two components - PSS and SSS. The PSS, Primary Synchronization Signal, has the value 0, 1, or 2. The SSS, Secondary Synchronization Signal, can have a value between 0 and 167.
 
+The suppliers of UE will be referred to as manufacturers and of base-stations (BSS) as vendors.
 
 ## Background to the Research Problem/Question
 
@@ -276,9 +279,34 @@ What do manufacturers say about their devices and base stations? Is there a comp
 
 ## painted picture
 
-In the uplink, there are two physical layer channels. The random access channel connects to the base station and the uplink channel contains the data and control information. In downlink there are four channels. Synchronization is used by the endpoint to estimate symbol timing and carrier frequency and obtain the cell identity and frame boundary. The broadcast channel contains the master information block (MIB). The control channel carries downlink control information and can be repeated 2048 times, as well as the data channel which contains the payload, paging, system information and the random access response. [@Adhikary2016]. 
+### how does NB-IoT work?
 
-In terms of coverage performance, [@Adhikary2016] takes into account the doppler spread which denotes the speed of the endpoint, but does not take into account inter-cell interference. Endpoints typically transmit at 23 dBm in an urban environment, with base stations transmitting at 43 or 46 dBm.
+In the uplink, there are two physical layer channels. The random access channel connects to the base station and the uplink channel contains the data and control information. In downlink there are four channels. Synchronization is used by the endpoint to estimate symbol timing and carrier frequency and obtain the cell identity and frame boundary. The broadcast channel contains the master information block (MIB). The control channel carries downlink control information and can be repeated 2048 times, as well as the data channel which contains the payload, paging, system information and the random access response. [@Adhikary2016].
+
+
+[comment]: # yo
+NB-IoT operation requires a minimum bandwidth of 180 kHz, which is equal to the size of the smallest LTE Physical Resource Block (PRB). Depending on the availability of spec- trum, NB-IoT can be either deployed on its own (“standalone operation”), in the guard carriers of existing LTE/UMTS spectrum (“guardband operation”) or within an existing LTE carrier by replacing one or more PRBs (“inband operation”). In order to support such flexible deployment scenarios, NB- IoT reuses the LTE design extensively, such as the OFDM (Or- thogonal Frequency Division Multiplexing) type of modulation in downlink, SC-FDMA (Single Carrier Frequency Division Multiple Access) in uplink, channel coding, rate matching and interleaving. In addition, a host of new features are added to ensure the demands of IoT based applications. Key design changes from LTE include the synchronization sequences, the random access preamble, the broadcast channel and the control channel. These changes are primarily motivated by the fact that NB-IoT is required to operate on a minimum bandwidth of 180 kHz (1 PRB), whereas many channels in LTE were designed to span multiple PRBs occupying greater bandwidth compared to 180 kHz. These design changes achieve the IoT requirements while ensuring best co-existence performance with the existing LTE system [@Adhikary2016].
+
+
+
+### basestations?
+
+When only a fraction of the existing LTE cell sites support NB-IoT, devices cannot attach to the best cell if that cell does not support NB-IoT. As a result, the path loss can be very high. In addition, they also suffer from high interference from non-NB-IoT cells [@Mangalvedhe2016a].
+
+## evaluations
+
+**List**
+
+* periodic link reporting
+  * energy consumption
+  * delay performance
+* 
+
+
+
+### Adhikary
+
+In terms of coverage performance, Adhikary [@Adhikary2016] takes into account the doppler spread which denotes the speed of the endpoint, but does not take into account inter-cell interference. Endpoints typically transmit at 23 dBm in an urban environment, with base stations transmitting at 43 or 46 dBm.
 
 |   Numerology   |   15 kHz   |   3.75 kHz   |
 | ---- | ---- | ---- |
@@ -290,6 +318,15 @@ In terms of coverage performance, [@Adhikary2016] takes into account the doppler
 |(6) Required SINR (dB) | -11.8 | -5.7|
 |(7) Receiver sensitivity = (5) + (6) (dBm) | -141.0 | -141.0|
 |(8) Max coupling loss = (1) - (7) (dB) | 164.0 | 164.0|
+
+### Bello
+
+Bello [@Bello2018a] evaluates PSM.
+
+periodic link reporting
+
+- energy consumption
+- delay performance
 
 
 
@@ -313,6 +350,16 @@ UL regular reporting traffic characteristics for low-cost MTC
 | -------------------- | -------------------------------------- | -------------------- | ------------------------------------------------------------ |
 | **No mobility**      | 1min (optional)   5min, 30min,   1hour | 1000, optional 10000 | Static,   Pedestrian (optional, no seamless   handover requirement) |
 | **Limited mobility** | 5s (optional)   10s,30s                | 1000                 | Vehicular (no seamless   handover requirement)               |
+
+
+
+**Power class**
+
+Table 6.2.2F-1: UE Power Class from 3GPP TS 36.101 defines the mean power of output power measurement.
+
+| EUTRA band | Class 3 (dBm) | Tolerance (dB) | Class 5 (dBm) | Tolerance (dB) | Class 6 (dBm) | Tolerance (dB) |
+| ---------- | ------------- | -------------- | ------------- | -------------- | ------------- | -------------- |
+| 8          | 23            | ±2             | 20            | ±2             | 14            | ±2.5           |
 
 
 
@@ -557,17 +604,17 @@ iperf
 
 # Research design and methodology
 
-mini intro
+## framework
 
-mini lit review
-
-methodology
-
-results
-
-discussion
-
-conclusion
+* mini intro
+  * 64 tests. 4x4x4. cost, time, power consumption, signal strength. 4 BSS. 4 UE.
+* mini lit review
+  * 
+* methodology
+  * 
+* results
+* discussion
+* conclusion
 
 Making use of what is available in South Africa, there are four manufacturers, and going to use four endpoints.
 
@@ -654,7 +701,78 @@ Table showing Ublox tests
 | Red     | Not possible  |
 | Grey    | Uncertain     |
 
+## UE Monitor
+
+!UICC && !Unknown && !LL1 && !RRC && !IND && !NAS && !REQ && !REPORT && !RLC && !MAC && !CNF && !Serving
+
+## which tests?
+
+There are many questions asked when it comes to the use of a wireless technology. Since there are multiple manufacturers one can expect differences in performance. When choosing a module in scalable projects, one typically looks for a balance between high performance and low cost. In high performance one expects quality, reliability, and long battery life. It must be able to connect seamlessly and from expected range. Besides the cost of the modem one also expects a low external parts count, minimal data overhead and longevity of device lifetime.
+
+This thesis will focus on four main themes, namely cost, time, power consumption and signal strength. 
+
+## why cost?
+
+Cost is important to take into consideration for capital and operating expenses. Upfront costs include the modem, external parts and integration. Operating costs include the data payloads and data overhead which developers may not take into consideration. On the RRC layer, there is signaling between the UE and BSS, but only on the NAS layer is data charged.
+
+## which endpoint manufacturers?
+
+The following list of manufacturers have a number of modules, SoCs and chipsets which support NB-IoT according to [@Evolution2017] and manufacturer websites.
+
+| Manufactuer           | NB-IoT supported devices |
+| --------------------- | ------------------------ |
+| Quectel               | 5                        |
+| Telit                 | 2                        |
+| u-blox                | 6                        |
+| ZTE                   | 1                        |
+| Nordic                | 1                        |
+| Sierra   Wireless     | 2                        |
+| PyCom                 | 2                        |
+| SimComm               | 1                        |
+| SkyWorks              | 6                        |
+| Altair Semiconductors | 1                        |
+| CommSolid             | 1                        |
+| Intel                 | 2                        |
+| MediaTek              | 1                        |
+| Neul                  | 1                        |
+| Qualcomm              | 2                        |
+| Sequans               | 2                        |
+
+The following list of manufacturers have been tested to see if they are supported according to Vodacom, MTN and RF Design:.
+
+| Manufacturers  |
+| -------------- |
+| Quectel        |
+| u-blox         |
+| Nordic         |
+| SimComm        |
+| Telit          |
+| SierraWireless |
+
+Since the goal of the research is to evaluate NB-IoT, a number of devices will be tested and the resulting differences investigated. Due to availability and cost limitations, the following four are chosen.
+
+
+
+| Manufacturers |
+| ------------- |
+| Quectel       |
+| u-blox        |
+| Nordic        |
+| SimComm       |
+
+## why time?
+
+With the UE at a certain range from the BSS, NB-IoT uses increased RACH repetitions to maintain connection. For the majority of use cases a packet makes a round trip within 130 - 250ms, but at the edge of coverage it increases drastically up to 10 seconds. This can be detrimental to battery life, especially when considering how SigFox takes roughly 6 seconds to transmit a message.
+
+## why power consumption?
+
+Power consumption is important to note amongst various manufacturers. 
+
 # Results
+
+## time
+
+### Quectel + ZTE
 
 The following tests were taken on the roof outside the HF RF lab on the 5th floor of the Electrical & Electronic Engineering building. The base station it connected to is on the General Building, and is just over 150m away at the same elevation with a single building blocking line-of-sight. The base station is situated on the bottom left if the picture at an altitude of approximately 138m.
 
@@ -738,7 +856,7 @@ Paging the base station?
 
 Initial ping takes longer than the rest? Should one rebuild the ping test to make it more generic? What does a ping test look like?
 
-
+When R14 is released, does it have backwards compatibility with R13?
 
 There is a a certain range from the base station where the dev kit disconnects from the base station with attenuator and without antenna.
 

@@ -1,9 +1,79 @@
-
+import math
 
 string = "Bytes=4A-07-00-00-C5-E9-3C-F2-61-18-07-04-45-00-07-00-60-18-0C-0C-3D-00-02-41-39-00-07-41-31-0B-F6-56-F5-01-80-78-70-C0-01-3A-D6-06-F0-F0-00-00-00-A4-00-0F-02-01-D0-11-D1-7B-00-07-80-00-10-00-00-16-00-52-56-F5-01-8C-A7-F5-E0-C1-6A-01-05-5E-01-41-6E-01-75"
 
 def uBytes(string):
     return len(string.split('-'))
+
+## T3412
+def extended_periodic_TAU(bin_str):
+    mul = {}
+    mul['000'] = [10, 'minutes']
+    mul['001'] = [1, 'hours']
+    mul['010'] = [10, 'hours']
+    mul['011'] = [2, 'seconds']
+    mul['100'] = [30, 'seconds']
+    mul['101'] = [1, 'minutes']
+    mul['110'] = [320, 'hours']
+    mul['111'] = [0, 'deactivated']
+
+    if bin_str[:3] in mul:
+        t = mul[bin_str[:3]]
+        return str(t[0] * int(bin_str[3:], base=2)) + ' ' + t[1]
+    return 'failed'
+
+## T3324
+def active_time(bin_str):
+    mul = {}
+    mul['000'] = [2, 'seconds']
+    mul['001'] = [1, 'minutes']
+    mul['010'] = [1, 'deci-hours']
+    mul['111'] = [0, 'deactivated']
+
+    if bin_str[:3] in mul:
+        t = mul[bin_str[:3]]
+        return str(t[0] * int(bin_str[3:], base=2)) + ' ' + t[1]
+    return 'failed'
+
+# Paging time window
+def paging_time_window(bin_str):
+    return str((int(bin_str, base=2) + 1) * 2.56)
+
+# Paging time window
+def eDRX_value(bin_str):
+    n = int(bin_str, base=2)
+    if n == 8:
+        return '1966.08'
+    if n == 9:
+        return '2621.44'
+    return str(math.pow(2, n) * 10.24)
+    
+    
+
+def converter(input_str):
+    arr = input_str.split(',')
+    if 'Bytes=' in input_str:
+        return 'Data length: ' + str(uBytes(input_str))
+    if '+CEREG' in input_str:
+        return 'Active T3324: ' + active_time(arr[7].split('"')[1]) \
+         + ', Periodic T3412: ' + extended_periodic_TAU(arr[8].split('"')[1])
+    if '+NPTWEDRXP' in input_str:
+        return 'NW provided eDRX value: ' + eDRX_value(arr[3].split('"')[1]) \
+         + ' seconds, Paging Time Window: ' + paging_time_window(arr[4].split('"')[1]) \
+         + ' seconds'
+    if '+NPTWEDRXS' in input_str:
+        return 'eDRX value: ' + eDRX_value(arr[2].split('"')[1]) \
+         + ' seconds, Paging Time Window: ' + paging_time_window(arr[1].split('"')[1]) \
+         + ' seconds'
+    if '+CPSMS' in input_str:
+        return 'Active T3324: ' + active_time(arr[-1].split('"')[1]) \
+         + ', Periodic T3412: ' + extended_periodic_TAU(arr[-2].split('"')[1])
+    return None
+
+
+##print(active_time("00010000"))
+##print(converter('+CEREG: 5,1,"8CA7","28C465",7,,,"00010000","00101010"'))
+##print(converter('+NPTWEDRXP: 5,"0000","0010","0010","0000'))
 
 
 ## uBytes(string)
@@ -27,19 +97,32 @@ strings = [['Bytes=4A-07-00-00-C5-E9-3C-F2-61-18-07-04-45-00-07-00-60-18-0C-0C-3
             'Bytes=BE-5E-00-00-6A-FD-78-72-61-18-07-04-10-00-07-00-60-18-0C-0C-08-00-03-46-02-00-07-46-01-00',
             ],
             ]
-for t in strings:
-    nsum = 0
-    print('%%')
-    for s in t:
-        n = uBytes(s)
-        print(n)
-        nsum += n
-    print('##')
-    print(nsum)
+##for t in strings:
+##    nsum = 0
+##    print('%%')
+##    for s in t:
+##        n = uBytes(s)
+##        print(n)
+##        nsum += n
+##    print('##')
+##    print(nsum)
 
 
-print('bler1', 250+257)
-print('bler2', 250+233)
-print('diff1', 250+257-439)
-print('diff2', 250+233-439) 
+##print('bler1', 250+257)
+##print('bler2', 250+233)
+##print('diff1', 250+257-439)
+##print('diff2', 250+233-439)
+
+print('265,00:01.716919,LL1_IDLE_CONFIG_REQ:', uBytes('Bytes=56-9E-00-00-27-EB-28-20-61-02-04-00-48-01-04-00-40-02-0B-02-40-01-00-00-00-00-00-00-00-00-D0-54-00-00-00-00-00-00-F9-04-00-00-00-01-08-00-10-00-00-00-01-00-00-00-00-00-00-00-40-01-00-00-10-00-00-00-08-00-00-00-00-0C-0A-01-04-0A-40-02-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-92-FF-01-02-01-00-14-00-00-00-00-00-00-00-20-00-00-00-30-50-18-01-00-00-FF-01-00-00-00-00-92-FF-0A-00-0C-00-00-00-17-00-01-00-00-00-80-0E-00-00-EA-00-00-00-80-02-00-00-01-02-00-00-01-00-00-00-00-02-00-00-08-00-00-00-A8-02-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-20-04'))
+
+print('Input AT strings here:')
+
+try:
+    while True:
+        raw = input('> ')
+        c = converter(raw)
+        if (c):
+            print(c)
+except KeyboardInterrupt as e:
+    print('Exiting')
     

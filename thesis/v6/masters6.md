@@ -1,6 +1,6 @@
 ---
 title: 3GPP Narrowband LTE evaluation for IoT in South Africa
-author: Daniel Robinson, Prof MJ Booysen
+author: Daniel Robinson
 date: Stellenbosch University, March 2019
 tags: [LTE, NB-IoT]
 abstract: |
@@ -18,11 +18,37 @@ linkcolor: blue
 
 **3GPP** Third Generation Partnership Project
 
+**2G, 3G, 4G, 5G** 2nd, 3rd, 4th and 5th Generation
+
 **NB-IoT** Narrow-Band Internet of Things
+
+**SMS** Short Message Service
+
+**Voip** Voice over Internet Protocol
+
+**IMS** IP Multimedia Subsystem
+
+**LPWAN** Low Powered Wide Area Network
 
 # Introduction
 
-===In recent years, 3GPP have developed new LPWANs for the cellular industry on the roadmap towards 5G, namely LTE Cat-M, EC-GSM-IoT and NB-IoT to supersede the sun-setting 2G/GPRS networks. GSM was first deployed in 1991 and offered calls and SMS. In 2000, 2G/GPRS added internet at speeds comparable to dialup. Due to high user demand in bandwidth-hungry applications such as video and file sharing, it evolved into 3G and 4G LTE which is currently in use today. 2G/GPRS has been a cost effective way to keep in touch with other people via calls and SMS especially for the poorer communities in Africa and elsewhere in the world but even it is becoming less favoured due to the proliferation of WhatsApp, Telegram and other instant messaging platforms. That leaves 2G/GPRS to serve as a gateway for smart devices and sensors, but due to its high-powered nature it is not sustainable. In the wake of its absence, although the spectrum it leaves behind can be re-farmed for cellular LPWANs besides LTE networks, it also opens up opportunities for market entrants of the unlicensed frequency spectrum such as LoRaWAN and SigFox. Each LPWAN technology has its own unique flaws and benefits and there is yet to be a clear winner when it comes to connecting 'things' to the internet. In South Africa, there is a push by at least two major cellular service providers to adopt an LPWAN to fill the void left behind by 2G/GPRS now and in the future. NB-IoT is a technology being investigated by one of the major cellular service providers in Africa, and they who are also funding this research, have also provided network coverage for testing to Stellenbosch University. Ideally, the technology can be rolled out to existing base stations as a software upgrade for national coverage, but it is limited by factors such as use case demand, expensive licensing and general uncertainty about the technology. This thesis aims to highlight the challenges, advantages and disadvantages of the technology. By doing endpoint tests with multiple manufacturers and base station vendors, one can paint an accurate picture of the capabilities of the technology. The technology is robust in certain test cases and scenarios, but additional work is required from the 3GPP to enhance the technology.===
+In recent years, 3GPP have developed new LPWANs for the cellular industry on the roadmap towards 5G, namely LTE Cat-M, EC-GSM-IoT and NB-IoT to supersede the sun-setting 2G/GPRS networks. GSM was first deployed in 1991 and offered calls and SMS as circuit switched data. In 2000, 2G/GPRS added internet at speeds comparable to dialup as packet switched data. Circuit switched data is ideal for real-time connections and means that links have bandwidth pre-allocated. This also increases the guarantee of information transferred timeously and the QoS. Packet switched data is connectionless on the other hand, with higher bandwidths possible in shared channels. GSM had been a cost-effective way to keep in touch with people around world, as well as the poorer communities in Africa. Due to the proliferation of WhatsApp, Facebook, Telegram and other social media platforms, there is a shift away from calls and sms. 
+
+![sms_usage](../notebooks/sms_usage.png)
+
+Facebook, penetration
+
+Africa
+
+World Bank
+
+Due to high user demand in bandwidth-hungry applications such as voice, video and file sharing, it evolved into 3G and 4G LTE which is currently in use today in the form of VoIP and IMS. Since the more affordable packet switched networks can handle more bandwidth than circuit switched networks, the transition is sensible.
+
+![ims voip](C:\GIT\masters\thesis\images\ims voip.jpg)
+
+That leaves 2G/GPRS to serve as a gateway for smart devices and sensors in the M2M sphere, but due to its high-powered nature it is not sustainable for applications which require battery longevity of up to 10 years or more. 3GPP developed dedicated LPWAN technologies to serve this purpose. In lieu of its absence, although the spectrum it leaves behind can be re-farmed for cellular LPWANs besides LTE networks, it also opens up opportunities for market entrants of the unlicensed frequency spectrum such as LoRaWAN and SigFox. Each LPWAN technology has its own unique flaws and benefits and there is yet to be a clear winner when it comes to connecting 'things' to the internet. In South Africa, there is a push by at least two major cellular service providers to adopt an LPWAN to fill the void left behind by 2G/GPRS now and in the future. NB-IoT is a technology being investigated by one of the major cellular service providers in Africa, and they who are also funding this research, have also provided network coverage for testing to Stellenbosch University. Ideally, the technology can be rolled out to existing base stations as a software upgrade for national coverage, but it is limited by factors such as use case demand, expensive licensing and general uncertainty about the technology. This thesis aims to highlight the challenges, advantages and disadvantages of the technology. By doing endpoint tests with multiple manufacturers and base station vendors, one can paint an accurate picture of the capabilities of the technology. The technology is robust in certain test cases and scenarios, but additional work is required from the 3GPP to enhance the technology.
+
+According to the World Bank, there is approximately 1 cellular subscription for every person around the world. The number of cellular subscriptions range from 75% of the population in Sub-Saharan Africa to 125% in Europe and Central Asia which indicates that
 
 *Fragmentation in the cellular industry (for manufacturers and service providers alike) when it comes to using certain technologies, standards and protocols causes contention. One of them in contention is NB-IoT, which is an LTE-based wireless technology which takes on the likes of LoRaWAN and SigFox.*
 
@@ -53,8 +79,6 @@ https://www.flickswitch.co.za/nb-iot-rollout-in-south-africa/
   - Which manufacturers in SA provide the technology for basestations and endpoints?
     - ZTE, Huawei, Ericsson, Nokia
     - Quectel, Ublox, Simcom, Sierra Wireless, Pycom, Nordic
-
-
 
 
 
@@ -300,7 +324,19 @@ When only a fraction of the existing LTE cell sites support NB-IoT, devices cann
   * delay performance
 * 
 
+## cellular connections
 
+According to the [World Bank in 2016](https://www.google.com/publicdata/explore?ds=d5bncppjof8f9_&ctype=l&strail=false&bcs=d&nselm=h&met_y=it_cel_sets_p2&scale_y=lin&ind_y=false&rdim=region&idim=region:SSF:MEA:ECS:EAS:LCN:NAC:SAS&ifdim=region&tdim=true&ind=false&icfg&iconSize=0.5), mobile cellular subscriptions around the world started growing in the early 90s until approximately 100 subscriptions per 100 people at that time. Europe & Central Asia leads with 125 and Sub-Saharan Africa follows with 72 subscriptions per 100.
+
+## basestation stats
+
+![basestation stats](https://infographic.statista.com/normal/chartoftheday_17097_voip_worldwide_revenue_n.jpg)
+
+
+
+Huawei, the Chinese telecommunications company, has cornered about a quarter of global revenue from VoIP and IMS equipment, according to estimates from IHS Markit. Ericsson, the Swedish telecommunications company, holds about 21 percent of the VoIP and IMS global revenue, followed by Nokia and ZTE. 
+
+Voice over Internet Protocol (VoIP) allows users to make voice calls using broadband internet connection instead of a standard phone line. Overall the VoIP revenue dropped by 12 percent year over year between 2017 and 2018. The dip is fueled by the sluggish voice over LTE (VoLTE) network advancements and flatlined spending. VoLTE was the main driver of VoIP and IMS growth, so roadblocks for the broadband network stymie VoIP market expansion.
 
 ### Adhikary
 
@@ -794,15 +830,15 @@ What is the effect of high / low SNR on COPS registration?
 
 ## why power consumption?
 
-===Power consumption and profiling is important to note amongst various manufacturers.===
+Power consumption and profiling is important to note amongst various manufacturers.
 
 ## why signal strength?
 
-===Probably one of the most useful tests is a drive by test in a generic town which has one or more base stations. The different decades of signal strength from -50 dBm to -113 dBm can be shaded on a colour-key. Points of disconnection can be analyzed, discussed and suggestions can be made.===
+Probably one of the most useful tests is a drive by test in a generic town which has one or more base stations. The different decades of signal strength from -50 dBm to -113 dBm can be shaded on a colour-key. Points of disconnection can be analyzed, discussed and suggestions can be made.
 
-===There are two kinds, an idle mode test and a constant iperf connection test.===
+There are two kinds, an idle mode test and a constant iperf connection test.
 
-===Lastly, an RF attenuator will be used to see the effect of changing the signal strength in a controlled manner such that the effect on time, packet size and power consumption can be consistently measured, especially considering the base station is in control of the UE.===
+Lastly, an RF attenuator will be used to see the effect of changing the signal strength in a controlled manner such that the effect on time, packet size and power consumption can be consistently measured, especially considering the base station is in control of the UE.
 
 ## measuring T3324, T3412 timers
 
@@ -858,9 +894,9 @@ def cereg(at_str):
 
 # Results
 
-## ==Power Profiling==
+## Power Profiling
 
-### ==Ublox + ZTE==
+### Ublox + ZTE
 
 The following tests measure current for a Ublox SARA N200 connected to a ZTE base station.
 

@@ -39,7 +39,7 @@ def active_time(bin_str):
 def paging_time_window(bin_str):
     return str((int(bin_str, base=2) + 1) * 2.56)
 
-# Paging time window
+# eDRX value
 def eDRX_value(bin_str):
     n = int(bin_str, base=2)
     if n == 8:
@@ -52,6 +52,9 @@ def eDRX_value(bin_str):
 
 def converter(input_str):
     arr = input_str.split(',')
+    if '@1' in input_str:
+        mode = 'csv mode activated'
+        return mode
     if 'Bytes=' in input_str:
         return 'Data length: ' + str(uBytes(input_str))
     if '+CEREG' in input_str:

@@ -5,6 +5,7 @@ import time
 import pytest
 import numpy as np
 import math
+import time
 
 from process import timing_bits as p
 
@@ -36,11 +37,10 @@ def receiveTIM():
     a = []
     b = []
     g = 0
-    while True:
+    now = time.time()
+    while True and (time.time() - now < 600.0):
         d = serTIM.readline().decode('utf-8')
-        if not len(d):
-            c += 1
-        else:
+        if len(d):
             d = d.strip()
             a.append(d)
             b.append(int(d.split(',')[0]))
@@ -140,13 +140,15 @@ def test_eDRX():
     for edrx in range(10):
         for ptw in range(16):
             data = expect('AT+NPTWEDRXS=2,5,"' + str(to_bin(ptw, 4)) + '","' + str(to_bin(edrx, 4)) + '"', '+CSCON: 0', 10)
-            receiveAT(2, expect='+NPTWEDRXP')
+            # receiveAT(2, expect='+NPTWEDRXP')
             expect('AT+NPTWEDRXS?', 'NPTWEDRXS')
+            receiveTIM()
 
 @pytest.mark.edrx_nw
 def test_NWeDRX():
     for ptw, edrx in zip(nw_ptw, nw_edrx):
         data = expect('AT+NPTWEDRXS=2,5,"' + ptw + '","' + edrx + '"', '+CSCON: 0', 10)
+        receiveTIM()
         # receiveAT(2, expect='+NPTWEDRXP')
         # expect('AT+NPTWEDRXS?', 'NPTWEDRXS')
 
@@ -164,15 +166,17 @@ def test_file_eDRX():
 def guess_seq_len(seq):
     # find number of sequences in similar arrays
     # limited to a maximum difference
+    # seq = [18158, 12118, 8360, 20478, 20478, ...]
     maxDiff = 100
     guess = 0
-    max_len = math.ceil(len(seq) / 2)
+    
     for s in range(len(seq)):
-        for x in range(1, max_len - s + 1):
+        for x in range(2, int((len(seq) - s) / 2) + 1):
             a = abs(np.array(seq[s:s+x]) - np.array(seq[s+x:s+2*x]))
             if len(a) and not False in (a < np.array([maxDiff] * len(a))):
-                print(x, s, a, seq[s:s+x], "==", seq[s+x:s+2*x])
+                print(s, x, a, seq[s:s+x], "==", seq[s+x:s+2*x])
                 return x
+
     return guess
 
 def test_findRepetition():

@@ -49,7 +49,7 @@ void servicePulses() {
         triggered = false;
         lastEdgeTime = ms;
     } else if (afterIdle && printOutput) {
-        txTime = lastEdgeTime - firstEdgeTime;
+        txTime = lastEdgeTime - firstEdgeTime ? lastEdgeTime - firstEdgeTime : txTime;
         logMessage = String(idleTime + txTime) + ", " + String(idleTime) + ", " + String(txTime) + ", " + ++counter;
         Serial.println(logMessage);
         printOutput = false;

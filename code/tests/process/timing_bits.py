@@ -1,4 +1,4 @@
-import math
+from process.globals import *
 
 ## T3412
 def extended_periodic_TAU(bin_str):

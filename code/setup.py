@@ -1,0 +1,1 @@
+pip install pyserial numpy pytest pynmea2 jupyter jupyterlab matplotlib

@@ -32,31 +32,29 @@ linkcolor: blue
 
 # Introduction
 
-In recent years, 3GPP have developed new LPWANs for the cellular industry on the roadmap towards 5G, namely LTE Cat-M, EC-GSM-IoT and NB-IoT to supersede the sun-setting 2G/GPRS networks. GSM was first deployed in 1991 and offered calls and SMS as circuit switched data. In 2000, 2G/GPRS added internet at speeds comparable to dialup as packet switched data. Circuit switched data is ideal for real-time connections and means that links have bandwidth pre-allocated. This also increases the guarantee of information transferred timeously and the QoS. Packet switched data is connectionless on the other hand, with higher bandwidths possible in shared channels. GSM had been a cost-effective way to keep in touch with people around world, as well as the poorer communities in Africa. Due to the proliferation of WhatsApp, Facebook, Telegram and other social media platforms, there is a shift away from calls and sms. 
+In recent years, 3GPP have developed new LPWANs for the cellular industry on the roadmap towards 5G, namely LTE Cat-M, EC-GSM-IoT and NB-IoT to supersede the sun-setting 2G/GPRS networks. GSM was first deployed in 1991 and offered calls and SMS as circuit switched data. In 2000, 2G/GPRS added internet at speeds comparable to dialup as packet switched data. Circuit switched data is ideal for real-time connections and means that links have bandwidth pre-allocated. This also increases the QoS guarantee of information transferred timeously. Packet switched data is connectionless on the other hand, with higher bandwidths possible in shared channels. GSM had been a cost-effective way to keep in touch with people around world, as well as the poorer communities in Africa. Due to the proliferation of WhatsApp, Facebook, Telegram and other social media platforms, there is a shift away from calls and sms. 
 
 ![sms_usage](../notebooks/sms_usage.png)
 
-Facebook, penetration
-
+<!---Facebook, penetration
 Africa
-
-World Bank
+World Bank-->
 
 Due to high user demand in bandwidth-hungry applications such as voice, video and file sharing, it evolved into 3G and 4G LTE which is currently in use today in the form of VoIP and IMS. Since the more affordable packet switched networks can handle more bandwidth than circuit switched networks, the transition is sensible.
 
 ![ims voip](C:\GIT\masters\thesis\images\ims voip.jpg)
 
-That leaves 2G/GPRS to serve as a gateway for smart devices and sensors in the M2M sphere, but due to its high-powered nature it is not sustainable for applications which require battery longevity of up to 10 years or more. 3GPP developed dedicated LPWAN technologies to serve this purpose. In lieu of its absence, although the spectrum it leaves behind can be re-farmed for cellular LPWANs besides LTE networks, it also opens up opportunities for market entrants of the unlicensed frequency spectrum such as LoRaWAN and SigFox. Each LPWAN technology has its own unique flaws and benefits and there is yet to be a clear winner when it comes to connecting 'things' to the internet. In South Africa, there is a push by at least two major cellular service providers to adopt an LPWAN to fill the void left behind by 2G/GPRS now and in the future. NB-IoT is a technology being investigated by one of the major cellular service providers in Africa, and they who are also funding this research, have also provided network coverage for testing to Stellenbosch University. Ideally, the technology can be rolled out to existing base stations as a software upgrade for national coverage, but it is limited by factors such as use case demand, expensive licensing and general uncertainty about the technology. This thesis aims to highlight the challenges, advantages and disadvantages of the technology. By doing endpoint tests with multiple manufacturers and base station vendors, one can paint an accurate picture of the capabilities of the technology. The technology is robust in certain test cases and scenarios, but additional work is required from the 3GPP to enhance the technology.
+That left 2G/GPRS to serve as a gateway for smart devices and sensors in the M2M sphere, but due to its high-powered nature it is not sustainable for applications which require battery longevity of up to 10 years or more. 3GPP developed dedicated LPWAN technologies to serve this purpose. In lieu of its absence, although the spectrum it held can be re-farmed for cellular LPWANs, it also opens up opportunities for market entrants of unlicensed frequencies such as LoRaWAN and SigFox. Each LPWAN technology has its own unique flaws and benefits and there is yet to be a clear winner when it comes to connecting 'things' to the internet. In South Africa, there is a push by at least two major cellular service providers to adopt a cellular LPWAN to fill the void left behind by 2G/GPRS now and in the future. NB-IoT is being investigated by MTN South Africa, and since they are also funding this research, have also provided network coverage for testing to Stellenbosch University. Ideally, the technology can be rolled out to existing base stations as a software upgrade for national coverage, but it is limited by factors such as use case demand, expensive licensing and general uncertainty about the technology. This thesis aims to highlight the challenges, advantages and disadvantages of the technology. By doing endpoint tests with multiple manufacturers and base station vendors, one can paint an accurate picture of the capabilities of the technology. The technology is robust in certain test cases and scenarios, but additional work is required from the 3GPP to enhance the technology.
 
-According to the World Bank, there is approximately 1 cellular subscription for every person around the world. The number of cellular subscriptions range from 75% of the population in Sub-Saharan Africa to 125% in Europe and Central Asia which indicates that
+<!---*According to the World Bank, there is approximately 1 cellular subscription for every person around the world. The number of cellular subscriptions range from 75% of the population in Sub-Saharan Africa to 125% in Europe and Central Asia which indicates that certain technologies, standards and protocols causes contention. One of them is NB-IoT, which is an LTE-based wireless technology which takes on the likes of LoRaWAN and SigFox.*-->
 
-*Fragmentation in the cellular industry (for manufacturers and service providers alike) when it comes to using certain technologies, standards and protocols causes contention. One of them in contention is NB-IoT, which is an LTE-based wireless technology which takes on the likes of LoRaWAN and SigFox.*
-
-*Who is my target audience? Researchers, IoT enthusiasts. Myself.*
+<!---Who is my target audience? Researchers, IoT enthusiasts. Myself.*-->
 
 https://www.flickswitch.co.za/nb-iot-rollout-in-south-africa/
 
+> NB-IoT technology is designed such that it can be used in areas beyond the radio coverage of current cellular standards and in devices which must run from battery power for many years. The devices will generally send small amounts of data infrequently; a typical usage scenario might be 100 to 200 bytes sent twice per day for battery powered devices. For mains powered devices the limit is not based on battery size, but cost and network bandwidth/resources.
 
+> The system operation is analogous to SMS in that it is a datagram-oriented, stored-and-forward system, rather than a GPRS-like IP pipe. This is because NB-IoT devices spend most of their time asleep, making possible the required long battery life. The system implements extended DRX cycles for paging, but as this window will be limited to save battery life, the delivery of downlink messages occurs mainly when the system detects that uplink messages have been received from a device (indicating that it is awake). Here a store-and-forward system, an “IoT Platform”, is useful. [@ubloxAppNote2018]
 
 ## framework
 
@@ -394,15 +392,11 @@ https://www.3gpp.org/technologies/keywords-acronyms/96-nas
 
 ![JPEG - 33.6Â kb](http://www.3gpp.org/local/cache-vignettes/L400xH152/eps-control-plane-for-e-utran-2-0586e.jpg)
 
-TR 36.888
-
+<!---TR 36.888
 foil-backed insulation
-
 metalized windows
-
 concrete thick-walled buildings
-
-UL regular reporting traffic characteristics for low-cost MTC
+UL regular reporting traffic characteristics for low-cost MTC-->
 
 | Use cases            | UL interval                            | Packet (bits)        | Mobility                                                     |
 | -------------------- | -------------------------------------- | -------------------- | ------------------------------------------------------------ |

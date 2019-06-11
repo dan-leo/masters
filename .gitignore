@@ -5,3 +5,6 @@ tex2pdf*
 TUINO_ZERO_96
 */testing-framework/
 **/backup/
+*.pyc
+**/.ipynb_checkpoints/
+**/ipch/

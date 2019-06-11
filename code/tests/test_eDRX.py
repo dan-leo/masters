@@ -1,17 +1,6 @@
-import serial
-import colorama
-import sys
-import time
-import pytest
-import numpy as np
-import math
-import time
-
-from process import timing_bits as p
+from process.globals import *
 
 colorama.init()
-serAT = serial.Serial('COM108', 9600, timeout=1)
-serTIM = serial.Serial('COM15', 115200, timeout=1)
 to_bin = lambda x, n: format(x, 'b').zfill(n)
 
 black   =  '\033[1;30m'
@@ -28,68 +17,21 @@ nw_ptw  = ["0000","0000","0000","0000","0000","0000","0000","0000","0000","0000"
 
 print (yellow, 'Welcome to the', green, 'AT command', yellow, 'tester by Daniel Robinson.')
 
-def sendTIM(cmd):
-    print(yellow + cmd)
-    serTIM.write(bytes(cmd + '\r', 'utf-8'))
-
-def receiveTIM():
-    c = 0
-    a = []
-    b = []
-    g = 0
-    now = time.time()
-    while True and (time.time() - now < 600.0):
-        d = serTIM.readline().decode('utf-8')
-        if len(d):
-            d = d.strip()
-            a.append(d)
-            b.append(int(d.split(',')[0]))
-            print(white + d, blue + str(b))
-            g = guess_seq_len(b)
-            if g != 0:
-                print(magenta + str(g))
-                break
-
+@pytest.mark.skip()
 def test_rec():
-    receiveTIM()
-    
-def sendAT(cmd, t=0, expect='OK'):
-    print(yellow + cmd)
-    serAT.write(bytes(cmd + '\r', 'utf-8'))
-    return receiveAT(t, expect)
-
-def receiveAT(t=0, expect='OK'):
-    c = 0
-    data = []
-    while True:
-        d = serAT.readline().decode('utf-8')
-        if not len(d):
-            c += 1
-        d = d.strip()
-        if len(d) > 0:
-            print(cyan + d)
-            out = p.converter(d)
-            if out:
-                print(magenta + out)
-            data.append(d)
-        if t > 0:
-            if c == t:
-                data.append('timeout')
-                return data
-        if expect in d or 'ERROR' in d:
-            return data
+    s.receiveTIM()
 
 def OK(cmd, t=0):
-    assert 'OK' in sendAT(cmd, t)
+    assert 'OK' in s.sendAT(cmd, t)
 
 def expect(cmd, reply, t=1):
-    data = sendAT(cmd, t, reply)
+    data = s.sendAT(cmd, t, reply)
     assert True in [reply in i for i in data]
     return data
     
 @pytest.mark.setup
 def test_connect():
-    assert serAT.is_open == True
+    assert s.serAT.is_open == True
 
 @pytest.mark.setup
 def test_AT():
@@ -113,7 +55,7 @@ def test_CFUN():
     OK('AT+CFUN=0', 3)
     expect('at+cfun?', '+CFUN: 0', 1)
     expect('AT+CFUN=1', '+CEREG: 0', 2)
-    receiveAT()
+    s.receiveAT()
 
 @pytest.mark.setup
 def test_COPS():
@@ -135,49 +77,35 @@ def test_release():
     expect('AT+NSOSTF=0,"1.1.1.1",7,0x200,1,"FF"', '+CSCON: 0', 10)
     OK('at+nsocl=0')
 
+# @pytest.mark.skip()
 @pytest.mark.edrx
 def test_eDRX():
     for edrx in range(10):
         for ptw in range(16):
             data = expect('AT+NPTWEDRXS=2,5,"' + str(to_bin(ptw, 4)) + '","' + str(to_bin(edrx, 4)) + '"', '+CSCON: 0', 10)
-            # receiveAT(2, expect='+NPTWEDRXP')
+            # s.receiveAT(2, expect='+NPTWEDRXP')
             expect('AT+NPTWEDRXS?', 'NPTWEDRXS')
-            receiveTIM()
+            s.receiveTIM()
 
+@pytest.mark.skip()
 @pytest.mark.edrx_nw
 def test_NWeDRX():
     for ptw, edrx in zip(nw_ptw, nw_edrx):
         data = expect('AT+NPTWEDRXS=2,5,"' + ptw + '","' + edrx + '"', '+CSCON: 0', 10)
-        receiveTIM()
-        # receiveAT(2, expect='+NPTWEDRXP')
+        s.receiveTIM()
+        # s.receiveAT(2, expect='+NPTWEDRXP')
         # expect('AT+NPTWEDRXS?', 'NPTWEDRXS')
 
-
+@pytest.mark.skip()
 @pytest.mark.file_edrx
 def test_file_eDRX():
     # fileEDRX = open('eDRX ' + time.strftime("%Y%m%d-%H%M%S") + '.log', "w+")
-    f = open("nw_edrx.log", "r")
-    fx = open('nw_edrx.csv', "w+")
+    f = open("./logs/nw_edrx.log", "r")
+    fx = open('./logs/nw_edrx.csv', "w+")
     lines = f.readlines()
     for l in lines:
         print(p.csv(l))
         fx.write(p.csv(l) + '\n')
-
-def guess_seq_len(seq):
-    # find number of sequences in similar arrays
-    # limited to a maximum difference
-    # seq = [18158, 12118, 8360, 20478, 20478, ...]
-    maxDiff = 100
-    guess = 0
-    
-    for s in range(len(seq)):
-        for x in range(2, int((len(seq) - s) / 2) + 1):
-            a = abs(np.array(seq[s:s+x]) - np.array(seq[s+x:s+2*x]))
-            if len(a) and not False in (a < np.array([maxDiff] * len(a))):
-                print(s, x, a, seq[s:s+x], "==", seq[s+x:s+2*x])
-                return x
-
-    return guess
 
 def test_findRepetition():
     f = open("logs/pulses0x1331NWeDRX81.92PTW5.21.log", "r")
@@ -185,13 +113,14 @@ def test_findRepetition():
     a = []
     for l in lines:
         a.append(int(l.split(',')[0]))
-    print(guess_seq_len(a))
+    print(find.guess_seq_len(a))
 
 def test_close():
-    serAT.close()
-    serTIM.close()
-    assert serAT.is_open == False
-    assert serTIM.is_open == False
+    s.serAT.close()
+    s.serTIM.close()
+    assert s.serAT.is_open == False
+    assert s.serTIM.is_open == False
+    assert s.serGPS.is_open == False
 
 if __name__ == '__main__':
     test_close()

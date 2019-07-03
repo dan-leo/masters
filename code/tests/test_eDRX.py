@@ -15,9 +15,48 @@ def setup_module(module):
 def teardown_module(module):
     serialClose()
 
-@pytest.mark.skip()
-def test_rec():
-    receiveTIM()
+def test_serial():
+    import serial.tools.list_ports
+    ports = serial.tools.list_ports.comports()
+    for port, desc, hwid in sorted(ports):
+        print("{}: {} [{}]".format(port, desc, hwid))
+        print(hwid.split('=')[1].split()[0])
+
+def dictToCSV(dictionary):
+    csv = ""
+    for key in dictionary:
+        csv += str(dictionary[key]) + ','
+    # print(red + csv)
+    return csv
+
+def test_capture():
+    print('CAPTURE START')
+    try:
+        while True:
+            data = receiveTIM()
+            if data:
+                # print(data)
+                print(red + dictToCSV(data) + yellow + nuestats())
+                
+    except KeyboardInterrupt:
+        pass
+    finally:
+        print('CAPTURE END')
+
+def nuestats():
+    data = expect('at+nuestats="ALL"', 'OK', output=False)[:-1]
+    # print(blue + data)
+    dr = {}
+    for i in data:
+        j = i.split(',')
+        if j[0] == 'NUESTATS: "APPSMEM"':
+            dr[j[1].split(':')[0]] = j[1].split(':')[1]
+        elif 'NUESTATS' in j[0]:
+            dr[j[1]] = j[2]
+    return dictToCSV(dr)
+
+def test_nuestats():
+    print(yellow + nuestats())
 
 # @pytest.mark.skip()
 # @pytest.mark.edrx
@@ -84,27 +123,9 @@ def test_ptauConfigs():
             if 'ERROR' in data[0]:
                 expect('at+cpsms?', '')
 
-def nuestats():
-    data = expect('at+nuestats="ALL"', 'OK')[:-1]
-    # print(data)
-    dr = {}
-    for i in data:
-        j = i.split(',')
-        if j[0] != 'NUESTATS: "APPSMEM"':
-            dr[j[1]] = j[2]
-    #     else:
-    #         dr[j[0]] = j[1]
-    
-    for key in dr:
-        print(dr[key], end=",")
-
-def test_nuestats():
-    nuestats()
-    
-
 def test_edrxQuery():
-    expect('AT+NPTWEDRXS?', 'NPTWEDRXS')
-    expect('at+cpsms?', 'CPSMS')
+    expect('AT+NPTWEDRXS?', 'NPTWEDRXS', output=False)
+    expect('at+cpsms?', 'CPSMS', output=False)
 
 # @pytest.mark.skip()
 # @pytest.mark.edrx_nw

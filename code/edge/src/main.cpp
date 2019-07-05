@@ -1,6 +1,8 @@
 #include "header.h"
 #include <math.h>
 
+boolean run = true;
+
 void setup() {
     Serial.begin(115200);
     // pinMode(7, OUTPUT);
@@ -12,11 +14,15 @@ void loop() {
     // // delay(random(1000));
     // // digitalWrite(7, false);
     // // delay(random(1000));
-    // if (Serial.available()) {
-    //     char c = Serial.read();
-    //     if (c == 'r') energySetup();
-    // }
-    energyLoop();
+    if (Serial.available()) {
+        char c = Serial.read();
+        if (c == 'r') energySetup();
+        if (c == 'e') run = false;
+        if (c == 's') run = true;
+    }
+    if (run) {
+        energyLoop();
+    }
 }
 
 // void loop() {

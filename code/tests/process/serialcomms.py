@@ -47,7 +47,7 @@ def serialClose():
 
 
 def sendTIM(cmd):
-    print(yellow + cmd)
+    # print(yellow + cmd)
     serTIM.write(bytes(cmd + '\r', 'utf-8'))
 
 def primeTIM():

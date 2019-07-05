@@ -26,7 +26,7 @@ void energyLoop() {
         zeroCounter = 0;
         sum += reading;
     }
-    else if (zeroCounter < 10000) {
+    else if (zeroCounter < 5000) {
         // if (!zeroCounter) tEnd = millis();
         zeroCounter++;
     }

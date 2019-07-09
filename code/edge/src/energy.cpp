@@ -16,7 +16,7 @@ void energySetup() {
 
 void energyLoop() {
     uint8_t reading = analogRead(A0);
-    if (reading > 10) {
+    if (reading > 20) {
         if (reading > maxReading) maxReading = reading;
         if (!readCount++) {
             tStart = millis();
@@ -26,7 +26,7 @@ void energyLoop() {
         zeroCounter = 0;
         sum += reading;
     }
-    else if (zeroCounter < 5000) {
+    else if (zeroCounter < 10000) {
         // if (!zeroCounter) tEnd = millis();
         zeroCounter++;
     }

@@ -163,7 +163,7 @@ Cellular operators are in control of some things, and users of others.
 
 When it comes to base stations, the user does not have control over the inactivity timer
 
-|            |                                                              |
+| Mode       | NW Configuration                                             |
 | ---------- | ------------------------------------------------------------ |
 | **Mode 1** | Inactivity timer = 20s (network default)<br />T3324 = 0s (disabled)<br />C-DRX = 2.048s (network default) |
 | **Mode 2** | Inactivity timer = Immediate Release<br />T3324 = 8s<br />I-DRX = 2.56s<br />eDRX/PTW = Disabled |
@@ -188,6 +188,8 @@ Ublox has an NB-IoT Application Development Guide [@ubloxAppNote2018] which deta
 It would be a good idea to use Martinez' work and complement it.
 
 
+
+at+natspeed=115200,30,1
 
 
 

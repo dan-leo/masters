@@ -7,8 +7,6 @@ def read(filename):
     while 1:
         for msg in reader.next():
             print(msg)
-
-
 def read():
     reader = pynmea2.NMEAStreamReader()
     com = s.serGPS

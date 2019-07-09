@@ -11,6 +11,13 @@ def teardown_module(module):
 # def test_connect():
 #     assert serAT.is_open == True
 
+def test_serial():
+    import serial.tools.list_ports
+    ports = serial.tools.list_ports.comports()
+    for port, desc, hwid in sorted(ports):
+        print("{}: {} [{}]".format(port, desc, hwid))
+        print(hwid.split('=')[1].split()[0])
+
 @pytest.mark.setup
 def test_AT():
     OK('AT')
@@ -27,6 +34,7 @@ def test_URC():
     OK('AT+CSCON=1')
     OK('AT+CEREG=5')
     OK('AT+NPSMR=1')
+    # todo: at+natspeed=115200,30,1
 
 @pytest.mark.setup
 def test_CFUN():

@@ -32,7 +32,7 @@ def serialOpen():
             AT_PORT = port
             ATcount += 1
     try:
-        serAT = serial.Serial(AT_PORT, 9600, timeout=1)
+        serAT = serial.Serial(AT_PORT, 115200, timeout=1)
         serTIM = serial.Serial(uC_PORT, 115200, timeout=1)
         serGPS = serial.Serial(GPS_PORT, 9600, timeout=1)
     except serial.serialutil.SerialException as e:
@@ -103,7 +103,7 @@ def receiveAT(t=0, expect='OK', output=True):
             if c == t:
                 data.append('timeout')
                 return data
-        if expect in d or 'ERROR' in d or 'FAILED' in d:
+        if (expect in d) or ('ERROR' in d) or ('FAILED' in d):
             return data
 
 def OK(cmd, t=0):

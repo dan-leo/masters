@@ -17,7 +17,7 @@ def test_release_close():
     expect('at+nsocl=0', '')
     receiveAT(1)
 
-def test_release_release1():
+def test_release_release1_():
     expect('at+nsocl=0', '')
     receiveAT(1)
     for i in range(12):

@@ -1,12 +1,4 @@
-from __future__ import print_function
-from process.globals import *
-
-def setup_module(module):
-    print()
-    serialOpen()
- 
-def teardown_module(module):
-    serialClose()
+from test_ import *
 
 @pytest.mark.skip()
 def test_copsset():

@@ -1,16 +1,4 @@
-from __future__ import print_function
-from process.globals import *
-
-colorama.init()
-
-# print (yellow, 'Welcome to the', green, 'AT command', yellow, 'tester by Daniel Robinson.')
-
-def setup_module(module):
-    print()
-    serialOpen()
- 
-def teardown_module(module):
-    serialClose()
+from test_ import *
 
 def test_capture():
     capture(1000)

@@ -10,7 +10,6 @@ magenta =  '\033[1;35m'
 cyan    =  '\033[1;36m'
 white   =  '\033[1;37m'
 
-# TODO: autodetect comm port
 AT_PORT = 'COM106'
 uC_PORT = 'COM121'
 GPS_PORT = 'COM83'
@@ -20,17 +19,23 @@ serTIM = serial.Serial()
 serGPS = serial.Serial()
 
 def serialOpen():
-    global serAT, serTIM, serGPS
+    global serAT, serTIM, serGPS, AT_PORT, uC_PORT
     ATcount = 0
     ports = serial.tools.list_ports.comports()
     for port, desc, hwid in sorted(ports):
         # print("{}: {} [{}]".format(port, desc, hwid))
         vid_pid = hwid.split('=')[1].split()[0]
+        # print(vid_pid)
         if vid_pid == '2341:8036':
             uC_PORT = port
         if vid_pid == '0403:6010' and not ATcount:
             AT_PORT = port
             ATcount += 1
+            pytest.vendor = 'ublox'
+        if vid_pid == '04E2:1414' and ATcount < 3:
+            AT_PORT = port
+            ATcount += 1
+            pytest.vendor = 'quectel'
     try:
         serAT = serial.Serial(AT_PORT, 115200, timeout=1)
         serTIM = serial.Serial(uC_PORT, 115200, timeout=1)
@@ -48,14 +53,16 @@ def serialClose():
 
 def sendTIM(cmd):
     # print(yellow + cmd)
-    serTIM.write(bytes(cmd + '\r', 'utf-8'))
+    pass
+    # serTIM.write(bytes(cmd + '\r', 'utf-8'))
 
 def primeTIM():
     serTIM.write('r'.encode())
 
 def receiveTIM():
     data = {}
-    d = serTIM.readline().decode('utf-8')
+    # d = serTIM.readline().decode('utf-8')
+    d = '2300,260,2560,10.0,100,'
     if len(d):
         d = d.strip()
         data['idleTime'] = int(d.split(',')[0])
@@ -78,15 +85,18 @@ def receiveTIM():
             #     print(magenta + str(g))
             #     break
     
-def sendAT(cmd, t=0, expect='OK', output=True):
+def sendAT(cmd, t=0, expect=['OK'], output=True):
     if output:
         print(yellow + cmd)
     serAT.write(bytes(cmd + '\r', 'utf-8'))
     return receiveAT(t, expect, output)
 
-def receiveAT(t=0, expect='OK', output=True):
+def receiveAT(t=0, expect=['OK'], output=True):
     c = 0
     data = []
+    exp = expect[:]
+    exp.append('ERROR')
+    exp.append('FAILED')
     while True:
         d = serAT.readline().decode('utf-8')
         if not len(d):
@@ -103,14 +113,27 @@ def receiveAT(t=0, expect='OK', output=True):
             if c == t:
                 data.append('timeout')
                 return data
-        if (expect in d) or ('ERROR' in d) or ('FAILED' in d):
-            return data
+        for e in exp:
+            if e in d:
+                return data
 
 def OK(cmd, t=0):
     assert 'OK' in sendAT(cmd, t)
 
 def expect(cmd, reply, t=1, output=True):
-    data = sendAT(cmd, t, reply, output)
-    if len(reply):
-        assert True in [reply in i for i in data]
+    replies = reply
+    if str(type(reply)) == "<class 'str'>":
+        replies = [reply]
+    data = sendAT(cmd, t, replies, output)
+    if not len(replies[0]):
+        return data
+    check = False
+    for r in replies:
+        if len(r):
+            if True in [r in i for i in data]:
+                check = True
+                break
+    if not check:
+        print(magenta + str(replies))
+    assert check
     return data

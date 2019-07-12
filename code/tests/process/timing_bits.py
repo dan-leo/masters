@@ -37,11 +37,26 @@ def paging_time_window(bin_str):
 # eDRX value
 def eDRX_value(bin_str):
     n = int(bin_str, base=2)
-    if n == 8:
-        return '1966.08'
-    if n == 9:
-        return '2621.44'
-    return str(math.pow(2, n) * 10.24)
+    if pytest.vendor == 'ublox':
+        if n == 8:
+            return '1966.08'
+        if n == 9:
+            return '2621.44'
+        return str(math.pow(2, n) * 10.24)
+    elif pytest.vendor == 'quectel':
+        if n == 10:
+            return '327.68'
+        if n == 11:
+            return '655.36'
+        if n == 12:
+            return '1310.72'
+        if n == 13:
+            return '2621.44'
+        if n == 14:
+            return '5242.88'
+        if n == 14:
+            return '10485.76'
+        return str((n - 1) * 20.48)
     
 
 def converter(input_str):
@@ -61,8 +76,13 @@ def converter(input_str):
         + ' seconds, Paging Time Window: ' + paging_time_window(arr[1].split('"')[1]) \
         + ' seconds'
     if '+CPSMS' in input_str:
-        return 'Active T3324: ' + active_time(arr[-1].split('"')[1]) \
-        + ', Periodic T3412: ' + extended_periodic_TAU(arr[-2].split('"')[1])
+        if pytest.vendor == 'ublox':
+            return 'Active T3324: ' + active_time(arr[-1].split('"')[1]) \
+            + ', Periodic T3412: ' + extended_periodic_TAU(arr[-2].split('"')[1])
+        elif pytest.vendor == 'quectel':
+            print(arr[-1])
+            return 'Active T3324: ' + active_time(arr[-1]) \
+            + ', Periodic T3412: ' + extended_periodic_TAU(arr[-2])
 
     return None
 

@@ -9,7 +9,7 @@
             "forcedInclude": [
                 "C:\\\\Users\\\\d7rob\\\\AppData\\\\Local\\\\Arduino15\\\\packages\\\\arduino\\\\hardware\\\\avr\\\\1.6.23\\\\cores\\\\arduino\\\\Arduino.h"
             ],
-            "intelliSenseMode": "msvc-x64",
+            "intelliSenseMode": "gcc-x64",
             "compilerPath": "C:\\MinGW\\bin\\gcc.exe",
             "cStandard": "c11",
             "cppStandard": "c++17"

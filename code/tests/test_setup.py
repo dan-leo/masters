@@ -1,11 +1,4 @@
-from __future__ import print_function
-from process.globals import *
-
-def setup_module(module):
-    serialOpen()
- 
-def teardown_module(module):
-    serialClose()
+from test_ import *
 
 # @pytest.mark.setup
 # def test_connect():
@@ -20,6 +13,7 @@ def test_serial():
 
 @pytest.mark.setup
 def test_AT():
+    print(pytest.vendor)
     OK('AT')
 
 @pytest.mark.setup
@@ -31,29 +25,35 @@ def test_NCONFIG():
 @pytest.mark.setup
 def test_URC():
     OK('AT+CMEE=1')
-    OK('AT+CSCON=1')
-    OK('AT+CEREG=5')
     OK('AT+NPSMR=1')
+    OK('AT+CSCON=1')
+    if vendor == 'ublox':
+        OK('AT+CEREG=5')
+    elif vendor == 'quectel':
+        OK('AT+CEREG=3')
     # todo: at+natspeed=115200,30,1
 
 @pytest.mark.setup
 def test_CFUN():
     OK('AT+CFUN=0', 3)
-    expect('at+cfun?', '+CFUN: 0', 1)
-    expect('AT+CFUN=1', '+CEREG: 0', 2)
-    receiveAT()
+    receiveAT(1)
+    expect('at+cfun?', '+CFUN:', 1)
+    receiveAT(1)
+    expect('AT+CFUN=1', '+CEREG:', 2)
+    receiveAT(1)
 
 @pytest.mark.setup
 def test_COPS():
-    expect('AT+COPS=0', '+CEREG: 1', 10)
+    receiveAT(3)
+    expect('AT+COPS=0', ['+CEREG: 1', '+CEREG:1'], 10)
 
 @pytest.mark.setup
 def test_CEREG():
-    expect('AT+CEREG?', '+CEREG: 5,1')
+    expect('AT+CEREG?', ['+CEREG: 5,1', '+CEREG:3,1'])
 
 @pytest.mark.setup
 def test_ping():
-    expect('at+nping="8.8.8.8"', '+NPING: "8.8.8.8"', 10)
+    expect('at+nping="8.8.8.8"', ['+NPING: "8.8.8.8"', '+NPING:8.8.8.8'], 10)
 
 @pytest.mark.release
 def test_release():

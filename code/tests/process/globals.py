@@ -9,11 +9,6 @@ import pynmea2
 import serial
 import time
 
-# from process import timing_bits as p
-# from process import find as find
-# from process import serialcomms as s
-# from process import gps as g
-
 from process.timing_bits import *
 from process.find import *
 from process.serialcomms import *

@@ -1,12 +1,4 @@
-from __future__ import print_function
-from process.globals import *
-
-def setup_module(module):
-    print()
-    serialOpen()
- 
-def teardown_module(module):
-    serialClose()
+from test_ import *
 
 @pytest.mark.skip()
 def test_releaseset():
@@ -17,14 +9,38 @@ def test_release_close():
     expect('at+nsocl=0', '')
     receiveAT(1)
 
-def test_release_release1_():
-    expect('at+nsocl=0', '')
-    receiveAT(1)
-    for i in range(12):
+def test_release_release0():
+    if pytest.vendor == 'ublox':
+        expect('at+nsocl=0', '')
+        receiveAT(1)
         OK('AT+NSOCR="DGRAM",17,14000,1')
         expect('AT+NSOSTF=0,"1.1.1.1",7,0x200,1,"FF"', '+CSCON: 0', 10)
         OK('at+nsocl=0')
-        capture(1)
+    elif pytest.vendor == 'quectel':
+        expect('at+nsocl=1', '')
+        receiveAT(1)
+        OK('AT+NSOCR=DGRAM,17,14000,1')
+        expect('AT+NSOSTF=1,1.1.1.1,7,0x200,1,FF', '+CSCON:0', 10)
+        OK('at+nsocl=1')
+    capture(1)
+
+def test_release_release1_():
+    if pytest.vendor == 'ublox':
+        expect('at+nsocl=0', '')
+        receiveAT(1)
+        OK('AT+NSOCR="DGRAM",17,14000,1')
+        for i in range(12):
+            expect('AT+NSOSTF=0,"1.1.1.1",7,0x200,1,"FF"', '+CSCON: 0', 10)
+            capture(1, dir + )
+        OK('at+nsocl=0')
+    elif pytest.vendor == 'quectel':
+        expect('at+nsocl=1', '')
+        receiveAT(1)
+        OK('AT+NSOCR=DGRAM,17,14000,1')
+        for i in range(12):
+            expect('AT+NSOSTF=1,1.1.1.1,7,0x200,1,FF', '+CSCON:0', 10)
+            capture(1)
+        OK('at+nsocl=1')
 
 
 def test_release_release16():

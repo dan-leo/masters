@@ -189,7 +189,15 @@ It would be a good idea to use Martinez' work and complement it.
 
 
 
-at+natspeed=115200,30,1
+>  at+natspeed=115200,30,1
+
+> disables LPM. cannot do RSSI triangulation
+
+https://www.etsi.org/deliver/etsi_TS/125100_125199/125133/13.00.00_60/ts_125133v130000p.pdf
+
+> In idle mode, UE shall support DRX cycles lengths 0.64, 1.28, 2.56 and 5.12 s, according to [16] and UE shall, if it
+> supports eDRX_IDLE, support eDRX_IDLE cycle lengths 10.24, 20.48, 40.96, 81.92, 163.84, 327.68, 55.36,1310.72,
+> 1966.08 and 2621.44 seconds, according to TS 24.008 [32]. 
 
 
 

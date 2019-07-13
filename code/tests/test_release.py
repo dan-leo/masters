@@ -1,5 +1,7 @@
 from test_ import *
 
+place = 'medialab/'
+
 @pytest.mark.skip()
 def test_releaseset():
     # setEDRX(0, 0, 2, 1, 6, 1) # 2.56 continuous
@@ -31,7 +33,7 @@ def test_release_release1_():
         OK('AT+NSOCR="DGRAM",17,14000,1')
         for i in range(12):
             expect('AT+NSOSTF=0,"1.1.1.1",7,0x200,1,"FF"', '+CSCON: 0', 10)
-            capture(1, dir + )
+            capture(1, place + pytest.vendor + '/release1')
         OK('at+nsocl=0')
     elif pytest.vendor == 'quectel':
         expect('at+nsocl=1', '')

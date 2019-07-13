@@ -36,6 +36,9 @@ def serialOpen():
             AT_PORT = port
             ATcount += 1
             pytest.vendor = 'quectel'
+        if vid_pid == '0403:6001':
+            AT_PORT = port
+            pytest.vendor = 'simcom'
     try:
         serAT = serial.Serial(AT_PORT, 115200, timeout=1)
         serTIM = serial.Serial(uC_PORT, 115200, timeout=1)

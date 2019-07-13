@@ -22,7 +22,7 @@ def active_time(bin_str):
     mul = {}
     mul['000'] = [2, 'seconds']
     mul['001'] = [1, 'minutes']
-    mul['010'] = [1, 'deci-hours']
+    mul['010'] = [6, 'minutes']
     mul['111'] = [0, 'deactivated']
 
     if bin_str[:3] in mul:
@@ -36,27 +36,15 @@ def paging_time_window(bin_str):
 
 # eDRX value
 def eDRX_value(bin_str):
-    n = int(bin_str, base=2)
-    if pytest.vendor == 'ublox':
-        if n == 8:
-            return '1966.08'
-        if n == 9:
-            return '2621.44'
-        return str(math.pow(2, n) * 10.24)
-    elif pytest.vendor == 'quectel':
-        if n == 10:
-            return '327.68'
-        if n == 11:
-            return '655.36'
-        if n == 12:
-            return '1310.72'
-        if n == 13:
-            return '2621.44'
-        if n == 14:
-            return '5242.88'
-        if n == 14:
-            return '10485.76'
+    n = int(bin_str, base=2)]
+    if n == 0:
+        return '5.12'
+    if n == 1:
+        return '10.24'
+    if n < 9:
         return str((n - 1) * 20.48)
+    if n < 16:
+        return str(math.pow(2, n - 4) * 10.24)
     
 
 def converter(input_str):

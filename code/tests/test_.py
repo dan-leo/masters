@@ -1,7 +1,5 @@
 from __future__ import print_function
-from process.globals import *
-
-import pytest
+from process.globals import *   
 
 def pytest_configure():
     pytest.vendor = 'pytest'

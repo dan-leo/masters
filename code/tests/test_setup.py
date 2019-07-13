@@ -18,19 +18,29 @@ def test_AT():
 
 @pytest.mark.setup
 def test_NCONFIG():
-    OK('AT+NCONFIG="AUTOCONNECT","FALSE"')
-    OK('AT+NCONFIG="CR_0859_SI_AVOID","TRUE"')
-    OK('AT+NCONFIG="CR_0354_0338_SCRAMBLING","TRUE"')
+    if pytest.vendor in ['ublox', 'quectel']:
+        OK('AT+NCONFIG="AUTOCONNECT","FALSE"')
+        OK('AT+NCONFIG="CR_0859_SI_AVOID","TRUE"')
+        OK('AT+NCONFIG="CR_0354_0338_SCRAMBLING","TRUE"')
 
 @pytest.mark.setup
 def test_URC():
-    OK('AT+CMEE=1')
-    OK('AT+NPSMR=1')
-    OK('AT+CSCON=1')
-    if vendor == 'ublox':
+    if pytest.vendor in ['ublox', 'quectel']:
+        OK('AT+CMEE=1')
+        OK('AT+NPSMR=1')
+        OK('AT+CSCON=1')
+    if pytest.vendor in ['ublox', 'simcom']:
         OK('AT+CEREG=5')
-    elif vendor == 'quectel':
+    if pytest.vendor == 'quectel':
         OK('AT+CEREG=3')
+    if pytest.vendor == 'simcom':
+        OK('AT+CGEREP=1')
+        OK('AT+CGREG=2')
+        OK('AT+CREG=2')
+        OK('AT+CTZR=1')
+        OK('AT+CCIOTOPT=1')
+        OK('AT+CLTS=1')
+        OK('AT+CSMINS=1')
     # todo: at+natspeed=115200,30,1
 
 @pytest.mark.setup
@@ -44,7 +54,11 @@ def test_CFUN():
 
 @pytest.mark.setup
 def test_COPS():
-    receiveAT(3)
+    if pytest.vendor == 'quectel':
+        receiveAT(3)
+    if pytest.vendor == 'simcom':
+        expect('AT+COPS=0', '+CEREG: 1', 10)
+        return
     expect('AT+COPS=0', ['+CEREG: 1', '+CEREG:1'], 10)
 
 @pytest.mark.setup

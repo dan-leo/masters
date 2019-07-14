@@ -95,6 +95,8 @@ def sendAT(cmd, t=0, expect=['OK'], output=True):
     return receiveAT(t, expect, output)
 
 def receiveAT(t=0, expect=['OK'], output=True):
+    if str(type(expect)) == "<class 'str'>":
+        expect = [expect]
     c = 0
     data = []
     exp = expect[:]

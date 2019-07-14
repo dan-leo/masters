@@ -2,9 +2,12 @@ from test_ import *
 
 place = 'medialab/'
 
-@pytest.mark.skip()
+# @pytest.mark.skip()
 def test_releaseset():
     # setEDRX(0, 0, 2, 1, 6, 1) # 2.56 continuous
+    if pytest.vendor == 'simcom':
+        setEDRX(0, 9, 0, 16, 2, 15) # off
+        return
     setEDRX(0, 9, 0, 0, 0, 0) # off
 
 def test_release_close():
@@ -19,6 +22,12 @@ def test_release_release0():
         expect('AT+NSOSTF=0,"1.1.1.1",7,0x200,1,"FF"', '+CSCON: 0', 10)
         OK('at+nsocl=0')
     elif pytest.vendor == 'quectel':
+        expect('at+nsocl=1', '')
+        receiveAT(1)
+        OK('AT+NSOCR=DGRAM,17,14000,1')
+        expect('AT+NSOSTF=1,1.1.1.1,7,0x200,1,FF', '+CSCON:0', 10)
+        OK('at+nsocl=1')
+    elif pytest.vendor == 'simcom':
         expect('at+nsocl=1', '')
         receiveAT(1)
         OK('AT+NSOCR=DGRAM,17,14000,1')

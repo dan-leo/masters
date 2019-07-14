@@ -35,8 +35,18 @@ def paging_time_window(bin_str):
     return str((int(bin_str, base=2) + 1) * 2.56)
 
 # eDRX value
-def eDRX_value(bin_str):
-    n = int(bin_str, base=2)]
+# http://www.microchip.ua/simcom/LTE/SIM7020/AppNotes/SIM7020%20Series_Low%20Power%20Mode_Application%20Note_V1.03.pdf
+# https://www.etsi.org/deliver/etsi_TS/125100_125199/125133/13.00.00_60/ts_125133v130000p.pdf
+def eDRX_value(bin_str, mode='wb-s1'):
+    n = int(bin_str, base=2)
+    if mode == 'nb-s1':
+        if n < 2:
+            return 'unchanged'
+        if n in [4, 6, 7, 8]:
+            return '20.48'
+    if mode == 'wb-s1':
+        if n in [14, 15]:
+            return '2621,44'
     if n == 0:
         return '5.12'
     if n == 1:
@@ -44,31 +54,31 @@ def eDRX_value(bin_str):
     if n < 9:
         return str((n - 1) * 20.48)
     if n < 16:
-        return str(math.pow(2, n - 4) * 10.24)
+        return str(math.pow(2, n - 5) * 10.24)
     
 
 def converter(input_str):
     arr = input_str.split(',')
+    # print(arr)
     if 'Bytes=' in input_str:
         return 'Data length: ' + str(uBytes(input_str))
     if '+CEREG: 1' in input_str:
-        tau = arr[7].split('"')
-        return 'Active T3324: ' + active_time(arr[6].split('"')[1]) \
+        tau = arr[-1].split('"')
+        return 'Active T3324: ' + active_time(arr[-2].split('"')[1]) \
         + ', Periodic T3412: ' + extended_periodic_TAU(tau[1] if len(tau) > 1 else '999')
     if '+NPTWEDRXP' in input_str:
         return 'NW provided eDRX value: ' + eDRX_value(arr[3].split('"')[1]) \
         + ' seconds, Paging Time Window: ' + paging_time_window(arr[4].split('"')[1]) \
         + ' seconds'
     if '+NPTWEDRXS' in input_str:
-        return 'eDRX value: ' + eDRX_value(arr[2].split('"')[1]) \
-        + ' seconds, Paging Time Window: ' + paging_time_window(arr[1].split('"')[1]) \
+        return 'eDRX value: ' + eDRX_value(arr[-1].split('"')[1]) \
+        + ' seconds, Paging Time Window: ' + paging_time_window(arr[-2].split('"')[1]) \
         + ' seconds'
     if '+CPSMS' in input_str:
         if pytest.vendor == 'ublox':
             return 'Active T3324: ' + active_time(arr[-1].split('"')[1]) \
             + ', Periodic T3412: ' + extended_periodic_TAU(arr[-2].split('"')[1])
         elif pytest.vendor == 'quectel':
-            print(arr[-1])
             return 'Active T3324: ' + active_time(arr[-1]) \
             + ', Periodic T3412: ' + extended_periodic_TAU(arr[-2])
 

@@ -102,10 +102,18 @@ def edrxQuery():
     expect('at+cpsms?', 'CPSMS', output=True)
 
 def setEDRX(ptw = 0, edrx = 9, active = 0, activeMul = 5, ptau = 3, ptauMul = 10, output=True):
-    data = expect('AT+NPTWEDRXS=2,5,"' + str(to_bin(ptw, 4)) + '","' + str(to_bin(edrx, 4)) + '"', reply='', t=3, output=output) # +CSCON: 0
-    receiveAT(t=1, output=output)
-    data = expect('at+cpsms=1,,,"' + str(to_bin(ptau, 3)) + str(to_bin(ptauMul, 5)) + '","' + str(to_bin(active, 3)) + str(to_bin(activeMul, 5)) + '"', reply='', t=3, output=output) # +NPSMR:
-    receiveAT(t=1, output=output)
-    # receiveAT(2, expect='+NPTWEDRXP')
-    edrxQuery()
-#     receiveTIM()
+    if pytest.vendor == 'ublox':
+        data = expect('AT+NPTWEDRXS=2,5,"' + str(to_bin(ptw, 4)) + '","' + str(to_bin(edrx, 4)) + '"', reply='', t=3, output=output) # +CSCON: 0
+        receiveAT(t=1, output=output)
+        data = expect('at+cpsms=1,,,"' + str(to_bin(ptau, 3)) + str(to_bin(ptauMul, 5)) + '","' + str(to_bin(active, 3)) + str(to_bin(activeMul, 5)) + '"', reply='', t=3, output=output) # +NPSMR:
+        receiveAT(t=1, output=output)
+        # receiveAT(2, expect='+NPTWEDRXP')
+        edrxQuery()
+    #     receiveTIM()
+    if pytest.vendor == 'quectel':
+        pass
+    if pytest.vendor == 'simcom':
+        # data = expect('AT+NPTWEDRXS=2,5,"' + str(to_bin(ptw, 4)) + '","' + str(to_bin(edrx, 4)) + '"', reply='', t=3, output=output) # +CSCON: 0
+        # receiveAT(t=1, output=output)
+        data = expect('AT+CPSMS=1,,,' + str(to_bin(ptau, 3)) + str(to_bin(ptauMul, 5)) + '","' + str(to_bin(active, 3)) + str(to_bin(activeMul, 5)) + '"', reply='', t=3, output=output) # +NPSMR:
+        receiveAT(t=1, output=output)

@@ -34,3 +34,9 @@ def test_change():
 
 def test_edrxQuery():
     edrxQuery()
+
+# https://www.etsi.org/deliver/etsi_TS/125100_125199/125133/13.00.00_60/ts_125133v130000p.pdf
+def test_drxlen():
+    tc = [0.08, 0.16, 0.32, 0.64, 1.28, 2.56, 5.12]
+    ti = [0.64, 1.28, 2.56, 5.12]
+    pass

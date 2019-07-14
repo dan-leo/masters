@@ -41,6 +41,8 @@ def test_URC():
         OK('AT+CCIOTOPT=1')
         OK('AT+CLTS=1')
         OK('AT+CSMINS=1')
+        OK('AT+CPSMSTATUS=1')
+        OK('ATE0')
     # todo: at+natspeed=115200,30,1
 
 @pytest.mark.setup
@@ -67,7 +69,13 @@ def test_CEREG():
 
 @pytest.mark.setup
 def test_ping():
-    expect('at+nping="8.8.8.8"', ['+NPING: "8.8.8.8"', '+NPING:8.8.8.8'], 10)
+    if pytest.vendor in ['ublox', 'quectel']:
+        expect('at+nping="8.8.8.8"', ['+NPING: "8.8.8.8"', '+NPING:8.8.8.8'], 20)
+    if pytest.vendor == 'simcom':
+        expect('AT+CIPPING="8.8.8.8"', '+CIPPING:', 20)
+        receiveAT(10, '+CIPPING:')
+        receiveAT(10, '+CIPPING:')
+        receiveAT(10, '+CIPPING:')
 
 @pytest.mark.release
 def test_release():

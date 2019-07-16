@@ -56,7 +56,7 @@ def test_CFUN():
 
 @pytest.mark.setup
 def test_COPS():
-    if pytest.vendor == 'quectel':
+    if pytest.vendor in ['ublox', 'quectel']:
         receiveAT(3)
     if pytest.vendor == 'simcom':
         expect('AT+COPS=0', '+CEREG: 1', 10)

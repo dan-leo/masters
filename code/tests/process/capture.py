@@ -3,7 +3,7 @@ from process.globals import *
 to_bin = lambda x, n: format(x, 'b').zfill(n)
 
 def capture(limit, file='dump'):
-    filename = './tests/logs/' + file
+    filename = './logs/' + file
     print('CAPTURE START')
     begin = True
     with open(filename, 'a+') as f:
@@ -113,7 +113,7 @@ def setEDRX(ptw = 0, edrx = 9, active = 0, activeMul = 5, ptau = 3, ptauMul = 10
     if pytest.vendor == 'quectel':
         pass
     if pytest.vendor == 'simcom':
-        # data = expect('AT+NPTWEDRXS=2,5,"' + str(to_bin(ptw, 4)) + '","' + str(to_bin(edrx, 4)) + '"', reply='', t=3, output=output) # +CSCON: 0
-        # receiveAT(t=1, output=output)
-        data = expect('AT+CPSMS=1,,,' + str(to_bin(ptau, 3)) + str(to_bin(ptauMul, 5)) + '","' + str(to_bin(active, 3)) + str(to_bin(activeMul, 5)) + '"', reply='', t=3, output=output) # +NPSMR:
+        data = expect('AT*MEDRXCFG=1,5,"' + str(to_bin(edrx, 4)) + '","' + str(to_bin(ptw, 4)) + '"', reply='', t=3, output=output) # +CSCON: 0
+        receiveAT(t=1, output=output)
+        data = expect('AT+CPSMS=1,,,"' + str(to_bin(ptau, 3)) + str(to_bin(ptauMul, 5)) + '","' + str(to_bin(active, 3)) + str(to_bin(activeMul, 5)) + '"', reply='', t=3, output=output) # +NPSMR:
         receiveAT(t=1, output=output)

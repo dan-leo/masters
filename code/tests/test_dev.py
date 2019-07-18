@@ -1,7 +1,15 @@
 from test_ import *
 
+@pytest.fixture(autouse=True)
 def test_capture():
-    capture(1000)
+    pytest.test = 'dev/'
+    tcap(1000)
+
+def test_while(request):        
+    pytest.subtest = request.node.name.split('_')[1] + '/'
+    while True:
+        print(pytest.manufacturer)
+        time.sleep(1)
 
 def test_nuestats():
     print(yellow + nuestats())
@@ -30,7 +38,6 @@ def test_change():
         print()
         sendTIM('r')
         setEDRX(0, 9, 0, 5, 3, 10) # off
-        test_capture(1)
 
 def test_edrxQuery():
     edrxQuery()

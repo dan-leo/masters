@@ -2,48 +2,63 @@ from process.globals import *
 
 to_bin = lambda x, n: format(x, 'b').zfill(n)
 
-def capture(limit, file='dump'):
-    # loc = 'vodacom/cticc/'
-    loc = 'vodacom/centurycity/'
-    dir = r'./logs/' + loc + pytest.vendor + '/'
+thread = False
+
+def tcap(limit=1000, log=''):
+    thread = threading.Thread(target=capture, args=[limit, log])
+    thread.daemon=True
+    thread.start()
+
+def fwrite(path, data):
+    pass
+
+def checkFile(file):
+    path = r'./logs/' + pytest.manufacturer + '_' + pytest.loc + pytest.vendor + '/' + pytest.test + pytest.subtest + pytest.descr
+    if len(file):
+        path += '_' + file
+    print(yellow + path + white)
     try:
-        slash = file[::-1].index('/')
-        dir += file[:-slash]
-        file = file[-slash:]
-    except ValueError:
-        pass
-    filename = dir + file
-    print('CAPTURE START')
-    begin = True
-    try:
-        with open(filename, 'a+') as f:
+        with open(path, 'a+') as f:
             pass
     except (FileNotFoundError, PermissionError):
-        os.makedirs(dir)
-        with open(filename, 'a+') as f:
+        slash = path[::-1].index('/')
+        directory = path[:-slash]
+        # file = path[-slash:]
+        # filename = directory + file
+        os.makedirs(directory)
+        with open(path, 'a+') as f:
             pass
-    with open(filename, 'r') as f:
-        if 'index,' in f.readline():
-            begin = False
+    with open(path, 'r') as f:
+        return path, 'index,' in f.readline()
+
+def capture(limit, file):
+    print('CAPTURE START')
     sendTIM('s')
     index = 0
     buf = []
     try:
         while True:
-            with open(filename, 'a+') as f:
-                data = receiveTIM()
-                if data:
-                    # print(data)
-                    sendTIM('e')
-                    nue = nuestats()
+            # try:
+            data = receiveTIM()
+            # except:
+            #     data = ''
+            if data:
+                # print(data)
+                sendTIM('e')
+                nue = nuestats()
+                print(nue)
 
-                    # print header
-                    if begin:
+                # if no header or file does not exist
+                path, header_exists = checkFile(file)
+
+                with open(path, 'a+') as f:
+
+                    if not header_exists:
                         if not len(nue):
                             buf.append(data)
                             continue
                         msg = 'index,'
-                        print(green + 'index,')
+                        print(cyan + 'index,')
                         for key in data:
                             msg += key + ','
                             print(key, end=',')
@@ -52,17 +67,17 @@ def capture(limit, file='dump'):
                             print(key, end=',')
                         print()
                         f.write(msg + '\n')
-                        begin = False
 
                     # in case nuestat not working initially
                     if len(buf):
                         for b in buf:
-                            msg = yellow + str(index) + ',' + red + dictToCSV(b)
+                            msg = green + str(index) + ',' + red + dictToCSV(b)
                             print(msg)
                             msg = str(index) + ',' + dictToCSV(b)
                             f.write(msg + '\n')
                         buf = []
-                    msg = yellow + str(index) + ',' + red + dictToCSV(data) + blue + dictToCSV(nue)
+
+                    msg = green + str(index) + ',' + red + dictToCSV(data) + blue + dictToCSV(nue)
                     print(msg)
                     msg = str(index) + ',' + dictToCSV(data) + dictToCSV(nue)
                     f.write(msg + '\n')
@@ -84,7 +99,6 @@ def dictToCSV(dictionary):
     return csv
 
 def nuestats():
-    data = expect('at+nuestats="ALL"', 'OK', output=False)[:-1]
 #     data = []
 #     for d in expect('at+nuestats="RADIO"', 'OK', output=False)[:-1]:
 #         data.append(d)
@@ -92,24 +106,43 @@ def nuestats():
 #         data.append(d)
 #     data.append(expect('at+nuestats="CELL"', 'OK', output=False)[:-1])
     # print(blue + str(data))
-    dr = {}
-    for i in data:
-        j = i.split(',')
-        # print(j)
-        if j[0] == 'NUESTATS: "APPSMEM"' or j[0] == 'NUESTATS:APPSMEM':
-            dr[j[1].split(':')[0][1:-1]] = j[1].split(':')[1]
-        elif j[0] == 'NUESTATS: "CELL"' or j[0] == 'NUESTATS:CELL':
-            dr['primary_cell'] = j[3]
-            dr['rsrp'] = j[4]
-            dr['rsrq'] = j[5]
-            dr['rssi'] = j[6]
-            dr['snr'] = j[7]
-        elif 'NUESTATS:RADIO' in j[0]:
-            s = j[1].split(':')
-            dr[s[0]] = s[1]
-        elif 'NUESTATS' in j[0]:
-            dr[j[1][1:-1]] = j[2]
-    return dr
+    try:
+        print('with pytest.lock.acquire():', pytest.lock)
+        with pytest.lock.acquire(blocking=False):
+            for i in range(10):
+                try:
+                    print('for i in range(10):', i)
+                    data = expect('at+nuestats="ALL"', 'OK', output=True, blocking=True)[:-1]
+                except AssertionError:
+                    continue
+                dr = {}
+                try:
+                    for i in data:
+                        j = i.split(',')
+                        # print(j)
+                        if j[0] == 'NUESTATS: "APPSMEM"' or j[0] == 'NUESTATS:APPSMEM':
+                            dr[j[1].split(':')[0][1:-1]] = j[1].split(':')[1]
+                        elif j[0] == 'NUESTATS: "CELL"' or j[0] == 'NUESTATS:CELL':
+                            dr['primary_cell'] = j[3]
+                            dr['rsrp'] = j[4]
+                            dr['rsrq'] = j[5]
+                            dr['rssi'] = j[6]
+                            dr['snr'] = j[7]
+                        elif 'NUESTATS:RADIO' in j[0]:
+                            s = j[1].split(':')
+                            dr[s[0]] = s[1]
+                        elif 'NUESTATS' in j[0]:
+                            dr[j[1][1:-1]] = j[2]
+                except IndexError as e:
+                    print(e)
+                    continue
+                if len(dr):
+                    return dr
+            else:
+                return {}
+    finally:
+        print('pytest.lock.release()')
+        pytest.lock.release()
 
 def edrxQuery():
     expect('AT+NPTWEDRXS?', 'NPTWEDRXS', output=True)

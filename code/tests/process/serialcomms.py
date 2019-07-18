@@ -40,7 +40,7 @@ def serialOpen():
             AT_PORT = port
             pytest.vendor = 'simcom'
     try:
-        serAT = serial.Serial(AT_PORT, 115200, timeout=1)
+        serAT = serial.Serial(AT_PORT, 115200, timeout=0.1)
         serTIM = serial.Serial(uC_PORT, 115200, timeout=1)
         serGPS = serial.Serial(GPS_PORT, 9600, timeout=1)
     except serial.serialutil.SerialException as e:
@@ -75,7 +75,7 @@ def receiveTIM():
             data['energy'] = float(d.split(',')[3])
             data['maxCurrent'] = float(d.split(',')[4])
         except (ValueError, IndexError) as e:
-            print(data)
+            print(d)
             raise e
     return data
 
@@ -92,13 +92,25 @@ def receiveTIM():
             #     print(magenta + str(g))
             #     break
     
-def sendAT(cmd, t=0, expect=['OK'], output=True):
+def sendAT(cmd, t=0, expect=['OK'], output=True, blocking=False):
     if output:
         print(yellow + cmd)
     serAT.write(bytes(cmd + '\r', 'utf-8'))
-    return receiveAT(t, expect, output)
+    if blocking:
+        return receiveAT_blocking(t, expect, output)
+    else:
+        return receiveAT(t, expect, output)
 
 def receiveAT(t=0, expect=['OK'], output=True):
+    try:
+        locked = pytest.lock.acquire(blocking=False)
+        if locked:
+            return receiveAT_blocking(t, expect, output)
+    finally:
+        if locked:
+            pytest.lock.release()
+
+def receiveAT_blocking(t=0, expect=['OK'], output=True):
     if str(type(expect)) == "<class 'str'>":
         expect = [expect]
     c = 0
@@ -106,10 +118,19 @@ def receiveAT(t=0, expect=['OK'], output=True):
     exp = expect[:]
     exp.append('ERROR')
     exp.append('FAILED')
+    # while True:
+    #     d = serAT.readline().decode('utf-8')
+    #     if not len(d):
+    #         c += 0.1
+    #     if t > 0 and c == t:
+    #         data.append('timeout')
+    #         return data
+    #     if len(d):
+    #         data.append(d)
     while True:
         d = serAT.readline().decode('utf-8')
         if not len(d):
-            c += 1
+            c += 0.1
         d = d.strip()
         if len(d) > 0:
             if output:
@@ -127,13 +148,15 @@ def receiveAT(t=0, expect=['OK'], output=True):
                 return data
 
 def OK(cmd, t=0):
-    assert 'OK' in sendAT(cmd, t)
+    reply = sendAT(cmd, t)
+    print('reply:', reply)
+    assert 'OK' in reply
 
-def expect(cmd, reply, t=1, output=True):
+def expect(cmd, reply, t=1, output=True, blocking=False):
     replies = reply
     if str(type(reply)) == "<class 'str'>":
         replies = [reply]
-    data = sendAT(cmd, t, replies, output)
+    data = sendAT(cmd, t, replies, output, blocking)
     if not len(replies[0]):
         return data
     check = False

@@ -46,6 +46,11 @@ def test_URC():
     # todo: at+natspeed=115200,30,1
 
 @pytest.mark.setup
+def test_APN():
+    OK('AT+CGDCONT=0,"IP","rflab"')
+    # OK('AT+CGDCONT=0,"IP","nbiot.vodacom.za"')
+
+@pytest.mark.setup
 def test_CFUN():
     OK('AT+CFUN=0', 3)
     receiveAT(1)

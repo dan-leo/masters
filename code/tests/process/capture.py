@@ -3,11 +3,25 @@ from process.globals import *
 to_bin = lambda x, n: format(x, 'b').zfill(n)
 
 def capture(limit, file='dump'):
-    filename = './logs/' + file
+    # loc = 'vodacom/cticc/'
+    loc = 'vodacom/centurycity/'
+    dir = r'./logs/' + loc + pytest.vendor + '/'
+    try:
+        slash = file[::-1].index('/')
+        dir += file[:-slash]
+        file = file[-slash:]
+    except ValueError:
+        pass
+    filename = dir + file
     print('CAPTURE START')
     begin = True
-    with open(filename, 'a+') as f:
-        pass
+    try:
+        with open(filename, 'a+') as f:
+            pass
+    except (FileNotFoundError, PermissionError):
+        os.makedirs(dir)
+        with open(filename, 'a+') as f:
+            pass
     with open(filename, 'r') as f:
         if 'index,' in f.readline():
             begin = False

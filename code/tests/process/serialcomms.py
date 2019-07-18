@@ -32,7 +32,7 @@ def serialOpen():
             AT_PORT = port
             ATcount += 1
             pytest.vendor = 'ublox'
-        if vid_pid == '04E2:1414' and ATcount < 3:
+        if vid_pid == '04E2:1414' and ATcount < 1:
             AT_PORT = port
             ATcount += 1
             pytest.vendor = 'quectel'
@@ -64,15 +64,19 @@ def primeTIM():
 
 def receiveTIM():
     data = {}
-    # d = serTIM.readline().decode('utf-8')
-    d = '2300,260,2560,10.0,100,'
+    d = serTIM.readline().decode('utf-8')
+    # d = '2300,260,2560,10.0,100,'
     if len(d):
-        d = d.strip()
-        data['idleTime'] = int(d.split(',')[0])
-        data['txTime'] = int(d.split(',')[1])
-        data['totalTime'] = int(d.split(',')[2])
-        data['energy'] = float(d.split(',')[3])
-        data['maxCurrent'] = float(d.split(',')[4])
+        try:
+            d = d.strip()
+            data['idleTime'] = int(d.split(',')[0])
+            data['txTime'] = int(d.split(',')[1])
+            data['totalTime'] = int(d.split(',')[2])
+            data['energy'] = float(d.split(',')[3])
+            data['maxCurrent'] = float(d.split(',')[4])
+        except (ValueError, IndexError) as e:
+            print(data)
+            raise e
     return data
 
     # g = 0

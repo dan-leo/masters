@@ -16,7 +16,7 @@ void energySetup() {
 
 void energyLoop() {
     uint8_t reading = analogRead(A0);
-    if (reading > 20) {
+    if (reading > 40) {
         // Serial.println(reading);
         if (reading > maxReading) maxReading = reading;
         if (!readCount++) {

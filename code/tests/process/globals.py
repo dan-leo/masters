@@ -8,6 +8,7 @@ import time
 import pynmea2
 import serial
 import time
+import os
 
 from process.timing_bits import *
 from process.find import *

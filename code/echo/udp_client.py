@@ -26,7 +26,7 @@ def send_and_receive_one(sock, message, addr):
 def start(args):
     "Starts sending messages to the server."
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    sock.settimeout(1) # seconds
+    sock.settimeout(2) # seconds
     addr = (args.host, args.port)
     try:
         for i in itertools.count(1):

@@ -6,6 +6,7 @@ import argparse
 import itertools
 import logging
 import socket
+from time import sleep
 
 logger = logging.getLogger(__name__)
 
@@ -27,6 +28,9 @@ def receive_and_send_one(sock):
     input_data, addr = receive_next(sock)
     message = input_data.decode()
     logger.info("Received message from %s: %s (%s bytes).", addr, message, len(input_data))
+    output_len = sock.sendto(input_data, addr)
+    logger.info("Echoed message back to %s: %s (%s bytes).", addr, message, output_len)
+    sleep(5)
     output_len = sock.sendto(input_data, addr)
     logger.info("Echoed message back to %s: %s (%s bytes).", addr, message, output_len)
 

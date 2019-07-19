@@ -40,7 +40,7 @@ def serialOpen():
             AT_PORT = port
             pytest.vendor = 'simcom'
     try:
-        serAT = serial.Serial(AT_PORT, 115200, timeout=0.1)
+        serAT = serial.Serial(AT_PORT, 115200, timeout=1)
         serTIM = serial.Serial(uC_PORT, 115200, timeout=1)
         serGPS = serial.Serial(GPS_PORT, 9600, timeout=1)
     except serial.serialutil.SerialException as e:
@@ -96,21 +96,9 @@ def sendAT(cmd, t=0, expect=['OK'], output=True, blocking=False):
     if output:
         print(yellow + cmd)
     serAT.write(bytes(cmd + '\r', 'utf-8'))
-    if blocking:
-        return receiveAT_blocking(t, expect, output)
-    else:
-        return receiveAT(t, expect, output)
+    return receiveAT(t, expect, output, blocking)
 
-def receiveAT(t=0, expect=['OK'], output=True):
-    try:
-        locked = pytest.lock.acquire(blocking=False)
-        if locked:
-            return receiveAT_blocking(t, expect, output)
-    finally:
-        if locked:
-            pytest.lock.release()
-
-def receiveAT_blocking(t=0, expect=['OK'], output=True):
+def receiveAT(t=0, expect=['OK'], output=True, blocking=False):
     if str(type(expect)) == "<class 'str'>":
         expect = [expect]
     c = 0
@@ -128,24 +116,33 @@ def receiveAT_blocking(t=0, expect=['OK'], output=True):
     #     if len(d):
     #         data.append(d)
     while True:
-        d = serAT.readline().decode('utf-8')
-        if not len(d):
-            c += 0.1
-        d = d.strip()
-        if len(d) > 0:
-            if output:
-                print(cyan + d)
-            out = converter(d)
-            if out:
-                print(magenta + out)
-            data.append(d)
-        if t > 0:
-            if c == t:
-                data.append('timeout')
-                return data
-        for e in exp:
-            if e in d:
-                return data
+        if not pytest.lock or blocking:
+            print('lock:', pytest.lock, blocking)
+            # print(1)
+            d = serAT.readline().decode('utf-8')
+            # print(2)
+            if not len(d):
+                c += 1
+            d = d.strip()
+            # print(3)
+            if len(d) > 0:
+                if output:
+                    print(cyan + d)
+                out = converter(d)
+                if out:
+                    print(magenta + out)
+                data.append(d)
+            # print(4)
+            if t > 0:
+                if c == t:
+                    data.append('timeout')
+                    return data
+            # print(5)
+            for e in exp:
+                if e in d:
+                    # print(6)
+                    return data
+            # print(7)
 
 def OK(cmd, t=0):
     reply = sendAT(cmd, t)

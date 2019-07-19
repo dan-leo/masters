@@ -40,7 +40,7 @@ def serialOpen():
             AT_PORT = port
             pytest.vendor = 'simcom'
     try:
-        serAT = serial.Serial(AT_PORT, 115200, timeout=0.1)
+        serAT = serial.Serial(AT_PORT, 115200, timeout=1)
         serTIM = serial.Serial(uC_PORT, 115200, timeout=1)
         serGPS = serial.Serial(GPS_PORT, 9600, timeout=1)
     except serial.serialutil.SerialException as e:
@@ -103,21 +103,26 @@ def streamAT():
         d = serAT.readline().decode('utf-8')
         d = d.strip()
         if len(d):
-            if pytest.nuelock:
-                pytest.nuestream.append(d)
-            else:
-                pytest.stream.append(d)
+            pytest.stream.append(d)
             if pytest.output:
                 print(cyan + d)
-            out = converter(d)
-            if out:
-                print(magenta + out)
+            # out = converter(d)
+            # if out:
+            #     print(magenta + out)
+
+def valsInAarry(vals, array):
+    for e in vals:
+        # print('e in datastream', e in datastream, e)
+        if e in array:
+            return True
+    return False
+
 
 def receiveAT(t=0, expect=['OK'], output=True):
     if str(type(expect)) == "<class 'str'>":
         expect = [expect]
     c = 0
-    data = []
+    # data = []
     exp = expect[:]
     exp.append('ERROR')
     exp.append('FAILED')
@@ -131,39 +136,56 @@ def receiveAT(t=0, expect=['OK'], output=True):
     #     if len(d):
     #         data.append(d)
 
-    datastream = []
     length = 0
-    br = False
-    while c < t:
-        # print('br', br)
-        if br:
-            break
-        if pytest.nuelock:
-            datastream = pytest.nuestream[:]
-            print(datastream, 'pytest.nuestream[:]', len(pytest.nuestream))
+    while c <= t:
+        if len(pytest.stream) != length:
+            length = len(pytest.stream)
+            if valsInAarry(exp, pytest.stream):
+                nuestat = []
+                for i, j in enumerate(pytest.stream):
+                    print(i, j)
+                    if 'NUESTATS' in j:
+                        nuestat.append(pytest.stream.pop(i))
+                if len(nuestat):
+                    nuestat.append('OK')
+                    return nuestat
+                break
         else:
-            datastream = pytest.stream[:]
-        print('datastream', datastream)
-        if len(datastream) != length:
-            length = len(datastream)
-            for e in exp:
-                print('e in datastream', e in datastream, e)
-                if e in datastream:
-                    break
-        br = True
-        # else:
-        #     # print('len(datastream) != length', len(datastream) != length, len(datastream), length)
-        #     time.sleep(0.1)
-        #     c += 0.1
+            c += 0.1
+            time.sleep(0.1)
+    return pytest.stream
+
+
+
+
+    # datastream = []
+    # br = False
+    # while c < t:
+    #     # print('br', br)
+    #     if br:
+    #         break
+    #     datastream = pytest.stream[:]
+    #     print('datastream', datastream)
+    #     if len(datastream) != length:
+    #         length = len(datastream)
+    #         for e in exp:
+    #             print('e in datastream', e in datastream, e)
+    #             if e in datastream:
+    #                 break
+    #     br = True
+    #     # else:
+    #     #     # print('len(datastream) != length', len(datastream) != length, len(datastream), length)
+    #     #     time.sleep(0.1)
+    #     #     c += 0.1
+    # # else:
+    #     # print("datastream.append('timeout')", c)
+    #     # datastream.append('timeout')
+    # ret = datastream[:]
+    # if pytest.nuelock:
+    #     pytest.nuestream = []
     # else:
-        # print("datastream.append('timeout')", c)
-        # datastream.append('timeout')
-    ret = datastream[:]
-    if pytest.nuelock:
-        pytest.nuestream = []
-    else:
-        pytest.stream = []
-    return ret
+    #     pytest.stream = []
+    # return ret
 
 
     # while True:
@@ -205,6 +227,6 @@ def expect(cmd, reply, t=1, output=True):
                 check = True
                 break
     if not check:
-        print(magenta + str(replies), data, cmd, pytest.stream, len(pytest.nuestream), len(data))
+        print(magenta + str(replies), len(data), cmd, len(pytest.stream))
     assert check
     return data

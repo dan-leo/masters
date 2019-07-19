@@ -111,11 +111,11 @@ def nuestats():
 #     data.append(expect('at+nuestats="CELL"', 'OK', output=False)[:-1])
     # print(blue + str(data))
     pytest.output = False
-    pytest.nuelock = True
     try:
-        for i in range(2):
+        for i in range(1):
             try:
                 data = expect('at+nuestats="ALL"', 'OK', output=True)[:-1]
+                print('data:', data)
                 # cmd = 'at+nuestats="ALL"'
                 # serAT.write(bytes(cmd + '\r', 'utf-8'))
                 # if 'OK'
@@ -153,7 +153,6 @@ def nuestats():
             return {}
     finally:
         pytest.output = True
-        pytest.nuelock = False
 
 def edrxQuery():
     expect('AT+NPTWEDRXS?', 'NPTWEDRXS', output=True)

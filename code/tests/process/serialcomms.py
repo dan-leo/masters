@@ -83,7 +83,9 @@ def streamAT():
         d = d.strip()
         if len(d):
             pytest.stream.append(d)
-            if pytest.output:
+            if d != pytest.stream[-1]:
+                print(green + d, pytest.stream[-1])
+            if pytest.output and not 'NUESTAT' in d:
                 print(cyan + d)
             # out = converter(d)
             # if out:
@@ -100,10 +102,10 @@ def OK(cmd, t=1):
     # print('reply:', reply)
     assert 'OK' in reply
 
-def valsInAarry(vals, array):
+def valsInStream(vals):
     for e in vals:
         # print('e in datastream', e in datastream, e)
-        if e in array:
+        if e in pytest.stream:
             return True
     return False
 
@@ -120,16 +122,21 @@ def receiveAT(t=0, expect=['OK'], output=True):
     while c <= t:
         if len(pytest.stream) != length:
             length = len(pytest.stream)
-            if valsInAarry(exp, pytest.stream):
+            if valsInStream(exp):
                 nuestat = []
-                for i, j in enumerate(pytest.stream):
-                    # print(i, j)
-                    if 'NUESTATS' in j:
-                        nuestat.append(pytest.stream.pop(i)[:])
+                for w in range(length):
+                    for i, j in enumerate(pytest.stream):
+                        # print(red, 'pytest.stream', len(pytest.stream), white)
+                        # print(i, j)
+                        if 'NUESTATS' in j:
+                            nuestat.append(pytest.stream.pop(i)[:])
+                            break
                 if len(nuestat):
                     nuestat.append('OK')
+                    pytest.stream = []
+                    # print('nuestat', nuestat, len(nuestat))
                     return nuestat
-                # print('valsInAarry(exp, pytest.stream)', exp)
+                # print('valsInStream(exp, pytest.stream)', exp)
                 ret = pytest.stream[:]
                 pytest.stream = []
                 break

@@ -1,19 +1,41 @@
+#!/usr/bin/env python3
+
+import concurrent.futures
 import time
 
-def fed():
-    try:
-        var = True
-        while var:
-            print('yop')
-            time.sleep(1)
-            var = False
-        else:
-            print('nop')
-            return
-    finally:
-        print('ziod')
+def func_that_raises(do_raise):
+    for i in range(3):
+        print(i)
+        time.sleep(0.1)
+    if do_raise:
+        raise Exception()
+    for i in range(3):
+        print(i)
+        time.sleep(0.1)
 
-fed()
+with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
+    futures = []
+    futures.append(executor.submit(func_that_raises, False))
+    futures.append(executor.submit(func_that_raises, True))
+    for future in concurrent.futures.as_completed(futures):
+        print(repr(future.exception()))
+
+# import time
+
+# def fed():
+#     try:
+#         var = True
+#         while var:
+#             print('yop')
+#             time.sleep(1)
+#             var = False
+#         else:
+#             print('nop')
+#             return
+#     finally:
+#         print('ziod')
+
+# fed()
 
 
 # from test_ import *

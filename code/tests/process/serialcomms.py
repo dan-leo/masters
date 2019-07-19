@@ -53,11 +53,9 @@ def serialClose():
     serTIM.close()
     serGPS.close()
 
-
 def sendTIM(cmd):
     # print(yellow + cmd)
-    pass
-    # serTIM.write(bytes(cmd + '\r', 'utf-8'))
+    serTIM.write(bytes(cmd + '\r', 'utf-8'))
 
 def primeTIM():
     serTIM.write('r'.encode())
@@ -78,26 +76,7 @@ def receiveTIM():
             print(d)
             raise e
     return data
-
-    # g = 0
-    # now = time.time()
-    # while True and (time.time() - now < 600.0):
-    while True:
-            # print(white + d, blue + str(energy))
-            break
-            # if energy[-1] > 25.0:
-
-            # g = guess_seq_len(b)
-            # if g != 0:
-            #     print(magenta + str(g))
-            #     break
-    
-def sendAT(cmd, t=0, expect=['OK'], output=True):
-    if output and pytest.output:
-        print(yellow + cmd)
-    serAT.write(bytes(cmd + '\r', 'utf-8'))
-    return receiveAT(t, expect, output)
-
+        
 def streamAT():
     while True:
         d = serAT.readline().decode('utf-8')
@@ -109,6 +88,17 @@ def streamAT():
             # out = converter(d)
             # if out:
             #     print(magenta + out)
+    
+def sendAT(cmd, t=0, expect=['OK'], output=True):
+    if output and pytest.output:
+        print(yellow + cmd)
+    serAT.write(bytes(cmd + '\r', 'utf-8'))
+    return receiveAT(t, expect, output)
+
+def OK(cmd, t=1):
+    reply = sendAT(cmd, t)
+    # print('reply:', reply)
+    assert 'OK' in reply
 
 def valsInAarry(vals, array):
     for e in vals:
@@ -117,101 +107,37 @@ def valsInAarry(vals, array):
             return True
     return False
 
-
 def receiveAT(t=0, expect=['OK'], output=True):
     if str(type(expect)) == "<class 'str'>":
         expect = [expect]
     c = 0
-    # data = []
     exp = expect[:]
     exp.append('ERROR')
     exp.append('FAILED')
-    # while True:
-    #     d = serAT.readline().decode('utf-8')
-    #     if not len(d):
-    #         c += 0.1
-    #     if t > 0 and c == t:
-    #         data.append('timeout')
-    #         return data
-    #     if len(d):
-    #         data.append(d)
 
     length = 0
+    ret = pytest.stream[:]
     while c <= t:
         if len(pytest.stream) != length:
             length = len(pytest.stream)
             if valsInAarry(exp, pytest.stream):
                 nuestat = []
                 for i, j in enumerate(pytest.stream):
-                    print(i, j)
+                    # print(i, j)
                     if 'NUESTATS' in j:
-                        nuestat.append(pytest.stream.pop(i))
+                        nuestat.append(pytest.stream.pop(i)[:])
                 if len(nuestat):
                     nuestat.append('OK')
                     return nuestat
+                # print('valsInAarry(exp, pytest.stream)', exp)
+                ret = pytest.stream[:]
+                pytest.stream = []
                 break
-        else:
-            c += 0.1
-            time.sleep(0.1)
-    return pytest.stream
+        c += 0.1
+        time.sleep(0.1)
+    print('ret', ret)
+    return ret
 
-
-
-
-    # datastream = []
-    # br = False
-    # while c < t:
-    #     # print('br', br)
-    #     if br:
-    #         break
-    #     datastream = pytest.stream[:]
-    #     print('datastream', datastream)
-    #     if len(datastream) != length:
-    #         length = len(datastream)
-    #         for e in exp:
-    #             print('e in datastream', e in datastream, e)
-    #             if e in datastream:
-    #                 break
-    #     br = True
-    #     # else:
-    #     #     # print('len(datastream) != length', len(datastream) != length, len(datastream), length)
-    #     #     time.sleep(0.1)
-    #     #     c += 0.1
-    # # else:
-    #     # print("datastream.append('timeout')", c)
-    #     # datastream.append('timeout')
-    # ret = datastream[:]
-    # if pytest.nuelock:
-    #     pytest.nuestream = []
-    # else:
-    #     pytest.stream = []
-    # return ret
-
-
-    # while True:
-    #     d = serAT.readline().decode('utf-8')
-    #     if not len(d):
-    #         c += 1
-    #     d = d.strip()
-    #     if len(d) > 0:
-    #         if output:
-    #             print(cyan + d)
-    #         out = converter(d)
-    #         if out:
-    #             print(magenta + out)
-    #         data.append(d)
-    #     if t > 0:
-    #         if c == t:
-    #             data.append('timeout')
-    #             return data
-    #     for e in exp:
-    #         if e in d:
-    #             return data
-
-def OK(cmd, t=0):
-    reply = sendAT(cmd, t)
-    print('reply:', reply)
-    assert 'OK' in reply
 
 def expect(cmd, reply, t=1, output=True):
     replies = reply

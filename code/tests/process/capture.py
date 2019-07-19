@@ -2,16 +2,17 @@ from process.globals import *
 
 to_bin = lambda x, n: format(x, 'b').zfill(n)
 
-thread = False
-
-def tcap(limit=1000, log=''):
+def tcap(limit=1000, log='', start=True):
     # try:
-    thread = threading.Thread(target=capture, args=[limit, log])
-    thread.daemon=True
-    thread.start()
-    thread2 = threading.Thread(target=streamAT)
-    thread2.daemon=True
-    thread2.start()
+    t1 = threading.Thread(target=capture, args=[limit, log])
+    t2 = threading.Thread(target=streamAT)
+    t1.daemon=True
+    t1.start()
+    t2.daemon=True
+    t2.start()
+    # yield
+    # thread.join()
+    # thread2.join()
     # except (KeyboardInterrupt, AttributeError, TypeError, serial.serialutil.SerialException) as e:
     #     print(magenta + str(e))
     #     print('Quit')
@@ -80,7 +81,6 @@ def capture(limit, file):
                             msg = str(index) + ',' + dictToCSV(b)
                             f.write(msg + '\n')
                         buf = []
-
                     msg = green + str(index) + ',' + red + dictToCSV(data) + blue + dictToCSV(nue)
                     print(msg)
                     msg = str(index) + ',' + dictToCSV(data) + dictToCSV(nue)
@@ -110,21 +110,12 @@ def nuestats():
 #         data.append(d)
 #     data.append(expect('at+nuestats="CELL"', 'OK', output=False)[:-1])
     # print(blue + str(data))
-    pytest.output = False
+    # pytest.output = False
     try:
         for i in range(1):
             try:
-                data = expect('at+nuestats="ALL"', 'OK', output=True)[:-1]
-                print('data:', data)
-                # cmd = 'at+nuestats="ALL"'
-                # serAT.write(bytes(cmd + '\r', 'utf-8'))
-                # if 'OK'
-                # data = pytest.nuestream[:]
-                # print('data', data)
-                # pytest.nuestream = []
-                # print('pytest.nuestream', pytest.nuestream)
+                data = expect('at+nuestats="ALL"', 'OK', 2, output=True)[:-1]
             except AssertionError as e:
-                # print(e)
                 continue
             dr = {}
             try:

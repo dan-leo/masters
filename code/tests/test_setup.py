@@ -11,6 +11,12 @@ def test_serial():
         print("{}: {} [{}]".format(port, desc, hwid))
         print(hwid.split('=')[1].split()[0])
 
+@pytest.fixture(autouse=True)
+def test_setup_capture(request):
+    print(request.node.name)
+    pytest.test = 'setup/'
+    tcap(1000)
+
 @pytest.mark.setup
 def test_AT():
     print(pytest.vendor)

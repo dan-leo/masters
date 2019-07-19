@@ -37,4 +37,6 @@ def setup_module(module):
     pytest.stream = []
  
 def teardown_module(module):
-    serialClose()
+    # tcap(start=False)
+    # serialClose()
+    pass

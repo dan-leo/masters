@@ -1,7 +1,8 @@
 from test_ import *
 
 @pytest.fixture(autouse=True)
-def test_capture():
+def test_capture(request):
+    print(request.node.name)
     pytest.test = 'dev/'
     tcap(1000)
 

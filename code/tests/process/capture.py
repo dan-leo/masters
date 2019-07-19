@@ -5,12 +5,16 @@ to_bin = lambda x, n: format(x, 'b').zfill(n)
 thread = False
 
 def tcap(limit=1000, log=''):
+    # try:
     thread = threading.Thread(target=capture, args=[limit, log])
     thread.daemon=True
     thread.start()
-
-def fwrite(path, data):
-    pass
+    thread2 = threading.Thread(target=streamAT)
+    thread2.daemon=True
+    thread2.start()
+    # except (KeyboardInterrupt, AttributeError, TypeError, serial.serialutil.SerialException) as e:
+    #     print(magenta + str(e))
+    #     print('Quit')
 
 def checkFile(file):
     path = r'./logs/' + pytest.manufacturer + '_' + pytest.loc + pytest.vendor + '/' + pytest.test + pytest.subtest + pytest.descr
@@ -38,15 +42,15 @@ def capture(limit, file):
     buf = []
     try:
         while True:
-            # try:
-            data = receiveTIM()
-            # except:
-            #     data = ''
+            try:
+                data = receiveTIM()
+            except:
+                data = ''
             if data:
                 # print(data)
                 sendTIM('e')
                 nue = nuestats()
-                print(nue)
+                # print(nue)
 
                 # if no header or file does not exist
                 path, header_exists = checkFile(file)
@@ -106,13 +110,21 @@ def nuestats():
 #         data.append(d)
 #     data.append(expect('at+nuestats="CELL"', 'OK', output=False)[:-1])
     # print(blue + str(data))
+    pytest.output = False
+    pytest.nuelock = True
     try:
-        pytest.lock = True
-        for i in range(10):
+        for i in range(2):
             try:
-                print('for i in range(10):', i)
-                data = expect('at+nuestats="ALL"', 'OK', output=True, blocking=True)[:-1]
-            except AssertionError:
+                data = expect('at+nuestats="ALL"', 'OK', output=True)[:-1]
+                # cmd = 'at+nuestats="ALL"'
+                # serAT.write(bytes(cmd + '\r', 'utf-8'))
+                # if 'OK'
+                # data = pytest.nuestream[:]
+                # print('data', data)
+                # pytest.nuestream = []
+                # print('pytest.nuestream', pytest.nuestream)
+            except AssertionError as e:
+                # print(e)
                 continue
             dr = {}
             try:
@@ -140,7 +152,8 @@ def nuestats():
         else:
             return {}
     finally:
-        pytest.lock = False
+        pytest.output = True
+        pytest.nuelock = False
 
 def edrxQuery():
     expect('AT+NPTWEDRXS?', 'NPTWEDRXS', output=True)

@@ -33,7 +33,10 @@ def setup_module(module):
     pytest.test = 'dump/'
     pytest.subtest = ''
 
-    pytest.lock = False
+    pytest.output = True
+    pytest.stream = []
+    pytest.nuelock = False
+    pytest.nuestream = []
  
 def teardown_module(module):
     serialClose()

@@ -40,7 +40,7 @@ def serialOpen():
             AT_PORT = port
             pytest.vendor = 'simcom'
     try:
-        serAT = serial.Serial(AT_PORT, 115200, timeout=1)
+        serAT = serial.Serial(AT_PORT, 115200, timeout=0.1)
         serTIM = serial.Serial(uC_PORT, 115200, timeout=1)
         serGPS = serial.Serial(GPS_PORT, 9600, timeout=1)
     except serial.serialutil.SerialException as e:
@@ -92,13 +92,28 @@ def receiveTIM():
             #     print(magenta + str(g))
             #     break
     
-def sendAT(cmd, t=0, expect=['OK'], output=True, blocking=False):
-    if output:
+def sendAT(cmd, t=0, expect=['OK'], output=True):
+    if output and pytest.output:
         print(yellow + cmd)
     serAT.write(bytes(cmd + '\r', 'utf-8'))
-    return receiveAT(t, expect, output, blocking)
+    return receiveAT(t, expect, output)
 
-def receiveAT(t=0, expect=['OK'], output=True, blocking=False):
+def streamAT():
+    while True:
+        d = serAT.readline().decode('utf-8')
+        d = d.strip()
+        if len(d):
+            if pytest.nuelock:
+                pytest.nuestream.append(d)
+            else:
+                pytest.stream.append(d)
+            if pytest.output:
+                print(cyan + d)
+            out = converter(d)
+            if out:
+                print(magenta + out)
+
+def receiveAT(t=0, expect=['OK'], output=True):
     if str(type(expect)) == "<class 'str'>":
         expect = [expect]
     c = 0
@@ -115,45 +130,72 @@ def receiveAT(t=0, expect=['OK'], output=True, blocking=False):
     #         return data
     #     if len(d):
     #         data.append(d)
-    while True:
-        if not pytest.lock or blocking:
-            print('lock:', pytest.lock, blocking)
-            # print(1)
-            d = serAT.readline().decode('utf-8')
-            # print(2)
-            if not len(d):
-                c += 1
-            d = d.strip()
-            # print(3)
-            if len(d) > 0:
-                if output:
-                    print(cyan + d)
-                out = converter(d)
-                if out:
-                    print(magenta + out)
-                data.append(d)
-            # print(4)
-            if t > 0:
-                if c == t:
-                    data.append('timeout')
-                    return data
-            # print(5)
+
+    datastream = []
+    length = 0
+    br = False
+    while c < t:
+        # print('br', br)
+        if br:
+            break
+        if pytest.nuelock:
+            datastream = pytest.nuestream[:]
+            print(datastream, 'pytest.nuestream[:]', len(pytest.nuestream))
+        else:
+            datastream = pytest.stream[:]
+        print('datastream', datastream)
+        if len(datastream) != length:
+            length = len(datastream)
             for e in exp:
-                if e in d:
-                    # print(6)
-                    return data
-            # print(7)
+                print('e in datastream', e in datastream, e)
+                if e in datastream:
+                    break
+        br = True
+        # else:
+        #     # print('len(datastream) != length', len(datastream) != length, len(datastream), length)
+        #     time.sleep(0.1)
+        #     c += 0.1
+    # else:
+        # print("datastream.append('timeout')", c)
+        # datastream.append('timeout')
+    ret = datastream[:]
+    if pytest.nuelock:
+        pytest.nuestream = []
+    else:
+        pytest.stream = []
+    return ret
+
+
+    # while True:
+    #     d = serAT.readline().decode('utf-8')
+    #     if not len(d):
+    #         c += 1
+    #     d = d.strip()
+    #     if len(d) > 0:
+    #         if output:
+    #             print(cyan + d)
+    #         out = converter(d)
+    #         if out:
+    #             print(magenta + out)
+    #         data.append(d)
+    #     if t > 0:
+    #         if c == t:
+    #             data.append('timeout')
+    #             return data
+    #     for e in exp:
+    #         if e in d:
+    #             return data
 
 def OK(cmd, t=0):
     reply = sendAT(cmd, t)
     print('reply:', reply)
     assert 'OK' in reply
 
-def expect(cmd, reply, t=1, output=True, blocking=False):
+def expect(cmd, reply, t=1, output=True):
     replies = reply
     if str(type(reply)) == "<class 'str'>":
         replies = [reply]
-    data = sendAT(cmd, t, replies, output, blocking)
+    data = sendAT(cmd, t, replies, output)
     if not len(replies[0]):
         return data
     check = False
@@ -163,6 +205,6 @@ def expect(cmd, reply, t=1, output=True, blocking=False):
                 check = True
                 break
     if not check:
-        print(magenta + str(replies))
+        print(magenta + str(replies), data, cmd, pytest.stream, len(pytest.nuestream), len(data))
     assert check
     return data

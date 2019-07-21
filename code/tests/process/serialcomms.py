@@ -40,7 +40,7 @@ def serialOpen():
             AT_PORT = port
             pytest.vendor = 'simcom'
     try:
-        serAT = serial.Serial(AT_PORT, 115200, timeout=0.1)
+        serAT = serial.Serial(AT_PORT, 115200, timeout=1)
         serTIM = serial.Serial(uC_PORT, 115200, timeout=1)
         serGPS = serial.Serial(GPS_PORT, 9600, timeout=1)
     except serial.serialutil.SerialException as e:
@@ -127,7 +127,7 @@ def receiveAT(t=0, expect=['OK'], output=True):
     while True:
         d = serAT.readline().decode('utf-8')
         if not len(d):
-            c += 0.1
+            c += 1
         d = d.strip()
         if len(d) > 0:
             if output:
@@ -137,7 +137,7 @@ def receiveAT(t=0, expect=['OK'], output=True):
                 print(magenta + out)
             data.append(d)
         if t > 0:
-            if c == t:
+            if c >= t:
                 data.append('timeout')
                 return data
         for e in exp:

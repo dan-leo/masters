@@ -1,6 +1,5 @@
 from process.globals import *
 
-
 def test_gps():
     g.read()
 

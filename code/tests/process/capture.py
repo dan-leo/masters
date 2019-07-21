@@ -31,7 +31,7 @@ def checkFile(file):
     with open(path, 'r') as f:
         return path, 'index,' in f.readline()
 
-def capture(limit, file):
+def capture(limit=1000, file=''):
     print('CAPTURE START')
     sendTIM('s')
     index = 0
@@ -46,7 +46,7 @@ def capture(limit, file):
                 # print(data)
                 sendTIM('e')
                 nue = nuestats()
-                print(nue)
+                # print(nue)
 
                 # if no header or file does not exist
                 path, header_exists = checkFile(file)

@@ -1,19 +1,23 @@
 from test_ import *
 
 # @pytest.fixture(autouse=True)
-# def test_capture():
+# def test_capture(request):
 #     pytest.test = 'echo/'
 #     tcap(1000)
 
+@pytest.fixture(autouse=True)
+def _config(request):
+    pytest.test = 'echo/'
+
 @pytest.mark.skip()
-def test_echoset():
+def test_echoset(request):
     pytest.subtest = 'set/'
     setEDRX(1, 0, 0, 15, 3, 15) # 2.56 cont, 30 sec ptau
     receiveAT(2)
 
 
 # AT+NSOCR="DGRAM",17,14000
-def test_echo():
+def test_echo(request):
     pytest.subtest = ''
     if pytest.vendor == 'ublox':
         # expect('at+cops=2', '+NPSMR: 1', 32)

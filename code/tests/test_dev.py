@@ -17,7 +17,13 @@ def test_receiveAT(request):
     while True:
         receiveAT(1)
 
+def test_OK(request):        
+    pytest.subtest = request.node.name.split('_')[1] + '/'
+    while True:
+        OK('AT')
+
 def test_nuestats():
+    pytest.subtest = request.node.name.split('_')[1] + '/'
     print(yellow + str(nuestats()))
 
 def test_view():

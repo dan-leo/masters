@@ -33,6 +33,7 @@ def setup_module(module):
     pytest.test = 'dump/'
     pytest.subtest = ''
 
+    pytest.blocking = False
     pytest.output = True
     pytest.stream = []
  

@@ -53,7 +53,8 @@ def test_URC():
 
 @pytest.mark.setup
 def test_APN():
-    OK('AT+CGDCONT=0,"IP","rflab"')
+    expect('AT+CGDCONT=0,"IP","rflab"', '')
+    receiveAT(1)
     # OK('AT+CGDCONT=0,"IP","nbiot.vodacom.za"')
 
 @pytest.mark.setup

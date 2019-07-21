@@ -3,19 +3,12 @@ from process.globals import *
 to_bin = lambda x, n: format(x, 'b').zfill(n)
 
 def tcap(limit=1000, log='', start=True):
-    # try:
     t1 = threading.Thread(target=capture, args=[limit, log])
-    t2 = threading.Thread(target=streamAT)
     t1.daemon=True
     t1.start()
+    t2 = threading.Thread(target=streamAT)
     t2.daemon=True
     t2.start()
-    # yield
-    # thread.join()
-    # thread2.join()
-    # except (KeyboardInterrupt, AttributeError, TypeError, serial.serialutil.SerialException) as e:
-    #     print(magenta + str(e))
-    #     print('Quit')
 
 def checkFile(file):
     path = r'./logs/' + pytest.manufacturer + '_' + pytest.loc + pytest.vendor + '/' + pytest.test + pytest.subtest + pytest.descr
@@ -38,19 +31,24 @@ def checkFile(file):
 
 def capture(limit, file):
     print('CAPTURE START')
-    sendTIM('s')
+    # sendTIM('s')
     index = 0
     buf = []
+    last_nue = {}
     try:
         while True:
             try:
                 data = receiveTIM()
             except:
                 data = ''
-            if data:
-                # print(data)
-                sendTIM('e')
-                nue = nuestats()
+            if len(data):
+                # print(red + str(data))
+                if not pytest.blocking:
+                    # sendTIM('e')
+                    nue = nuestats()
+                    last_nue = nue
+                else:
+                    nue = last_nue
                 # print(nue)
 
                 # if no header or file does not exist
@@ -81,11 +79,12 @@ def capture(limit, file):
                             msg = str(index) + ',' + dictToCSV(b)
                             f.write(msg + '\n')
                         buf = []
+                    
                     msg = green + str(index) + ',' + red + dictToCSV(data) + blue + dictToCSV(nue)
                     print(msg)
                     msg = str(index) + ',' + dictToCSV(data) + dictToCSV(nue)
                     f.write(msg + '\n')
-                    sendTIM('s')
+                    # sendTIM('s')
                     index += 1
                     if index == limit:
                         break
@@ -93,7 +92,7 @@ def capture(limit, file):
         pass
     finally:
         print('CAPTURE END')
-        sendTIM('s')
+        # sendTIM('s')
 
 def dictToCSV(dictionary):
     csv = ""
@@ -112,9 +111,10 @@ def nuestats():
     # print(blue + str(data))
     # pytest.output = False
     try:
-        for i in range(1):
+        for i in range(5):
             try:
-                data = expect('at+nuestats="ALL"', 'OK', 2, output=True)[:-1]
+                data = expect('at+nuestats="ALL"', 'OK', 1, output=True)[:-1]
+                # print(green + str(data))
             except AssertionError as e:
                 continue
             dr = {}

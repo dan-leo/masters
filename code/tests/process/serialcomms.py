@@ -92,25 +92,22 @@ def receiveTIM():
             #     print(magenta + str(g))
             #     break
     
-def sendAT(cmd, t=0, expect=['OK'], output=True, blocking=False):
+def sendAT(cmd, t=0, expect=['OK'], output=True):
     if output:
         print(yellow + cmd)
     serAT.write(bytes(cmd + '\r', 'utf-8'))
-    if blocking:
-        return receiveAT_blocking(t, expect, output)
-    else:
-        return receiveAT(t, expect, output)
+    return receiveAT(t, expect, output)
+
+# def receiveAT(t=0, expect=['OK'], output=True):
+#     try:
+#         locked = pytest.lock.acquire(blocking=False)
+#         if locked:
+#             return receiveAT_blocking(t, expect, output)
+#     finally:
+#         if locked:
+#             pytest.lock.release()
 
 def receiveAT(t=0, expect=['OK'], output=True):
-    try:
-        locked = pytest.lock.acquire(blocking=False)
-        if locked:
-            return receiveAT_blocking(t, expect, output)
-    finally:
-        if locked:
-            pytest.lock.release()
-
-def receiveAT_blocking(t=0, expect=['OK'], output=True):
     if str(type(expect)) == "<class 'str'>":
         expect = [expect]
     c = 0
@@ -149,14 +146,14 @@ def receiveAT_blocking(t=0, expect=['OK'], output=True):
 
 def OK(cmd, t=0):
     reply = sendAT(cmd, t)
-    print('reply:', reply)
+    # print('reply:', reply)
     assert 'OK' in reply
 
-def expect(cmd, reply, t=1, output=True, blocking=False):
+def expect(cmd, reply, t=1, output=True):
     replies = reply
     if str(type(reply)) == "<class 'str'>":
         replies = [reply]
-    data = sendAT(cmd, t, replies, output, blocking)
+    data = sendAT(cmd, t, replies, output)
     if not len(replies[0]):
         return data
     check = False

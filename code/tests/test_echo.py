@@ -1,9 +1,9 @@
 from test_ import *
 
-@pytest.fixture(autouse=True)
-def test_capture():
-    pytest.test = 'echo/'
-    tcap(1000)
+# @pytest.fixture(autouse=True)
+# def test_capture():
+#     pytest.test = 'echo/'
+#     tcap(1000)
 
 @pytest.mark.skip()
 def test_echoset():

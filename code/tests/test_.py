@@ -33,7 +33,7 @@ def setup_module(module):
     pytest.test = 'dump/'
     pytest.subtest = ''
 
-    pytest.lock = threading.Lock()
+    # pytest.lock = threading.Lock()
  
 def teardown_module(module):
     serialClose()

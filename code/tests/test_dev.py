@@ -1,9 +1,9 @@
 from test_ import *
 
-@pytest.fixture(autouse=True)
-def test_capture():
-    pytest.test = 'dev/'
-    tcap(1000)
+# @pytest.fixture(autouse=True)
+# def test_capture():
+#     pytest.test = 'dev/'
+#     tcap(1000)
 
 def test_while(request):        
     pytest.subtest = request.node.name.split('_')[1] + '/'
@@ -11,8 +11,14 @@ def test_while(request):
         print(pytest.manufacturer)
         time.sleep(1)
 
+def test_OK(request):        
+    pytest.subtest = request.node.name.split('_')[1] + '/'
+    while True:
+        OK('AT')
+        time.sleep(1)
+
 def test_nuestats():
-    print(yellow + nuestats())
+    print(yellow + str(nuestats()))
 
 def test_view():
         tPTW = [2.56,5.12,7.68,10.24,12.8,15.36,17.92,20.48,23.04,25.6,28.16,30.72,33.28,35.84,38.4,40.96]

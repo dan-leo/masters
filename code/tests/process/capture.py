@@ -4,10 +4,10 @@ to_bin = lambda x, n: format(x, 'b').zfill(n)
 
 thread = False
 
-def tcap(limit=1000, log=''):
-    thread = threading.Thread(target=capture, args=[limit, log])
-    thread.daemon=True
-    thread.start()
+# def tcap(limit=1000, log=''):
+#     thread = threading.Thread(target=capture, args=[limit, log])
+#     thread.daemon=True
+#     thread.start()
 
 def fwrite(path, data):
     pass
@@ -106,43 +106,37 @@ def nuestats():
 #         data.append(d)
 #     data.append(expect('at+nuestats="CELL"', 'OK', output=False)[:-1])
     # print(blue + str(data))
-    try:
-        print('with pytest.lock.acquire():', pytest.lock)
-        with pytest.lock.acquire(blocking=False):
-            for i in range(10):
-                try:
-                    print('for i in range(10):', i)
-                    data = expect('at+nuestats="ALL"', 'OK', output=True, blocking=True)[:-1]
-                except AssertionError:
-                    continue
-                dr = {}
-                try:
-                    for i in data:
-                        j = i.split(',')
-                        # print(j)
-                        if j[0] == 'NUESTATS: "APPSMEM"' or j[0] == 'NUESTATS:APPSMEM':
-                            dr[j[1].split(':')[0][1:-1]] = j[1].split(':')[1]
-                        elif j[0] == 'NUESTATS: "CELL"' or j[0] == 'NUESTATS:CELL':
-                            dr['primary_cell'] = j[3]
-                            dr['rsrp'] = j[4]
-                            dr['rsrq'] = j[5]
-                            dr['rssi'] = j[6]
-                            dr['snr'] = j[7]
-                        elif 'NUESTATS:RADIO' in j[0]:
-                            s = j[1].split(':')
-                            dr[s[0]] = s[1]
-                        elif 'NUESTATS' in j[0]:
-                            dr[j[1][1:-1]] = j[2]
-                except IndexError as e:
-                    print(e)
-                    continue
-                if len(dr):
-                    return dr
-            else:
-                return {}
-    finally:
-        print('pytest.lock.release()')
-        pytest.lock.release()
+    for i in range(10):
+        try:
+            # print('for i in range(10):', i)
+            data = expect('at+nuestats="ALL"', 'OK', output=False)[:-1]
+        except AssertionError:
+            continue
+        dr = {}
+        try:
+            for i in data:
+                j = i.split(',')
+                # print(j)
+                if j[0] == 'NUESTATS: "APPSMEM"' or j[0] == 'NUESTATS:APPSMEM':
+                    dr[j[1].split(':')[0][1:-1]] = j[1].split(':')[1]
+                elif j[0] == 'NUESTATS: "CELL"' or j[0] == 'NUESTATS:CELL':
+                    dr['primary_cell'] = j[3]
+                    dr['rsrp'] = j[4]
+                    dr['rsrq'] = j[5]
+                    dr['rssi'] = j[6]
+                    dr['snr'] = j[7]
+                elif 'NUESTATS:RADIO' in j[0]:
+                    s = j[1].split(':')
+                    dr[s[0]] = s[1]
+                elif 'NUESTATS' in j[0]:
+                    dr[j[1][1:-1]] = j[2]
+        except IndexError as e:
+            print(e)
+            continue
+        if len(dr):
+            return dr
+    else:
+        return {}
 
 def edrxQuery():
     expect('AT+NPTWEDRXS?', 'NPTWEDRXS', output=True)

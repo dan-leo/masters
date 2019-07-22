@@ -75,10 +75,10 @@ def test_cops_release(request):
 
 ############## dereg release ##############
 
-@pytest.mark.reg2
+@pytest.mark.reg3
 def test_cops_deregister(request):
     pytest.subtest = request.node.name.split('_')[-1] + '/'
-    flushTIM()
+#     time.sleep(5)
 #     receiveAT(5)
     OK('AT+COPS=2', 5)
 ##     pauseTIM(True)
@@ -88,12 +88,6 @@ def test_cops_deregister(request):
 #     receiveAT(3)
 #     fetchTIM()
     flushTIM()
-    capture(1, 3)
-    fetchTIM()
-    capture(1, 3)
-    fetchTIM()
-    capture(1, 3)
-    fetchTIM()
     capture(1, 3)
 #     capture(1, 3)
 

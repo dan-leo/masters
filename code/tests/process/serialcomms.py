@@ -83,7 +83,7 @@ def receiveTIM():
     if len(d):
         try:
             d = d.strip()
-            print(magenta + d)
+            # print(magenta + d)
             data['idleTime'] = int(d.split(',')[0])
             data['txTime'] = int(d.split(',')[1])
             data['totalTime'] = int(d.split(',')[2])

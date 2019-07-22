@@ -55,16 +55,11 @@ void energyLoop(boolean pause) {
         
         energyFlush();
 
-        char floatBuffer[20];
-        dtostrf(energy, 2+3, 2, floatBuffer);
-
-        sprintf(tx, "%ld,%ld,%ld,%s,%d\r\n", idleTime, txTime, idleTime + txTime, energy, maxReading/2);
-
-        // buf.print(idleTime); buf.print(",");
-        // buf.print(txTime); buf.print(",");
-        // buf.print(idleTime + txTime); buf.print(",");
-        // buf.print(energy); buf.print(",");
-        // buf.print(maxReading/2);
+        buf.print(idleTime); buf.print(",");
+        buf.print(txTime); buf.print(",");
+        buf.print(idleTime + txTime); buf.print(",");
+        buf.print(energy); buf.print(",");
+        buf.println(maxReading/2);
 
         energyPrint();
         energySetup();

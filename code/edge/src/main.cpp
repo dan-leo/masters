@@ -2,6 +2,9 @@
 #include <math.h>
 
 boolean run = true;
+boolean pause = false;
+
+extern BufferSerial buf;
 
 void setup() {
     Serial.begin(115200);
@@ -14,14 +17,23 @@ void loop() {
     // // delay(random(1000));
     // // digitalWrite(7, false);
     // // delay(random(1000));
+    if (run) energyLoop(pause);
+
     if (Serial.available()) {
         char c = Serial.read();
         if (c == 'r') energySetup();
         if (c == 'e') run = false;
         if (c == 's') run = true;
-    }
-    if (run) {
-        energyLoop();
+        if (c == 'p') pause = true;
+        if (c == 'u') pause = false;
+        if (c == 'f') energyFlush();
+        if (c == 't') {
+            buf.print(',');
+            buf.println(buf.current_length());
+            energyPrint();
+            energyFlush();
+        }
+        // Serial.println(pause);
     }
 }
 

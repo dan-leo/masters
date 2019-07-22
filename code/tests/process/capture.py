@@ -31,20 +31,25 @@ def checkFile(file):
     with open(path, 'r') as f:
         return path, 'index,' in f.readline()
 
-def capture(limit=1000, file=''):
+def capture(limit=1000, timeout=0, file=''):
     print('CAPTURE START')
-    sendTIM('s')
+    # sendTIM('s')
     index = 0
     buf = []
+    tStart = time.time()
     try:
         while True:
+            if time.time() - tStart > timeout and timeout:
+                break
+
             # try:
             data = receiveTIM()
             # except:
             #     data = ''
             if data:
+                flushTIM()
                 # print(data)
-                sendTIM('e')
+                # sendTIM('e')
                 nue = nuestats()
                 # print(nue)
 
@@ -81,15 +86,15 @@ def capture(limit=1000, file=''):
                     print(msg)
                     msg = str(index) + ',' + dictToCSV(data) + dictToCSV(nue)
                     f.write(msg + '\n')
-                    sendTIM('s')
+                    # sendTIM('s')
                     index += 1
-                    if index == limit:
+                    if index == limit and limit:
                         break
     except KeyboardInterrupt:
         pass
     finally:
         print('CAPTURE END')
-        sendTIM('s')
+        # sendTIM('s')
 
 def dictToCSV(dictionary):
     csv = ""

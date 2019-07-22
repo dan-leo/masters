@@ -56,26 +56,41 @@ def serialClose():
 
 def sendTIM(cmd):
     # print(yellow + cmd)
-    pass
-    # serTIM.write(bytes(cmd + '\r', 'utf-8'))
+    serTIM.write(bytes(cmd + '\r', 'utf-8'))
 
-def primeTIM():
-    serTIM.write('r'.encode())
+def pauseTIM(enable):
+    # serTIM.write('r'.encode())
+    sendTIM('p' if enable else 'u')
+
+def primeTIM(enable):
+    # serTIM.write('r'.encode())
+    sendTIM('s' if enable else 'e')
+
+def flushTIM():
+    time.sleep(0.1)
+    sendTIM('f')
+    time.sleep(0.1)
+
+def fetchTIM():
+    sendTIM('t')
+    # time.sleep(0.1)
 
 def receiveTIM():
     data = {}
+    serTIM.flush()
     d = serTIM.readline().decode('utf-8')
     # d = '2300,260,2560,10.0,100,'
     if len(d):
         try:
             d = d.strip()
+            print(magenta + d)
             data['idleTime'] = int(d.split(',')[0])
             data['txTime'] = int(d.split(',')[1])
             data['totalTime'] = int(d.split(',')[2])
             data['energy'] = float(d.split(',')[3])
             data['maxCurrent'] = float(d.split(',')[4])
         except (ValueError, IndexError) as e:
-            print(d)
+            print(red + d)
             raise e
     return data
 
@@ -148,6 +163,7 @@ def OK(cmd, t=0):
     reply = sendAT(cmd, t)
     # print('reply:', reply)
     assert 'OK' in reply
+    return reply
 
 def expect(cmd, reply, t=1, output=True):
     replies = reply
@@ -163,6 +179,6 @@ def expect(cmd, reply, t=1, output=True):
                 check = True
                 break
     if not check:
-        print(magenta + str(replies))
+        print(magenta + str(replies), data)
     assert check
     return data

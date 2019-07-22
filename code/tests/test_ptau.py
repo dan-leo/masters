@@ -7,8 +7,11 @@ def _config(request):
     pytest.test = 'ptau/'
 
 # @pytest.mark.skip()
-def test_ptauset(request):
+def test_ptau_set(request):
+    pytest.subtest = request.node.name.split('_')[-1] + '/'
     setEDRX(4, 1, 0, 0, 3, 2) # 5.5 sec ptau
+    capture(1)
 
-def test_ptau(request):
-    capture(1000, 'ptau/' + descr)
+def test_ptau_capture(request):
+    pytest.subtest = request.node.name.split('_')[-1] + '/'
+    capture()

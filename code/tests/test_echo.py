@@ -10,15 +10,16 @@ def _config(request):
     pytest.test = 'echo/'
 
 @pytest.mark.skip()
-def test_echoset(request):
-    pytest.subtest = 'set/'
+def test_echo_set(request):
+    pytest.subtest = request.node.name.split('_')[-1] + '/'
     setEDRX(1, 0, 0, 15, 3, 15) # 2.56 cont, 30 sec ptau
     receiveAT(2)
+    capture(1)
 
 
 # AT+NSOCR="DGRAM",17,14000
 def test_echo(request):
-    pytest.subtest = ''
+    pytest.subtest = request.node.name.split('_')[-1] + '/'
     if pytest.vendor == 'ublox':
         # expect('at+cops=2', '+NPSMR: 1', 32)
         # expect('at+cops=0', '+CEREG: 1', 32)

@@ -12,6 +12,7 @@ def test_releaseset(request):
         setEDRX(0, 9, 0, 1, 2, 31) # off
         return
     setEDRX(0, 9, 0, 0, 0, 0) # off
+    capture(1)
 
 def test_release_close(request):
     pytest.subtest = request.node.name.split('_')[-1] + '/'

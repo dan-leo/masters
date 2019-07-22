@@ -58,7 +58,7 @@ void energyLoop(boolean pause) {
         buf.print(txTime); buf.print(",");
         buf.print(idleTime + txTime); buf.print(",");
         buf.print(energy); buf.print(",");
-        buf.print(maxReading/2);
+        buf.println(maxReading/2);
 
         energyPrint();
         energySetup();

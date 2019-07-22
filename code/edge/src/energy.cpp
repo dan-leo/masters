@@ -10,22 +10,23 @@ volatile double energy = 0;
 uint8_t maxReading = 0;
 // boolean prime = false;
 
-volatile uint8_t tx[64];
-BufferSerial buf(tx, 64);
+char tx[64];
+// BufferSerial buf(tx, 64);
 
 void energySetup() {
     sum = idleTime = txTime = readCount = maxReading = energy = 0;
 }
 
 void energyFlush() {
-    buf.flush();
+    // buf.flush();
     tx[0] = '\0';
     // buf.print(buf.current_length());
     // buf.print(',');
 }
 
 void energyPrint() {
-    Serial.print(buf);
+    // Serial.print(buf);
+    Serial.print((const char *)tx);
 }
 
 void energyLoop(boolean pause) {
@@ -54,11 +55,16 @@ void energyLoop(boolean pause) {
         
         energyFlush();
 
-        buf.print(idleTime); buf.print(",");
-        buf.print(txTime); buf.print(",");
-        buf.print(idleTime + txTime); buf.print(",");
-        buf.print(energy); buf.print(",");
-        buf.print(maxReading/2);
+        char floatBuffer[20];
+        dtostrf(energy, 2+3, 2, floatBuffer);
+
+        sprintf(tx, "%ld,%ld,%ld,%s,%d\r\n", idleTime, txTime, idleTime + txTime, energy, maxReading/2);
+
+        // buf.print(idleTime); buf.print(",");
+        // buf.print(txTime); buf.print(",");
+        // buf.print(idleTime + txTime); buf.print(",");
+        // buf.print(energy); buf.print(",");
+        // buf.print(maxReading/2);
 
         energyPrint();
         energySetup();

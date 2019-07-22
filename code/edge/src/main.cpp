@@ -28,8 +28,8 @@ void loop() {
         if (c == 'u') pause = false;
         if (c == 'f') energyFlush();
         if (c == 't') {
-            buf.print(',');
-            buf.println(buf.current_length());
+            // buf.print(',');
+            // buf.println(buf.current_length());
             energyPrint();
             energyFlush();
         }

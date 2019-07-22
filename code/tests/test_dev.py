@@ -26,7 +26,7 @@ def test_OK(request):
         OK('AT')
         time.sleep(1)
 
-def test_devcap(request):        
+def test_devcap(request):
     pytest.subtest = request.node.name.split('_')[-1] + '/'
     capture()
 

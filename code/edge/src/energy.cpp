@@ -11,27 +11,27 @@ uint8_t maxReading = 0;
 // boolean prime = false;
 
 char tx[64];
-// BufferSerial buf(tx, 64);
+BufferSerial buf(tx, 64);
 
 void energySetup() {
     sum = idleTime = txTime = readCount = maxReading = energy = 0;
 }
 
 void energyFlush() {
-    // buf.flush();
+    buf.flush();
     tx[0] = '\0';
     // buf.print(buf.current_length());
     // buf.print(',');
 }
 
 void energyPrint() {
-    // Serial.print(buf);
-    Serial.print((const char *)tx);
+    Serial.print(buf);
+    // Serial.print((const char *)tx);
 }
 
 void energyLoop(boolean pause) {
     uint8_t reading = analogRead(A0);
-    if (reading > 40) {
+    if (reading > 60) {
         // Serial.println(reading);
         if (reading > maxReading) maxReading = reading;
         if (!readCount++) {

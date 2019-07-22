@@ -33,7 +33,7 @@ def checkFile(file):
 
 def capture(limit=1000, timeout=0, file=''):
     print('CAPTURE START')
-    # sendTIM('s')
+    sendTIM('s')
     index = 0
     buf = []
     tStart = time.time()
@@ -49,7 +49,7 @@ def capture(limit=1000, timeout=0, file=''):
             if data:
                 flushTIM()
                 # print(data)
-                # sendTIM('e')
+                sendTIM('e')
                 nue = nuestats()
                 # print(nue)
 
@@ -86,7 +86,7 @@ def capture(limit=1000, timeout=0, file=''):
                     print(msg)
                     msg = str(index) + ',' + dictToCSV(data) + dictToCSV(nue)
                     f.write(msg + '\n')
-                    # sendTIM('s')
+                    sendTIM('s')
                     index += 1
                     if index == limit and limit:
                         break
@@ -94,7 +94,7 @@ def capture(limit=1000, timeout=0, file=''):
         pass
     finally:
         print('CAPTURE END')
-        # sendTIM('s')
+        sendTIM('s')
 
 def dictToCSV(dictionary):
     csv = ""
@@ -157,7 +157,11 @@ def setEDRX(ptw = 0, edrx = 9, active = 0, activeMul = 5, ptau = 3, ptauMul = 10
         edrxQuery()
     #     receiveTIM()
     if pytest.vendor == 'quectel':
-        pass
+        data = expect('AT+NPTWEDRXS=2,5,' + str(to_bin(ptw, 4)) + ',' + str(to_bin(edrx, 4)), reply='', t=3, output=output) # +CSCON: 0
+        receiveAT(t=1, output=output)
+        data = expect('at+cpsms=1,,,' + str(to_bin(ptau, 3)) + str(to_bin(ptauMul, 5)) + ',' + str(to_bin(active, 3)) + str(to_bin(activeMul, 5)), reply='', t=3, output=output) # +NPSMR:
+        receiveAT(t=1, output=output)
+        edrxQuery()
     if pytest.vendor == 'simcom':
         data = expect('AT*MEDRXCFG=1,5,"' + str(to_bin(edrx, 4)) + '","' + str(to_bin(ptw, 4)) + '"', reply='', t=3, output=output) # +CSCON: 0
         receiveAT(t=1, output=output)

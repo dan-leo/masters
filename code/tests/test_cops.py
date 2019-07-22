@@ -29,7 +29,7 @@ def test_cops_register1(request):
     flushTIM()
     expect('AT+CFUN=1', 'OK', 3)
     expect('AT+COPS=0', '')
-    receiveAT(300, ['+CEREG: 1', '+CSCON: 0'])
+    receiveAT(300, ['+CEREG: 1', '+CSCON: 0', '+CEREG:1', '+CSCON:0'])
 #    pauseTIM(True)
 
 @pytest.mark.reg1
@@ -43,7 +43,7 @@ def test_cops_delay(request):
 def test_cops_tensec(request):
     pytest.subtest = request.node.name.split('_')[-1] + '/'
     # expect('AT+COPS=2', '+NPSMR:', 100)
-    expect('AT+CFUN=0', '+CSCON: 0', 3)
+    expect('AT+CFUN=0', ['+CSCON: 0', '+CSCON:0', '+NPSMR:'], 30)
     capture(2, 5)
 
 ############## reg release ##############
@@ -53,7 +53,7 @@ def test_cops_register2(request):
     pytest.subtest = request.node.name.split('_')[-1] + '/'
     flushTIM()
     expect('AT+CFUN=1', 'OK', 3)
-    expect('AT+COPS=0', ['+CEREG: 1', '+CSCON: 0'], 300)
+    expect('AT+COPS=0', ['+CEREG: 1', '+CSCON: 0', '+CEREG:1', '+CSCON:0'], 300)
 #    pauseTIM(True)
 
 @pytest.mark.reg2
@@ -62,12 +62,19 @@ def test_cops_release(request):
     receiveAT(1)
     fetchTIM()
     capture(1, 3)
-    expect('at+nsocl=0', '')
-    receiveAT(1)
-    OK('AT+NSOCR="DGRAM",17,14000,1')
-    receiveAT(1)
-    expect('AT+NSOSTF=0,"1.1.1.1",7,0x200,1,"FF"', '+CSCON: 0', 100)
-    OK('at+nsocl=0')
+    if pytest.vendor == 'ublox':
+        expect('at+nsocl=0', '')
+        receiveAT(1)
+        OK('AT+NSOCR="DGRAM",17,14000,1')
+        receiveAT(1)
+        expect('AT+NSOSTF=0,"1.1.1.1",7,0x200,1,"FF"', '+CSCON: 0', 100)
+        OK('at+nsocl=0')
+    elif pytest.vendor == 'quectel':
+        expect('at+nsocl=1', '')
+        receiveAT(1)
+        OK('AT+NSOCR=DGRAM,17,14000,1')
+        expect('AT+NSOSTF=1,1.1.1.1,7,0x200,1,FF', '+CSCON:0', 300)
+        OK('at+nsocl=1')
     receiveAT(1)
     receiveAT(2)
     fetchTIM()
@@ -82,7 +89,7 @@ def test_cops_deregister(request):
 #     receiveAT(5)
     OK('AT+COPS=2', 5)
 ##     pauseTIM(True)
-    receiveAT(300, '+NPSMR:')
+    receiveAT(300, ['+NPSMR: 1', '+NPSMR:1'])
 ##     pauseTIM(False)
 #     expect('AT+CFUN=0', '', 1)
 #     receiveAT(3)
@@ -99,6 +106,7 @@ def test_cops_inactive(request):
     # primeTIM(False)
     expect('AT+CFUN=0', '')
     receiveAT(5)
+    receiveAT(5)
     expect('AT+CFUN=1', 'OK', 3)
-    expect('AT+COPS=0', ['+CEREG: 1', '+CSCON: 0'], 300)
-#     capture(1, 400)
+    expect('AT+COPS=0', ['+CEREG: 1', '+CSCON: 0', '+CEREG:1', '+CSCON:0'], 300)
+    capture(10, 400)

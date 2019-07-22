@@ -81,7 +81,6 @@ def converter(input_str):
         elif pytest.vendor == 'quectel':
             return 'Active T3324: ' + active_time(arr[-1]) \
             + ', Periodic T3412: ' + extended_periodic_TAU(arr[-2])
-
     return None
 
 def csv(input_str):

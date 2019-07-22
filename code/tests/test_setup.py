@@ -55,12 +55,12 @@ def test_URC(request):
     # todo: at+natspeed=115200,30,1
 
 
-@pytest.mark.skip()
-@pytest.mark.setup
+# @pytest.mark.skip()
+@pytest.mark.apn
 def test_APN(request):
     pytest.subtest = request.node.name.split('_')[-1] + '/'
-    OK('AT+CGDCONT=0,"IP","rflab"')
-    # OK('AT+CGDCONT=0,"IP","nbiot.vodacom.za"')
+    # OK('AT+CGDCONT=0,"IP","rflab"')
+    OK('AT+CGDCONT=0,"IP","nbiot.vodacom.za"')
 
 @pytest.mark.setup
 def test_CFUN(request):

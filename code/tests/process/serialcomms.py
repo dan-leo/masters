@@ -32,7 +32,7 @@ def serialOpen():
             AT_PORT = port
             ATcount += 1
             pytest.vendor = 'ublox'
-        if vid_pid == '04E2:1414' and ATcount < 1:
+        if vid_pid == '04E2:1414' and ATcount < 2:
             AT_PORT = port
             ATcount += 1
             pytest.vendor = 'quectel'

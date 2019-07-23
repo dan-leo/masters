@@ -169,7 +169,7 @@ def test_release_release512(request):
         OK('at+nsocl=1')
 
 # @pytest.mark.skip()
-@pytest.mark.release
+# @pytest.mark.release
 def test_release_capture(request):
     pytest.subtest = request.node.name.split('_')[-1] + '/'
     capture(1)

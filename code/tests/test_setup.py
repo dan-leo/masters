@@ -59,8 +59,13 @@ def test_URC(request):
 @pytest.mark.apn
 def test_APN(request):
     pytest.subtest = request.node.name.split('_')[-1] + '/'
-    # OK('AT+CGDCONT=0,"IP","rflab"')
-    OK('AT+CGDCONT=0,"IP","nbiot.vodacom.za"')
+    apn = 'rflab'
+    apn = 'nbiot.vodacom.za'
+    
+    if pytest.vendor in ['ublox', 'quectel']:
+        OK('AT+CGDCONT=0,"IP","' + apn + '"')
+    elif pytest.vendor == 'simcom':
+        OK('AT*MCGDEFCONT="IP","' + apn + '"')
 
 @pytest.mark.setup
 def test_CFUN(request):
@@ -91,21 +96,23 @@ def test_CEREG(request):
 def test_ping(request):
     pytest.subtest = request.node.name.split('_')[-1] + '/'
     if pytest.vendor in ['ublox', 'quectel']:
-        expect('at+nping="8.8.8.8"', ['+NPING: "8.8.8.8"', '+NPING:8.8.8.8'], 20)
+        expect('at+nping="8.8.8.8"', ['+NPING: "8.8.8.8"', '+NPING:8.8.8.8', '+NPINGERR:'], 20)
     if pytest.vendor == 'simcom':
         expect('AT+CIPPING="8.8.8.8"', '+CIPPING:', 20)
         receiveAT(10, '+CIPPING:')
         receiveAT(10, '+CIPPING:')
         receiveAT(10, '+CIPPING:')
+    print(nuestats())
+    print('### 0')
 
-@pytest.mark.release
-def test_release(request):
-    pytest.subtest = request.node.name.split('_')[-1] + '/'
-    # expect('at+cops=2', '+NPSMR: 1', 10)
-    # expect('at+cops=0', '+CEREG: 1', 10)
-    OK('AT+NSOCR="DGRAM",17,14000,1')
-    expect('AT+NSOSTF=0,"1.1.1.1",7,0x200,1,"FF"', '+CSCON: 0', 10)
-    OK('at+nsocl=0')
+# @pytest.mark.release
+# def test_release(request):
+#     pytest.subtest = request.node.name.split('_')[-1] + '/'
+#     # expect('at+cops=2', '+NPSMR: 1', 10)
+#     # expect('at+cops=0', '+CEREG: 1', 10)
+#     OK('AT+NSOCR="DGRAM",17,14000,1')
+#     expect('AT+NSOSTF=0,"1.1.1.1",7,0x200,1,"FF"', '+CSCON: 0', 10)
+#     OK('at+nsocl=0')
 
 @pytest.mark.reboot
 def test_reboot(request):

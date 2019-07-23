@@ -20,13 +20,13 @@ def test_echo_register(request):
     pytest.subtest = request.node.name.split('_')[-1] + '/'
     flushTIM()
     expect('AT+CFUN=1', 'OK', 3)
-    expect('AT+COPS=0', ['+CEREG: 1', '+CSCON: 0'], 300)
+    expect('AT+COPS=0', ['+CEREG: 1', '+CSCON: 0', '+CEREG:1', '+CSCON:0'], 300)
     fetchTIM()
     capture(1, 2)
 
 
 # AT+NSOCR="DGRAM",17,14000
-def test_echo(request):
+def test_echo_e(request):
     pytest.subtest = request.node.name.split('_')[-1] + '/'
     if pytest.vendor == 'ublox':
         # expect('at+cops=2', '+NPSMR: 1', 32)
@@ -44,6 +44,16 @@ def test_echo(request):
         OK('AT+NSORF=0,32', 3)
         # OK('at+nsocl=0')
         # capture(1, 'echo/' + descr)
+    if pytest.vendor == 'quectel':
+        expect('at+nsocl=1', '')
+        receiveAT(1)
+        OK('AT+NSOCR=DGRAM,17,4444')
+        expect('AT+NSOSTF=1,34.74.25.60,5555,0x400,3,393837', '+NSONMI:1', 300)
+        receiveAT(1, '+CSCON:')
+        OK('AT+NSORF=1,32', 3)
+        capture(8, 8)
+        receiveAT(20, '+NSONMI:1')
+        OK('AT+NSORF=1,32', 3)
     elif pytest.vendor == 'simcom':
         expect('AT+CSOCL=0', '')
         receiveAT(1)
@@ -60,6 +70,6 @@ def test_echo(request):
 def test_echo_deregister(request):
     pytest.subtest = request.node.name.split('_')[-1] + '/'
     # expect('AT+COPS=2', '+NPSMR:', 100)
-    expect('AT+CFUN=0', ['+CSCON: 0', '+CSCON:0', '+NPSMR:'], 20)
+    expect('AT+CFUN=0', ['+CSCON: 0', '+CSCON:0', '+NPSMR:'], 100)
     capture(2, 5)
     

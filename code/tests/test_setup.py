@@ -60,7 +60,7 @@ def test_URC(request):
 def test_APN(request):
     pytest.subtest = request.node.name.split('_')[-1] + '/'
     apn = 'rflab'
-    apn = 'nbiot.vodacom.za'
+    # apn = 'nbiot.vodacom.za'
     
     if pytest.vendor in ['ublox', 'quectel']:
         OK('AT+CGDCONT=0,"IP","' + apn + '"')

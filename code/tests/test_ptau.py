@@ -14,4 +14,4 @@ def test_ptau_set(request):
 
 def test_ptau_capture(request):
     pytest.subtest = request.node.name.split('_')[-1] + '/'
-    capture(4)
+    capture(10)

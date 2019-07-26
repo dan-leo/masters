@@ -89,7 +89,7 @@ def test_cops_deregister(request):
 #     receiveAT(5)
     OK('AT+COPS=2', 5)
 ##     pauseTIM(True)
-    receiveAT(300, ['+NPSMR: 1', '+NPSMR:1'])
+    receiveAT(300, ['+NPSMR:'])
 ##     pauseTIM(False)
 #     expect('AT+CFUN=0', '', 1)
 #     receiveAT(3)

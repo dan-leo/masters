@@ -1,0 +1,1 @@
+C:\Users\d7rob\AppData\Local\Abricotine\app-0.7.0\Abricotine.exe "%~1"

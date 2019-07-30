@@ -2,13 +2,15 @@ from process.globals import *
 
 to_bin = lambda x, n: format(x, 'b').zfill(n)
 
-def tcap(limit=1000, log='', start=True):
-    t1 = threading.Thread(target=capture, args=[limit, log])
-    t1.daemon=True
-    t1.start()
-    t2 = threading.Thread(target=streamAT)
-    t2.daemon=True
-    t2.start()
+thread = False
+
+# def tcap(limit=1000, log=''):
+#     thread = threading.Thread(target=capture, args=[limit, log])
+#     thread.daemon=True
+#     thread.start()
+
+def fwrite(path, data):
+    pass
 
 def checkFile(file):
     path = r'./logs/' + pytest.manufacturer + '_' + pytest.loc + pytest.vendor + '/' + pytest.test + pytest.subtest + pytest.descr
@@ -29,26 +31,26 @@ def checkFile(file):
     with open(path, 'r') as f:
         return path, 'index,' in f.readline()
 
-def capture(limit, file):
+def capture(limit=1000, timeout=0, file=''):
     print('CAPTURE START')
-    # sendTIM('s')
+    sendTIM('s')
     index = 0
     buf = []
-    last_nue = {}
+    tStart = time.time()
     try:
         while True:
-            try:
-                data = receiveTIM()
-            except:
-                data = ''
-            if len(data):
-                # print(red + str(data))
-                if not pytest.blocking:
-                    # sendTIM('e')
-                    nue = nuestats()
-                    last_nue = nue
-                else:
-                    nue = last_nue
+            if time.time() - tStart > timeout and timeout:
+                break
+
+            # try:
+            data = receiveTIM()
+            # except:
+            #     data = ''
+            if data:
+                flushTIM()
+                # print(data)
+                sendTIM('e')
+                nue = nuestats()
                 # print(nue)
 
                 # if no header or file does not exist
@@ -79,20 +81,20 @@ def capture(limit, file):
                             msg = str(index) + ',' + dictToCSV(b)
                             f.write(msg + '\n')
                         buf = []
-                    
+
                     msg = green + str(index) + ',' + red + dictToCSV(data) + blue + dictToCSV(nue)
                     print(msg)
                     msg = str(index) + ',' + dictToCSV(data) + dictToCSV(nue)
                     f.write(msg + '\n')
-                    # sendTIM('s')
+                    sendTIM('s')
                     index += 1
-                    if index == limit:
+                    if index == limit and limit:
                         break
     except KeyboardInterrupt:
         pass
     finally:
         print('CAPTURE END')
-        # sendTIM('s')
+        sendTIM('s')
 
 def dictToCSV(dictionary):
     csv = ""
@@ -109,41 +111,37 @@ def nuestats():
 #         data.append(d)
 #     data.append(expect('at+nuestats="CELL"', 'OK', output=False)[:-1])
     # print(blue + str(data))
-    # pytest.output = False
-    try:
-        for i in range(5):
-            try:
-                data = expect('at+nuestats="ALL"', 'OK', 1, output=True)[:-1]
-                # print(green + str(data))
-            except AssertionError as e:
-                continue
-            dr = {}
-            try:
-                for i in data:
-                    j = i.split(',')
-                    # print(j)
-                    if j[0] == 'NUESTATS: "APPSMEM"' or j[0] == 'NUESTATS:APPSMEM':
-                        dr[j[1].split(':')[0][1:-1]] = j[1].split(':')[1]
-                    elif j[0] == 'NUESTATS: "CELL"' or j[0] == 'NUESTATS:CELL':
-                        dr['primary_cell'] = j[3]
-                        dr['rsrp'] = j[4]
-                        dr['rsrq'] = j[5]
-                        dr['rssi'] = j[6]
-                        dr['snr'] = j[7]
-                    elif 'NUESTATS:RADIO' in j[0]:
-                        s = j[1].split(':')
-                        dr[s[0]] = s[1]
-                    elif 'NUESTATS' in j[0]:
-                        dr[j[1][1:-1]] = j[2]
-            except IndexError as e:
-                print(e)
-                continue
-            if len(dr):
-                return dr
-        else:
-            return {}
-    finally:
-        pytest.output = True
+    for i in range(10):
+        try:
+            # print('for i in range(10):', i)
+            data = expect('at+nuestats="ALL"', 'OK', output=False)[:-1]
+        except AssertionError:
+            continue
+        dr = {}
+        try:
+            for i in data:
+                j = i.split(',')
+                # print(j)
+                if j[0] == 'NUESTATS: "APPSMEM"' or j[0] == 'NUESTATS:APPSMEM':
+                    dr[j[1].split(':')[0][1:-1]] = j[1].split(':')[1]
+                elif j[0] == 'NUESTATS: "CELL"' or j[0] == 'NUESTATS:CELL':
+                    dr['primary_cell'] = j[3]
+                    dr['rsrp'] = j[4]
+                    dr['rsrq'] = j[5]
+                    dr['rssi'] = j[6]
+                    dr['snr'] = j[7]
+                elif 'NUESTATS:RADIO' in j[0]:
+                    s = j[1].split(':')
+                    dr[s[0]] = s[1]
+                elif 'NUESTATS' in j[0]:
+                    dr[j[1][1:-1]] = j[2]
+        except IndexError as e:
+            print(e)
+            continue
+        if len(dr):
+            return dr
+    else:
+        return {}
 
 def edrxQuery():
     expect('AT+NPTWEDRXS?', 'NPTWEDRXS', output=True)
@@ -159,7 +157,11 @@ def setEDRX(ptw = 0, edrx = 9, active = 0, activeMul = 5, ptau = 3, ptauMul = 10
         edrxQuery()
     #     receiveTIM()
     if pytest.vendor == 'quectel':
-        pass
+        data = expect('AT+NPTWEDRXS=2,5,' + str(to_bin(ptw, 4)) + ',' + str(to_bin(edrx, 4)), reply='', t=3, output=output) # +CSCON: 0
+        receiveAT(t=1, output=output)
+        data = expect('at+cpsms=1,,,' + str(to_bin(ptau, 3)) + str(to_bin(ptauMul, 5)) + ',' + str(to_bin(active, 3)) + str(to_bin(activeMul, 5)), reply='', t=3, output=output) # +NPSMR:
+        receiveAT(t=1, output=output)
+        edrxQuery()
     if pytest.vendor == 'simcom':
         data = expect('AT*MEDRXCFG=1,5,"' + str(to_bin(edrx, 4)) + '","' + str(to_bin(ptw, 4)) + '"', reply='', t=3, output=output) # +CSCON: 0
         receiveAT(t=1, output=output)

@@ -32,7 +32,7 @@ def serialOpen():
             AT_PORT = port
             ATcount += 1
             pytest.vendor = 'ublox'
-        if vid_pid == '04E2:1414' and ATcount < 1:
+        if vid_pid == '04E2:1414' and ATcount < 3:
             AT_PORT = port
             ATcount += 1
             pytest.vendor = 'quectel'
@@ -40,8 +40,8 @@ def serialOpen():
             AT_PORT = port
             pytest.vendor = 'simcom'
     try:
-        serAT = serial.Serial(AT_PORT, 115200, timeout=0.2)
-        serTIM = serial.Serial(uC_PORT, 115200, timeout=0.01)
+        serAT = serial.Serial(AT_PORT, 115200, timeout=1)
+        serTIM = serial.Serial(uC_PORT, 115200, timeout=1)
         serGPS = serial.Serial(GPS_PORT, 9600, timeout=1)
     except serial.serialutil.SerialException as e:
         pass
@@ -53,131 +53,117 @@ def serialClose():
     serTIM.close()
     serGPS.close()
 
+
 def sendTIM(cmd):
     # print(yellow + cmd)
     serTIM.write(bytes(cmd + '\r', 'utf-8'))
 
-def primeTIM():
-    serTIM.write('r'.encode())
+def pauseTIM(enable):
+    # serTIM.write('r'.encode())
+    sendTIM('p' if enable else 'u')
+
+def primeTIM(enable):
+    # serTIM.write('r'.encode())
+    sendTIM('s' if enable else 'e')
+
+def flushTIM():
+    time.sleep(0.1)
+    sendTIM('f')
+    time.sleep(0.1)
+
+def fetchTIM():
+    sendTIM('t')
+    # time.sleep(0.1)
 
 def receiveTIM():
     data = {}
-    d = ''
-    while True:
-        h = serTIM.readline()
-        if h:
-            d += h.decode('utf-8')
-            if len(d.split(',')) >= 5:
-                break
+    serTIM.flush()
+    d = serTIM.readline().decode('utf-8')
     # d = '2300,260,2560,10.0,100,'
-
-    try:
-        d = d.strip()
-        data['idleTime'] = int(d.split(',')[0])
-        data['txTime'] = int(d.split(',')[1])
-        data['totalTime'] = int(d.split(',')[2])
-        data['energy'] = float(d.split(',')[3])
-        data['maxCurrent'] = float(d.split(',')[4])
-    except (ValueError, IndexError) as e:
-        print(red + d)
-        raise e
+    if len(d):
+        try:
+            d = d.strip()
+            # print(magenta + d)
+            data['idleTime'] = int(d.split(',')[0])
+            data['txTime'] = int(d.split(',')[1])
+            data['totalTime'] = int(d.split(',')[2])
+            data['energy'] = float(d.split(',')[3])
+            data['maxCurrent'] = float(d.split(',')[4])
+        except (ValueError, IndexError) as e:
+            print(red + d)
+            raise e
     return data
-        
-def streamAT():
+
+    # g = 0
+    # now = time.time()
+    # while True and (time.time() - now < 600.0):
     while True:
-        if not pytest.blocking:
-            d = serAT.readline()
-            if len(d):
-                d = d.decode('utf-8').strip()
-                pytest.stream.append(d)
-                # if d != pytest.stream[-1]:
-                #     print(green + d, pytest.stream[-1])
-                # if pytest.output and not 'NUESTAT' in d:
-                #     print(cyan + d)
-                
-                # out = converter(d)
-                # if out:
-                #     print(magenta + out)
+            # print(white + d, blue + str(energy))
+            break
+            # if energy[-1] > 25.0:
+
+            # g = guess_seq_len(b)
+            # if g != 0:
+            #     print(magenta + str(g))
+            #     break
     
 def sendAT(cmd, t=0, expect=['OK'], output=True):
-    if output and pytest.output:
+    if output:
         print(yellow + cmd)
     serAT.write(bytes(cmd + '\r', 'utf-8'))
     return receiveAT(t, expect, output)
 
-def OK(cmd, t=1):
-    reply = sendAT(cmd, t)
-    # print('reply:', reply)
-    assert 'OK' in reply
+# def receiveAT(t=0, expect=['OK'], output=True):
+#     try:
+#         locked = pytest.lock.acquire(blocking=False)
+#         if locked:
+#             return receiveAT_blocking(t, expect, output)
+#     finally:
+#         if locked:
+#             pytest.lock.release()
 
-def valsInStream(vals):
-    for e in vals:
-        # print('e in datastream', e in datastream, e)
-        if e in pytest.stream:
-            return True
-    return False
-
-def receiveAT(t=0, expect=['OK'], output=True, blocking=False):
+def receiveAT(t=0, expect=['OK'], output=True):
     if str(type(expect)) == "<class 'str'>":
         expect = [expect]
     c = 0
+    data = []
     exp = expect[:]
     exp.append('ERROR')
     exp.append('FAILED')
+    # while True:
+    #     d = serAT.readline().decode('utf-8')
+    #     if not len(d):
+    #         c += 0.1
+    #     if t > 0 and c == t:
+    #         data.append('timeout')
+    #         return data
+    #     if len(d):
+    #         data.append(d)
+    while True:
+        d = serAT.readline().decode('utf-8')
+        if not len(d):
+            c += 1
+        d = d.strip()
+        if len(d) > 0:
+            if output:
+                print(cyan + d)
+            out = converter(d)
+            if out:
+                print(magenta + out)
+            data.append(d)
+        if t > 0:
+            if c >= t:
+                data.append('timeout')
+                return data
+        for e in exp:
+            if e in d:
+                return data
 
-    if blocking:
-        pytest.blocking = True
-        data = []
-        while True:
-            d = serAT.readline().decode('utf-8')
-            if not len(d):
-                c += 1
-            d = d.strip()
-            if len(d) > 0:
-                if output:
-                    print(cyan, d, white)
-                out = converter(d)
-                if out:
-                    print(magenta + out)
-                data.append(d)
-            if t > 0:
-                if c == t:
-                    data.append('timeout')
-                    return data
-            for e in exp:
-                if e in d:
-                    return data
-    else:
-        pytest.blocking = False
-        length = 0
-        ret = pytest.stream[:]
-        while c <= t:
-            if len(pytest.stream) != length:
-                length = len(pytest.stream)
-                if valsInStream(exp):
-                    nuestat = []
-                    for w in range(length):
-                        for i, j in enumerate(pytest.stream):
-                            # print(red, 'pytest.stream', len(pytest.stream), white)
-                            # print(i, j)
-                            if 'NUESTATS' in j:
-                                nuestat.append(pytest.stream.pop(i)[:])
-                                break
-                    if len(nuestat):
-                        nuestat.append('OK')
-                        # pytest.stream = []
-                        print('nuestat', nuestat, len(nuestat))
-                        return nuestat
-                    # print('valsInStream(exp, pytest.stream)', exp)
-                    ret = pytest.stream[:]
-                    pytest.stream = []
-                    break
-            c += 0.1
-            time.sleep(0.1)
-            print('#####################')
-        print('ret', ret)
-        return ret
-
+def OK(cmd, t=0):
+    reply = sendAT(cmd, t)
+    # print('reply:', reply)
+    assert 'OK' in reply
+    return reply
 
 def expect(cmd, reply, t=1, output=True):
     replies = reply
@@ -193,6 +179,6 @@ def expect(cmd, reply, t=1, output=True):
                 check = True
                 break
     if not check:
-        print(magenta + str(replies), len(data), cmd, len(pytest.stream))
+        print(magenta + str(replies), data)
     assert check
     return data

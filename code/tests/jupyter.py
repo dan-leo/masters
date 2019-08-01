@@ -7,6 +7,41 @@ print('custom jupyter library imported')
 dirr = ""
 debug = False
 
+def adjust(key, val):
+    if key == 'Total power':
+        return max(-1400, val)
+    if key == 'Signal power':
+        return max(-1400, val)
+    if key == 'ECL':
+        return min(3, val)
+    if key == 'SNR':
+        return max(-200, val)
+#     if key == 'txTime':
+#         if val > 200000:
+#             return 20000
+#     if key == 'energy':
+#         return min(100000, val)
+    if key == 'TX power':
+        if val < -1000:
+            return -140
+    if key == 'EARFCN':
+        return min(10000, val)
+    if key == 'PCI':
+        if val > 1000:
+            return 0
+    if key == 'RSRQ':
+        if val < -1000:
+            return 0
+    return val
+
+def clean(arr, val):
+    try:
+        for i in arr:
+            arr.pop(arr.index(val))
+    except ValueError:
+        pass
+    return arr
+
 # csv to {}
 def csvToDict(file):
     dt = {}
@@ -58,9 +93,6 @@ def dataProcess(dt):
     dt['time'] = [0]
     for k in dt:
         for i, v in enumerate(dt[k]):
-            if k == 'ECL':
-                if v > 2:
-                    dt[k][i] = -1
             if k == 'idleTime':
                 if i > 0:
                     dt['time'].append(v + dt['txTime'][i-1] + dt['time'][i-1])
@@ -122,18 +154,6 @@ def mk(files):
         # print('c', len(c))
         dt.append(dataProcess(c))
     return dt
-
-def adjust(key, val):
-    if key == 'Signal power':
-        return max(-1300, val)
-    if key == 'ECL':
-        return min(3, val)
-    if key == 'SNR':
-        return max(-200, val)
-    if key == 'txTime':
-        if val > 200000:
-            return 20000
-    return val
 
 def maxHeaders(dt):
     m = 0

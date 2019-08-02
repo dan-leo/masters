@@ -8,30 +8,30 @@ dirr = ""
 debug = False
 
 def adjust(key, val):
-    if key == 'Total power':
-        return max(-1400, val)
-    if key == 'Signal power':
-        return max(-1400, val)
-    if key == 'ECL':
-        return min(3, val)
-    if key == 'SNR':
-        return max(-200, val)
-#     if key == 'txTime':
-#         if val > 200000:
-#             return 20000
-#     if key == 'energy':
-#         return min(100000, val)
-    if key == 'TX power':
-        if val < -1000:
-            return -140
-    if key == 'EARFCN':
-        return min(10000, val)
-    if key == 'PCI':
-        if val > 1000:
-            return 0
-    if key == 'RSRQ':
-        if val < -1000:
-            return 0
+#     if key == 'Total power':
+#         return max(-1400, val)
+#     if key == 'Signal power':
+#         return max(-1400, val)
+#     if key == 'ECL':
+#         return min(3, val)
+#     if key == 'SNR':
+#         return max(-200, val)
+# #     if key == 'txTime':
+# #         if val > 200000:
+# #             return 20000
+# #     if key == 'energy':
+# #         return min(100000, val)
+#     if key == 'TX power':
+#         if val < -1000:
+#             return -140
+#     if key == 'EARFCN':
+#         return min(10000, val)
+#     if key == 'PCI':
+#         if val > 1000:
+#             return 0
+#     if key == 'RSRQ':
+#         if val < -1000:
+#             return 0
     return val
 
 def clean(arr, val):

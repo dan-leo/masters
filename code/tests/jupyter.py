@@ -7,7 +7,7 @@ print('custom jupyter @DanielRobinson')
 dirr = ""
 debug = False
 
-def compare(files, thresh, text, ylabel, xlabel, ky, kx, ry, rx, overlays=['ublox', 'quectel'], graphs=['zte', 'nokia'], split=1, hist=False):
+def compare(files, thresh, text, ylabel, xlabel, ky, kx, ry, rx, overlays=['ublox', 'quectel'], graphs=['zte', 'nokia'], split=1, hist=False, bins=20):
     global dirr
     _debug = False
     sy = len(graphs)
@@ -38,7 +38,7 @@ def compare(files, thresh, text, ylabel, xlabel, ky, kx, ry, rx, overlays=['ublo
                 uei = dev.index(overlays[j]) if overlays[j] in dev else dev.index(graphs[s])
                 dirr = 'logs/' + nwv[nwi] + dev[uei] + '/'
                 # print(i, s, j, dirr, nwi, uei)
-                plot(ax[0], ax[1], kx, ky, rx, ry, files, colours[nwi][uei], alpha[j], (i, split), hist, thresh, j)
+                plot(ax[0], ax[1], kx, ky, rx, ry, files, colours[nwi][uei], alpha[j], (i, split), hist, thresh, j, bins)
                 if i == split - 1:
                     if overlays[j] in dev:
                         plt.xlabel(loc[nwi] + ' ' + xlabel)
@@ -120,7 +120,7 @@ def dict_filt(dc, x, y, split, thresh):
         print(IndexError, 'len(dc[x]) and len(dc[y])', len(dc[x]) and len(dc[y]))
         return np.array(dc[x]), np.array(dc[y]), [None, None]
 
-def plot(ax1, ax2, x, y, xr, yr, files, colour, alpha, split, hist, thresh, overlay_index):
+def plot(ax1, ax2, x, y, xr, yr, files, colour, alpha, split, hist, thresh, overlay_index, bins):
     # print('plot(x, y, xr, yr, files, colour, alpha, split, hist)', x, y)
     hy = []
     ax = ax2 if ax2 else ax1
@@ -150,21 +150,25 @@ def plot(ax1, ax2, x, y, xr, yr, files, colour, alpha, split, hist, thresh, over
             hy = np.ravel(hy)
         finally:
             if len(hy):
-                ax.hist(hy, color=colour[0], alpha=alpha)
+                ly = limits[1]
+                if ly[0]:
+                    ly[0] /= yr
+                if ly[1]:
+                    ly[1] /= yr
+                # print(limits, len(hy), ly)
+                ax.hist(hy, color=colour[0], alpha=alpha, range=ly, bins=bins)
+                # y alignment of dual hist graphs
                 if right and overlay_index == 1:
                     f1, f2, g1, g2 = plt.axis()
                     print(f1, f2, g1, g2)
                     h1, h2, u1, u2 = ax1.axis()
                     ax1.set_ylim([min(u1, g1), max(u2, g2)])
                     ax2.set_ylim([min(u1, g1), max(u2, g2)])
+                # x alignment of dual hist graphs
                 axes = plt.gca()
-                ly = limits[1]
-                if ly[0]:
-                    ly[0] /= yr
-                if ly[1]:
-                    ly[1] /= yr
                 axes.set_xlim(ly)
                 return
+    # y and x alignment of dual plot graphs
     axes = plt.gca()
     lx = limits[0]
     ly = limits[1]

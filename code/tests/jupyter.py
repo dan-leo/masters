@@ -70,7 +70,7 @@ def compare(files, thresh, text, ylabel, xlabel, ky, kx, ry, rx, descr='all_nw',
     plt.savefig('img/vodacom_vs_mtn_' + descr + "_" + overlay + "_" + "_".join(text.split()) + '.png')
     plt.show()
     
-def splitter(r, limits, split):
+def splitter(r, a, limits, split):
     split, slen = split
     if split == 0:
         lim = [limits[split], None]
@@ -82,6 +82,7 @@ def splitter(r, limits, split):
         lim = [limits[split], limits[split-1]]
         r *= a < limits[split-1]
         r *= a >= limits[split]
+    return r, lim
     
 def dict_filt(dc, x, y, split, thresh):
     _debug = False
@@ -114,6 +115,7 @@ def plot(x, y, xr, yr, files, colour, alpha, split, hist, thresh):
                     continue
                 # print('plot q/yr', q/yr)
                 plt.plot(p/xr, q/yr, colour, alpha=alpha)
+
     if hist and hy:
         # remember that ravel passes by reference, unlike flatten which passes a copy of the array
         
@@ -125,6 +127,28 @@ def plot(x, y, xr, yr, files, colour, alpha, split, hist, thresh):
         finally:
             if len(hy):
                 plt.hist(hy, color=colour[0], alpha=alpha)
+                axes = plt.gca()
+                ly = limits[1]
+                if ly[0]:
+                    ly[0] /= yr
+                if ly[1]:
+                    ly[1] /= yr
+                axes.set_xlim(ly)
+                return
+    axes = plt.gca()
+    lx = limits[0]
+    ly = limits[1]
+    if lx[0]:
+        lx[0] /= xr
+    if lx[1]:
+        lx[1] /= xr
+    if ly[0]:
+        ly[0] /= yr
+    if ly[1]:
+        ly[1] /= yr
+    axes.set_xlim(lx)
+    axes.set_ylim(ly)
+    # plt.show()
 
 def adjust(key, val):
 #     if key == 'Total power':

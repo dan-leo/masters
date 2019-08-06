@@ -8,7 +8,6 @@ dirr = ""
 debug = False
 
 def compare(files, thresh, text, ylabel, xlabel, ky, kx, ry, rx, overlays=['ublox', 'quectel'], graphs=['zte', 'nokia'], split=1, hist=False):
-    # print(files, text, ylabel, xlabel, ky, kx, ry, rx, descr, overlay, split, hist)
     global dirr
     _debug = False
     sy = len(graphs)
@@ -31,8 +30,6 @@ def compare(files, thresh, text, ylabel, xlabel, ky, kx, ry, rx, overlays=['ublo
         ax = [None, None]
         for s in range(sy):
             ax[s] = fig.add_subplot(sx, sy, s + 1 + i * sy)
-            if i == split - 1:
-                plt.xlabel(loc[s] + ' ' + xlabel)
             if i == np.floor(split/2):
                 plt.ylabel(ylabel)
             for j in range(len(overlays)):
@@ -40,8 +37,13 @@ def compare(files, thresh, text, ylabel, xlabel, ky, kx, ry, rx, overlays=['ublo
                 nwi = b.index(True) if True in b else [graphs[s] in a for a in nwv].index(True)
                 uei = dev.index(overlays[j]) if overlays[j] in dev else dev.index(graphs[s])
                 dirr = 'logs/' + nwv[nwi] + dev[uei] + '/'
-                print(i, s, j, dirr, nwi, uei)
+                # print(i, s, j, dirr, nwi, uei)
                 plot(ax[0], ax[1], kx, ky, rx, ry, files, colours[nwi][uei], alpha[j], (i, split), hist, thresh, j)
+                if i == split - 1:
+                    if overlays[j] in dev:
+                        plt.xlabel(loc[nwi] + ' ' + xlabel)
+                    else:
+                        plt.xlabel(dev[uei][0].upper() + dev[uei][1:] + ' ' + xlabel)
 
     plt.savefig('img/vodacom_vs_mtn_' + "_".join(graphs) + "_" + "_".join(overlays) + "_" + "_".join(text.split()) + '.png')
     plt.show()

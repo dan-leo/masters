@@ -2,10 +2,129 @@ import numpy as np
 import matplotlib.pyplot as plt
 import glob
 
-print('custom jupyter library imported')
+print('custom jupyter @DanielRobinson')
 
 dirr = ""
 debug = False
+
+def compare(files, thresh, text, ylabel, xlabel, ky, kx, ry, rx, descr='all_nw', overlay='all', split=1, hist=False):
+    # print(files, text, ylabel, xlabel, ky, kx, ry, rx, descr, overlay, split, hist)
+    global dirr
+    _debug = False
+    sy = 2 if 'all' in descr else 1
+    fx = 7 * sy
+    fy = 4 * split + 2
+    sx = 1 + split
+    debug = False
+    alpha = [1, 0.7]
+    if _debug: 
+        print(fx, fy, sx, sy,)    
+    
+    plt.figure(figsize=(fx, fy))
+    plt.suptitle(text) 
+    
+    for i in range(split):
+        if descr in ['zte', 'all_nw']:
+            plt.subplot(sx, sy, 1 + i * 2)
+            if i == split - 1:
+                plt.xlabel('MTN ZTE ' + xlabel)
+            plt.ylabel(ylabel)
+            if overlay in ['ublox', 'all']:
+                dirr = 'logs/zte_mtn/rf_shield/ublox/'
+                plot(kx, ky, rx, ry, files, 'g*', alpha[0], (i, split), hist, thresh)
+            if overlay in ['quectel', 'all']:
+                dirr = 'logs/zte_mtn/rf_shield/quectel/'
+                plot(kx, ky, rx, ry, files, 'k*', alpha[1], (i, split), hist, thresh)
+        if descr in ['nokia', 'all_nw'] and sy > 1:
+            plt.subplot(sx, sy, 2 + i * 2)
+            if i == split - 1:
+                plt.xlabel('Vodacom Nokia ' + xlabel)
+            if overlay in ['ublox', 'all']:
+                dirr = 'logs/nokia_vodacom/centurycity/ublox/'
+                plot(kx, ky, rx, ry, files, 'g*', alpha[0], (i, split), hist, thresh)
+            if overlay in ['quectel', 'all']:
+                dirr = 'logs/nokia_vodacom/centurycity/quectel/'
+                plot(kx, ky, rx, ry, files, 'k*', alpha[1], (i, split), hist, thresh)
+        if descr in ['ublox', 'all_ue']:
+            plt.subplot(sx, sy, 1 + i * 2)
+            if i == split - 1:
+                plt.xlabel('Ublox ' + xlabel)
+            plt.ylabel(ylabel)
+            if overlay in ['zte', 'all']:
+                dirr = 'logs/zte_mtn/rf_shield/ublox/'
+                plot(kx, ky, rx, ry, files, 'g*', alpha[0], (i, split), hist, thresh)
+            if overlay in ['nokia', 'all']:
+                dirr = 'logs/nokia_vodacom/centurycity/ublox/'
+                plot(kx, ky, rx, ry, files, 'b*', alpha[1], (i, split), hist, thresh)
+        if descr in ['quectel', 'all_ue'] and sy > 1:
+            plt.subplot(sx, sy, 2 + i * 2)
+            if i == split - 1:
+                plt.xlabel('Quectel ' + xlabel)
+            if overlay in ['zte', 'all']:
+                dirr = 'logs/zte_mtn/rf_shield/quectel/'
+                plot(kx, ky, rx, ry, files, 'k*', alpha[0], (i, split), hist, thresh)
+            if overlay in ['nokia', 'all']:
+                dirr = 'logs/nokia_vodacom/centurycity/quectel/'
+                plot(kx, ky, rx, ry, files, 'r*', alpha[1], (i, split), hist, thresh)
+        
+    plt.savefig('img/vodacom_vs_mtn_' + descr + "_" + overlay + "_" + "_".join(text.split()) + '.png')
+    plt.show()
+    
+def splitter(r, limits, split):
+    split, slen = split
+    if split == 0:
+        lim = [limits[split], None]
+        r *= a >= limits[split]
+    elif split == slen - 1:
+        lim = [None, limits[split-1]]
+        r *= a < limits[split-1]
+    else:
+        lim = [limits[split], limits[split-1]]
+        r *= a < limits[split-1]
+        r *= a >= limits[split]
+    
+def dict_filt(dc, x, y, split, thresh):
+    _debug = False
+    try:
+        t, limitx = thresh(dc, x, split) 
+        t2, limity = thresh(dc, y, split)
+        if len(t):
+            t *= t2
+        if _debug:
+            print('dc[x]', x, len(dc[x]), 'dc[y]', y, len(dc[y]), dc[x], dc[y])
+        return np.array(dc[x])[t], np.array(dc[y])[t], [limitx, limity]
+    except IndexError:
+        print(IndexError, 'len(dc[x]) and len(dc[y])', len(dc[x]) and len(dc[y]))
+        return np.array(dc[x]), np.array(dc[y]), [None, None]
+
+def plot(x, y, xr, yr, files, colour, alpha, split, hist, thresh):
+    # print('plot(x, y, xr, yr, files, colour, alpha, split, hist)', x, y)
+    hy = []
+    for f in files:
+        zu_mg = merge(mk(f))
+        # print('zu_mg', zu_mg)
+        if zu_mg:
+            p, q, limits = dict_filt(zu_mg, x, y, split, thresh)
+            # print('p, q', p, q)
+            if len(p) and len(q):
+                if hist:
+                    # print('hist q/yr', q/yr)
+                    if len(q):
+                        hy.append(q/yr)
+                    continue
+                # print('plot q/yr', q/yr)
+                plt.plot(p/xr, q/yr, colour, alpha=alpha)
+    if hist and hy:
+        # remember that ravel passes by reference, unlike flatten which passes a copy of the array
+        
+        # print(np.ravel(hy), len(np.ravel(hy)), type(np.ravel(hy)))
+        try:
+            hy = np.concatenate(np.ravel(hy))
+        except ValueError:
+            hy = np.ravel(hy)
+        finally:
+            if len(hy):
+                plt.hist(hy, color=colour[0], alpha=alpha)
 
 def adjust(key, val):
 #     if key == 'Total power':
@@ -139,7 +258,8 @@ def datasetPlot(dt, length, time):
     plt.show()
     
 def mk(files):
-    # print('files', files)
+    global dirr
+    # print('files', files, 'dirr', dirr)
     dt = []
     file_list = []
     if str(type(files)) == "<class 'str'>":
@@ -147,7 +267,7 @@ def mk(files):
     else:
         for fl in files:
             file_list.append(dirr + fl)
-    # print('files2', files)
+    # print('file_list', file_list)
     for f in file_list:
         # print('filefff', f)
         c = csvToDict(f)

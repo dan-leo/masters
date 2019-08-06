@@ -7,65 +7,102 @@ print('custom jupyter @DanielRobinson')
 dirr = ""
 debug = False
 
-def compare(files, thresh, text, ylabel, xlabel, ky, kx, ry, rx, descr='all_nw', overlay='all', split=1, hist=False):
+def compare(files, thresh, text, ylabel, xlabel, ky, kx, ry, rx, overlays=['ublox', 'quectel'], graphs=['zte', 'nokia'], split=1, hist=False):
     # print(files, text, ylabel, xlabel, ky, kx, ry, rx, descr, overlay, split, hist)
     global dirr
     _debug = False
-    sy = 2 if 'all' in descr else 1
+    sy = len(graphs)
     fx = 7 * sy
     fy = 4 * split + 2
     sx = 1 + split
     debug = False
     alpha = [1, 0.7]
+    dev = ['ublox', 'quectel']
+    nwv = ['zte_mtn/rf_shield/', 'nokia_vodacom/centurycity/']
+    loc = ['MTN ZTE', 'Vodacom Nokia']
+    colours = [['g*', 'k*'], ['b*', 'r*']]
     if _debug: 
         print(fx, fy, sx, sy,)    
     
-    plt.figure(figsize=(fx, fy))
-    plt.suptitle(text) 
-    
+    fig = plt.figure(figsize=(fx, fy))
+    plt.suptitle(text)
+
     for i in range(split):
-        if descr in ['zte', 'all_nw']:
-            plt.subplot(sx, sy, 1 + i * 2)
+        ax = [None, None]
+        for s in range(sy):
+            ax[s] = fig.add_subplot(sx, sy, s + 1 + i * 2)
             if i == split - 1:
-                plt.xlabel('MTN ZTE ' + xlabel)
-            plt.ylabel(ylabel)
-            if overlay in ['ublox', 'all']:
-                dirr = 'logs/zte_mtn/rf_shield/ublox/'
-                plot(kx, ky, rx, ry, files, 'g*', alpha[0], (i, split), hist, thresh)
-            if overlay in ['quectel', 'all']:
-                dirr = 'logs/zte_mtn/rf_shield/quectel/'
-                plot(kx, ky, rx, ry, files, 'k*', alpha[1], (i, split), hist, thresh)
-        if descr in ['nokia', 'all_nw'] and sy > 1:
-            plt.subplot(sx, sy, 2 + i * 2)
-            if i == split - 1:
-                plt.xlabel('Vodacom Nokia ' + xlabel)
-            if overlay in ['ublox', 'all']:
-                dirr = 'logs/nokia_vodacom/centurycity/ublox/'
-                plot(kx, ky, rx, ry, files, 'g*', alpha[0], (i, split), hist, thresh)
-            if overlay in ['quectel', 'all']:
-                dirr = 'logs/nokia_vodacom/centurycity/quectel/'
-                plot(kx, ky, rx, ry, files, 'k*', alpha[1], (i, split), hist, thresh)
-        if descr in ['ublox', 'all_ue']:
-            plt.subplot(sx, sy, 1 + i * 2)
-            if i == split - 1:
-                plt.xlabel('Ublox ' + xlabel)
-            plt.ylabel(ylabel)
-            if overlay in ['zte', 'all']:
-                dirr = 'logs/zte_mtn/rf_shield/ublox/'
-                plot(kx, ky, rx, ry, files, 'g*', alpha[0], (i, split), hist, thresh)
-            if overlay in ['nokia', 'all']:
-                dirr = 'logs/nokia_vodacom/centurycity/ublox/'
-                plot(kx, ky, rx, ry, files, 'b*', alpha[1], (i, split), hist, thresh)
-        if descr in ['quectel', 'all_ue'] and sy > 1:
-            plt.subplot(sx, sy, 2 + i * 2)
-            if i == split - 1:
-                plt.xlabel('Quectel ' + xlabel)
-            if overlay in ['zte', 'all']:
-                dirr = 'logs/zte_mtn/rf_shield/quectel/'
-                plot(kx, ky, rx, ry, files, 'k*', alpha[0], (i, split), hist, thresh)
-            if overlay in ['nokia', 'all']:
-                dirr = 'logs/nokia_vodacom/centurycity/quectel/'
-                plot(kx, ky, rx, ry, files, 'r*', alpha[1], (i, split), hist, thresh)
+                plt.xlabel(loc[s] + ' ' + xlabel)
+            if i == np.floor(split/2):
+                plt.ylabel(ylabel)
+            num = 2 if overlay == 'all' else 1
+            for j in range(num):
+                if num > 1:
+                    if 'nw' in descr:
+                        nwvi = s
+                        devv = dev[j]
+                        colourx = s
+                        coloury = j
+                    else:
+                        nwvi = j
+                        devv = dev[s]
+                        colourx = j
+                        coloury = s
+                else:
+                    nwvi = nwv.index(descr)
+                    devv = overlay
+                    coloury = dev.index(overlay)
+                dirr = 'logs/' + nwv[nwvi] + devv + '/'
+                print(i, s, j, dirr)
+                plot(ax[0], ax[1], kx, ky, rx, ry, files, colours[colourx][coloury], alpha[j], (i, split), hist, thresh, j)
+
+
+        # if descr in ['zte', 'all_nw']:
+        #     ax1 = fig.add_subplot(sx, sy, 1 + i * 2)
+            
+        #     if i == split - 1:
+        #         plt.xlabel('MTN ZTE ' + xlabel)
+        #     if i == np.ceil(split/2):
+        #         plt.ylabel(ylabel)
+        #     colours = ['g*', 'k*']
+        #     num = 2 if overlay == 'all' else 1
+        #     for j in range(num):
+        #         dirr = 'logs/zte_mtn/rf_shield/' + (dev[j] if num > 1 else overlay) + '/'
+        #         plot(ax1, None, kx, ky, rx, ry, files, colours[j if num > 1 else dev.index(overlay)], alpha[j], (i, split), hist, thresh, j)
+        # if descr in ['nokia', 'all_nw'] and sy > 1:
+        #     ax2 = fig.add_subplot(sx, sy, 2 + i * 2)
+            
+        #     if i == split - 1:
+        #         plt.xlabel('Vodacom Nokia ' + xlabel)
+        #     if overlay in ['ublox', 'all']:
+        #         dirr = 'logs/nokia_vodacom/centurycity/ublox/'
+        #         plot(ax1, ax2, kx, ky, rx, ry, files, 'b*', alpha[0], (i, split), hist, thresh, 0)
+        #     if overlay in ['quectel', 'all']:
+        #         dirr = 'logs/nokia_vodacom/centurycity/quectel/'
+        #         plot(ax1, ax2, kx, ky, rx, ry, files, 'r*', alpha[1], (i, split), hist, thresh, 1)
+        # if descr in ['ublox', 'all_ue']:
+        #     ax1 = fig.add_subplot(sx, sy, 1 + i * 2)
+            
+        #     if i == split - 1:
+        #         plt.xlabel('Ublox ' + xlabel)
+        #     plt.ylabel(ylabel)
+        #     if overlay in ['zte', 'all']:
+        #         dirr = 'logs/zte_mtn/rf_shield/ublox/'
+        #         plot(ax1, None, kx, ky, rx, ry, files, 'g*', alpha[0], (i, split), hist, thresh, 0)
+        #     if overlay in ['nokia', 'all']:
+        #         dirr = 'logs/nokia_vodacom/centurycity/ublox/'
+        #         plot(ax1, None, kx, ky, rx, ry, files, 'b*', alpha[1], (i, split), hist, thresh, 1)
+        # if descr in ['quectel', 'all_ue'] and sy > 1:
+        #     ax2 = fig.add_subplot(sx, sy, 2 + i * 2)
+            
+        #     if i == split - 1:
+        #         plt.xlabel('Quectel ' + xlabel)
+        #     if overlay in ['zte', 'all']:
+        #         dirr = 'logs/zte_mtn/rf_shield/quectel/'
+        #         plot(ax1, ax2, kx, ky, rx, ry, files, 'k*', alpha[0], (i, split), hist, thresh, 0)
+        #     if overlay in ['nokia', 'all']:
+        #         dirr = 'logs/nokia_vodacom/centurycity/quectel/'
+        #         plot(ax1, ax2, kx, ky, rx, ry, files, 'r*', alpha[1], (i, split), hist, thresh, 1)
         
     plt.savefig('img/vodacom_vs_mtn_' + descr + "_" + overlay + "_" + "_".join(text.split()) + '.png')
     plt.show()
@@ -98,9 +135,11 @@ def dict_filt(dc, x, y, split, thresh):
         print(IndexError, 'len(dc[x]) and len(dc[y])', len(dc[x]) and len(dc[y]))
         return np.array(dc[x]), np.array(dc[y]), [None, None]
 
-def plot(x, y, xr, yr, files, colour, alpha, split, hist, thresh):
+def plot(ax1, ax2, x, y, xr, yr, files, colour, alpha, split, hist, thresh, overlay_index):
     # print('plot(x, y, xr, yr, files, colour, alpha, split, hist)', x, y)
     hy = []
+    ax = ax2 if ax2 else ax1
+    right = True if ax2 else False
     for f in files:
         zu_mg = merge(mk(f))
         # print('zu_mg', zu_mg)
@@ -114,7 +153,7 @@ def plot(x, y, xr, yr, files, colour, alpha, split, hist, thresh):
                         hy.append(q/yr)
                     continue
                 # print('plot q/yr', q/yr)
-                plt.plot(p/xr, q/yr, colour, alpha=alpha)
+                ax.plot(p/xr, q/yr, colour, alpha=alpha)
 
     if hist and hy:
         # remember that ravel passes by reference, unlike flatten which passes a copy of the array
@@ -126,7 +165,13 @@ def plot(x, y, xr, yr, files, colour, alpha, split, hist, thresh):
             hy = np.ravel(hy)
         finally:
             if len(hy):
-                plt.hist(hy, color=colour[0], alpha=alpha)
+                ax.hist(hy, color=colour[0], alpha=alpha)
+                if right and overlay_index == 1:
+                    f1, f2, g1, g2 = plt.axis()
+                    print(f1, f2, g1, g2)
+                    h1, h2, u1, u2 = ax1.axis()
+                    ax1.set_ylim([min(u1, g1), max(u2, g2)])
+                    ax2.set_ylim([min(u1, g1), max(u2, g2)])
                 axes = plt.gca()
                 ly = limits[1]
                 if ly[0]:
@@ -143,6 +188,7 @@ def plot(x, y, xr, yr, files, colour, alpha, split, hist, thresh):
     if lx[1]:
         lx[1] /= xr
     if ly[0]:
+        ly[0] -= 1
         ly[0] /= yr
     if ly[1]:
         ly[1] /= yr

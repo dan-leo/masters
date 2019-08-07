@@ -7,6 +7,52 @@ print('custom jupyter @DanielRobinson')
 dirr = ""
 debug = False
 
+def adjust(key, val):
+#     if key == 'Total power':
+#         return max(-1400, val)
+#     if key == 'Signal power':
+#         return max(-1400, val)
+    if key == 'ECL':
+        return min(3, val)
+#     if key == 'SNR':
+#         return max(-200, val)
+# #     if key == 'txTime':
+# #         if val > 200000:
+# #             return 20000
+# #     if key == 'energy':
+# #         return min(100000, val)
+#     if key == 'TX power':
+#         if val < -1000:
+#             return -140
+#     if key == 'EARFCN':
+#         return min(10000, val)
+#     if key == 'PCI':
+#         if val > 1000:
+#             return 0
+#     if key == 'RSRQ':
+#         if val < -1000:
+#             return 0
+    return val
+
+def thresh(a, key, split):
+    a = np.array(a[key])
+    r = a == a
+    lim = [None, None]
+    if key == 'Signal power':
+        r *= a > -1450
+        lim = [-1350, -700]
+    if key == 'TX power':
+        r *= a > -1400
+    if key == 'Total power':
+        r *= a > -1400
+    if key == 'SNR':
+        r *= a > -200
+        # lim = [-200, 200]
+    if key == 'energy':
+        r *= a > 0
+        lim = [0, 800000]
+    return r, lim
+
 def compare(files, thresh, text, ylabel, xlabel, ky, kx, ry, rx, overlays=['ublox', 'quectel'], graphs=['zte', 'nokia'], split=1, hist=False, bins=20, log=False):
     global dirr
     sy = len(graphs)
@@ -37,7 +83,7 @@ def compare(files, thresh, text, ylabel, xlabel, ky, kx, ry, rx, overlays=['ublo
                 uei = dev.index(overlays[j]) if overlays[j] in dev else dev.index(graphs[s])
                 dirr = 'logs/' + nwv[nwi] + dev[uei] + '/'
                 # print(i, s, j, dirr, nwi, uei)
-                plot(ax[0], ax[1], kx, ky, rx, ry, files, colours[nwi][uei], alpha[j], (i, split), hist, thresh, j, bins, log)
+                plot(ax[0], ax[1], kx, ky, rx, ry, files, colours[nwi][uei], alpha[j], (i, split), hist, thresh, [[s, len(graphs)], [j, len(overlays)]], bins, log)
                 if i == split - 1:
                     if overlays[j] in dev:
                         plt.xlabel(loc[nwi] + ' ' + xlabel)
@@ -52,7 +98,7 @@ def compare(files, thresh, text, ylabel, xlabel, ky, kx, ry, rx, overlays=['ublo
             ymin = min(ymin, u1)
             ymax = max(ymax, u2)
         for ax in axlist:
-            ax.set_ylim([ymin, ymax])
+            ax.set_ylim([None if log else ymin, ymax])
 
     plt.savefig('img/vodacom_vs_mtn_' + "_".join(graphs) + "_" + "_".join(overlays) + "_" + "_".join(text.split()) + '.png')
     plt.show()
@@ -86,11 +132,11 @@ def dict_filt(dc, x, y, split, thresh):
         print(IndexError, 'len(dc[x]) and len(dc[y])', len(dc[x]) and len(dc[y]))
         return np.array(dc[x]), np.array(dc[y]), [None, None]
 
-def plot(ax1, ax2, x, y, xr, yr, files, colour, alpha, split, hist, thresh, overlay_index, bins, log):
+def plot(ax1, ax2, x, y, xr, yr, files, colour, alpha, split, hist, thresh, indexes, bins, log):
     # print('plot(x, y, xr, yr, files, colour, alpha, split, hist)', x, y)
     hy = []
     ax = ax2 if ax2 else ax1
-    right = True if ax2 else False
+    right = indexes[0][0] >= 1
     for f in files:
         zu_mg = merge(mk(f))
         # print('zu_mg', zu_mg)
@@ -116,22 +162,26 @@ def plot(ax1, ax2, x, y, xr, yr, files, colour, alpha, split, hist, thresh, over
             hy = np.ravel(hy)
         finally:
             if len(hy):
-                print(len(hy))
+                # print(len(hy))
                 ly = limits[1]
                 if ly[0]:
                     ly[0] /= yr
                 if ly[1]:
                     ly[1] /= yr
                 # print(limits, len(hy), ly)
+                if not ly[0] and not ly[1]:
+                    ly = None
                 ax.hist(hy, color=colour[0], alpha=alpha, range=ly, bins=bins, log=log)
                 # y alignment of dual hist graphs
-                if right and overlay_index == 1:
+                if right and indexes[1][0] >= (1 if indexes[1][1] > 0 else 0):
+                    # print(min(u1, g1), max(u2, g2))
                     f1, f2, g1, g2 = plt.axis()
-                    print(f1, f2, g1, g2)
+                    # print(f1, f2, g1, g2)
                     h1, h2, u1, u2 = ax1.axis()
                     ax1.set_ylim([min(u1, g1), max(u2, g2)])
                     ax2.set_ylim([min(u1, g1), max(u2, g2)])
                 # x alignment of dual hist graphs
+                # if ly:
                 axes = plt.gca()
                 axes.set_xlim(ly)
                 return
@@ -150,6 +200,14 @@ def plot(ax1, ax2, x, y, xr, yr, files, colour, alpha, split, hist, thresh, over
         ly[1] /= yr
     axes.set_xlim(lx)
     axes.set_ylim(ly)
+    if right and indexes[1][0] >= (1 if indexes[1][1] > 0 else 0):
+        f1, f2, g1, g2 = plt.axis()
+        h1, h2, u1, u2 = ax1.axis()
+        print(min(u1, g1), max(u2, g2))
+        ax1.set_ylim([min(u1, g1), max(u2, g2)])
+        ax2.set_ylim([min(u1, g1), max(u2, g2)])
+        ax1.set_xlim([min(f1, h1), max(f2, h2)])
+        ax2.set_xlim([min(f1, h1), max(f2, h2)])
     # plt.show()
 
 def clean(arr, val):
@@ -311,33 +369,6 @@ def mean(dt):
             for d in dt:
                 mean[k].append(adjust(k, np.mean(d[k])))
     return mean
-
-def adjust(key, val):
-#     if key == 'Total power':
-#         return max(-1400, val)
-#     if key == 'Signal power':
-#         return max(-1400, val)
-#     if key == 'ECL':
-#         return min(3, val)
-#     if key == 'SNR':
-#         return max(-200, val)
-# #     if key == 'txTime':
-# #         if val > 200000:
-# #             return 20000
-# #     if key == 'energy':
-# #         return min(100000, val)
-#     if key == 'TX power':
-#         if val < -1000:
-#             return -140
-#     if key == 'EARFCN':
-#         return min(10000, val)
-#     if key == 'PCI':
-#         if val > 1000:
-#             return 0
-#     if key == 'RSRQ':
-#         if val < -1000:
-#             return 0
-    return val
 
 
         # if descr in ['zte', 'all_nw']:

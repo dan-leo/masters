@@ -145,8 +145,7 @@ def plot(ax1, ax2, x, y, xr, yr, files, colour, alpha, split, hist, thresh, inde
         # print('zu_mg', zu_mg)
         if zu_mg:
             p, q, limits = dict_filt(zu_mg, x, y, split, thresh)
-            # print(limits)
-            # print('p, q', p, q)
+            # print('p, q', p, q, 'limits', limits)
             try:
                 if len(p) and len(q):
                     if hist:
@@ -175,37 +174,38 @@ def plot(ax1, ax2, x, y, xr, yr, files, colour, alpha, split, hist, thresh, inde
                 if ly[1]:
                     ly[1] /= yr
                 # print(limits, len(hy), ly)
-                if not ly[0] and not ly[1]:
+                if not ly[0] or not ly[1]:
                     ly = None
+                # print('ly', ly)
                 ax.hist(hy, color=colour[0], alpha=alpha, range=ly, bins=bins, log=log)
                 # y alignment of dual hist graphs
                 if right and indexes[1][0] >= (1 if indexes[1][1] > 0 else 0):
-                    # print(min(u1, g1), max(u2, g2))
                     f1, f2, g1, g2 = plt.axis()
-                    # print(f1, f2, g1, g2)
                     h1, h2, u1, u2 = ax1.axis()
                     ax1.set_ylim([min(u1, g1), max(u2, g2)])
                     ax2.set_ylim([min(u1, g1), max(u2, g2)])
+                    ax1.set_xlim([min(f1, h1), max(f2, h2)])
+                    ax2.set_xlim([min(f1, h1), max(f2, h2)])
+                    # print(f1, f2, g1, g2)
+                    # print(min(u1, g1), max(u2, g2))
                 # x alignment of dual hist graphs
                 # if ly:
-                axes = plt.gca()
-                axes.set_xlim(ly)
+                # axes = plt.gca()
+                # axes.set_xlim(ly)
                 return
     # y and x limit alignment of dual plot graphs
     try:
         axes = plt.gca()
-        lx = limits[0]
+        # lx = limits[0]
+        # if lx[0]:
+        #     lx[0] /= xr
+        # if lx[1]:
+        #     lx[1] /= xr
         ly = limits[1]
-        if lx[0]:
-            lx[0] /= xr
-        if lx[1]:
-            lx[1] /= xr
         if ly[0]:
-            ly[0] -= 1
             ly[0] /= yr
         if ly[1]:
             ly[1] /= yr
-        axes.set_xlim(lx)
         axes.set_ylim(ly)
     except TypeError:
         pass

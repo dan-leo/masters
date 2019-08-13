@@ -158,9 +158,23 @@ def plot(ax1, ax2, x, y, xr, yr, files, colour, alpha, split, hist, thresh, inde
             except TypeError:
                 pass
 
+    # y and x limit alignment of dual plot graphs
+    # lx = limits[0]
+    # if lx[0]:
+    #     lx[0] /= xr
+    # if lx[1]:
+    #     lx[1] /= xr
+    ly = limits[1]
+    if ly[0]:
+        ly[0] /= yr
+    if ly[1]:
+        ly[1] /= yr
+    if not hist:
+        ax.set_ylim(ly)
+
+
     if hist and hy:
         # remember that ravel passes by reference, unlike flatten which passes a copy of the array
-        
         try:
             hy = np.concatenate(np.ravel(hy))
         except ValueError:
@@ -168,48 +182,16 @@ def plot(ax1, ax2, x, y, xr, yr, files, colour, alpha, split, hist, thresh, inde
         finally:
             if len(hy):
                 # print(len(hy))
-                ly = limits[1]
-                if ly[0]:
-                    ly[0] /= yr
-                if ly[1]:
-                    ly[1] /= yr
-                # print(limits, len(hy), ly)
                 if not ly[0] or not ly[1]:
                     ly = None
-                # print('ly', ly)
+                print('ly', ly)
                 ax.hist(hy, color=colour[0], alpha=alpha, range=ly, bins=bins, log=log)
-                # y alignment of dual hist graphs
-                if right and indexes[1][0] >= (1 if indexes[1][1] > 0 else 0):
-                    f1, f2, g1, g2 = plt.axis()
-                    h1, h2, u1, u2 = ax1.axis()
-                    ax1.set_ylim([min(u1, g1), max(u2, g2)])
-                    ax2.set_ylim([min(u1, g1), max(u2, g2)])
-                    ax1.set_xlim([min(f1, h1), max(f2, h2)])
-                    ax2.set_xlim([min(f1, h1), max(f2, h2)])
-                    # print(f1, f2, g1, g2)
-                    # print(min(u1, g1), max(u2, g2))
                 # x alignment of dual hist graphs
                 # if ly:
-                # axes = plt.gca()
-                # axes.set_xlim(ly)
-                return
-    # y and x limit alignment of dual plot graphs
-    try:
-        axes = plt.gca()
-        # lx = limits[0]
-        # if lx[0]:
-        #     lx[0] /= xr
-        # if lx[1]:
-        #     lx[1] /= xr
-        ly = limits[1]
-        if ly[0]:
-            ly[0] /= yr
-        if ly[1]:
-            ly[1] /= yr
-        axes.set_ylim(ly)
-    except TypeError:
-        pass
-     # y alignment of dual plot graphs
+                ax.set_xlim(ly)
+                # return
+                
+    # y alignment of dual plot graphs
     if right and indexes[1][0] >= (1 if indexes[1][1] > 0 else 0):
         f1, f2, g1, g2 = plt.axis()
         h1, h2, u1, u2 = ax1.axis()
@@ -218,6 +200,8 @@ def plot(ax1, ax2, x, y, xr, yr, files, colour, alpha, split, hist, thresh, inde
         ax2.set_ylim([min(u1, g1), max(u2, g2)])
         ax1.set_xlim([min(f1, h1), max(f2, h2)])
         ax2.set_xlim([min(f1, h1), max(f2, h2)])
+        # print(f1, f2, g1, g2)
+        # print(min(u1, g1), max(u2, g2))
 
 def clean(arr, val):
     try:

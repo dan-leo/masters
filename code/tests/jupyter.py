@@ -100,7 +100,7 @@ def compare(files, thresh, text, ylabel, xlabel, ky, kx, ry, rx, overlays=['ublo
         for ax in axlist:
             ax.set_ylim([None if log else ymin, ymax])
 
-    plt.savefig('img/vodacom_vs_mtn_' + "_".join(graphs) + "_" + "_".join(overlays) + "_" + "_".join(text.split()) + '.png')
+    plt.savefig('img/vodacom_vs_mtn_' + "_".join(graphs) + "_" + "_".join(overlays) + "_" + "_".join(text.split()) + '.pdf')
     plt.show()
         
     
@@ -121,13 +121,16 @@ def splitter(r, a, limits, split):
 def dict_filt(dc, x, y, split, thresh):
     _debug = False
     try:
-        t, limitx = thresh(dc, x, split) 
-        t2, limity = thresh(dc, y, split)
-        if len(t):
-            t *= t2
-        if _debug:
-            print('dc[x]', x, len(dc[x]), 'dc[y]', y, len(dc[y]), dc[x], dc[y])
-        return np.array(dc[x])[t], np.array(dc[y])[t], [limitx, limity]
+        try:
+            t, limitx = thresh(dc, x, split) 
+            t2, limity = thresh(dc, y, split)
+            if len(t):
+                t *= t2
+            if _debug:
+                print('dc[x]', x, len(dc[x]), 'dc[y]', y, len(dc[y]), dc[x], dc[y])
+            return np.array(dc[x])[t], np.array(dc[y])[t], [limitx, limity]
+        except KeyError:
+            return None, None, [None, None]
     except IndexError:
         print(IndexError, 'len(dc[x]) and len(dc[y])', len(dc[x]) and len(dc[y]))
         return np.array(dc[x]), np.array(dc[y]), [None, None]
@@ -142,20 +145,23 @@ def plot(ax1, ax2, x, y, xr, yr, files, colour, alpha, split, hist, thresh, inde
         # print('zu_mg', zu_mg)
         if zu_mg:
             p, q, limits = dict_filt(zu_mg, x, y, split, thresh)
+            # print(limits)
             # print('p, q', p, q)
-            if len(p) and len(q):
-                if hist:
-                    # print('hist q/yr', q/yr)
-                    if len(q):
-                        hy.append(q/yr)
-                    continue
-                # print('plot q/yr', q/yr)
-                ax.plot(p/xr, q/yr, colour, alpha=alpha)
+            try:
+                if len(p) and len(q):
+                    if hist:
+                        # print('hist q/yr', q/yr)
+                        if len(q):
+                            hy.append(q/yr)
+                        continue
+                    # print('plot q/yr', q/yr)
+                    ax.plot(p/xr, q/yr, colour, alpha=alpha)
+            except TypeError:
+                pass
 
     if hist and hy:
         # remember that ravel passes by reference, unlike flatten which passes a copy of the array
         
-        # print(np.ravel(hy), len(np.ravel(hy)), type(np.ravel(hy)))
         try:
             hy = np.concatenate(np.ravel(hy))
         except ValueError:
@@ -185,21 +191,25 @@ def plot(ax1, ax2, x, y, xr, yr, files, colour, alpha, split, hist, thresh, inde
                 axes = plt.gca()
                 axes.set_xlim(ly)
                 return
-    # y and x alignment of dual plot graphs
-    axes = plt.gca()
-    lx = limits[0]
-    ly = limits[1]
-    if lx[0]:
-        lx[0] /= xr
-    if lx[1]:
-        lx[1] /= xr
-    if ly[0]:
-        ly[0] -= 1
-        ly[0] /= yr
-    if ly[1]:
-        ly[1] /= yr
-    axes.set_xlim(lx)
-    axes.set_ylim(ly)
+    # y and x limit alignment of dual plot graphs
+    try:
+        axes = plt.gca()
+        lx = limits[0]
+        ly = limits[1]
+        if lx[0]:
+            lx[0] /= xr
+        if lx[1]:
+            lx[1] /= xr
+        if ly[0]:
+            ly[0] -= 1
+            ly[0] /= yr
+        if ly[1]:
+            ly[1] /= yr
+        axes.set_xlim(lx)
+        axes.set_ylim(ly)
+    except TypeError:
+        pass
+     # y alignment of dual plot graphs
     if right and indexes[1][0] >= (1 if indexes[1][1] > 0 else 0):
         f1, f2, g1, g2 = plt.axis()
         h1, h2, u1, u2 = ax1.axis()
@@ -208,7 +218,6 @@ def plot(ax1, ax2, x, y, xr, yr, files, colour, alpha, split, hist, thresh, inde
         ax2.set_ylim([min(u1, g1), max(u2, g2)])
         ax1.set_xlim([min(f1, h1), max(f2, h2)])
         ax2.set_xlim([min(f1, h1), max(f2, h2)])
-    # plt.show()
 
 def clean(arr, val):
     try:
@@ -266,15 +275,30 @@ def csvToDict(file):
 
 # post processing csv {} data
 def dataProcess(dt):
-    dt['time'] = [0]
-    for k in dt:
-        for i, v in enumerate(dt[k]):
-            if k == 'idleTime':
-                if i > 0:
-                    dt['time'].append(v + dt['txTime'][i-1] + dt['time'][i-1])
-            else:
-                break
-    return dt
+    try:
+        dt['time'] = [0]
+        dt['txBytes'] = []
+        dt['txBytes_rsrp'] = []
+        for k in ['idleTime', 'Total TX bytes']:
+            for i, v in enumerate(dt[k]):
+                if k == 'idleTime':
+                    if i > 0:
+                        dt['time'].append(v + dt['txTime'][i-1] + dt['time'][i-1])
+                if k == 'Total TX bytes':
+                    if i > 0:
+                        dt['txBytes'].append(dt[k][i] - dt[k][i-1])
+                        dt['txBytes_rsrp'].append(dt['Signal power'][i])
+                else:
+                    break
+        # print(dt['txBytes'])
+    except KeyError:
+        dt['txBytes'] = [[0] * len(dt['Signal power'])][0]
+        # print('KeyError: ', "dt['txBytes']", dt['txBytes'])
+    finally:
+        dt['time'] = np.array(dt['time'])
+        dt['txBytes'] = np.array(dt['txBytes'])
+        
+        return dt
 
 def dp(dt, length=1000, time=False):
     datasetPlot(dt, length, time)
@@ -328,8 +352,9 @@ def mk(files):
     for f in file_list:
         # print('filefff', f)
         c = csvToDict(f)
-        # print('c', len(c))
-        dt.append(dataProcess(c))
+        dp = dataProcess(c)
+        # print("dp['txBytes']", dp['txBytes'])
+        dt.append(dp)
     return dt
 
 def maxHeaders(dt):
@@ -340,8 +365,12 @@ def maxHeaders(dt):
             m = len(d)
             maxH = []
             for k in d:
+                # if k == 'txBytes':
+                #     print(str(type(d[k])))
                 if str(type(d[k])) == "<class 'numpy.ndarray'>":
                     maxH.append(k)
+                # if str(type(d[k])) == "<class 'list'>":
+                #     # print(k)
     return maxH
 
 def merge(dt):
@@ -356,7 +385,8 @@ def merge(dt):
                 for element in d[k]:
                     merge[k].append(adjust(k, element))
             except (KeyError, IndexError) as e:
-                if debug: print(e, end=",")
+                if debug: 
+                    print(e, end=",")
     return merge
 
 def mean(dt):

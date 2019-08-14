@@ -104,18 +104,24 @@ def compare(files, thresh, text, ylabel, xlabel, ky, kx, ry, rx, overlays=['ublo
     plt.show()
         
     
-def splitter(r, a, limits, split):
+def splitter(r, a, limits, split, ends=True):
     split, slen = split
-    if split == 0:
-        lim = [limits[split], None]
-        r *= a >= limits[split]
-    elif split == slen - 1:
-        lim = [None, limits[split-1]]
-        r *= a < limits[split-1]
+    if ends:
+        lim = [limits[split+1], limits[split]]
+        r *= a < limits[split]
+        r *= a >= limits[split+1]
     else:
-        lim = [limits[split], limits[split-1]]
-        r *= a < limits[split-1]
-        r *= a >= limits[split]
+        # limits = limits[1:1]
+        if split == 0:
+            lim = [limits[split], None]
+            r *= a >= limits[split]
+        elif split == slen - 1:
+            lim = [None, limits[split-1]]
+            r *= a < limits[split-1]
+        else:
+            lim = [limits[split], limits[split-1]]
+            r *= a < limits[split-1]
+            r *= a >= limits[split]
     return r, lim
     
 def dict_filt(dc, x, y, split, thresh):
@@ -131,8 +137,8 @@ def dict_filt(dc, x, y, split, thresh):
             return np.array(dc[x])[t], np.array(dc[y])[t], [limitx, limity]
         except KeyError:
             return None, None, [None, None]
-    except IndexError:
-        print(IndexError, 'len(dc[x]) and len(dc[y])', len(dc[x]) and len(dc[y]))
+    except IndexError as e:
+        print(IndexError, 'len(dc[x]) and len(dc[y])', len(dc[x]) and len(dc[y]), e)
         return np.array(dc[x]), np.array(dc[y]), [None, None]
 
 def plot(ax1, ax2, x, y, xr, yr, files, colour, alpha, split, hist, thresh, indexes, bins, log):
@@ -184,7 +190,7 @@ def plot(ax1, ax2, x, y, xr, yr, files, colour, alpha, split, hist, thresh, inde
                 # print(len(hy))
                 if not ly[0] or not ly[1]:
                     ly = None
-                print('ly', ly)
+                # print('ly', ly)
                 ax.hist(hy, color=colour[0], alpha=alpha, range=ly, bins=bins, log=log)
                 # x alignment of dual hist graphs
                 # if ly:
@@ -193,9 +199,8 @@ def plot(ax1, ax2, x, y, xr, yr, files, colour, alpha, split, hist, thresh, inde
                 
     # y alignment of dual plot graphs
     if right and indexes[1][0] >= (1 if indexes[1][1] > 0 else 0):
-        f1, f2, g1, g2 = plt.axis()
+        f1, f2, g1, g2 = ax2.axis()
         h1, h2, u1, u2 = ax1.axis()
-        print(min(u1, g1), max(u2, g2))
         ax1.set_ylim([min(u1, g1), max(u2, g2)])
         ax2.set_ylim([min(u1, g1), max(u2, g2)])
         ax1.set_xlim([min(f1, h1), max(f2, h2)])

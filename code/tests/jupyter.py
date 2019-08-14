@@ -53,110 +53,15 @@ def thresh(a, key, split):
         lim = [0, 800000]
     return r, lim
 
-def compare(files, thresh, text, ylabel, xlabel, ky, kx, ry, rx, overlays=['ublox', 'quectel'], graphs=['zte', 'nokia'], split=1, hist=False, bins=20, log=False):
-    global dirr
-    sy = len(graphs)
-    fx = 7 * sy
-    fy = 4 * split + 2
-    sx = 1 + split
-    debug = False
-    alpha = [1, 0.7]
-    dev = ['ublox', 'quectel']
-    nwv = ['zte_mtn/rf_shield/', 'nokia_vodacom/centurycity/']
-    loc = ['MTN ZTE', 'Vodacom Nokia']
-    colours = [['g*', 'k*'], ['b*', 'r*']]  
-    
-    fig = plt.figure(figsize=(fx, fy))
-    plt.suptitle(text, y=0.92)
-    axlist = []
-
-    for i in range(split):
-        ax = [None, None]
-        for s in range(sy):
-            ax[s] = fig.add_subplot(sx, sy, s + 1 + i * sy)
-            axlist.append(ax[s])
-            if i == np.floor(split/2):
-                plt.ylabel(ylabel)
-
-            pcolours = []
-            dirrs = []
-            for j in range(len(overlays)):
-                b = [overlays[j] in a for a in nwv]
-                nwi = b.index(True) if True in b else [graphs[s] in a for a in nwv].index(True)
-                uei = dev.index(overlays[j]) if overlays[j] in dev else dev.index(graphs[s])
-                dirrs.append('logs/' + nwv[nwi] + dev[uei] + '/')
-                pcolours.append(colours[nwi][uei])
-                print(i, s, j, dirrs[j], nwi, uei)
-            
-            plot(ax[0], ax[1], kx, ky, rx, ry, dirrs, files, pcolours, alpha, (i, split), hist, thresh, [s, len(graphs)], bins, log)
-            if i == split - 1:
-                if overlays[j] in dev:
-                    plt.xlabel(loc[nwi] + ' ' + xlabel)
-                else:
-                    plt.xlabel(dev[uei][0].upper() + dev[uei][1:] + ' ' + xlabel)
-
-    # make hist have same y axis
-    if hist:
-        ymin = ymax = 0
-        for ax in axlist:
-            h1, h2, u1, u2 = ax.axis()
-            ymin = min(ymin, u1)
-            ymax = max(ymax, u2)
-        for ax in axlist:
-            ax.set_ylim([None if log else ymin, ymax])
-
-    plt.savefig('img/vodacom_vs_mtn_' + "_".join(graphs) + "_" + "_".join(overlays) + "_" + "_".join(text.split()) + '.pdf')
-    plt.show()
-        
-    
-def splitter(r, a, limits, split, ends=True):
-    split, slen = split
-    if ends:
-        lim = [limits[split+1], limits[split]]
-        r *= a < limits[split]
-        r *= a >= limits[split+1]
-    else:
-        # limits = limits[1:1]
-        if split == 0:
-            lim = [limits[split], None]
-            r *= a >= limits[split]
-        elif split == slen - 1:
-            lim = [None, limits[split-1]]
-            r *= a < limits[split-1]
-        else:
-            lim = [limits[split], limits[split-1]]
-            r *= a < limits[split-1]
-            r *= a >= limits[split]
-    return r, lim
-    
-def dict_filt(dc, x, y, split, thresh):
-    _debug = False
-    try:
-        try:
-            t, limitx = thresh(dc, x, split) 
-            t2, limity = thresh(dc, y, split)
-            if len(t):
-                t *= t2
-            if _debug:
-                print('dc[x]', x, len(dc[x]), 'dc[y]', y, len(dc[y]), dc[x], dc[y])
-            return np.array(dc[x])[t], np.array(dc[y])[t], [limitx, limity]
-        except KeyError:
-            return None, None, [None, None]
-    except IndexError as e:
-        print(IndexError, 'len(dc[x]) and len(dc[y])', len(dc[x]) and len(dc[y]), e)
-        return np.array(dc[x]), np.array(dc[y]), [None, None]
-
 def plot(ax1, ax2, x, y, xr, yr, dirrs, files, colour, alpha, split, hist, thresh, indexes, bins, log):
     print('plot(x, y, xr, yr, files, colour, alpha, split, hist)', x, y, colour, split, hist, indexes)
     global dirr
     hyy = []
     ax = ax2 if ax2 else ax1
     right = indexes[0] >= 1
-    for j in range(len(dirrs)):
+
         dirr = dirrs[j]
         hy = []
-        for f in files:
-            zu_mg = merge(mk(f))
             # print('zu_mg', zu_mg)
             if zu_mg:
                 p, q, limits = dict_filt(zu_mg, x, y, split, thresh)
@@ -218,6 +123,107 @@ def plot(ax1, ax2, x, y, xr, yr, dirrs, files, colour, alpha, split, hist, thres
         ax2.set_xlim([min(f1, h1), max(f2, h2)])
         # print(f1, f2, g1, g2)
         # print(min(u1, g1), max(u2, g2))
+
+def compare(files, thresh, text, ylabel, xlabel, ky, kx, ry, rx, overlays=['ublox', 'quectel'], graphs=['zte', 'nokia'], split=1, hist=False, bins=20, log=False):
+    global dirr
+    sy = len(graphs)
+    fx = 7 * sy
+    fy = 4 * split + 2
+    sx = 1 + split
+    debug = False
+    alpha = [1, 0.7]
+    dev = ['ublox', 'quectel']
+    nwv = ['zte_mtn/rf_shield/', 'nokia_vodacom/centurycity/']
+    loc = ['MTN ZTE', 'Vodacom Nokia']
+    colours = [['g*', 'k*'], ['b*', 'r*']]
+    
+    fig = plt.figure(figsize=(fx, fy))
+    plt.suptitle(text, y=0.92)
+    axlist = []
+
+    for j in range(len(dirrs)):
+        for f in files:
+            zu_mg = merge(mk(f))
+
+    print(kx, ky, rx, ry)
+
+    for i in range(split):
+        ax = [None, None]
+        print('###')
+        for s in range(sy):
+            ax[s] = fig.add_subplot(sx, sy, s + 1 + i * sy)
+            axlist.append(ax[s])
+            if i == np.floor(split/2):
+                plt.ylabel(ylabel)
+
+            pcolours = []
+            dirrs = []
+            for j in range(len(overlays)):
+                b = [overlays[j] in a for a in nwv]
+                nwi = b.index(True) if True in b else [graphs[s] in a for a in nwv].index(True)
+                uei = dev.index(overlays[j]) if overlays[j] in dev else dev.index(graphs[s])
+                dirrs.append('logs/' + nwv[nwi] + dev[uei] + '/')
+                pcolours.append(colours[nwi][uei])
+                # print(i, s, j, dirrs[j], nwi, uei)
+            print(dirrs)
+            print(pcolours, alpha, (i, split), hist, [s, len(graphs)], bins, log)
+            plot(ax[0], ax[1], kx, ky, rx, ry, dirrs, files, pcolours, alpha, (i, split), hist, thresh, [s, len(graphs)], bins, log)
+            if i == split - 1:
+                if overlays[j] in dev:
+                    plt.xlabel(loc[nwi] + ' ' + xlabel)
+                else:
+                    plt.xlabel(dev[uei][0].upper() + dev[uei][1:] + ' ' + xlabel)
+
+    # make hist have same y axis
+    if hist:
+        ymin = ymax = 0
+        for ax in axlist:
+            h1, h2, u1, u2 = ax.axis()
+            ymin = min(ymin, u1)
+            ymax = max(ymax, u2)
+        for ax in axlist:
+            ax.set_ylim([None if log else ymin, ymax])
+
+    plt.savefig('img/vodacom_vs_mtn_' + "_".join(graphs) + "_" + "_".join(overlays) + "_" + "_".join(text.split()) + '.pdf')
+    plt.show()
+        
+    
+def splitter(r, a, limits, split, ends=True):
+    split, slen = split
+    if ends:
+        lim = [limits[split+1], limits[split]]
+        r *= a < limits[split]
+        r *= a >= limits[split+1]
+    else:
+        # limits = limits[1:1]
+        if split == 0:
+            lim = [limits[split], None]
+            r *= a >= limits[split]
+        elif split == slen - 1:
+            lim = [None, limits[split-1]]
+            r *= a < limits[split-1]
+        else:
+            lim = [limits[split], limits[split-1]]
+            r *= a < limits[split-1]
+            r *= a >= limits[split]
+    return r, lim
+    
+def dict_filt(dc, x, y, split, thresh):
+    _debug = False
+    try:
+        try:
+            t, limitx = thresh(dc, x, split) 
+            t2, limity = thresh(dc, y, split)
+            if len(t):
+                t *= t2
+            if _debug:
+                print('dc[x]', x, len(dc[x]), 'dc[y]', y, len(dc[y]), dc[x], dc[y])
+            return np.array(dc[x])[t], np.array(dc[y])[t], [limitx, limity]
+        except KeyError:
+            return None, None, [None, None]
+    except IndexError as e:
+        print(IndexError, 'len(dc[x]) and len(dc[y])', len(dc[x]) and len(dc[y]), e)
+        return np.array(dc[x]), np.array(dc[y]), [None, None]
 
 def clean(arr, val):
     try:

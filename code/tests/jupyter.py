@@ -77,18 +77,23 @@ def compare(files, thresh, text, ylabel, xlabel, ky, kx, ry, rx, overlays=['ublo
             axlist.append(ax[s])
             if i == np.floor(split/2):
                 plt.ylabel(ylabel)
+
+            pcolours = []
+            dirrs = []
             for j in range(len(overlays)):
                 b = [overlays[j] in a for a in nwv]
                 nwi = b.index(True) if True in b else [graphs[s] in a for a in nwv].index(True)
                 uei = dev.index(overlays[j]) if overlays[j] in dev else dev.index(graphs[s])
-                dirr = 'logs/' + nwv[nwi] + dev[uei] + '/'
-                # print(i, s, j, dirr, nwi, uei)
-                plot(ax[0], ax[1], kx, ky, rx, ry, files, colours[nwi][uei], alpha[j], (i, split), hist, thresh, [[s, len(graphs)], [j, len(overlays)]], bins, log)
-                if i == split - 1:
-                    if overlays[j] in dev:
-                        plt.xlabel(loc[nwi] + ' ' + xlabel)
-                    else:
-                        plt.xlabel(dev[uei][0].upper() + dev[uei][1:] + ' ' + xlabel)
+                dirrs.append('logs/' + nwv[nwi] + dev[uei] + '/')
+                pcolours.append(colours[nwi][uei])
+                print(i, s, j, dirrs[j], nwi, uei)
+            
+            plot(ax[0], ax[1], kx, ky, rx, ry, dirrs, files, pcolours, alpha, (i, split), hist, thresh, [s, len(graphs)], bins, log)
+            if i == split - 1:
+                if overlays[j] in dev:
+                    plt.xlabel(loc[nwi] + ' ' + xlabel)
+                else:
+                    plt.xlabel(dev[uei][0].upper() + dev[uei][1:] + ' ' + xlabel)
 
     # make hist have same y axis
     if hist:
@@ -141,28 +146,40 @@ def dict_filt(dc, x, y, split, thresh):
         print(IndexError, 'len(dc[x]) and len(dc[y])', len(dc[x]) and len(dc[y]), e)
         return np.array(dc[x]), np.array(dc[y]), [None, None]
 
-def plot(ax1, ax2, x, y, xr, yr, files, colour, alpha, split, hist, thresh, indexes, bins, log):
-    # print('plot(x, y, xr, yr, files, colour, alpha, split, hist)', x, y)
-    hy = []
+def plot(ax1, ax2, x, y, xr, yr, dirrs, files, colour, alpha, split, hist, thresh, indexes, bins, log):
+    print('plot(x, y, xr, yr, files, colour, alpha, split, hist)', x, y, colour, split, hist, indexes)
+    global dirr
+    hyy = []
     ax = ax2 if ax2 else ax1
-    right = indexes[0][0] >= 1
-    for f in files:
-        zu_mg = merge(mk(f))
-        # print('zu_mg', zu_mg)
-        if zu_mg:
-            p, q, limits = dict_filt(zu_mg, x, y, split, thresh)
-            # print('p, q', p, q, 'limits', limits)
+    right = indexes[0] >= 1
+    for j in range(len(dirrs)):
+        dirr = dirrs[j]
+        hy = []
+        for f in files:
+            zu_mg = merge(mk(f))
+            # print('zu_mg', zu_mg)
+            if zu_mg:
+                p, q, limits = dict_filt(zu_mg, x, y, split, thresh)
+                if hist:
+                    hy.append(q/yr)
+                else:
+                    if len(p) and len(q):
+                        p /= xr
+                        q /= yr
+                        # print('p, q', p, q, 'limits', limits)
+                        ax.plot(p, q, colour[j], alpha=alpha[j])
+        if hist:
+            # remember that ravel passes by reference, unlike flatten which passes a copy of the array
             try:
-                if len(p) and len(q):
-                    if hist:
-                        # print('hist q/yr', q/yr)
-                        if len(q):
-                            hy.append(q/yr)
-                        continue
-                    # print('plot q/yr', q/yr)
-                    ax.plot(p/xr, q/yr, colour, alpha=alpha)
-            except TypeError:
-                pass
+                hy = np.concatenate(np.ravel(hy))
+            except ValueError:
+                hy = np.ravel(hy)
+            finally:
+                if len(hy):
+                    hyy.append(hy)
+                # try:
+                # except TypeError:
+                #     pass
 
     # y and x limit alignment of dual plot graphs
     # lx = limits[0]
@@ -171,22 +188,16 @@ def plot(ax1, ax2, x, y, xr, yr, files, colour, alpha, split, hist, thresh, inde
     # if lx[1]:
     #     lx[1] /= xr
     ly = limits[1]
-    if ly[0]:
-        ly[0] /= yr
-    if ly[1]:
-        ly[1] /= yr
-    if not hist:
-        ax.set_ylim(ly)
+    if ly:
+        if ly[0]:
+            ly[0] /= yr
+        if ly[1]:
+            ly[1] /= yr
+        if not hist:
+            ax.set_ylim(ly)
 
 
-    if hist and hy:
-        # remember that ravel passes by reference, unlike flatten which passes a copy of the array
-        try:
-            hy = np.concatenate(np.ravel(hy))
-        except ValueError:
-            hy = np.ravel(hy)
-        finally:
-            if len(hy):
+    if hist and len(hyy):
                 # print(len(hy))
                 if not ly[0] or not ly[1]:
                     ly = None
@@ -198,7 +209,7 @@ def plot(ax1, ax2, x, y, xr, yr, files, colour, alpha, split, hist, thresh, inde
                 # return
                 
     # y alignment of dual plot graphs
-    if right and indexes[1][0] >= (1 if indexes[1][1] > 0 else 0):
+    if right:
         f1, f2, g1, g2 = ax2.axis()
         h1, h2, u1, u2 = ax1.axis()
         ax1.set_ylim([min(u1, g1), max(u2, g2)])

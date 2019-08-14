@@ -74,12 +74,7 @@ def compare(files, thresh, text, ylabel, xlabel, ky, kx, ry, rx, overlays=['ublo
     for i in range(split):
         ax = [None, None]
         lens = []
-        hyys = []
-        lys = []
-        spcolours = []
-        print('i', i)
         for s in range(sy):
-            print('s', s)
             hyy = []
             pcolours = []
             ax[s] = fig.add_subplot(sx, sy, s + 1 + i * sy)
@@ -87,7 +82,6 @@ def compare(files, thresh, text, ylabel, xlabel, ky, kx, ry, rx, overlays=['ublo
             if i == np.floor(split/2):
                 plt.ylabel(ylabel)
             for j in range(len(overlays)):
-                print('j', j)
                 b = [overlays[j] in a for a in nwv]
                 nwi = b.index(True) if True in b else [graphs[s] in a for a in nwv].index(True)
                 uei = dev.index(overlays[j]) if overlays[j] in dev else dev.index(graphs[s])
@@ -97,29 +91,23 @@ def compare(files, thresh, text, ylabel, xlabel, ky, kx, ry, rx, overlays=['ublo
                 else:
                     pcolours.append(colours[nwi][uei])
                 # print(i, s, j, dirr, nwi, uei)
-                print('dirr', dirr)
                 hy, ly = plot(ax[0], ax[1], kx, ky, rx, ry, files, colours[nwi][uei], alpha, (i, split), hist, thresh, [[s, len(graphs)], [j, len(overlays)]], bins, log)
-                print('lens', lens)
                 lens.append(len(hy))
                 hyy.append(hy)
-            hyys.append(hyy)
-            spcolours.append(pcolours)
-            lys.append(lys)
-            print(lens)
-        
-        for s in range(len(hyys)):
+            
             if s >= 1:
                 lens = np.array(lens).T
+                print(lens)
                 # b = [len(a) for a in a]
                 # [[1 * b[-1] / c] * c for c in b]
-            ax[s].hist(hyys[s], color=spcolours[s], alpha=alpha, range=lys[s], bins=bins, log=log, )
+            ax[s].hist(hyy, color=pcolours, alpha=alpha, range=ly, bins=bins, log=log, )
             ax[s].set_xlim(ly) # x alignment of dual hist graphs
-        # return
-        if i == split - 1:
-            if overlays[j] in dev:
-                plt.xlabel(loc[nwi] + ' ' + xlabel)
-            else:
-                plt.xlabel(dev[uei][0].upper() + dev[uei][1:] + ' ' + xlabel)
+            # return
+            if i == split - 1:
+                if overlays[j] in dev:
+                    plt.xlabel(loc[nwi] + ' ' + xlabel)
+                else:
+                    plt.xlabel(dev[uei][0].upper() + dev[uei][1:] + ' ' + xlabel)
 
     import matplotlib.ticker as ticker
     # make hist have same y axis
@@ -144,9 +132,7 @@ def plot(ax1, ax2, x, y, xr, yr, files, colour, alpha, split, hist, thresh, inde
     ax = ax2 if ax2 else ax1
     right = indexes[0][0] >= 1
     for f in files:
-        print('zu_mg')
         zu_mg = merge(mk(f))
-        print('len zu_mg', len(zu_mg))
         # print('zu_mg', zu_mg)
         if zu_mg:
             p, q, limits = dict_filt(zu_mg, x, y, split, thresh)

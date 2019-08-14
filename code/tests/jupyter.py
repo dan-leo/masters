@@ -101,15 +101,19 @@ def compare(files, thresh, text, ylabel, xlabel, ky, kx, ry, rx, overlays=['ublo
                 else:
                     plt.xlabel(dev[uei][0].upper() + dev[uei][1:] + ' ' + xlabel)
 
+    import matplotlib.ticker as ticker
     # make hist have same y axis
     if hist:
-        ymin = ymax = 0
+        ymin = ymax = 0.8
         for ax in axlist:
             h1, h2, u1, u2 = ax.axis()
-            ymin = min(ymin, u1)
+            # ymin = min(ymin, u1) # None if log else ymin
             ymax = max(ymax, u2)
         for ax in axlist:
-            ax.set_ylim([None if log else ymin, ymax])
+            ax.set_ylim([ymin, ymax])
+            # print(ymin, ymax)
+            for axis in [ax.xaxis, ax.yaxis]:
+                axis.set_major_formatter(ticker.FuncFormatter(lambda y,pos: ('{{:.{:1d}f}}'.format(int(np.maximum(-np.log10(y),0)))).format(y)))
 
     plt.savefig('img/vodacom_vs_mtn_' + "_".join(graphs) + "_" + "_".join(overlays) + "_" + "_".join(text.split()) + '.pdf')
     plt.show()

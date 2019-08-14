@@ -53,38 +53,93 @@ def thresh(a, key, split):
         lim = [0, 800000]
     return r, lim
 
-def plot(ax1, ax2, x, y, xr, yr, dirrs, files, colour, alpha, split, hist, thresh, indexes, bins, log):
-    print('plot(x, y, xr, yr, files, colour, alpha, split, hist)', x, y, colour, split, hist, indexes)
+def compare(files, thresh, text, ylabel, xlabel, ky, kx, ry, rx, overlays=['ublox', 'quectel'], graphs=['zte', 'nokia'], split=1, hist=False, bins=20, log=False):
     global dirr
-    hyy = []
-    ax = ax2 if ax2 else ax1
-    right = indexes[0] >= 1
+    sy = len(graphs)
+    fx = 7 * sy
+    fy = 4 * split + 2
+    sx = 1 + split
+    debug = False
+    alpha = 1.0
+    dev = ['ublox', 'quectel']
+    nwv = ['zte_mtn/rf_shield/', 'nokia_vodacom/centurycity/']
+    loc = ['MTN ZTE', 'Vodacom Nokia']
+    colours = [['g*', 'k*'], ['b*', 'r*']]  
+    
+    fig = plt.figure(figsize=(fx, fy))
+    plt.suptitle(text, y=0.92)
+    axlist = []
 
-        dirr = dirrs[j]
-        hy = []
-            # print('zu_mg', zu_mg)
-            if zu_mg:
-                p, q, limits = dict_filt(zu_mg, x, y, split, thresh)
+    for i in range(split):
+        ax = [None, None]
+        for s in range(sy):
+            hyy = []
+            pcolours = []
+            ax[s] = fig.add_subplot(sx, sy, s + 1 + i * sy)
+            axlist.append(ax[s])
+            if i == np.floor(split/2):
+                plt.ylabel(ylabel)
+            for j in range(len(overlays)):
+                b = [overlays[j] in a for a in nwv]
+                nwi = b.index(True) if True in b else [graphs[s] in a for a in nwv].index(True)
+                uei = dev.index(overlays[j]) if overlays[j] in dev else dev.index(graphs[s])
+                dirr = 'logs/' + nwv[nwi] + dev[uei] + '/'
                 if hist:
-                    hy.append(q/yr)
+                    pcolours.append(colours[nwi][uei][0])
                 else:
-                    if len(p) and len(q):
-                        p /= xr
-                        q /= yr
-                        # print('p, q', p, q, 'limits', limits)
-                        ax.plot(p, q, colour[j], alpha=alpha[j])
-        if hist:
-            # remember that ravel passes by reference, unlike flatten which passes a copy of the array
+                    pcolours.append(colours[nwi][uei])
+                # print(i, s, j, dirr, nwi, uei)
+                hy, ly = plot(ax[0], ax[1], kx, ky, rx, ry, files, colours[nwi][uei], alpha, (i, split), hist, thresh, [[s, len(graphs)], [j, len(overlays)]], bins, log)
+                hyy.append(hy)
+
+            ax[s].hist(hyy, color=pcolours, alpha=alpha, range=ly, bins=bins, log=log)
+            ax[s].set_xlim(ly) # x alignment of dual hist graphs
+            # return
+            if i == split - 1:
+                if overlays[j] in dev:
+                    plt.xlabel(loc[nwi] + ' ' + xlabel)
+                else:
+                    plt.xlabel(dev[uei][0].upper() + dev[uei][1:] + ' ' + xlabel)
+
+    import matplotlib.ticker as ticker
+    # make hist have same y axis
+    if hist:
+        ymin = ymax = 0.8
+        for ax in axlist:
+            h1, h2, u1, u2 = ax.axis()
+            # ymin = min(ymin, u1) # None if log else ymin
+            ymax = max(ymax, u2)
+        for ax in axlist:
+            ax.set_ylim([ymin, ymax])
+            # print(ymin, ymax)
+            for axis in [ax.xaxis, ax.yaxis]:
+                axis.set_major_formatter(ticker.FuncFormatter(lambda y,pos: ('{{:.{:1d}f}}'.format(int(np.maximum(-np.log10(max(y, 0.01)),0)))).format(y)))
+
+    plt.savefig('img/vodacom_vs_mtn_' + "_".join(graphs) + "_" + "_".join(overlays) + "_" + "_".join(text.split()) + '.pdf')
+    plt.show()
+        
+def plot(ax1, ax2, x, y, xr, yr, files, colour, alpha, split, hist, thresh, indexes, bins, log):
+    # print('plot(x, y, xr, yr, files, colour, alpha, split, hist)', x, y)
+    hy = []
+    ax = ax2 if ax2 else ax1
+    right = indexes[0][0] >= 1
+    for f in files:
+        zu_mg = merge(mk(f))
+        # print('zu_mg', zu_mg)
+        if zu_mg:
+            p, q, limits = dict_filt(zu_mg, x, y, split, thresh)
+            # print('p, q', p, q, 'limits', limits)
             try:
-                hy = np.concatenate(np.ravel(hy))
-            except ValueError:
-                hy = np.ravel(hy)
-            finally:
-                if len(hy):
-                    hyy.append(hy)
-                # try:
-                # except TypeError:
-                #     pass
+                if len(p) and len(q):
+                    if hist:
+                        # print('hist q/yr', q/yr)
+                        if len(q):
+                            hy.append(q/yr)
+                        continue
+                    # print('plot q/yr', q/yr)
+                    ax.plot(p/xr, q/yr, colour, alpha=alpha)
+            except TypeError:
+                pass
 
     # y and x limit alignment of dual plot graphs
     # lx = limits[0]
@@ -93,28 +148,30 @@ def plot(ax1, ax2, x, y, xr, yr, dirrs, files, colour, alpha, split, hist, thres
     # if lx[1]:
     #     lx[1] /= xr
     ly = limits[1]
-    if ly:
-        if ly[0]:
-            ly[0] /= yr
-        if ly[1]:
-            ly[1] /= yr
-        if not hist:
-            ax.set_ylim(ly)
+    if ly[0]:
+        ly[0] /= yr
+    if ly[1]:
+        ly[1] /= yr
+    if not hist:
+        ax.set_ylim(ly)
 
 
-    if hist and len(hyy):
+    if hist and hy:
+        # remember that ravel passes by reference, unlike flatten which passes a copy of the array
+        try:
+            hy = np.concatenate(np.ravel(hy))
+        except ValueError:
+            hy = np.ravel(hy)
+        finally:
+            if len(hy):
                 # print(len(hy))
                 if not ly[0] or not ly[1]:
                     ly = None
                 # print('ly', ly)
-                ax.hist(hy, color=colour[0], alpha=alpha, range=ly, bins=bins, log=log)
-                # x alignment of dual hist graphs
-                # if ly:
-                ax.set_xlim(ly)
-                # return
+                return hy, ly
                 
     # y alignment of dual plot graphs
-    if right:
+    if right and indexes[1][0] >= (1 if indexes[1][1] > 0 else 0):
         f1, f2, g1, g2 = ax2.axis()
         h1, h2, u1, u2 = ax1.axis()
         ax1.set_ylim([min(u1, g1), max(u2, g2)])
@@ -123,74 +180,12 @@ def plot(ax1, ax2, x, y, xr, yr, dirrs, files, colour, alpha, split, hist, thres
         ax2.set_xlim([min(f1, h1), max(f2, h2)])
         # print(f1, f2, g1, g2)
         # print(min(u1, g1), max(u2, g2))
-
-def compare(files, thresh, text, ylabel, xlabel, ky, kx, ry, rx, overlays=['ublox', 'quectel'], graphs=['zte', 'nokia'], split=1, hist=False, bins=20, log=False):
-    global dirr
-    sy = len(graphs)
-    fx = 7 * sy
-    fy = 4 * split + 2
-    sx = 1 + split
-    debug = False
-    alpha = [1, 0.7]
-    dev = ['ublox', 'quectel']
-    nwv = ['zte_mtn/rf_shield/', 'nokia_vodacom/centurycity/']
-    loc = ['MTN ZTE', 'Vodacom Nokia']
-    colours = [['g*', 'k*'], ['b*', 'r*']]
-    
-    fig = plt.figure(figsize=(fx, fy))
-    plt.suptitle(text, y=0.92)
-    axlist = []
-
-    for j in range(len(dirrs)):
-        for f in files:
-            zu_mg = merge(mk(f))
-
-    print(kx, ky, rx, ry)
-
-    for i in range(split):
-        ax = [None, None]
-        print('###')
-        for s in range(sy):
-            ax[s] = fig.add_subplot(sx, sy, s + 1 + i * sy)
-            axlist.append(ax[s])
-            if i == np.floor(split/2):
-                plt.ylabel(ylabel)
-
-            pcolours = []
-            dirrs = []
-            for j in range(len(overlays)):
-                b = [overlays[j] in a for a in nwv]
-                nwi = b.index(True) if True in b else [graphs[s] in a for a in nwv].index(True)
-                uei = dev.index(overlays[j]) if overlays[j] in dev else dev.index(graphs[s])
-                dirrs.append('logs/' + nwv[nwi] + dev[uei] + '/')
-                pcolours.append(colours[nwi][uei])
-                # print(i, s, j, dirrs[j], nwi, uei)
-            print(dirrs)
-            print(pcolours, alpha, (i, split), hist, [s, len(graphs)], bins, log)
-            plot(ax[0], ax[1], kx, ky, rx, ry, dirrs, files, pcolours, alpha, (i, split), hist, thresh, [s, len(graphs)], bins, log)
-            if i == split - 1:
-                if overlays[j] in dev:
-                    plt.xlabel(loc[nwi] + ' ' + xlabel)
-                else:
-                    plt.xlabel(dev[uei][0].upper() + dev[uei][1:] + ' ' + xlabel)
-
-    # make hist have same y axis
-    if hist:
-        ymin = ymax = 0
-        for ax in axlist:
-            h1, h2, u1, u2 = ax.axis()
-            ymin = min(ymin, u1)
-            ymax = max(ymax, u2)
-        for ax in axlist:
-            ax.set_ylim([None if log else ymin, ymax])
-
-    plt.savefig('img/vodacom_vs_mtn_' + "_".join(graphs) + "_" + "_".join(overlays) + "_" + "_".join(text.split()) + '.pdf')
-    plt.show()
-        
     
 def splitter(r, a, limits, split, ends=True):
     split, slen = split
     if ends:
+        if slen == 1:
+            limits = [limits[0], limits[-1]]
         lim = [limits[split+1], limits[split]]
         r *= a < limits[split]
         r *= a >= limits[split+1]
@@ -224,6 +219,7 @@ def dict_filt(dc, x, y, split, thresh):
     except IndexError as e:
         print(IndexError, 'len(dc[x]) and len(dc[y])', len(dc[x]) and len(dc[y]), e)
         return np.array(dc[x]), np.array(dc[y]), [None, None]
+
 
 def clean(arr, val):
     try:

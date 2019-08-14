@@ -113,7 +113,7 @@ def compare(files, thresh, text, ylabel, xlabel, ky, kx, ry, rx, overlays=['ublo
             ax.set_ylim([ymin, ymax])
             # print(ymin, ymax)
             for axis in [ax.xaxis, ax.yaxis]:
-                axis.set_major_formatter(ticker.FuncFormatter(lambda y,pos: ('{{:.{:1d}f}}'.format(int(np.maximum(-np.log10(y),0)))).format(y)))
+                axis.set_major_formatter(ticker.FuncFormatter(lambda y,pos: ('{{:.{:1d}f}}'.format(int(np.maximum(-np.log10(max(y, 0.01)),0)))).format(y)))
 
     plt.savefig('img/vodacom_vs_mtn_' + "_".join(graphs) + "_" + "_".join(overlays) + "_" + "_".join(text.split()) + '.pdf')
     plt.show()
@@ -184,6 +184,8 @@ def plot(ax1, ax2, x, y, xr, yr, files, colour, alpha, split, hist, thresh, inde
 def splitter(r, a, limits, split, ends=True):
     split, slen = split
     if ends:
+        if slen == 1:
+            limits = [limits[0], limits[-1]]
         lim = [limits[split+1], limits[split]]
         r *= a < limits[split]
         r *= a >= limits[split+1]

@@ -462,7 +462,8 @@ def datasetPlot(dt, length, time):
                     pass
             i += 1
     plt.show()
-    
+
+# join attenuated files together into database
 def mk(files):
     global dirr
     # print('files', files, 'dirr', dirr)

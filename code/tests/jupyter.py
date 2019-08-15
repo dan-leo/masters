@@ -51,26 +51,32 @@ def thresh(a, key, split):
         # lim = [-200, 200]
     if key == 'energy':
         r *= a > 0
-        lim = [0, 800000]
+        lim = [1, 800000]
+    if key == 'Total TX bytes':
+        r *= a > 0
+        lim = [None, 100000]
+    if key == 'Total RX bytes':
+        r *= a > 0
+        lim = [None, 50000]
     if key == 'txBytes':
         r *= a > 0
-        limits = [10000, 500, 200, 1]
+        limits = [10000, 500, 200, 50]
         r, lim = splitter(r, a, limits, split, True)
     if key == 'rxBytes':
         r *= a > 0
-        limits = [5000, 500, 200, 1]
+        limits = [10000, 500, 200, 50]
         r, lim = splitter(r, a, limits, split, True)
     if key == 'TX time':
-        limits = [120000, 1]
+        limits = [120000, 50]
         r, lim = splitter(r, a, limits, split, True)
     if key == 'RX time':
-        limits = [500000, 1]
+        limits = [500000, 50]
         r, lim = splitter(r, a, limits, split, True)
     if key == 'txTimeNW':
-        limits = [120000, 1]
+        limits = [120000, 50]
         r, lim = splitter(r, a, limits, split, True)
     if key == 'rxTimeNW':
-        limits = [120000, 1]
+        limits = [120000, 50]
         r, lim = splitter(r, a, limits, split, True)
     return r, lim
 
@@ -89,9 +95,12 @@ def compare(files, thresh, text, ylabel, xlabel, ky, kx, ry, rx, overlays=['ublo
     # colours = [['g*', 'k*'], ['g*', 'k*']]
     
     fig = plt.figure(figsize=(fx, fy))
-    plt.suptitle(text, y=0.92)
+    plt.suptitle(text + (" histogram" if hist else " plot"), y=0.92)
     axlist = []
-
+    if hist:
+        xlabel = ylabel
+        ylabel = 'Count'
+    
     for i in range(split):
         ax = [None, None]
         lens = []

@@ -39,29 +39,15 @@ RSSI
 
 ![Packet energy plotted against received signal power of the primary cell tower. Due to the large variation, there is no clear correlation between energy and RSRP](../../code/tests/img/Vodacom_vs_MTN_ZTE_Nokia_Ublox_Quectel_log__UDP_packet_energy_vs_Received_Signal_power.png)
 
-<!--![Vodacom_vs_MTN_ZTE_Nokia_Ublox_Quectel_log__UDP_packet_energy_vs_Received_Signal_power](../../code/tests/img/Vodacom_vs_MTN_ZTE_Nokia_Ublox_Quectel_log__UDP_packet_energy_vs_Received_Signal_power.png)-->
-
-<!--\begin{figure}[h!]
-  \caption{Packet energy plotted against received signal power of the primary cell tower. Due to the large variation, there is no clear correlation between energy and RSRP}
-  \includegraphics[width=1.0\textwidth]{../../code/tests/img/Vodacom_vs_MTN_ZTE_Nokia_Ublox_Quectel_log__UDP_packet_energy_vs_Received_Signal_power.pdf}
-\end{figure}-->
-
-![Packet energy histogram of the primary cell tower. MTN has a majority latency under 10 seconds, whilst Vodacom is between 10 and 100 seconds](../../code/tests/img/Vodacom_vs_MTN_ZTE_Nokia_Ublox_Quectel_log__hist_UDP_packet_energy_vs_Received_Signal_power.png)
-
-<!--![Vodacom_vs_MTN_ZTE_Nokia_Ublox_Quectel_log__hist_UDP_packet_energy_vs_Received_Signal_power](../../code/tests/img/Vodacom_vs_MTN_ZTE_Nokia_Ublox_Quectel_log__hist_UDP_packet_energy_vs_Received_Signal_power.png)-->
-
-<!--\begin{figure}[h!]
-  \caption{Packet energy histogram of the primary cell tower. MTN has a majority latency under 10 seconds, whilst Vodacom is between 10 and 100 seconds}
-  \includegraphics[width=1.0\textwidth]{../../code/tests/img/Vodacom_vs_MTN_ZTE_Nokia_Ublox_Quectel_log__hist_UDP_packet_energy_vs_Received_Signal_power.pdf}
-\end{figure}-->
+![Packet energy histogram of the primary cell tower. MTN has a majority energy usage under 10 Joules, whilst Vodacom is between 10 and 100 Joules](../../code/tests/img/Vodacom_vs_MTN_ZTE_Nokia_Ublox_Quectel_log__hist_UDP_packet_energy_vs_Received_Signal_power.png)
 
 ## Latency
 
 
 
-<!--![MTN (green, black) vs Vodacom (blue, red) Latency test](vodacom_vs_mtn_zte_nokia_ublox_quectel_UDP_packet_latency_vs_Received_Signal_power.png)-->
+![Packet latency against RSRP. MTN has variation evenly distributed from -80 to -120 dBm, and vodacom a hotspot centered at 10 seconds and -100 to -110 dBm](../../code/tests/img/Vodacom_vs_MTN_ZTE_Nokia_Ublox_Quectel_log__UDP_packet_latency_vs_Received_Signal_power.png)
 
-<!--![MTN (green, black) vs Vodacom (blue, red) Energy test](C:\GIT\masters\code\tests\img\vodacom_vs_mtn_energy.png)-->
+![MTN has a majority latency under 10 seconds, whilst Vodacom is between 10 and 100 seconds](../../code/tests/img/Vodacom_vs_MTN_ZTE_Nokia_Ublox_Quectel_log__hist_UDP_packet_latency_histogram.png)
 
 
 
@@ -74,3 +60,19 @@ The current data is in the process of being processed and visualised, with resul
     \item Capture data from Huawei and Ericsson from Vodacom and MTN in Johannesburg early September.
     \item Write up thesis and complete end of September
 \end{itemize}
+
+
+
+<!--![MTN (green, black) vs Vodacom (blue, red) Latency test](vodacom_vs_mtn_zte_nokia_ublox_quectel_UDP_packet_latency_vs_Received_Signal_power.png)-->
+
+<!--![MTN (green, black) vs Vodacom (blue, red) Energy test](C:\GIT\masters\code\tests\img\vodacom_vs_mtn_energy.png)-->
+
+<!--\begin{figure}[h!]
+  \caption{Packet energy plotted against received signal power of the primary cell tower. Due to the large variation, there is no clear correlation between energy and RSRP}
+  \includegraphics[width=1.0\textwidth]{../../code/tests/img/Vodacom_vs_MTN_ZTE_Nokia_Ublox_Quectel_log__UDP_packet_energy_vs_Received_Signal_power.pdf}
+\end{figure}-->
+
+<!--\begin{figure}[h!]
+  \caption{Packet energy histogram of the primary cell tower. MTN has a majority latency under 10 seconds, whilst Vodacom is between 10 and 100 seconds}
+  \includegraphics[width=1.0\textwidth]{../../code/tests/img/Vodacom_vs_MTN_ZTE_Nokia_Ublox_Quectel_log__hist_UDP_packet_energy_vs_Received_Signal_power.pdf}
+\end{figure}-->

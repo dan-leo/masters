@@ -100,18 +100,23 @@ def compare(files, thresh, text, ylabel, xlabel, ky, kx, ry, rx, overlays=['ublo
                 if i == split - 1:
                     print('dirr', dirr)
                 hy, ly = plot(ax[0], ax[1], kx, ky, rx, ry, files, colours[nwi][uei], alpha, (i, split), hist, thresh, [[s, len(graphs)], [j, len(overlays)]], bins, log)
-                # print('lens', lens)
+                # print('ly', ly)
+
                 lens.append(len(hy))
                 hyy.append(hy)
+                # print('lens', lens)
                 # hyys.append(hyy)
                 # spcolours.append(pcolours)
                 # lys.append(lys)
-                
+            
             b = [len(a) for a in hyy]
             m = max(lens)
             w = [[1 * m / c] * c for c in b]
             # print(lens, m, b)
-            ax[s].hist(hyy, color=pcolours, alpha=alpha, range=ly, bins=bins, log=log, weights=w if weighted else None)
+            n, rbins, patches = ax[s].hist(hyy, color=pcolours, alpha=alpha, range=ly, bins=bins, log=log, weights=w if weighted else None)
+            np.set_printoptions(precision=0, suppress=True)
+            print(rbins)
+            # print(ly)
             ax[s].set_xlim(ly) # x
             if i == split - 1:
                 if overlays[j] in dev:
@@ -137,13 +142,15 @@ def compare(files, thresh, text, ylabel, xlabel, ky, kx, ry, rx, overlays=['ublo
         for ax in axlist:
             ax.set_ylim([ymin, ymax])
             # print(ymin, ymax)
-            for axis in [ax.xaxis, ax.yaxis]:
-                axis.set_major_formatter(ticker.FuncFormatter(lambda y,pos: ('{{:.{:1d}f}}'.format(int(np.maximum(-np.log10(max(y, 0.01)),0)))).format(y)))
+            # for axis in [ax.xaxis, ax.yaxis]:
+            if log:
+                ax.yaxis.set_major_formatter(ticker.FuncFormatter(lambda y,pos: ('{{:.{:1d}f}}'.format(int(np.maximum(-np.log10(max(y, 0.01)),0)))).format(y)))
 
     plt.savefig('img/vodacom_vs_mtn_' + "_".join(graphs) + "_" + "_".join(overlays) + "_" + "_".join(text.split()) + '.pdf')
     plt.show()
         
 def plot(ax1, ax2, x, y, xr, yr, files, colour, alpha, split, hist, thresh, indexes, bins, log):
+    # print(ax1, ax2, x, y, xr, yr, colour, alpha, split, hist, indexes, bins, log)
     # print('plot(x, y, xr, yr, files, colour, alpha, split, hist)', x, y)
     hy = []
     ax = ax2 if ax2 else ax1
@@ -192,9 +199,10 @@ def plot(ax1, ax2, x, y, xr, yr, files, colour, alpha, split, hist, thresh, inde
         finally:
             if len(hy):
                 # print(len(hy))
-                if not ly[0] or not ly[1]:
+                if not ly[0] and not ly[1]:
                     ly = None
                 # print('ly', ly)
+                # print(len(hy), ly)
                 return hy, ly 
                 
     # y alignment of dual plot graphs
@@ -207,6 +215,8 @@ def plot(ax1, ax2, x, y, xr, yr, files, colour, alpha, split, hist, thresh, inde
         ax2.set_xlim([min(f1, h1), max(f2, h2)])
         # print(f1, f2, g1, g2)
         # print(min(u1, g1), max(u2, g2))
+    
+    return None, None
     
 def splitter(r, a, limits, split, ends=True):
     split, slen = split
@@ -228,6 +238,7 @@ def splitter(r, a, limits, split, ends=True):
             lim = [limits[split], limits[split-1]]
             r *= a < limits[split-1]
             r *= a >= limits[split]
+    # print('splitter lim', lim)
     return r, lim
     
 def dict_filt(dc, x, y, split, thresh):

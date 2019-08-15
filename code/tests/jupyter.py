@@ -35,7 +35,7 @@ def adjust(key, val):
     return val
 
 def thresh(a, key, split):
-    a = np.array(a[key])
+    a = np.array(a)
     r = a == a
     lim = [None, None]
     if key == 'Signal power':
@@ -181,18 +181,22 @@ def plot(ax1, ax2, x, y, xr, yr, files, colour, alpha, split, hist, thresh, inde
 
     # y and x limit alignment of dual plot graphs
     lx = limits[0]
-    if lx[0]:
-        lx[0] /= xr
-    if lx[1]:
-        lx[1] /= xr
     ly = limits[1]
-    if ly[0]:
-        ly[0] /= yr
-    if ly[1]:
-        ly[1] /= yr
-    if not hist:
-        ax.set_xlim(lx)
-        ax.set_ylim(ly)
+    # print('type(lx)', str(type(lx)))
+    if str(type(lx)) != "<class 'NoneType'>":
+        if lx[0]:
+            lx[0] /= xr
+        if lx[1]:
+            lx[1] /= xr
+        if not hist:
+            ax.set_xlim(lx)
+    if str(type(ly)) != "<class 'NoneType'>":
+        if ly[0]:
+            ly[0] /= yr
+        if ly[1]:
+            ly[1] /= yr
+        if not hist:
+            ax.set_ylim(ly)
 
 
     if hist and hy:
@@ -250,13 +254,17 @@ def dict_filt(dc, x, y, split, thresh):
     _debug = False
     try:
         try:
-            t, limitx = thresh(dc, x, split) 
-            t2, limity = thresh(dc, y, split)
+            kx = [x, x[1:-1]]
+            kx = kx[[a in dc.keys() for a in kx].index(True)]
+            ky = [y, y[1:-1]]
+            ky = ky[[a in dc.keys() for a in ky].index(True)]
+            t, limitx = thresh(dc[kx], x, split)
+            t2, limity = thresh(dc[ky], y, split)
             if len(t):
                 t *= t2
             if _debug:
                 print('dc[x]', x, len(dc[x]), 'dc[y]', y, len(dc[y]), dc[x], dc[y])
-            return np.array(dc[x])[t], np.array(dc[y])[t], [limitx, limity]
+            return np.array(dc[kx])[t], np.array(dc[ky])[t], [limitx, limity]
         except KeyError:
             return None, None, [None, None]
     except IndexError as e:

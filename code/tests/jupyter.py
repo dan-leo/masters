@@ -60,14 +60,26 @@ def thresh(a, key, split):
         r *= a > 0
         limits = [5000, 500, 200, 1]
         r, lim = splitter(r, a, limits, split, True)
+    if key == 'TX time':
+        limits = [120000, 1]
+        r, lim = splitter(r, a, limits, split, True)
+    if key == 'RX time':
+        limits = [500000, 1]
+        r, lim = splitter(r, a, limits, split, True)
+    if key == 'txTimeNW':
+        limits = [120000, 1]
+        r, lim = splitter(r, a, limits, split, True)
+    if key == 'rxTimeNW':
+        limits = [120000, 1]
+        r, lim = splitter(r, a, limits, split, True)
     return r, lim
 
-def compare(files, thresh, text, ylabel, xlabel, ky, kx, ry, rx, overlays=['ublox', 'quectel'], graphs=['zte', 'nokia'], split=1, hist=False, bins=20, log=False, weighted=True):
+def compare(files, thresh, text, ylabel, xlabel, ky, kx, ry, rx, overlays=['ublox', 'quectel'], graphs=['zte', 'nokia'], split=1, hist=False, bins=20, log=True, weighted=True):
     global dirr
     sy = len(graphs)
     fx = 7 * sy
-    fy = 4 * split + 2
-    sx = 1 + split
+    fy = 4 * split
+    sx = split
     debug = False
     alpha = 1.0
     dev = ['ublox', 'quectel']
@@ -121,7 +133,11 @@ def compare(files, thresh, text, ylabel, xlabel, ky, kx, ry, rx, overlays=['ublo
                 m = max(lens)
                 w = [[1 * m / c] * c for c in b]
                 # print(lens, m, b)
-                n, rbins, patches = ax[s].hist(hyy, color=pcolours[:len(hyy)], alpha=alpha, range=ly, bins=bins, log=log, stacked=False, label=overlays, weights=w if weighted else None)
+                # print(hyy, bins)
+                _, lbins = np.histogram(np.concatenate(np.ravel(hyy)), bins=bins)
+                logbins = np.logspace(np.log10(lbins[0]), np.log10(lbins[-1]), len(lbins))
+                n, rbins, _ = ax[s].hist(hyy, color=pcolours[:len(hyy)], alpha=alpha, range=ly, bins= logbins if log else bins, log=log, stacked=False, label=overlays, weights=w if weighted else None)
+                plt.xscale('log')
                 # ax[s].legend(prop={'size': 10})
                 np.set_printoptions(precision=0, suppress=True)
                 print(rbins)
@@ -164,13 +180,24 @@ def compare(files, thresh, text, ylabel, xlabel, ky, kx, ry, rx, overlays=['ublo
             ax.set_ylim([ymin, ymax])
         # ax.legend(prop={'size': 10}, labels=overlays)
         # print(ymin, ymax)
-        # for axis in [ax.xaxis, ax.yaxis]:
         if log:
-            ax.yaxis.set_major_formatter(ticker.FuncFormatter(lambda y,pos: ('{{:.{:1d}f}}'.format(int(np.maximum(-np.log10(max(y, 0.01)),0)))).format(y)))
-
-    plt.savefig('img/vodacom_vs_mtn_' + "_".join(graphs) + "_" + "_".join(overlays) + "_" + "_".join(text.split()) + '.png')
-    plt.savefig('img/vodacom_vs_mtn_' + "_".join(graphs) + "_" + "_".join(overlays) + "_" + "_".join(text.split()) + '.pdf')
+            for axis in [ax.xaxis, ax.yaxis]:
+                axis.set_major_formatter(ticker.FuncFormatter(lambda y,pos: ('{{:.{:1d}f}}'.format(int(np.maximum(-np.log10(max(y, 0.01)),0)))).format(y)))
+    
+    log = "_log_" if log else "_"
+    hist = "_hist_" if hist else "_"
+    pic = 'img/Vodacom_vs_MTN_' + "_".join(caps(graphs)) + "_" + "_".join(caps(overlays)) + log + hist + "_".join(text.split())
+    plt.savefig(pic + '.png')
+    plt.savefig(pic + '.pdf')
     plt.show()
+
+def caps(a):
+    for i in range(len(a)):
+        if 'zte' in a[i]:
+            a[i] = 'ZTE'
+        else:
+            a[i] = a[i][0].upper() + a[i][1:]
+    return a
         
 def plot(ax1, ax2, x, y, xr, yr, files, colour, alpha, split, hist, thresh, indexes, bins, log, overlay):
     # print(ax1, ax2, x, y, xr, yr, colour, alpha, split, hist, indexes, bins, log)
@@ -195,7 +222,11 @@ def plot(ax1, ax2, x, y, xr, yr, files, colour, alpha, split, hist, thresh, inde
                             hy.append(q/yr)
                         continue
                     # print('plot q/yr', q/yr)
-                    ax.plot(p/xr, q/yr, colour, label=overlay if not ci else None, alpha=alpha)
+                    if log:
+                        ax.semilogy(p/xr, q/yr, colour, label=overlay if not ci else None, alpha=alpha)
+                    else:
+                        ax.plot(p/xr, q/yr, colour, label=overlay if not ci else None, alpha=alpha)
+                        
                     ci += 1
             except TypeError:
                 pass
@@ -356,8 +387,8 @@ def csvToDict(file):
 # post processing csv {} data
 def dataProcess(dt):
     try:
-        kins = ['idleTime', 'Total TX bytes', 'Total RX bytes']
-        kouts = ['time', 'txBytes', 'rxBytes']
+        kins = ['idleTime', 'Total TX bytes', 'Total RX bytes', 'TX time', 'RX time']
+        kouts = ['time', 'txBytes', 'rxBytes', 'txTimeNW', 'rxTimeNW']
         for ko in kouts:
             dt[ko] = [0]
         for k, ko in zip(kins, kouts):

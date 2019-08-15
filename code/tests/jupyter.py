@@ -97,28 +97,27 @@ def compare(files, thresh, text, ylabel, xlabel, ky, kx, ry, rx, overlays=['ublo
                 else:
                     pcolours.append(colours[nwi][uei])
                 # print(i, s, j, dirr, nwi, uei)
+                hy, ly = plot(ax[0], ax[1], kx, ky, rx, ry, files, colours[nwi][uei], alpha, (i, split), hist, thresh, [[s, len(graphs)], [j, len(overlays)]], bins, log, dev[uei])
+                if hist:
+                    lens.append(len(hy))
+                    hyy.append(hy)
+                    # print('lens', lens)
+                    # hyys.append(hyy)
+                    # spcolours.append(pcolours)
+                    # lys.append(lys)
                 if i == split - 1:
                     print('dirr', dirr)
-                hy, ly = plot(ax[0], ax[1], kx, ky, rx, ry, files, colours[nwi][uei], alpha, (i, split), hist, thresh, [[s, len(graphs)], [j, len(overlays)]], bins, log)
-                # print('ly', ly)
-
-                lens.append(len(hy))
-                hyy.append(hy)
-                # print('lens', lens)
-                # hyys.append(hyy)
-                # spcolours.append(pcolours)
-                # lys.append(lys)
-            
-            b = [len(a) for a in hyy]
-            m = max(lens)
-            w = [[1 * m / c] * c for c in b]
-            # print(lens, m, b)
-            n, rbins, patches = ax[s].hist(hyy, color=pcolours, alpha=alpha, range=ly, bins=bins, log=log, label=overlays, stacked=False, weights=w if weighted else None)
-            ax[s].legend(prop={'size': 10})
-            np.set_printoptions(precision=0, suppress=True)
-            print(rbins)
-            # print(ly)
-            ax[s].set_xlim(ly) # x
+            if hist:
+                b = [len(a) for a in hyy]
+                m = max(lens)
+                w = [[1 * m / c] * c for c in b]
+                # print(lens, m, b)
+                n, rbins, patches = ax[s].hist(hyy, color=pcolours, alpha=alpha, range=ly, bins=bins, log=log, stacked=False, labels=overlays, weights=w if weighted else None)
+                # ax[s].legend(prop={'size': 10})
+                np.set_printoptions(precision=0, suppress=True)
+                print(rbins)
+                # print(ly)
+                ax[s].set_xlim(ly) # x
             if i == split - 1:
                 if overlays[j] in dev:
                     plt.xlabel(loc[nwi] + ' ' + xlabel)
@@ -134,29 +133,32 @@ def compare(files, thresh, text, ylabel, xlabel, ky, kx, ry, rx, overlays=['ublo
 
     import matplotlib.ticker as ticker
     # make hist have same y axis
-    if hist:
-        ymin = ymax = 0.8
-        for ax in axlist:
-            h1, h2, u1, u2 = ax.axis()
-            # ymin = min(ymin, u1) # None if log else ymin
-            ymax = max(ymax, u2)
-        for ax in axlist:
+    ymin = ymax = 0.8
+    for ax in axlist:
+        h1, h2, u1, u2 = ax.axis()
+        # ymin = min(ymin, u1) # None if log else ymin
+        ymax = max(ymax, u2)
+    for ax in axlist:
+        ax.legend(prop={'size': 10})
+        if hist:
             ax.set_ylim([ymin, ymax])
-            # print(ymin, ymax)
-            # for axis in [ax.xaxis, ax.yaxis]:
-            if log:
-                ax.yaxis.set_major_formatter(ticker.FuncFormatter(lambda y,pos: ('{{:.{:1d}f}}'.format(int(np.maximum(-np.log10(max(y, 0.01)),0)))).format(y)))
+        # ax.legend(prop={'size': 10}, labels=overlays)
+        # print(ymin, ymax)
+        # for axis in [ax.xaxis, ax.yaxis]:
+        if log:
+            ax.yaxis.set_major_formatter(ticker.FuncFormatter(lambda y,pos: ('{{:.{:1d}f}}'.format(int(np.maximum(-np.log10(max(y, 0.01)),0)))).format(y)))
 
     plt.savefig('img/vodacom_vs_mtn_' + "_".join(graphs) + "_" + "_".join(overlays) + "_" + "_".join(text.split()) + '.pdf')
     plt.show()
         
-def plot(ax1, ax2, x, y, xr, yr, files, colour, alpha, split, hist, thresh, indexes, bins, log):
+def plot(ax1, ax2, x, y, xr, yr, files, colour, alpha, split, hist, thresh, indexes, bins, log, overlay):
     # print(ax1, ax2, x, y, xr, yr, colour, alpha, split, hist, indexes, bins, log)
     # print('plot(x, y, xr, yr, files, colour, alpha, split, hist)', x, y)
     hy = []
     ax = ax2 if ax2 else ax1
     right = indexes[0][0] >= 1
-    for f in files:
+    ci = 0
+    for fi, f in enumerate(files):
         # print('zu_mg')
         zu_mg = merge(mk(f))
         # print('len zu_mg', len(zu_mg))
@@ -172,22 +174,24 @@ def plot(ax1, ax2, x, y, xr, yr, files, colour, alpha, split, hist, thresh, inde
                             hy.append(q/yr)
                         continue
                     # print('plot q/yr', q/yr)
-                    ax.plot(p/xr, q/yr, colour, alpha=alpha)
+                    ax.plot(p/xr, q/yr, colour, label=overlay if not ci else None, alpha=alpha)
+                    ci += 1
             except TypeError:
                 pass
 
     # y and x limit alignment of dual plot graphs
-    # lx = limits[0]
-    # if lx[0]:
-    #     lx[0] /= xr
-    # if lx[1]:
-    #     lx[1] /= xr
+    lx = limits[0]
+    if lx[0]:
+        lx[0] /= xr
+    if lx[1]:
+        lx[1] /= xr
     ly = limits[1]
     if ly[0]:
         ly[0] /= yr
     if ly[1]:
         ly[1] /= yr
     if not hist:
+        ax.set_xlim(lx)
         ax.set_ylim(ly)
 
 

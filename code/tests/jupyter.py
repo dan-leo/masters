@@ -64,8 +64,8 @@ def compare(files, thresh, text, ylabel, xlabel, ky, kx, ry, rx, overlays=['ublo
     dev = ['ublox', 'quectel']
     nwv = ['zte_mtn/rf_shield/', 'nokia_vodacom/centurycity/']
     loc = ['MTN ZTE', 'Vodacom Nokia']
-    # colours = [['g*', 'k*'], ['b*', 'r*']]
-    colours = [['g*', 'k*'], ['g*', 'k*']]
+    colours = [['g*', 'k*'], ['b*', 'r*']]
+    # colours = [['g*', 'k*'], ['g*', 'k*']]
     
     fig = plt.figure(figsize=(fx, fy))
     plt.suptitle(text, y=0.92)
@@ -113,7 +113,8 @@ def compare(files, thresh, text, ylabel, xlabel, ky, kx, ry, rx, overlays=['ublo
             m = max(lens)
             w = [[1 * m / c] * c for c in b]
             # print(lens, m, b)
-            n, rbins, patches = ax[s].hist(hyy, color=pcolours, alpha=alpha, range=ly, bins=bins, log=log, weights=w if weighted else None)
+            n, rbins, patches = ax[s].hist(hyy, color=pcolours, alpha=alpha, range=ly, bins=bins, log=log, label=overlays, stacked=False, weights=w if weighted else None)
+            ax[s].legend(prop={'size': 10})
             np.set_printoptions(precision=0, suppress=True)
             print(rbins)
             # print(ly)

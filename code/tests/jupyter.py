@@ -55,7 +55,11 @@ def thresh(a, key, split):
     if key == 'txBytes':
         r *= a > 0
         limits = [10000, 500, 200, 1]
-        r, lim = splitter(r, a, limits, split)
+        r, lim = splitter(r, a, limits, split, True)
+    if key == 'rxBytes':
+        r *= a > 0
+        limits = [5000, 500, 200, 1]
+        r, lim = splitter(r, a, limits, split, True)
     return r, lim
 
 def compare(files, thresh, text, ylabel, xlabel, ky, kx, ry, rx, overlays=['ublox', 'quectel'], graphs=['zte', 'nokia'], split=1, hist=False, bins=20, log=False, weighted=True):
@@ -103,21 +107,21 @@ def compare(files, thresh, text, ylabel, xlabel, ky, kx, ry, rx, overlays=['ublo
                     pcolours.append(colours[nwi][uei])
                 # print(i, s, j, dirr, nwi, uei)
                 hy, ly = plot(ax[0], ax[1], kx, ky, rx, ry, files, colours[nwi][uei], alpha, (i, split), hist, thresh, [[s, len(graphs)], [j, len(overlays)]], bins, log, dev[uei])
-                if hist:
+                if hist and str(type(hy)) != "<class 'NoneType'>":
                     lens.append(len(hy))
                     hyy.append(hy)
                     # print('lens', lens)
                     # hyys.append(hyy)
                     # spcolours.append(pcolours)
                     # lys.append(lys)
-                if i == split - 1:
-                    print('dirr', dirr)
+                # if i == split - 1:
+                #     print('dirr', dirr)
             if hist:
                 b = [len(a) for a in hyy]
                 m = max(lens)
                 w = [[1 * m / c] * c for c in b]
                 # print(lens, m, b)
-                n, rbins, patches = ax[s].hist(hyy, color=pcolours, alpha=alpha, range=ly, bins=bins, log=log, stacked=False, label=overlays, weights=w if weighted else None)
+                n, rbins, patches = ax[s].hist(hyy, color=pcolours[:len(hyy)], alpha=alpha, range=ly, bins=bins, log=log, stacked=False, label=overlays, weights=w if weighted else None)
                 # ax[s].legend(prop={'size': 10})
                 np.set_printoptions(precision=0, suppress=True)
                 print(rbins)
@@ -128,6 +132,17 @@ def compare(files, thresh, text, ylabel, xlabel, ky, kx, ry, rx, overlays=['ublo
                     plt.xlabel(loc[nwi] + ' ' + xlabel)
                 else:
                     plt.xlabel(dev[uei][0].upper() + dev[uei][1:] + ' ' + xlabel)
+        
+        # y alignment of dual plot graphs
+        if s >= 1:# and j >= (1 if len(overlays) > 0 else 0):
+            f1, f2, g1, g2 = ax[1].axis()
+            h1, h2, u1, u2 = ax[0].axis()
+            ax[0].set_ylim([min(u1, g1), max(u2, g2)])
+            ax[1].set_ylim([min(u1, g1), max(u2, g2)])
+            ax[0].set_xlim([min(f1, h1), max(f2, h2)])
+            ax[1].set_xlim([min(f1, h1), max(f2, h2)])
+            # print(f1, f2, g1, g2)
+            # print(min(u1, g1), max(u2, g2))
         # for s in range(len(hyys)):
         #     if s >= 1:
         #         lens = np.array(lens).T
@@ -153,6 +168,7 @@ def compare(files, thresh, text, ylabel, xlabel, ky, kx, ry, rx, overlays=['ublo
         if log:
             ax.yaxis.set_major_formatter(ticker.FuncFormatter(lambda y,pos: ('{{:.{:1d}f}}'.format(int(np.maximum(-np.log10(max(y, 0.01)),0)))).format(y)))
 
+    plt.savefig('img/vodacom_vs_mtn_' + "_".join(graphs) + "_" + "_".join(overlays) + "_" + "_".join(text.split()) + '.png')
     plt.savefig('img/vodacom_vs_mtn_' + "_".join(graphs) + "_" + "_".join(overlays) + "_" + "_".join(text.split()) + '.pdf')
     plt.show()
         
@@ -219,16 +235,16 @@ def plot(ax1, ax2, x, y, xr, yr, files, colour, alpha, split, hist, thresh, inde
                 # print(len(hy), ly)
                 return hy, ly 
                 
-    # y alignment of dual plot graphs
-    if right and indexes[1][0] >= (1 if indexes[1][1] > 0 else 0):
-        f1, f2, g1, g2 = ax2.axis()
-        h1, h2, u1, u2 = ax1.axis()
-        ax1.set_ylim([min(u1, g1), max(u2, g2)])
-        ax2.set_ylim([min(u1, g1), max(u2, g2)])
-        ax1.set_xlim([min(f1, h1), max(f2, h2)])
-        ax2.set_xlim([min(f1, h1), max(f2, h2)])
-        # print(f1, f2, g1, g2)
-        # print(min(u1, g1), max(u2, g2))
+    # # y alignment of dual plot graphs
+    # if right and indexes[1][0] >= (1 if indexes[1][1] > 0 else 0):
+    #     f1, f2, g1, g2 = ax2.axis()
+    #     h1, h2, u1, u2 = ax1.axis()
+    #     ax1.set_ylim([min(u1, g1), max(u2, g2)])
+    #     ax2.set_ylim([min(u1, g1), max(u2, g2)])
+    #     ax1.set_xlim([min(f1, h1), max(f2, h2)])
+    #     ax2.set_xlim([min(f1, h1), max(f2, h2)])
+    #     # print(f1, f2, g1, g2)
+    #     # print(min(u1, g1), max(u2, g2))
     
     return None, None
     
@@ -340,8 +356,8 @@ def csvToDict(file):
 # post processing csv {} data
 def dataProcess(dt):
     try:
-        kins = ['idleTime', 'Total TX bytes']
-        kouts = ['time', 'txBytes']
+        kins = ['idleTime', 'Total TX bytes', 'Total RX bytes']
+        kouts = ['time', 'txBytes', 'rxBytes']
         for ko in kouts:
             dt[ko] = [0]
         for k, ko in zip(kins, kouts):
@@ -349,7 +365,7 @@ def dataProcess(dt):
                 if k == 'idleTime':
                     if i > 0:
                         dt[ko].append(v + dt['txTime'][i-1] + dt[ko][i-1])
-                if k in kins[1]:
+                if k in kins[1:]:
                     if i > 0:
                         # print('dt[k][i] - dt[k][i-1]', dt[k][i] - dt[k][i-1])
                         dt[ko].append(dt[k][i] - dt[k][i-1])
@@ -362,7 +378,6 @@ def dataProcess(dt):
     finally:
         for ko in kouts:
             dt[ko] = np.array(dt[ko])
-        
         return dt
 
 def dp(dt, length=1000, time=False):

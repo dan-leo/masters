@@ -25,9 +25,13 @@ The UE devices are specifically the:
 
 Ublox and Quectel data has been captured for Nokia networks at Vodacom head office in Century City, Cape Town and for ZTE at the MTN Mobile Intelligence Lab, Stellenbosch and inside an RF enclosure with the door slightly open before being sealed.
 
-![MTN (green, black) vs Vodacom (blue, red) Latency test](C:\GIT\masters\code\tests\img\vodacom_vs_mtn_latency.png)
+![MTN (green, black) vs Vodacom (blue, red) Latency test](vodacom_vs_mtn_zte_nokia_ublox_quectel_UDP_packet_latency_vs_Received_Signal_power.pdf)
+
+
 
 ![MTN (green, black) vs Vodacom (blue, red) Energy test](C:\GIT\masters\code\tests\img\vodacom_vs_mtn_energy.png)
+
+
 
 # Remaining work and plan
 
@@ -35,6 +39,6 @@ The current data is in the process of being processed and visualised, with resul
 
 \begin{itemize}
     \item Addition of Nordic and SimCom to testing framework in progress
-    \item Capture data from Huawei and Ericsson from Vodacom and MTN in Johannesburg end of August.
+    \item Capture data from Huawei and Ericsson from Vodacom and MTN in Johannesburg early September.
     \item Write up thesis and complete end of September
 \end{itemize}

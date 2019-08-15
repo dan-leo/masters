@@ -35,7 +35,8 @@ def adjust(key, val):
     return val
 
 def thresh(a, key, split):
-    a = np.array(a)
+    # print('a[key]', a[key], key)
+    a = np.array(a[key])
     r = a == a
     lim = [None, None]
     if key == 'Signal power':
@@ -51,6 +52,10 @@ def thresh(a, key, split):
     if key == 'energy':
         r *= a > 0
         lim = [0, 800000]
+    if key == 'txBytes':
+        r *= a > 0
+        limits = [10000, 500, 200, 1]
+        r, lim = splitter(r, a, limits, split)
     return r, lim
 
 def compare(files, thresh, text, ylabel, xlabel, ky, kx, ry, rx, overlays=['ublox', 'quectel'], graphs=['zte', 'nokia'], split=1, hist=False, bins=20, log=False, weighted=True):
@@ -112,7 +117,7 @@ def compare(files, thresh, text, ylabel, xlabel, ky, kx, ry, rx, overlays=['ublo
                 m = max(lens)
                 w = [[1 * m / c] * c for c in b]
                 # print(lens, m, b)
-                n, rbins, patches = ax[s].hist(hyy, color=pcolours, alpha=alpha, range=ly, bins=bins, log=log, stacked=False, labels=overlays, weights=w if weighted else None)
+                n, rbins, patches = ax[s].hist(hyy, color=pcolours, alpha=alpha, range=ly, bins=bins, log=log, stacked=False, label=overlays, weights=w if weighted else None)
                 # ax[s].legend(prop={'size': 10})
                 np.set_printoptions(precision=0, suppress=True)
                 print(rbins)
@@ -254,17 +259,17 @@ def dict_filt(dc, x, y, split, thresh):
     _debug = False
     try:
         try:
-            kx = [x, x[1:-1]]
-            kx = kx[[a in dc.keys() for a in kx].index(True)]
-            ky = [y, y[1:-1]]
-            ky = ky[[a in dc.keys() for a in ky].index(True)]
-            t, limitx = thresh(dc[kx], x, split)
-            t2, limity = thresh(dc[ky], y, split)
+            # kx = [x, x[1:-1]]
+            # kx = kx[[a in dc.keys() for a in kx].index(True)]
+            # ky = [y, y[1:-1]]
+            # ky = ky[[a in dc.keys() for a in ky].index(True)]
+            t, limitx = thresh(dc, x, split)
+            t2, limity = thresh(dc, y, split)
             if len(t):
                 t *= t2
             if _debug:
                 print('dc[x]', x, len(dc[x]), 'dc[y]', y, len(dc[y]), dc[x], dc[y])
-            return np.array(dc[kx])[t], np.array(dc[ky])[t], [limitx, limity]
+            return np.array(dc[x])[t], np.array(dc[y])[t], [limitx, limity]
         except KeyError:
             return None, None, [None, None]
     except IndexError as e:
@@ -285,6 +290,7 @@ def csvToDict(file):
     dt = {}
     data = []
     header = []
+    fheader = ['index','idleTime','txTime','totalTime','energy','maxCurrent','Signal power','Total power','TX power','TX time','RX time','Cell ID','ECL','SNR','EARFCN','PCI','RSRQ','RLC UL BLER','RLC DL BLER','MAC UL BLER','MAC DL BLER','Total TX bytes','Total RX bytes','Total TX blocks','Total RX blocks','Total RTX blocks','Total ACK/NACK RX','RLC UL','RLC DL','MAC UL','MAC DL','Current Allocated','Total Free','Max Free','Num Allocs','Num Frees','primary_cell','rsrp','rsrq','rssi','snr']
     ready = False
     
     # test file encoding
@@ -322,34 +328,40 @@ def csvToDict(file):
     # print(nump.shape)
     # print(nump.T)
     for n, d in zip(header, nump.T):
-        dt[n] = d
+        if n in fheader:
+            dt[n] = d
+        else:
+            for fh in fheader:
+                if n in fh:
+                    dt[fh] = d
     dt['name'] = file
     return dt
 
 # post processing csv {} data
 def dataProcess(dt):
     try:
-        dt['time'] = [0]
-        dt['txBytes'] = []
-        dt['txBytes_rsrp'] = []
-        for k in ['idleTime', 'Total TX bytes']:
+        kins = ['idleTime', 'Total TX bytes']
+        kouts = ['time', 'txBytes']
+        for ko in kouts:
+            dt[ko] = [0]
+        for k, ko in zip(kins, kouts):
             for i, v in enumerate(dt[k]):
                 if k == 'idleTime':
                     if i > 0:
-                        dt['time'].append(v + dt['txTime'][i-1] + dt['time'][i-1])
-                if k == 'Total TX bytes':
+                        dt[ko].append(v + dt['txTime'][i-1] + dt[ko][i-1])
+                if k in kins[1]:
                     if i > 0:
-                        dt['txBytes'].append(dt[k][i] - dt[k][i-1])
-                        dt['txBytes_rsrp'].append(dt['Signal power'][i])
-                else:
-                    break
-        # print(dt['txBytes'])
+                        # print('dt[k][i] - dt[k][i-1]', dt[k][i] - dt[k][i-1])
+                        dt[ko].append(dt[k][i] - dt[k][i-1])
+            # if k == 'Total TX bytes':
+                # print('dt[k]', dt[k])
+                # print("dt['txBytes']", dt['txBytes'])
     except KeyError:
-        dt['txBytes'] = [[0] * len(dt['Signal power'])][0]
+        dt[ko] = [[0] * len(dt['Signal power'])][0]
         # print('KeyError: ', "dt['txBytes']", dt['txBytes'])
     finally:
-        dt['time'] = np.array(dt['time'])
-        dt['txBytes'] = np.array(dt['txBytes'])
+        for ko in kouts:
+            dt[ko] = np.array(dt[ko])
         
         return dt
 

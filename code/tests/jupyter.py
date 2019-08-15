@@ -143,15 +143,20 @@ def compare(files, thresh, text, ylabel, xlabel, ky, kx, ry, rx, overlays=['ublo
                 w = [[1 * m / c] * c for c in b]
                 # print(lens, m, b)
                 # print(hyy, bins)
-                _, lbins = np.histogram(np.concatenate(np.ravel(hyy)), bins=bins)
-                logbins = np.logspace(np.log10(lbins[0]), np.log10(lbins[-1]), len(lbins))
-                n, rbins, _ = ax[s].hist(hyy, color=pcolours[:len(hyy)], alpha=alpha, range=ly, bins= logbins if log else bins, log=log, stacked=False, label=overlays, weights=w if weighted else None)
-                plt.xscale('log')
-                # ax[s].legend(prop={'size': 10})
-                np.set_printoptions(precision=0, suppress=True)
-                print(rbins)
-                # print(ly)
-                ax[s].set_xlim(ly) # x
+                try:
+                    data = np.concatenate(np.ravel(hyy))
+                except ValueError:
+                    data = np.ravel(hyy)
+                finally:
+                    _, lbins = np.histogram(data, bins=bins)
+                    logbins = np.logspace(np.log10(lbins[0]), np.log10(lbins[-1]), len(lbins))
+                    n, rbins, _ = ax[s].hist(hyy, color=pcolours[:len(hyy)], alpha=alpha, range=ly, bins= logbins if log else bins, log=log, stacked=False, label=overlays, weights=w if weighted else None)
+                    plt.xscale('log')
+                    # ax[s].legend(prop={'size': 10})
+                    np.set_printoptions(precision=0, suppress=True)
+                    print(rbins)
+                    # print(ly)
+                    ax[s].set_xlim(ly) # x
             if i == split - 1:
                 if overlays[j] in dev:
                     plt.xlabel(loc[nwi] + ' ' + xlabel)
@@ -195,7 +200,7 @@ def compare(files, thresh, text, ylabel, xlabel, ky, kx, ry, rx, overlays=['ublo
     
     log = "_log_" if log else "_"
     hist = "_hist_" if hist else "_"
-    pic = 'img/Vodacom_vs_MTN_' + "_".join(caps(graphs)) + "_" + "_".join(caps(overlays)) + log + hist + "_".join(text.split())
+    pic = 'img/Vodacom_vs_MTN_' + "_".join(caps(graphs)) + "_" + "_".join(caps(overlays)) + log + str(split) + hist + "_".join(text.split())
     plt.savefig(pic + '.png')
     plt.savefig(pic + '.pdf')
     plt.show()

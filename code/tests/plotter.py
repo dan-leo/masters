@@ -17,7 +17,8 @@ def attdt():
     atf['50-110 dB'] = []
     return atf
 
-def db(dirrs, files):
+# def db(dirrs, files):
+def scatternuator(name, kx, ky, thresh, plotlim, scale, limited, dirrs, files, log=True):
     attenuator_db = []
 
     np.set_printoptions(precision=3, suppress=True)
@@ -56,9 +57,10 @@ def db(dirrs, files):
             # print('atd[k]', len(atd[k]))
         
         attenuator_db.append(atd)
-    return attenuator_db
 
-def scatternuator(name, kx, ky, thresh, plotlim, scale, limited, attenuator_db):
+    # return attenuator_db
+# def scatternuator(name, kx, ky, thresh, plotlim, scale, limited, attenuator_db):
+
     # 4x4 plotter
     fy = 8
     fx = 12
@@ -102,10 +104,12 @@ def scatternuator(name, kx, ky, thresh, plotlim, scale, limited, attenuator_db):
         aka.append(ka)
         # ax = plt.gca()
         paxis.append(ax)
-        ax.set_yscale('log')
+        if log:
+            ax.set_yscale('log')
         ax.set_xlim(plotlim[:2])
         ax.set_ylim(plotlim[2:])
-        ax.yaxis.set_major_formatter(ticker.FuncFormatter(lambda y,pos: ('{{:.{:1d}f}}'.format(int(np.maximum(-np.log10(max(y, 0.01)),0)))).format(y)))
+        if log:
+            ax.yaxis.set_major_formatter(ticker.FuncFormatter(lambda y,pos: ('{{:.{:1d}f}}'.format(int(np.maximum(-np.log10(max(y, 0.01)),0)))).format(y)))
         ax.legend()#bbox_to_anchor=(0.97, 1.15))
 
     pic = 'plotter/' + name + '_plot'

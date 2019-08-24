@@ -17,21 +17,10 @@ def attdt():
     atf['50-110 dB'] = []
     return atf
 
-def scatternuator(name, dirrs, files, kx, ky, thresh, plotlim, scale, limited, bins=20):
-    plot_host = False
-    plot_dist = False
+def db(dirrs, files):
+    attenuator_db = []
 
     np.set_printoptions(precision=3, suppress=True)
-    cc = ['tab:orange', 'tab:green', 'tab:red', 'tab:purple', 'tab:blue', 'tab:brown']
-    # 4x4 plotter
-    paxis = []
-    daxis = []
-    haxis = []
-    hist = []
-    aka = []
-    fy = 8
-    fx = 12
-    fig = plt.figure(figsize=(fx, fy))
     for di, dirr in enumerate(dirrs):
         print(dirr)
         ####################### file prep #######################
@@ -65,13 +54,25 @@ def scatternuator(name, dirrs, files, kx, ky, thresh, plotlim, scale, limited, b
                 atd[k].append(dp)
             atd[k] = j.merge(atd[k])
             # print('atd[k]', len(atd[k]))
+        
+        attenuator_db.append(atd)
+    return attenuator_db
 
+def scatternuator(name, kx, ky, thresh, plotlim, scale, limited, attenuator_db):
+    # 4x4 plotter
+    fy = 8
+    fx = 12
+    aka = []
+    hist = []
+    paxis = []
+    fig = plt.figure(figsize=(fx, fy))
+    cc = ['tab:orange', 'tab:green', 'tab:red', 'tab:purple', 'tab:blue', 'tab:brown']
+    for di, atd in enumerate(attenuator_db):
         ####################### scatter #######################
-        # fig = plt.figure()
-        ax = fig.add_subplot(2, 2, di + 1)
         y = []
         x = []
         ka = []
+        ax = fig.add_subplot(2, 2, di + 1)
 
         for i, k in enumerate(atd):
             try:
@@ -91,7 +92,7 @@ def scatternuator(name, dirrs, files, kx, ky, thresh, plotlim, scale, limited, b
                 # print(yy)
                 xx = xx / scale[0]
                 yy = yy / scale[1]
-                ax.scatter(xx[r], yy[r], linestyle='dotted', color=cc[i], label=k)
+                ax.scatter(xx[r], yy[r], linestyle='dotted', color=cc[i], label=k, alpha=0.8)
                 x.append(xx[r])
                 y.append(yy[r])
                 ka.append(k)

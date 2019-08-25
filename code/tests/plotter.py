@@ -5,20 +5,23 @@ import importlib
 import pandas as pd
 import seaborn as sns
 # importlib.reload(j)
+from mpl_toolkits import mplot3d
 
 import matplotlib.ticker as ticker
 import glob
 
 def attdt():
     atf = {}
-    atten = np.arange(0, 50, 10)
+    atten = np.arange(0, 40, 10)
     for at in atten:
         atf[str(at) + ' dB'] = []
-    atf['50-110 dB'] = []
+    atf['40-110 dB'] = []
     return atf
 
 # def db(dirrs, files):
-def scatternuator(name, kx, ky, thresh, plotlim, scale, limited, dirrs, files, log=True):
+def scatternuator(name, kx, ky, thresh, plotlim, scale, limited, dirrs, files, kz=None, log=True, overlay=False, \
+    labels=['Ublox', 'Quectel'], legend=True, type='fade', fig=None, offset=0, colour='tab:blue', bbox=(1.03, 0.97)):
+    savefig = fig == None
     attenuator_db = []
 
     np.set_printoptions(precision=3, suppress=True)
@@ -35,14 +38,14 @@ def scatternuator(name, kx, ky, thresh, plotlim, scale, limited, dirrs, files, l
                 for atn in atten:
                     if str(atn) in f:
                         # print(atn, file)
-                        if atn >= 50:
-                            atf['50-110 dB'].append(file)
+                        if atn >= 40:
+                            atf['40-110 dB'].append(file)
                         else:
                             atf[str(atn) + ' dB'].append(file)
                         break
                 else:
                     print('else', file)
-                    atf['50-110 dB'].append(file)
+                    atf['40-110 dB'].append(file)
 
         ####################### database {} prep #######################
 
@@ -57,27 +60,44 @@ def scatternuator(name, kx, ky, thresh, plotlim, scale, limited, dirrs, files, l
             # print('atd[k]', len(atd[k]))
         
         attenuator_db.append(atd)
+    # print(attenuator_db)
 
     # return attenuator_db
 # def scatternuator(name, kx, ky, thresh, plotlim, scale, limited, attenuator_db):
 
     # 4x4 plotter
-    fy = 8
-    fx = 12
+    fy = 4 if overlay else 8
+    fx = 6 if overlay else 12
+    # fx = 1
     aka = []
     hist = []
     paxis = []
-    fig = plt.figure(figsize=(fx, fy))
+    z_list = []
+    ecl_list = []
+    if not fig:
+        fig = plt.figure(figsize=(fx, fy))
     cc = ['tab:orange', 'tab:green', 'tab:red', 'tab:purple', 'tab:blue', 'tab:brown']
+    cd = ['tab:blue', 'tab:red']
+    alphas = [1.0, 0.8, 0.6, 0.5, 0.4, 0.3]
+    if overlay:
+        if '3d' in type:
+            ax = fig.add_subplot(111, projection = '3d')
+        else:
+            ax = fig.add_subplot(111)
     for di, atd in enumerate(attenuator_db):
         ####################### scatter #######################
         y = []
         x = []
         ka = []
-        ax = fig.add_subplot(2, 2, di + 1)
+        if overlay:
+            # ax = fig.add_subplot(111, label=labels[di])   
+            ax.set_label(labels[di])    
+        else:
+            ax = fig.add_subplot(2, 2, di + 1)
 
         for i, k in enumerate(atd):
             try:
+                ecl = np.array(atd[k]['ECL'])
                 xx = np.array(atd[k][kx])
                 yy = np.array(atd[k][ky])
                 r = xx == xx
@@ -91,15 +111,42 @@ def scatternuator(name, kx, ky, thresh, plotlim, scale, limited, dirrs, files, l
                 if thresh[3]:
                     r2 *= yy < thresh[3]
                 r *= r2
+                if kz:
+                    zz = np.array(atd[k][kz])
+                    r3 = zz == zz
+                    if thresh[4]:
+                        r3 *= zz > thresh[4]
+                    if thresh[5]:
+                        r3 *= zz < thresh[5]
+                    r *= r3
                 # print(yy)
                 xx = xx / scale[0]
+                xx += offset
                 yy = yy / scale[1]
-                ax.scatter(xx[r], yy[r], linestyle='dotted', color=cc[i], label=k, alpha=0.8)
+                if type == 'fade':
+                    ax.scatter(xx[r], yy[r], marker='o', color=cd[di], label=k, alpha=alphas[len(atd)-1-i])
+                elif type == 'colour':
+                    ax.scatter(xx[r], yy[r], marker='o', color=cc[i], label=k, alpha=0.8)
+                elif type == 'single':
+                    ax.scatter(xx[r], yy[r], marker='o', color=colour, label=labels[0] if not i else None, alpha=0.8)
+                elif type == 'ecl':
+                    for xp, yp, e in zip(xx[r], yy[r], ecl[r]):
+                        ax.scatter(xp, yp, marker='o', color=cc[int(e)], label=(255 if e == 3 else e) if not e in ecl_list else None, alpha=0.8)
+                        ecl_list.append(e)
+                elif type == 'ecl3d':
+                    for xp, yp, e in zip(xx[r], yy[r], ecl[r]):
+                        ax.scatter(xp, yp, e, marker='o', color=cc[int(e)], label=e if not e in ecl_list else None, alpha=0.8)
+                        ecl_list.append(e)
+                elif type == 'plot3d':
+                    for xp, yp, zp in zip(xx[r], yy[r], zz[r]):
+                        ax.scatter(xp, yp, zp, marker='o', color=colour, label=labels[0] if not labels[0] in z_list else None, alpha=0.8)
+                        z_list.append(labels[0])
+                    # ax.scatter(xx[r], yy[r], zz[r], marker='o', color=colour, label=labels[0] if not i else None, alpha=0.8)
                 x.append(xx[r])
                 y.append(yy[r])
                 ka.append(k)
             except (KeyError, IndexError) as e:
-                print(e)
+                print('KeyError, IndexError', e)
         hist.append([x, y])
         aka.append(ka)
         # ax = plt.gca()
@@ -110,11 +157,17 @@ def scatternuator(name, kx, ky, thresh, plotlim, scale, limited, dirrs, files, l
         ax.set_ylim(plotlim[2:])
         if log:
             ax.yaxis.set_major_formatter(ticker.FuncFormatter(lambda y,pos: ('{{:.{:1d}f}}'.format(int(np.maximum(-np.log10(max(y, 0.01)),0)))).format(y)))
-        ax.legend()#bbox_to_anchor=(0.97, 1.15))
+        # ax.legend(bbox_to_anchor=(0.97, 1.15))
+        if overlay and not di and legend:
+            if bbox:
+                ax.legend(bbox_to_anchor=bbox)
+            else:
+                ax.legend()
 
-    pic = 'plotter/' + name + '_plot'
-    plt.savefig(pic + '.png')
-    plt.savefig(pic + '.pdf')
+    if savefig:
+        pic = 'plotter/' + name + '_plot'
+        plt.savefig(pic + '.png')
+        plt.savefig(pic + '.pdf')
 
 def pan4(name, dirrs, files, kx, ky, thresh, plotlim, distlim, histlim, scale, limited, bins=20):
     plot_host = False

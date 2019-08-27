@@ -26,13 +26,13 @@ def scatternuator(name, kx, ky, thresh, plotlim, scale, limited, dirrs, files, k
 
     np.set_printoptions(precision=3, suppress=True)
     for di, dirr in enumerate(dirrs):
-        print(dirr)
         ####################### file prep #######################
         atf = attdt()
         atten = np.arange(110, -1, -10)
         # starfolder = 'release/release128/*'
         for starfolder in files:
             subfiles = glob.glob(dirr + starfolder)
+            print(dirr + starfolder)
             for file in subfiles:
                 f = file.split('\\')[-1]
                 for atn in atten:
@@ -50,12 +50,20 @@ def scatternuator(name, kx, ky, thresh, plotlim, scale, limited, dirrs, files, k
         ####################### database {} prep #######################
 
         atd = atd if atd else attdt()
+        for k in atd:
+            if str(type(atd[k])) == "<class 'dict'>":
+                # print('len(atd[', k, '])', len(atd[k]), type(atd[k]))
+                atd[k] = [atd[k]]
         for k in atf:
             # print(k, atf[k])
             for f in atf[k]:
-                c = j.csvToDict(f)
-                dp = j.dataProcess(c)
-                atd[k].append(dp)
+                try:
+                    c = j.csvToDict(f)
+                    dp = j.dataProcess(c)
+                    atd[k].append(dp)
+                except AttributeError as e:
+                    print('AttributeError', e, k, type(atd[k]))
+                    pass
             atd[k] = j.merge(atd[k])
             # print('atd[k]', len(atd[k]))
         
@@ -69,6 +77,7 @@ def scatternuator(name, kx, ky, thresh, plotlim, scale, limited, dirrs, files, k
     # 4x4 plotter
     fy = 4 if overlay else 8
     fx = 6 if overlay else 12
+    npoints = 0
     # fx = 1
     aka = []
     hist = []
@@ -126,10 +135,13 @@ def scatternuator(name, kx, ky, thresh, plotlim, scale, limited, dirrs, files, k
                 xx += offset
                 if scaled:
                     yy = yy / scale[1]
+                npoints += len(xx[r])
                 if ttype == 'fade':
                     ax.scatter(xx[r], yy[r], marker='o', color=cd[di], label=k, alpha=alphas[len(atd)-1-i])
                 elif ttype == 'colour':
                     ax.scatter(xx[r], yy[r], marker='o', color=cc[i], label=k, alpha=0.8)
+                elif ttype == 'label':
+                    ax.scatter(xx[r], yy[r], marker='o', color=cc[i], label=labels[0], alpha=0.8)
                 elif ttype == 'single':
                     ax.scatter(xx[r], yy[r], marker='o', color=colour, label=labels[0] if not i else None, alpha=0.8)
                 elif ttype == 'ecl':
@@ -168,6 +180,7 @@ def scatternuator(name, kx, ky, thresh, plotlim, scale, limited, dirrs, files, k
             else:
                 ax.legend()
 
+    print('points', npoints)
     if savefig:
         pic = 'plotter/' + name + '_plot'
         plt.savefig(pic + '.png')
@@ -206,11 +219,12 @@ def histernator(kx, ky, atd, thresh=[None]*4, scale=[1,1], bins=20, fig=None):
     # print('len(hist)', len(hist))
     # for i in hist:
     #     print(len(i))
-    # print(hist)
     print('bins', bins)
+    for h in hist:
+        print('hist points', len(h))
     df = pd.DataFrame(hist)#, columns=k)
     # df.index = pd.Index(aka[hi])
-    df.T.plot.hist(stacked=False, bins=bins, density=False, ax=ax)#, weights=w)
+    df.T.plot.hist(stacked=True, bins=bins, density=False, ax=ax)#, weights=w)
 
 
 def pan4(name, dirrs, files, kx, ky, thresh, plotlim, distlim, histlim, scale, limited, bins=20):
@@ -229,13 +243,13 @@ def pan4(name, dirrs, files, kx, ky, thresh, plotlim, distlim, histlim, scale, l
     fx = 12
     fig = plt.figure(figsize=(fx, fy))
     for di, dirr in enumerate(dirrs):
-        print(dirr)
         ####################### file prep #######################
         atf = attdt()
         atten = np.arange(110, -1, -10)
         # starfolder = 'release/release128/*'
         for starfolder in files:
             subfiles = glob.glob(dirr + starfolder)
+            print(dirr + starfolder)
             for file in subfiles:
                 f = file.split('\\')[-1]
                 for atn in atten:

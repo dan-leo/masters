@@ -488,15 +488,20 @@ def maxHeaders(dt):
     maxH = []
     for d in dt:
         if len(d) > m:
-            m = len(d)
-            maxH = []
-            for k in d:
-                # if k == 'txBytes':
-                #     print(str(type(d[k])))
-                if str(type(d[k])) == "<class 'numpy.ndarray'>":
-                    maxH.append(k)
-                # if str(type(d[k])) == "<class 'list'>":
-                #     # print(k)
+            try:
+                m = len(d)
+                maxH = []
+                for k in d:
+                    # if k == 'txBytes':
+                    #     print(str(type(d[k])))
+                    if str(type(d[k])) == "<class 'numpy.ndarray'>":
+                        maxH.append(k)
+                    # if str(type(d[k])) == "<class 'list'>":
+                    #     # print(k)
+            except TypeError as e:
+                # print(TypeError, e, d)
+                pass
+    # print('maxH', maxH)
     return maxH
 
 def merge(dt):

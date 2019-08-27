@@ -18,6 +18,17 @@ def attdt():
     atf['40-110 dB'] = []
     return atf
 
+# manual flatten of array
+def flatten(hist):
+    flat = []
+    for i in range(len(hist)):
+        merge = []
+        for h in hist[i][0]:
+            for v in h:
+                merge.append(v)
+        flat.append(merge)
+    return np.array(flat)
+
 # def db(dirrs, files):
 def scatternuator(name, kx, ky, thresh, plotlim, scale, limited, dirrs, files, kz=None, atd=None, scaled=False, log=True, overlay=False, \
     labels=['Ublox', 'Quectel'], legend=True, ttype='fade', fig=None, offset=0, colour='tab:blue', bbox=(1.03, 0.97)):
@@ -30,9 +41,9 @@ def scatternuator(name, kx, ky, thresh, plotlim, scale, limited, dirrs, files, k
         atf = attdt()
         atten = np.arange(110, -1, -10)
         # starfolder = 'release/release128/*'
+        print(dirr + str(files))
         for starfolder in files:
             subfiles = glob.glob(dirr + starfolder)
-            print(dirr + starfolder)
             for file in subfiles:
                 f = file.split('\\')[-1]
                 for atn in atten:
@@ -80,7 +91,8 @@ def scatternuator(name, kx, ky, thresh, plotlim, scale, limited, dirrs, files, k
     npoints = 0
     # fx = 1
     aka = []
-    hist = []
+    histy = []
+    histx = []
     paxis = []
     z_list = []
     ecl_list = []
@@ -162,7 +174,12 @@ def scatternuator(name, kx, ky, thresh, plotlim, scale, limited, dirrs, files, k
                 ka.append(k)
             except (KeyError, IndexError) as e:
                 print('KeyError, IndexError', e)
-        hist.append([x, y])
+        # hist.append([x, y])
+        # print('x', len(x))
+        # x = sum(x, [])
+        # y = sum(y, [])
+        histx.append(x)
+        histy.append(y)
         aka.append(ka)
         # ax = plt.gca()
         paxis.append(ax)
@@ -180,51 +197,28 @@ def scatternuator(name, kx, ky, thresh, plotlim, scale, limited, dirrs, files, k
             else:
                 ax.legend()
 
-    print('points', npoints)
+    sumx = [len(h) for h in histx[0]]
+    sumy = [len(h) for h in histy[0]]
+    print('points', npoints, sum(sumx), sum(sumy), sumx, sumy, len(histx), len(histy))
     if savefig:
         pic = 'plotter/' + name + '_plot'
         plt.savefig(pic + '.png')
         plt.savefig(pic + '.pdf')
+    return histx, histy
 
-def histernator(kx, ky, atd, thresh=[None]*4, scale=[1,1], bins=20, fig=None):
-    if not fig:
-        fig = plt.figure(figsize=(fx, fy))
+def histernator(hist_points, title, labels=None, fy=4, fx=6, bins=20):
+    fig = plt.figure(figsize=(fx, fy))
+    plt.title(title + ' histogram')
     # ax = fig.add_subplot(111)
     ax = plt.gca()
-    hist = []
-    for k in atd:
-        try:
-            xx = np.array(atd[k][kx])
-            yy = np.array(atd[k][ky])
-            r = xx == xx
-            if thresh[0]:
-                r *= xx > thresh[0]
-            if thresh[1]:
-                r *= xx < thresh[1]
-            r2 = yy == yy
-            if thresh[2]:
-                r2 *= yy > thresh[2]
-            if thresh[3]:
-                r2 *= yy < thresh[3]
-            r *= r2
-            xx = xx / scale[0]
-            yy = yy / scale[1]
+    print('hist points', hist_points.shape, [len(a) for a in hist_points], 'bins', bins)
 
-            hist.append(yy[r])
-            # if True in r:
-            #     print(xx[r], yy[r])
-        except (KeyError, IndexError) as e:
-            print('KeyError, IndexError', e)
-            hist.append(np.array([]))
-    # print('len(hist)', len(hist))
-    # for i in hist:
-    #     print(len(i))
-    print('bins', bins)
-    for h in hist:
-        print('hist points', len(h))
-    df = pd.DataFrame(hist)#, columns=k)
     # df.index = pd.Index(aka[hi])
-    df.T.plot.hist(stacked=True, bins=bins, density=False, ax=ax)#, weights=w)
+    plt.hist(hist_points, bins=bins, label=labels, stacked=True)
+    if labels:
+        plt.legend()
+    plt.show()
+    return hist_points
 
 
 def pan4(name, dirrs, files, kx, ky, thresh, plotlim, distlim, histlim, scale, limited, bins=20):
@@ -247,9 +241,9 @@ def pan4(name, dirrs, files, kx, ky, thresh, plotlim, distlim, histlim, scale, l
         atf = attdt()
         atten = np.arange(110, -1, -10)
         # starfolder = 'release/release128/*'
+        print(dirr + str(files))
         for starfolder in files:
             subfiles = glob.glob(dirr + starfolder)
-            print(dirr + starfolder)
             for file in subfiles:
                 f = file.split('\\')[-1]
                 for atn in atten:

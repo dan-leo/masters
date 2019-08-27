@@ -19,8 +19,8 @@ def attdt():
     return atf
 
 # def db(dirrs, files):
-def scatternuator(name, kx, ky, thresh, plotlim, scale, limited, dirrs, files, kz=None, log=True, overlay=False, \
-    labels=['Ublox', 'Quectel'], legend=True, type='fade', fig=None, offset=0, colour='tab:blue', bbox=(1.03, 0.97)):
+def scatternuator(name, kx, ky, thresh, plotlim, scale, limited, dirrs, files, kz=None, atd=None, scaled=False, log=True, overlay=False, \
+    labels=['Ublox', 'Quectel'], legend=True, ttype='fade', fig=None, offset=0, colour='tab:blue', bbox=(1.03, 0.97)):
     savefig = fig == None
     attenuator_db = []
 
@@ -49,7 +49,7 @@ def scatternuator(name, kx, ky, thresh, plotlim, scale, limited, dirrs, files, k
 
         ####################### database {} prep #######################
 
-        atd = attdt()
+        atd = atd if atd else attdt()
         for k in atf:
             # print(k, atf[k])
             for f in atf[k]:
@@ -62,7 +62,8 @@ def scatternuator(name, kx, ky, thresh, plotlim, scale, limited, dirrs, files, k
         attenuator_db.append(atd)
     # print(attenuator_db)
 
-    # return attenuator_db
+    if ttype == 'return':
+        return atd
 # def scatternuator(name, kx, ky, thresh, plotlim, scale, limited, attenuator_db):
 
     # 4x4 plotter
@@ -80,7 +81,7 @@ def scatternuator(name, kx, ky, thresh, plotlim, scale, limited, dirrs, files, k
     cd = ['tab:blue', 'tab:red']
     alphas = [1.0, 0.8, 0.6, 0.5, 0.4, 0.3]
     if overlay:
-        if '3d' in type:
+        if '3d' in ttype:
             ax = fig.add_subplot(111, projection = '3d')
         else:
             ax = fig.add_subplot(111)
@@ -120,24 +121,26 @@ def scatternuator(name, kx, ky, thresh, plotlim, scale, limited, dirrs, files, k
                         r3 *= zz < thresh[5]
                     r *= r3
                 # print(yy)
-                xx = xx / scale[0]
+                if scaled:
+                    xx = xx / scale[0]
                 xx += offset
-                yy = yy / scale[1]
-                if type == 'fade':
+                if scaled:
+                    yy = yy / scale[1]
+                if ttype == 'fade':
                     ax.scatter(xx[r], yy[r], marker='o', color=cd[di], label=k, alpha=alphas[len(atd)-1-i])
-                elif type == 'colour':
+                elif ttype == 'colour':
                     ax.scatter(xx[r], yy[r], marker='o', color=cc[i], label=k, alpha=0.8)
-                elif type == 'single':
+                elif ttype == 'single':
                     ax.scatter(xx[r], yy[r], marker='o', color=colour, label=labels[0] if not i else None, alpha=0.8)
-                elif type == 'ecl':
+                elif ttype == 'ecl':
                     for xp, yp, e in zip(xx[r], yy[r], ecl[r]):
                         ax.scatter(xp, yp, marker='o', color=cc[int(e)], label=(255 if e == 3 else e) if not e in ecl_list else None, alpha=0.8)
                         ecl_list.append(e)
-                elif type == 'ecl3d':
+                elif ttype == 'ecl3d':
                     for xp, yp, e in zip(xx[r], yy[r], ecl[r]):
                         ax.scatter(xp, yp, e, marker='o', color=cc[int(e)], label=e if not e in ecl_list else None, alpha=0.8)
                         ecl_list.append(e)
-                elif type == 'plot3d':
+                elif ttype == 'plot3d':
                     for xp, yp, zp in zip(xx[r], yy[r], zz[r]):
                         ax.scatter(xp, yp, zp, marker='o', color=colour, label=labels[0] if not labels[0] in z_list else None, alpha=0.8)
                         z_list.append(labels[0])
@@ -153,8 +156,9 @@ def scatternuator(name, kx, ky, thresh, plotlim, scale, limited, dirrs, files, k
         paxis.append(ax)
         if log:
             ax.set_yscale('log')
-        ax.set_xlim(plotlim[:2])
-        ax.set_ylim(plotlim[2:])
+        if limited:
+            ax.set_xlim(plotlim[:2])
+            ax.set_ylim(plotlim[2:])
         if log:
             ax.yaxis.set_major_formatter(ticker.FuncFormatter(lambda y,pos: ('{{:.{:1d}f}}'.format(int(np.maximum(-np.log10(max(y, 0.01)),0)))).format(y)))
         # ax.legend(bbox_to_anchor=(0.97, 1.15))
@@ -169,8 +173,48 @@ def scatternuator(name, kx, ky, thresh, plotlim, scale, limited, dirrs, files, k
         plt.savefig(pic + '.png')
         plt.savefig(pic + '.pdf')
 
+def histernator(kx, ky, atd, thresh=[None]*4, scale=[1,1], bins=20, fig=None):
+    if not fig:
+        fig = plt.figure(figsize=(fx, fy))
+    # ax = fig.add_subplot(111)
+    ax = plt.gca()
+    hist = []
+    for k in atd:
+        try:
+            xx = np.array(atd[k][kx])
+            yy = np.array(atd[k][ky])
+            r = xx == xx
+            if thresh[0]:
+                r *= xx > thresh[0]
+            if thresh[1]:
+                r *= xx < thresh[1]
+            r2 = yy == yy
+            if thresh[2]:
+                r2 *= yy > thresh[2]
+            if thresh[3]:
+                r2 *= yy < thresh[3]
+            r *= r2
+            xx = xx / scale[0]
+            yy = yy / scale[1]
+
+            hist.append(yy[r])
+            # if True in r:
+            #     print(xx[r], yy[r])
+        except (KeyError, IndexError) as e:
+            print('KeyError, IndexError', e)
+            hist.append(np.array([]))
+    # print('len(hist)', len(hist))
+    # for i in hist:
+    #     print(len(i))
+    # print(hist)
+    print('bins', bins)
+    df = pd.DataFrame(hist)#, columns=k)
+    # df.index = pd.Index(aka[hi])
+    df.T.plot.hist(stacked=False, bins=bins, density=False, ax=ax)#, weights=w)
+
+
 def pan4(name, dirrs, files, kx, ky, thresh, plotlim, distlim, histlim, scale, limited, bins=20):
-    plot_host = False
+    plot_hist = False
     plot_dist = False
 
     np.set_printoptions(precision=3, suppress=True)
@@ -366,7 +410,7 @@ def pan4(name, dirrs, files, kx, ky, thresh, plotlim, distlim, histlim, scale, l
 
     ####################### histogram #######################
     
-    if plot_host:
+    if plot_hist:
         fy = 8
         fx = 12
         fig = plt.figure(figsize=(fx, fy))

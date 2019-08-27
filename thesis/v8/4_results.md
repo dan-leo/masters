@@ -6,6 +6,8 @@ Application developers and cellular service providers alike are interested in im
 
 ## Approach
 
+How is this performing according to the fundamental performance metrics.
+
 The goal is to test four UE manufacturers against four network vendors with a set of RF metrics.
 
 | NW Vendors | UE Manufacturers | RF Metrics         |
@@ -33,7 +35,7 @@ Due to the large dataset and requiring a reasonable means of visualization, we c
 \begin{minipage}{\linewidth}
 \begin{center}
 \includegraphics[width=.6\linewidth]{../../code/tests/img2/histogram_counts.pdf}
-\captionof{figure}{Python seaborn histogram of a univariate latency distribution showing counts}
+\captionof{figure}{Example python histogram of a univariate latency distribution showing counts}
 \end{center}
 \end{minipage}
 
@@ -41,11 +43,10 @@ Due to the large dataset and requiring a reasonable means of visualization, we c
 
 Histogram counts vary among various datasets when their sizes differ, so it would be a good idea to normalize it such that the area under the graph makes 1.0. The probability of the discrete data can also be estimated in a continuous probability density function (PDF) with the kernel density estimation.
 
-
 \begin{minipage}{\linewidth}
 \begin{center}
 \includegraphics[width=.6\linewidth]{../../code/tests/img2/probability_density_function_seaborn.pdf}
-\captionof{figure}{Python seaborn histogram of a univariate latency distribution with a normalized density and a gaussian kernel density estimate}
+\captionof{figure}{Example python histogram of a univariate latency distribution with a normalized density and a gaussian kernel density estimate}
 \end{center}
 \end{minipage}
 
@@ -73,6 +74,12 @@ If the histogram bin values are normalized by dividing by the bin count, adding 
 
 [](../../code/tests/img2/probability_mass_function.png)
 
+In fact, good practice would be viewing the data as is and not trying to analyze it from what is essentially an entirely new perspective. Thus, the data will be viewed as 2D plotted points and histograms. Colour will be used to group the data according to attenuation and packet size.
+
+## DRX Tests
+
+The UE is set to a specific eDRX network configuration.
+
 
 
 # Results
@@ -89,25 +96,21 @@ In idle-DRX mode, MTN has an interval of 2.56 seconds and Vodacom 10.24 seconds.
 
 ### Latency
 
-![drx_txTime_plot](../../code/tests/plotter/drx_txTime_plot.png)
+![Attenuation does not seem to have an effect on the eDRX latency except when RSRP is lower than -110dB](../../code/tests/plotter/drx_txTime_plot.png)
 
-![drx_txTime_logkde](../../code/tests/plotter/drx_txTime_logkde.png)
 
-![drx_txTime_hist](../../code/tests/plotter/drx_txTime_hist.png)
+
+
 
 ![drx_RX time_plot](../../code/tests/plotter/drx_RX time_plot.png)
 
-![drx_RX time_logkde](../../code/tests/plotter/drx_RX time_logkde.png)
 
-![drx_RX time_hist](../../code/tests/plotter/drx_RX time_hist.png)
+
+
 
 ### Energy
 
-![drx_energy_plot](../../code/tests/plotter/drx_energy_plot.png)
-
-![drx_energy_logkde](../../code/tests/plotter/drx_energy_logkde.png)
-
-![drx_energy_hist](../../code/tests/plotter/drx_energy_hist.png)
+![Attenuation does not seem to have an effect on the eDRX energy except when RSRP is lower than -110dB](../../code/tests/plotter/drx_energy_plot.png)
 
 ### Cost
 
@@ -123,17 +126,11 @@ PTAU was longer for Vodacom than for MTN.
 
 ![ptau_txTime_plot](../../code/tests/plotter/ptau_txTime_plot.png)
 
-![ptau_txTime_logkde](../../code/tests/plotter/ptau_txTime_logkde.png)
-
-![ptau_txTime_hist](../../code/tests/plotter/ptau_txTime_hist.png)
-
 ### Energy
 
 ![ptau_energy_plot](../../code/tests/plotter/ptau_energy_plot.png)
 
-![ptau_energy_logkde](../../code/tests/plotter/ptau_energy_logkde.png)
 
-![ptau_energy_hist](../../code/tests/plotter/ptau_energy_hist.png)
 
 ### Cost
 
@@ -173,15 +170,11 @@ RSSI
 
 ![release_txTime_plot](../../code/tests/plotter/release_txTime_plot.png)
 
-![release_txTime_logkde](../../code/tests/plotter/release_txTime_logkde.png)
 
-![release_txTime_hist](../../code/tests/plotter/release_txTime_hist.png)
+
+
 
 ![release_txTimeNW_plot](../../code/tests/plotter/release_txTimeNW_plot.png)
-
-![release_txTimeNW_logkde](../../code/tests/plotter/release_txTimeNW_logkde.png)
-
-![release_txTimeNW_hist](../../code/tests/plotter/release_txTimeNW_hist.png)
 
 ### Energy
 
@@ -205,9 +198,9 @@ RSSI
 
 ![release_energy_plot](../../code/tests/plotter/release_energy_plot.png)
 
-![release_energy_logkde](../../code/tests/plotter/release_energy_logkde.png)
 
-![release_energy_hist](../../code/tests/plotter/release_energy_hist.png)
+
+
 
 ## Cops Tests
 

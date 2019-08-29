@@ -86,6 +86,32 @@ The UE is set to a specific eDRX network configuration.
 
 Ublox and Quectel data has been captured for Nokia networks at Vodacom head office in Century City, Cape Town and for ZTE at the MTN Mobile Intelligence Lab, Stellenbosch inside an RF enclosure with the door slightly open before being sealed.
 
+## Dataset
+
+Looking at the dataset as a whole, it has
+
+![Dataset_Energy_vs_Latency_Quectel_ZTE_plot](../../code/tests/plotter/Dataset_Energy_vs_Latency_Quectel_ZTE_plot.png)
+
+![Dataset_Energy_vs_Latency_Quectel_ZTE_energy](../../code/tests/plotter/Dataset_Energy_vs_Latency_Quectel_ZTE_energy.png)
+
+![Dataset_Energy_vs_Latency_Quectel_ZTE_latency](../../code/tests/plotter/Dataset_Energy_vs_Latency_Quectel_ZTE_latency.png)
+
+![Dataset_Energy_vs_Latency_Quectel_ZTE_outliers](../../code/tests/plotter/Dataset_Energy_vs_Latency_Quectel_ZTE_outliers.png)
+
+
+
+![Dataset_Energy_vs_Latency_Quectel_ZTE_plot](../../code/tests/plotter/Dataset_Energy_vs_Latency_Quectel_ZTE_plot.png)
+
+![Dataset_Energy_vs_Latency_Quectel_ZTE_energy](../../code/tests/plotter/Dataset_Energy_vs_Latency_Quectel_ZTE_energy.png)
+
+![Dataset_Energy_vs_Latency_Quectel_ZTE_latency](../../code/tests/plotter/Dataset_Energy_vs_Latency_Quectel_ZTE_latency.png)
+
+![Dataset_Energy_vs_Latency_Quectel_ZTE_outliers](../../code/tests/plotter/Dataset_Energy_vs_Latency_Quectel_ZTE_outliers.png)
+
+
+
+
+
 ## DRX Tests
 
 ### UE/NW Behavior

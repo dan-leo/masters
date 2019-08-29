@@ -7,6 +7,8 @@ import seaborn as sns
 # importlib.reload(j)
 from mpl_toolkits import mplot3d
 import copy
+import matplotlib.patches as mpatches
+from matplotlib.lines import Line2D
 
 import matplotlib.ticker as ticker
 import glob
@@ -19,7 +21,7 @@ def attdt():
     for at in atten:
         atf[str(at) + ' dB'] = []
     atf['40-110 dB'] = []
-    return atf
+    return copy.deepcopy(atf)
 
 # manual flatten of array
 def flatten(hist):
@@ -35,17 +37,19 @@ def flatten(hist):
 # def db(dirrs, files):
 def scatternuator(name, kx, ky, thresh, plotlim, scale, limited, dirrs, files, kz=None, atd=None, scaled=False, log=True, overlay=False, \
     labels=['Ublox', 'Quectel'], legend=True, title='metric', ttype='fade', fig=None, offset=0, colour='tab:blue', fx=5, fy=3, \
-    print_outliers=True, bbox=(1.03, 0.97)):
+    print_outliers=True, mean=False, bbox=None, ):
+    # (1.03, 0.97)):
     savefig = fig == None
     attenuator_db = []
 
+    # print('@@@@@@@@@@@@@@@@@@@@@@@@@@@')
     np.set_printoptions(precision=3, suppress=True)
     for di, dirr in enumerate(dirrs):
         ####################### file prep #######################
         atf = attdt()
         atten = np.arange(110, -1, -10)
         # starfolder = 'release/release128/*'
-        print(dirr + str(files))
+        # print(dirr + str(files))
         for starfolder in files:
             subfiles = glob.glob(dirr + starfolder)
             for file in subfiles:
@@ -64,8 +68,15 @@ def scatternuator(name, kx, ky, thresh, plotlim, scale, limited, dirrs, files, k
 
         ####################### database {} prep #######################
 
-        atd = atd if atd else attdt()
+        # print([(len(atf[a])) for a in atd])
+        # print('true' if atd else 'false')
+
+        # print('$$$$$$$$$$$$$$$$$$$$$$$$$$$$')
+        # atd = atd if atd else attdt()
+        atd = attdt()
+        # print(atd)
         for k in atd:
+            # print('type(atd[k])', type(atd[k]))
             if str(type(atd[k])) == "<class 'dict'>":
                 # print('len(atd[', k, '])', len(atd[k]), type(atd[k]))
                 atd[k] = [atd[k]]
@@ -76,17 +87,31 @@ def scatternuator(name, kx, ky, thresh, plotlim, scale, limited, dirrs, files, k
                     c = j.csvToDict(f)
                     dp = j.dataProcess(c)
                     atd[k].append(dp)
+                    # arr = [len(dp[i]) for i in dp]
+                    # print('dp', len(dp), len(atd[k]), len(atf[k]), arr, sum(arr), len(arr), f)
+                    # print([i for i in dp])
                 except AttributeError as e:
                     print('AttributeError', e, k, type(atd[k]))
                     pass
-            atd[k] = j.merge(atd[k])
-            # print('atd[k]', len(atd[k]))
+            if mean:
+                atd[k] = j.mean(j.merge(atd[k]))
+            else:
+                atd[k] = j.merge(atd[k])
+            # print('atd[k=', k, ']', len(atd[k]), [len(atd[k][i]) for i in atd[k]])
         
-        atdc = copy.deepcopy(atd)
-        attenuator_db.append(atdc)
+        # # for pri in [('atd[k=', k, ']', len(atd[k]), max([len(atd[k][i]) for i in atd[k]]), sum([len(atd[k][i]) for i in atd[k]])) for k in atd]:
+        # #     print(pri)
+        # values_per_att = [sum([len(atd[k][i]) for i in atd[k]]) for k in atd]
+        # print('values', sum(values_per_att), values_per_att)
+        # traces_per_att = [max([*[len(atd[k][i]) for i in atd[k]], 0]) for k in atd]
+        # print('traces', sum(traces_per_att), traces_per_att)
+        # print(dirr)
+        # # print([(len(atd[a])) for a in atd])
+        
+        attenuator_db.append(copy.deepcopy(atd))
 
     if ttype == 'return':
-        return atd
+        return attenuator_db
 # def scatternuator(name, kx, ky, thresh, plotlim, scale, limited, attenuator_db):
 
     # 4x4 plotter
@@ -103,7 +128,8 @@ def scatternuator(name, kx, ky, thresh, plotlim, scale, limited, dirrs, files, k
     ecl_list = []
     if not fig:
         fig = plt.figure(figsize=(fx, fy))
-    plt.title(title + ' plot')
+    if title:
+        plt.title(title + ' plot')
     cc = ['tab:orange', 'tab:green', 'tab:red', 'tab:purple', 'tab:blue', 'tab:brown']
     cd = ['tab:blue', 'tab:red']
     alphas = [1.0, 0.8, 0.6, 0.5, 0.4, 0.3]
@@ -160,12 +186,13 @@ def scatternuator(name, kx, ky, thresh, plotlim, scale, limited, dirrs, files, k
                 if scaled:
                     yy = yy / scale[1]
                 npoints += len(xx[r])
+                # print('npoints', npoints)
                 if ttype == 'fade':
                     ax.scatter(xx[r], yy[r], marker='o', color=cd[di], label=k, alpha=alphas[len(atd)-1-i])
                 elif ttype == 'colour':
                     ax.scatter(xx[r], yy[r], marker='o', color=cc[i], label=k, alpha=0.8)
                 elif ttype == 'label':
-                    ax.scatter(xx[r], yy[r], marker='o', color=colour[di], label=labels[di] if not i else None, alpha=[1.0, 0.8, 0.6, 0.5][di])
+                    ax.scatter(xx[r], yy[r], marker='o', color=colour[di], label=labels[di] if not i else None, alpha=0.8, s=10) # [1.0, 0.5, 0.2, 0.1][di]
                 elif ttype == 'single':
                     ax.scatter(xx[r], yy[r], marker='o', color=colour, label=labels[0] if not i else None, alpha=0.8)
                 elif ttype == 'ecl':
@@ -188,12 +215,13 @@ def scatternuator(name, kx, ky, thresh, plotlim, scale, limited, dirrs, files, k
                 if False in r:
                     o = [xx[np.invert(r)], yy[np.invert(r)]]
                     if print_outliers:
-                        print('r', o)
+                        print('r', o, labels[di], files)
                     outliers.append(o)
                     # print('outliers', outliers)
                 ka.append(k)
             except (KeyError, IndexError) as e:
-                print('KeyError, IndexError', e, k, atd[k])
+                if k == '0 dB':
+                    print('KeyError, IndexError', e, k, atd[k], labels[di], files)
         # hist.append([x, y])
         # print('x', len(x))
         # x = sum(x, [])
@@ -214,13 +242,16 @@ def scatternuator(name, kx, ky, thresh, plotlim, scale, limited, dirrs, files, k
             ax.yaxis.set_major_formatter(ticker.FuncFormatter(lambda y,pos: ('{{:.{:1d}f}}'.format(int(np.maximum(-np.log10(max(y, 0.01)),0)))).format(y)))
         # ax.legend(bbox_to_anchor=(0.97, 1.15))
         if overlay and legend:
+            # print('legend', dirrs[di])
+            # handles = [mpatches.Patch(color=colour[i], label=lab) for i, lab in enumerate(labels)]
+            handles = [Line2D(range(1), range(1), color="white", marker='o', label=lab, markersize=6, markerfacecolor=colour[i]) for i, lab in enumerate(labels)]
             if bbox:
-                ax.legend(bbox_to_anchor=bbox)
+                ax.legend(handles=handles, bbox_to_anchor=bbox)
             else:
-                ax.legend()
+                ax.legend(handles=handles)
 
-    sumx = [len(h) for h in histx[0]]
-    sumy = [len(h) for h in histy[0]]
+    # sumx = [len(h) for h in histx[0]]
+    # sumy = [len(h) for h in histy[0]]
     # print('points', npoints, sum(sumx), sum(sumy), sumx, sumy, len(histx), len(histy))
     if savefig:
         pic = 'plotter/' + name + '_plot'
@@ -230,7 +261,8 @@ def scatternuator(name, kx, ky, thresh, plotlim, scale, limited, dirrs, files, k
 
 def histernator(hist_points, title, labels=None, fy=4, fx=6, bins=20, colour=cc):
     fig = plt.figure(figsize=(fx, fy))
-    plt.title(title + ' histogram')
+    # plt.title(title + ' histogram')
+    print(title + ' histogram')
     # ax = fig.add_subplot(111)
     ax = plt.gca()
     print('hist points', hist_points.shape, [len(a) for a in hist_points], 'bins', bins)

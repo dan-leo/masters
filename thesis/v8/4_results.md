@@ -2,6 +2,17 @@
 
 Application developers and cellular service providers alike are interested in implementing NB-IoT (LTE Cat-NB) as an alternative to LoRaWAN, SigFox and other LPWANs. Application developers require network coverage, and cellular service providers require consumer and enterprise demand or reasonable motivation before rolling it out nationally. Although there is a great deal of theoretical analysis and simulations in research, the lack of empirical evidence may be contributing to the impasse of growth in the network technology. This thesis aims to bridge that divide.
 
+* what aspect is the plot trying to cover
+
+* what is it telling me on that topic
+* purpose
+* data in the plot saying / deduce / narrative / story
+* 4 sentences
+* 4 sentences when comparing nw, and tehn again ues
+* 
+
+
+
 ![](../images/whitespace.png)
 
 ## Approach

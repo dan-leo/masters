@@ -395,7 +395,7 @@ def csvToDict(file):
             for fh in fheader:
                 if n in fh:
                     dt[fh] = d
-    dt['name'] = file
+    # dt['name'] = file
     return dt
 
 # post processing csv {} data
@@ -522,13 +522,13 @@ def merge(dt):
 
 def mean(dt):
     mean = {}
+    # maxH = maxHeaders(dt)
     if debug: 
         print('dt len:', len(dt[0]))
-    for k in dt[0]:
-        if str(type(dt[0][k])) == "<class 'numpy.ndarray'>":
-            mean[k] = []
-            for d in dt:
-                mean[k].append(adjust(k, np.mean(d[k])))
+    for k in dt:
+        # print(k, type(dt[k]))
+        if str(type(dt[k])) == "<class 'list'>":
+            mean[k] = adjust(k, np.mean(dt[k]))
     return mean
 
 

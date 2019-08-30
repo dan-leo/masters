@@ -75,15 +75,15 @@ def plot(mdb, kx, ky, scale=[1,1], invert=[True,False], colour=cc):
     plt.show()
     print(ti+1, ui+1, ai+1)
 
-def hist(plotx=False, kx='A', ky='B'):
+def hist(plotx=False, kx='A', ky='B', bins=20):
     print('ky', kky)
     fig = plt.figure(figsize=(14, 4))
     ax1 = fig.add_subplot(131)
     ax2 = fig.add_subplot(132)
     ax3 = fig.add_subplot(133)
-    ax1.hist(hyatt, stacked=True)
-    ax2.hist(hyuenw, stacked=True)
-    ax3.hist(hytest, stacked=True)
+    ax1.hist(hyatt, stacked=True, bins=bins)
+    ax2.hist(hyuenw, stacked=True, bins=bins)
+    ax3.hist(hytest, stacked=True, bins=bins)
     plt.show()
     if plotx:
         print('kx', kkx)
@@ -91,7 +91,7 @@ def hist(plotx=False, kx='A', ky='B'):
         ax1 = fig.add_subplot(131)
         ax2 = fig.add_subplot(132)
         ax3 = fig.add_subplot(133)
-        ax1.hist(hxatt, stacked=True)
-        ax2.hist(hxuenw, stacked=True)
-        ax3.hist(hxtest, stacked=True)
+        ax1.hist(hxatt, stacked=True, bins=bins)
+        ax2.hist(hxuenw, stacked=True, bins=bins)
+        ax3.hist(hxtest, stacked=True, bins=bins)
         plt.show()

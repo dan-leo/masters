@@ -10,8 +10,8 @@ debug = False
 def adjust(key, val):
 #     if key == 'Total power':
 #         return max(-1400, val)
-#     if key == 'Signal power':
-#         return max(-1400, val)
+    if key == 'Signal power':
+        return max(-1640, val)
     if key == 'ECL':
         return min(3, val)
 #     if key == 'SNR':
@@ -33,6 +33,53 @@ def adjust(key, val):
 #         if val < -1000:
 #             return 0
     return val
+
+def threshold(a, key):
+    # print('a[key]', a[key], key)
+    a = np.array(a[key])
+    r = a == a
+    lim = [None, None]
+    if key == 'Signal power':
+        r *= a > -1450
+    if key == 'txTime':
+        r *= a < 25000
+    if key == 'TX power':
+        r *= a > -100
+    if key == 'Total power':
+        r *= a > -1400
+    if key == 'SNR':
+        r *= a > -200
+        # lim = [-200, 200]
+    if key == 'energy':
+        r *= a > 0
+        lim = [1, 800000]
+    if key == 'Total TX bytes':
+        r *= a > 0
+        lim = [None, 100000]
+    if key == 'Total RX bytes':
+        r *= a > 0
+        lim = [None, 50000]
+    if key == 'txBytes':
+        r *= a > 0
+        limits = [10000, 500, 200, 50]
+        r, lim = splitter(r, a, limits, split, True)
+    if key == 'rxBytes':
+        r *= a > 0
+        limits = [10000, 500, 200, 50]
+        r, lim = splitter(r, a, limits, split, True)
+    if key == 'TX time':
+        limits = [120000, 50]
+        r, lim = splitter(r, a, limits, split, True)
+    if key == 'RX time':
+        limits = [500000, 50]
+        r, lim = splitter(r, a, limits, split, True)
+    if key == 'txTimeNW':
+        limits = [120000, 50]
+        r, lim = splitter(r, a, limits, split, True)
+    if key == 'rxTimeNW':
+        limits = [120000, 50]
+        r, lim = splitter(r, a, limits, split, True)
+    return r
 
 def thresh(a, key, split):
     # print('a[key]', a[key], key)

@@ -21,9 +21,8 @@ def adjust(key, val):
 # #             return 20000
 # #     if key == 'energy':
 # #         return min(100000, val)
-#     if key == 'TX power':
-#         if val < -1000:
-#             return -140
+    if key == 'TX power':
+        return max(-1000, val)
 #     if key == 'EARFCN':
 #         return min(10000, val)
 #     if key == 'PCI':

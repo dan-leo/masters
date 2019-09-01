@@ -10,8 +10,8 @@ debug = False
 def adjust(key, val):
 #     if key == 'Total power':
 #         return max(-1400, val)
-    if key == 'Signal power':
-        return max(-1640, val)
+    # if key == 'Signal power':
+    #     return max(-1640, val)
     if key == 'ECL':
         return min(3, val)
 #     if key == 'SNR':
@@ -21,8 +21,8 @@ def adjust(key, val):
 # #             return 20000
 # #     if key == 'energy':
 # #         return min(100000, val)
-    if key == 'TX power':
-        return max(-1000, val)
+    # if key == 'TX power':
+    #     return max(-1000, val)
 #     if key == 'EARFCN':
 #         return min(10000, val)
 #     if key == 'PCI':
@@ -32,6 +32,17 @@ def adjust(key, val):
 #         if val < -1000:
 #             return 0
     return val
+
+def exclude(key, vals):
+    a = np.array(vals)
+    r = a == a
+    if key == 'Signal power':
+        r *= a > -1450
+    if key == 'Total power':
+        r *= a > -1450
+    if key == 'TX power':
+        r *= a > -2000
+    return a[r]
 
 def threshold(a, key):
     # print('a[key]', a[key], key)
@@ -43,7 +54,7 @@ def threshold(a, key):
     if key == 'txTime':
         r *= a < 25000
     if key == 'TX power':
-        r *= a > -100
+        r *= a > -1000
     if key == 'Total power':
         r *= a > -1400
     if key == 'SNR':
@@ -51,33 +62,25 @@ def threshold(a, key):
         # lim = [-200, 200]
     if key == 'energy':
         r *= a > 0
-        lim = [1, 800000]
-    if key == 'Total TX bytes':
-        r *= a > 0
-        lim = [None, 100000]
-    if key == 'Total RX bytes':
-        r *= a > 0
-        lim = [None, 50000]
-    if key == 'txBytes':
-        r *= a > 0
-        limits = [10000, 500, 200, 50]
-        r, lim = splitter(r, a, limits, split, True)
-    if key == 'rxBytes':
-        r *= a > 0
-        limits = [10000, 500, 200, 50]
-        r, lim = splitter(r, a, limits, split, True)
-    if key == 'TX time':
-        limits = [120000, 50]
-        r, lim = splitter(r, a, limits, split, True)
-    if key == 'RX time':
-        limits = [500000, 50]
-        r, lim = splitter(r, a, limits, split, True)
-    if key == 'txTimeNW':
-        limits = [120000, 50]
-        r, lim = splitter(r, a, limits, split, True)
-    if key == 'rxTimeNW':
-        limits = [120000, 50]
-        r, lim = splitter(r, a, limits, split, True)
+        r *= a < 50000
+    # if key == 'Total TX bytes':
+    #     r *= a > 0
+    # if key == 'Total RX bytes':
+    #     r *= a > 0
+    # if key == 'txBytes':
+    #     r *= a > 0
+
+    # if key == 'rxBytes':
+    #     r *= a > 0
+
+    # if key == 'TX time':
+
+    # if key == 'RX time':
+
+    # if key == 'txTimeNW':
+
+    # if key == 'rxTimeNW':
+
     return r
 
 def thresh(a, key, split):
@@ -574,7 +577,9 @@ def mean(dt):
     for k in dt:
         # print(k, type(dt[k]))
         if str(type(dt[k])) == "<class 'list'>":
-            mean[k] = adjust(k, np.mean(dt[k]))
+            vals = exclude(k, dt[k])
+            if vals.all() != None:
+                mean[k] = np.mean(vals)
     return mean
 
 

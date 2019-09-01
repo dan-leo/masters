@@ -83,6 +83,8 @@ def plot(mdb, kx, ky, xlabel='', ylabel='', scale=[1,1], invert=[True,False], co
     ax1.legend(loc='best')
     ax2.legend(loc='best')
     ax3.legend(loc='best')
+    kx = '_'.join(kx.split())
+    ky = '_'.join(ky.split())
     fig.savefig('plotter3/' + kx + '_' + ky + '_plot.png')
     fig.savefig('plotter3/' + kx + '_' + ky + '_plot.pdf')
     fig2.savefig('plotter3/' + kx + '_' + ky + '_outliers.png')
@@ -91,6 +93,7 @@ def plot(mdb, kx, ky, xlabel='', ylabel='', scale=[1,1], invert=[True,False], co
     print(ti+1, ui+1, ai+1)
 
 def hist(plotx=False, kx='A', ky='B', bins=20):
+    global kkx, kky
     print('ky', kky)
     fig = plt.figure(figsize=(14, 4))
     ax1 = fig.add_subplot(131)
@@ -104,6 +107,7 @@ def hist(plotx=False, kx='A', ky='B', bins=20):
     ax1.legend(loc='best')
     ax2.legend(loc='best')
     ax3.legend(loc='best')
+    kky = '_'.join(kky.split())
     plt.savefig('plotter3/' + kky + '_histogram.png')
     plt.savefig('plotter3/' + kky + '_histogram.pdf')
     plt.show()
@@ -121,6 +125,7 @@ def hist(plotx=False, kx='A', ky='B', bins=20):
         ax1.legend(loc='best')
         ax2.legend(loc='best')
         ax3.legend(loc='best')
+        kkx = '_'.join(kkx.split())
         plt.savefig('plotter3/' + kkx + '_histogram.png')
         plt.savefig('plotter3/' + kkx + '_histogram.pdf')
         plt.show()

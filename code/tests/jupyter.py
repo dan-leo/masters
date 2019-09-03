@@ -42,7 +42,23 @@ def exclude(key, vals):
         r *= a > -1450
     if key == 'TX power':
         r *= a > -2000
-    return a[r]
+    if key == 'SNR':
+        r *= a > -1000
+    if key == 'RSRQ':
+        r *= a > -1000
+    if key == 'txBytes':
+        r *= a > 0
+    if key == 'rxBytes':
+        r *= a > 0
+    if key == 'txTimeNW':
+        r *= a > 0
+    if key == 'rxTimeNW':
+        r *= a > 0
+    if key == 'EARFCN':
+        r *= a > 0
+    if key == 'PCI':
+        r *= a > 0
+    return r
 
 def threshold(a, key):
     # print('a[key]', a[key], key)
@@ -59,15 +75,26 @@ def threshold(a, key):
         r *= a > -1400
     if key == 'SNR':
         r *= a > -200
-        # lim = [-200, 200]
     if key == 'energy':
         r *= a > 0
         r *= a < 50000
+    if key == 'txBytes':
+        r *= a < 1100
+    if key == 'rxBytes':
+        r *= a < 1100
+    if key == 'txTimeNW':
+        r *= a < 20000
+    if key == 'rxTimeNW':
+        r *= a < 20000
+    if key == 'Total ACK NACK RX':
+        r *= a > 0
+    # if key == 'EARFCN':
+    #     r *= a < 100000
+    if key == 'PCI':
+        r *= a < 200
     # if key == 'Total TX bytes':
     #     r *= a > 0
     # if key == 'Total RX bytes':
-    #     r *= a > 0
-    # if key == 'txBytes':
     #     r *= a > 0
 
     # if key == 'rxBytes':
@@ -77,9 +104,6 @@ def threshold(a, key):
 
     # if key == 'RX time':
 
-    # if key == 'txTimeNW':
-
-    # if key == 'rxTimeNW':
 
     return r
 
@@ -449,6 +473,8 @@ def csvToDict(file):
 
 # post processing csv {} data
 def dataProcess(dt):
+    dt['Total ACK NACK RX'] = dt.pop('Total ACK/NACK RX')
+    # print('Total ACK NACK RX', dt['Total ACK NACK RX'])
     try:
         kins = ['idleTime', 'Total TX bytes', 'Total RX bytes', 'TX time', 'RX time']
         kouts = ['time', 'txBytes', 'rxBytes', 'txTimeNW', 'rxTimeNW']
@@ -577,9 +603,12 @@ def mean(dt):
     for k in dt:
         # print(k, type(dt[k]))
         if str(type(dt[k])) == "<class 'list'>":
-            vals = exclude(k, dt[k])
-            if vals.all() != None:
-                mean[k] = np.mean(vals)
+            vals = np.array(dt[k])[exclude(k, dt[k])]
+            try:
+                if len(vals):
+                    mean[k] = np.mean(vals)
+            except TypeError:
+                print(e, k, vals)
     return mean
 
 

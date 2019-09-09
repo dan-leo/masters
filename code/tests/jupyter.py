@@ -58,6 +58,8 @@ def exclude(key, vals):
         r *= a > 0
     if key == 'PCI':
         r *= a > 0
+    if key == 'Total ACK NACK RX':
+        r *= a > 0
     return r
 
 def threshold(a, key):
@@ -86,8 +88,6 @@ def threshold(a, key):
         r *= a < 20000
     if key == 'rxTimeNW':
         r *= a < 20000
-    if key == 'Total ACK NACK RX':
-        r *= a > 0
     # if key == 'EARFCN':
     #     r *= a < 100000
     if key == 'PCI':

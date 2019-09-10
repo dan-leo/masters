@@ -243,7 +243,7 @@ def scatternuator(name, kx, ky, thresh, plotlim, scale, limited, dirrs, files, k
         if overlay and legend:
             # print('legend', dirrs[di])
             # handles = [mpatches.Patch(color=colour[i], label=lab) for i, lab in enumerate(labels)]
-            handles = [Line2D(range(1), range(1), color="white", marker='o', label=lab, markersize=6, markerfacecolor=colour[i]) for i, lab in enumerate(labels)]
+            handles = [Line2D(range(1), range(1), color="white", marker='o', label=lab, markersize=8, markerfacecolor=colour[i]) for i, lab in enumerate(labels)]
             if bbox:
                 ax.legend(handles=handles, bbox_to_anchor=bbox)
             else:

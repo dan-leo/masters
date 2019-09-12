@@ -4,7 +4,7 @@ author: Daniel Robinson
 date: Stellenbosch University, Sept 2019
 tags: [LTE, NB-IoT]
 abstract: |
-  2G/GPRS is a sun-setting technology leaving behind a void for LPWANs such as LoRaWAN and SigFox to fill. The viability of NB-IoT being such a technology for South Africa is investigated. Multiple endpoint manufacturers and base station vendors are tested to compare capabilities with respect to cost, time, power consumption and signal strength. The results proved promising.
+  2G/GPRS is a sun-setting technology leaving behind a void for LPWANs such as LoRaWAN and SigFox to fill. The viability of NB-IoT being such a technology for South Africa is investigated. Multiple endpoint manufacturers and base station vendors are tested to compare capabilities with respect to power efficiency, latency, signal strength and other metrics. The results proved promising.
 
 toc: true
 lot: true
@@ -16,7 +16,227 @@ linkcolor: blue
 
 ![](../images/whitespace.png)
 
-# Results
+# Acronyms
+
+- **3GPP** Third Generation Partnership Project
+- **LTE Cat-NB1/2** Long Term Evolution Narrow-Band Category 1/2
+- **NB-IoT** Narrowband Internet of Things
+- **OTDOA** - Observed Time Difference Of Arrival
+- **UDP** - U Datagram P
+- **eDRX** - Extended Discontinuous Receive X
+- **PTAU** - Periodic Tracking Area Update
+- **COPS** - Cellular Operator Selection
+- **NW** - Network
+- **EARFCN** - E-UTRA Absolute Radio Frequency Channel Number
+- **PCI**
+- **ECL**
+
+# Preamble
+
+Application developers and cellular service providers alike are interested in implementing NB-IoT (LTE Cat-NB) as an alternative to LoRaWAN, SigFox and other LPWANs. Application developers require network coverage, and cellular service providers require consumer and enterprise demand or reasonable motivation before rolling it out nationally. Although there is a great deal of theoretical analysis and simulations in research, the lack of empirical evidence may be contributing to the impasse of growth in the network technology. This thesis aims to bridge that divide.
+
+A number of tests have been developed, performed and analyzed for multiple UE (Ublox and Quectel) and MNOs (MTN and Vodacom) via ZTE and Nokia vendors. Power saving, latency, RF, packet and network metrics are evaluated using UDP, Echo, COPS (network registration), eDRX and PTAU tests.
+
+## Terminology
+
+It's imperative to understand the terminology in LTE. First of 
+
+# Intro
+
+Although NB-IoT joined LPWANs circa 2016-2017, demand uptake among consumer and industry in South Africa is still slow as well as national coverage rollout. Worldwide it has 30% (rough estimate?) population coverage with most in Europe, China and lately America (mid-2019).
+
+In South Africa, NB-IoT has most of its coverage in the Gauteng province as well as a few sites in other towns and cities. Although Gauteng only covers 1.49% of the land mass in South Africa, it holds ~22% of its ~57 million people so it is great as a live trial run before pushing for national coverage.
+
+It is based off of LTE, making integration and upgrading of existing infrastructure more seamless than an entirely separate technology, although it also brings with the drawbacks of legacy LTE. This includes the benefit of low power, and the low bandwidth trade off which is suitable for smart devices and IoT.
+
+An application developer in IoT is interested in a hands-on approach with the technology they will use, with the aim of scaling up production such that volumes of 1000 devices or more can be reached. Thus an empirical evaluation of the technology is focused on in this thesis, especially when considering that much of the research is analytical or simulation bound.
+
+Martinez [@Martinez2019] has explored NB-IoT from the perspective of the application developer. It is well thought out, and follows a similar path to this thesis. When evaluating performance, it would do well to find the limits of the technology as well as find the optimum 'sweet spot' or range for efficient operation.
+
+A user would consider critical characteristics such as energy consumption, coverage, cost, network latency and behavior. Martinez looks at these except for cost, which is better looked at by Ali [@Ali2015]. A set of tests were devised and results showed that in some cases its energy consumption performed better than an LPWAN referenced technology such as LoRa, with the added benefit of guaranteeing delivery. However, the high variability in energy consumption and network latency call into question its reliability especially for mission-critical applications.
+
+Network operators are looking to enter the LPWAN sphere. 3GPP have made this possible by adapting LTE into Cat-M and NB-IoT.
+
+Application developers are always on the lookout for viable technologies, and tend to use the most prolific ones
+
+## IoT
+
+In 2014, Gartner estimated that IoT had reached the height of inflated expectations, and the hype it generated has resulted in a rich ecosystem of technologies.
+
+![Gartner's IoT hype 2014](../images/hype-cycle-2014-100371840-large.idge.jpeg)
+
+
+
+Hype yields investment, regardless whether the underlying innovation holds value. Cryptocurrencies are merely a decentralized form of monetary exchange that exists world-wide wide where its value is mainly speculative. Speculation can be volatile, and it can be deemed more ideal for an innovation to have stable growth. IoT holds value in connecting things to the internet, as in its namesake. This can be seen in the venture capital injection into companies and start-ups and the number of connected devices over time.
+
+![Number of connected devices [@Ali2015]](../images/Expected-number-of-connected-devices-to-the-Internet-This-chart-is-obtained-from-recent.png)
+
+
+
+In general when forecasting time-series data it would be pragmatic to consider technical analysis, fundamental understanding and sentiment, besides many other factors. At the very least, IoT shows great potential for exponential growth, and unless a technology disruption occurs which means we do not require connections or our devices, then there is undoubtedly an [uptrend](https://amarketresearchgazette.com/global-narrowband-iot-nb-iot-market-2019-2025-vodafone-china-unicom-china-telecom-att-etisalat-telstra-orange-telefonica-sk-telecom-deutsche-telekom/). As Gartner predicts, we should be in the plateau of productivity now, and this can be observed by looking at the current news regarding the technology.
+
+A few months before publishing, [AT&T announces](https://blog.nordicsemi.com/getconnected/att-launches-nb-iot-network-in-usa) nation-wide coverage of NB-IoT in the USA, alongside its existing LTE Cat-M coverage. Deutsche Telekom and Vodafone cover Europe (news?) and China enables millions more IoT devices [@china2019].
+
+## LPWANs
+
+There are many wireless technologies out there, with some standardized (including Bluetooth, 6LowPan, RPMA, Weightless, IETF 6TiSCH, SigFox, LoRaWAN, Dash7 amongst others). Many are proprietary to retain company value and they try to meet application specific requirements also limited by technological constraints. Matching custom applications with a wireless technology is non-trivial as there is no silver bullet that matches all use-cases. On the contrary, many technologies overlap in their capabilities.
+
+## Smart metering
+
+One of the simplest use cases in IoT is smart metering. Periodically sending uplink data at regular intervals from a static location has the advantage of remote monitoring and reducing the need for physical readings. It also opened up new features for users (such as dynamic pricing and usage pattern analysis) and operators (such as load balancing a large number of clients). The clear value proposition and success is partially due to the belief that IoT should be low powered and low data transmissions which still exists today.
+
+## NB-IoT
+
+Formed by the 3GPP from LTE, NB-IoT was developed within that framework and its capabilities are particularly well suited to smart metering.
+
+![IoT Market representation [@Martinez2019]](../images/1559246290186.png)
+
+Taking it one step further, the 3GPP defined two device categories, namely Cat NB1 and NB2, with the latter adding support for:
+
+- Support of Positioning of Device using OTDOA
+  - seamless cell re-selection
+- Push to talk voice messaging
+- New Device Power Class (14 dBm)
+- Multicast transmission
+
+ OTDOA positioning, 
+
+Compared to LTE
+
+- devices are stationary
+- intermittent burst transmissions
+- low data bandwidth
+- delay-tolerant applications
+- support for huge number of devices
+- deals with poor coverage (indoor penetration)
+- battery lifetime of a few years
+
+## Performance limitations
+
+It would be useful for the application developer to know the boundaries resulting from this approach. Drawbacks and optimizations targeting IoT can be discussed. The application developer is a potential adopter of the technology and focuses on parameters that fall within end-user control.
+
+Cellular operators would also benefit by knowing where they can improve upon their configurations and equipment.
+
+To this end it would be beneficial to:
+
+- Analyze critical metrics at the core of NB-IoT, such as energy consumption, coverage, cost and latency.
+- Create a testing framework to characterize NB-IoT devices in actual operation and using various networks.
+- Set optimal operating boundaries based on the obtained results. This should also re-evaluate suitability in certain use cases.
+- Compare NB-IoT to Dash7, which can be considered a prominent bi-directional contender. It has the capability of using LoRa's physical layer (RF frontend) so has the added benefit of long range.
+
+## LTE Architecture
+
+![LTE_classic_architecture](../images/LTE_classic_architecture.png)
+
+# Review of Related Literature
+
+Several studies provide theoretical models not only for the energy consumption of NB-IoT networks [@Andres-Maldonado2017], but also for their latency and delay bounds [@Feltrin2019], impact of coverage extensions [@Andres-Maldonado2018b], coverage performance [@Adhikary2016], battery lifetimes [@Yeoh2018d],[@Lauridsen2018], (theoretically) optimal configuration strategies [@Feltrin2018] and overall performance for particular verticals [@Soussi2018],[@Beyene2017b].
+
+Only Martinez [@Martinez2019] focuses effort on the adopter and presents an operational and empirical analysis of the technology when it is deployed in a real network (such as Vodafone in the Metropolitan area of Barcelona).
+
+Despite the unquestionable value of the theoretical models (for example, to understand orders of magnitude or to guess the theoretical upper and lower bounds), an empirical approach provides real insights into the variability that a UE experiences when deployed in real conditions. This work therefore goes in this direction as a complement to Martinez and related works, and it further provides empirical measurements for UEs that are deployed using a real-world NB-IoT network always while taking the perspective of an application developer.
+
+GSM RF equipment testing and performance analysis [@Kasbah2005]
+
+Analysis of NB-IoT Deployment in LTE Guard-Band [@Ratasuk2017c]
+
+In South Africa, there are two cellular operators trialing NB-IoT and combined they use a total of four different manufacturers.
+
+| BSS Manufacturer | Cellular operator |
+| ---------------- | ----------------- |
+| Huawei           | Vodacom           |
+| Ericsson         | MTN               |
+| ZTE              | MTN               |
+| Nokia            | Vodacom           |
+
+Theoretically, one can assume that these manufacturers meet 3GPP's specifications and that they have set up an optimal environment.
+
+With a testing framework, one can evaluate these capabilities in a transparent manner for both developers and cellular operators alike and work towards improving the quality thereof.
+
+Cellular operators are in control of some things, and users of others.
+
+|                             | Cellular operators | Users       |
+| --------------------------- | ------------------ | ----------- |
+| NB-IoT Base stations (BSS)  | **X**              |             |
+| NB-IoT User Equipment (UE)  |                    | **X**       |
+| LoRaWAN Gateways            |                    | **X**       |
+| LoRaWAN Devices             |                    | **X**       |
+| NB-IoT licensed spectrum    |                    | billed      |
+| LoRaWAN unlicensed spectrum |                    | duty-cycled |
+|                             |                    |             |
+|                             |                    |             |
+
+When it comes to base stations, the user does not have control over the inactivity timer.
+
+## Martinez
+
+Martinez et al. [@Martinez2019] did empirical tests within the Vodafone Network in Barcelona. They observed UE and NW behavior, measured current traces, and did various tests in different modes.
+
+| Mode       | NW Configuration                                             |
+| ---------- | ------------------------------------------------------------ |
+| **Mode 1** | Inactivity timer = 20s (network default)<br/>T3324 = 0s (disabled)<br/>C-DRX = 2.048s (network default) |
+| **Mode 2** | Inactivity timer = Immediate Release<br/>T3324 = 8s<br/>I-DRX = 2.56s<br/>eDRX/PTW = Disabled |
+| **Mode 3** | Inactivity timer = Immediate Release<br/>T3324 = 0s (disabled) |
+
+## Notes
+
+**MTN Lab / 14th Ave Phase 3: Test Plant**
+
+NB-IoT PoC MTN South Africa (Ericsson RAN Connectivity Tests only) [@Ssengonzi2017]
+
+Industrial north Drive Test Requirements [@NorthDrive2017]
+
+**Stellenbosch**
+
+Evaluation of next-generation low-power communication technologies to replace GSM in IoT-applications [@Thomas2018]
+
+**Manufacturers**
+
+Ublox has an NB-IoT Application Development Guide [@ubloxAppNote2018] which details many of the capabilities of the UE.
+
+# Design and Methodology
+
+## Approach
+
+The aim is to compare user equipment (UE) against mobile network operators (MNOs) with a set of tests that evaluate NB-IoT's performance according to a set of metrics which highlight striking differences due to the underlying complexities of LTE architecture.
+
+Four mobile network operators (MNOs) are compared in South Africa according to the underlying vendor
+infrastructure used, namely Nokia and ZTE in the Cape/coastal regions and Ericsson and Huawei based in Gauteng/inland regions.
+
+More than one UE is used to improve the accuracy of the result, namely Ublox and Quectel. There is an open possibility to test SimCom and Nordic as well.
+
+A unit testing framework has been carefully prepared in Python in combination with a Hewlett Packard rotary RF attenuator in 10dBm steps. 
+
+Table: UE, NW and main metric comparisons
+
+| NW Vendors | UE Manufacturers | Main Metrics     |
+| ---------- | ---------------- | ---------------- |
+| ZTE        | Ublox            | Power Efficiency |
+| Nokia      | Quectel          | Latency          |
+| Ericsson   | Nordic           | Data Charging    |
+| Huawei     | SimCom           | Signal Strength  |
+
+## MNO Vendors
+
+MTN and Vodacom in South Africa have an interest in NB-IoT.
+
+## UE Manufacturers
+
+The UE devices used is specifically the:
+
+- Ublox Sara N200
+- Quectel BC95
+
+and the following is recommended in future:
+
+- Nordic nRF9160
+- SimCom SIM7020E
+
+## Tests
+
+## PyTest framework
+
+## Post-processing
 
 ## Dataset
 
@@ -42,6 +262,22 @@ Instead of finding a single mean for all the entries and associated files, at le
 \end{minipage}
 
 [](../../../masters/code/tests/plots/dpoints.png)
+
+## Notes
+
+> at+natspeed=115200,30,1
+
+> disables LPM. cannot do RSSI triangulation
+
+https://www.etsi.org/deliver/etsi_TS/125100_125199/125133/13.00.00_60/ts_125133v130000p.pdf
+
+> In idle mode, UE shall support DRX cycles lengths 0.64, 1.28, 2.56 and 5.12 s, according to [16] and UE shall, if it
+> supports eDRX_IDLE, support eDRX_IDLE cycle lengths 10.24, 20.48, 40.96, 81.92, 163.84, 327.68, 55.36,1310.72,
+> 1966.08 and 2621.44 seconds, according to TS 24.008 [32]. 
+
+It would be a good idea to use Martinez' work and complement it.
+
+# Results
 
 \newpage
 
@@ -149,23 +385,23 @@ On the Vodafone network in connected-DRX (C-DRX) mode, the UE is observed to sho
 
 \begin{minipage}{1.0\linewidth}
 \begin{center}
-\includegraphics[width=1.0\linewidth]{../../code/tests/logs/zte_mtn/rf_shield/ublox/scope/12.8ms.jpg}
-\captionof{figure}[C-DRX MTN-Ublox]{Timing measurement of MTN-Ublox during C-DRX. Although the duty cycles vary in C-DRX mode, it can be estimated that pulses are roughlly 12.8ms in length with 4ms idle between. This means that 75% of the time the UE device is drawing current.}
+\includegraphics[width=1.0\linewidth]{../../code/tests/logs/zte_mtn/rf_shield/ublox/scope/12_8ms.jpg}
+\captionof{figure}[C-DRX MTN-Ublox]{Timing measurement of MTN-Ublox during C-DRX. Although the duty cycles vary in C-DRX mode, it can be estimated that pulses are roughlly 12.8ms in length with 4ms idle between. This means that 75\% of the time the UE device is drawing current.}
 \end{center}
 \end{minipage}
 
-[](../../code/tests/logs/zte_mtn/rf_shield/ublox/scope/12.8ms.jpg)
+[](../../code/tests/logs/zte_mtn/rf_shield/ublox/scope/12_8ms.jpg)
 
 \begin{minipage}{1.0\linewidth}
 \begin{center}
 \includegraphics[width=1.0\linewidth]{../../code/tests/logs/zte_mtn/rf_shield/quectel/scope/12ms.jpg}
-\captionof{figure}[C-DRX MTN-Quectel]{Timing measurent of C-DRX mode for MTN-Quectel. Although the duty cycles vary in C-DRX mode, it can be estimated that pulses are roughly 12ms in length with 4ms idle between. This means that 75% of the time the UE device is drawing current.}
+\captionof{figure}[C-DRX MTN-Quectel]{Timing measurent of C-DRX mode for MTN-Quectel. Although the duty cycles vary in C-DRX mode, it can be estimated that pulses are roughly 12ms in length with 4ms idle between. This means that 75\% of the time the UE device is drawing current.}
 \end{center}
 \end{minipage}
 
 [](../../code/tests/logs/zte_mtn/rf_shield/quectel/scope/12ms.jpg)
 
-## Power saving
+## Power efficiency
 
 There is a large discrepancy in the energy consumption between MTN and Vodacom.
 
@@ -309,21 +545,23 @@ It is evident that on all attenuation levels there is a high degree of variation
 
 \begin{minipage}{\linewidth}
 \begin{center}
-\includegraphics[width=1.0\linewidth]{../../code/tests/logs/zte_mtn/rf_shield/ublox/scope/73.6mA.jpg_110dB_slightly_open.jpg}
+\includegraphics[width=1.0\linewidth]{../../code/tests/logs/zte_mtn/rf_shield/ublox/scope/cdrx73_6mA_110dB.jpg}
 \captionof{figure}[C-DRX MTN-Ublox current measurement]{Current measurement of MTN-Ublox during connected DRX mode (C-DRX). The UE uses 73.6mA at 110dB attenuation with the RF shield enclosure door slightly open}
 \end{center}
 \end{minipage}
 
-![](../../code/tests/logs/zte_mtn/rf_shield/ublox/scope/73.6mA.jpg_110dB_slightly_open.jpg)
+[](../../code/tests/logs/zte_mtn/rf_shield/ublox/scope/73.6mA.jpg_110dB_slightly_open.jpg)
+
+[](../../code/tests/logs/zte_mtn/rf_shield/ublox/scope/cdrx73_6mA_110dB.jpg)
 
 \begin{minipage}{\linewidth}
 \begin{center}
-\includegraphics[width=1.0\linewidth]{../../code/tests/datagrams/mtn_ublox_energy.pdf}
+\includegraphics[width=1.0\linewidth]{../../code/tests/logs/zte_mtn/rf_shield/quectel/scope/70.4mA_ant_0dB.jpg}
 \captionof{figure}[C-DRX MTN-Quectel current measurement]{Current measurement of MTN-Ublox during connected DRX mode (C-DRX). The UE uses 73.6mA at 110dB attenuation with the RF shield enclosure door slightly open}
 \end{center}
 \end{minipage}
 
-![](../../code/tests/logs/zte_mtn/rf_shield/quectel/scope/70.4mA_ant_0dB.jpg)
+[](../../code/tests/logs/zte_mtn/rf_shield/quectel/scope/70.4mA_ant_0dB.jpg)
 
 ## Packet metrics
 
@@ -336,7 +574,7 @@ It is evident that on all attenuation levels there is a high degree of variation
 \begin{minipage}{\linewidth}
 \begin{center}
 \includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_txBytes_plot.pdf}
-\captionof{figure}{TX packet sizes (174/457) up to 1kB. (A) Attenuation zones evident and potentially affect packet size. (B) UE-MNO pairs share similar characteristics. (C) Different tests are grouped with similar sizes with UDP packets being the largest, and COPS the smallest. (D) ECL does not seem to affect packet size.}
+\captionof{figure}[TX packet sizes (174/457) up to 1kB.]{TX packet sizes (174/457) up to 1kB. (A) Attenuation zones evident and potentially affect packet size. (B) UE-MNO pairs share similar characteristics. (C) Different tests are grouped with similar sizes with UDP packets being the largest, and COPS the smallest. (D) ECL does not seem to affect packet size.}
 \end{center}
 \end{minipage}
 
@@ -347,7 +585,7 @@ In general packets are around 100-300 bytes in size and all UE-MNO pairings shar
 \begin{minipage}{\linewidth}
 \begin{center}
 \includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_txBytes_outliers.pdf}
-\captionof{figure}{TX packet size outliers (37/65) up to 20kB. Attenuation zones do not affect packet size. Vodacom has outliers above 10kB. All outliers are as a result of UDP packet tests and ECL does not seem to affect packet size.}
+\captionof{figure}[TX packet size outliers (37/65) up to 20kB.]{TX packet size outliers (37/65) up to 20kB. Attenuation zones do not affect packet size. Vodacom has outliers above 10kB. All outliers are as a result of UDP packet tests and ECL does not seem to affect packet size.}
 \end{center}
 \end{minipage}
 
@@ -362,7 +600,7 @@ There is a large degree of variation in packet sizes expected to be up to 512 by
 \begin{minipage}{\linewidth}
 \begin{center}
 \includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_rxBytes_plot.pdf}
-\captionof{figure}{RX packet sizes (166/504) up to 1kB. (A) Attenuation zones evident and do not affect packet size. (B) UE-MNO pairs share similar characteristics. (C) Different tests are grouped with similar sizes with UDP packets being the largest, and COPS the smallest. (D) ECL does not seem to affect packet size.}
+\captionof{figure}[RX packet sizes (166/504) up to 1kB.]{RX packet sizes (166/504) up to 1kB. (A) Attenuation zones evident and do not affect packet size. (B) UE-MNO pairs share similar characteristics. (C) Different tests are grouped with similar sizes with UDP packets being the largest, and COPS the smallest. (D) ECL does not seem to affect packet size.}
 \end{center}
 \end{minipage}
 
@@ -373,7 +611,7 @@ In general packet sizes are up to 200 bytes.
 \begin{minipage}{\linewidth}
 \begin{center}
 \includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_rxBytes_outliers.pdf}
-\captionof{figure}{RX packet size outliers (12/18) up to 6kB. Attenuation zones do not affect packet size Quectel-MTN and Ublox-Vodacom pairs are essentially the only outliers above 300 bytes already. All outliers are as a result of UDP packet tests and ECL does not seem to affect packet size.}
+\captionof{figure}[RX packet size outliers (12/18) up to 6kB.]{RX packet size outliers (12/18) up to 6kB. Attenuation zones do not affect packet size Quectel-MTN and Ublox-Vodacom pairs are essentially the only outliers above 300 bytes already. All outliers are as a result of UDP packet tests and ECL does not seem to affect packet size.}
 \end{center}
 \end{minipage}
 
@@ -386,7 +624,7 @@ In general packet sizes are up to 200 bytes.
 \begin{minipage}{\linewidth}
 \begin{center}
 \includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_Total_ACK_NACK_RX_plot.pdf}
-\captionof{figure}{ACK/NACK packets (83/385) mostly up to 30 required, and one outlier at 80. (A) Attenuation zones evident and do not affect number of ACK/NACKs. (B) Vodacom requires more ACK/NACK responses than MTN. They share similar characteristics at a difference of 40dBm RSRP. (C) Significant variation in tests, although eDRX tests show the greatest number. (D) ECL does not seem to affect ACK/NACK count}
+\captionof{figure}[ACK/NACK packets (83/385) mostly up to 30, 80 outlier]{ACK/NACK packets (83/385) mostly up to 30 required, and one outlier at 80. (A) Attenuation zones evident and do not affect number of ACK/NACKs. (B) Vodacom requires more ACK/NACK responses than MTN. They share similar characteristics at a difference of 40dBm RSRP. (C) Significant variation in tests, although eDRX tests show the greatest number. (D) ECL does not seem to affect ACK/NACK count}
 \end{center}
 \end{minipage}
 
@@ -407,7 +645,7 @@ Tests were completed in good, mid cell and cell edge RF conditions.
 \begin{minipage}{\linewidth}
 \begin{center}
 \includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_Total_power_plot.pdf}
-\captionof{figure}{RSSI vs RSRP packets (389/1619). (A) Attenuation zones evident in both RSSI/RSRP. (B) Vodacom within a range of 40dBm and MTN within 50dBm. MTN is also 20dBm more sensitive in terms of RSRP. (C) Significant variation in tests across both axes. (D) ECL 2 mainly from -110dB RSRP or less and ECL 1 more. ECL 0 spread throughout.}
+\captionof{figure}[RSSI vs RSRP packets (389/1619).]{RSSI vs RSRP packets (389/1619). (A) Attenuation zones evident in both RSSI/RSRP. (B) Vodacom within a range of 40dBm and MTN within 50dBm. MTN is also 20dBm more sensitive in terms of RSRP. (C) Significant variation in tests across both axes. (D) ECL 2 mainly from -110dB RSRP or less and ECL 1 more. ECL 0 spread throughout.}
 \end{center}
 \end{minipage}
 
@@ -430,7 +668,7 @@ Tests were completed in good, mid cell and cell edge RF conditions.
 \begin{minipage}{\linewidth}
 \begin{center}
 \includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_RSRQ_plot.pdf}
-\captionof{figure}{RSRQ vs RSRP packets (389/1619). (A) Attenuation zones evident in RSRP and skewed by RSRQ axis. (B) Vodacom shows poorer RSRQ than MTN. (CD) Significant variation in tests and ECL across both axes.}
+\captionof{figure}[RSRQ vs RSRP packets (389/1619).]{RSRQ vs RSRP packets (389/1619). (A) Attenuation zones evident in RSRP and skewed by RSRQ axis. (B) Vodacom shows poorer RSRQ than MTN. (CD) Significant variation in tests and ECL across both axes.}
 \end{center}
 \end{minipage}
 
@@ -486,7 +724,7 @@ SNR is spread relatively evenly for the different attenuation zones.
 \begin{minipage}{\linewidth}
 \begin{center}
 \includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_ECL_plot.pdf}
-\captionof{figure}{ECL not determined by attenuation.}
+\captionof{figure}[ECL vs RSRP.]{ECL not determined by attenuation.}
 \end{center}
 \end{minipage}
 
@@ -548,7 +786,7 @@ Memory can be considered a reasonable UE health metric in terms of monitoring co
 \begin{minipage}{1.0\linewidth}
 \begin{center}
 \includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Current_Allocated_histogram.pdf}
-\captionof{figure}{Currently allocated memory. Equal distribution of attenuation zones and tests. Quectel uses about 16kB of memory and Ublox about 26kB.}
+\captionof{figure}[Currently allocated memory.]{Currently allocated memory. Equal distribution of attenuation zones and tests. Quectel uses about 16kB of memory and Ublox about 26kB.}
 \end{center}
 \end{minipage}
 
@@ -557,7 +795,7 @@ Memory can be considered a reasonable UE health metric in terms of monitoring co
 \begin{minipage}{1.0\linewidth}
 \begin{center}
 \includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Total_Free_histogram.pdf}
-\captionof{figure}{Free memory available. Equal distribution of attenuation zones and tests. Quectel has about 7kB of memory free and Ublox about 17kB.}
+\captionof{figure}[Free memory available.]{Free memory available. Equal distribution of attenuation zones and tests. Quectel has about 7kB of memory free and Ublox about 17kB.}
 \end{center}
 \end{minipage}
 
@@ -566,7 +804,7 @@ Memory can be considered a reasonable UE health metric in terms of monitoring co
 \begin{minipage}{1.0\linewidth}
 \begin{center}
 \includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_Num_Allocs_plot.pdf}
-\captionof{figure}{Accumulated memory allocations per packet (390/1619) up to 4000. (ABCD) Attenuation zones evident per decade, Quectel has slightly more allocations per MNO, tests show majority linear increases and ECL does not have a notable effect on the number of allocations.}
+\captionof{figure}[Accumulated memory allocations per packet (390/1619) up to 4000.]{Accumulated memory allocations per packet (390/1619) up to 4000. (ABCD) Attenuation zones evident per decade, Quectel has slightly more allocations per MNO, tests show majority linear increases and ECL does not have a notable effect on the number of allocations.}
 \end{center}
 \end{minipage}
 
@@ -581,6 +819,24 @@ Memory can be considered a reasonable UE health metric in terms of monitoring co
 The number of allocations and frees are very similar, hence the latter is not shown here as well. The code can be considered running stable for both Ublox and Quectel, with memory usages of 60% and 70%, respectively.
 
 ## UE-MNO Comparison
+
+# Discussion
+
+# Conclusion
+
+Attenuation does not affect performance as much as the ECL level does, and includes
+degradation to latency, energy consumption and packet size.
+
+The inefficiency between the two South African MNOs can either be attributed to poor
+system configuration, or hardware fault. That is, if the network vendor meets the 3GPP's
+standards. Vodacom’s Nokia infrastructure has failed one of the most important
+requirements for NB-IoT being under 10 seconds latency for all network conditions.
+Secondly it is 20dBm RSRP less sensitive than MTN’s ZTE infrastructure, which has
+satisfactory performance overall. Since the findings are reflected similarly across the
+Ublox and Quectel UE, it implies that the discrepancies are as a result of the MNO
+vendor.
+
+# References
 
 
 

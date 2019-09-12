@@ -22,7 +22,6 @@ linkcolor: blue
 - **LTE Cat-NB1/2** Long Term Evolution Narrow-Band Category 1/2
 - **NB-IoT** Narrowband Internet of Things
 - **OTDOA** - Observed Time Difference Of Arrival
-- **UDP** - U Datagram P
 - **eDRX** - Extended Discontinuous Receive X
 - **PTAU** - Periodic Tracking Area Update
 - **COPS** - Cellular Operator Selection
@@ -30,16 +29,54 @@ linkcolor: blue
 - **EARFCN** - E-UTRA Absolute Radio Frequency Channel Number
 - **PCI**
 - **ECL**
+- **eNB** - **eNodeB** - 
+- **USSD**
+- **SMS**
+- **WAP**
+- **IP**
+  
+## SI Units
+
+- **kB, MB** - kilobyte, megabyte
+- **kbps** - kilobits per second
+- **mJ or J** - millijoules or joules
+- **s, ms, us** - second, millisecond, microsecond
+
+# Terminology
+
+It's imperative to understand the terminology in LTE. First of all, LTE Cat-NB and NB-IoT have the same meaning. It is not the same as LTE Cat-M.
+
+There are two different versions of NB-IoT, with LTE Cat-NB1 being release 13 (), and LTE Cat-NB2 being release 14.
+
+GSM and GPRS fall under 2G and 2.5G. Data transmission (such as USSD, SMS, WAP, IP) is circuit-switched over GSM, and packet-switched over GPRS. Circuit switched data is billed per time interval such as seconds or minutes, and packet-switched is charged per number of bytes (kB, MB, etcetra).
+
+Table: Brief comparison of wireless LPWANs
+
+|                       |             | LoRaWAN           | SigFox   |      |      |
+| --------------------- | ----------- | ----------------- | -------- | ---- | ---- |
+| Frequency             |             | 433, 868, 915 MHz | ~868 MHz |      |      |
+| Bandwidth             |             |                   | 200 kHz  |      |      |
+| Throughput            | 56–114 kbps | 27 kbps           | 0.1 kbps |      |      |
+| Duty cycle limitation |             | 1-10%             | 1%       |      |      |
+| Messages per day      |             |                   | 140      |      |      |
+| Bytes per message     |             |                   | 12       |      |      |
+
+Table: Brief comparison of cellular technologies
+
+|                   | 2G/GSM/GPRS | EC-GSM-IoT | LTE Cat-M | NB-IoT     |
+| ----------------- | ----------- | ---------- | --------- | ---------- |
+| Frequencies       |             |            |           | 0.8-2.6GHz |
+| Bandwidth         |             |            |           | 200kHz     |
+| Throughput        |             |            |           | 250 kbps   |
+| Bytes per message |             |            |           | 512        |
+
+
 
 # Preamble
 
 Application developers and cellular service providers alike are interested in implementing NB-IoT (LTE Cat-NB) as an alternative to LoRaWAN, SigFox and other LPWANs. Application developers require network coverage, and cellular service providers require consumer and enterprise demand or reasonable motivation before rolling it out nationally. Although there is a great deal of theoretical analysis and simulations in research, the lack of empirical evidence may be contributing to the impasse of growth in the network technology. This thesis aims to bridge that divide.
 
 A number of tests have been developed, performed and analyzed for multiple UE (Ublox and Quectel) and MNOs (MTN and Vodacom) via ZTE and Nokia vendors. Power saving, latency, RF, packet and network metrics are evaluated using UDP, Echo, COPS (network registration), eDRX and PTAU tests.
-
-## Terminology
-
-It's imperative to understand the terminology in LTE. First of 
 
 # Intro
 
@@ -64,8 +101,6 @@ Application developers are always on the lookout for viable technologies, and te
 In 2014, Gartner estimated that IoT had reached the height of inflated expectations, and the hype it generated has resulted in a rich ecosystem of technologies.
 
 ![Gartner's IoT hype 2014](../images/hype-cycle-2014-100371840-large.idge.jpeg)
-
-
 
 Hype yields investment, regardless whether the underlying innovation holds value. Cryptocurrencies are merely a decentralized form of monetary exchange that exists world-wide wide where its value is mainly speculative. Speculation can be volatile, and it can be deemed more ideal for an innovation to have stable growth. IoT holds value in connecting things to the internet, as in its namesake. This can be seen in the venture capital injection into companies and start-ups and the number of connected devices over time.
 
@@ -140,34 +175,6 @@ GSM RF equipment testing and performance analysis [@Kasbah2005]
 
 Analysis of NB-IoT Deployment in LTE Guard-Band [@Ratasuk2017c]
 
-In South Africa, there are two cellular operators trialing NB-IoT and combined they use a total of four different manufacturers.
-
-| BSS Manufacturer | Cellular operator |
-| ---------------- | ----------------- |
-| Huawei           | Vodacom           |
-| Ericsson         | MTN               |
-| ZTE              | MTN               |
-| Nokia            | Vodacom           |
-
-Theoretically, one can assume that these manufacturers meet 3GPP's specifications and that they have set up an optimal environment.
-
-With a testing framework, one can evaluate these capabilities in a transparent manner for both developers and cellular operators alike and work towards improving the quality thereof.
-
-Cellular operators are in control of some things, and users of others.
-
-|                             | Cellular operators | Users       |
-| --------------------------- | ------------------ | ----------- |
-| NB-IoT Base stations (BSS)  | **X**              |             |
-| NB-IoT User Equipment (UE)  |                    | **X**       |
-| LoRaWAN Gateways            |                    | **X**       |
-| LoRaWAN Devices             |                    | **X**       |
-| NB-IoT licensed spectrum    |                    | billed      |
-| LoRaWAN unlicensed spectrum |                    | duty-cycled |
-|                             |                    |             |
-|                             |                    |             |
-
-When it comes to base stations, the user does not have control over the inactivity timer.
-
 ## Martinez
 
 Martinez et al. [@Martinez2019] did empirical tests within the Vodafone Network in Barcelona. They observed UE and NW behavior, measured current traces, and did various tests in different modes.
@@ -218,7 +225,31 @@ Table: UE, NW and main metric comparisons
 
 ## MNO Vendors
 
-MTN and Vodacom in South Africa have an interest in NB-IoT.
+In South Africa, there are two cellular operators trialing NB-IoT and combined they use a total of four different manufacturers.
+
+| BSS Manufacturer | Cellular operator |
+| ---------------- | ----------------- |
+| Nokia            | Vodacom           |
+| ZTE              | MTN               |
+| Huawei           | Vodacom           |
+| Ericsson         | MTN               |
+
+Theoretically, one can assume that these manufacturers meet 3GPP's specifications and that they have set up an optimal environment.
+
+With a testing framework, one can evaluate these capabilities in a transparent manner for both developers and cellular operators alike and work towards improving the quality thereof.
+
+Cellular operators are in control of some things, and users of others.
+
+|                             | Cellular operators | Users       |
+| --------------------------- | ------------------ | ----------- |
+| NB-IoT Base stations (BSS)  | **X**              |             |
+| NB-IoT User Equipment (UE)  |                    | **X**       |
+| LoRaWAN Gateways            |                    | **X**       |
+| LoRaWAN Devices             |                    | **X**       |
+| NB-IoT licensed spectrum    |                    | billed      |
+| LoRaWAN unlicensed spectrum |                    | duty-cycled |
+|                             |                    |             |
+|                             |                    |             |
 
 ## UE Manufacturers
 
@@ -231,6 +262,12 @@ and the following is recommended in future:
 
 - Nordic nRF9160
 - SimCom SIM7020E
+
+## AT commands
+
+When it comes to base stations, the user does not have control over the inactivity timer. There is, however, a method to request the eNB/network to
+
+
 
 ## Tests
 
@@ -303,7 +340,7 @@ Extended Coverage Levels (ECL) are determined by the network. The eNB (base stat
 \end{center}
 \end{minipage}
 
-[](../../../masters/code/tests/plotterk/SNR_txTime_outliers.png)
+![](../../../masters/code/tests/plotterk/SNR_txTime_outliers.png)
 
 ### Measured latency
 

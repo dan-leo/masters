@@ -1,7 +1,7 @@
 ---
-title: 3GPP Narrowband LTE evaluation for IoT in South Africa
+title: LTE Cat-NB (Narrowband) characterization of user equipment (UE) and mobile network operators (MNOs)
 author: Daniel Robinson
-date: Stellenbosch University, June 2019
+date: Stellenbosch University, Sept 2019
 tags: [LTE, NB-IoT]
 abstract: |
   2G/GPRS is a sun-setting technology leaving behind a void for LPWANs such as LoRaWAN and SigFox to fill. The viability of NB-IoT being such a technology for South Africa is investigated. Multiple endpoint manufacturers and base station vendors are tested to compare capabilities with respect to cost, time, power consumption and signal strength. The results proved promising.
@@ -18,19 +18,20 @@ linkcolor: blue
 
 # Abstract
 
-Build a testing framework for a potential adopter and application developer to empirically model the capabilities of a network and UE.
+Application developers and cellular service providers alike are interested in implementing NB-IoT (LTE Cat-NB) as an alternative to LoRaWAN, SigFox and other LPWANs. Application developers require network coverage, and cellular service providers require consumer and enterprise demand or reasonable motivation before rolling it out nationally. Although there is a great deal of theoretical analysis and simulations in research, the lack of empirical evidence may be contributing to the impasse of growth in the network technology. This thesis aims to bridge that divide.
+
+A number of tests have been developed, performed and analyzed for multiple UE (Ublox and Quectel) and MNOs (MTN and Vodacom) via ZTE and Nokia vendors. Power saving, latency, RF, packet and network metrics are evaluated using UDP, Echo, COPS (network registration), eDRX and PTAU tests.
 
 # Acronyms
 
-**3GPP** Third Generation Partnership Project
-
-**LTE Cat-NB1/2** Long Term Evolution Narrow-Band Category 1/2
-
-**NB-IoT** Narrowband Internet of Things
-
-**OTDOA** - Observed Time Difference Of Arrival
-
-
+* **3GPP** Third Generation Partnership Project
+* **LTE Cat-NB1/2** Long Term Evolution Narrow-Band Category 1/2
+* **NB-IoT** Narrowband Internet of Things
+* **OTDOA** - Observed Time Difference Of Arrival
+* **UDP** - U Datagram P
+* **eDRX** - Extended Discontinuous Receive X
+* **PTAU** - Periodic Tracking Area Update
+* **COPS** - Cellular Operator Selection
 
 # Intro
 

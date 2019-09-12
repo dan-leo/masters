@@ -231,7 +231,7 @@ def hist(plotx=False, kx='A', ky='B', bins=20):
         fig2.savefig(ffolder + kkx + '_histogram.png')
         fig2.savefig(ffolder + kkx + '_histogram.pdf')
         plt.show()
-    return hcounts, outcounts
+    return hcounts, outcounts, hyuenw
 
 
     # fig = plt.figure(figsize=(9, 8))

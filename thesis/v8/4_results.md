@@ -21,12 +21,12 @@ How is this performing according to the fundamental performance metrics.
 
 The goal is to test four UE manufacturers against four network vendors with a set of RF metrics.
 
-| NW Vendors | UE Manufacturers | RF Metrics         |
-| ---------- | ---------------- | ------------------ |
-| ZTE        | Ublox            | Energy Consumption |
-| Nokia      | Quectel          | Latency            |
-| Ericsson   | Nordic           | Behavior           |
-| Huawei     | SimCom           | Cost               |
+| NW Vendors | UE Manufacturers | Main Metrics     |
+| ---------- | ---------------- | ---------------- |
+| ZTE        | Ublox            | Power efficiency |
+| Nokia      | Quectel          | Latency          |
+| Ericsson   | Nordic           | Data charging    |
+| Huawei     | SimCom           | Signal strength  |
 
 A unit testing framework has been carefully prepared in Python in combination with a Hewlett Packard rotary RF attenuator in 10dBm steps.
 
@@ -36,6 +36,8 @@ The UE devices are specifically the:
 * Quectel BC95
 * Nordic nRF9160
 * SimCom SIM7020E
+
+![LTE_classic_architecture](../images/LTE_classic_architecture.png)
 
 # Design Methodology
 

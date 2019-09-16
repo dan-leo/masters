@@ -12,6 +12,7 @@ lof: true
 link-citations: true
 csl: ieee.csl
 linkcolor: blue
+geometry: "left=3cm,right=3cm,top=2cm,bottom=2cm"
 ---
 
 ![](../images/whitespace.png)
@@ -34,7 +35,7 @@ linkcolor: blue
 - **SMS**
 - **WAP**
 - **IP**
-  
+- **RRC**
 ## SI Units
 
 - **kB, MB** - kilobyte, megabyte
@@ -70,15 +71,11 @@ Table: Brief comparison of cellular technologies
 | Throughput        |             |            |           | 250 kbps   |
 | Bytes per message |             |            |           | 512        |
 
-
-
-# Preamble
+# Intro
 
 Application developers and cellular service providers alike are interested in implementing NB-IoT (LTE Cat-NB) as an alternative to LoRaWAN, SigFox and other LPWANs. Application developers require network coverage, and cellular service providers require consumer and enterprise demand or reasonable motivation before rolling it out nationally. Although there is a great deal of theoretical analysis and simulations in research, the lack of empirical evidence may be contributing to the impasse of growth in the network technology. This thesis aims to bridge that divide.
 
 A number of tests have been developed, performed and analyzed for multiple UE (Ublox and Quectel) and MNOs (MTN and Vodacom) via ZTE and Nokia vendors. Power saving, latency, RF, packet and network metrics are evaluated using UDP, Echo, COPS (network registration), eDRX and PTAU tests.
-
-# Intro
 
 Although NB-IoT joined LPWANs circa 2016-2017, demand uptake among consumer and industry in South Africa is still slow as well as national coverage rollout. Worldwide it has 30% (rough estimate?) population coverage with most in Europe, China and lately America (mid-2019).
 
@@ -265,7 +262,7 @@ and the following is recommended in future:
 
 ## AT commands
 
-When it comes to base stations, the user does not have control over the inactivity timer. There is, however, a method to request the eNB/network to
+When it comes to base stations, the user does not have control over the inactivity timer. Release assistance can request the eNB/network to disconnect the modem from Radio Resource Control (RRC) connected mode.
 
 
 
@@ -273,7 +270,68 @@ When it comes to base stations, the user does not have control over the inactivi
 
 ## PyTest framework
 
+PyTest is a unit testing framework used to setup the UE for each test using AT commands.
+
+## Field test captures
+
+Ublox and Quectel data has been captured for Nokia networks at Vodacom head office in Century City, Cape Town and for ZTE at the MTN Mobile Intelligence Lab, Stellenbosch inside an RF enclosure with the door slightly open before being sealed.
+
 ## Post-processing
+
+- what aspect is the plot trying to cover
+- what is it telling me on that topic
+- purpose
+- data in the plot saying / deduce / narrative / story
+- 4 sentences
+- 4 sentences when comparing nw, and tehn again ues
+
+### Probability estimation
+
+Due to the large dataset and requiring a reasonable means of visualization, we can consider a histogram.
+
+\begin{minipage}{\linewidth}
+\begin{center}
+\includegraphics[width=.6\linewidth]{../../code/tests/img2/histogram_counts.pdf}
+\captionof{figure}{Example python histogram of a univariate latency distribution showing counts}
+\end{center}
+\end{minipage}
+
+[](../../code/tests/img2/histogram_counts.png)
+
+Histogram counts vary among various datasets when their sizes differ, so it would be a good idea to normalize it such that the area under the graph makes 1.0. The probability of the discrete data can also be estimated in a continuous probability density function (PDF) with the kernel density estimation.
+
+\begin{minipage}{\linewidth}
+\begin{center}
+\includegraphics[width=.6\linewidth]{../../code/tests/img2/probability_density_function_seaborn.pdf}
+\captionof{figure}{Example python histogram of a univariate latency distribution with a normalized density and a gaussian kernel density estimate}
+\end{center}
+\end{minipage}
+
+[](../../code/tests/img2/probability_density_function_seaborn.png)
+
+There are also various types of kernel density estimation, as can be seen here.
+
+\begin{minipage}{\linewidth}
+\begin{center}
+\includegraphics[width=.6\linewidth]{../../code/tests/img2/probability_density_function.pdf}
+\captionof{figure}{Various types of kernel density estimation (KDE)}
+\end{center}
+\end{minipage}
+
+[](../../code/tests/img2/probability_density_function.png)
+
+If the histogram bin values are normalized by dividing by the bin count, adding the values makes 1 instead of integrating along the x-axis. Similarly, multiplying the PDF by its x-axis gives the following result. Although all the plotted values are now truly under 1, the KDE is shifted and doesn't seem usable.  The integration to 1 visualization typical in statistics has to be used.
+
+\begin{minipage}{\linewidth}
+\begin{center}
+\includegraphics[width=.6\linewidth]{../../code/tests/img2/probability_mass_function.pdf}
+\captionof{figure}{Various types of kernel density estimation (KDE) with histogram and KDE normalized in attempted probability mass function}
+\end{center}
+\end{minipage}
+
+[](../../code/tests/img2/probability_mass_function.png)
+
+In fact, good practice would be viewing the data as is and not trying to analyze it from what is essentially an entirely new perspective. Thus, the data will be viewed as 2D plotted points and histograms. Colour will be used to group the data according to attenuation and packet size.
 
 ## Dataset
 
@@ -329,7 +387,7 @@ It would be a good idea to use Martinez' work and complement it.
 \end{center}
 \end{minipage}
 
-[](../../../masters/code/tests/plotterk/SNR_txTime_plot.png)
+![](../../../masters/code/tests/plotterk/SNR_txTime_plot.png)
 
 Extended Coverage Levels (ECL) are determined by the network. The eNB (base station) sets the number of transmission repetitions (ECL) according to received signal strength reported by the UE.
 
@@ -340,7 +398,7 @@ Extended Coverage Levels (ECL) are determined by the network. The eNB (base stat
 \end{center}
 \end{minipage}
 
-![](../../../masters/code/tests/plotterk/SNR_txTime_outliers.png)
+[](../../../masters/code/tests/plotterk/SNR_txTime_outliers.png)
 
 ### Measured latency
 

@@ -35,8 +35,9 @@ def lighten_color(color, amount=0.3):
     return colorsys.hls_to_rgb(c[0], 1 - amount * (1 - c[1]), c[2])
 
 def plot(mdb, kx, ky, xlabel='', ylabel='', scale=[1,1], invert=[True,False], colour=cc, folder='', K=0):
-    global hytest, hyuenw, hyatt, hxtest, hxuenw, hxatt, kkx, kky, xxlabel, yylabel, ffolder, outcounts
+    global hytest, hyuenw, hyatt, hxtest, hxuenw, hxatt, kkx, kky, xxlabel, yylabel, ffolder, outcounts, ally
     outcounts = 0
+    ally = []
     hytest, hyuenw, hyatt = [], [], []
     hxtest, hxuenw, hxatt = [], [], []
     folder = folder + '/' if len(folder) else 'plotter3/'
@@ -45,20 +46,23 @@ def plot(mdb, kx, ky, xlabel='', ylabel='', scale=[1,1], invert=[True,False], co
     xxlabel, yylabel = xlabel, ylabel
     # importlib.reload(p)
     # importlib.reload(j)
-    fig = plt.figure(figsize=(14, 4))
-    ax1 = fig.add_subplot(131)
-    ax2 = fig.add_subplot(132)
-    ax3 = fig.add_subplot(133)
-    fig2 = plt.figure(figsize=(14, 2))
-    ax4 = fig2.add_subplot(131)
-    ax5 = fig2.add_subplot(132)
-    ax6 = fig2.add_subplot(133)
+    fig = plt.figure(figsize=(9, 8))
+    ax1 = fig.add_subplot(221)
+    ax2 = fig.add_subplot(222)
+    ax3 = fig.add_subplot(223)
+    ax4 = fig.add_subplot(224)
+    fig2 = plt.figure(figsize=(9, 8))
+    ax5 = fig2.add_subplot(221)
+    ax6 = fig2.add_subplot(222)
+    ax7 = fig2.add_subplot(223)
+    ax8 = fig2.add_subplot(224)
     for oi in range(2):
         for ti, test in enumerate(mdb):
             hytest.append([])
             hxtest.append([])
             for ui, uenw in enumerate(test):
                 if not ti:
+                    ally.append([])
                     hyuenw.append([])
                     hxuenw.append([])
                 for ai, att in enumerate(uenw):
@@ -118,6 +122,7 @@ def plot(mdb, kx, ky, xlabel='', ylabel='', scale=[1,1], invert=[True,False], co
                                 if y.size:
                                     # hy = np.mean(y)
                                     for hy in y:
+                                        ally[ui].append(hy)
                                         hytest[ti].append(hy)
                                         hyuenw[ui].append(hy)
                                         hyatt[ai].append(hy)
@@ -135,15 +140,20 @@ def plot(mdb, kx, ky, xlabel='', ylabel='', scale=[1,1], invert=[True,False], co
                                 x = np.array(atk[kx])[r]/scale[0]
                                 y = np.array(atk[ky])[r]/scale[1]
                                 outcounts += len(y)
+                                if y.size:
+                                    l = len(ally[ui])
+                                    for hoy in y:
+                                        ally[ui].append(hoy)
+                                    print(ui, l, len(ally[ui]))
                                 ms=80
                                 if ui < 2:
-                                    ax4.scatter(x, y, color=cc[ui] if oi else lighten_color(cc[ui]), s=ms)
-                                else:
                                     ax5.scatter(x, y, color=cc[ui] if oi else lighten_color(cc[ui]), s=ms)
-                                ax6.scatter(x, y, color=cc_compare[int(ui/2)] if oi else lighten_color(cc_compare[int(ui/2)]), s=ms)
-                                # ax4.scatter(x, y, color=cc[ai], s=ms, alpha=1.0 if oi else 0.15)
-                                # ax5.scatter(x, y, color=cc[ui], s=ms, alpha=1.0 if oi else 0.15)
-                                # ax6.scatter(x, y, color=cc[ti], s=ms, alpha=1.0 if oi else 0.15)
+                                else:
+                                    ax6.scatter(x, y, color=cc[ui] if oi else lighten_color(cc[ui]), s=ms)
+                                ax7.scatter(x, y, color=cc_compare[int(ui/2)] if oi else lighten_color(cc_compare[int(ui/2)]), s=ms)
+                                # ax5.scatter(x, y, color=cc[ai], s=ms, alpha=1.0 if oi else 0.15)
+                                # ax6.scatter(x, y, color=cc[ui], s=ms, alpha=1.0 if oi else 0.15)
+                                # ax7.scatter(x, y, color=cc[ti], s=ms, alpha=1.0 if oi else 0.15)
                             except TypeError as e:
                             # except KeyboardInterrupt as e:
                                 print(e, atd[kx])
@@ -153,8 +163,8 @@ def plot(mdb, kx, ky, xlabel='', ylabel='', scale=[1,1], invert=[True,False], co
                             pass
     ax1.set_ylabel(ylabel)
     ax2.set_xlabel(xlabel)
-    ax4.set_ylabel(ylabel)
-    ax5.set_xlabel(xlabel)
+    ax5.set_ylabel(ylabel)
+    ax6.set_xlabel(xlabel)
     ax1.legend(loc='best')
     ax2.legend(loc='best')
     ax3.legend(loc='best')
@@ -166,6 +176,9 @@ def plot(mdb, kx, ky, xlabel='', ylabel='', scale=[1,1], invert=[True,False], co
     fig2.savefig(folder + kx + '_' + ky + '_outliers.pdf')
     plt.show()
     print(ti+1, ui+1, ai+1)
+
+def reth():
+    return hyatt, hyuenw, hytest, ally
 
 def hist(plotx=False, kx='A', ky='B', bins=20):
     global kkx, kky

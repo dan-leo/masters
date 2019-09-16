@@ -4,7 +4,7 @@ author: Daniel Robinson
 date: Stellenbosch University, Sept 2019
 tags: [LTE, NB-IoT]
 abstract: |
-  2G/GPRS is a sun-setting technology leaving behind a void for LPWANs such as LoRaWAN and SigFox to fill. The viability of NB-IoT being such a technology for South Africa is investigated. Multiple endpoint manufacturers and base station vendors are tested to compare capabilities with respect to cost, time, power consumption and signal strength. The results proved promising.
+  2G/GPRS is a sun-setting technology leaving behind a void for LPWANs such as LoRaWAN and SigFox to fill. The viability of NB-IoT being such a technology for South Africa is investigated. Multiple endpoint manufacturers and base station vendors are tested to compare capabilities with respect to cost, time, power consumption and signal strength. The results prove promising.
 
 toc: true
 lot: true
@@ -14,9 +14,7 @@ csl: ieee.csl
 linkcolor: blue
 ---
 
-# LTE Cat-NB Network and UE Characterization in IoT
-
-# Abstract
+# Preamble
 
 Application developers and cellular service providers alike are interested in implementing NB-IoT (LTE Cat-NB) as an alternative to LoRaWAN, SigFox and other LPWANs. Application developers require network coverage, and cellular service providers require consumer and enterprise demand or reasonable motivation before rolling it out nationally. Although there is a great deal of theoretical analysis and simulations in research, the lack of empirical evidence may be contributing to the impasse of growth in the network technology. This thesis aims to bridge that divide.
 
@@ -32,6 +30,11 @@ A number of tests have been developed, performed and analyzed for multiple UE (U
 * **eDRX** - Extended Discontinuous Receive X
 * **PTAU** - Periodic Tracking Area Update
 * **COPS** - Cellular Operator Selection
+* **NW** - Network
+* **EARFCN** - E-UTRA Absolute Radio Frequency Channel Number
+* **PCI**
+* **ECL**
+* 
 
 # Intro
 
@@ -65,7 +68,7 @@ Hype yields investment, regardless whether the underlying innovation holds value
 
 
 
-As an aside, when forecasting time-series data it would be pragmatic to consider technical analysis, fundamental understanding and sentiment. Due to simplicity it can be considered safe to say that IoT shows exponential growth, and unless a technology disruption occurs which means we do not require connections or our devices, then there is undoubtedly an [uptrend](https://amarketresearchgazette.com/global-narrowband-iot-nb-iot-market-2019-2025-vodafone-china-unicom-china-telecom-att-etisalat-telstra-orange-telefonica-sk-telecom-deutsche-telekom/). As Gartner predicts, we should be in the plateau of productivity now, and this can be observed by looking at the current news regarding the technology.
+In general when forecasting time-series data it would be pragmatic to consider technical analysis, fundamental understanding and sentiment, besides many other factors. At the very least, IoT shows great potential for exponential growth, and unless a technology disruption occurs which means we do not require connections or our devices, then there is undoubtedly an [uptrend](https://amarketresearchgazette.com/global-narrowband-iot-nb-iot-market-2019-2025-vodafone-china-unicom-china-telecom-att-etisalat-telstra-orange-telefonica-sk-telecom-deutsche-telekom/). As Gartner predicts, we should be in the plateau of productivity now, and this can be observed by looking at the current news regarding the technology.
 
 A few months before publishing, [AT&T announces](https://blog.nordicsemi.com/getconnected/att-launches-nb-iot-network-in-usa) nation-wide coverage of NB-IoT in the USA, alongside its existing LTE Cat-M coverage. Deutsche Telekom and Vodafone cover Europe (news?) and China enables millions more IoT devices [@china2019].
 
@@ -162,13 +165,19 @@ Cellular operators are in control of some things, and users of others.
 |                             |                    |             |
 |                             |                    |             |
 
-When it comes to base stations, the user does not have control over the inactivity timer
+When it comes to base stations, the user does not have control over the inactivity timer.
+
+## Martinez
+
+Martinez et al. [@Martinez2019] did empirical tests within the Vodafone Network in Barcelona. They observed UE and NW behavior, measured current traces, and did various tests in different modes.
 
 | Mode       | NW Configuration                                             |
 | ---------- | ------------------------------------------------------------ |
-| **Mode 1** | Inactivity timer = 20s (network default)<br />T3324 = 0s (disabled)<br />C-DRX = 2.048s (network default) |
-| **Mode 2** | Inactivity timer = Immediate Release<br />T3324 = 8s<br />I-DRX = 2.56s<br />eDRX/PTW = Disabled |
-| **Mode 3** | Inactivity timer = Immediate Release<br />T3324 = 0s (disabled) |
+| **Mode 1** | Inactivity timer = 20s (network default)<br/>T3324 = 0s (disabled)<br/>C-DRX = 2.048s (network default) |
+| **Mode 2** | Inactivity timer = Immediate Release<br/>T3324 = 8s<br/>I-DRX = 2.56s<br/>eDRX/PTW = Disabled |
+| **Mode 3** | Inactivity timer = Immediate Release<br/>T3324 = 0s (disabled) |
+
+
 
 **MTN Lab / 14th Ave Phase 3: Test Plant**
 

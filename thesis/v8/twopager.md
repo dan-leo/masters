@@ -36,12 +36,41 @@ geometry: "left=3cm,right=3cm,top=2cm,bottom=2cm"
 - **WAP**
 - **IP**
 - **RRC**
-## SI Units
+
+<!--## SI Units
 
 - **kB, MB** - kilobyte, megabyte
 - **kbps** - kilobits per second
 - **mJ or J** - millijoules or joules
-- **s, ms, us** - second, millisecond, microsecond
+- **s, ms, us** - second, millisecond, microsecond-->
+
+# Park
+
+* Novice and seasoned adopters of new technology may struggle to find where NB-IoT stands
+
+# Intro
+
+NB-IoT is a promising contender to fill the role that 2G/GPRS leaves behind as countries around the world schedule its retirement. Especially to a new adopter of a wireless technology
+
+Application developers and cellular service providers alike are interested in implementing NB-IoT (LTE Cat-NB) as an alternative to LoRaWAN, SigFox and other LPWANs. Application developers require network coverage, and cellular service providers require consumer and enterprise demand or reasonable motivation before rolling it out nationally. Although there is a great deal of theoretical analysis and simulations in research, the lack of empirical evidence may be contributing to the impasse of growth in the network technology. This thesis aims to bridge that divide.
+
+A number of tests have been developed, performed and analyzed for multiple UE (Ublox and Quectel) and MNOs (MTN and Vodacom) via ZTE and Nokia vendors. Power saving, latency, RF, packet and network metrics are evaluated using UDP, Echo, COPS (network registration), eDRX and PTAU tests.
+
+Although NB-IoT joined LPWANs circa 2016-2017, demand uptake among consumer and industry in South Africa is still slow as well as national coverage rollout. Worldwide it has 30% (rough estimate?) population coverage with most in Europe, China and lately America (mid-2019).
+
+In South Africa, NB-IoT has most of its coverage in the Gauteng province as well as a few sites in other towns and cities. Although Gauteng only covers 1.49% of the land mass in South Africa, it holds ~22% of its ~57 million people so it is great as a live trial run before pushing for national coverage.
+
+It is based off of LTE, making integration and upgrading of existing infrastructure more seamless than an entirely separate technology, although it also brings with the drawbacks of legacy LTE. This includes the benefit of low power, and the low bandwidth trade off which is suitable for smart devices and IoT.
+
+An application developer in IoT is interested in a hands-on approach with the technology they will use, with the aim of scaling up production such that volumes of 1000 devices or more can be reached. Thus an empirical evaluation of the technology is focused on in this thesis, especially when considering that much of the research is analytical or simulation bound.
+
+Martinez [@Martinez2019] has explored NB-IoT from the perspective of the application developer. It is well thought out, and follows a similar path to this thesis. When evaluating performance, it would do well to find the limits of the technology as well as find the optimum 'sweet spot' or range for efficient operation.
+
+A user would consider critical characteristics such as energy consumption, coverage, cost, network latency and behavior. Martinez looks at these except for cost, which is better looked at by Ali [@Ali2015]. A set of tests were devised and results showed that in some cases its energy consumption performed better than an LPWAN referenced technology such as LoRa, with the added benefit of guaranteeing delivery. However, the high variability in energy consumption and network latency call into question its reliability especially for mission-critical applications.
+
+Network operators are looking to enter the LPWAN sphere. 3GPP have made this possible by adapting LTE into Cat-M and NB-IoT.
+
+Application developers are always on the lookout for viable technologies, and tend to use the most prolific ones
 
 # Terminology
 
@@ -71,27 +100,7 @@ Table: Brief comparison of cellular technologies
 | Throughput        |             |            |           | 250 kbps   |
 | Bytes per message |             |            |           | 512        |
 
-# Intro
 
-Application developers and cellular service providers alike are interested in implementing NB-IoT (LTE Cat-NB) as an alternative to LoRaWAN, SigFox and other LPWANs. Application developers require network coverage, and cellular service providers require consumer and enterprise demand or reasonable motivation before rolling it out nationally. Although there is a great deal of theoretical analysis and simulations in research, the lack of empirical evidence may be contributing to the impasse of growth in the network technology. This thesis aims to bridge that divide.
-
-A number of tests have been developed, performed and analyzed for multiple UE (Ublox and Quectel) and MNOs (MTN and Vodacom) via ZTE and Nokia vendors. Power saving, latency, RF, packet and network metrics are evaluated using UDP, Echo, COPS (network registration), eDRX and PTAU tests.
-
-Although NB-IoT joined LPWANs circa 2016-2017, demand uptake among consumer and industry in South Africa is still slow as well as national coverage rollout. Worldwide it has 30% (rough estimate?) population coverage with most in Europe, China and lately America (mid-2019).
-
-In South Africa, NB-IoT has most of its coverage in the Gauteng province as well as a few sites in other towns and cities. Although Gauteng only covers 1.49% of the land mass in South Africa, it holds ~22% of its ~57 million people so it is great as a live trial run before pushing for national coverage.
-
-It is based off of LTE, making integration and upgrading of existing infrastructure more seamless than an entirely separate technology, although it also brings with the drawbacks of legacy LTE. This includes the benefit of low power, and the low bandwidth trade off which is suitable for smart devices and IoT.
-
-An application developer in IoT is interested in a hands-on approach with the technology they will use, with the aim of scaling up production such that volumes of 1000 devices or more can be reached. Thus an empirical evaluation of the technology is focused on in this thesis, especially when considering that much of the research is analytical or simulation bound.
-
-Martinez [@Martinez2019] has explored NB-IoT from the perspective of the application developer. It is well thought out, and follows a similar path to this thesis. When evaluating performance, it would do well to find the limits of the technology as well as find the optimum 'sweet spot' or range for efficient operation.
-
-A user would consider critical characteristics such as energy consumption, coverage, cost, network latency and behavior. Martinez looks at these except for cost, which is better looked at by Ali [@Ali2015]. A set of tests were devised and results showed that in some cases its energy consumption performed better than an LPWAN referenced technology such as LoRa, with the added benefit of guaranteeing delivery. However, the high variability in energy consumption and network latency call into question its reliability especially for mission-critical applications.
-
-Network operators are looking to enter the LPWAN sphere. 3GPP have made this possible by adapting LTE into Cat-M and NB-IoT.
-
-Application developers are always on the lookout for viable technologies, and tend to use the most prolific ones
 
 ## IoT
 
@@ -262,6 +271,8 @@ and the following is recommended in future:
 
 ## AT commands
 
+This section outlines the capabilities of the UEs.
+
 When it comes to base stations, the user does not have control over the inactivity timer. Release assistance can request the eNB/network to disconnect the modem from Radio Resource Control (RRC) connected mode.
 
 
@@ -372,9 +383,11 @@ https://www.etsi.org/deliver/etsi_TS/125100_125199/125133/13.00.00_60/ts_125133v
 
 It would be a good idea to use Martinez' work and complement it.
 
+\label{fig:sinr_latency}
+
 # Results
 
-\newpage
+This section visualizes and analyses the results from the dataset obtained.
 
 ## Latency and timing
 
@@ -383,11 +396,14 @@ It would be a good idea to use Martinez' work and complement it.
 \begin{minipage}{1.0\linewidth}
 \begin{center}
 \includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/SNR_txTime_plot.pdf}
-\captionof{figure}[SINR Latency points (526/1558) under 25 seconds.]{Latency points (526/1558) under 25 seconds. (A) Attenuation per decade is not evident according to SNR. It can be suggested that using SNR as a metric for other tests is not beneficial if the attenuation zones cannot be distinguished. This also suggests that Transmit power is a result of RSRP/RSSI instead. (B) The data exists between -100 and 100 dB for both Vodacom and MTN. (C) Tests are varied across SNR. (D) Increased ECL levels seems to be strongly correlated with latency. (Note) The tail at 200 dB is cleared up as a single K-means cluster point due to excess repetition of one of the tests. At K=5, K-means points are a third of the maximum filtered values, which therefore minimizes the low latency kurtosis and retains the unique features.}
+\captionof{figure}[Latency points (526/1558) under 25 seconds against SINR.]{Latency points (526/1558) under 25 seconds in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs against SINR.}
+\label{fig:sinr_latency}
 \end{center}
 \end{minipage}
 
-![](../../../masters/code/tests/plotterk/SNR_txTime_plot.png)
+[](../../../masters/code/tests/plotterk/SNR_txTime_plot.png)
+
+In Fig. \ref{fig:sinr_latency}, (A) Attenuation per decade is not evident according to SNR. It can be suggested that using SNR as a metric for other tests is not beneficial if the attenuation zones cannot be distinguished. This also suggests that Transmit power is a result of RSRP/RSSI instead. (B) The data exists between -100 and 100 dB for both Vodacom and MTN. (C) Tests are varied across SNR. (D) Increased ECL levels seems to be strongly correlated with latency. (Note) The tail at 200 dB is cleared up as a single K-means cluster point due to excess repetition of one of the tests. At K=5, K-means points are a third of the maximum filtered values, which therefore minimizes the low latency kurtosis and retains the unique features.
 
 Extended Coverage Levels (ECL) are determined by the network. The eNB (base station) sets the number of transmission repetitions (ECL) according to received signal strength reported by the UE.
 
@@ -915,7 +931,7 @@ The number of allocations and frees are very similar, hence the latter is not sh
 
 ## UE-MNO Comparison
 
-# Discussion
+
 
 # Conclusion
 

@@ -60,6 +60,14 @@ def exclude(key, vals):
         r *= a > 0
     if key == 'Total ACK NACK RX':
         r *= a > 0
+    if key == 'RLC UL':
+        r *= a > 0
+    if key == 'RLC DL':
+        r *= a > 0
+    if key == 'MAC UL':
+        r *= a > 0
+    if key == 'MAC DL':
+        r *= a > 0
     return r
 
 def threshold(a, key):
@@ -88,10 +96,12 @@ def threshold(a, key):
         r *= a < 20000
     if key == 'rxTimeNW':
         r *= a < 20000
-    # if key == 'EARFCN':
-    #     r *= a < 100000
     if key == 'PCI':
         r *= a < 200
+    # if key == 'MAC DL':
+    #     r *= a < 200
+    # if key == 'EARFCN':
+    #     r *= a < 100000
     # if key == 'Total TX bytes':
     #     r *= a > 0
     # if key == 'Total RX bytes':

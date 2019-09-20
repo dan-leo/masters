@@ -12,10 +12,10 @@ from sklearn.cluster import KMeans
 from matplotlib.offsetbox import AnchoredText
 
 cc_compare = [(237/255, 189/255, 0), 'red']
-ccui = ['tab:grey', 'tab:cyan', 'tab:blue', 'tab:purple', 'tab:orange', 'tab:brown', 'tab:red'] 
+ccui = ['tab:cyan', 'tab:grey', 'tab:blue', 'tab:purple', 'tab:orange', 'tab:brown', 'tab:red']
 cc = ['tab:orange', 'tab:green', 'tab:red', 'tab:purple', 'tab:blue', 'tab:brown', 'tab:cyan']
 testl = ['1-16 B', '64-128 B', '256-512 B', 'Echo', 'COPS', 'eDRX', 'PTAU']
-uenwl = ['Ublox-ZTE', 'Quectel-ZTE', 'Ublox-Nokia', 'Quectel-Nokia']
+uenwl = ['Ublox-MTN', 'Quectel-MTN', 'Ublox-Vodacom', 'Quectel-Vodacom']
 nwl = ['MTN-ZTE', 'Vodacom-Nokia']
 attl = [a for a in p.attdt()]
 

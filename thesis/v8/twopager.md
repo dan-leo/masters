@@ -36,6 +36,7 @@ geometry: "left=3cm,right=3cm,top=2cm,bottom=2cm"
 - **WAP**
 - **IP**
 - **RRC**
+- **PS**
 
 <!--## SI Units
 
@@ -47,6 +48,81 @@ geometry: "left=3cm,right=3cm,top=2cm,bottom=2cm"
 # Park
 
 * Novice and seasoned adopters of new technology may struggle to find where NB-IoT stands
+
+* https://www.gsma.com/iot/rollout-vodafone/
+
+  * The NB-IoT coverage gain versus GSM is in line with Vodafone’s target, while recent testing activities have also demonstrated excellent network performance, exceeding Vodafone’s expectations: the uplink first transmission success rate is greater than 97%, reaching 99.9% with retransmissions.
+
+    Vodafone is working with multiple chipset and module suppliers to enable testing and trial opportunities, as well as device interoperability testing. It has tested devices from Neul and Qualcomm against Huawei, Ericsson and Nokia systems in multiple regions. All of these vendors’ NB-IoT Radio Access Network technology has been successfully interconnected with Vodafone’s core Internet of Things network.
+
+  * Neul and Qualcomm against Huawei, Ericsson and Nokia systems
+
+  * 1000 BS, Spain
+
+* https://www.vodafone.com/business/news-and-insights/blog/gigabit-thinking/the-art-of-the-possible-5-innovations-at-iot-solutions-world-congress-2018
+
+  * **1. Agriculture: Making sense of farming conditions**
+  * **2. Mobility: Bringing an end to parking pain**
+  * **3. Buildings: Remote surveillance gives peace of mind**
+  * **4. Retail: Digital tags improve product traceability**
+  * **5. Consumer: Connecting people and devices**
+
+* Features
+
+  * MCPTT
+    * Normalized platform for PS [https://www.mcopenplatform.org](https://www.mcopenplatform.org/)
+  * D2D
+  * MBMS
+  * RAN-sharing
+
+* https://enterpriseiotinsights.com/20190506/nb-iot/samsung-kt-launch-nbiot-service-through-ps-lte-network-korea
+
+  * In addition to LTE radio base stations that support 700 MHz, Samsung is providing KT with a virtualized core and the latest features of PS-LTE based on the 3GPP standard. Some of the key features include MCPTT solutions, Radio Access Network sharing, evolved Multimedia Broadcast Multicast Service, Public Network IoT based on NB-IoT, Isolated eUTRAN Operation for Public Safety (IOPS), and device-to-device (D2D) network solutions.
+
+    Samsung highlighted that D2D and NB-IoT play crucial roles in creating public safety network by ensuring stable, seamless, and reliable network in unfavorable environments. For instance, D2D allows direct and undisrupted communications between any two devices without traversing radio base stations or core network even in areas where bases stations are not provided.
+
+* 
+
+* 
+
+## Use cases
+
+* Public Safety
+* Agruiculture
+* Smart Metering
+
+## Why is NB-IoT chosen?
+
+Due to the complexities of integrating 3GPP, LTE architecture, large MNOs and vendors, radio access networks and customers
+
+There is a great deal of uncertainty
+
+promising
+
+throughput
+
+only caveat is battery life
+
+## Performance summary
+
+|              | MCL    | Scalability | Battery life | Throughput |
+| ------------ | ------ | ----------- | ------------ | ---------- |
+| NB-IoT       | 164dBm | >50k        |              |            |
+| GPRS         | 148dBm |             |              |            |
+| LoRaWAN SF12 | 157dBm |             |              |            |
+| SigFox       | 160dBm | >50k        |              |            |
+
+| Technology   | MCL  | Scalability | Battery life | Throughput |
+| ------------ | ---- | ----------- | ------------ | ---------- |
+| NB-IoT       | X    | X           |              | X          |
+| GPRS         |      | X           |              | X          |
+| LoRaWAN SF7  |      |             | X            |            |
+| LoRaWAN SF12 | X    |             |              |            |
+| SigFox       | X    | X           |              |            |
+
+## NB NB NB NB
+
+If NB- IoT worked with the mobile network operators to reduce its RRC-idle phase, it could develop a minimal power consumption to compare with that of LoRaWAN and Sigfox.
 
 # Intro
 
@@ -72,7 +148,7 @@ Network operators are looking to enter the LPWAN sphere. 3GPP have made this pos
 
 Application developers are always on the lookout for viable technologies, and tend to use the most prolific ones
 
-# Terminology
+## Terminology
 
 It's imperative to understand the terminology in LTE. First of all, LTE Cat-NB and NB-IoT have the same meaning. It is not the same as LTE Cat-M.
 
@@ -304,6 +380,7 @@ Due to the large dataset and requiring a reasonable means of visualization, we c
 \begin{center}
 \includegraphics[width=.6\linewidth]{../../code/tests/img2/histogram_counts.pdf}
 \captionof{figure}{Example python histogram of a univariate latency distribution showing counts}
+\label{fig:}
 \end{center}
 \end{minipage}
 
@@ -315,6 +392,7 @@ Histogram counts vary among various datasets when their sizes differ, so it woul
 \begin{center}
 \includegraphics[width=.6\linewidth]{../../code/tests/img2/probability_density_function_seaborn.pdf}
 \captionof{figure}{Example python histogram of a univariate latency distribution with a normalized density and a gaussian kernel density estimate}
+\label{fig:}
 \end{center}
 \end{minipage}
 
@@ -326,6 +404,7 @@ There are also various types of kernel density estimation, as can be seen here.
 \begin{center}
 \includegraphics[width=.6\linewidth]{../../code/tests/img2/probability_density_function.pdf}
 \captionof{figure}{Various types of kernel density estimation (KDE)}
+\label{fig:}
 \end{center}
 \end{minipage}
 
@@ -337,6 +416,7 @@ If the histogram bin values are normalized by dividing by the bin count, adding 
 \begin{center}
 \includegraphics[width=.6\linewidth]{../../code/tests/img2/probability_mass_function.pdf}
 \captionof{figure}{Various types of kernel density estimation (KDE) with histogram and KDE normalized in attempted probability mass function}
+\label{fig:}
 \end{center}
 \end{minipage}
 
@@ -364,6 +444,7 @@ Instead of finding a single mean for all the entries and associated files, at le
 \begin{center}
 \includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plots/dpoints.pdf}
 \captionof{figure}[K-means clustering]{Trace entries per test. Absolute maximum of 1811 traces has been reduced by removing duplicates and applying thresholds. K-means clustering achieves the desired effect of reducing dimensionality and skewness induced from low latency sampling on the dataset for different tests, yet keeps most of the features of the thresholded max.}
+\label{fig:}
 \end{center}
 \end{minipage}
 
@@ -383,7 +464,6 @@ https://www.etsi.org/deliver/etsi_TS/125100_125199/125133/13.00.00_60/ts_125133v
 
 It would be a good idea to use Martinez' work and complement it.
 
-\label{fig:sinr_latency}
 
 # Results
 
@@ -391,46 +471,47 @@ This section visualizes and analyses the results from the dataset obtained.
 
 ## Latency and timing
 
-### SINR
+This sections handles measured and reported latencies and timings versus signal strength to see the effect of different attenuation zones and test types for multiple UE and MNOs.
+
+### Measured latency
+
+This is the time spent consuming current and is measured externally.
+
+#### SINR
 
 \begin{minipage}{1.0\linewidth}
 \begin{center}
 \includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/SNR_txTime_plot.pdf}
-\captionof{figure}[Latency points (526/1558) under 25 seconds against SINR.]{Latency points (526/1558) under 25 seconds in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs against SINR.}
+\captionof{figure}[Measured latency points (526/1558) under 25 seconds against SINR.]{Measured latency points (526/1558) under 25 seconds in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs against SINR.}
 \label{fig:sinr_latency}
 \end{center}
 \end{minipage}
 
 [](../../../masters/code/tests/plotterk/SNR_txTime_plot.png)
 
-In Fig. \ref{fig:sinr_latency}, (A) Attenuation per decade is not evident according to SNR. It can be suggested that using SNR as a metric for other tests is not beneficial if the attenuation zones cannot be distinguished. This also suggests that Transmit power is a result of RSRP/RSSI instead. (B) The data exists between -100 and 100 dB for both Vodacom and MTN. (C) Tests are varied across SNR. (D) Increased ECL levels seems to be strongly correlated with latency. (Note) The tail at 200 dB is cleared up as a single K-means cluster point due to excess repetition of one of the tests. At K=5, K-means points are a third of the maximum filtered values, which therefore minimizes the low latency kurtosis and retains the unique features.
+In Figure \ref{fig:sinr_latency}, (ABCF) Ublox and Quectel share similar characteristics and differ according to MNO. UE has a mean of 2 seconds on MTN-ZTE, and 6-7 seconds on Vodacom-Nokia. (DE) Attenuation per decade is not evident according to SNR. It can be suggested that using SNR as a metric for other tests is not beneficial if the attenuation zones cannot be distinguished. This also suggests that transmit power is a result of RSRP/RSSI variation instead. (GH) Tests are varied across SNR. eDRX paging cycles and COPS maintain similar latencies, however the rest increase three-fold or more. (H) Echo tests have outlier registrations and deregistrations at Vodacom-Nokia. UDP packet byte size does not seem to have an effect on latency. (I) Most of Vodacom-Nokia's dataset is on ECL 1. Increased ECL levels do not seem correlated with latency. (Note) The tail at 200 dB is cleared up as a single K-means cluster point due to excess repetition of one of the tests. At K=5, K-means points are a third of the maximum filtered values, which therefore minimizes the low latency kurtosis and retains the unique features.
 
 Extended Coverage Levels (ECL) are determined by the network. The eNB (base station) sets the number of transmission repetitions (ECL) according to received signal strength reported by the UE.
 
 \begin{minipage}{1.0\linewidth}
 \begin{center}
 \includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/SNR_txTime_outliers.pdf}
-\captionof{figure}[SINR Latency outliers (51/61) up to 300 seconds]{Furthermore, Latency outliers (51/61) up to 300 seconds support the ongoing trend, except that Vodacom has the vast majority of points}
+\captionof{figure}[Measured latency outliers (51/61) up to 300 seconds against SINR.]{Measured latency outliers (51/61) up to 300 seconds in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs against SINR.}
+\label{fig:sinr_latency_otl}
 \end{center}
 \end{minipage}
 
 [](../../../masters/code/tests/plotterk/SNR_txTime_outliers.png)
 
-### Measured latency
+Furthermore, in Figure \label{fig:sinr_latency_otl} latency outliers are (ABC) mostly as a result of Vodacom-Nokia. Both MNOs have outliers up to 300 seconds, but that is for cases where the inactivity timer is active. Since the inactivity timer cannot be controlled by the UE, the next step is to deregister from the network with `AT+COPS=2`. On MTN-ZTE, this is a quick action taking at most a few seconds, however on the Vodacom-Nokia network it can take 40 seconds or more. This is the real latency caveat which makes the Vodacom-Nokia network unusable.
 
-\begin{minipage}{\linewidth}
-\begin{center}
-\includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_txTime_outliers.pdf}
-\captionof{figure}[Measured Latency outliers (42/61) up to 300 seconds]{Latency outliers (42/61) are up to 300 seconds, mainly from Vodacom and not affected by ECL. Prominent tests include COPS, PTAU and UDP packet tests.}
-\end{center}
-\end{minipage}
-
-[](../../../masters/code/tests/plotterk/Signal_power_txTime_outliers.png)
+#### RSRP
 
 \begin{minipage}{\linewidth}
 \begin{center}
 \includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_txTime_plot.pdf}
-\captionof{figure}[Measured Latency points (342/1558) under 25 seconds.]{Latency points (342/1558) under 25 seconds. (A) Attenuation per decade is evident. (B) Vodacom latency is up to 5 times greater, excluding outliers. (C) All tests show variation in latency except eDRX. (D) ECL is influenced by RSRP on MTN networks, but does not affect latency. Vodacom's increased latency shows from ECL 1 onwards.}
+\captionof{figure}[Measured Latency points (342/1558) under 25 seconds against RSRP.]{Latency points (342/1558) under 25 seconds in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs against RSRP.}
+\label{fig:latency_rsrp}
 \end{center}
 \end{minipage}
 
@@ -438,25 +519,51 @@ Extended Coverage Levels (ECL) are determined by the network. The eNB (base stat
 
 [](../../../masters/code/tests/plotterk/txTime_histogram.png)
 
-There is a large discrepancy in the measured latency between MTN and Vodacom.
+(A) Attenuation per decade is evident. (B) Vodacom latency is up to 5 times greater, excluding outliers. (C) All tests show variation in latency except eDRX. (D) ECL is influenced by RSRP on MTN networks, but does not affect latency. Vodacom's increased latency shows from ECL 1 onwards.
 
-### TX, RX time
+As opposed to Figure \ref{fig:sinr_latency}, in Figure \ref{fig:latency_rsrp} (ABCF) the characteristics of each MNO is distributed more evenly. RSRP measurements are across a 50dBm range for MTN-ZTE and 40dBm for Vodacom-Nokia with the weakest signals around -130dBm and -110dBm respectively. (DE) Attenuation per decade is evident according to RSRP. This RF metric is most beneficial to compare against when measuring the outcome of attenuations. (GH) Tests are varied across RSRP. (G) eDRX paging cycles and PTAU have the quickest latencies under a few seconds whilst COPS has the longest up to 10 seconds. (H) Echo tests have outlier network (de)registrations at Vodacom-Nokia. UDP packet byte size has high variance, yet only has an effect on latency in the fastest transmissions. (I) Most of Vodacom-Nokia's dataset is on ECL 1, yet MTN-ZTE's ECL 1 has much lower latency and variance. Increased ECL levels do not necessarily correlate with latency. Closer inspection is needed per test.
+
+Extended Coverage Levels (ECL) are determined by the network. The eNB (base station) sets the number of transmission repetitions (ECL) according to received signal strength reported by the UE.
+
+<!--\begin{minipage}{\linewidth}
+\begin{center}
+\includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_txTime_outliers.pdf}
+\captionof{figure}[Measured latency outliers (42/61) up to 300 seconds against RSRP.]{Measured latency outliers (42/61) up to 300 seconds in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs against RSRP.}
+\label{fig:latency_rsrp_otl}
+\end{center}
+\end{minipage}-->
+
+[](../../../masters/code/tests/plotterk/Signal_power_txTime_outliers.png)
+
+<!--Furthermore, in Figure \label{fig:latency_rsrp_otl} latency outliers are-->
+
+Since the only difference between the outliers of latency versus SINR (Figure \ref{fig:sinr_latency}) and latency versus RSRP is the fact that the attenuation zones are evident per decade, it is not necessary to show here. What can also be said is that extreme outliers are not cased by attenuation, but is rather network controlled.
+
+### Reported latency
+
+The UE reports TX and RX time via the `AT+NUESTATS="RADIO"` command. It is the transmit and receive time spent on air (using its allocated bandwidth in the RF spectrum).
+
+#### TX time
 
 \begin{minipage}{1.0\linewidth}
 \begin{center}
 \includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_txTimeNW_plot.pdf}
-\captionof{figure}[TX time points (225/528) under 20 seconds.]{TX time points (225/528) under 20 seconds. (A) Attenuation zones clearly defined per decade. (B) UE reports satisfactory TX time according to 3GPP standards (under 10 seconds). (C) UDP packet transmissions are reported to be greater than 5 seconds, and the rest of the tests as less. (D) ECL does not affect latency according to reported TX time.}
+\captionof{figure}[TX time points (325/539) under 20 seconds against RSRP.]{TX time points (325/539) under 20 seconds in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs against RSRP.}
+\label{fig:txTimeNW}
 \end{center}
 \end{minipage}
 
-[](../../../masters/code/tests/plotterk/Signal_power_txTimeNW_plot.png)
+![](../../../masters/code/tests/plotterk/Signal_power_txTimeNW_plot.png)
 
-The UE reported latency is not indicative of the measured latency. Data for both MNOs falls within the first 5 seconds, unlike what was measured. It is possible that actual on-air time is less than when measuring latency from external energy measurements because the signals are modulated in the time domain (duty cycle, pulse width). This is not a suitable substitute for latency metrics.
+In Figure \ref{fig:txTimeNW}, (AF) the effect of K-means clustering can be seen as it simplifies the variance around -110 to -130dBm as more tests had been take than necessary. Nevertheless, this coincides with (I) higher ECL 2 values. However, ECL is not the only metric that affects latency as there are ECL 0 values in that range as well. As a whole, the UE have low latency and means under 1 second with MTN-ZTE. (BF) Ublox shows poorer performance than Quectel here, yet both have means around 2-3 seconds. (C) The data is almost mutually exclusive and only shares a boundary with TX times under 2 seconds. (DE) Attenuation zones are clearly defined per decade. (GH) UDP packet transmissions are reported greater than 5 seconds, and the rest of the tests as less. (I) ECL might affect latency according to reported TX time.
+
+Although the UE reports satisfactory TX time according to 3GPP standards (under 10 seconds) it is not indicative of the measured latency and it is likely necessary to look at RX time as well. Data for both MNOs falls within the first 5 seconds, unlike what was measured. It is possible that actual on-air time is less than when measuring latency from external energy measurements because the signals are modulated in the time domain (duty cycle, pulse width).
 
 \begin{minipage}{1.0\linewidth}
 \begin{center}
 \includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_txTimeNW_outliers.pdf}
-\captionof{figure}[TX time outliers (11/11) up to 100 seconds]{TX time outliers (11/11) exist up to 100 seconds and only on the Vodacom network.}
+\captionof{figure}[TX time outliers (11/11) up to 100 seconds]{TX time outliers (11/11) exist up to 100 seconds in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs against RSRP.}
+\label{fig:txTimeNW_otl}
 \end{center}
 \end{minipage}
 
@@ -464,12 +571,29 @@ The UE reported latency is not indicative of the measured latency. Data for both
 
 [](../../../masters/code/tests/plotterk/txTimeNW_histogram.png)
 
+In Figure \ref{fig:txTimeNW_otl}, (ADFG) MTN-ZTE shows no outliers, but (BC) Vodacom-Nokia shows outliers for both Ublox and Quectel. (E) Attenuation does not affect TX time. (H) If not a lengthy UDP packet transmission, both eDRX and PTAU have a single outlier which could be a result of an RRC connection with a long inactivity timer, synchronization error or else.
 
+#### RX Time
+
+\begin{minipage}{1.0\linewidth}
+\begin{center}
+\includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_rxTimeNW_plot.pdf}
+\captionof{figure}[RX time packets (283/1069) under 20 seconds against RSRP.]{RX time packets (283/1069) under 20 seconds in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs against RSRP.}
+\label{fig:}
+\end{center}
+\end{minipage}
+
+[](../../../masters/code/tests/plotterk/Signal_power_rxTimeNW_plot.png)
+
+(A) Attenuation zones clearly defined per decade. (B) MTN RX and TX time mainly within 2.5 seconds. Vodacom mainly up to 10 seconds. (C) All tests show variation in RX time except eDRX. (D) ECL does not affect RX time on MTN, however most of the tests at Vodacom show ECL 1 and above.
+
+The on-air time for receiving from the network is at least twice as much as the TX time metric. It is more comparable to the external energy-latency measurements and suggests that more energy is spent on receiving than necessary.
 
 \begin{minipage}{1.0\linewidth}
 \begin{center}
 \includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_rxTimeNW_outliers.pdf}
-\captionof{figure}[RX time outliers (36/47) up to 400 seconds]{RX time outliers (36/47) show RX time up to almost 400 seconds and majority when connected to Vodacom towers. It includes mostly the UDP packet tests and at ECL 1.}
+\captionof{figure}[RX time outliers (36/47) up to 400 seconds against RSRP.]{RX time outliers (36/47) up to 400 seconds in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs against RSRP.}
+\label{fig:}
 \end{center}
 \end{minipage}
 
@@ -477,18 +601,7 @@ The UE reported latency is not indicative of the measured latency. Data for both
 
 [](../../../masters/code/tests/plotterk/rxTimeNW_histogram.png)
 
-
-
-\begin{minipage}{1.0\linewidth}
-\begin{center}
-\includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_rxTimeNW_plot.pdf}
-\captionof{figure}[RX time packets (283/1069) under 20 seconds.]{RX time packets (283/1069) under 20 seconds. (A) Attenuation zones clearly defined per decade. (B) MTN RX and TX time mainly within 2.5 seconds. Vodacom mainly up to 10 seconds. (C) All tests show variation in RX time except eDRX. (D) ECL does not affect RX time on MTN, however most of the tests at Vodacom show ECL 1 and above.}
-\end{center}
-\end{minipage}
-
-[](../../../masters/code/tests/plotterk/Signal_power_rxTimeNW_plot.png)
-
-The on-air time for receiving from the network is at least twice as much as the TX time metric. It is more comparable to the external energy-latency measurements and suggests that more energy is spent on receiving than necessary.
+show RX time up to almost 400 seconds and majority when connected to Vodacom towers. It includes mostly the UDP packet tests and at ECL 1.
 
 ### C-DRX duty cycle
 
@@ -497,20 +610,26 @@ On the Vodafone network in connected-DRX (C-DRX) mode, the UE is observed to sho
 \begin{minipage}{1.0\linewidth}
 \begin{center}
 \includegraphics[width=1.0\linewidth]{../../code/tests/logs/zte_mtn/rf_shield/ublox/scope/12_8ms.jpg}
-\captionof{figure}[C-DRX MTN-Ublox]{Timing measurement of MTN-Ublox during C-DRX. Although the duty cycles vary in C-DRX mode, it can be estimated that pulses are roughlly 12.8ms in length with 4ms idle between. This means that 75\% of the time the UE device is drawing current.}
+\captionof{figure}[C-DRX MTN-Ublox]{Timing measurement of MTN-Ublox during C-DRX. Although the duty cycles vary in C-DRX mode, it can be estimated that pulses are roughly 12.8ms in length with 4ms idle between. This means that 75\% of the time the UE device is drawing current.}
+\label{fig:}
 \end{center}
 \end{minipage}
 
-[](../../code/tests/logs/zte_mtn/rf_shield/ublox/scope/12_8ms.jpg)
+![](../../code/tests/logs/zte_mtn/rf_shield/ublox/scope/12_8ms.jpg)
 
 \begin{minipage}{1.0\linewidth}
 \begin{center}
 \includegraphics[width=1.0\linewidth]{../../code/tests/logs/zte_mtn/rf_shield/quectel/scope/12ms.jpg}
 \captionof{figure}[C-DRX MTN-Quectel]{Timing measurent of C-DRX mode for MTN-Quectel. Although the duty cycles vary in C-DRX mode, it can be estimated that pulses are roughly 12ms in length with 4ms idle between. This means that 75\% of the time the UE device is drawing current.}
+\label{fig:}
 \end{center}
 \end{minipage}
 
 [](../../code/tests/logs/zte_mtn/rf_shield/quectel/scope/12ms.jpg)
+
+### Summary
+
+There is a large discrepancy in the measured latency between MTN-ZTE and Vodacom-Nokia.
 
 ## Power efficiency
 
@@ -518,33 +637,39 @@ There is a large discrepancy in the energy consumption between MTN and Vodacom.
 
 The inefficiency between the two South African MNOs can either be attributed to poor system configuration, or hardware fault. That is, if the network vendor meets the 3GPP's standards.
 
-### SINR
+### Measured energy consumption
+
+#### SINR
 
 ![MTN Energy (mJ or J) vs SINR (dB)](../images/1568089288965.png)
 
 ![Vodacom Energy (J) vs SINR (dB)](../images/1568089425196.png)
 
-
-
-### Measured energy consumption
+#### RSRP
 
 \begin{minipage}{\linewidth}
 \begin{center}
 \includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_energy_plot.pdf}
-\captionof{figure}[Energy packets (340/1540) up to 50 Joules]{Energy packets (340/1540) up to 50 Joules or 14mWh. (A) Attenuation zones per decade evident. (B) Vodacom energy consumption up to 10 times greater, excluding outliers. (C) All tests show variation in energy consumption except eDRX. (D) Vodacom at mostly ECL 1, yet MTN has varied ECL.}
+\captionof{figure}[Energy packets (340/1540) up to 50 Joules against RSRP.]{Energy packets (340/1540) up to 50 Joules or 14mWh in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs against RSRP.}
+\label{fig:}
 \end{center}
 \end{minipage}
 
 [](../../../masters/code/tests/plotterk/Signal_power_energy_plot.png)
 
+(A) Attenuation zones per decade evident. (B) Vodacom energy consumption up to 10 times greater, excluding outliers. (C) All tests show variation in energy consumption except eDRX. (D) Vodacom at mostly ECL 1, yet MTN has varied ECL.
+
 \begin{minipage}{\linewidth}
 \begin{center}
 \includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_energy_outliers.pdf}
-\captionof{figure}[Energy outliers (46/79) up to 750 Joules]{Energy outliers (46/79) are up to 750 Joules or 200mWh, mainly from Vodacom at ECL 1 and the COPS, PTAU or UDP packet test.}
+\captionof{figure}[Energy outliers (46/79) up to 750 Joules against RSRP.]{Energy outliers (46/79) up to 750 Joules or 200mWh in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs against RSRP.}
+\label{fig:}
 \end{center}
 \end{minipage}
 
 [](../../../masters/code/tests/plotterk/Signal_power_energy_outliers.png)
+
+Energy outliers mainly from Vodacom at ECL 1 and the COPS, PTAU or UDP packet test.
 
 All in all, Vodacom uses up to 40 times (200 Joules) more than MTN (up to 5 Joules).
 
@@ -559,16 +684,22 @@ With daily transmissions, one can hope for a year when connected to Vodacom, and
 \begin{minipage}{\linewidth}
 \begin{center}
 \includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_energy_outliers.pdf}
-\captionof{figure}[Max current of packets (372/1619) up to 128mA]{Max current of packets (372/1619) roughly between 70 and 120mA, and skewed towards higher consumption. It is also clamped at 128mA due to measurement limitations. (A) Attenuation zones evident. (B) Both MTN and Vodacom share similar distributions of max current usage. (C) Tests are varied, yet UDP packet transmission tend to use more current. (D) ECL does not affect current usage.}
+\captionof{figure}[Max current of packets (372/1619) up to 128mA against RSRP.]{Max current of packets (372/1619) up to 128mA in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs against RSRP.}
+\label{fig:}
 \end{center}
 \end{minipage}
 
 [](../../../masters/code/tests/plotterk/Signal_power_maxCurrent_plot.png)
 
+roughly between 70 and 120mA, and skewed towards higher consumption. It is also clamped at 128mA due to measurement limitations. 
+
+(A) Attenuation zones evident. (B) Both MTN and Vodacom share similar distributions of max current usage. (C) Tests are varied, yet UDP packet transmission tend to use more current. (D) ECL does not affect current usage.
+
 \begin{minipage}{\linewidth}
 \begin{center}
 \includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/maxCurrent_histogram.pdf}
 \captionof{figure}[Max current of packets histogram]{The latency-energy measurement hardware is limited to 128mA, and therefore we can see some clamping here. It shouldn't affect the energy readings much however, as maximum current occurs only during the first few microseconds of the random access preamble.}
+\label{fig:}
 \end{center}
 \end{minipage}
 
@@ -579,11 +710,14 @@ With daily transmissions, one can hope for a year when connected to Vodacom, and
 \begin{minipage}{\linewidth}
 \begin{center}
 \includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_TX_power_plot.pdf}
-\captionof{figure}[Transmit powers of packets (204/1597) up to 23dBm]{Transmit powers of packets (204/1597) from -10 to 23 dBm. (A) Transmit power decreases proportional to RSRP from around -100 dBm and stronger. (B) Attenuation/RSRP affects transmit power on MTN, and Vodacom remains at the 23 dBm max. (C) Variation in all tests. (D) ECL 0 and 1 uses less power but ECL 2 remains at max power.}
+\captionof{figure}[Transmit powers of packets (204/1597) up to 23dBm against RSRP.]{Transmit powers of packets (204/1597) from -10 to 23 dBm in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs against RSRP.}
+\label{fig:}
 \end{center}
 \end{minipage}
 
 [](../../../masters/code/tests/plotterk/Signal_power_TX_power_plot.png)
+
+(A) Transmit power decreases proportional to RSRP from around -100 dBm and stronger. (B) Attenuation/RSRP affects transmit power on MTN, and Vodacom remains at the 23 dBm max. (C) Variation in all tests. (D) ECL 0 and 1 uses less power but ECL 2 remains at max power.
 
 The UE maintains a max output power of 23 dBm when connected to Vodacom towers, and decreases proportional to RSRP/RSSI on MTN towers. When comparing energy and latency to transmit power, both show variation at 23 dBm and decrease at lower powers which indicates that although it is a contributing factor it is definitely more affected by time on air.
 
@@ -596,22 +730,28 @@ Around -100 dBm devices decrease their output power at roughly 10 dBm per decade
 \begin{minipage}{\linewidth}
 \begin{center}
 \includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/txTime_energy_plot.pdf}
-\captionof{figure}[Energy-Latency packets (322/1640)]{Energy consumption versus Latency packets (322/1640). (A) Attenuation zones show variation. (B) UE-MNO pairings show similar trends, yet is possible (more in Vodacom's case) for latency to increase and energy levels to remain the same. (C) Tests show variation. (D) Increased ECL indicated higher latency and energy consumption.}
+\captionof{figure}[Energy versus latency packets (322/1640)]{Energy versus latency packets (322/1640) in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs against RSRP.}
+\label{fig:}
 \end{center}
 \end{minipage}
 
 [](../../../masters/code/tests/plotterk/txTime_energy_plot.png)
+
+(A) Attenuation zones show variation. (B) UE-MNO pairings show similar trends, yet is possible (more in Vodacom's case) for latency to increase and energy levels to remain the same. (C) Tests show variation. (D) Increased ECL indicated higher latency and energy consumption.
 
 After 5 seconds UEs consume 1 Joule per second when connected to a tower and after 15 seconds 3 Joules per second at most. However, it is possible to use energy more efficiently and increase latency.
 
 \begin{minipage}{\linewidth}
 \begin{center}
 \includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/txTime_energy_outliers.pdf}
-\captionof{figure}[Energy-Latency packet outliers (47/74).]{Energy vs Latency outliers (47/74) exist from 25 seconds onwards, and it follows the same structure as the above. The majority of outliers are Vodacom's.}
+\captionof{figure}[Energy versus latency outliers (47/74) against RSRP.]{Energy vs latency outliers (47/74) in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs against RSRP.}
+\label{fig:}
 \end{center}
 \end{minipage}
 
 [](../../../masters/code/tests/plotterk/txTime_energy_outliers.png)
+
+ exist from 25 seconds onwards, and it follows the same structure as the above. The majority of outliers are Vodacom's.
 
 It is evident that on all attenuation levels there is a high degree of variation in latency and energy, and thus correlation with attenuation is unlikely. Considering the discrepancy between MTN and Vodacom is up to a ten-fold difference, the latter's Nokia towers are vastly inefficient. Lastly, most of the test data falls within the first 10 seconds, with eDRX power saving being the most efficient, and network registration or sending large UDP packets being the least.
 
@@ -623,6 +763,7 @@ It is evident that on all attenuation levels there is a high degree of variation
 \begin{center}
 \includegraphics[width=1.0\linewidth]{../../code/tests/datagrams/mtn_ublox_energy.pdf}
 \captionof{figure}[UDP Datagram energy-sizes]{Datagram sizes of MTN-Ublox pair up to 1500mJ. Note the steady increase in Energy consumption on the baseline, and the high variation.}
+\label{fig:}
 \end{center}
 \end{minipage}
 
@@ -658,6 +799,7 @@ It is evident that on all attenuation levels there is a high degree of variation
 \begin{center}
 \includegraphics[width=1.0\linewidth]{../../code/tests/logs/zte_mtn/rf_shield/ublox/scope/cdrx73_6mA_110dB.jpg}
 \captionof{figure}[C-DRX MTN-Ublox current measurement]{Current measurement of MTN-Ublox during connected DRX mode (C-DRX). The UE uses 73.6mA at 110dB attenuation with the RF shield enclosure door slightly open}
+\label{fig:}
 \end{center}
 \end{minipage}
 
@@ -669,6 +811,7 @@ It is evident that on all attenuation levels there is a high degree of variation
 \begin{center}
 \includegraphics[width=1.0\linewidth]{../../code/tests/logs/zte_mtn/rf_shield/quectel/scope/70.4mA_ant_0dB.jpg}
 \captionof{figure}[C-DRX MTN-Quectel current measurement]{Current measurement of MTN-Ublox during connected DRX mode (C-DRX). The UE uses 73.6mA at 110dB attenuation with the RF shield enclosure door slightly open}
+\label{fig:}
 \end{center}
 \end{minipage}
 
@@ -685,24 +828,30 @@ It is evident that on all attenuation levels there is a high degree of variation
 \begin{minipage}{\linewidth}
 \begin{center}
 \includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_txBytes_plot.pdf}
-\captionof{figure}[TX packet sizes (174/457) up to 1kB.]{TX packet sizes (174/457) up to 1kB. (A) Attenuation zones evident and potentially affect packet size. (B) UE-MNO pairs share similar characteristics. (C) Different tests are grouped with similar sizes with UDP packets being the largest, and COPS the smallest. (D) ECL does not seem to affect packet size.}
+\captionof{figure}[TX packet sizes (174/457) up to 1kB against RSRP.]{TX packet sizes (174/457) up to 1kB in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs against RSRP.}
+\label{fig:}
 \end{center}
 \end{minipage}
 
 [](../../../masters/code/tests/plotterk/Signal_power_txBytes_plot.png)
+
+(A) Attenuation zones evident and potentially affect packet size. (B) UE-MNO pairs share similar characteristics. (C) Different tests are grouped with similar sizes with UDP packets being the largest, and COPS the smallest. (D) ECL does not seem to affect packet size.
 
 In general packets are around 100-300 bytes in size and all UE-MNO pairings share similar sizes. There are a few subtle trend lines which suggest that packet size increases proportionally to decreased RSRP. 
 
 \begin{minipage}{\linewidth}
 \begin{center}
 \includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_txBytes_outliers.pdf}
-\captionof{figure}[TX packet size outliers (37/65) up to 20kB.]{TX packet size outliers (37/65) up to 20kB. Attenuation zones do not affect packet size. Vodacom has outliers above 10kB. All outliers are as a result of UDP packet tests and ECL does not seem to affect packet size.}
+\captionof{figure}[TX packet size outliers (37/65) up to 20kB against RSRP.]{TX packet size outliers (37/65) up to 20kB in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs against RSRP.}
+\label{fig:}
 \end{center}
 \end{minipage}
 
 [](../../../masters/code/tests/plotterk/Signal_power_txBytes_outliers.png)
 
 [txBytes_histogram](../../../masters/code/tests/plotterk/txBytes_histogram.png)
+
+Attenuation zones do not affect packet size. Vodacom has outliers above 10kB. All outliers are as a result of UDP packet tests and ECL does not seem to affect packet size.
 
 There is a large degree of variation in packet sizes expected to be up to 512 bytes, with sizes up to 10kB or more recorded. That's a 20-fold difference which certainly means on can run out of budget on data costs sooner than expected. The prices of packet-switched data in South Africa is high due to ICASA regulations and is the cause of much competition for remaining spectrum when most is still being used for analogue television broadcast by the SABC.
 
@@ -711,18 +860,22 @@ There is a large degree of variation in packet sizes expected to be up to 512 by
 \begin{minipage}{\linewidth}
 \begin{center}
 \includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_rxBytes_plot.pdf}
-\captionof{figure}[RX packet sizes (166/504) up to 1kB.]{RX packet sizes (166/504) up to 1kB. (A) Attenuation zones evident and do not affect packet size. (B) UE-MNO pairs share similar characteristics. (C) Different tests are grouped with similar sizes with UDP packets being the largest, and COPS the smallest. (D) ECL does not seem to affect packet size.}
+\captionof{figure}[RX packet sizes (166/504) up to 1kB against RSRP.]{RX packet sizes (166/504) up to 1kB in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs against RSRP.}
+\label{fig:}
 \end{center}
 \end{minipage}
 
 [](../../../masters/code/tests/plotterk/Signal_power_rxBytes_plot.png)
+
+(A) Attenuation zones evident and do not affect packet size. (B) UE-MNO pairs share similar characteristics. (C) Different tests are grouped with similar sizes with UDP packets being the largest, and COPS the smallest. (D) ECL does not seem to affect packet size.
 
 In general packet sizes are up to 200 bytes.
 
 \begin{minipage}{\linewidth}
 \begin{center}
 \includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_rxBytes_outliers.pdf}
-\captionof{figure}[RX packet size outliers (12/18) up to 6kB.]{RX packet size outliers (12/18) up to 6kB. Attenuation zones do not affect packet size Quectel-MTN and Ublox-Vodacom pairs are essentially the only outliers above 300 bytes already. All outliers are as a result of UDP packet tests and ECL does not seem to affect packet size.}
+\captionof{figure}[RX packet size outliers (12/18) up to 6kB against RSRP.]{RX packet size outliers (12/18) up to 6kB in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs against RSRP.}
+\label{fig:}
 \end{center}
 \end{minipage}
 
@@ -730,12 +883,15 @@ In general packet sizes are up to 200 bytes.
 
 [](../../../masters/code/tests/plotterk/rxBytes_histogram.png)
 
+Attenuation zones do not affect packet size Quectel-MTN and Ublox-Vodacom pairs are essentially the only outliers above 300 bytes already. All outliers are as a result of UDP packet tests and ECL does not seem to affect packet size.
+
 ### ACKs/NACKs
 
 \begin{minipage}{\linewidth}
 \begin{center}
 \includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_Total_ACK_NACK_RX_plot.pdf}
-\captionof{figure}[ACK/NACK packets (83/385) mostly up to 30, 80 outlier]{ACK/NACK packets (83/385) mostly up to 30 required, and one outlier at 80. (A) Attenuation zones evident and do not affect number of ACK/NACKs. (B) Vodacom requires more ACK/NACK responses than MTN. They share similar characteristics at a difference of 40dBm RSRP. (C) Significant variation in tests, although eDRX tests show the greatest number. (D) ECL does not seem to affect ACK/NACK count}
+\captionof{figure}[ACK/NACK packet count (83/385) up to 30, outlier at 80]{ACK/NACK packets count (83/385), outlier at 80 in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs against RSRP.}
+\label{fig:}
 \end{center}
 \end{minipage}
 
@@ -743,6 +899,19 @@ In general packet sizes are up to 200 bytes.
 
 [](../../../masters/code/tests/plotterk/Total_ACK_NACK_RX_histogram.png)
 
+up to 30 required, and one outlier at 80. 
+
+(A) Attenuation zones evident and do not affect number of ACK/NACKs. (B) Vodacom requires more ACK/NACK responses than MTN. They share similar characteristics at a difference of 40dBm RSRP. (C) Significant variation in tests, although eDRX tests show the greatest number. (D) ECL does not seem to affect ACK/NACK count
+
+## Throughput
+
+![Signal_power_RLC_DL_plot](../../code/tests/plotterk/Signal_power_RLC_DL_plot.png)
+
+![Signal_power_RLC_UL_plot](../../code/tests/plotterk/Signal_power_RLC_UL_plot.png)
+
+![Signal_power_MAC_DL_plot](../../code/tests/plotterk/Signal_power_MAC_DL_plot.png)
+
+![Signal_power_MAC_UL_plot](../../code/tests/plotterk/Signal_power_MAC_UL_plot.png)
 
 
 ## RF receive metrics
@@ -751,16 +920,30 @@ In general packet sizes are up to 200 bytes.
 
 Tests were completed in good, mid cell and cell edge RF conditions.
 
+### MCL
+
+|                | MCL     |
+| -------------- | ------- |
+| MTN-ZTE        | 157 dBm |
+| Vodacom-Nokia  | 137 dBm |
+| MTN-Ericsson   |         |
+| Vodacom-Huawei |         |
+
+
+
 ### RSSI vs RSRP
 
 \begin{minipage}{\linewidth}
 \begin{center}
 \includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_Total_power_plot.pdf}
-\captionof{figure}[RSSI vs RSRP packets (389/1619).]{RSSI vs RSRP packets (389/1619). (A) Attenuation zones evident in both RSSI/RSRP. (B) Vodacom within a range of 40dBm and MTN within 50dBm. MTN is also 20dBm more sensitive in terms of RSRP. (C) Significant variation in tests across both axes. (D) ECL 2 mainly from -110dB RSRP or less and ECL 1 more. ECL 0 spread throughout.}
+\captionof{figure}[RSSI versus RSRP packets (389/1619).]{RSSI versus RSRP packets (389/1619) in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs.}
+\label{fig:}
 \end{center}
 \end{minipage}
 
 [](../../../masters/code/tests/plotterk/Signal_power_Total_power_plot.png)
+
+(A) Attenuation zones evident in both RSSI/RSRP. (B) Vodacom within a range of 40dBm and MTN within 50dBm. MTN is also 20dBm more sensitive in terms of RSRP. (C) Significant variation in tests across both axes. (D) ECL 2 mainly from -110dB RSRP or less and ECL 1 more. ECL 0 spread throughout.
 
 [](../../../masters/code/tests/plotterk/Total_power_histogram.png)
 
@@ -779,16 +962,20 @@ Tests were completed in good, mid cell and cell edge RF conditions.
 \begin{minipage}{\linewidth}
 \begin{center}
 \includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_RSRQ_plot.pdf}
-\captionof{figure}[RSRQ vs RSRP packets (389/1619).]{RSRQ vs RSRP packets (389/1619). (A) Attenuation zones evident in RSRP and skewed by RSRQ axis. (B) Vodacom shows poorer RSRQ than MTN. (CD) Significant variation in tests and ECL across both axes.}
+\captionof{figure}[RSRQ vs RSRP packets (389/1619).]{RSRQ vs RSRP packets (389/1619) in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs.}
+\label{fig:}
 \end{center}
 \end{minipage}
 
 [](../../../masters/code/tests/plotterk/Signal_power_RSRQ_plot.png)
 
+(A) Attenuation zones evident in RSRP and skewed by RSRQ axis. (B) Vodacom shows poorer RSRQ than MTN. (CD) Significant variation in tests and ECL across both axes.
+
 \begin{minipage}{\linewidth}
 \begin{center}
 \includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/RSRQ_histogram.pdf}
 \captionof{figure}{Histogram distribution of RSRQ.}
+\label{fig:}
 \end{center}
 \end{minipage}
 
@@ -811,11 +998,14 @@ For example, in a frame-synchronized network, **SINR estimation based on synchro
 \begin{minipage}{\linewidth}
 \begin{center}
 \includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_RSRQ_plot.pdf}
-\captionof{figure}{SINR vs RSRP packets (389/1619). (A) Attenuation zones evident in RSRP and skewed by SINR axis. (B) Vodacom shows poorer SINR than MTN. (CD) Significant variation in tests and ECL across both axes.}
+\captionof{figure}{SINR versus RSRP packets (389/1619) in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs.}
+\label{fig:}
 \end{center}
 \end{minipage}
 
 [](../../../masters/code/tests/plotterk/Signal_power_SNR_plot.png)
+
+(A) Attenuation zones evident in RSRP and skewed by SINR axis. (B) Vodacom shows poorer SINR than MTN. (CD) Significant variation in tests and ECL across both axes.
 
 SNR is spread relatively evenly for the different attenuation zones.
 
@@ -823,6 +1013,7 @@ SNR is spread relatively evenly for the different attenuation zones.
 \begin{center}
 \includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/SNR_histogram.pdf}
 \captionof{figure}{Histogram distribution of SINR.}
+\label{fig:}
 \end{center}
 \end{minipage}
 
@@ -836,6 +1027,7 @@ SNR is spread relatively evenly for the different attenuation zones.
 \begin{center}
 \includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_ECL_plot.pdf}
 \captionof{figure}[ECL vs RSRP.]{ECL not determined by attenuation.}
+\label{fig:}
 \end{center}
 \end{minipage}
 
@@ -898,6 +1090,7 @@ Memory can be considered a reasonable UE health metric in terms of monitoring co
 \begin{center}
 \includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Current_Allocated_histogram.pdf}
 \captionof{figure}[Currently allocated memory.]{Currently allocated memory. Equal distribution of attenuation zones and tests. Quectel uses about 16kB of memory and Ublox about 26kB.}
+\label{fig:}
 \end{center}
 \end{minipage}
 
@@ -907,6 +1100,7 @@ Memory can be considered a reasonable UE health metric in terms of monitoring co
 \begin{center}
 \includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Total_Free_histogram.pdf}
 \captionof{figure}[Free memory available.]{Free memory available. Equal distribution of attenuation zones and tests. Quectel has about 7kB of memory free and Ublox about 17kB.}
+\label{fig:}
 \end{center}
 \end{minipage}
 
@@ -916,6 +1110,7 @@ Memory can be considered a reasonable UE health metric in terms of monitoring co
 \begin{center}
 \includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_Num_Allocs_plot.pdf}
 \captionof{figure}[Accumulated memory allocations per packet (390/1619) up to 4000.]{Accumulated memory allocations per packet (390/1619) up to 4000. (ABCD) Attenuation zones evident per decade, Quectel has slightly more allocations per MNO, tests show majority linear increases and ECL does not have a notable effect on the number of allocations.}
+\label{fig:}
 \end{center}
 \end{minipage}
 
@@ -929,9 +1124,56 @@ Memory can be considered a reasonable UE health metric in terms of monitoring co
 
 The number of allocations and frees are very similar, hence the latter is not shown here as well. The code can be considered running stable for both Ublox and Quectel, with memory usages of 60% and 70%, respectively.
 
+\newpage
+
 ## UE-MNO Comparison
 
+|                      | Ublox-MTN | Quectel-MTN | Ublox-Vodacom | Quectel-Vodacom |
+| -------------------- | --------- | ----------- | ------------- | --------------- |
+| Latency (s)          | 5.52244   | 10.7305     | 12.5608       | 27.7113         |
+| Transmit Latency (s) | 0.517468  | 1.33562     | 14.4993       | 4.19134         |
+| Receive Latency (s)  | 1.28067   | 3.31065     | 60.4745       | 10.5279         |
+| Energy (J)           | 11.3519   | 21.9479     | 21.9968       | 57.7098         |
+| Max current (mA)     | 102.719   | 104.121     | 106.388       | 108.684         |
+| Transmit power (dBm)   | 16.9598   | 14.801      | 16.1628       | 18.6389         |
+| RSSI (dBm)           | -93.3134  | -89.4984    | -83.2977      | -82.2805        |
+| TX Bytes (B)         | 345.799   | 852.68      | 3113          | 446.482         |
+| RX Bytes (B)         | 109.161   | 386.651     | 769.311       | 147.708         |
+| ACK/NACK RX Packet   | 20.1      | 7.5         | 13.2121       | 12.2667         |
+| TX Bytes (B)         | 345.013   | 852.081     | 3113          | 446.482         |
+| Currently allocated   | 26195.4   | 16282.4     | 26157.7       | 16282.8         |
+| Total free memory    | 17140.6   | 6717.56     | 17178.3       | 6717.23         |
+| Max free memory      | 15264     | 6706.63     | 15264         | 6705.74         |
+| Num Allocs memory    | 1930      | 1891.31     | 936.311       | 1649.67         |
+| Num Frees memory     | 1715.31   | 1825.06     | 723.078       | 1583.59         |
+| RLC UL (B)           | 468.846   | 336.887     | 343.824       | 201.274         |
+| RLC DL (B)           | 240.222   | 144.186     | 77.1014       | 43.2787         |
+| MAC UL (B)           | 568.269   | 554.038     | 357.295       | 292.272         |
+| MAC UL (B)           | 321.125   | 181.181     | 87.0923       | 55.1858         |
 
+|                      | MTN      | Vodacom  |
+| -------------------- | -------- | -------- |
+| Latency (s)          | 8.14339  | 20.1361  |
+| Transmit Latency (s) | 0.926546 | 9.34534  |
+| Receive Latency (s)  | 2.29566  | 35.5012  |
+| Energy (J)           | 16.6617  | 39.8533  |
+| Max current (mA)     | 103.479  | 107.625  |
+| Transmit power (dBm) | 15.8804  | 17.4008  |
+| RSSI (dBm)           | -91.4028 | -82.7891 |
+| SINR (dB)            | 3.43184  | 3.35709  |
+| RSRQ (dB)            | -13.0146 | -13.1458 |
+| TX Bytes (B)         | 599.239  | 1779.74  |
+| RX Bytes (B)         | 247.906  | 458.51   |
+| ACK/NACK RX Packet   | 13.8     | 12.7394  |
+| Currently allocated  | 21238.9  | 21220.3  |
+| Total free memory    | 11929.1  | 11947.7  |
+| Max free memory      | 10985.3  | 10984.9  |
+| Num Allocs memory    | 1910.39  | 1292.83  |
+| Num Frees memory     | 1770.26  | 1147.14  |
+| RLC UL (B)           | 402.866  | 273.191  |
+| RLC DL (B)           | 192.204  | 60.19    |
+| MAC UL (B)           | 561.154  | 324.784  |
+| MAC UL (B)           | 251.153  | 71.3259  |
 
 # Conclusion
 

@@ -39,7 +39,7 @@ def test_echo_e(request):
         expect('AT+NSOSTF=0,"34.74.25.60",5555,0x400,3,"313232"', '+NSONMI: 0', 300)
         receiveAT(1, '+CSCON: ')
         OK('AT+NSORF=0,32', 3)
-        capture(8, 8)
+        capture(10, 8)
         receiveAT(20, '+NSONMI: 0')
         OK('AT+NSORF=0,32', 3)
         # OK('at+nsocl=0')

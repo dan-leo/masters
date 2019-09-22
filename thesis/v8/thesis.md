@@ -18,6 +18,14 @@ numbersections: true
 
 ![](../images/whitespace.png)
 
+# Declaration {-#declaration}
+
+# Abstract {-#abstract}
+
+# Uittreksel {-#uittreksel}
+
+# Acknowledgements {-#acknowledgements}
+
 # Acronyms {-#acronyms}
 
 - **3GPP** Third Generation Partnership Project
@@ -51,7 +59,7 @@ numbersections: true
 - **BTS** - Base Transceiver Station
 - **D2D** - Device to Device
 
-## SI Units
+## SI Units {-#siunits}
 
 - **kB, MB** - kilobyte, megabyte
 - **kbps** - kilobits per second
@@ -314,6 +322,14 @@ and the following recommended in future:
 - Nordic nRF9160
 - SimCom SIM7020E
 
+### Ublox
+
+### Quectel
+
+### Nordic
+
+### SimCom
+
 These UEs all share AT commands as the API to control their capabilities.
 
 ## AT Commands {#atcommands}
@@ -396,12 +412,12 @@ A unit testing framework has been carefully prepared in Python in combination wi
 
 Table: UE, NW and main metric comparisons
 
-| NW Vendors | UE Manufacturers | Main Metrics     |
-| ---------- | ---------------- | ---------------- |
-| ZTE        | Ublox            | Power Efficiency |
-| Nokia      | Quectel          | Latency          |
-| Ericsson   | Nordic           | Data Charging    |
-| Huawei     | SimCom           | Signal Strength  |
+| NW Vendors | UE Manufacturers | Main Metrics     | Secondary Metrics | Estimates    |
+| ---------- | ---------------- | ---------------- | ----------------- | ------------ |
+| ZTE        | Ublox            | Power Efficiency | Signal Strength   | Battery Life |
+| Nokia      | Quectel          | Latency          | Throughput        | Data Billing |
+| Ericsson   | Nordic           | Data usage       |                   |              |
+| Huawei     | SimCom           |                  |                   |              |
 
 ## Available Metrics
 
@@ -544,14 +560,18 @@ Instead of finding a single mean for all the entries and associated files, at le
 
 [](../../../masters/code/tests/plotterk/ECL_histogram.png)
 
-Table: PCI and Cell ID count after K-means cluster filtering.
+Table: PCI, Cell ID count and EARFCN after K-means cluster filtering with tuples in (Ublox, Quectel) format.
 
-| PCI, Cell ID   | Ublox-ZTE | Quectel-ZTE | Ublox-Nokia | Quectel-Nokia |
-| -------------- | --------- | ----------- | ----------- | ------------- |
-| 123, 239882509 | 34        | 26          |             |               |
-| 14, 2671716    | 13        | 29          |             |               |
-| 11, 2672484    | 1         | 4           |             |               |
-| 2, 484196      |           |             | 34          | 32            |
+| PCI  | Cell ID   |      | ZTE      | Nokia    |
+| ---- | --------- | ---- | -------- | -------- |
+| 123  | 239882509 |      | (34, 26) |          |
+| 14   | 2671716   |      | (13, 29) |          |
+| 11   | 2672484   |      | (1, 4)   |          |
+| 2    | 484196    |      |          | (34, 32) |
+|      |           |      |          |          |
+|      | EARFCN    |      |          |          |
+|      | 3712      |      | (35, 35) |          |
+|      | 3564      |      |          | (34, 32) |
 
 More than one tower proves that Intra-Frequency Cellular Reselection works as expected.
 
@@ -1056,7 +1076,7 @@ It is evident that on all attenuation levels there is a high degree of variation
 
 [](../../code/tests/logs/zte_mtn/rf_shield/quectel/scope/70.4mA_ant_0dB.jpg)
 
-## Data billing
+## Data usage
 
 ### TX, RX bytes
 
@@ -1168,11 +1188,11 @@ Table: Comparing means of UE-MNO pairs
 
 |                      | Ublox-MTN | Quectel-MTN | Ublox-Vodacom | Quectel-Vodacom |
 | -------------------- | --------- | ----------- | ------------- | --------------- |
+| **Metrics** |  |  |  |  |
 | Latency (s)          | 5.52   | 10.73     | 12.5608       | 27.7113         |
 | Transmit time (s) | 0.52 | 1.34    | 14.4993       | 4.19134         |
 | Receive time (s) | 1.28   | 3.31     | 60.4745       | 10.5279         |
 | Energy (J)           | 11.4  | 21.9     | 21.9968       | 57.7098         |
-| Battery Lifetime |  |  |  |  |
 | Max current (mA)     | 102.7   | 104.1     | 106.4     | 108.7        |
 | Transmit power (dBm)   | 16.96 | 14.80      | 16.16       | 18.64        |
 | RSSI (dBm)           | -93.31  | -89.50  | -83.30    | -82.28        |
@@ -1183,6 +1203,10 @@ Table: Comparing means of UE-MNO pairs
 | RLC DL (B)           | 240.2   | 144.2    | 77.1       | 43.3        |
 | MAC UL (B)           | 568.2   | 554.0     | 357.3      | 292.3        |
 | MAC UL (B)           | 321.1   | 181.2    | 87.1      | 55.2        |
+|  |  |  |  |  |
+| **Estimates** |  |  |  |  |
+| Battery Lifetime |  |  |  |  |
+| Data Billing |  |  |  |  |
 
 Table: Comparing means of MNOs
 
@@ -1205,6 +1229,10 @@ Table: Comparing means of MNOs
 | RLC DL (B)           | 192.2   | 60.2    |
 | MAC UL (B)           | 561.2   | 324.8   |
 | MAC UL (B)           | 251.2   | 71.3    |
+|  |  |  |
+| **Estimates** |  |  |
+| Battery Lifetime | 1500 | 800 |
+| Data Billing (how many 512 B) | 5000 | 2000 |
 
 # Discussion and Recommendations {#discussion}
 

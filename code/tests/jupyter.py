@@ -98,6 +98,8 @@ def threshold(a, key):
         r *= a < 20000
     if key == 'PCI':
         r *= a < 200
+    if key == 'estimate':
+        r *= a < 2e4
     # if key == 'MAC DL':
     #     r *= a < 200
     # if key == 'EARFCN':
@@ -486,16 +488,21 @@ def dataProcess(dt):
     dt['Total ACK NACK RX'] = dt.pop('Total ACK/NACK RX')
     # print('Total ACK NACK RX', dt['Total ACK NACK RX'])
     try:
-        kins = ['idleTime', 'Total TX bytes', 'Total RX bytes', 'TX time', 'RX time']
-        kouts = ['time', 'txBytes', 'rxBytes', 'txTimeNW', 'rxTimeNW']
+        kins = ['idleTime', 'energy', 'Total TX bytes', 'Total RX bytes', 'TX time', 'RX time']
+        kouts = ['time', 'estimate', 'txBytes', 'rxBytes', 'txTimeNW', 'rxTimeNW']
         for ko in kouts:
-            dt[ko] = [0]
+            dt[ko] = [] if ko in ['estimate'] else [0]
         for k, ko in zip(kins, kouts):
+            # print('yo')
             for i, v in enumerate(dt[k]):
+                if k == 'energy':
+                    v = v if v > 0 else 0.001
+                    dt[ko].append(9250.0/(v/(1000*3.6)))
+                    # print(9250.0/(v/(1000*3.6)))
                 if k == 'idleTime':
                     if i > 0:
                         dt[ko].append(v + dt['txTime'][i-1] + dt[ko][i-1])
-                if k in kins[1:]:
+                if k in kins[2:]:
                     if i > 0:
                         # print('dt[k][i] - dt[k][i-1]', dt[k][i] - dt[k][i-1])
                         dt[ko].append(dt[k][i] - dt[k][i-1])

@@ -42,7 +42,7 @@ def lighten_color(color, amount):
     return colorsys.hls_to_rgb(c[0], 1 - amount * (1 - c[1]), c[2])
 
 
-def plot(mdb, kx, ky, xlabel='', ylabel='', scale=[1,1], invert=[True,False], colour=cc, folder='', K=0, loc='upper right', bbox=(1.05, 1.12)):
+def plot(mdb, kx, ky, xlabel='', ylabel='', scale=[1,1], invert=[True,False], colour=cc, folder='', K=0, numerator=[None, None], loc='upper right', bbox=(1.05, 1.12)):
     global hytest, hyuenw, hyatt, hxtest, hxuenw, hxatt, kkx, kky, xxlabel, yylabel, ffolder, outcounts, ally
     outcounts = acounts = oiutcounts = 0
     hytest, hyuenw, hyatt = [], [], []
@@ -111,6 +111,10 @@ def plot(mdb, kx, ky, xlabel='', ylabel='', scale=[1,1], invert=[True,False], co
                                     r = rx * ry
                                     x = atk[kx][r]/scale[0]
                                     y = atk[ky][r]/scale[1]
+                                    if numerator[0]:
+                                        x = numerator[0]/x
+                                    if numerator[1]:
+                                        y = numerator[1]/y
                                     # axp[0][0].scatter(x, y, color=cc[ui] if oi else lc(cc[ui]), label=uenwl[ui] if not ti and not ai and oi else None)
                                     # axp[1][0].scatter(x, y, color=cc[ai] if oi else lc(cc[ai]), label=attl[ai] if not ti and not ui and oi else None)
                                     # axp[2][0].scatter(x, y, color=cc[ti] if oi else lc(cc[ti]), label=testl[ti] if not ui and not ai and oi else None)

@@ -8,9 +8,10 @@ def _config(request):
 def test_drx_set(request):
     pytest.subtest = request.node.name.split('_')[-1] + '/'
     setEDRX(4, 1, 2, 5, 6, 2) # 2.56 continuous
+    # setEDRX(4, 1, 2, 5, 6, 2) # 2.56 continuous
     capture(1)
 
 def test_drx_cap(request):
     pytest.subtest = request.node.name.split('_')[-1] + '/'
-    capture(30)
+    capture(10)
     # capture()

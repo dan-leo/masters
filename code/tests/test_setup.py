@@ -118,3 +118,8 @@ def test_ping(request):
 def test_reboot(request):
     pytest.subtest = request.node.name.split('_')[-1] + '/'
     expect('at+nrb', '')
+
+def test_edrxset2(request):
+    pytest.subtest = request.node.name.split('_')[-1] + '/'
+    setEDRX(0, 5, 0, 0, 0, 0) # 2.56 continuous
+    capture(1)

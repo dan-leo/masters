@@ -1,7 +1,5 @@
 from test_ import *
 
-descr = '50'
-
 @pytest.fixture(autouse=True)
 def _config(request):
     pytest.test = 'ptau/'

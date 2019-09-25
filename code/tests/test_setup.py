@@ -91,6 +91,7 @@ def test_COPS(request):
 def test_CEREG(request):
     pytest.subtest = request.node.name.split('_')[-1] + '/'
     expect('AT+CEREG?', ['+CEREG: 5,1', '+CEREG:3,1'])
+    # capture(1)
 
 @pytest.mark.setup
 def test_ping(request):
@@ -103,7 +104,7 @@ def test_ping(request):
         receiveAT(10, '+CIPPING:')
         receiveAT(10, '+CIPPING:')
     print(nuestats())
-    print('### 0')
+    capture(1)
 
 # @pytest.mark.release
 # def test_release(request):

@@ -59,9 +59,9 @@ def test_cops_register2(request):
 @pytest.mark.reg2
 def test_cops_release(request):
     pytest.subtest = request.node.name.split('_')[-1] + '/'
-    receiveAT(1)
+    # receiveAT(1)
     fetchTIM()
-    capture(1, 3)
+    # capture(1, 3)
     if pytest.vendor == 'ublox':
         expect('at+nsocl=0', '')
         receiveAT(1)
@@ -76,7 +76,7 @@ def test_cops_release(request):
         expect('AT+NSOSTF=1,1.1.1.1,7,0x200,1,FF', '+CSCON:0', 300)
         OK('at+nsocl=1')
     receiveAT(1)
-    receiveAT(2)
+    receiveAT(1)
     fetchTIM()
     capture(1, 3)
 
@@ -95,7 +95,7 @@ def test_cops_deregister(request):
 #     receiveAT(3)
 #     fetchTIM()
     flushTIM()
-    capture(1, 3)
+    capture(1, 20)
 #     capture(1, 3)
 
 ############## inactive ##############

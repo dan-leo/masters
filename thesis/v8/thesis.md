@@ -1238,6 +1238,12 @@ Table: Comparing means of MNOs
 
 Fix NW config.
 
+## Optimal network configuration
+
+Avoid -120 dBm - -130 dBm region
+
+
+
 # Conclusion {#conclusion}
 
 Attenuation does not affect performance as much as the ECL level does, and includes

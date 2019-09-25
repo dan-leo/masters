@@ -8,8 +8,8 @@ def setup_module(module):
     serialOpen()
     print()
 
-    # pytest.manufacturer = 'huawei'
-    pytest.manufacturer = 'ericsson'
+    pytest.manufacturer = 'huawei'
+    # pytest.manufacturer = 'ericsson'
     # pytest.manufacturer = 'nokia'
     # pytest.manufacturer = 'zte'
 
@@ -19,10 +19,12 @@ def setup_module(module):
     # pytest.loc = 'vodacom/quellerina_behavior/'
     # pytest.loc = 'mtn/mil_lab/'
     # pytest.loc = 'mtn/rf_shield/'
-    pytest.loc = 'mtn/testplant_14th/'
-    pytest.loc = 'mtn/testplant_14th_behavior/'
+    # pytest.loc = 'mtn/testplant_14th/'
+    pytest.loc = 'vodacom/testplant_14th/'
+    # pytest.loc = 'mtn/testplant_14th_behavior/'
 
-    pytest.descr = '0'
+    # pytest.descr = '0'
+    pytest.descr = '5'
     # pytest.descr = '10'
     # pytest.descr = '20'
     # pytest.descr = '30'

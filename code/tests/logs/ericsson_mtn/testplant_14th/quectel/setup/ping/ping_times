@@ -1,0 +1,416 @@
+====================================================== 51 deselected in 3.60 seconds ======================================================
+PS C:\GIT\masters\code\tests> pytest -svk cops_set
+=========================================================== test session starts ===========================================================
+platform win32 -- Python 3.7.3, pytest-4.6.2, py-1.8.0, pluggy-0.12.0 -- c:\users\d7rob\appdata\local\programs\python\python37\python.exe
+cachedir: .pytest_cache
+rootdir: C:\GIT\masters\code\tests, inifile: pytest.ini
+collected 51 items / 50 deselected / 1 selected                                                                                            
+
+test_cops.py::test_cops_set
+AT+NPTWEDRXS=2,5,0000,1001
+OK
+at+cpsms=1,,,00000000,00000000
+OK
+AT+NPTWEDRXS?
++NPTWEDRXS:5,"0000","1001"
+eDRX value: 163.84 seconds, Paging Time Window: 2.56 seconds
+at+cpsms?
+OK
++CPSMS:1,,,00000000,00000000
+Active T3324: 0 seconds, Periodic T3412: 0 minutes
+PASSED
+
+================================================= 1 passed, 50 deselected in 3.52 seconds =================================================
+PS C:\GIT\masters\code\tests> pytest -svk ping
+=========================================================== test session starts ===========================================================
+platform win32 -- Python 3.7.3, pytest-4.6.2, py-1.8.0, pluggy-0.12.0 -- c:\users\d7rob\appdata\local\programs\python\python37\python.exe
+cachedir: .pytest_cache
+rootdir: C:\GIT\masters\code\tests, inifile: pytest.ini
+collected 51 items / 50 deselected / 1 selected                                                                                            
+
+test_setup.py::test_ping
+at+nping="8.8.8.8"
+OK
++NPSMR:0
++CSCON:1
++NPINGERR:1
+{'Signal power': '-203', 'Total power': '-134', 'TX power': '-450', 'TX time': '362', 'RX time': '5185', 'Cell ID': '1538426', 'ECL': '0', 'SNR': '280', 'EARFCN': '3725', 'PCI': '66', 'RSRQ': '-108', 'OPERATOR MODE': '2', 'LC UL BLE': '0', 'LC DL BLE': '0', 'AC UL BLE': '0', 'AC
+DL BLE': '0', 'otal TX byte': '584', 'otal RX byte': '322', 'otal TX block': '14', 'otal RX block': '17', 'otal RTX block': '0', 'otal ACK/NACK R': '0', 'LC U': '0', 'LC D': '0', 'AC U': '0', 'AC D': '0', 'urrent Allocate': '26192', 'otal Fre': '17144', 'ax Fre': '15264', 'um Alloc': '6591', 'um Free': '6377', 'primary_cell': '1', 'rsrp': '-203', 'rsrq': '-108', 'rssi': '-134', 'snr': '280'}
+CAPTURE START
+./logs/ericsson_mtn/testplant_14th/quectel/setup/ping/0
+0,268077,1187,460,70.67,77.0,-203,-134,-450,362,5185,1538426,0,280,3725,66,-108,2,0,0,0,0,584,322,14,17,0,0,0,0,0,0,26192,17144,15264,6594,6380,1,-203,-108,-134,280,
+CAPTURE END
+PASSED
+
+================================================ 1 passed, 50 deselected in 14.54 seconds =================================================
+PS C:\GIT\masters\code\tests> pytest -svk ping
+=========================================================== test session starts ===========================================================
+platform win32 -- Python 3.7.3, pytest-4.6.2, py-1.8.0, pluggy-0.12.0 -- c:\users\d7rob\appdata\local\programs\python\python37\python.exe
+cachedir: .pytest_cache
+rootdir: C:\GIT\masters\code\tests, inifile: pytest.ini
+collected 51 items / 50 deselected / 1 selected                                                                                            
+
+test_setup.py::test_ping
+at+nping="8.8.8.8"
+OK
++NPSMR:0
++CSCON:1
++NPING:8.8.8.8,52,2049
+{'Signal power': '-203', 'Total power': '-146', 'TX power': '-440', 'TX time': '11091', 'RX time': '15296', 'Cell ID': '1538426', 'ECL': '0', 'SNR': '300', 'EARFCN': '3725', 'PCI': '66', 'RSRQ': '-108', 'OPERATOR MODE': '2', 'LC UL BLE': '0', 'LC DL BLE': '0', 'AC UL BLE': '0', 'AC DL BLE': '0', 'otal TX byte': '810', 'otal RX byte': '495', 'otal TX block': '20', 'otal RX block': '23', 'otal RTX block': '0', 'otal ACK/NACK R': '0', 'LC U': '50', 'LC D': '48', 'AC U': '132', 'AC D': '58', 'urrent Allocate': '26192', 'otal Fre': '17144', 'ax Fre': '15264', 'um Alloc': '6600', 'um Free': '6386', 'primary_cell': '1', 'rsrp': '-203', 'rsrq': '-108', 'rssi': '-146', 'snr': '300'}
+CAPTURE START
+./logs/ericsson_mtn/testplant_14th/quectel/setup/ping/0
+0,1535,12146,4633,7749.85,102.0,-199,-107,-440,11091,24048,1538426,0,249,3725,66,-108,2,0,0,0,0,810,502,20,24,0,0,50,48,132,62,26192,17144,15264,6603,6389,1,-199,-108,-107,249,
+CAPTURE END
+PASSED
+
+================================================ 1 passed, 50 deselected in 17.18 seconds =================================================
+PS C:\GIT\masters\code\tests> pytest -svk ping
+=========================================================== test session starts ===========================================================
+platform win32 -- Python 3.7.3, pytest-4.6.2, py-1.8.0, pluggy-0.12.0 -- c:\users\d7rob\appdata\local\programs\python\python37\python.exe
+cachedir: .pytest_cache
+rootdir: C:\GIT\masters\code\tests, inifile: pytest.ini
+collected 51 items / 50 deselected / 1 selected                                                                                            
+
+test_setup.py::test_ping
+at+nping="8.8.8.8"
+OK
++NPSMR:0
++CSCON:1
++NPING:8.8.8.8,52,2297
+{'Signal power': '-299', 'Total power': '-242', 'TX power': '-350', 'TX time': '11323', 'RX time': '25084', 'Cell ID': '1538426', 'ECL': '0', 'SNR': '300', 'EARFCN': '3725', 'PCI': '66', 'RSRQ': '-108', 'OPERATOR MODE': '2', 'LC UL BLE': '0', 'LC DL BLE': '0', 'AC UL BLE': '0', 'AC DL BLE': '0', 'otal TX byte': '929', 'otal RX byte': '596', 'otal TX block': '23', 'otal RX block': '27', 'otal RTX block': '0', 'otal ACK/NACK R': '0', 'LC U': '50', 'LC D': '48', 'AC U': '132', 'AC D': '62', 'urrent Allocate': '26192', 'otal Fre': '17144', 'ax Fre': '15264', 'um Alloc': '6609', 'um Free': '6395', 'primary_cell': '1', 'rsrp': '-299', 'rsrq': '-108', 'rssi': '-242', 'snr': '300'}
+CAPTURE START
+./logs/ericsson_mtn/testplant_14th/quectel/setup/ping/20
+index,
+idleTime,txTime,totalTime,energy,maxCurrent,Signal power,Total power,TX power,TX time,RX time,Cell ID,ECL,SNR,EARFCN,PCI,RSRQ,OPERATOR MODE,LC UL BLE,LC DL BLE,AC UL BLE,AC DL BLE,otal TX byte,otal RX byte,otal TX block,otal RX block,otal RTX block,otal ACK/NACK R,LC U,LC D,AC U,AC D,urrent Allocate,otal Fre,ax Fre,um Alloc,um Free,primary_cell,rsrp,rsrq,rssi,snr,
+0,27765,12393,4655,7791.15,72.0,-300,-207,-350,11323,33834,1538426,0,286,3725,66,-108,2,0,0,0,0,929,603,23,28,0,0,50,47,132,62,26192,17144,15264,6612,6398,1,-300,-108,-207,286,
+CAPTURE END
+PASSED
+
+================================================ 1 passed, 50 deselected in 19.26 seconds =================================================
+PS C:\GIT\masters\code\tests> pytest -svk ping
+=========================================================== test session starts ===========================================================
+platform win32 -- Python 3.7.3, pytest-4.6.2, py-1.8.0, pluggy-0.12.0 -- c:\users\d7rob\appdata\local\programs\python\python37\python.exe
+cachedir: .pytest_cache
+rootdir: C:\GIT\masters\code\tests, inifile: pytest.ini
+collected 51 items / 50 deselected / 1 selected                                                                                            
+
+test_setup.py::test_ping
+at+nping="8.8.8.8"
+OK
++NPSMR:0
++CSCON:1
++NPING:8.8.8.8,52,1884
+{'Signal power': '-399', 'Total power': '-342', 'TX power': '-250', 'TX time': '11419', 'RX time': '34786', 'Cell ID': '1538426', 'ECL': '0', 'SNR': '299', 'EARFCN': '3725', 'PCI': '66', 'RSRQ': '-108', 'OPERATOR MODE': '2', 'LC UL BLE': '0', 'LC DL BLE': '0', 'AC UL BLE': '0', 'AC DL BLE': '0', 'otal TX byte': '1048', 'otal RX byte': '697', 'otal TX block': '26', 'otal RX block': '31', 'otal RTX block': '0', 'otal ACK/NACK R': '0', 'LC U': '50', 'LC D': '47', 'AC U': '132', 'AC D': '62', 'urrent Allocate': '26192', 'otal Fre': '17144', 'ax Fre': '15264', 'um Alloc': '6618', 'um Free': '6404', 'primary_cell': '1', 'rsrp': '-399', 'rsrq': '-108', 'rssi': '-342', 'snr': '298'}
+CAPTURE START
+./logs/ericsson_mtn/testplant_14th/quectel/setup/ping/30
+index,
+idleTime,txTime,totalTime,energy,maxCurrent,Signal power,Total power,TX power,TX time,RX time,Cell ID,ECL,SNR,EARFCN,PCI,RSRQ,OPERATOR MODE,LC UL BLE,LC DL BLE,AC UL BLE,AC DL BLE,otal TX byte,otal RX byte,otal TX block,otal RX block,otal RTX block,otal ACK/NACK R,LC U,LC D,AC U,AC D,urrent Allocate,otal Fre,ax Fre,um Alloc,um Free,primary_cell,rsrp,rsrq,rssi,snr,
+0,10415,11186,4669,7837.89,78.0,-399,-307,-250,11419,43525,1538426,0,279,3725,66,-108,2,0,0,0,0,1048,704,26,32,0,0,50,48,132,62,26192,17144,15264,6621,6407,1,-399,-108,-307,279,
+CAPTURE END
+PASSED
+
+================================================ 1 passed, 50 deselected in 18.55 seconds =================================================
+PS C:\GIT\masters\code\tests> pytest -svk ping
+=========================================================== test session starts ===========================================================
+platform win32 -- Python 3.7.3, pytest-4.6.2, py-1.8.0, pluggy-0.12.0 -- c:\users\d7rob\appdata\local\programs\python\python37\python.exe
+cachedir: .pytest_cache
+rootdir: C:\GIT\masters\code\tests, inifile: pytest.ini
+collected 51 items / 50 deselected / 1 selected                                                                                            
+
+test_setup.py::test_ping
+at+nping="8.8.8.8"
+OK
++NPSMR:0
++CSCON:1
++NPING:8.8.8.8,52,2179
+{'Signal power': '-499', 'Total power': '-442', 'TX power': '-150', 'TX time': '11668', 'RX time': '44540', 'Cell ID': '1538426', 'ECL': '0', 'SNR': '299', 'EARFCN': '3725', 'PCI': '66', 'RSRQ': '-108', 'OPERATOR MODE': '2', 'LC UL BLE': '0', 'LC DL BLE': '0', 'AC UL BLE': '0', 'AC DL BLE': '0', 'otal TX byte': '1167', 'otal RX byte': '798', 'otal TX block': '29', 'otal RX block': '35', 'otal RTX block': '0', 'otal ACK/NACK R': '0', 'LC U': '50', 'LC D': '48', 'AC U': '132', 'AC D': '62', 'urrent Allocate': '26192', 'otal Fre': '17144', 'ax Fre': '15264', 'um Alloc': '6627', 'um Free': '6413', 'primary_cell': '1', 'rsrp': '-499', 'rsrq': '-108', 'rssi': '-442', 'snr': '298'}
+CAPTURE START
+./logs/ericsson_mtn/testplant_14th/quectel/setup/ping/40
+index,
+idleTime,txTime,totalTime,energy,maxCurrent,Signal power,Total power,TX power,TX time,RX time,Cell ID,ECL,SNR,EARFCN,PCI,RSRQ,OPERATOR MODE,LC UL BLE,LC DL BLE,AC UL BLE,AC DL BLE,otal TX byte,otal RX byte,otal TX block,otal RX block,otal RTX block,otal ACK/NACK R,LC U,LC D,AC U,AC D,urrent Allocate,otal Fre,ax Fre,um Alloc,um Free,primary_cell,rsrp,rsrq,rssi,snr,
+0,43781,11416,4683,7897.27,86.0,-495,-402,-150,11668,53291,1538426,0,238,3725,66,-110,2,0,0,0,0,1167,805,29,36,0,0,50,48,132,62,26192,17144,15264,6630,6416,1,-495,-110,-402,238,
+CAPTURE END
+PASSED
+
+================================================ 1 passed, 50 deselected in 19.36 seconds =================================================
+PS C:\GIT\masters\code\tests>
+PS C:\GIT\masters\code\tests> pytest -svk ping
+=========================================================== test session starts ===========================================================
+platform win32 -- Python 3.7.3, pytest-4.6.2, py-1.8.0, pluggy-0.12.0 -- c:\users\d7rob\appdata\local\programs\python\python37\python.exe
+cachedir: .pytest_cache
+rootdir: C:\GIT\masters\code\tests, inifile: pytest.ini
+collected 51 items / 50 deselected / 1 selected                                                                                            
+
+test_setup.py::test_ping
+at+nping="8.8.8.8"
+OK
++NPSMR:0
++CSCON:1
++NPING:8.8.8.8,52,2134
+{'Signal power': '-602', 'Total power': '-545', 'TX power': '-50', 'TX time': '11746', 'RX time': '54319', 'Cell ID': '1538426', 'ECL': '0', 'SNR': '300', 'EARFCN': '3725', 'PCI': '66', 'RSRQ': '-108', 'OPERATOR MODE': '2', 'LC UL BLE': '0', 'LC DL BLE': '0', 'AC UL BLE': '0', 'AC DL BLE': '0', 'otal TX byte': '1286', 'otal RX byte': '899', 'otal TX block': '32', 'otal RX block': '39', 'otal RTX block': '0', 'otal ACK/NACK R': '0', 'LC U': '50', 'LC D': '48', 'AC U': '132', 'AC D': '62', 'urrent Allocate': '26192', 'otal Fre': '17144', 'ax Fre': '15264', 'um Alloc': '6636', 'um Free': '6422', 'primary_cell': '1', 'rsrp': '-601', 'rsrq': '-108', 'rssi': '-544', 'snr': '300'}
+CAPTURE START
+./logs/ericsson_mtn/testplant_14th/quectel/setup/ping/50
+index,
+idleTime,txTime,totalTime,energy,maxCurrent,Signal power,Total power,TX power,TX time,RX time,Cell ID,ECL,SNR,EARFCN,PCI,RSRQ,OPERATOR MODE,LC UL BLE,LC DL BLE,AC UL BLE,AC DL BLE,otal TX byte,otal RX byte,otal TX block,otal RX block,otal RTX block,otal ACK/NACK R,LC U,LC D,AC U,AC D,urrent Allocate,otal Fre,ax Fre,um Alloc,um Free,primary_cell,rsrp,rsrq,rssi,snr,
+0,17204,11437,4685,7944.42,79.0,-601,-509,-50,11746,63072,1538426,0,287,3725,66,-108,2,0,0,0,0,1286,906,32,40,0,0,50,47,132,62,26192,17144,15264,6639,6425,1,-601,-108,-509,287,
+CAPTURE END
+PASSED
+
+================================================ 1 passed, 50 deselected in 19.31 seconds =================================================
+PS C:\GIT\masters\code\tests> pytest -svk ping
+=========================================================== test session starts ===========================================================
+platform win32 -- Python 3.7.3, pytest-4.6.2, py-1.8.0, pluggy-0.12.0 -- c:\users\d7rob\appdata\local\programs\python\python37\python.exe
+cachedir: .pytest_cache
+rootdir: C:\GIT\masters\code\tests, inifile: pytest.ini
+collected 51 items / 50 deselected / 1 selected                                                                                            
+
+test_setup.py::test_ping
+at+nping="8.8.8.8"
+OK
++NPSMR:0
++CSCON:1
++NPING:8.8.8.8,52,3537
+{'Signal power': '-704', 'Total power': '-647', 'TX power': '50', 'TX time': '12111', 'RX time': '65169', 'Cell ID': '1538426', 'ECL': '0',
+'SNR': '300', 'EARFCN': '3725', 'PCI': '66', 'RSRQ': '-108', 'OPERATOR MODE': '2', 'LC UL BLE': '0', 'LC DL BLE': '0', 'AC UL BLE': '0', 'AC DL BLE': '0', 'otal TX byte': '1496', 'otal RX byte': '1081', 'otal TX block': '40', 'otal RX block': '47', 'otal RTX block': '0', 'otal ACK/NACK R': '0', 'LC U': '50', 'LC D': '47', 'AC U': '132', 'AC D': '62', 'urrent Allocate': '26192', 'otal Fre': '17144', 'ax Fre': '15264', 'um Alloc': '6645', 'um Free': '6431', 'primary_cell': '1', 'rsrp': '-704', 'rsrq': '-108', 'rssi': '-647', 'snr': '300'}
+CAPTURE START
+./logs/ericsson_mtn/testplant_14th/quectel/setup/ping/60
+index,
+idleTime,txTime,totalTime,energy,maxCurrent,Signal power,Total power,TX power,TX time,RX time,Cell ID,ECL,SNR,EARFCN,PCI,RSRQ,OPERATOR MODE,LC UL BLE,LC DL BLE,AC UL BLE,AC DL BLE,otal TX byte,otal RX byte,otal TX block,otal RX block,otal RTX block,otal ACK/NACK R,LC U,LC D,AC U,AC D,urrent Allocate,otal Fre,ax Fre,um Alloc,um Free,primary_cell,rsrp,rsrq,rssi,snr,
+0,10849,12830,5144,11166.07,97.0,-704,-615,50,12111,73928,1538426,0,283,3725,66,-108,2,0,0,0,0,1496,1088,40,48,0,0,50,83,132,108,26192,17144,15264,6648,6434,1,-704,-108,-615,283,
+CAPTURE END
+PASSED
+
+================================================ 1 passed, 50 deselected in 20.17 seconds =================================================
+PS C:\GIT\masters\code\tests> pytest -svk ping
+=========================================================== test session starts ===========================================================
+platform win32 -- Python 3.7.3, pytest-4.6.2, py-1.8.0, pluggy-0.12.0 -- c:\users\d7rob\appdata\local\programs\python\python37\python.exe
+cachedir: .pytest_cache
+rootdir: C:\GIT\masters\code\tests, inifile: pytest.ini
+collected 51 items / 50 deselected / 1 selected                                                                                            
+
+test_setup.py::test_ping
+at+nping="8.8.8.8"
+OK
++NPSMR:0
++CSCON:1
++NPING:8.8.8.8,52,1988
+{'Signal power': '-804', 'Total power': '-747', 'TX power': '150', 'TX time': '12209', 'RX time': '74899', 'Cell ID': '1538426', 'ECL': '0', 'SNR': '300', 'EARFCN': '3725', 'PCI': '66', 'RSRQ': '-108', 'OPERATOR MODE': '2', 'LC UL BLE': '0', 'LC DL BLE': '0', 'AC UL BLE': '0', 'AC DL BLE': '0', 'otal TX byte': '1615', 'otal RX byte': '1182', 'otal TX block': '43', 'otal RX block': '51', 'otal RTX block': '0', 'otal ACK/NACK R': '0', 'LC U': '50', 'LC D': '83', 'AC U': '132', 'AC D': '108', 'urrent Allocate': '26192', 'otal Fre': '17144', 'ax Fre': '15264', 'um Alloc': '6654', 'um Free': '6440', 'primary_cell': '1', 'rsrp': '-804', 'rsrq': '-108', 'rssi': '-747', 'snr': '300'}
+CAPTURE START
+./logs/ericsson_mtn/testplant_14th/quectel/setup/ping/70
+index,
+idleTime,txTime,totalTime,energy,maxCurrent,Signal power,Total power,TX power,TX time,RX time,Cell ID,ECL,SNR,EARFCN,PCI,RSRQ,OPERATOR MODE,LC UL BLE,LC DL BLE,AC UL BLE,AC DL BLE,otal TX byte,otal RX byte,otal TX block,otal RX block,otal RTX block,otal ACK/NACK R,LC U,LC D,AC U,AC D,urrent Allocate,otal Fre,ax Fre,um Alloc,um Free,primary_cell,rsrp,rsrq,rssi,snr,
+0,15029,11211,4589,8856.66,95.0,-804,-712,150,12209,83636,1538426,0,290,3725,66,-108,2,0,0,0,0,1615,1189,43,52,0,0,50,47,132,62,26192,17144,15264,6657,6443,1,-804,-108,-712,290,
+CAPTURE END
+PASSED
+
+================================================ 1 passed, 50 deselected in 18.86 seconds =================================================
+PS C:\GIT\masters\code\tests> pytest -svk ping
+=========================================================== test session starts ===========================================================
+platform win32 -- Python 3.7.3, pytest-4.6.2, py-1.8.0, pluggy-0.12.0 -- c:\users\d7rob\appdata\local\programs\python\python37\python.exe
+cachedir: .pytest_cache
+rootdir: C:\GIT\masters\code\tests, inifile: pytest.ini
+collected 51 items / 50 deselected / 1 selected                                                                                            
+
+test_setup.py::test_ping
+at+nping="8.8.8.8"
+OK
++NPSMR:0
++CSCON:1
++NPING:8.8.8.8,52,2176
+{'Signal power': '-908', 'Total power': '-851', 'TX power': '210', 'TX time': '12440', 'RX time': '84551', 'Cell ID': '1538426', 'ECL': '0', 'SNR': '295', 'EARFCN': '3725', 'PCI': '66', 'RSRQ': '-108', 'OPERATOR MODE': '2', 'LC UL BLE': '0', 'LC DL BLE': '0', 'AC UL BLE': '0', 'AC DL BLE': '0', 'otal TX byte': '1734', 'otal RX byte': '1283', 'otal TX block': '46', 'otal RX block': '55', 'otal RTX block': '0', 'otal ACK/NACK R': '0', 'LC U': '50', 'LC D': '47', 'AC U': '132', 'AC D': '62', 'urrent Allocate': '26192', 'otal Fre': '17144', 'ax Fre': '15264', 'um Alloc': '6663', 'um Free': '6449', 'primary_cell': '1', 'rsrp': '-907', 'rsrq': '-108', 'rssi': '-850', 'snr': '293'}
+CAPTURE START
+./logs/ericsson_mtn/testplant_14th/quectel/setup/ping/80
+index,
+idleTime,txTime,totalTime,energy,maxCurrent,Signal power,Total power,TX power,TX time,RX time,Cell ID,ECL,SNR,EARFCN,PCI,RSRQ,OPERATOR MODE,LC UL BLE,LC DL BLE,AC UL BLE,AC DL BLE,otal TX byte,otal RX byte,otal TX block,otal RX block,otal RTX block,otal ACK/NACK R,LC U,LC D,AC U,AC D,urrent Allocate,otal Fre,ax Fre,um Alloc,um Free,primary_cell,rsrp,rsrq,rssi,snr,
+0,9802,11476,4570,8782.24,124.0,-907,-814,210,12440,93301,1538426,1,277,3725,66,-108,2,0,0,0,0,1734,1290,46,56,0,0,50,47,132,62,26192,17144,15264,6666,6452,1,-907,-108,-814,277,
+CAPTURE END
+PASSED
+
+================================================ 1 passed, 50 deselected in 18.43 seconds =================================================
+PS C:\GIT\masters\code\tests> pytest -svk ping
+=========================================================== test session starts ===========================================================
+platform win32 -- Python 3.7.3, pytest-4.6.2, py-1.8.0, pluggy-0.12.0 -- c:\users\d7rob\appdata\local\programs\python\python37\python.exe
+cachedir: .pytest_cache
+rootdir: C:\GIT\masters\code\tests, inifile: pytest.ini
+collected 0 items / 1 errors                                                                                                               
+
+================================================================= ERRORS ==================================================================
+______________________________________________________ ERROR collecting test session ______________________________________________________
+c:\users\d7rob\appdata\local\programs\python\python37\lib\site-packages\py\_path\common.py:377: in visit
+    for x in Visitor(fil, rec, ignore, bf, sort).gen(self):
+c:\users\d7rob\appdata\local\programs\python\python37\lib\site-packages\py\_path\common.py:429: in gen
+    for p in self.gen(subdir):
+c:\users\d7rob\appdata\local\programs\python\python37\lib\site-packages\py\_path\common.py:418: in gen
+    dirs = self.optsort([p for p in entries
+c:\users\d7rob\appdata\local\programs\python\python37\lib\site-packages\py\_path\common.py:419: in <listcomp>
+    if p.check(dir=1) and (rec is None or rec(p))])
+c:\users\d7rob\appdata\local\programs\python\python37\lib\site-packages\py\_path\local.py:381: in check
+    return not kw["dir"] ^ isdir(self.strpath)
+E   KeyboardInterrupt
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Interrupted: 1 errors during collection !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+========================================================= 1 error in 3.47 seconds =========================================================
+PS C:\GIT\masters\code\tests> pytest -svk ping
+=========================================================== test session starts ===========================================================
+platform win32 -- Python 3.7.3, pytest-4.6.2, py-1.8.0, pluggy-0.12.0 -- c:\users\d7rob\appdata\local\programs\python\python37\python.exe
+cachedir: .pytest_cache
+rootdir: C:\GIT\masters\code\tests, inifile: pytest.ini
+collected 51 items / 50 deselected / 1 selected                                                                                            
+
+test_setup.py::test_ping
+at+nping="8.8.8.8"
+OK
++NPSMR:0
++CSCON:1
++NPING:8.8.8.8,52,2009
+{'Signal power': '-907', 'Total power': '-850', 'TX power': '210', 'TX time': '12499', 'RX time': '94246', 'Cell ID': '1538426', 'ECL': '0', 'SNR': '298', 'EARFCN': '3725', 'PCI': '66', 'RSRQ': '-108', 'OPERATOR MODE': '2', 'LC UL BLE': '0', 'LC DL BLE': '0', 'AC UL BLE': '0', 'AC DL BLE': '0', 'otal TX byte': '1853', 'otal RX byte': '1384', 'otal TX block': '49', 'otal RX block': '59', 'otal RTX block': '0', 'otal ACK/NACK R': '0', 'LC U': '50', 'LC D': '47', 'AC U': '132', 'AC D': '62', 'urrent Allocate': '26192', 'otal Fre': '17144', 'ax Fre': '15264', 'um Alloc': '6672', 'um Free': '6458', 'primary_cell': '1', 'rsrp': '-907', 'rsrq': '-108', 'rssi': '-850', 'snr': '297'}
+CAPTURE START
+./logs/ericsson_mtn/testplant_14th/quectel/setup/ping/70
+0,72533,12106,4581,8805.49,124.0,-907,-815,210,12499,102971,1538426,1,260,3725,66,-108,2,0,0,0,0,1853,1391,49,60,0,0,50,47,132,62,26192,17144,15264,6675,6461,1,-907,-108,-815,260,
+CAPTURE END
+PASSED
+
+================================================ 1 passed, 50 deselected in 18.07 seconds =================================================
+PS C:\GIT\masters\code\tests> pytest -svk ping
+=========================================================== test session starts ===========================================================
+platform win32 -- Python 3.7.3, pytest-4.6.2, py-1.8.0, pluggy-0.12.0 -- c:\users\d7rob\appdata\local\programs\python\python37\python.exe
+cachedir: .pytest_cache
+rootdir: C:\GIT\masters\code\tests, inifile: pytest.ini
+collected 51 items / 50 deselected / 1 selected                                                                                            
+
+test_setup.py::test_ping
+at+nping="8.8.8.8"
+OK
++NPSMR:0
++CSCON:1
++NPING:8.8.8.8,52,1993
+{'Signal power': '-804', 'Total power': '-747', 'TX power': '150', 'TX time': '12595', 'RX time': '104030', 'Cell ID': '1538426', 'ECL': '0', 'SNR': '295', 'EARFCN': '3725', 'PCI': '66', 'RSRQ': '-108', 'OPERATOR MODE': '2', 'LC UL BLE': '0', 'LC DL BLE': '0', 'AC UL BLE': '0', 'AC DL BLE': '0', 'otal TX byte': '1972', 'otal RX byte': '1485', 'otal TX block': '52', 'otal RX block': '63', 'otal RTX block': '0', 'otal
+ACK/NACK R': '0', 'LC U': '50', 'LC D': '47', 'AC U': '132', 'AC D': '62', 'urrent Allocate': '26192', 'otal Fre': '17144', 'ax Fre': '15264', 'um Alloc': '6681', 'um Free': '6467', 'primary_cell': '1', 'rsrp': '-804', 'rsrq': '-108', 'rssi': '-747', 'snr': '300'}
+CAPTURE START
+./logs/ericsson_mtn/testplant_14th/quectel/setup/ping/60
+index,
+idleTime,txTime,totalTime,energy,maxCurrent,Signal power,Total power,TX power,TX time,RX time,Cell ID,ECL,SNR,EARFCN,PCI,RSRQ,OPERATOR MODE,LC UL BLE,LC DL BLE,AC UL BLE,AC DL BLE,otal TX byte,otal RX byte,otal TX block,otal RX block,otal RTX block,otal ACK/NACK R,LC U,LC D,AC U,AC D,urrent Allocate,otal Fre,ax Fre,um Alloc,um Free,primary_cell,rsrp,rsrq,rssi,snr,
+0,213022,11294,4569,8767.03,92.0,-804,-712,150,12595,112768,1538426,0,281,3725,66,-108,2,0,0,0,0,1972,1492,52,64,0,0,50,47,132,62,26192,17144,15264,6684,6470,1,-804,-108,-712,281,
+CAPTURE END
+PASSED
+
+================================================ 1 passed, 50 deselected in 17.36 seconds =================================================
+PS C:\GIT\masters\code\tests> pytest -svk ping
+=========================================================== test session starts ===========================================================
+platform win32 -- Python 3.7.3, pytest-4.6.2, py-1.8.0, pluggy-0.12.0 -- c:\users\d7rob\appdata\local\programs\python\python37\python.exe
+cachedir: .pytest_cache
+rootdir: C:\GIT\masters\code\tests, inifile: pytest.ini
+collected 51 items / 50 deselected / 1 selected                                                                                            
+
+test_setup.py::test_ping
+at+nping="8.8.8.8"
+OK
++NPSMR:0
++CSCON:1
++NPING:8.8.8.8,52,2288
+{'Signal power': '-907', 'Total power': '-850', 'TX power': '210', 'TX time': '12826', 'RX time': '113726', 'Cell ID': '1538426', 'ECL': '0', 'SNR': '294', 'EARFCN': '3725', 'PCI': '66', 'RSRQ': '-108', 'OPERATOR MODE': '2', 'LC UL BLE': '0', 'LC DL BLE': '0', 'AC UL BLE': '0', 'AC DL BLE': '0', 'otal TX byte': '2091', 'otal RX byte': '1586', 'otal TX block': '55', 'otal RX block': '67', 'otal RTX block': '0', 'otal
+ACK/NACK R': '0', 'LC U': '50', 'LC D': '47', 'AC U': '132', 'AC D': '62', 'urrent Allocate': '26192', 'otal Fre': '17144', 'ax Fre': '15264', 'um Alloc': '6690', 'um Free': '6476', 'primary_cell': '1', 'rsrp': '-907', 'rsrq': '-108', 'rssi': '-850', 'snr': '295'}
+CAPTURE START
+./logs/ericsson_mtn/testplant_14th/quectel/setup/ping/70
+index,
+idleTime,txTime,totalTime,energy,maxCurrent,Signal power,Total power,TX power,TX time,RX time,Cell ID,ECL,SNR,EARFCN,PCI,RSRQ,OPERATOR MODE,LC UL BLE,LC DL BLE,AC UL BLE,AC DL BLE,otal TX byte,otal RX byte,otal TX block,otal RX block,otal RTX block,otal ACK/NACK R,LC U,LC D,AC U,AC D,urrent Allocate,otal Fre,ax Fre,um Alloc,um Free,primary_cell,rsrp,rsrq,rssi,snr,
+0,12319,11519,4581,8859.22,125.0,-907,-815,210,12826,122477,1538426,1,283,3725,66,-108,2,0,0,0,0,2091,1593,55,68,0,0,50,47,132,62,26192,17144,15264,6693,6479,1,-907,-108,-815,283,
+CAPTURE END
+PASSED
+
+================================================ 1 passed, 50 deselected in 17.63 seconds =================================================
+PS C:\GIT\masters\code\tests> pytest -svk ping
+=========================================================== test session starts ===========================================================
+platform win32 -- Python 3.7.3, pytest-4.6.2, py-1.8.0, pluggy-0.12.0 -- c:\users\d7rob\appdata\local\programs\python\python37\python.exe
+cachedir: .pytest_cache
+rootdir: C:\GIT\masters\code\tests, inifile: pytest.ini
+collected 51 items / 50 deselected / 1 selected                                                                                            
+
+test_setup.py::test_ping
+at+nping="8.8.8.8"
+OK
++NPSMR:0
++CSCON:1
++NPING:8.8.8.8,52,2023
+{'Signal power': '-1008', 'Total power': '-950', 'TX power': '210', 'TX time': '12885', 'RX time': '123411', 'Cell ID': '1538426', 'ECL': '0', 'SNR': '226', 'EARFCN': '3725', 'PCI': '66', 'RSRQ': '-108', 'OPERATOR MODE': '2', 'LC UL BLE': '0', 'LC DL BLE': '0', 'AC UL BLE': '0',
+'AC DL BLE': '0', 'otal TX byte': '2210', 'otal RX byte': '1687', 'otal TX block': '58', 'otal RX block': '71', 'otal RTX block': '0', 'otal ACK/NACK R': '0', 'LC U': '50', 'LC D': '47', 'AC U': '132', 'AC D': '62', 'urrent Allocate': '26192', 'otal Fre': '17144', 'ax Fre': '15264', 'um Alloc': '6699', 'um Free': '6485', 'primary_cell': '1', 'rsrp': '-1008', 'rsrq': '-108', 'rssi': '-951', 'snr': '231'}
+CAPTURE START
+./logs/ericsson_mtn/testplant_14th/quectel/setup/ping/80
+index,
+idleTime,txTime,totalTime,energy,maxCurrent,Signal power,Total power,TX power,TX time,RX time,Cell ID,ECL,SNR,EARFCN,PCI,RSRQ,OPERATOR MODE,LC UL BLE,LC DL BLE,AC UL BLE,AC DL BLE,otal TX byte,otal RX byte,otal TX block,otal RX block,otal RTX block,otal ACK/NACK R,LC U,LC D,AC U,AC D,urrent Allocate,otal Fre,ax Fre,um Alloc,um Free,primary_cell,rsrp,rsrq,rssi,snr,
+0,9955,11324,4590,8845.38,115.0,-1009,-916,210,12885,132162,1538426,1,210,3725,66,-108,2,0,0,0,0,2210,1694,58,72,0,0,50,47,132,62,26192,17144,15264,6702,6488,1,-1009,-108,-916,210,
+CAPTURE END
+PASSED
+
+================================================ 1 passed, 50 deselected in 18.71 seconds =================================================
+PS C:\GIT\masters\code\tests> pytest -svk ping
+=========================================================== test session starts ===========================================================
+platform win32 -- Python 3.7.3, pytest-4.6.2, py-1.8.0, pluggy-0.12.0 -- c:\users\d7rob\appdata\local\programs\python\python37\python.exe
+cachedir: .pytest_cache
+rootdir: C:\GIT\masters\code\tests, inifile: pytest.ini
+collected 51 items / 50 deselected / 1 selected                                                                                            
+
+test_setup.py::test_ping
+at+nping="8.8.8.8"
+OK
++NPSMR:0
++CSCON:1
++NPING:8.8.8.8,52,2195
+{'Signal power': '-1109', 'Total power': '-1043', 'TX power': '220', 'TX time': '12988', 'RX time': '133212', 'Cell ID': '1538426', 'ECL': '0', 'SNR': '123', 'EARFCN': '3725', 'PCI': '66', 'RSRQ': '-108', 'OPERATOR MODE': '2', 'LC UL BLE': '0', 'LC DL BLE': '0', 'AC UL BLE': '0', 'AC DL BLE': '0', 'otal TX byte': '2335', 'otal RX byte': '1787', 'otal TX block': '61', 'otal RX block': '74', 'otal RTX block': '0', 'otal ACK/NACK R': '0', 'LC U': '50', 'LC D': '47', 'AC U': '132', 'AC D': '62', 'urrent Allocate': '26192', 'otal Fre': '17144', 'ax Fre': '15264', 'um Alloc': '6708', 'um Free': '6494', 'primary_cell': '1', 'rsrp': '-1109', 'rsrq': '-108', 'rssi': '-1043', 'snr': '128'}
+CAPTURE START
+./logs/ericsson_mtn/testplant_14th/quectel/setup/ping/100
+index,
+idleTime,txTime,totalTime,energy,maxCurrent,Signal power,Total power,TX power,TX time,RX time,Cell ID,ECL,SNR,EARFCN,PCI,RSRQ,OPERATOR MODE,LC UL BLE,LC DL BLE,AC UL BLE,AC DL BLE,otal TX byte,otal RX byte,otal TX block,otal RX block,otal RTX block,otal ACK/NACK R,LC U,LC D,AC U,AC D,urrent Allocate,otal Fre,ax Fre,um Alloc,um Free,primary_cell,rsrp,rsrq,rssi,snr,
+0,10177,12383,7528,24261.47,126.0,-1109,-1012,220,12988,142678,1538426,2,117,3725,66,-110,2,0,0,0,0,2335,1794,61,75,0,0,50,47,132,60,26192,17144,15264,6711,6497,1,-1109,-110,-1012,117,
+CAPTURE END
+PASSED
+
+================================================ 1 passed, 50 deselected in 19.34 seconds =================================================
+PS C:\GIT\masters\code\tests> pytest -svk ping
+=========================================================== test session starts ===========================================================
+platform win32 -- Python 3.7.3, pytest-4.6.2, py-1.8.0, pluggy-0.12.0 -- c:\users\d7rob\appdata\local\programs\python\python37\python.exe
+cachedir: .pytest_cache
+rootdir: C:\GIT\masters\code\tests, inifile: pytest.ini
+collected 51 items / 50 deselected / 1 selected                                                                                            
+
+test_setup.py::test_ping
+at+nping="8.8.8.8"
+OK
++NPSMR:0
++CSCON:1
++NPING:8.8.8.8,52,3298
+{'Signal power': '-1187', 'Total power': '-1079', 'TX power': '230', 'TX time': '13469', 'RX time': '144158', 'Cell ID': '1538425', 'ECL': '1', 'SNR': '60', 'EARFCN': '3725', 'PCI': '31', 'RSRQ': '-116', 'OPERATOR MODE': '2', 'LC UL BLE': '0', 'LC DL BLE': '0', 'AC UL BLE': '0',
+'AC DL BLE': '0', 'otal TX byte': '2466', 'otal RX byte': '1887', 'otal TX block': '64', 'otal RX block': '77', 'otal RTX block': '0', 'otal ACK/NACK R': '0', 'LC U': '50', 'LC D': '47', 'AC U': '132', 'AC D': '60', 'urrent Allocate': '26192', 'otal Fre': '17144', 'ax Fre': '15264', 'um Alloc': '6717', 'um Free': '6503', 'primary_cell': '1', 'rsrp': '-1188', 'rsrq': '-117', 'rssi': '-1088', 'snr': '58'}
+CAPTURE START
+./logs/ericsson_mtn/testplant_14th/quectel/setup/ping/100
+index,
+idleTime,txTime,totalTime,energy,maxCurrent,Signal power,Total power,TX power,TX time,RX time,Cell ID,ECL,SNR,EARFCN,PCI,RSRQ,OPERATOR MODE,LC UL BLE,LC DL BLE,AC UL BLE,AC DL BLE,otal TX byte,otal RX byte,otal TX block,otal RX block,otal RTX block,otal ACK/NACK R,LC U,LC D,AC U,AC D,urrent Allocate,otal Fre,ax Fre,um Alloc,um Free,primary_cell,rsrp,rsrq,rssi,snr,
+0,59997,18641,14708,24993.5,119.0,-1189,-1083,230,13469,159169,1538425,2,43,3725,31,-124,2,0,0,0,0,2466,1894,64,78,0,0,50,30,132,39,26192,17144,15264,6720,6506,1,-1189,-124,-1083,43,
+CAPTURE END
+PASSED
+
+================================================ 1 passed, 50 deselected in 23.64 seconds =================================================
+PS C:\GIT\masters\code\tests> pytest -svk ping
+=========================================================== test session starts ===========================================================
+platform win32 -- Python 3.7.3, pytest-4.6.2, py-1.8.0, pluggy-0.12.0 -- c:\users\d7rob\appdata\local\programs\python\python37\python.exe
+cachedir: .pytest_cache
+rootdir: C:\GIT\masters\code\tests, inifile: pytest.ini
+collected 51 items / 50 deselected / 1 selected                                                                                            
+
+test_setup.py::test_ping
+at+nping="8.8.8.8"
+OK
++NPSMR:0
++CSCON:1
++NPING:8.8.8.8,52,3358
+{'Signal power': '-1190', 'Total power': '-1087', 'TX power': '230', 'TX time': '13986', 'RX time': '160516', 'Cell ID': '1538425', 'ECL': '1', 'SNR': '56', 'EARFCN': '3725', 'PCI': '31', 'RSRQ': '-118', 'OPERATOR MODE': '2', 'LC UL BLE': '0', 'LC DL BLE': '0', 'AC UL BLE': '0',
+'AC DL BLE': '0', 'otal TX byte': '2599', 'otal RX byte': '1987', 'otal TX block': '67', 'otal RX block': '80', 'otal RTX block': '0', 'otal ACK/NACK R': '0', 'LC U': '50', 'LC D': '30', 'AC U': '132', 'AC D': '39', 'urrent Allocate': '26192', 'otal Fre': '17144', 'ax Fre': '15264', 'um Alloc': '6726', 'um Free': '6512', 'primary_cell': '1', 'rsrp': '-1190', 'rsrq': '-117', 'rssi': '-1086', 'snr': '58'}
+CAPTURE START
+./logs/ericsson_mtn/testplant_14th/quectel/setup/ping/110
+index,
+idleTime,txTime,totalTime,energy,maxCurrent,Signal power,Total power,TX power,TX time,RX time,Cell ID,ECL,SNR,EARFCN,PCI,RSRQ,OPERATOR MODE,LC UL BLE,LC DL BLE,AC UL BLE,AC DL BLE,otal TX byte,otal RX byte,otal TX block,otal RX block,otal RTX block,otal ACK/NACK R,LC U,LC D,AC U,AC D,urrent Allocate,otal Fre,ax Fre,um Alloc,um Free,primary_cell,rsrp,rsrq,rssi,snr,
+0,10099,18620,14635,24398.55,127.0,-1188,-1090,230,13986,175448,1538425,2,54,3725,31,-118,2,0,0,0,0,2599,1994,67,81,0,0,50,31,132,39,26192,17144,15264,6729,6515,1,-1188,-118,-1090,54,
+CAPTURE END
+PASSED
+
+================================================ 1 passed, 50 deselected in 23.77 seconds =================================================
+PS C:\GIT\masters\code\tests> pytest -svk ping

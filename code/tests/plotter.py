@@ -16,10 +16,10 @@ cc = ['tab:orange', 'tab:green', 'tab:red', 'tab:purple', 'tab:blue', 'tab:brown
 
 def attdt():
     atf = {}
-    atten = np.arange(0, 40, 10)
+    atten = np.arange(0, 111, 10)
     for at in atten:
         atf[str(at) + ' dB'] = []
-    atf['40-110 dB'] = []
+    # atf['40-110 dB'] = []
     return copy.deepcopy(atf)
 
 # manual flatten of array
@@ -56,7 +56,7 @@ def scatternuator(name, kx, ky, thresh, plotlim, scale, limited, dirrs, files, k
                 for atn in atten:
                     if str(atn) in f:
                         # print(atn, file)
-                        if atn >= 40:
+                        if atn >= 120:
                             atf['40-110 dB'].append(file)
                         else:
                             atf[str(atn) + ' dB'].append(file)

@@ -42,7 +42,7 @@ def lighten_color(color, amount):
     return colorsys.hls_to_rgb(c[0], 1 - amount * (1 - c[1]), c[2])
 
 
-def plot(mdb, kx, ky, xlabel='', ylabel='', scale=[1,1], invert=[True,False], colour=cc, folder='', K=0, numerator=[None, None], loc='upper right', bbox=(1.05, 1.12)):
+def plot(mdb, kx, ky, xlabel='', ylabel='', scale=[1,1], invert=[True,False], colour=cc, folder='', K=0, numerator=[None, None], testl=testl, loc='upper right', thresh=None, bbox=(1.05, 1.12)):
     global hytest, hyuenw, hyatt, hxtest, hxuenw, hxatt, kkx, kky, xxlabel, yylabel, ffolder, outcounts, ally
     outcounts = acounts = oiutcounts = 0
     hytest, hyuenw, hyatt = [], [], []
@@ -100,7 +100,7 @@ def plot(mdb, kx, ky, xlabel='', ylabel='', scale=[1,1], invert=[True,False], co
 
                                 # main
                                 rx = j.threshold(atk, kx)
-                                ry = j.threshold(atk, ky)
+                                ry = j.threshold(atk, ky, thresh)
                                 for si in range(2):
                                     if si:
                                         ax = axo
@@ -121,15 +121,15 @@ def plot(mdb, kx, ky, xlabel='', ylabel='', scale=[1,1], invert=[True,False], co
 
                                     if ui < 2:
                                         ax[0][0].scatter(x, y, color=ccui[ui] if oi else lc(ccui[ui]), label=uenwl[ui] if not ti and not ai and oi else None)
-                                        ax[1][0].scatter(x, y, color=cc[ai] if oi else lc(cc[ai]), label=attl[ai] if not ti and not ui and oi else None)
-                                        ax[2][0].scatter(x, y, color=cc[ti] if oi else lc(cc[ti]), label=testl[ti] if not ui and not ai and oi else None)
+                                        ax[1][0].scatter(x, y, color=cc[ai % len(cc)] if oi else lc(cc[ai % len(cc)]), label=attl[ai] if not ti and not ui and oi else None)
+                                        ax[2][0].scatter(x, y, color=cc[ti % len(testl)] if oi else lc(cc[ti % len(testl)]), label=testl[ti % len(testl)] if not ui and ai and oi else None)
                                         # if not oi:
                                         #     ax[0][0].scatter(x, y, color=lc(cc[ui]))
                                         # else:
                                         #     ax[0][0].scatter(x, y, color=cc[ui], label=uenwl[ui] if not ti and not ai else None)
                                     else:
                                         ax[0][1].scatter(x, y, color=ccui[ui] if oi else lc(ccui[ui]), label=uenwl[ui] if not ti and not ai and oi else None)
-                                        ax[1][1].scatter(x, y, color=cc[ai] if oi else lc(cc[ai]), label=attl[ai] if not ti and not ui and oi else None)
+                                        ax[1][1].scatter(x, y, color=cc[ai % len(cc)] if oi else lc(cc[ai % len(cc)]), label=attl[ai] if not ti and not ui and oi else None)
                                         ax[2][1].scatter(x, y, color=cc[ti] if oi else lc(cc[ti]), label=testl[ti] if not ui and not ai and oi else None)
                                         # if not oi:
                                         #     ax[0][1].scatter(x, y, color=lc(cc[ui]))
@@ -254,7 +254,7 @@ def plot(mdb, kx, ky, xlabel='', ylabel='', scale=[1,1], invert=[True,False], co
     # f1, f2, g1, g2 = axp[0][2].axis()
     y2 = axp[0][2].get_yticks()[-1]
     for i, (ax1, ax2, alph) in enumerate(zip([ax for row in axp for ax in row], [ax for row in axo for ax in row], ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'])):
-        ax2.set_ylim(y2 - 0.4*np.abs(y2), None)
+        ax2.set_ylim(y2 - 0.1*np.abs(y2), None)
         ax1.add_artist(AnchoredText(alph, loc='lower right' if i in [1,4,7] else 'lower left'))
         ax2.add_artist(AnchoredText(alph, loc='lower right' if i in [1,4,7] else 'lower left'))
 

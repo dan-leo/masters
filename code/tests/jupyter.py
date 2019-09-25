@@ -33,7 +33,7 @@ def adjust(key, val):
 #             return 0
     return val
 
-def exclude(key, vals):
+def exclude(key, vals, thresh=None):
     a = np.array(vals)
     r = a == a
     if key == 'Signal power':
@@ -70,10 +70,13 @@ def exclude(key, vals):
         r *= a > 0
     return r
 
-def threshold(a, key):
+def threshold(a, key, thresh=None):
     # print('a[key]', a[key], key)
     a = np.array(a[key])
     r = a == a
+    if thresh:
+        r *= a < thresh
+        return r
     lim = [None, None]
     if key == 'Signal power':
         r *= a > -1450

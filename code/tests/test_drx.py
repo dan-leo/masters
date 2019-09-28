@@ -13,5 +13,5 @@ def test_drx_set(request):
 
 def test_drx_cap(request):
     pytest.subtest = request.node.name.split('_')[-1] + '/'
-    capture(10)
-    # capture()
+    # capture(10)
+    capture(10000)

@@ -24,8 +24,8 @@ def setup_module(module):
     # pytest.loc = 'mtn/testplant_14th_behavior/'
 
     # pytest.descr = '0'
-    pytest.descr = '5'
-    # pytest.descr = '10'
+    # pytest.descr = '5'
+    pytest.descr = '10'
     # pytest.descr = '20'
     # pytest.descr = '30'
     # pytest.descr = '40'

@@ -10,9 +10,10 @@ import matplotlib.colors as mc
 import colorsys
 from sklearn.cluster import KMeans
 from matplotlib.offsetbox import AnchoredText
+from matplotlib.ticker import (MultipleLocator, FormatStrFormatter, AutoMinorLocator)
 
 cc_compare = [(237/255, 189/255, 0), 'red']
-ccui = ['tab:cyan', 'tab:grey', 'tab:blue', 'tab:purple', 'tab:orange', 'tab:brown', 'tab:red']
+ccui = ['tab:cyan', 'tab:green', 'tab:blue', 'tab:purple', 'tab:orange', 'tab:brown', 'tab:red']
 cc = ['tab:orange', 'tab:green', 'tab:red', 'tab:purple', 'tab:blue', 'tab:brown', 'tab:cyan']
 testl = ['1-16 B', '64-128 B', '256-512 B', 'Echo', 'COPS', 'eDRX', 'PTAU']
 uenwl = ['Ublox-MTN', 'Quectel-MTN', 'Ublox-Vodacom', 'Quectel-Vodacom']
@@ -122,15 +123,15 @@ def plot(mdb, kx, ky, xlabel='', ylabel='', scale=[1,1], invert=[True,False], co
                                     if ui < 2:
                                         ax[0][0].scatter(x, y, color=ccui[ui] if oi else lc(ccui[ui]), label=uenwl[ui] if not ti and not ai and oi else None)
                                         ax[1][0].scatter(x, y, color=cc[ai % len(cc)] if oi else lc(cc[ai % len(cc)]), label=attl[ai] if not ti and not ui and oi else None)
-                                        ax[2][0].scatter(x, y, color=cc[ti % len(testl)] if oi else lc(cc[ti % len(testl)]), label=testl[ti % len(testl)] if not ui and ai and oi else None)
+                                        ax[2][0].scatter(x, y, color=cc[ti % len(testl)] if oi else lc(cc[ti % len(testl)]), label=testl[ti % len(testl)] if not ui and not ai and oi else None)
                                         # if not oi:
                                         #     ax[0][0].scatter(x, y, color=lc(cc[ui]))
                                         # else:
                                         #     ax[0][0].scatter(x, y, color=cc[ui], label=uenwl[ui] if not ti and not ai else None)
                                     else:
                                         ax[0][1].scatter(x, y, color=ccui[ui] if oi else lc(ccui[ui]), label=uenwl[ui] if not ti and not ai and oi else None)
-                                        ax[1][1].scatter(x, y, color=cc[ai % len(cc)] if oi else lc(cc[ai % len(cc)]), label=attl[ai] if not ti and not ui and oi else None)
-                                        ax[2][1].scatter(x, y, color=cc[ti] if oi else lc(cc[ti]), label=testl[ti] if not ui and not ai and oi else None)
+                                        ax[1][1].scatter(x, y, color=cc[ai % len(cc)] if oi else lc(cc[ai % len(cc)]), label=attl[ai] if not ti and ui == 2 and oi else None)
+                                        ax[2][1].scatter(x, y, color=cc[ti] if oi else lc(cc[ti]), label=testl[ti] if ui == 2 and not ai and oi else None)
                                         # if not oi:
                                         #     ax[0][1].scatter(x, y, color=lc(cc[ui]))
                                         # else:
@@ -247,6 +248,8 @@ def plot(mdb, kx, ky, xlabel='', ylabel='', scale=[1,1], invert=[True,False], co
         ax[2][0].set_zorder(1)
         ax[1][0].legend(loc=loc, bbox_to_anchor=(1.35, 1.12) if not si else (1.35, 1.04)) # 'best'
         ax[2][0].legend(loc=loc, bbox_to_anchor=(1.35, 1.12) if not si else (1.35, 1.04)) # 'best'
+        # ax[1][1].legend(loc=loc) #, bbox_to_anchor=(1.35, 1.12) if not si else (1.35, 1.04)) # 'best'
+        # ax[2][1].legend(loc=loc) #, bbox_to_anchor=(1.35, 1.12) if not si else (1.35, 1.04)) # 'best'
         ax[2][2].legend(loc=loc, bbox_to_anchor=bbox if not si else (bbox[0], 1.04)) # 'best'
 
     axp[0][0].add_artist(AnchoredText(str(sum([len(a) for a in hytest])) + '/' + str(acounts) + '\nK=' + str(K), loc=2))
@@ -257,6 +260,8 @@ def plot(mdb, kx, ky, xlabel='', ylabel='', scale=[1,1], invert=[True,False], co
         ax2.set_ylim(y2 - 0.1*np.abs(y2), None)
         ax1.add_artist(AnchoredText(alph, loc='lower right' if i in [1,4,7] else 'lower left'))
         ax2.add_artist(AnchoredText(alph, loc='lower right' if i in [1,4,7] else 'lower left'))
+        if i != 5:
+            ax1.xaxis.set_major_locator(MultipleLocator(10))
 
     kx = '_'.join(kx.split())
     ky = '_'.join(ky.split())

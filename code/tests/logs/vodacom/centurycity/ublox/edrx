@@ -1,9 +1,0 @@
-
-test_eDRX.py::test_edrxQuery
-AT+NPTWEDRXS?
-+NPTWEDRXS: 5,"0001","0000"
-eDRX value: 5.12 seconds, Paging Time Window: 5.12 seconds
-at+cpsms?
-OK
-+CPSMS: 1,,,"01101111","00001111"
-Active T3324: 30 seconds, Periodic T3412: 30 seconds

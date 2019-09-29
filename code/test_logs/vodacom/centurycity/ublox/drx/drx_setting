@@ -1,0 +1,12 @@
+test_drx.py::test_drxset
+AT+NPTWEDRXS=2,5,"0000","0000"
+OK
+at+cpsms=1,,,"11000001","01000001"
+OK
+AT+NPTWEDRXS?
++NPTWEDRXS: 5,"0000","0000"
+eDRX value: 5.12 seconds, Paging Time Window: 2.56 seconds
+at+cpsms?
+OK
++CPSMS: 1,,,"11000001","01000001"
+Active T3324: 6 minutes, Periodic T3412: 320 hours

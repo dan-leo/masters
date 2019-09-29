@@ -1,0 +1,3 @@
+tests/test_release.py::test_release_capture CAPTURE START
+index,idleTime,txTime,totalTime,energy,maxCurrent,Signal power,Total power,TX power,TX time,RX time,Cell ID,ECL,SNR,EARFCN,PCI,RSRQ,RLC UL BLER,RLC DL BLER,MAC UL BLER,MAC DL BLER,Total TX bytes,Total RX bytes,Total TX blocks,Total RX blocks,Total RTX blocks,Total ACK/NACK RX,RLC UL,RLC DL,MAC UL,MAC DL,Current Allocated,Total Free,Max Free,Num Allocs,Num Frees,
+0,1516368,3325,1519693,2240.69,113.0,-799,-717,20,1436,32783,2671717,0,96,3712,234,-111,0,0,0,0,1605,1154,42,42,0,0,45,53,100,83,16276,6724,6724,13327,13261,

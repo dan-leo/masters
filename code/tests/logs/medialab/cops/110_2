@@ -1,3 +1,0 @@
-CAPTURE START
-index,idleTime,txTime,totalTime,energy,maxCurrent,Signal power,Total power,TX power,TX time,RX time,Cell ID,ECL,SNR,EARFCN,PCI,RSRQ,RLC UL BLER,RLC DL BLER,MAC UL BLER,MAC DL BLER,Total TX bytes,Total RX bytes,Total TX blocks,Total RX blocks,Total RTX blocks,Total ACK/NACK RX,RLC UL,RLC DL,MAC UL,MAC DL,Current Allocated,Total Free,Max Free,Num Allocs,Num Frees,
-0,4162,265054,269216,376736.59,98.0,-808,-718,30,274,243952,2671717,0,60,3712,234,-117,0,0,0,0,347,340,10,11,0,0,0,0,0,0,16276,6724,6724,13080,13014,

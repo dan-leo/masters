@@ -43,7 +43,8 @@ def lighten_color(color, amount):
     return colorsys.hls_to_rgb(c[0], 1 - amount * (1 - c[1]), c[2])
 
 
-def plot(mdb, kx, ky, xlabel='', ylabel='', scale=[1,1], invert=[True,False], colour=cc, folder='', K=0, numerator=[None, None], testl=testl, loc='upper right', thresh=None, bbox=(1.05, 1.12)):
+def plot(mdb, kx, ky, xlabel='', ylabel='', scale=[1,1], invert=[True,False], colour=cc, folder='', K=0, numerator=[None, None], testl=testl, 
+        joburg=False, loc='upper right', thresh=None, bbox=(1.05, 1.12)):
     global hytest, hyuenw, hyatt, hxtest, hxuenw, hxatt, kkx, kky, xxlabel, yylabel, ffolder, outcounts, ally
     outcounts = acounts = oiutcounts = 0
     hytest, hyuenw, hyatt = [], [], []
@@ -246,10 +247,12 @@ def plot(mdb, kx, ky, xlabel='', ylabel='', scale=[1,1], invert=[True,False], co
         ax[0][2].legend(loc=loc, bbox_to_anchor=bbox) # 'best'
         ax[1][0].set_zorder(1)
         ax[2][0].set_zorder(1)
-        ax[1][0].legend(loc=loc, bbox_to_anchor=(1.35, 1.12) if not si else (1.35, 1.04)) # 'best'
-        ax[2][0].legend(loc=loc, bbox_to_anchor=(1.35, 1.12) if not si else (1.35, 1.04)) # 'best'
-        # ax[1][1].legend(loc=loc) #, bbox_to_anchor=(1.35, 1.12) if not si else (1.35, 1.04)) # 'best'
-        # ax[2][1].legend(loc=loc) #, bbox_to_anchor=(1.35, 1.12) if not si else (1.35, 1.04)) # 'best'
+        if joburg:
+            ax[1][1].legend(loc=loc) #, bbox_to_anchor=(1.35, 1.12) if not si else (1.35, 1.04)) # 'best'
+            ax[2][1].legend(loc=loc) #, bbox_to_anchor=(1.35, 1.12) if not si else (1.35, 1.04)) # 'best'
+        else:
+            ax[1][0].legend(loc=loc, bbox_to_anchor=(1.35, 1.12) if not si else (1.35, 1.04)) # 'best'
+            ax[2][0].legend(loc=loc, bbox_to_anchor=(1.35, 1.12) if not si else (1.35, 1.04)) # 'best'
         ax[2][2].legend(loc=loc, bbox_to_anchor=bbox if not si else (bbox[0], 1.04)) # 'best'
 
     axp[0][0].add_artist(AnchoredText(str(sum([len(a) for a in hytest])) + '/' + str(acounts) + '\nK=' + str(K), loc=2))
@@ -260,7 +263,7 @@ def plot(mdb, kx, ky, xlabel='', ylabel='', scale=[1,1], invert=[True,False], co
         ax2.set_ylim(y2 - 0.1*np.abs(y2), None)
         ax1.add_artist(AnchoredText(alph, loc='lower right' if i in [1,4,7] else 'lower left'))
         ax2.add_artist(AnchoredText(alph, loc='lower right' if i in [1,4,7] else 'lower left'))
-        if i != 5:
+        if i != 5 and not joburg:
             ax1.xaxis.set_major_locator(MultipleLocator(10))
 
     kx = '_'.join(kx.split())

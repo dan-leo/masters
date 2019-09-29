@@ -30,34 +30,56 @@ numbersections: true
 
 - **3GPP** Third Generation Partnership Project
 - **LTE Cat-NB1/2** Long Term Evolution Narrow-Band Category 1/2
-- **NB-IoT** Narrowband Internet of Things
+- **NB-IoT** Narrow Band Internet of Things
 - **OTDOA** - Observed Time Difference Of Arrival
 - **eDRX** - Extended Discontinuous Receive X
 - **PTAU** - Periodic Tracking Area Update
 - **COPS** - Cellular Operator Selection
 - **NW** - Network
 - **EARFCN** - E-UTRA Absolute Radio Frequency Channel Number
-- **PCI**
+- **PCI** - Physical Channel ID
 - **ECL**
 - **eNB** - **eNodeB** - 
 - **USSD**
 - **SMS**
 - **WAP**
-- **IP**
+- **IP** - Internet Protocol
 - **RRC**
 - **PS**
-- **UE**
+- **UE** - User Equipment
 - **MNO**
 - **MQTT**
 - **CoAP**
 - **UDP**
 - **TCP**
 - **QXDM**
+- **PTAU** - Periodic Tracking Area Update
 - **MTN** - Mobile Telephone Network
 - **LPWAN**
 - **BPSK** - Binary Phase-Shift Keying
 - **BTS** - Base Transceiver Station
 - **D2D** - Device to Device
+- **AMQP** - Advanced Message Queue Protocol
+-  **AT** - Attention
+-  **CDP**- Connected Device Platform
+-  **DC**- Data Channel
+-  **DCE** - Data Communications Equipment
+-  **DL** - Downlink
+-  **DTE ** - Data Terminal Equipment
+-  **EARFCN ** - Extended Absolute Radio-Frequency Channel Number
+-  **GPRS** - General Packet Radio Service
+-  **IMEI** - International Mobile Equipment Identity
+-  **IMSI** - International Mobile Station Identity
+-  **MCS** - Message Coding Scheme
+-  **MO** - Mobile Originated
+-  **MT** - Mobile Terminated
+-  **SIM** - Subscriber Identity Module
+-  **SMS** - Short Message Se/rvice
+-  **SNR** - Signal to Noise Ratio
+-  **TE** - Terminal Equipment
+-  **UL** - Uplink
+-  **URC** - Unsolicited Result Code
+-  **UUID** - Unique User Identification
 
 ## SI Units {-#siunits}
 
@@ -78,7 +100,14 @@ NB-IoT is a promising contender to fill the role that 2G/GPRS leaves behind as c
 
 ## Why NB-IoT?
 
-NB-IoT shows performance benefits over alternatives in terms of uplink and downlink throughput, range. Energy consumption remains a problem [@Durand2019], [@Martinez2019].
+NB-IoT shows performance benefits over alternatives in terms of uplink and downlink throughput, range. 
+
+* ~ 10 years
+* < 10 seconds
+* \+ 20 dB improvement over 2G/GPRS
+* 
+
+Energy consumption remains a problem [@Durand2019], [@Martinez2019].
 
 ## Problem statement {#probstat}
 
@@ -99,7 +128,11 @@ Estimate:
 * Battery life
 * Data billing
 
-Aim. Evaluate robustness, stability, capabilities, claimed vs actual. Core features/metrics.
+Aim:
+
+* Evaluate robustness, stability, capabilities, claimed vs actual. 
+* Core features/metrics.
+* Investigate sources of variability
 
 ## Scope of work {#scopework}
 
@@ -197,11 +230,31 @@ Table: Brief comparison of cellular technologies
 
 LPWANs enable a vast array of use cases.
 
+
+
+|              | MCL    | Scalability | Battery life | Throughput |
+| ------------ | ------ | ----------- | ------------ | ---------- |
+| NB-IoT       | 164dBm | >50k        |              |            |
+| GPRS         | 148dBm |             |              |            |
+| LoRaWAN SF12 | 157dBm |             |              |            |
+| SigFox       | 160dBm | >50k        |              |            |
+
+| Technology   | MCL  | Scalability | Battery life | Throughput |
+| ------------ | ---- | ----------- | ------------ | ---------- |
+| NB-IoT       | X    | X           |              | X          |
+| GPRS         |      | X           |              | X          |
+| LoRaWAN SF7  |      |             | X            |            |
+| LoRaWAN SF12 | X    |             |              |            |
+| SigFox       | X    | X           |              |            |
+
 ## Use cases {#usecases}
 
 - Public Safety
 - Agriculture
 - Smart Metering
+- Actuator Control
+- Real-time Monitoring
+- Asset Tracking
 
 The most popular use case in IoT is smart metering.
 
@@ -242,12 +295,40 @@ Taking it one step further, the 3GPP defined two device categories, namely Cat N
 Compared to LTE
 
 - devices are stationary
+
 - intermittent burst transmissions
+
 - low data bandwidth
+
 - delay-tolerant applications
+
 - support for huge number of devices
+
 - deals with poor coverage (indoor penetration)
+
 - battery lifetime of a few years
+
+  
+
+* eDRX and PSM
+* Debugging
+  * QXDM, UEMonitor etc
+
+
+
+* NB-IoT technology is designed such that it can be used in areas beyond the radio coverage of current
+  cellular standards and in devices which must run from battery power for many years. The devices
+  will generally send small amounts of data infrequently; a typical usage scenario might be 100 to
+  200 bytes sent twice per day for battery powered devices. For mains powered devices the limit is not
+  based on battery size, but cost and network bandwidth/resources.
+* The system operation is analogous to SMS in that it is a datagram-oriented, stored-and-forward
+  system, rather than a GPRS-like IP pipe. This is because NB-IoT devices spend most of their time
+  asleep, making possible the required long battery life. The system implements extended DRX cycles
+  for paging, but as this window will be limited to save battery life, the delivery of downlink messages
+  occurs mainly when the system detects that uplink messages have been received from a device
+  (indicating that it is awake). Here a store-and-forward system, an “IoT Platform”, is useful.
+
+
 
 Although most users interact only with the UE which runs its own proprietary firmware stack, NB-IoT also has a complex backend architecture.
 
@@ -256,6 +337,8 @@ Although most users interact only with the UE which runs its own proprietary fir
 ![LTE_classic_architecture](../images/LTE_classic_architecture.png)
 
 The complexities of LTE architecture further increases the chance of performance degradation with respect to 3GPP specifications due to the vast array of setup parameters. It would be beneficial to analyze the performance of multiple UE against various MNO vendors. It is important to note that MNOs may use various vendors in their architecture, and thus this study is mainly focused on the eNodeB vendor which is also UE facing and has the greatest chance of performance degradation due network quality, RF interference and so forth.
+
+* Both UDP socket commands and datagram commands use the IP data transport through the SGi.
 
 ## Performance evaluation
 
@@ -345,6 +428,19 @@ Table: Summary AT Command set for Ublox
 | Set APN              | AT+CGDCONT | Sets the relevant APN for the MNO.                           |
 |                      |            |                                                              |
 
+* SARA-N2 series modules implement a FOTA solution based on CoAP. It is possible to configure the
+  module’s poll timer for when the module checks the FOTA CoAP server for new firmware. When the
+  feature is enabled and a new package is available, the module will automatically download the FOTA
+  update and provide URCs about its progress. The module’s firmware is not updated automatically
+  when the download has completed and so the application must start the upgrade process step.
+* The +UTEST AT command allows the user to set the module in non-signaling (or test) mode, or
+  returns to the signaling (or normal) mode. In test/non-signaling mode, the module switches off the
+  protocol stack for performing single tests which could not be performed during the signaling mode.
+* MO Datagrams sent and received by IoT platform has these commands wrapped internally in a Constrained Application Protocol (CoAP) message and sent over UDP sockets. Once the module accepted a datagram it cannot be removed and will be transmitted to the network as soon as radio conditions permit. The only way to clear the module’s transmit queue is to reboot it. In good radio conditions, the transmission might take a few seconds. In bad radio conditions a transmission opportunity may not occur for minutes, days or weeks but the datagram will be transmitted once radio conditions are good enough. When a MO message is queued, the module will try to send the message to the base station. It will only send the next message once the previous message has been sent. If there is a radio link failure (RLF), the device will re-scan the channel ranges and try to reconnect to a base station. There may be a back off time where the device goes into deep-sleep mode before trying again.
+* An unsolicited result code (URC) is a string message (provided by the DCE) that is not a response to
+  a previous AT command. It can be output, when enabled, at any time to inform the DTE of a specific
+  event or status change.
+
 When it comes to base stations, the user does not have control over the inactivity timer. Release assistance can request the eNB/network to disconnect the modem from Radio Resource Control (RRC) connected mode.
 
 ## Thesis structure {#thesis-struct}
@@ -355,21 +451,328 @@ NB-IoT is introduced to the reader in Chapter \ref{intro}. A literature study re
 
 Several studies provide theoretical models not only for the energy consumption of NB-IoT networks [@Andres-Maldonado2017], but also for their latency and delay bounds [@Feltrin2019], impact of coverage extensions [@Andres-Maldonado2018b], coverage performance [@Adhikary2016], battery lifetimes [@Yeoh2018d],[@Lauridsen2018], (theoretically) optimal configuration strategies [@Feltrin2018] and overall performance for particular verticals [@Soussi2018],[@Beyene2017b].
 
-Only Martinez [@Martinez2019] focuses effort on the adopter and presents an operational and empirical analysis of the technology when it is deployed in a real network (such as Vodafone in the Metropolitan area of Barcelona).
+Only Martinez [@Martinez2019] focuses effort on the adopter and presents an operational and empirical analysis of the technology when it is deployed in a real network (such as Vodafone in the Metropolitan area of Barcelona). Durand [@Thomas2018] compares different LPWANs empirically including NB-IoT.
 
-Despite the unquestionable value of the theoretical models (for example, to understand orders of magnitude or to guess the theoretical upper and lower bounds), an empirical approach provides real insights into the variability that a UE experiences when deployed in real conditions. This work therefore goes in this direction as a complement to Martinez and related works, and it further provides empirical measurements for UEs that are deployed using a real-world NB-IoT network always while taking the perspective of an application developer.
+Despite the unquestionable value of the theoretical models (for example, to understand orders of magnitude or to guess the theoretical upper and lower bounds), an empirical approach provides real insights into the variability that a UE experiences when deployed in real conditions. This work therefore complements Martinez and related works, and it further provides empirical measurements for UEs that are deployed using a real-world NB-IoT network always while taking the perspective of an application developer.
 
-GSM RF equipment testing and performance analysis [@Kasbah2005]
+* GSM RF equipment testing and performance analysis [@Kasbah2005]
+* Analysis of NB-IoT Deployment in LTE Guard-Band [@Ratasuk2017c]
 
-Analysis of NB-IoT Deployment in LTE Guard-Band [@Ratasuk2017c]
+The empirical results of NB-IoT depend on the device used (UE) and underlying vendor architecture of the MNO providing coverage. Thus, 
 
 ## LoRaWAN {#lorawan}
 
+LoRaWAN is a contender for NB-IoT. It lacks bidirectionality and datarate.
+
 ## SigFox {#sigfox}
 
-## Note-worthy non-research contributions {#non-research}
+SigFox is a contender for NB-IoT. It lacks bidirectionality and datarate.
 
-### Ublox Application Dev note
+## NB-IoT {#nblit}
+
+- This section describes NB-IoT in more detail and the setup procedures involved.
+- 3GPP
+- the UE is to a large extent/entirely controlled by the network/eNodeB.
+  - UE must follow NW settings broadcast inside the SIB and allocations for UL/DL data.
+
+## Hardware
+
+* Modem
+* Antenna
+* RX/TX lines
+
+## Setup
+
+* AT+NCONFIG
+  * AUTOCONNECT
+  * CR_0859_SI_AVOID
+  * CR_0354_0338_SCRAMBLING
+* URCs
+* APN
+
+## Network Registration
+
+- 
+- By default the SARA-N2 series modules will automatically try and connect to the network. This
+  feature will read the SIM for the PLMN and attempt to register with the network. The device will use
+  the default APN from the network. The auto-connect feature can be enabled by the +NCONFIG AT
+  command. Reset the module to save these settings to the non-volatile memory.
+- If the application requires more control over the registration process set the SARA-N2 series
+  modules into the manual registration mode. With the auto-connect feature turned off the module is
+  able to manually connect to a specific PLMN and specify an APN.
+- After a RRC connection is made to the base station the module will try and register with the
+  network. If the module IMEI or IMSI is not allowed on the network, the module will disconnect from
+  that base station and continue scanning for other base stations. This can be seen if the <mode>
+  parameter of the +CSCON AT command shows the “1” and then “0” response without +CEREG
+  changing to 1 or 5 means that the module was not able to register on that network.
+  In case the module is registered to the network, the <status> parameter of the +CEREG AT
+  command will be 1 (registered) or 5 (registered & roaming).
+
+## Inactivity Timer and RRC Connection
+
+After network registration or transmitting a data packet, the device usually enters RRC connected (C-DRX) mode for a specified inactivity timeout specified by the network.
+
+- When the module is in RRC connected mode it will be receiving all the base station signaling. The
+  average power consumed in this mode is about 48 mA. If the RRC connection is left for 20 s of
+  inactivity before the RRC is released, then this will consume about 1 mWh @ 3.6V.
+- 48 mA in this mode
+- 20 seconds is about 1mWh @ 3.6V
+- AT+CSCON
+- After a short period, if no messages are being sent from the module, the +CSCON response will be
+  “0” to show the RRC connection has been released by the eNodeB.
+- At the first registration or when the module wakes from the power save mode (PSM), it performs a
+  Random Access CHannel (RACH) procedure to attach to the base station. This establishes a Radio
+  Resource Control (RRC) connection to the base station. Once established only the base station can
+  release this connection. The module cannot drop the RRC connection other than turning off the
+  radio using the AT+CFUN=0 command.
+- The base station has an “inactivity” timer for each module and if there is no activity the base station
+  will send a RRC release message to the module. The module should respond back to the base station
+  with an acknowledgment. The inactivity timer is nominally 20 s.
+- The module will be able to receive and send messages immediately when in connected mode.
+- During a RRC connection, the +CSCON AT command provide the signalling connection status. It is
+  also possible to enable the +CSCON URC.
+
+## Release Assistance
+
+Release assistance requests the eNodeB to release the RRC connection immediately. By avoiding 20 seconds of idle RRC in C-DRX mode, there is a 93% improvement in power consumption for a 200 byte transmission in ECL 1.
+
+[@ubloxAppNote2018]
+
+An example of sending a 200 byte message in ECL 2 with good SNR can include 5 RACH transmission bursts, a Transmission Block Size ~43 bytes, one repetition and taking just over 1 second, consuming 200uWh.
+
+For the same example in bad SNR, the TBS allocated 32 bytes per chunk, with a repetition of 8 and 4. It took 5.5 seconds and consumed 1.07mWh -- fives times as much as before.
+
+- Some applications may not want to wait for the base station’s inactivity timer to expire after 20 s as
+  this wastes power from the battery. In Release-13 the “Release Assistance” feature allows the
+  module to request for the RRC connection to be dropped as soon as the message has been received
+  by the network.
+- The flag is noticed by the MME on the network and sends a message back to the eNodeB base
+  station to drop the RRC connection. The network must support Release Assistance for this feature.
+- After the RRC connection has been released the module then goes in to a period where it could be
+  paging the base station. The timer for this period is called T3324. After T3324 has expired the
+  module goes into Power Save Mode (PSM). See section 11 for further information
+
+
+
+## eDRX and PSM
+
+The NB-IoT protocol allows for power save mode (PSM), and the SARA-N2 series modules also
+support a Deep Sleep mode where the module is running at very low current, ~3 µA. The module
+automatically enters various states depending on the device activity. Here below are listed the
+common activities and the various states it will be in after registration.
+
+* T3324 / T3412 timer values
+
+### T3412
+
+* (GPRS timer 3)
+*  3GPP TS 24.008 [4], figure 10.5.147a and table 10.5.163a.
+
+* Bits 5 to 1 represent the binary coded timer value. Bits 6 to 8 define the timer value unit for the GPRS
+  timer as follows
+* 8 7 6
+  0 0 0 value is incremented in multiples of 10 minutes
+  0 0 1 value is incremented in multiples of 1 hour
+  0 1 0 value is incremented in multiples of 10 hours
+  0 1 1 value is incremented in multiples of 2 seconds
+  1 0 0 value is incremented in multiples of 30 seconds
+  1 0 1 value is incremented in multiples of 1 minute
+  1 1 0 value is incremented in multiples of 320 hours (Note 1)
+  1 1 1 value indicates that the timer is deactivated (Note 2)
+* Example: "01000111" = 7 x10 hours = 70 hours
+* NOTE 1: This timer value unit is only applicable to the T3312 extended value IE and the T3412
+  extended value IE (see 3GPP TS 24.301 [5]). If it is received in an integrity protected message, the
+  value shall be interpreted as multiples of 320 hours. Otherwise the value shall be interpreted as
+  multiples of 1 hour.
+* NOTE 2: This timer value unit is not applicable to the T3412 extended value IE. If this timer value
+  is received, the T3412 extended value IE shall be considered as not included in the message (see
+  3GPP TS 24.301 [5]).
+
+### T3324 timer
+
+* Bits 5 to 1 represent the binary coded timer value. Bits 6 to 8 define the timer value unit for the GPRS
+  timer as follows
+* 8 7 6
+  0 0 0 value is incremented in multiples of 2 seconds
+  0 0 1 value is incremented in multiples of 1 minute
+  0 1 0 value is incremented in multiples of deci-hours
+  1 1 1 value indicates that the timer is deactivated
+* Example: "00100100" = 4 x1 minute = 4 minutes
+
+## System Information Blocks (SIB) {#sib}
+
+The SIB describes the method of attachment and what repetitions the UE must use to first transmit
+to the base station. Once a RRC connection is made, the base station then uses the perceived SNR
+to configure the uplink allocations the UE will use to transmit the messages.
+Because allocations for each uplink/downlink are dynamically set by the base station it is difficult to
+calculate the power consumption of a single message deployed in the field.
+
+* example SIB
+
+## Repetitions (ECL)
+
+* ECL
+* Module interference increases the number of repetitions
+* Minimize ECL 2.
+* Network operators should provide enough coverage to allow devices to be mostly in coverage class 0
+  or 1. Depending on the NB-IoT deployment, the network could have large areas, or devices located in
+  deep locations which unfortunately mean they operate in Coverage Class 2.
+* Coverage Class 2 uses high repetitions for the RACH process and also higher coding schemes when
+  transmitting data and therefore fundamentally consumes more power than it would in the other
+  coverage classes.
+
+* 
+
+## Behavior
+
+When the module has started the network search process, poll the +NUESTATS AT command and
+view the Rx and Tx Time:
+
+* If Rx Time is increasing then the module is trying to scan for a base station.
+* If Tx Time is increasing then the module has found a base station and is trying to communicate
+  with it.
+* If the Total Power and Signal Power values are different than -32767 (invalid) then the module has
+  read the MIB and SIB signals from the base station.
+* Once an RRC connection is made, the +CSCON read command will return 1. Turn on the +CSCON
+  URC which will be output at each RRC connection change.
+
+* 
+
+## Available Metrics
+
+### RSRP
+
+It is the power of the wanted part of the receive signal, the NB-IoT part.
+
+### Total power
+
+It is the radio signal strength within the receive bandwidth (both expressed in 10ths
+of a decibel). From this the signal to noise ratio can be calculated.
+
+### Transmit power
+
+* It is the RF power output from the module. It may be a low number if the
+  received signal strength is good (and hence the module assumes that the base station is close
+  by).
+
+*  Ideally the module
+  should consume 230 mA for +23 dBm.
+
+### TX, RX Time
+
+TX Time is the duration for which the module’s transmitter has been switched on.
+
+RX Time is the duration for which the module’s receiver has been monitored for downlink
+activity (both expressed in milliseconds since the last reboot). Together these can be used to
+assess the time the module spends in each state and hence estimate the power consumed by
+the module.
+
+When the module first tries to register with the network, the Tx time will be zero as it will not have
+instantly found a base station. The Rx time will increase to show it is scanning for a base station.
+Once a base station is found it is possible to see that it is attempting to transmit to the base station
+as the Tx time will start to increase. If the base station does not respond to the module’s Tx, then
+the +CSCON: 1 URC will not be issued.
+
+### ECL 
+
+It is equivalent to "PRACH coverage enhancement level" defined in 3GPP 36.321 [3] sub
+clause 5.1
+
+### SNR
+
+Last SNR value.
+
+## notes
+
+[@Martinez2019]
+
+Complexities
+
+- signalling, dynamic adjustments triggered by network conditions, timing
+- competitive in terms of NB-IoT consumption due to 3GPP efforts to be similar to LPWANs
+
+Proprietary spectrum vs ISM bands?
+
+- ISM external interference and share
+- otherwise high unpredictability in device behavior
+
+Reliability?
+
+- Delivery guarantee
+
+Delay Tolerance
+
+- high variability in delivery time. Deal-breaker for some applications.
+
+Data rate
+
+- sporadic high bandwidth
+
+Ownership model
+
+- connectivity service, contract, charged per byte
+- coverage depends on deployed infrastructure
+
+## Latency {#latency}
+
+* < 10 seconds
+* 
+
+## Power Consumption {#power}
+
+* ~ 10 years battery life
+
+Low power consumption is vital for battery longevity.
+
+* PCB layout, antenna matching and location will have an effect to the overall interference received by
+  the module.
+* PSM and eDRX
+
+## Data usage
+
+* The module has a limited dynamic message queue size. For IoT applications, the message size
+  should be of the order of tens of bytes. UDP socket commands limit their payload size to 512 bytes.
+* There is no indication when the UDP data has been sent.
+* Downlink data from the cloud server must also be 512 bytes or less, because otherwise the
+  messages will be lost.
+* The module has an internal message buffer. If the module is unable to send the messages to the
+  network before this buffer is full, because the application is queueing quicker than it can send them,
+  then the UE will return ERROR for the +NSOST/+NSOSTF commands.
+* If a message cannot be sent because of communication issues between the module and eNB, the
+  module will attempt to send the message a second time. If this fails, the message will be dropped.
+  As +NSOST/+NSOSTF messages are UDP, there is no indication the message has been dropped.
+
+## Application architechture
+
+* ![1569744612309](../images/1569744612309.png)
+* At the far left the customer’s device contains a u-blox NB-IoT module that communicates over the
+  radio network with a cell tower that supports the NB-IoT network. The cellular network links the cell
+  tower with an IoT platform. This IoT platform stores uplink datagrams from the NB-IoT module. The
+  customer server communicates with the IoT platform to retrieve uplink datagrams and to send
+  downlink datagrams to the NB-IoT. The IoT platform holds downlink datagrams until the NB-IoT
+  module is awake to receive them.
+* The SARA-N2 series modules implement basic UDP socket commands for directly communicating
+  with an external service. With these commands the customer can build a simple IoT platform. With
+  an external processor other IoT layers could be implemented to aid this system design. SARA-N2
+  series modules support AT commands for general CoAP messaging. This allows the customer to not
+  require CoAP in their external processor.
+* Many developers coming from a GPRS type background may expect an always on type connection,
+  normally using TCP. NB-IoT is not session oriented, latencies are much higher and the device will
+  enter a power save mode. This is very different to always-on modems with “chatty” protocols like
+  TCP.
+* UDP sockets do not create connections to servers; UDP is a connection-less datagram protocol.
+  Because of this MO messages may not be received by the server and lost. The application should
+  take this in to consideration and provide its own acknowledgements between the UE and server.
+  CoAP is one protocol which can be used on top of UDP to provide this.
+* For resolving the issue of sending MT messages to a very sleepy module, when a MO message is
+  sent to the cloud server, the cloud server will know the module is active and connected to the
+  network. As seen in section 7 the connection is alive until the RRC connection is released by the
+  network and then still contactable when paging inside the T3324 period. If there are MT messages
+  to be sent to the module, the cloud server should send this message in this time.
+
+## Use cases
+
+Use cases suitable for NB-IoT
 
 ## Martinez
 
@@ -380,6 +783,9 @@ Martinez et al. [@Martinez2019] did empirical tests within the Vodafone Network 
 | **Mode 1** | Inactivity timer = 20s (network default)<br/>T3324 = 0s (disabled)<br/>C-DRX = 2.048s (network default) |
 | **Mode 2** | Inactivity timer = Immediate Release<br/>T3324 = 8s<br/>I-DRX = 2.56s<br/>eDRX/PTW = Disabled |
 | **Mode 3** | Inactivity timer = Immediate Release<br/>T3324 = 0s (disabled) |
+
+* performance bounds
+* empirical
 
 ## Notes
 
@@ -419,9 +825,10 @@ Table: UE, NW and main metric comparisons
 | Ericsson   | Nordic           | Data usage       |                   |              |
 | Huawei     | SimCom           |                  |                   |              |
 
-## Available Metrics
+## Optimized Setup
 
-### Reported TX Time
+* AT+COPS
+* Release / eDRX setup
 
 ## Measured Metrics
 
@@ -472,49 +879,49 @@ Due to the large dataset and requiring a reasonable means of visualization, we c
 
 \begin{minipage}{\linewidth}
 \begin{center}
-\includegraphics[width=.6\linewidth]{../../code/tests/img2/histogram_counts.pdf}
+\includegraphics[width=.6\linewidth]{../../code/tests/.old/img2/histogram_counts.pdf}
 \captionof{figure}{Example python histogram of a univariate latency distribution showing counts}
 \label{fig:}
 \end{center}
 \end{minipage}
 
-[](../../code/tests/img2/histogram_counts.png)
+[](../../code/tests/.old/img2/histogram_counts.png)
 
 Histogram counts vary among various datasets when their sizes differ, so it would be a good idea to normalize it such that the area under the graph makes 1.0. The probability of the discrete data can also be estimated in a continuous probability density function (PDF) with the kernel density estimation.
 
 \begin{minipage}{\linewidth}
 \begin{center}
-\includegraphics[width=.6\linewidth]{../../code/tests/img2/probability_density_function_seaborn.pdf}
+\includegraphics[width=.6\linewidth]{../../code/tests/.old/img2/probability_density_function_seaborn.pdf}
 \captionof{figure}{Example python histogram of a univariate latency distribution with a normalized density and a gaussian kernel density estimate}
 \label{fig:}
 \end{center}
 \end{minipage}
 
-[](../../code/tests/img2/probability_density_function_seaborn.png)
+[](../../code/tests/.old/img2/probability_density_function_seaborn.png)
 
 There are also various types of kernel density estimation, as can be seen here.
 
 \begin{minipage}{\linewidth}
 \begin{center}
-\includegraphics[width=.6\linewidth]{../../code/tests/img2/probability_density_function.pdf}
+\includegraphics[width=.6\linewidth]{../../code/tests/.old/img2/probability_density_function.pdf}
 \captionof{figure}{Various types of kernel density estimation (KDE)}
 \label{fig:}
 \end{center}
 \end{minipage}
 
-[](../../code/tests/img2/probability_density_function.png)
+[](../../code/tests/.old/img2/probability_density_function.png)
 
 If the histogram bin values are normalized by dividing by the bin count, adding the values makes 1 instead of integrating along the x-axis. Similarly, multiplying the PDF by its x-axis gives the following result. Although all the plotted values are now truly under 1, the KDE is shifted and doesn't seem usable.  The integration to 1 visualization typical in statistics has to be used.
 
 \begin{minipage}{\linewidth}
 \begin{center}
-\includegraphics[width=.6\linewidth]{../../code/tests/img2/probability_mass_function.pdf}
+\includegraphics[width=.6\linewidth]{../../code/tests/.old/img2/probability_mass_function.pdf}
 \captionof{figure}{Various types of kernel density estimation (KDE) with histogram and KDE normalized in attempted probability mass function}
 \label{fig:}
 \end{center}
 \end{minipage}
 
-[](../../code/tests/img2/probability_mass_function.png)
+[](../../code/tests/.old/img2/probability_mass_function.png)
 
 In fact, good practice would be viewing the data as is and not trying to analyze it from what is essentially an entirely new perspective. Thus, the data will be viewed as 2D plotted points and histograms. Colour will be used to group the data according to attenuation and packet size.
 
@@ -544,9 +951,17 @@ Instead of finding a single mean for all the entries and associated files, at le
 
 [](../../../masters/code/tests/plots/dpoints.png)
 
+## Visualization
+
+Since it appears that ECL is the ultimate factor that should influence latency and energy usage, it is the metric used for battery life estimation as well.
+
+
+
 ## Network metrics
 
 ### ECL, Cell ID, EARFCN, PCI
+
+The Cell ID in this response is the physical network cell ID.
 
 \begin{minipage}{\linewidth}
 \begin{center}
@@ -612,12 +1027,17 @@ Tests were completed in good, mid cell and cell edge RF conditions.
 
 ### MCL
 
+Once the module has an RRC connection, then the ECL, RSRP, RSRQ values allow to understand the
+RF link budget between the module and base station.
+
 |                | MCL     |
 | -------------- | ------- |
 | MTN-ZTE        | 157 dBm |
 | Vodacom-Nokia  | 137 dBm |
 | MTN-Ericsson   |         |
 | Vodacom-Huawei |         |
+
+
 
 ### RSSI vs RSRP
 
@@ -1078,7 +1498,16 @@ It is evident that on all attenuation levels there is a high degree of variation
 
 ## Data usage
 
+Considering the variance in figure \ref{fig:udpsize}, taking the mean will make for a simpler representation per UDP size.
+
 ### TX, RX bytes
+
+It displays the BLER and total number of bytes transmitted and received by the RLC Layer and
+Physical Layer.
+
+Using this statistic it is possible to see if the module is having difficulty in communicating with the
+base station. Even if the module is in good coverage, ECL 0, there still might be issues causing the
+messages not to be sent or received.
 
 **TX bytes**
 
@@ -1142,7 +1571,10 @@ In general packet sizes are up to 200 bytes.
 
 Attenuation zones do not affect packet size Quectel-MTN and Ublox-Vodacom pairs are essentially the only outliers above 300 bytes already. All outliers are as a result of UDP packet tests and ECL does not seem to affect packet size.
 
-### ACKs/NACKs
+### ACK to NACK Ratio
+
+Check the Ack/Nak ratio to see a general view of the link
+quality.
 
 \begin{minipage}{\linewidth}
 \begin{center}
@@ -1162,6 +1594,13 @@ up to 30 required, and one outlier at 80.
 
 ### Throughput
 
+It displays the throughput measurement for the RLC and physical layers.
+
+These values provide an indication of the efficiency of the radio link. With bad BLER, these values will
+be low. With very good BLER, these values will be near the theoretical throughput of NB-IoT – and
+because of this, may not change over time, as it does not take into account the time to wake up,
+scan for base station, etc. This is simply over the protocol stack itself.
+
 ![Signal_power_RLC_DL_plot](../../code/tests/plotterk/Signal_power_RLC_DL_plot.png)
 
 ![Signal_power_RLC_UL_plot](../../code/tests/plotterk/Signal_power_RLC_UL_plot.png)
@@ -1170,15 +1609,9 @@ up to 30 required, and one outlier at 80.
 
 ![Signal_power_MAC_UL_plot](../../code/tests/plotterk/Signal_power_MAC_UL_plot.png)
 
-## Estimates
+## Battery life Estimation
 
-### Battery life
-
-### Data billing
-
-Considering the variance in figure \ref{fig:udpsize}, taking the mean will make for a simpler representation per UDP size.
-
-
+### 
 
 \newpage
 
@@ -1206,7 +1639,7 @@ Table: Comparing means of UE-MNO pairs
 |  |  |  |  |  |
 | **Estimates** |  |  |  |  |
 | Battery Lifetime |  |  |  |  |
-| Data Billing |  |  |  |  |
+|  |  |  |  |  |
 
 Table: Comparing means of MNOs
 
@@ -1242,7 +1675,9 @@ Fix NW config.
 
 Avoid -120 dBm - -130 dBm region
 
+## Use Cases
 
+Use cases suitable for NB-IoT considering results
 
 # Conclusion {#conclusion}
 
@@ -1302,7 +1737,7 @@ vendor.
 
 ## Why is NB-IoT chosen?
 
-Due to the complexities of integrating 3GPP, LTE architecture, large MNOs and vendors, radio access networks and customers
+Due to the complexities of integrating 3GPP, LTE architecture, large MNOs and vendors, radio access networks and customers.
 
 There is a great deal of uncertainty
 
@@ -1312,22 +1747,11 @@ throughput
 
 only caveat is battery life
 
-## Performance summary
 
-|              | MCL    | Scalability | Battery life | Throughput |
-| ------------ | ------ | ----------- | ------------ | ---------- |
-| NB-IoT       | 164dBm | >50k        |              |            |
-| GPRS         | 148dBm |             |              |            |
-| LoRaWAN SF12 | 157dBm |             |              |            |
-| SigFox       | 160dBm | >50k        |              |            |
 
-| Technology   | MCL  | Scalability | Battery life | Throughput |
-| ------------ | ---- | ----------- | ------------ | ---------- |
-| NB-IoT       | X    | X           |              | X          |
-| GPRS         |      | X           |              | X          |
-| LoRaWAN SF7  |      |             | X            |            |
-| LoRaWAN SF12 | X    |             |              |            |
-| SigFox       | X    | X           |              |            |
+# Appendix A {-#appendixA}
+
+
 
 # References
 

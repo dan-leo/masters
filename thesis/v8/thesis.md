@@ -237,7 +237,7 @@ LPWANs enable a vast array of use cases.
 | NB-IoT       | 164dBm | >50k        |              |            |
 | GPRS         | 148dBm |             |              |            |
 | LoRaWAN SF12 | 157dBm |             |              |            |
-| SigFox       | 160dBm | >50k        |              |            |
+| SigFox       | `dBm   | >50k        |              |            |
 
 | Technology   | MCL  | Scalability | Battery life | Throughput |
 | ------------ | ---- | ----------- | ------------ | ---------- |
@@ -247,7 +247,32 @@ LPWANs enable a vast array of use cases.
 | LoRaWAN SF12 | X    |             |              |            |
 | SigFox       | X    | X           |              |            |
 
-## Use cases {#usecases}
+* Competition in the LPWAN space and regional momentum will ensure that the various technologies will continue to develop and improve to support more features and expand the network coverage. 
+* We expect selected uptake of each technology in specific application areas and our results show that each technology is better suited to specific applications and their concomitant requirements. Sigfox, NB-IoT, and LoraWAN SF12 performed equally well for applications where MCL (range) is paramount, with LoraWAN SF7 doing slightly worse. In applcitions where the main consideration is scalability, Sigfox, and NB-IoT substantially outperformed the LoraWAN varieties. However, if battery life is the most important consideration, LoraWAN SF7 seems to have the edge, with NB-IoT (the default setup we tested) performing worse. NB-IoT performed the best for uplink throughput, with LoraWAN SF7 coming in second. For all the other two-related metrics evaluated, namely downlink throughput and firmware upgradability, NB-IoT performs substantially better than the other technologies.
+* Poor for asset tracking and utility metering.
+* Average for smart bicyles, parking, garbage bins, agriculture and intelligent buildings.
+* Good for pet tracking, POS, healthcare.
+* NB-IoT outperforms SigFox and LoRaWAN in UL/DL throughput, scalability, MCL range and FoTA updates. It is superseded by LoRaWAN in battery life for SF7.
+
+## Metrics {#metrics_intro}
+
+* **MCL**: For IoT devices used in extended coverage situations,
+  such as deep-indoor devices or remote locations, we recommend either Sigfox or NB-IoT, as they offer a maximum MCL of more than 158 dB. IoT devices for general use would benefit from the large-scale deployment of the GPRS network, which provides excellent coverage because of its legacy infrastructure. It is clear that the extra overhead available in Sigfox, LoRaWAN, and NB-IoT allows for better indoor coverage than GPRS, which means that the LPWAN devices can be used in less than optimal operating conditions. Measured MCL correlates with theoretical values.
+* **Power consumption**: In applications where device battery life is
+  a crucial factor we recommend, either LoRaWAN or Sigfox, because they are completely asynchronous. We found that the battery life of LoRaWAN SF 7 was five times that of LoRaWAN SF 12 and nearly 25 times that of Sigfox. This is mainly due to the extremely long time-on-air of LoRaWAN SF 12 and Sigfox. If NB- IoT worked with the mobile network operators to reduce its RRC- idle phase, it could develop a minimal power consumption to compare with that of LoRaWAN and Sigfox.
+  * It is clear that LoRaWAN SF7 is the most power-efficient, due to the short transmission burst. NB-IoT displays the worst power-consumption, due to the extended RRC-idle state. This can be reduced using Release Assistance as in Section [@release_a]
+* **Throughput**: As throughput differs greatly between the four technologies, comparisons should rather be made in either the licensed (NB-IoT and GPRS) or unlicensed (Sigfox and LoRaWAN) spectrum categories. Applications that require huge amounts of data to be transmitted, such as real-time vehicle fleet monitoring, we recommend GPRS and NB-IoT as they are not duty cycle limited. The choice of GPRS or NB-IoT will be based on the battery life requirements of the IoT device, with NB-IoT having the advantage. In the case of extremely low-throughput applications, such as water meters, power meters, and weather stations, we recommend Sigfox, as it offers a scalable solution with no base station costs involved. Although it limits the 12 byte throughput per 24 h to 140 messages, this is more than the 20 messages offered by LoRaWAN SF12 (TTN).
+  * As NB-IoT operates in the licensed spectrum, there are no
+    throughput restrictions, other than the data-rate restriction. We measured the uplink and downlink data rates in different signal quality environments (distances from the gateway) by querying the modem. The measured downlink rate varied from 2250 to 14,193 bps. We could find no clear correlation between the downlink data rate and the signal quality environment.
+* **Scalability**: 
+  * Lower (sub-500 devices per gateway) scalability of LoRaWAN per base station compared to NB-IoT and GPRS. This low scalability is due to the limited number of channels and the lack of any scheduling between devices. To compensate for the low scalability, an increase in spatially diverse base stations would allow packets to be received by multiple base stations at varying received power levels.
+  * This simulation showed that with 55,000 devices transmitting the base station would reach the 270 simultaneously transmitting devices that Sigfox claims is possible while still ensuring a 99.9% PDR.
+* **Down link latency**: In applications where downlink latency is a
+  critical component, only GPRS will suffice, as it is the only technology in this study that requires constant paging between the base station and the end device. 
+* **Down link throughput**: Any applications requiring bi-directional communication of more than 120 bytes per 24 h, should use NB- IoT or GPRS, as Sigfox and LoRaWAN are limited by the duty- cycle limitations of the base station. 
+* **FoTa**: GPRS and NB-IoT are able to offer FOTA upgrades to IoT devices, as Sigfox ha s limited bandwidth. This feature is supported by LoRaWAN, through the fragmentation of large payloads [22].
+
+## Use cases {#usecases_intro}
 
 - Public Safety
 - Agriculture
@@ -255,6 +280,8 @@ LPWANs enable a vast array of use cases.
 - Actuator Control
 - Real-time Monitoring
 - Asset Tracking
+
+IoT has use case requirements in UL/DL throughput, battery longevity and scalability.
 
 The most popular use case in IoT is smart metering.
 
@@ -313,6 +340,7 @@ Compared to LTE
 * eDRX and PSM
 * Debugging
   * QXDM, UEMonitor etc
+  * [@ubloxAppNote2018]
 
 
 
@@ -468,12 +496,45 @@ LoRaWAN is a contender for NB-IoT. It lacks bidirectionality and datarate.
 
 SigFox is a contender for NB-IoT. It lacks bidirectionality and datarate.
 
-## NB-IoT {#nblit}
+## NB-IoT {#nbiot_lit}
 
 - This section describes NB-IoT in more detail and the setup procedures involved.
 - 3GPP
 - the UE is to a large extent/entirely controlled by the network/eNodeB.
   - UE must follow NW settings broadcast inside the SIB and allocations for UL/DL data.
+
+## Standing/Position
+
+[@Martinez2019]
+
+NB-IoT has proven to be competitive in terms of energy consumption,
+
+Complexities
+
+- signalling, dynamic adjustments triggered by network conditions, timing
+- competitive in terms of NB-IoT consumption due to 3GPP efforts to be similar to LPWANs
+
+Proprietary spectrum vs ISM bands?
+
+- ISM external interference and share
+- otherwise high unpredictability in device behavior
+
+Reliability?
+
+- Delivery guarantee
+
+Delay Tolerance
+
+- high variability in delivery time. Deal-breaker for some applications.
+
+Data rate
+
+- sporadic high bandwidth
+
+Ownership model
+
+- connectivity service, contract, charged per byte
+- coverage depends on deployed infrastructure
 
 ## Hardware
 
@@ -492,7 +553,6 @@ SigFox is a contender for NB-IoT. It lacks bidirectionality and datarate.
 
 ## Network Registration
 
-- 
 - By default the SARA-N2 series modules will automatically try and connect to the network. This
   feature will read the SIM for the PLMN and attempt to register with the network. The device will use
   the default APN from the network. The auto-connect feature can be enabled by the +NCONFIG AT
@@ -507,8 +567,9 @@ SigFox is a contender for NB-IoT. It lacks bidirectionality and datarate.
   changing to 1 or 5 means that the module was not able to register on that network.
   In case the module is registered to the network, the <status> parameter of the +CEREG AT
   command will be 1 (registered) or 5 (registered & roaming).
+- See [@ubloxAppNote2018]] for a connection status compatibility matrix.
 
-## Inactivity Timer and RRC Connection
+## RRC Connection and Inactivity Timer
 
 After network registration or transmitting a data packet, the device usually enters RRC connected (C-DRX) mode for a specified inactivity timeout specified by the network.
 
@@ -531,8 +592,17 @@ After network registration or transmitting a data packet, the device usually ent
 - The module will be able to receive and send messages immediately when in connected mode.
 - During a RRC connection, the +CSCON AT command provide the signalling connection status. It is
   also possible to enable the +CSCON URC.
+- When a MO message is sent from the module, the module must first create a RRC connection if
+  there is not already established with the base station. This status can be checked using the
+  AT+CSCON command.
+  To check the signalling connection status issue the +CSCON read command. The second parameter
+  of the information text response (+CSCON: <n>,<state>) provides the interested information:
+  * 0: idle mode (no RRC connection)
+  * 1: connected mode (RRC connection)
+- To configure a URC for this command, issue the AT+CSCON=1 command. A URC will be issued at
+  each RRC connection status change. 
 
-## Release Assistance
+## Release Assistance {#release_a}
 
 Release assistance requests the eNodeB to release the RRC connection immediately. By avoiding 20 seconds of idle RRC in C-DRX mode, there is a 93% improvement in power consumption for a 200 byte transmission in ECL 1.
 
@@ -554,7 +624,7 @@ For the same example in bad SNR, the TBS allocated 32 bytes per chunk, with a re
 
 
 
-## eDRX and PSM
+## eDRX, PSM, Active and PTAU
 
 The NB-IoT protocol allows for power save mode (PSM), and the SARA-N2 series modules also
 support a Deep Sleep mode where the module is running at very low current, ~3 µA. The module
@@ -625,6 +695,22 @@ calculate the power consumption of a single message deployed in the field.
 
 ## Behavior
 
+* The application can monitor the status of the module’s connection, registration and PSM state by
+  polling or configuring URCs. By monitoring the module status the application can behave more
+  efficiently, depending on the application type. For example, the application may want to know when
+  the module goes into Power Save Mode (PSM).
+
+Register the module to the NB-IoT network before to send or receive any messages. Without being
+registered the module will not be able to send or receive any messages.
+To check the network registration status issue the +CEREG read command. The second parameter
+of the information text response (+CEREG: <mode>,<state>) provides the interested information
+* 0: not registered, not registering
+* 1: registered
+* 2: not registered, but currently in the process to
+* 3: registration denied. The application should have a re-try mechanism which does not simply try registration immediately, but has some back-off process
+* 4: unknown
+* 5: registered, roaming
+
 When the module has started the network search process, poll the +NUESTATS AT command and
 view the Rx and Tx Time:
 
@@ -636,9 +722,82 @@ view the Rx and Tx Time:
 * Once an RRC connection is made, the +CSCON read command will return 1. Turn on the +CSCON
   URC which will be output at each RRC connection change.
 
-* 
+
+
+If the SIM used is an international SIM (roaming SIM) then the registration process can take many
+minutes for the first time. Once the module is registered on that network the PLMN should be
+stored in the SIM so that registration is quicker next time. The application can tell if it is using
+roaming SIM by the state being “5”.
+
+* The +CEREG URC can be enabled to provide the network registration status. Depending on the
+  <mode> parameter it is possible to configure the interested URC parameters (i.e. <mode>=4 or 5 to
+  see the provided network timers). See SARA-N2 AT Commands Manual [2] for more details.
+* Properly setting the +CEREG AT command (<modem>=3, 4 or 5) it is possible to see the
+  registration EMM cause value. These values are described in the 3GPP TS 24.008 [4]. Typical
+  causes:
+  * #5 IMEI not accepted
+  * #11 PLMN not allowed
+  * #12 Location Area not allowed
+  * #13 Roaming not allowed in this location area
+  * #22 Congestion
+
+## Data transmission
+
+The SARA-N2 series modules are able to send raw data through UDP sockets to an IP address. The
+data sent over the socket AT commands is not wrapped in any other layer, and the data provided is
+the data that is sent.
+
+The Constrained Application Protocol (CoAP) is a datagram-based client/server application protocol
+for devices on the constrained network (e.g. low overhead, low-power), designed to easily translate
+to HTTP for simplified integration with the web. CoAP clients can use the GET, PUT, POST and
+DELETE methods using requests and responses with a CoAP server.
+
+The usage of the Non-IP method during the sending or receiving of messages saves the overhead of
+needing to send a UDP IP header.
+
+See [@ubloxAppNote2018] for an Application example.
+
+### Ping
+
+Issue the +NPING AT command to check if the module is able to send and receive data.
+Check to see if the network can communicate to the internet, or it is needed another accessible
+server’s IP address to ping.
+To ping Google’s DNS server:
+AT+NPING="8.8.8.8"
+To ping OpenDNS DNS server:
+AT+NPING="208.67.222.222"
+The information text response to the +NPING AT command will be issued after a few seconds. If the
+information text response is +NPINGERR: 1, the ping has timed out.
+☞ The first ping might fail because it can take a few seconds to connect to the base station. Use
+the +CSCON URC to show when the module is connected.
+
+### Echo
+
+For a more advanced check on sending data to an external server, send data to the u-blox echo
+server at echo.u-blox.com.
+☞ Because there is no DNS lookup function in the SARA-N2 module series, use the IP address
+server which is 195.34.89.241.
+Command Response Description
+AT+NSOCR="DGRAM",17,10000 0
+OK
+Create a UDP socket.
+AT+NSOST=0,"195.34.89.241",7,5,"0102
+030405"
+0,5
+OK
+Send data on socket 0.
++NSONMI: 0,5
+Receive data on socket 0.
+AT+NSORF=0,5 +NSORF: 0,"195.34.89.241",7,5
+,"0102030405",0
+OK
+Request data from socket 0.
+Echo’d data received
 
 ## Available Metrics
+
+When the module is synchronized to the base station and is receiving the signaling the +NUESTATS AT command is able to describe the radio, cell, BLER and throughput statistics.
+The most useful statistic is the "RADIO" type.
 
 ### RSRP
 
@@ -682,37 +841,6 @@ clause 5.1
 
 Last SNR value.
 
-## notes
-
-[@Martinez2019]
-
-Complexities
-
-- signalling, dynamic adjustments triggered by network conditions, timing
-- competitive in terms of NB-IoT consumption due to 3GPP efforts to be similar to LPWANs
-
-Proprietary spectrum vs ISM bands?
-
-- ISM external interference and share
-- otherwise high unpredictability in device behavior
-
-Reliability?
-
-- Delivery guarantee
-
-Delay Tolerance
-
-- high variability in delivery time. Deal-breaker for some applications.
-
-Data rate
-
-- sporadic high bandwidth
-
-Ownership model
-
-- connectivity service, contract, charged per byte
-- coverage depends on deployed infrastructure
-
 ## Latency {#latency}
 
 * < 10 seconds
@@ -727,8 +855,10 @@ Low power consumption is vital for battery longevity.
 * PCB layout, antenna matching and location will have an effect to the overall interference received by
   the module.
 * PSM and eDRX
+* On the other hand, although the average power is comparable, peaks in transmission of LoRaWAN’s radio are around 40 mA, while in NB-IoT they reach 220 mA. This causes additional stress on the battery, which has to be managed with care.
+* 
 
-## Data usage
+## Data Usage
 
 * The module has a limited dynamic message queue size. For IoT applications, the message size
   should be of the order of tens of bytes. UDP socket commands limit their payload size to 512 bytes.
@@ -741,8 +871,11 @@ Low power consumption is vital for battery longevity.
 * If a message cannot be sent because of communication issues between the module and eNB, the
   module will attempt to send the message a second time. If this fails, the message will be dropped.
   As +NSOST/+NSOSTF messages are UDP, there is no indication the message has been dropped.
+* The UDP header is about 48-60 bytes in length, and so an
+  application sending 100 bytes will actually send about 160 bytes. For devices in the extreme
+  coverage class 2, this can be quite costly.
 
-## Application architechture
+## Application Architecture
 
 * ![1569744612309](../images/1569744612309.png)
 * At the far left the customer’s device contains a u-blox NB-IoT module that communicates over the

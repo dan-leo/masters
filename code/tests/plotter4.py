@@ -17,7 +17,6 @@ ccui = ['tab:cyan', 'tab:green', 'tab:blue', 'tab:purple', 'tab:orange', 'tab:br
 cc = ['tab:orange', 'tab:green', 'tab:red', 'tab:purple', 'tab:blue', 'tab:brown', 'tab:cyan']
 testl = ['1-16 B', '64-128 B', '256-512 B', 'Echo', 'COPS', 'eDRX', 'PTAU']
 uenwl = ['Ublox-MTN', 'Quectel-MTN', 'Ublox-Vodacom', 'Quectel-Vodacom']
-nwl = ['MTN-ZTE', 'Vodacom-Nokia']
 attl = [a for a in p.attdt()]
 
 def lc(color, amount=0.4):
@@ -44,9 +43,10 @@ def lighten_color(color, amount):
 
 
 def plot(mdb, kx, ky, xlabel='', ylabel='', scale=[1,1], invert=[True,False], colour=cc, folder='', K=0, numerator=[None, None], testl=testl, 
-        joburg=False, loc='upper right', thresh=None, bbox=(1.05, 1.12)):
+        joburg=False, log=False, loc='upper right', thresh=None, bbox=(1.05, 1.12)):
     global hytest, hyuenw, hyatt, hxtest, hxuenw, hxatt, kkx, kky, xxlabel, yylabel, ffolder, outcounts, ally
     outcounts = acounts = oiutcounts = 0
+    nwl = ['MTN-Ericsson', 'Vodacom-Huawei'] if joburg else ['MTN-ZTE', 'Vodacom-Nokia']
     hytest, hyuenw, hyatt = [], [], []
     hxtest, hxuenw, hxatt = [], [], []
     ecl_list = []
@@ -103,14 +103,18 @@ def plot(mdb, kx, ky, xlabel='', ylabel='', scale=[1,1], invert=[True,False], co
                                 # main
                                 rx = j.threshold(atk, kx)
                                 ry = j.threshold(atk, ky, thresh)
-                                for si in range(2):
+                                sirange = 1 if log else 2
+                                for si in range(sirange):
                                     if si:
                                         ax = axo
                                         rx = np.invert(rx) if invert[0] else rx==rx
                                         ry = np.invert(ry) if invert[1] else ry==ry
                                     else:
                                         ax = axp
-                                    r = rx * ry
+                                    if log:
+                                        r = atk[kx] == atk[kx]
+                                    else:
+                                        r = rx * ry
                                     x = atk[kx][r]/scale[0]
                                     y = atk[ky][r]/scale[1]
                                     if numerator[0]:
@@ -202,6 +206,10 @@ def plot(mdb, kx, ky, xlabel='', ylabel='', scale=[1,1], invert=[True,False], co
                         # except KeyboardInterrupt as e:
                             pass
 
+    for i, ax in enumerate([ax for row in axp for ax in row]):
+        if log:
+            ax.set_yscale('log')
+
     for si in range(2):
         ax = axo if si else axp
         ax[1][2].boxplot(ally)
@@ -242,18 +250,19 @@ def plot(mdb, kx, ky, xlabel='', ylabel='', scale=[1,1], invert=[True,False], co
         ax[2][0].set_xlabel(xlabel)
         ax[2][1].set_xlabel(xlabel)
         ax[2][2].set_xlabel(xlabel)
-        ax[0][0].legend(loc=loc, bbox_to_anchor=bbox) # 'best' (1.05, 1.12)
-        ax[0][1].legend(loc=loc, bbox_to_anchor=bbox) # 'best'
-        ax[0][2].legend(loc=loc, bbox_to_anchor=bbox) # 'best'
-        ax[1][0].set_zorder(1)
-        ax[2][0].set_zorder(1)
-        if joburg:
-            ax[1][1].legend(loc=loc) #, bbox_to_anchor=(1.35, 1.12) if not si else (1.35, 1.04)) # 'best'
-            ax[2][1].legend(loc=loc) #, bbox_to_anchor=(1.35, 1.12) if not si else (1.35, 1.04)) # 'best'
-        else:
-            ax[1][0].legend(loc=loc, bbox_to_anchor=(1.35, 1.12) if not si else (1.35, 1.04)) # 'best'
-            ax[2][0].legend(loc=loc, bbox_to_anchor=(1.35, 1.12) if not si else (1.35, 1.04)) # 'best'
-        ax[2][2].legend(loc=loc, bbox_to_anchor=bbox if not si else (bbox[0], 1.04)) # 'best'
+        if (log and not si) or (not log):
+            ax[0][0].legend(loc=loc, bbox_to_anchor=bbox) # 'best' (1.05, 1.12)
+            ax[0][1].legend(loc=loc, bbox_to_anchor=bbox) # 'best'
+            ax[0][2].legend(loc=loc, bbox_to_anchor=bbox) # 'best'
+            ax[1][0].set_zorder(1)
+            ax[2][0].set_zorder(1)
+            if joburg:
+                ax[1][1].legend(loc=loc) #, bbox_to_anchor=(1.35, 1.12) if not si else (1.35, 1.04)) # 'best'
+                ax[2][1].legend(loc=loc) #, bbox_to_anchor=(1.35, 1.12) if not si else (1.35, 1.04)) # 'best'
+            else:
+                ax[1][0].legend(loc=loc, bbox_to_anchor=(1.35, 1.12) if not si else (1.35, 1.04)) # 'best'
+                ax[2][0].legend(loc=loc, bbox_to_anchor=(1.35, 1.12) if not si else (1.35, 1.04)) # 'best'
+            ax[2][2].legend(loc=loc, bbox_to_anchor=bbox if not si else (bbox[0], 1.04)) # 'best'
 
     axp[0][0].add_artist(AnchoredText(str(sum([len(a) for a in hytest])) + '/' + str(acounts) + '\nK=' + str(K), loc=2))
     axo[0][0].add_artist(AnchoredText(str(outcounts) + '/' + str(oiutcounts) + '\nK=' + str(K), loc=2))
@@ -263,8 +272,15 @@ def plot(mdb, kx, ky, xlabel='', ylabel='', scale=[1,1], invert=[True,False], co
         ax2.set_ylim(y2 - 0.1*np.abs(y2), None)
         ax1.add_artist(AnchoredText(alph, loc='lower right' if i in [1,4,7] else 'lower left'))
         ax2.add_artist(AnchoredText(alph, loc='lower right' if i in [1,4,7] else 'lower left'))
-        if i != 5 and not joburg:
-            ax1.xaxis.set_major_locator(MultipleLocator(10))
+        if log:
+            ax1.yaxis.set_major_formatter(ticker.FuncFormatter(lambda y,pos: ('{{:.{:1d}f}}'.format(int(np.maximum(-np.log10(max(y, 0.01)),0)))).format(y)))
+        if i != 5:
+            # if log:
+            #     ax1.set_yscale('log')
+            if joburg:
+                ax1.xaxis.set_major_locator(MultipleLocator(20))
+            else:
+                ax1.xaxis.set_major_locator(MultipleLocator(10))
 
     kx = '_'.join(kx.split())
     ky = '_'.join(ky.split())

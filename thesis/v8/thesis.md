@@ -260,7 +260,7 @@ LPWANs enable a vast array of use cases.
   such as deep-indoor devices or remote locations, we recommend either Sigfox or NB-IoT, as they offer a maximum MCL of more than 158 dB. IoT devices for general use would benefit from the large-scale deployment of the GPRS network, which provides excellent coverage because of its legacy infrastructure. It is clear that the extra overhead available in Sigfox, LoRaWAN, and NB-IoT allows for better indoor coverage than GPRS, which means that the LPWAN devices can be used in less than optimal operating conditions. Measured MCL correlates with theoretical values.
 * **Power consumption**: In applications where device battery life is
   a crucial factor we recommend, either LoRaWAN or Sigfox, because they are completely asynchronous. We found that the battery life of LoRaWAN SF 7 was five times that of LoRaWAN SF 12 and nearly 25 times that of Sigfox. This is mainly due to the extremely long time-on-air of LoRaWAN SF 12 and Sigfox. If NB- IoT worked with the mobile network operators to reduce its RRC- idle phase, it could develop a minimal power consumption to compare with that of LoRaWAN and Sigfox.
-  * It is clear that LoRaWAN SF7 is the most power-efficient, due to the short transmission burst. NB-IoT displays the worst power-consumption, due to the extended RRC-idle state. This can be reduced using Release Assistance as in Section [@release_a]
+  * It is clear that LoRaWAN SF7 is the most power-efficient, due to the short transmission burst. NB-IoT displays the worst power-consumption, due to the extended RRC-idle state. This can be reduced using Release Assistance as in Section \ref{release_a}.
 * **Throughput**: As throughput differs greatly between the four technologies, comparisons should rather be made in either the licensed (NB-IoT and GPRS) or unlicensed (Sigfox and LoRaWAN) spectrum categories. Applications that require huge amounts of data to be transmitted, such as real-time vehicle fleet monitoring, we recommend GPRS and NB-IoT as they are not duty cycle limited. The choice of GPRS or NB-IoT will be based on the battery life requirements of the IoT device, with NB-IoT having the advantage. In the case of extremely low-throughput applications, such as water meters, power meters, and weather stations, we recommend Sigfox, as it offers a scalable solution with no base station costs involved. Although it limits the 12 byte throughput per 24 h to 140 messages, this is more than the 20 messages offered by LoRaWAN SF12 (TTN).
   * As NB-IoT operates in the licensed spectrum, there are no
     throughput restrictions, other than the data-rate restriction. We measured the uplink and downlink data rates in different signal quality environments (distances from the gateway) by querying the modem. The measured downlink rate varied from 2250 to 14,193 bps. We could find no clear correlation between the downlink data rate and the signal quality environment.
@@ -492,6 +492,12 @@ The empirical results of NB-IoT depend on the device used (UE) and underlying ve
 
 LoRaWAN is a contender for NB-IoT. It lacks bidirectionality and datarate.
 
+* LoRaWAN performs better for short messages, but it is subjected to a very high penalty when
+  more than one message per data block is required.
+* Second, the LoRaWAN reliability mechanism must be ensured at the
+  upper layers, and thus may incur higher energy costs.
+* 
+
 ## SigFox {#sigfox}
 
 SigFox is a contender for NB-IoT. It lacks bidirectionality and datarate.
@@ -503,11 +509,13 @@ SigFox is a contender for NB-IoT. It lacks bidirectionality and datarate.
 - the UE is to a large extent/entirely controlled by the network/eNodeB.
   - UE must follow NW settings broadcast inside the SIB and allocations for UL/DL data.
 
-## Standing/Position
+## Standing/Positioning
 
 [@Martinez2019]
 
 NB-IoT has proven to be competitive in terms of energy consumption,
+
+* Decent study on the operational trade-offs of NB-IoT over LTE.
 
 Complexities
 
@@ -627,7 +635,7 @@ For the same example in bad SNR, the TBS allocated 32 bytes per chunk, with a re
 ## eDRX, PSM, Active and PTAU
 
 The NB-IoT protocol allows for power save mode (PSM), and the SARA-N2 series modules also
-support a Deep Sleep mode where the module is running at very low current, ~3 µA. The module
+support a Deep Sleep mode where the module is running at very low current, ~3 $uA$. The module
 automatically enters various states depending on the device activity. Here below are listed the
 common activities and the various states it will be in after registration.
 
@@ -659,6 +667,8 @@ common activities and the various states it will be in after registration.
   3GPP TS 24.301 [5]).
 
 ### T3324 timer
+
+* The T3324 Timer is reset after a downlink message is received. The negative impact on energy savings should be taken into account if downlink data is fragmented.
 
 * Bits 5 to 1 represent the binary coded timer value. Bits 6 to 8 define the timer value unit for the GPRS
   timer as follows
@@ -768,15 +778,17 @@ To ping OpenDNS DNS server:
 AT+NPING="208.67.222.222"
 The information text response to the +NPING AT command will be issued after a few seconds. If the
 information text response is +NPINGERR: 1, the ping has timed out.
-☞ The first ping might fail because it can take a few seconds to connect to the base station. Use
-the +CSCON URC to show when the module is connected.
+
+* The first ping might fail because it can take a few seconds to connect to the base station. Use
+  the +CSCON URC to show when the module is connected.
 
 ### Echo
 
 For a more advanced check on sending data to an external server, send data to the u-blox echo
 server at echo.u-blox.com.
-☞ Because there is no DNS lookup function in the SARA-N2 module series, use the IP address
+* Because there is no DNS lookup function in the SARA-N2 module series, use the IP address
 server which is 195.34.89.241.
+
 Command Response Description
 AT+NSOCR="DGRAM",17,10000 0
 OK
@@ -837,6 +849,8 @@ the +CSCON: 1 URC will not be issued.
 It is equivalent to "PRACH coverage enhancement level" defined in 3GPP 36.321 [3] sub
 clause 5.1
 
+* As observed, the ECL has an impact on energy consumption, but not on the delay.
+
 ### SNR
 
 Last SNR value.
@@ -852,56 +866,36 @@ Last SNR value.
 
 Low power consumption is vital for battery longevity.
 
-* PCB layout, antenna matching and location will have an effect to the overall interference received by
-  the module.
+* PCB layout, antenna matching and location will have an effect to the overall interference received by the module.
 * PSM and eDRX
 * On the other hand, although the average power is comparable, peaks in transmission of LoRaWAN’s radio are around 40 mA, while in NB-IoT they reach 220 mA. This causes additional stress on the battery, which has to be managed with care.
+* As can be observed, mean values for NB-IoT are similar to the energy that a LoRaWAN device requires to transmit while using the SF12 configuration. The 5th percentile results for NB-IoT (best observed performance) are comparable to the best case performance of LoRaWAN when operating at SF8. This is in our opinion a relevant result, as NB-IoT guarantees packet delivery with similar power consumption.
+* The expected achievable lifespan (on average) for a NB-IoT is on the order 2-3 years, depending on the datagram size.
+* However, adopters may take into consideration some differences. First, sending larger messages (up to 512 bytes) has almost no impact on NB-IoT.
+* In a simple periodic-reporting application with very limited computing requirements5, the average power can be modeled approximately by Eq. \ref{eq:avgpower}, as detailed in [21]:
+
+$$P = \frac{E_{msg}}{T_{msg}}$$ {#eq:avgpower}
+
 * 
 
 ## Data Usage
 
-* The module has a limited dynamic message queue size. For IoT applications, the message size
-  should be of the order of tens of bytes. UDP socket commands limit their payload size to 512 bytes.
+* The module has a limited dynamic message queue size. For IoT applications, the message size should be of the order of tens of bytes. UDP socket commands limit their payload size to 512 bytes.
 * There is no indication when the UDP data has been sent.
-* Downlink data from the cloud server must also be 512 bytes or less, because otherwise the
-  messages will be lost.
-* The module has an internal message buffer. If the module is unable to send the messages to the
-  network before this buffer is full, because the application is queueing quicker than it can send them,
-  then the UE will return ERROR for the +NSOST/+NSOSTF commands.
-* If a message cannot be sent because of communication issues between the module and eNB, the
-  module will attempt to send the message a second time. If this fails, the message will be dropped.
-  As +NSOST/+NSOSTF messages are UDP, there is no indication the message has been dropped.
-* The UDP header is about 48-60 bytes in length, and so an
-  application sending 100 bytes will actually send about 160 bytes. For devices in the extreme
-  coverage class 2, this can be quite costly.
+* Downlink data from the cloud server must also be 512 bytes or less, because otherwise the messages will be lost.
+* The module has an internal message buffer. If the module is unable to send the messages to the network before this buffer is full, because the application is queueing quicker than it can send them, then the UE will return ERROR for the +NSOST/+NSOSTF commands.
+* If a message cannot be sent because of communication issues between the module and eNB, the module will attempt to send the message a second time. If this fails, the message will be dropped. As +NSOST/+NSOSTF messages are UDP, there is no indication the message has been dropped.
+* The UDP header is about 48-60 bytes in length, and so an application sending 100 bytes will actually send about 160 bytes. For devices in the extreme coverage class 2, this can be quite costly.
+* The UE may later resume the RRC Connected state with that context, thus avoiding the AS setup and saving considerable signaling overhead for the transmission of infrequent small data packets.
 
 ## Application Architecture
 
 * ![1569744612309](../images/1569744612309.png)
-* At the far left the customer’s device contains a u-blox NB-IoT module that communicates over the
-  radio network with a cell tower that supports the NB-IoT network. The cellular network links the cell
-  tower with an IoT platform. This IoT platform stores uplink datagrams from the NB-IoT module. The
-  customer server communicates with the IoT platform to retrieve uplink datagrams and to send
-  downlink datagrams to the NB-IoT. The IoT platform holds downlink datagrams until the NB-IoT
-  module is awake to receive them.
-* The SARA-N2 series modules implement basic UDP socket commands for directly communicating
-  with an external service. With these commands the customer can build a simple IoT platform. With
-  an external processor other IoT layers could be implemented to aid this system design. SARA-N2
-  series modules support AT commands for general CoAP messaging. This allows the customer to not
-  require CoAP in their external processor.
-* Many developers coming from a GPRS type background may expect an always on type connection,
-  normally using TCP. NB-IoT is not session oriented, latencies are much higher and the device will
-  enter a power save mode. This is very different to always-on modems with “chatty” protocols like
-  TCP.
-* UDP sockets do not create connections to servers; UDP is a connection-less datagram protocol.
-  Because of this MO messages may not be received by the server and lost. The application should
-  take this in to consideration and provide its own acknowledgements between the UE and server.
-  CoAP is one protocol which can be used on top of UDP to provide this.
-* For resolving the issue of sending MT messages to a very sleepy module, when a MO message is
-  sent to the cloud server, the cloud server will know the module is active and connected to the
-  network. As seen in section 7 the connection is alive until the RRC connection is released by the
-  network and then still contactable when paging inside the T3324 period. If there are MT messages
-  to be sent to the module, the cloud server should send this message in this time.
+* At the far left the customer’s device contains a u-blox NB-IoT module that communicates over the radio network with a cell tower that supports the NB-IoT network. The cellular network links the cell tower with an IoT platform. This IoT platform stores uplink datagrams from the NB-IoT module. The customer server communicates with the IoT platform to retrieve uplink datagrams and to send downlink datagrams to the NB-IoT. The IoT platform holds downlink datagrams until the NB-IoT module is awake to receive them.
+* The SARA-N2 series modules implement basic UDP socket commands for directly communicating with an external service. With these commands the customer can build a simple IoT platform. With an external processor other IoT layers could be implemented to aid this system design. SARA-N2 series modules support AT commands for general CoAP messaging. This allows the customer to not require CoAP in their external processor.
+* Many developers coming from a GPRS type background may expect an always on type connection, normally using TCP. NB-IoT is not session oriented, latencies are much higher and the device will enter a power save mode. This is very different to always-on modems with “chatty” protocols like TCP.
+* UDP sockets do not create connections to servers; UDP is a connection-less datagram protocol. Because of this MO messages may not be received by the server and lost. The application should take this in to consideration and provide its own acknowledgements between the UE and server. CoAP is one protocol which can be used on top of UDP to provide this.
+* For resolving the issue of sending MT messages to a very sleepy module, when a MO message is sent to the cloud server, the cloud server will know the module is active and connected to the network. As seen in section 7 the connection is alive until the RRC connection is released by the network and then still contactable when paging inside the T3324 period. If there are MT messages to be sent to the module, the cloud server should send this message in this time.
 
 ## Use cases
 
@@ -957,6 +951,9 @@ Table: UE, NW and main metric comparisons
 | Nokia      | Quectel          | Latency          | Throughput        | Data Billing |
 | Ericsson   | Nordic           | Data usage       |                   |              |
 | Huawei     | SimCom           |                  |                   |              |
+
+However, due to the demonstrated energy variability of NB-IoT, an estimate of the energy per message EMSG must be chosen in accordance with the application requirements, rang- ing from very optimistic (best case) to the most pessimistic (worst case). For that purpose, we use the data recorded as a probabilistic
+model, taking the 5th/95th-percentiles for the best/worst case scenarios, and the mean values as an estimate for the long- term behavior.
 
 ## Optimized Setup
 

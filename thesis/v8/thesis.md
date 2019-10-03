@@ -14,6 +14,8 @@ csl: ieee.csl
 linkcolor: blue
 geometry: "left=3cm,right=3cm,top=2cm,bottom=2cm"
 numbersections: true
+tablenos-warning-level: 1
+tablenos-number-by-section: true
 ---
 
 ![](../images/whitespace.png)
@@ -115,6 +117,8 @@ To evaluate the performance of NB-IoT using multiple user equipment (UE) and (MN
 
 There exists an interest in implementing NB-IoT (LTE Cat-NB) as an alternative to LoRaWAN, SigFox and other LPWANs. Application developers require network coverage, and cellular service providers require consumer and enterprise demand or reasonable motivation before rolling it out nationally. Although there is a great deal of theoretical analysis and simulations in research, the lack of empirical evidence may be contributing to a general uncertainty in the standing of the technology with respect to alternatives and a thus a slower adoption. This thesis aims to bridge that divide by evaluating NB-IoT's performance empirically using a set of metrics and to make certain estimations.
 
+Whilst theoretical models provide value in showing how factors affect an approximation, an empirical approach shows the variability induced due to network conditions.
+
 ## Research Objectives {#resobj}
 
 Evaluate:
@@ -201,6 +205,9 @@ Hype yields investment, regardless whether the underlying innovation holds value
 IoT shows great potential for exponential growth, and unless a technology disruption occurs which means we do not require connections or our devices, then there is undoubtedly an [uptrend](https://amarketresearchgazette.com/global-narrowband-iot-nb-iot-market-2019-2025-vodafone-china-unicom-china-telecom-att-etisalat-telstra-orange-telefonica-sk-telecom-deutsche-telekom/). As Gartner predicts, we should be in the plateau of productivity now, and this can be observed by looking at the current news regarding the technology.
 
 A few months before publishing, [AT&T announces](https://blog.nordicsemi.com/getconnected/att-launches-nb-iot-network-in-usa) nation-wide coverage of NB-IoT in the USA, alongside its existing LTE Cat-M coverage. Deutsche Telekom and Vodafone cover Europe (news?) and China enables millions more IoT devices [@china2019].
+
+* Matching emerging applications with existing technologies has become one of the
+  main challenges for IoT initiatives, especially when a new technology appears in the landscape and the map must be redrawn.
 
 Although there are many ways to connect IoT to the internet, NB-IoT is an LPWAN which is the focus of this study.
 
@@ -289,6 +296,8 @@ The most popular use case in IoT is smart metering.
 
 One of the simplest use cases in IoT is smart metering. Periodically sending uplink data at regular intervals from a static location has the advantage of remote monitoring and reducing the need for physical readings. It also opened up new features for users (such as dynamic pricing and usage pattern analysis) and operators (such as load balancing a large number of clients). The clear value proposition and success is partially due to the belief that IoT should be low powered and low data transmissions which still exists today.
 
+**Smart metering can be considered as defeating the purpose of NB-IoT when considering its downlink capabilities.**
+
 Smart metering can be considered the traditional IoT model.
 
 ## Push-pull model
@@ -344,6 +353,7 @@ Compared to LTE
 
 
 
+* NB-IoT devices are seen as stationary, only small chunks of data are intermittently transmitted and applications are envisaged as delay-tolerant.
 * NB-IoT technology is designed such that it can be used in areas beyond the radio coverage of current
   cellular standards and in devices which must run from battery power for many years. The devices
   will generally send small amounts of data infrequently; a typical usage scenario might be 100 to
@@ -508,6 +518,7 @@ SigFox is a contender for NB-IoT. It lacks bidirectionality and datarate.
 - 3GPP
 - the UE is to a large extent/entirely controlled by the network/eNodeB.
   - UE must follow NW settings broadcast inside the SIB and allocations for UL/DL data.
+- 
 
 ## Standing/Positioning
 
@@ -641,7 +652,7 @@ common activities and the various states it will be in after registration.
 
 * T3324 / T3412 timer values
 
-### T3412
+### T3412 PTAU Timer
 
 * (GPRS timer 3)
 *  3GPP TS 24.008 [4], figure 10.5.147a and table 10.5.163a.
@@ -666,9 +677,10 @@ common activities and the various states it will be in after registration.
   is received, the T3412 extended value IE shall be considered as not included in the message (see
   3GPP TS 24.301 [5]).
 
-### T3324 timer
+### T3324 Active Timer
 
 * The T3324 Timer is reset after a downlink message is received. The negative impact on energy savings should be taken into account if downlink data is fragmented.
+* the Active Timer (T3324) controls the time lapse during which the UE is reachable by the network in RRC Idle, i.e., the number of eDRX cycles.
 
 * Bits 5 to 1 represent the binary coded timer value. Bits 6 to 8 define the timer value unit for the GPRS
   timer as follows
@@ -678,6 +690,12 @@ common activities and the various states it will be in after registration.
   0 1 0 value is incremented in multiples of deci-hours
   1 1 1 value indicates that the timer is deactivated
 * Example: "00100100" = 4 x1 minute = 4 minutes
+
+### eDRX Cycle
+
+* An eDRX cycle is composed of an active phase, controlled by a Paging Time Window (PTW) timer, which ranges from 2.56 s to 40.96 s followed by a sleep phase until the end of the eDRX cycle. Within the PTW, the standard LTE paging is observed.
+
+### PTW
 
 ## System Information Blocks (SIB) {#sib}
 
@@ -954,6 +972,8 @@ Table: UE, NW and main metric comparisons
 
 However, due to the demonstrated energy variability of NB-IoT, an estimate of the energy per message EMSG must be chosen in accordance with the application requirements, rang- ing from very optimistic (best case) to the most pessimistic (worst case). For that purpose, we use the data recorded as a probabilistic
 model, taking the 5th/95th-percentiles for the best/worst case scenarios, and the mean values as an estimate for the long- term behavior.
+
+This information can be applied to multiple application use cases.
 
 ## Optimized Setup
 
@@ -1797,6 +1817,8 @@ Table: Comparing means of MNOs
 | Battery Lifetime | 1500 | 800 |
 | Data Billing (how many 512 B) | 5000 | 2000 |
 
+
+
 # Discussion and Recommendations {#discussion}
 
 Fix NW config.
@@ -1879,9 +1901,323 @@ only caveat is battery life
 
 
 
+\newpage
+
 # Appendix A {-#appendixA}
 
+Table: Latency Measurement 5th Percentile {#tbl:txTime_5}
 
+|                  | 1 B  | 16 B | 64 B | 128 B | 256 B | 512 B | Echo | COPS | eDRX | PTAU |
+| ---------------- | ---- | ---- | ---- | ----- | ----- | ----- | ---- | ---- | ---- | ---- |
+| Ublox-ZTE        | 1.82 | 1.51 | 1.80 | 1.78  | 1.71  | 1.94  | 0.18 | 2.13 | 0.10 | 0.38 |
+| Quectel-ZTE      | 1.42 | 1.06 | 1.29 | 1.90  | 1.87  | 1.94  | 0.21 | 0.00 | 0.22 | 0.56 |
+| Ublox-Nokia      | 3.97 | 5.13 | 8.77 | 6.43  | 6.30  | 8.54  | 0.32 | 37.9 | 0.31 | 2.37 |
+| Quectel-Nokia    | 4.60 | 3.55 | 3.38 | 5.40  | 5.33  | 9.40  | 0.37 | 0.19 | 0.04 | 4.88 |
+| Ublox-Ericsson   | 1.29 | 1.35 | 1.43 | 1.48  | 1.54  | 1.73  | 0.00 | 8.08 | 0.05 | 1.26 |
+| Quectel-Ericsson | 1.30 | 1.16 | 1.17 | 1.26  | 1.23  | 1.24  | 0.00 | 2.37 | 0.13 | 0.71 |
+| Ublox-Huawei     | 0.76 | 0.73 | 0.81 | 0.90  | 0.78  | 0.89  | 0.00 | 4.25 | 0.53 | 1.64 |
+| Quectel-Huawei   | 1.88 | 1.82 | 1.94 | 2.15  | 2.13  | 2.46  | 0.00 | 4.61 | 0.37 | 1.77 |
+|                  |      |      |      |       |       |       |      |      |      |      |
+| ZTE              | 1.62 | 1.29 | 1.54 | 1.84  | 1.79  | 1.94  | 0.20 | 1.06 | 0.16 | 0.47 |
+| Nokia            | 4.28 | 4.34 | 6.08 | 5.91  | 5.81  | 8.97  | 0.35 | 19.0 | 0.17 | 3.63 |
+| Ericsson         | 1.29 | 1.26 | 1.30 | 1.37  | 1.38  | 1.49  | 0.00 | 5.23 | 0.09 | 0.99 |
+| Huawei           | 1.32 | 1.28 | 1.38 | 1.52  | 1.46  | 1.68  | 0.00 | 4.43 | 0.45 | 1.70 |
+|                  |      |      |      |       |       |       |      |      |      |      |
+| Ublox            | 1.96 | 2.18 | 3.21 | 2.65  | 2.58  | 3.28  | 0.12 | 13.1 | 0.25 | 1.41 |
+| Quectel          | 2.30 | 1.90 | 1.95 | 2.68  | 2.64  | 3.76  | 0.14 | 1.79 | 0.19 | 1.98 |
+|                  |      |      |      |       |       |       |      |      |      |      |
+| MTN              | 1.46 | 1.27 | 1.42 | 1.61  | 1.59  | 1.71  | 0.10 | 3.14 | 0.12 | 0.73 |
+| Vodacom          | 2.80 | 2.81 | 3.73 | 3.72  | 3.63  | 5.32  | 0.17 | 11.7 | 0.31 | 2.67 |
+
+
+Table: Latency Measurement Means {#tbl:txTime_m}
+
+|                  | 1 B  | 16 B | 64 B | 128 B | 256 B | 512 B | Echo | COPS | eDRX | PTAU |
+| ---------------- | ---- | ---- | ---- | ----- | ----- | ----- | ---- | ---- | ---- | ---- |
+| Ublox-ZTE        | 15.4 | 2.88 | 3.54 | 3.60  | 15.3  | 4.97  | 5.04 | 23.3 | 0.39 | 1.87 |
+| Quectel-ZTE      | 2.46 | 2.58 | 2.70 | 2.85  | 3.18  | 3.56  | 2.20 | 3.26 | 0.58 | 18.1 |
+| Ublox-Nokia      | 20.8 | 13.4 | 15.4 | 32.8  | 72.6  | 13.5  | 26.9 | 97.5 | 5.89 | 13.1 |
+| Quectel-Nokia    | 21.2 | 7.93 | 8.84 | 9.22  | 10.6  | 14.0  | 13.3 | 1.88 | 3.67 | 9.38 |
+| Ublox-Ericsson   | 1.93 | 2.11 | 2.18 | 2.25  | 2.61  | 2.89  | 0.00 | 8.15 | 0.35 | 1.85 |
+| Quectel-Ericsson | 2.25 | 2.09 | 2.14 | 2.20  | 2.14  | 2.46  | 0.00 | 3.93 | 0.39 | 1.64 |
+| Ublox-Huawei     | 2.49 | 2.15 | 2.04 | 2.14  | 2.22  | 2.49  | 0.00 | 6.22 | 0.76 | 6.01 |
+| Quectel-Huawei   | 11.6 | 26.5 | 6.58 | 12.8  | 16.9  | 10.4  | 0.00 | 7.70 | 0.52 | 11.8 |
+|                  |      |      |      |       |       |       |      |      |      |      |
+| ZTE              | 8.96 | 2.73 | 3.12 | 3.23  | 9.27  | 4.26  | 3.62 | 13.2 | 0.49 | 10.0 |
+| Nokia            | 21.0 | 10.7 | 12.1 | 21.0  | 41.6  | 13.8  | 20.1 | 49.7 | 4.78 | 11.2 |
+| Ericsson         | 2.09 | 2.10 | 2.16 | 2.22  | 2.37  | 2.67  | 0.00 | 6.04 | 0.37 | 1.74 |
+| Huawei           | 7.07 | 14.3 | 4.31 | 7.49  | 9.57  | 6.46  | 0.00 | 6.96 | 0.64 | 8.93 |
+|                  |      |      |      |       |       |       |      |      |      |      |
+| Ublox            | 10.1 | 5.16 | 5.80 | 10.2  | 23.2  | 5.98  | 8.00 | 33.8 | 1.85 | 5.72 |
+| Quectel          | 9.41 | 9.77 | 5.06 | 6.78  | 8.23  | 7.62  | 3.88 | 4.19 | 1.29 | 10.2 |
+|                  |      |      |      |       |       |       |      |      |      |      |
+| MTN              | 5.53 | 2.41 | 2.64 | 2.72  | 5.82  | 3.47  | 1.81 | 9.66 | 0.43 | 5.89 |
+| Vodacom          | 14.0 | 12.5 | 8.23 | 14.2  | 25.6  | 10.1  | 10.0 | 28.3 | 2.71 | 10.1 |
+
+\newpage
+
+Table: Latency Measurement 95th Percentile {#tbl:txTime_95}
+
+|                  | 1 B  | 16 B | 64 B | 128 B | 256 B | 512 B | Echo | COPS | eDRX | PTAU |
+| ---------------- | ---- | ---- | ---- | ----- | ----- | ----- | ---- | ---- | ---- | ---- |
+| Ublox-ZTE        | 46.1 | 7.39 | 6.68 | 8.75  | 41.2  | 14.6  | 14.7 | 73.5 | 0.88 | 2.93 |
+| Quectel-ZTE      | 5.05 | 5.17 | 5.33 | 4.58  | 5.70  | 6.59  | 5.43 | 9.13 | 1.53 | 71.1 |
+| Ublox-Nokia      | 77.7 | 32.3 | 22.5 | 93.1  | 256.  | 20.3  | 61.3 | 203. | 34.6 | 32.6 |
+| Quectel-Nokia    | 75.7 | 15.9 | 20.5 | 18.8  | 19.4  | 23.3  | 34.8 | 6.25 | 2.73 | 21.9 |
+| Ublox-Ericsson   | 2.99 | 3.70 | 3.41 | 3.77  | 4.95  | 5.71  | 0.00 | 8.23 | 0.99 | 3.36 |
+| Quectel-Ericsson | 3.74 | 3.75 | 3.87 | 4.04  | 3.71  | 5.67  | 0.00 | 6.57 | 0.72 | 3.20 |
+| Ublox-Huawei     | 5.20 | 4.63 | 4.45 | 4.46  | 6.12  | 4.30  | 0.00 | 9.89 | 1.38 | 21.8 |
+| Quectel-Huawei   | 53.5 | 123. | 21.9 | 48.4  | 51.5  | 41.1  | 0.00 | 10.9 | 0.71 | 56.9 |
+|                  |      |      |      |       |       |       |      |      |      |      |
+| ZTE              | 25.6 | 6.28 | 6.00 | 6.66  | 23.4  | 10.6  | 10.0 | 41.3 | 1.20 | 37.0 |
+| Nokia            | 76.7 | 24.1 | 21.5 | 56.0  | 138.  | 21.8  | 48.0 | 104. | 18.6 | 27.3 |
+| Ericsson         | 3.37 | 3.72 | 3.64 | 3.90  | 4.33  | 5.69  | 0.00 | 7.40 | 0.85 | 3.28 |
+| Huawei           | 29.3 | 64.1 | 13.2 | 26.4  | 28.8  | 22.7  | 0.00 | 10.4 | 1.05 | 39.3 |
+|                  |      |      |      |       |       |       |      |      |      |      |
+| Ublox            | 33.0 | 12.0 | 9.28 | 27.5  | 77.2  | 11.2  | 19.0 | 73.8 | 9.47 | 15.2 |
+| Quectel          | 34.5 | 37.1 | 12.9 | 18.9  | 20.1  | 19.1  | 10.0 | 8.23 | 1.42 | 38.2 |
+|                  |      |      |      |       |       |       |      |      |      |      |
+| MTN              | 14.4 | 5.00 | 4.82 | 5.28  | 13.8  | 8.16  | 5.03 | 24.3 | 1.03 | 20.1 |
+| Vodacom          | 53.0 | 44.1 | 17.4 | 41.2  | 83.4  | 22.2  | 24.0 | 57.6 | 9.86 | 33.3 |
+
+---
+
+Table: TX Time 5th Percentile {#tbl:txTimeNW_5}
+
+|                  | 1 B  | 16 B | 64 B | 128 B | 256 B | 512 B | Echo | COPS | eDRX | PTAU |
+| ---------------- | ---- | ---- | ---- | ----- | ----- | ----- | ---- | ---- | ---- | ---- |
+| Ublox-ZTE        | 0.09 | 0.10 | 0.12 | 0.15  | 0.21  | 0.32  | 0.20 | 0.01 | 0.00 | 0.09 |
+| Quectel-ZTE      | 0.09 | 0.10 | 0.12 | 0.21  | 0.22  | 0.33  | 0.06 | 0.01 | 0.88 | 0.09 |
+| Ublox-Nokia      | 1.34 | 1.38 | 1.73 | 2.08  | 2.64  | 3.73  | 0.21 | 4.19 | 1.78 | 0.18 |
+| Quectel-Nokia    | 2.69 | 0.00 | 0.00 | 0.00  | 0.00  | 0.00  | 0.11 | 0.73 | 0.08 | 0.28 |
+| Ublox-Ericsson   | 0.15 | 0.14 | 0.17 | 0.24  | 0.29  | 0.44  | 0.00 | 0.07 | 0.00 | 0.15 |
+| Quectel-Ericsson | 0.06 | 0.06 | 0.06 | 0.07  | 0.08  | 0.09  | 0.00 | 0.10 | 0.00 | 0.05 |
+| Ublox-Huawei     | 0.09 | 0.10 | 0.12 | 0.14  | 0.19  | 0.30  | 0.00 | 0.00 | 0.00 | 0.09 |
+| Quectel-Huawei   | 0.18 | 0.15 | 0.20 | 0.15  | 0.25  | 0.43  | 0.00 | 0.15 | 0.00 | 0.10 |
+|                  |      |      |      |       |       |       |      |      |      |      |
+| ZTE              | 0.09 | 0.10 | 0.12 | 0.18  | 0.21  | 0.33  | 0.13 | 0.01 | 0.44 | 0.09 |
+| Nokia            | 2.01 | 0.69 | 0.86 | 1.04  | 1.32  | 1.86  | 0.16 | 2.46 | 0.93 | 0.23 |
+| Ericsson         | 0.10 | 0.10 | 0.12 | 0.15  | 0.18  | 0.27  | 0.00 | 0.09 | 0.00 | 0.10 |
+| Huawei           | 0.14 | 0.12 | 0.16 | 0.15  | 0.22  | 0.36  | 0.00 | 0.07 | 0.00 | 0.09 |
+|                  |      |      |      |       |       |       |      |      |      |      |
+| Ublox            | 0.42 | 0.43 | 0.53 | 0.65  | 0.83  | 1.20  | 0.10 | 1.07 | 0.44 | 0.12 |
+| Quectel          | 0.76 | 0.08 | 0.10 | 0.11  | 0.14  | 0.21  | 0.04 | 0.25 | 0.24 | 0.13 |
+|                  |      |      |      |       |       |       |      |      |      |      |
+| MTN              | 0.10 | 0.10 | 0.12 | 0.16  | 0.20  | 0.30  | 0.06 | 0.05 | 0.22 | 0.09 |
+| Vodacom          | 1.07 | 0.41 | 0.51 | 0.59  | 0.77  | 1.11  | 0.08 | 1.27 | 0.46 | 0.16 |
+
+\newpage
+
+Table: TX Time Means {#tbl:txTimeNW_m}
+
+|                  | 1 B  | 16 B | 64 B | 128 B | 256 B | 512 B | Echo | COPS | eDRX | PTAU |
+| ---------------- | ---- | ---- | ---- | ----- | ----- | ----- | ---- | ---- | ---- | ---- |
+| Ublox-ZTE        | 1.22 | 0.73 | 0.65 | 0.87  | 1.20  | 0.56  | 0.43 | 0.26 | 0.00 | 0.14 |
+| Quectel-ZTE      | 0.25 | 0.40 | 0.49 | 0.62  | 0.87  | 1.28  | 0.33 | 0.19 | 0.88 | 0.33 |
+| Ublox-Nokia      | 1.35 | 1.40 | 1.74 | 2.13  | 2.74  | 3.77  | 1.65 | 4.19 | 2.56 | 1.55 |
+| Quectel-Nokia    | 2.76 | 0.00 | 0.00 | 0.00  | 0.00  | 0.00  | 1.01 | 1.90 | 0.22 | 1.52 |
+| Ublox-Ericsson   | 0.42 | 0.47 | 0.49 | 0.58  | 0.81  | 1.16  | 0.00 | 0.07 | 0.00 | 0.38 |
+| Quectel-Ericsson | 0.20 | 0.20 | 0.20 | 0.24  | 0.28  | 0.38  | 0.00 | 0.49 | 0.00 | 0.17 |
+| Ublox-Huawei     | 0.58 | 0.78 | 0.56 | 0.92  | 0.75  | 0.70  | 0.00 | 0.00 | 0.00 | 1.06 |
+| Quectel-Huawei   | 0.51 | 0.58 | 0.49 | 0.88  | 0.79  | 0.86  | 0.00 | 0.15 | 0.00 | 1.05 |
+|                  |      |      |      |       |       |       |      |      |      |      |
+| ZTE              | 0.73 | 0.57 | 0.57 | 0.74  | 1.04  | 0.92  | 0.38 | 0.23 | 0.44 | 0.23 |
+| Nokia            | 2.06 | 0.70 | 0.87 | 1.06  | 1.37  | 1.88  | 1.33 | 3.05 | 1.39 | 1.54 |
+| Ericsson         | 0.31 | 0.34 | 0.34 | 0.41  | 0.55  | 0.77  | 0.00 | 0.28 | 0.00 | 0.28 |
+| Huawei           | 0.54 | 0.68 | 0.52 | 0.90  | 0.77  | 0.78  | 0.00 | 0.07 | 0.00 | 1.06 |
+|                  |      |      |      |       |       |       |      |      |      |      |
+| Ublox            | 0.89 | 0.85 | 0.86 | 1.12  | 1.38  | 1.55  | 0.52 | 1.13 | 0.64 | 0.78 |
+| Quectel          | 0.93 | 0.29 | 0.29 | 0.43  | 0.48  | 0.63  | 0.33 | 0.69 | 0.27 | 0.77 |
+|                  |      |      |      |       |       |       |      |      |      |      |
+| MTN              | 0.52 | 0.45 | 0.46 | 0.58  | 0.79  | 0.85  | 0.19 | 0.25 | 0.22 | 0.26 |
+| Vodacom          | 1.30 | 0.69 | 0.70 | 0.98  | 1.07  | 1.33  | 0.66 | 1.56 | 0.69 | 1.30 |
+
+
+Table: TX Time 95th Percentile {#tbl:txTimeNW_95}
+
+|                  | 1 B  | 16 B | 64 B | 128 B | 256 B | 512 B | Echo | COPS | eDRX | PTAU |
+| ---------------- | ---- | ---- | ---- | ----- | ----- | ----- | ---- | ---- | ---- | ---- |
+| Ublox-ZTE        | 4.96 | 3.89 | 1.67 | 1.98  | 6.88  | 1.10  | 0.64 | 0.79 | 0.00 | 0.28 |
+| Quectel-ZTE      | 0.63 | 0.97 | 1.16 | 1.40  | 3.07  | 4.04  | 0.88 | 0.51 | 0.88 | 0.65 |
+| Ublox-Nokia      | 1.37 | 1.41 | 1.74 | 2.16  | 2.89  | 3.80  | 4.34 | 4.19 | 3.34 | 3.13 |
+| Quectel-Nokia    | 2.84 | 0.00 | 0.00 | 0.00  | 0.00  | 0.00  | 3.24 | 4.75 | 0.35 | 2.11 |
+| Ublox-Ericsson   | 0.78 | 1.23 | 1.21 | 1.50  | 2.32  | 3.11  | 0.00 | 0.07 | 0.00 | 1.01 |
+| Quectel-Ericsson | 0.50 | 0.51 | 0.57 | 0.70  | 0.95  | 1.36  | 0.00 | 1.04 | 0.00 | 0.49 |
+| Ublox-Huawei     | 1.57 | 1.62 | 1.65 | 1.83  | 3.01  | 1.83  | 0.00 | 0.00 | 0.00 | 2.91 |
+| Quectel-Huawei   | 1.54 | 2.09 | 1.67 | 2.41  | 2.94  | 2.22  | 0.00 | 0.15 | 0.00 | 4.46 |
+|                  |      |      |      |       |       |       |      |      |      |      |
+| ZTE              | 2.79 | 2.43 | 1.42 | 1.69  | 4.98  | 2.57  | 0.76 | 0.65 | 0.44 | 0.47 |
+| Nokia            | 2.10 | 0.70 | 0.87 | 1.08  | 1.44  | 1.90  | 3.79 | 4.47 | 1.85 | 2.62 |
+| Ericsson         | 0.64 | 0.87 | 0.89 | 1.10  | 1.63  | 2.24  | 0.00 | 0.55 | 0.00 | 0.75 |
+| Huawei           | 1.56 | 1.86 | 1.66 | 2.12  | 2.98  | 2.03  | 0.00 | 0.07 | 0.00 | 3.69 |
+|                  |      |      |      |       |       |       |      |      |      |      |
+| Ublox            | 2.17 | 2.04 | 1.57 | 1.87  | 3.78  | 2.46  | 1.24 | 1.26 | 0.83 | 1.83 |
+| Quectel          | 1.38 | 0.89 | 0.85 | 1.13  | 1.74  | 1.90  | 1.03 | 1.61 | 0.31 | 1.93 |
+|                  |      |      |      |       |       |       |      |      |      |      |
+| MTN              | 1.72 | 1.65 | 1.15 | 1.40  | 3.31  | 2.40  | 0.38 | 0.60 | 0.22 | 0.61 |
+| Vodacom          | 1.83 | 1.28 | 1.26 | 1.60  | 2.21  | 1.96  | 1.89 | 2.27 | 0.92 | 3.15 |
+
+---
+
+\newpage
+
+Table: RX Time 5th Percentile {#tbl:rxTimeNW_5}
+
+|                  | 1 B  | 16 B | 64 B | 128 B | 256 B | 512 B | Echo | COPS | eDRX | PTAU |
+| ---------------- | ---- | ---- | ---- | ----- | ----- | ----- | ---- | ---- | ---- | ---- |
+| Ublox-ZTE        | 1.09 | 1.12 | 1.16 | 1.26  | 1.12  | 1.13  | 0.05 | 0.45 | 0.11 | 0.36 |
+| Quectel-ZTE      | 1.00 | 1.00 | 0.91 | 1.13  | 1.21  | 1.25  | 0.05 | 0.26 | 0.14 | 0.23 |
+| Ublox-Nokia      | 3.14 | 3.19 | 6.39 | 7.33  | 2.81  | 4.19  | 0.14 | 1.02 | 0.29 | 1.64 |
+| Quectel-Nokia    | 25.7 | 111. | 107. | 115.  | 111.  | 116.  | 0.24 | 0.97 | 0.29 | 2.72 |
+| Ublox-Ericsson   | 0.93 | 0.98 | 0.96 | 0.93  | 1.01  | 0.99  | 0.00 | 0.00 | 0.06 | 0.91 |
+| Quectel-Ericsson | 0.89 | 0.90 | 0.89 | 0.83  | 0.85  | 0.90  | 0.00 | 0.08 | 0.06 | 0.37 |
+| Ublox-Huawei     | 0.27 | 0.23 | 0.26 | 0.26  | 0.29  | 0.32  | 0.00 | 0.00 | 0.50 | 1.15 |
+| Quectel-Huawei   | 1.28 | 1.24 | 0.37 | 1.36  | 1.43  | 1.36  | 0.00 | 5.59 | 0.22 | 1.05 |
+|                  |      |      |      |       |       |       |      |      |      |      |
+| ZTE              | 1.05 | 1.06 | 1.04 | 1.20  | 1.16  | 1.19  | 0.05 | 0.36 | 0.12 | 0.29 |
+| Nokia            | 14.4 | 57.4 | 57.0 | 61.4  | 56.9  | 60.2  | 0.19 | 0.99 | 0.29 | 2.18 |
+| Ericsson         | 0.91 | 0.94 | 0.92 | 0.88  | 0.93  | 0.95  | 0.00 | 0.04 | 0.06 | 0.64 |
+| Huawei           | 0.78 | 0.73 | 0.32 | 0.81  | 0.86  | 0.84  | 0.00 | 2.79 | 0.36 | 1.10 |
+|                  |      |      |      |       |       |       |      |      |      |      |
+| Ublox            | 1.36 | 1.38 | 2.19 | 2.44  | 1.31  | 1.66  | 0.04 | 0.36 | 0.24 | 1.01 |
+| Quectel          | 7.22 | 28.6 | 27.4 | 29.7  | 28.6  | 29.9  | 0.07 | 1.72 | 0.18 | 1.10 |
+|                  |      |      |      |       |       |       |      |      |      |      |
+| MTN              | 0.98 | 1.00 | 0.98 | 1.04  | 1.05  | 1.07  | 0.02 | 0.20 | 0.09 | 0.47 |
+| Vodacom          | 7.60 | 29.0 | 28.6 | 31.1  | 28.8  | 30.5  | 0.09 | 1.89 | 0.33 | 1.64 |
+
+
+Table: RX Time Means {#tbl:rxTimeNW_m}
+
+|                  | 1 B  | 16 B | 64 B | 128 B | 256 B | 512 B | Echo | COPS | eDRX | PTAU |
+| ---------------- | ---- | ---- | ---- | ----- | ----- | ----- | ---- | ---- | ---- | ---- |
+| Ublox-ZTE        | 5.27 | 5.24 | 5.37 | 5.88  | 4.57  | 6.56  | 1.73 | 1.50 | 0.18 | 1.23 |
+| Quectel-ZTE      | 1.59 | 1.55 | 1.68 | 1.69  | 1.66  | 1.82  | 0.16 | 1.21 | 0.37 | 1.17 |
+| Ublox-Nokia      | 41.7 | 14.3 | 14.2 | 16.7  | 3.80  | 6.23  | 3.10 | 1.02 | 1.77 | 9.50 |
+| Quectel-Nokia    | 114. | 165. | 162. | 168.  | 159.  | 170.  | 1.78 | 6.39 | 18.6 | 6.13 |
+| Ublox-Ericsson   | 1.20 | 1.30 | 1.27 | 1.26  | 1.30  | 1.32  | 0.00 | 0.00 | 0.29 | 1.12 |
+| Quectel-Ericsson | 1.22 | 1.30 | 1.26 | 1.26  | 1.24  | 1.35  | 0.00 | 1.76 | 0.30 | 0.93 |
+| Ublox-Huawei     | 0.92 | 0.96 | 0.81 | 0.85  | 0.86  | 0.98  | 0.00 | 0.00 | 0.64 | 4.49 |
+| Quectel-Huawei   | 5.29 | 24.3 | 3.41 | 3.39  | 7.17  | 5.06  | 0.00 | 5.59 | 0.37 | 6.50 |
+|                  |      |      |      |       |       |       |      |      |      |      |
+| ZTE              | 3.43 | 3.39 | 3.52 | 3.79  | 3.11  | 4.19  | 0.95 | 1.36 | 0.28 | 1.20 |
+| Nokia            | 78.3 | 89.6 | 88.1 | 92.5  | 81.6  | 88.1  | 2.44 | 3.70 | 10.2 | 7.82 |
+| Ericsson         | 1.21 | 1.30 | 1.27 | 1.26  | 1.27  | 1.33  | 0.00 | 0.88 | 0.29 | 1.02 |
+| Huawei           | 3.10 | 12.6 | 2.11 | 2.12  | 4.01  | 3.02  | 0.00 | 2.79 | 0.50 | 5.50 |
+|                  |      |      |      |       |       |       |      |      |      |      |
+| Ublox            | 12.2 | 5.46 | 5.42 | 6.20  | 2.63  | 3.77  | 1.21 | 0.63 | 0.72 | 4.09 |
+| Quectel          | 30.7 | 48.0 | 42.1 | 43.6  | 42.3  | 44.5  | 0.48 | 3.74 | 4.92 | 3.68 |
+|                  |      |      |      |       |       |       |      |      |      |      |
+| MTN              | 2.32 | 2.34 | 2.40 | 2.53  | 2.19  | 2.76  | 0.47 | 1.12 | 0.28 | 1.11 |
+| Vodacom          | 40.7 | 51.1 | 45.1 | 47.3  | 42.8  | 45.5  | 1.22 | 3.25 | 5.35 | 6.66 |
+
+\newpage
+
+Table: RX Time 95th Percentile {#tbl:rxTimeNW_95}
+
+|                  | 1 B  | 16 B | 64 B | 128 B | 256 B | 512 B | Echo | COPS | eDRX | PTAU |
+| ---------------- | ---- | ---- | ---- | ----- | ----- | ----- | ---- | ---- | ---- | ---- |
+| Ublox-ZTE        | 16.7 | 20.4 | 24.0 | 27.8  | 17.0  | 34.7  | 6.23 | 2.41 | 0.37 | 1.76 |
+| Quectel-ZTE      | 2.87 | 2.51 | 3.23 | 2.85  | 3.11  | 3.11  | 0.36 | 2.99 | 0.81 | 1.68 |
+| Ublox-Nokia      | 140. | 30.8 | 20.3 | 23.2  | 4.62  | 7.73  | 11.3 | 1.02 | 6.76 | 27.9 |
+| Quectel-Nokia    | 258. | 246. | 245. | 244.  | 232.  | 264.  | 7.54 | 12.8 | 52.6 | 14.4 |
+| Ublox-Ericsson   | 1.71 | 1.94 | 1.70 | 1.89  | 1.84  | 1.95  | 0.00 | 0.00 | 0.94 | 1.69 |
+| Quectel-Ericsson | 2.18 | 2.23 | 2.18 | 2.20  | 2.15  | 2.13  | 0.00 | 4.06 | 0.58 | 1.77 |
+| Ublox-Huawei     | 1.92 | 2.15 | 2.00 | 2.00  | 1.91  | 1.65  | 0.00 | 0.00 | 1.20 | 19.2 |
+| Quectel-Huawei   | 22.5 | 118. | 13.0 | 9.76  | 32.1  | 20.3  | 0.00 | 5.59 | 0.61 | 30.5 |
+|                  |      |      |      |       |       |       |      |      |      |      |
+| ZTE              | 9.80 | 11.4 | 13.6 | 15.3  | 10.0  | 18.9  | 3.29 | 2.70 | 0.59 | 1.72 |
+| Nokia            | 199. | 138. | 132. | 133.  | 118.  | 136.  | 9.43 | 6.92 | 29.7 | 21.2 |
+| Ericsson         | 1.95 | 2.09 | 1.94 | 2.04  | 1.99  | 2.04  | 0.00 | 2.03 | 0.76 | 1.73 |
+| Huawei           | 12.2 | 60.2 | 7.52 | 5.88  | 17.0  | 10.9  | 0.00 | 2.79 | 0.90 | 24.9 |
+|                  |      |      |      |       |       |       |      |      |      |      |
+| Ublox            | 40.2 | 13.8 | 12.0 | 13.7  | 6.34  | 11.5  | 4.38 | 0.85 | 2.32 | 12.6 |
+| Quectel          | 71.5 | 92.4 | 65.9 | 64.8  | 67.5  | 72.5  | 1.97 | 6.36 | 13.6 | 12.1 |
+|                  |      |      |      |       |       |       |      |      |      |      |
+| MTN              | 5.87 | 6.78 | 7.78 | 8.70  | 6.03  | 10.4  | 1.64 | 2.36 | 0.67 | 1.73 |
+| Vodacom          | 105. | 99.5 | 70.2 | 69.9  | 67.8  | 73.5  | 4.71 | 4.86 | 15.3 | 23.0 |
+
+---
+
+
+
+Table: Energy 5th Percentile {#tbl:energy_5}
+
+|                  | 1 B    | 16 B   | 64 B   | 128 B  | 256 B  | 512 B  | Echo   | COPS   | eDRX   | PTAU   |
+| ---------------- | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ |
+| Ublox-ZTE        | 669.77 | 519.64 | 631.85 | 689.27 | 592.12 | 817.29 | 21.242 | 825.04 | 2.9492 | 23.757 |
+| Quectel-ZTE      | 334.68 | 317.34 | 275.30 | 506.58 | 532.38 | 670.70 | 8.1317 | 30.295 | 5.3670 | 243.65 |
+| Ublox-Nokia      | 5254.5 | 6506.5 | 14493. | 5737.8 | 10038. | 4025.2 | 44.605 | 100319 | 33.169 | 1061.2 |
+| Quectel-Nokia    | 5439.0 | 2967.4 | 2723.6 | 4724.1 | 1440.7 | 5549.4 | 32.197 | 16.855 | 2.0578 | 5751.2 |
+| Ublox-Ericsson   | 199.13 | 201.36 | 226.33 | 246.01 | 298.73 | 387.58 | 0.000  | 11163. | 0.1600 | 205.14 |
+| Quectel-Ericsson | 92.463 | 75.042 | 94.762 | 89.943 | 96.662 | 94.215 | 0.000  | 169.42 | 0.0300 | 15.657 |
+| Ublox-Huawei     | 21.569 | 21.510 | 27.491 | 25.538 | 43.223 | 80.923 | 0.000  | 2942.1 | 7.2205 | 258.07 |
+| Quectel-Huawei   | 351.02 | 287.91 | 350.86 | 385.39 | 418.91 | 467.35 | 0.000  | 1048.4 | 0.4770 | 192.74 |
+|                  |        |        |        |        |        |        |        |        |        |        |
+| ZTE              | 502.23 | 418.49 | 453.57 | 597.92 | 562.25 | 743.99 | 14.687 | 427.66 | 4.1581 | 133.70 |
+| Nokia            | 5346.7 | 4736.9 | 8608.5 | 5231.0 | 5739.6 | 4787.3 | 38.401 | 50168. | 17.613 | 3406.2 |
+| Ericsson         | 145.79 | 138.20 | 160.54 | 167.97 | 197.69 | 240.89 | 0.000  | 5666.6 | 0.0950 | 110.40 |
+| Huawei           | 186.29 | 154.71 | 189.17 | 205.46 | 231.06 | 274.14 | 0.000  | 1995.3 | 3.8487 | 225.41 |
+|                  |        |        |        |        |        |        |        |        |        |        |
+| Ublox            | 1536.2 | 1812.2 | 3844.7 | 1674.6 | 2743.1 | 1327.7 | 16.461 | 28812. | 10.874 | 387.06 |
+| Quectel          | 1554.3 | 911.92 | 861.13 | 1426.5 | 622.17 | 1695.4 | 10.082 | 316.26 | 1.9829 | 1550.8 |
+|                  |        |        |        |        |        |        |        |        |        |        |
+| MTN              | 324.01 | 278.35 | 307.06 | 382.95 | 379.97 | 492.44 | 7.3436 | 3047.1 | 2.1265 | 122.05 |
+| Vodacom          | 2766.5 | 2445.8 | 4398.8 | 2718.2 | 2985.3 | 2530.7 | 19.200 | 26081. | 10.731 | 1815.8 |
+
+\newpage
+
+Table: Energy Means {#tbl:energy_m}
+
+|                  | 1 B    | 16 B   | 64 B   | 128 B  | 256 B  | 512 B  | Echo   | COPS   | eDRX   | PTAU   |
+| ---------------- | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ |
+| Ublox-ZTE        | 28432. | 3281.4 | 5075.9 | 2981.8 | 44072. | 4691.9 | 9839.0 | 41748. | 150.54 | 1075.5 |
+| Quectel-ZTE      | 1329.8 | 2713.0 | 1803.0 | 1995.6 | 3230.3 | 4062.7 | 2804.4 | 6540.8 | 188.40 | 49601. |
+| Ublox-Nokia      | 46715. | 34876. | 36582. | 41300. | 113839 | 25040. | 75918. | 172539 | 13602. | 40282. |
+| Quectel-Nokia    | 27091. | 16279. | 13028. | 15915. | 21672. | 36501. | 23284. | 1854.0 | 7499.2 | 20390. |
+| Ublox-Ericsson   | 629.63 | 829.19 | 842.66 | 1049.5 | 1633.5 | 2629.0 | 0.000  | 11280. | 221.40 | 601.66 |
+| Quectel-Ericsson | 488.36 | 530.78 | 537.60 | 644.37 | 514.90 | 1242.0 | 0.000  | 1253.4 | 330.94 | 229.57 |
+| Ublox-Huawei     | 1450.3 | 1514.7 | 1353.3 | 1526.8 | 1428.4 | 1455.8 | 0.000  | 11185. | 13.660 | 7220.5 |
+| Quectel-Huawei   | 12538. | 58219. | 4710.8 | 20463. | 11257. | 10257. | 0.000  | 8254.6 | 3.0950 | 28574. |
+|                  |        |        |        |        |        |        |        |        |        |        |
+| ZTE              | 14880. | 2997.2 | 3439.4 | 2488.7 | 23651. | 4377.3 | 6321.7 | 24144. | 169.47 | 25338. |
+| Nokia            | 36903. | 25577. | 24805. | 28607. | 67755. | 30771. | 49601. | 87196. | 10550. | 30336. |
+| Ericsson         | 558.99 | 679.99 | 690.13 | 846.94 | 1074.2 | 1935.5 | 0.000  | 6267.1 | 276.17 | 415.62 |
+| Huawei           | 6994.2 | 29867. | 3032.0 | 10995. | 6342.8 | 5856.4 | 0.000  | 9720.1 | 8.3779 | 17897. |
+|                  |        |        |        |        |        |        |        |        |        |        |
+| Ublox            | 19306. | 10125. | 10963. | 11714. | 40243. | 8454.2 | 21439. | 59188. | 3496.9 | 12295. |
+| Quectel          | 10361. | 19435. | 5019.9 | 9754.7 | 9168.6 | 13015. | 6522.2 | 4475.7 | 2005.4 | 24699. |
+|                  |        |        |        |        |        |        |        |        |        |        |
+| MTN              | 7719.9 | 1838.6 | 2064.8 | 1667.8 | 12362. | 3156.4 | 3160.8 | 15206. | 222.82 | 12877. |
+| Vodacom          | 21948. | 27722. | 13918. | 19801. | 37049. | 18313. | 24800. | 48458. | 5279.5 | 24117. |
+
+
+Table: Energy 95th Percentile {#tbl:energy_95}
+
+|                  | 1 B    | 16 B   | 64 B   | 128 B  | 256 B  | 512 B  | Echo   | COPS   | eDRX   | PTAU   |
+| ---------------- | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ |
+| Ublox-ZTE        | 115881 | 12865. | 13075. | 12641. | 129539 | 19151. | 38255. | 128155 | 408.83 | 2357.6 |
+| Quectel-ZTE      | 4771.7 | 11587. | 6239.3 | 5138.2 | 10562. | 13847. | 8496.7 | 22131. | 492.80 | 203115 |
+| Ublox-Nokia      | 175767 | 110737 | 60709. | 114810 | 411534 | 47306. | 229193 | 256760 | 67074. | 75253. |
+| Quectel-Nokia    | 110238 | 39836. | 31249. | 31566. | 45701. | 71379. | 78546. | 10035. | 1751.6 | 41524. |
+| Ublox-Ericsson   | 1391.6 | 2781.5 | 2007.9 | 3071.7 | 6426.2 | 11377. | 0.000  | 11398. | 188.15 | 2069.7 |
+| Quectel-Ericsson | 1017.0 | 1348.4 | 1400.3 | 1617.0 | 2153.2 | 5712.5 | 0.000  | 4389.8 | 1132.4 | 997.62 |
+| Ublox-Huawei     | 4877.5 | 4764.2 | 5259.0 | 5196.5 | 5509.6 | 4615.4 | 0.000  | 29609. | 32.783 | 32212. |
+| Quectel-Huawei   | 66078. | 302737 | 22550. | 103422 | 44703. | 46951. | 0.000  | 20860. | 7.0342 | 181524 |
+|                  |        |        |        |        |        |        |        |        |        |        |
+| ZTE              | 60326. | 12226. | 9657.3 | 8889.9 | 70050. | 16499. | 23376. | 75143. | 450.81 | 102736 |
+| Nokia            | 143002 | 75287. | 45979. | 73188. | 228618 | 59343. | 153869 | 133397 | 34413. | 58388. |
+| Ericsson         | 1204.3 | 2064.9 | 1704.1 | 2344.4 | 4289.7 | 8545.1 | 0.000  | 7893.9 | 660.32 | 1533.6 |
+| Huawei           | 35478. | 153751 | 13904. | 54309. | 25106. | 25783. | 0.000  | 25234. | 19.909 | 106868 |
+|                  |        |        |        |        |        |        |        |        |        |        |
+| Ublox            | 74479. | 32787. | 20262. | 33930. | 138252 | 20612. | 66862. | 106480 | 16926. | 27973. |
+| Quectel          | 45526. | 88877. | 15360. | 35436. | 25780. | 34472. | 21760. | 14354. | 845.99 | 106790 |
+|                  |        |        |        |        |        |        |        |        |        |        |
+| MTN              | 30765. | 7145.8 | 5680.7 | 5617.2 | 37170. | 12522. | 11688. | 41518. | 555.57 | 52135. |
+| Vodacom          | 89240. | 114519 | 29942. | 63749. | 126862 | 42563. | 76934. | 79316. | 17216. | 82628. |
+
+
+
+\newpage
 
 # References
 

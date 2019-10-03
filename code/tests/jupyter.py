@@ -483,38 +483,33 @@ def csvToDict(file):
             for fh in fheader:
                 if n in fh:
                     dt[fh] = d
-    # dt['name'] = file
+    dt['name'] = file
     return dt
 
 # post processing csv {} data
 def dataProcess(dt):
     dt['Total ACK NACK RX'] = dt.pop('Total ACK/NACK RX')
-    # print('Total ACK NACK RX', dt['Total ACK NACK RX'])
     try:
         kins = ['idleTime', 'energy', 'Total TX bytes', 'Total RX bytes', 'TX time', 'RX time']
         kouts = ['time', 'estimate', 'txBytes', 'rxBytes', 'txTimeNW', 'rxTimeNW']
         for ko in kouts:
-            dt[ko] = [] if ko in ['estimate'] else [0]
+            dt[ko] = []
         for k, ko in zip(kins, kouts):
-            # print('yo')
             for i, v in enumerate(dt[k]):
                 if k == 'energy':
                     v = v if v > 0 else 0.001
-                    dt[ko].append(9250.0/(v/(1000*3.6)))
-                    # print(9250.0/(v/(1000*3.6)))
+                    dt[ko].append(9250.0/(v/3600))
                 if k == 'idleTime':
-                    if i > 0:
-                        dt[ko].append(v + dt['txTime'][i-1] + dt[ko][i-1])
+                    dt[ko].append((v + dt['txTime'][i-1] + dt[ko][i-1]) if i > 0 else 0)
                 if k in kins[2:]:
-                    if i > 0:
-                        # print('dt[k][i] - dt[k][i-1]', dt[k][i] - dt[k][i-1])
-                        dt[ko].append(dt[k][i] - dt[k][i-1])
-            # if k == 'Total TX bytes':
-                # print('dt[k]', dt[k])
-                # print("dt['txBytes']", dt['txBytes'])
+                    val = v - dt[k][i-1] if i > 0 and v > 0 else 0
+                    dt[ko].append(val)
+                    if ko == 'txTimeNW':
+                        if val > 10000:
+                            # print(v, dt[k][i-1] if i>0 else 0, val, i, dt['name'])
+                            dt[ko][i] = 0
     except KeyError:
         dt[ko] = [[0] * len(dt['Signal power'])][0]
-        # print('KeyError: ', "dt['txBytes']", dt['txBytes'])
     finally:
         for ko in kouts:
             dt[ko] = np.array(dt[ko])

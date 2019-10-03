@@ -45,6 +45,7 @@ def lighten_color(color, amount):
 def plot(mdb, kx, ky, xlabel='', ylabel='', scale=[1,1], invert=[True,False], colour=cc, folder='', K=0, numerator=[None, None], testl=testl, 
         joburg=False, log=False, loc='upper right', thresh=None, bbox=(1.05, 1.12)):
     global hytest, hyuenw, hyatt, hxtest, hxuenw, hxatt, kkx, kky, xxlabel, yylabel, ffolder, outcounts, ally
+    print('plot @3x3')
     outcounts = acounts = oiutcounts = 0
     nwl = ['MTN-Ericsson', 'Vodacom-Huawei'] if joburg else ['MTN-ZTE', 'Vodacom-Nokia']
     hytest, hyuenw, hyatt = [], [], []
@@ -57,13 +58,18 @@ def plot(mdb, kx, ky, xlabel='', ylabel='', scale=[1,1], invert=[True,False], co
     kkx, kky = kx, ky
     xxlabel, yylabel = xlabel, ylabel
     fig, axp = plt.subplots(3, 3, figsize=(12, 12), sharey=False)
-    fig2, axo = plt.subplots(3, 3, figsize=(12, 7), sharey=False)
+    if not log:
+        fig2, axo = plt.subplots(3, 3, figsize=(12, 7), sharey=False)
+    else:
+        axo = axp
+
     for oi in range(2):
         for ti, test in enumerate(mdb):
             if oi:
                 hytest.append([])
                 hxtest.append([])
             for ui, uenw in enumerate(test):
+                print('.', end='')
                 if not ti and oi:
                     ally.append([])
                     hyuenw.append([])
@@ -206,28 +212,37 @@ def plot(mdb, kx, ky, xlabel='', ylabel='', scale=[1,1], invert=[True,False], co
                         # except KeyboardInterrupt as e:
                             pass
 
+    print('Data Processing Done')
+
     for i, ax in enumerate([ax for row in axp for ax in row]):
+        # print('.', end='')
         if log:
             ax.set_yscale('log')
+    # print('Logarithmic Axes Done')
 
+    sirange = 1 if log else 2
     for si in range(2):
         ax = axo if si else axp
         ax[1][2].boxplot(ally)
         f1, f2, g1, g2 = ax[0][2].axis()
+        g1 = min([b for a in ally for b in a])
+        if (g1):
+            g1 -= 0.2*np.abs(g1)
+        else:
+            g1 = 0.01
+        # print('g1', g1)
         ax[1][2].set_ylim(g1, g2)
         ax[1][2].set_xticklabels(('U-M', 'Q-M', 'U-V', 'Q-V'))
 
         ax[0][1].set_yticklabels([])
-        # ax[0][2].set_yticklabels([])
         ax[1][1].set_yticklabels([])
-        # ax[1][2].set_yticklabels([])
         ax[2][1].set_yticklabels([])
-        # ax[2][2].set_yticklabels([])
 
         ax[0][0].set_xlim(f1, f2)
         ax[0][0].set_ylim(g1, g2)
         ax[0][1].set_xlim(f1, f2)
         ax[0][1].set_ylim(g1, g2)
+        ax[0][2].set_ylim(g1, g2)
         ax[1][0].set_xlim(f1, f2)
         ax[1][0].set_ylim(g1, g2)
         ax[1][1].set_xlim(f1, f2)
@@ -236,6 +251,7 @@ def plot(mdb, kx, ky, xlabel='', ylabel='', scale=[1,1], invert=[True,False], co
         ax[2][0].set_ylim(g1, g2)
         ax[2][1].set_xlim(f1, f2)
         ax[2][1].set_ylim(g1, g2)
+        ax[2][2].set_ylim(g1, g2)
 
         Afont = {
             #'family': 'serif',
@@ -265,14 +281,17 @@ def plot(mdb, kx, ky, xlabel='', ylabel='', scale=[1,1], invert=[True,False], co
             ax[2][2].legend(loc=loc, bbox_to_anchor=bbox if not si else (bbox[0], 1.04)) # 'best'
 
     axp[0][0].add_artist(AnchoredText(str(sum([len(a) for a in hytest])) + '/' + str(acounts) + '\nK=' + str(K), loc=2))
-    axo[0][0].add_artist(AnchoredText(str(outcounts) + '/' + str(oiutcounts) + '\nK=' + str(K), loc=2))
+    if not log:
+        axo[0][0].add_artist(AnchoredText(str(outcounts) + '/' + str(oiutcounts) + '\nK=' + str(K), loc=2))
     # f1, f2, g1, g2 = axp[0][2].axis()
     y2 = axp[0][2].get_yticks()[-1]
     for i, (ax1, ax2, alph) in enumerate(zip([ax for row in axp for ax in row], [ax for row in axo for ax in row], ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'])):
-        ax2.set_ylim(y2 - 0.1*np.abs(y2), None)
+        # print('.', end='')
+        if not log:
+            ax2.set_ylim(y2 - 0.1*np.abs(y2), None)
         ax1.add_artist(AnchoredText(alph, loc='lower right' if i in [1,4,7] else 'lower left'))
         ax2.add_artist(AnchoredText(alph, loc='lower right' if i in [1,4,7] else 'lower left'))
-        if log:
+        if log and not i in [1,4,7]:
             ax1.yaxis.set_major_formatter(ticker.FuncFormatter(lambda y,pos: ('{{:.{:1d}f}}'.format(int(np.maximum(-np.log10(max(y, 0.01)),0)))).format(y)))
         if i != 5:
             # if log:
@@ -282,15 +301,17 @@ def plot(mdb, kx, ky, xlabel='', ylabel='', scale=[1,1], invert=[True,False], co
             else:
                 ax1.xaxis.set_major_locator(MultipleLocator(10))
 
+    # print('Anchor Text Done')
     kx = '_'.join(kx.split())
     ky = '_'.join(ky.split())
     # plt.tight_layout()
     plt.show()
-    fig.savefig(folder + kx + '_' + ky + '_plot.png', bbox_inches='tight')
-    fig.savefig(folder + kx + '_' + ky + '_plot.pdf', bbox_inches='tight')
-    fig2.savefig(folder + kx + '_' + ky + '_outliers.png', bbox_inches='tight')
-    fig2.savefig(folder + kx + '_' + ky + '_outliers.pdf', bbox_inches='tight')
-    print(ti+1, ui+1, ai+1)
+    print('Plots Shown.', ti+1, ui+1, ai+1)
+    # fig.savefig(folder + kx + '_' + ky + '_plot.png', bbox_inches='tight')
+    # fig.savefig(folder + kx + '_' + ky + '_plot.pdf', bbox_inches='tight')
+    # fig2.savefig(folder + kx + '_' + ky + '_outliers.png', bbox_inches='tight')
+    # fig2.savefig(folder + kx + '_' + ky + '_outliers.pdf', bbox_inches='tight')
+    # print('Plots Saved.')
 
 def hist(plotx=False, kx='A', ky='B', bins=20):
     global kkx, kky

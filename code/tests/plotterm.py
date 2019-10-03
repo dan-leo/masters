@@ -48,6 +48,7 @@ def plot(mdb, kx, ky, xlabel='', ylabel='', scale=[1,1], invert=[True,False], co
     outcounts = acounts = oiutcounts = 0
     hytest, hyuenw, hyatt = [], [], []
     hxtest, hxuenw, hxatt = [], [], []
+    hytw = []
     ecl_list = []
     ecl_listo = []
     ally = []
@@ -58,13 +59,16 @@ def plot(mdb, kx, ky, xlabel='', ylabel='', scale=[1,1], invert=[True,False], co
     for oi in range(2):
         for ti, test in enumerate(mdb):
             if oi:
+                hytw.append([])
                 hytest.append([])
                 hxtest.append([])
             for ui, uenw in enumerate(test):
-                if not ti and oi:
-                    ally.append([])
-                    hyuenw.append([])
-                    hxuenw.append([])
+                if oi:
+                    hytw[ti].append([])
+                    if not ti:
+                        ally.append([])
+                        hyuenw.append([])
+                        hxuenw.append([])
                 for ai, att in enumerate(uenw):
                     if not ti and oi:
                         hyatt.append([])
@@ -100,26 +104,28 @@ def plot(mdb, kx, ky, xlabel='', ylabel='', scale=[1,1], invert=[True,False], co
                                     if y.size:
                                         for hy in y:
                                             ally[ui].append(hy)
+                                            hytw[ti][ui].append(hy)
                             except TypeError as e:
                                 print(e, atd[kx])
                         except (KeyError, TypeError) as e:
                             pass
-    mean = [np.mean(m) for m in ally]
-    # f, (ax1, ax2, ax3) = plt.subplots(1, 3, sharey='row')
-    fig = plt.figure(figsize=(7,4))
-    # ax1 = plt.subplot(121)
-    # ax2 = plt.subplot(133)
-    ax1 = plt.subplot2grid((1, 3), (0, 0), colspan=2)
-    ax2 = plt.subplot2grid((1, 3), (0, 2))
-    ax1.bar(['Ublox-ZTE','Quectel-ZTE','Ublox-Nokia','Quectel-Nokia'], mean)
-    ax2.bar(['MTN', 'Vodacom'], [np.mean(mean[:2]), np.mean(mean[2:])], color=cc_compare)
-    _, _, g1, g2 = ax1.axis()
-    ax2.set_ylim(g1, g2)
-    plt.tight_layout()
-    print(tabulate([np.insert([str(np.mean(m)) for m in ally], 0, ylabel)], uenwl, tablefmt="github"))
-    print(tabulate([np.insert([str(np.mean(m)) for m in [mean[:2], mean[2:]]], 0, ylabel)], ['MTN', 'Vodacom'], tablefmt="github"))
-    print(xlabel)
-    return ally
+    # mean = [np.mean(m) for m in ally]
+    # # f, (ax1, ax2, ax3) = plt.subplots(1, 3, sharey='row')
+    # fig = plt.figure(figsize=(7,4))
+    # # ax1 = plt.subplot(121)
+    # # ax2 = plt.subplot(133)
+    # ax1 = plt.subplot2grid((1, 3), (0, 0), colspan=2)
+    # ax2 = plt.subplot2grid((1, 3), (0, 2))
+    # ax1.bar(['Ublox-ZTE','Quectel-ZTE','Ublox-Nokia','Quectel-Nokia'], mean[:4])
+    # ax2.bar(['MTN', 'Vodacom'], [np.mean(mean[:2]), np.mean(mean[2:4])], color=cc_compare)
+    # _, _, g1, g2 = ax1.axis()
+    # ax2.set_ylim(g1, g2)
+    # plt.tight_layout()
+    # print(tabulate([np.insert([str(np.mean(m)) for m in ally], 0, ylabel)], uenwl, tablefmt="github"))
+    # print(tabulate([np.insert([str(np.mean(m)) for m in [mean[:2], mean[2:4]]], 0, ylabel)], ['MTN', 'Vodacom'], tablefmt="github"))
+    # print(xlabel)
+    print([str(np.mean(m))[:4] for m in ally])
+    return ally, hytw
     # for si in range(2):
     #     ax = axo if si else axp
     #     ax[1][2].boxplot(ally)

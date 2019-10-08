@@ -49,6 +49,7 @@ def plot(mdb, kx, ky, xlabel='', ylabel='', scale=[1,1], invert=[True,False], co
     hytest, hyuenw, hyatt = [], [], []
     hxtest, hxuenw, hxatt = [], [], []
     hytw = []
+    hecl = [[], [], [], []]
     ecl_list = []
     ecl_listo = []
     ally = []
@@ -60,11 +61,15 @@ def plot(mdb, kx, ky, xlabel='', ylabel='', scale=[1,1], invert=[True,False], co
         for ti, test in enumerate(mdb):
             if oi:
                 hytw.append([])
+                for i in range(4):
+                    hecl[i].append([])
                 hytest.append([])
                 hxtest.append([])
             for ui, uenw in enumerate(test):
                 if oi:
                     hytw[ti].append([])
+                    for i in range(4):
+                        hecl[i][ti].append([])
                     if not ti:
                         ally.append([])
                         hyuenw.append([])
@@ -91,9 +96,21 @@ def plot(mdb, kx, ky, xlabel='', ylabel='', scale=[1,1], invert=[True,False], co
                                     atdky = atd[ky][np.sort(idx)]
                                     data = np.array([atdkx, atdky])
                                     # k-means
-                                    kmeans = KMeans(n_clusters=min(K, len(atdky)))
+                                    K_len = min(K, len(atdky))
+                                    kmeans = KMeans(n_clusters=K_len)
                                     kmeans.fit(data.T)
                                     atk[kx], atk[ky] = kmeans.cluster_centers_.T
+                                    # print(kmeans.labels_, atk[kx], atk[ky])
+                                    # labels_   
+                                    a = [[] for i in range(K_len)]
+                                    for e, k in zip(atd['ECL'], kmeans.labels_):
+                                        a[k].append(e)
+                                    for i in range(K_len):
+                                        a[i] = int(round(np.mean(a[i]))) if a[i] else a[i]
+                                    for e, vy in zip(a, atk[ky]):
+                                        hecl[e][ti][ui].append(vy/scale[1])
+                                    # print(hecl)
+
                                 else:
                                     atk[kx], atk[ky] = atd[kx], atd[ky]
                                     atk['ECL'] = atd['ECL']
@@ -125,7 +142,7 @@ def plot(mdb, kx, ky, xlabel='', ylabel='', scale=[1,1], invert=[True,False], co
     # print(tabulate([np.insert([str(np.mean(m)) for m in [mean[:2], mean[2:4]]], 0, ylabel)], ['MTN', 'Vodacom'], tablefmt="github"))
     # print(xlabel)
     print([str(np.mean(m))[:4] for m in ally])
-    return ally, hytw
+    return ally, hytw, hecl
     # for si in range(2):
     #     ax = axo if si else axp
     #     ax[1][2].boxplot(ally)

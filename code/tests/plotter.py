@@ -20,7 +20,8 @@ def attdt():
     for at in atten:
         atf[str(at) + ' dB'] = []
     # atf['40-110 dB'] = []
-    return copy.deepcopy(atf)
+    # return copy.deepcopy(atf)
+    return atf
 
 # manual flatten of array
 def flatten(hist):
@@ -53,17 +54,23 @@ def scatternuator(name, kx, ky, thresh, plotlim, scale, limited, dirrs, files, k
             subfiles = glob.glob(dirr + starfolder)
             for file in subfiles:
                 f = file.split('\\')[-1]
+                f = file.split('/')[-1]
                 for atn in atten:
                     if str(atn) in f:
-                        # print(atn, file)
+                        # if 'slight' in f and 'cops' in file:
+                        #     print(atn, f, file)
                         if atn >= 120:
                             atf['40-110 dB'].append(file)
                         else:
                             atf[str(atn) + ' dB'].append(file)
                         break
+                    if f == '5':
+                        atf['0 dB'].append(file)
+                        break
                 else:
-                    print('else', file)
+                    print('else', file, f)
                     atf['40-110 dB'].append(file)
+        # print(atf)
 
         ####################### database {} prep #######################
 
@@ -107,7 +114,8 @@ def scatternuator(name, kx, ky, thresh, plotlim, scale, limited, dirrs, files, k
         # print(dirr)
         # # print([(len(atd[a])) for a in atd])
         
-        attenuator_db.append(copy.deepcopy(atd))
+        # attenuator_db.append(copy.deepcopy(atd))
+        attenuator_db.append(atd)
 
     if ttype == 'return':
         return attenuator_db

@@ -21,7 +21,7 @@ LTE Cat-NB (Narrowband) characterization of user equipment (UE) and mobile netwo
 
 
 
-## Memory allocation
+# Memory allocation
 
 Memory can be considered a reasonable UE health metric in terms of monitoring code stability.
 
@@ -92,3 +92,61 @@ MTN     &          &          &           &        &       &        &        &  
 Vodacom &          &          &           &        &       &        &        &       &        &        &        &        &        &        &        &        &        &        &        &        &       
 \end{tabular}
 \end{table}
+
+
+
+# UE-MNO Comparison
+
+Table: Comparing means of UE-MNO pairs
+
+|                      | Ublox-MTN | Quectel-MTN | Ublox-Vodacom | Quectel-Vodacom |
+| -------------------- | --------- | ----------- | ------------- | --------------- |
+| **Metrics**          |           |             |               |                 |
+| Latency (s)          | 5.52      | 10.73       | 12.5608       | 27.7113         |
+| Transmit time (s)    | 0.52      | 1.34        | 14.4993       | 4.19134         |
+| Receive time (s)     | 1.28      | 3.31        | 60.4745       | 10.5279         |
+| Energy (J)           | 11.4      | 21.9        | 21.9968       | 57.7098         |
+| Max current (mA)     | 102.7     | 104.1       | 106.4         | 108.7           |
+| Transmit power (dBm) | 16.96     | 14.80       | 16.16         | 18.64           |
+| RSSI (dBm)           | -93.31    | -89.50      | -83.30        | -82.28          |
+| TX Bytes (B)         | 345.8     | 852.7       | 3113          | 446.5           |
+| RX Bytes (B)         | 109.2     | 386.7       | 769.3         | 147.7           |
+| ACK/NACK RX Packet   | 20.1      | 7.5         | 13.2          | 12.3            |
+| RLC UL (B)           | 468.8     | 336.9       | 343.8         | 201.3           |
+| RLC DL (B)           | 240.2     | 144.2       | 77.1          | 43.3            |
+| MAC UL (B)           | 568.2     | 554.0       | 357.3         | 292.3           |
+| MAC UL (B)           | 321.1     | 181.2       | 87.1          | 55.2            |
+|                      |           |             |               |                 |
+| **Estimates**        |           |             |               |                 |
+| Battery Lifetime     |           |             |               |                 |
+|                      |           |             |               |                 |
+
+Table: Comparing means of MNOs
+
+|                               | MTN     | Vodacom |
+| ----------------------------- | ------- | ------- |
+| Latency (s)                   | 8.14    | 20.1    |
+| Transmit Latency (s)          | 0.93    | 9.35    |
+| Receive Latency (s)           | 2.30    | 35.5    |
+| Energy (J)                    | 16.7    | 39.9    |
+| Max current (mA)              | 103.5   | 107.6   |
+| Transmit power (dBm)          | 15.9    | 17.4    |
+| RSSI (dBm)                    | -91.4   | -82.8   |
+| SINR (dB)                     | 3.43    | 3.36    |
+| RSRQ (dB)                     | -13.0   | -13.1   |
+| TX Bytes (B)                  | 599.2   | 1779.7  |
+| RX Bytes (B)                  | 247.9   | 458.5   |
+| ACK/NACK RX Packet            | 13.8    | 12.7    |
+| Currently allocated           | 21238.9 | 21220.3 |
+| RLC UL (B)                    | 402.9   | 273.2   |
+| RLC DL (B)                    | 192.2   | 60.2    |
+| MAC UL (B)                    | 561.2   | 324.8   |
+| MAC UL (B)                    | 251.2   | 71.3    |
+|                               |         |         |
+| **Estimates**                 |         |         |
+| Battery Lifetime              | 1500    | 800     |
+| Data Billing (how many 512 B) | 5000    | 2000    |
+
+
+
+# 

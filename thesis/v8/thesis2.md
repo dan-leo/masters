@@ -22,7 +22,7 @@ tablenos-number-by-section: true
 
 ## Approach
 
-The aim is to compare user equipment (UE) against mobile network operators (MNOs) with a set of tests that evaluate NB-IoT's performance according to a set of metrics which highlight striking differences due to the underlying complexities of LTE architecture.
+As stated in Section \ref{resobj}, the aim of this study is to compare user equipment (UE) against mobile network operators (MNOs) with a set of tests that evaluate NB-IoT's performance according to a set of metrics which highlight striking differences due to the underlying complexities of LTE architecture.
 
 Four mobile network operators (MNOs) are compared in South Africa according to the underlying vendor
 infrastructure used, namely Nokia and ZTE in the Cape/coastal regions and Ericsson and Huawei based in Gauteng/inland regions.
@@ -30,15 +30,6 @@ infrastructure used, namely Nokia and ZTE in the Cape/coastal regions and Ericss
 More than one UE is used to improve the accuracy of the result, namely Ublox and Quectel. There is an open possibility to test SimCom and Nordic as well.
 
 A unit testing framework has been carefully prepared in Python in combination with a Hewlett Packard rotary RF attenuator in 10dBm steps. 
-
-Table: UE, NW and main metric comparisons {#tbl:metric_summary}
-
-| NW Vendors | UE Manufacturers | Main Metrics     | Secondary Metrics | Estimates    |
-| ---------- | ---------------- | ---------------- | ----------------- | ------------ |
-| ZTE        | Ublox            | Power Efficiency | Signal Strength   | Battery Life |
-| Nokia      | Quectel          | Latency          | Throughput        |              |
-| Ericsson   | Nordic           | Data usage       |                   |              |
-| Huawei     | SimCom           |                  |                   |              |
 
 However, due to the demonstrated energy variability of NB-IoT, an estimate of the energy per message EMSG must be chosen in accordance with the application requirements, rang- ing from very optimistic (best case) to the most pessimistic (worst case). For that purpose, we use the data recorded as a probabilistic
 model, taking the 5th/95th-percentiles for the best/worst case scenarios, and the mean values as an estimate for the long- term behavior.
@@ -238,114 +229,6 @@ Table: EARFCN for serving cell {#tbl:earfcn}
 The E-UTRA Absolute Radio Frequency Channel Number (EARFCN) designates the carrier frequency in the uplink and downlink, and ranges between 0-65535.
 
 Since the frequency of the three towers was the same on all three MTN towers, this shows that intra-cell reselection does indeed work.
-
-## RF receive metrics
-
-![LTE RSRQ and SINR RF Conditions](../images/LTE-RF-Conditions.png)
-
-Tests were completed in good, mid cell and cell edge RF conditions.
-
-### MCL
-
-Once the module has an RRC connection, then the ECL, RSRP, RSRQ values allow to understand the
-RF link budget between the module and base station.
-
-|                | MCL     |
-| -------------- | ------- |
-| MTN-ZTE        | 157 dBm |
-| Vodacom-Nokia  | 137 dBm |
-| MTN-Ericsson   |         |
-| Vodacom-Huawei |         |
-
-
-
-### RSSI vs RSRP
-
-\begin{minipage}{\linewidth}
-\begin{center}
-\includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_Total_power_plot.pdf}
-\captionof{figure}[RSSI versus RSRP packets (389/1619).]{RSSI versus RSRP packets (389/1619) in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs.}
-\label{fig:}
-\end{center}
-\end{minipage}
-
-[](../../../masters/code/tests/plotterk/Signal_power_Total_power_plot.png)
-
-(A) Attenuation zones evident in both RSSI/RSRP. (B) Vodacom within a range of 40dBm and MTN within 50dBm. MTN is also 20dBm more sensitive in terms of RSRP. (C) Significant variation in tests across both axes. (D) ECL 2 mainly from -110dB RSRP or less and ECL 1 more. ECL 0 spread throughout.
-
-[](../../../masters/code/tests/plotterk/Total_power_histogram.png)
-
-[](../../../masters/code/tests/plotterk/Signal_power_histogram.png)
-
-### RSRQ
-
-**RSRQ = N x RSRP / RSSI**
-
-![LTE RSRQ reporting range](../images/CableFree-LTE-RSRQ-reporting-range.png)
-
-- N is the number of Physical Resource Blocks (PRBs) over which the RSSI is measured, typically equal to system bandwidth
-- RSSI is pure wide band power measurement, including intracell power, interference and noise
-- The reporting range of RSRQ is defined from -3…-19.5dB
-
-\begin{minipage}{\linewidth}
-\begin{center}
-\includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_RSRQ_plot.pdf}
-\captionof{figure}[RSRQ vs RSRP packets (389/1619).]{RSRQ vs RSRP packets (389/1619) in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs.}
-\label{fig:}
-\end{center}
-\end{minipage}
-
-[](../../../masters/code/tests/plotterk/Signal_power_RSRQ_plot.png)
-
-(A) Attenuation zones evident in RSRP and skewed by RSRQ axis. (B) Vodacom shows poorer RSRQ than MTN. (CD) Significant variation in tests and ECL across both axes.
-
-\begin{minipage}{\linewidth}
-\begin{center}
-\includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/RSRQ_histogram.pdf}
-\captionof{figure}{Histogram distribution of RSRQ.}
-\label{fig:}
-\end{center}
-\end{minipage}
-
-[](../../../masters/code/tests/plotterk/RSRQ_histogram.png)
-
-### SINR
-
-https://www.cablefree.net/wirelesstechnology/4glte/lte-rsrq-sinr/
-
-SINR is a measure of signal quality as well but it is not defined in the 3GPP specs but defined by the UE vendor.
-
-It is not reported to the network. SINR is used a lot by operators, and the LTE industry in general, as it better quantifies the **relationship between RF conditions and Throughput**. LTE UEs typically use SINR to calculate the CQI (Channel Quality Indicator) they report to the network.
-
-It is a common practice to use Signal-to-Interference Ratio (SINR) as an indicator for network quality. It should be however noted that 3GPP specifications do not define SINR and  therefore UE does not report SINR to the network. SINR is still internally measured by most UEs and recorded by drive test tools.
-
-Unfortunately UE chipset and RF scanner manufacturers have implemented SINR measurement in various different ways which are not always easily comparable. While at first it may seem that defining SINR should be unambiguous, in case of LTE downlink this is not the case. This is because different REs within a radio frame carry different physical signals and channels each of which, in turn, see different interference power depending on inter-cell radio frame synchronization.
-
-For example, in a frame-synchronized network, **SINR estimation based on synchronization signals**(PSS/SSS) results in different SINR than SINR estimation based on Reference Signals, since in the latter case the frequency shift of the RS depends on the PCI plan.
-
-\begin{minipage}{\linewidth}
-\begin{center}
-\includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_RSRQ_plot.pdf}
-\captionof{figure}{SINR versus RSRP packets (389/1619) in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs.}
-\label{fig:}
-\end{center}
-\end{minipage}
-
-[](../../../masters/code/tests/plotterk/Signal_power_SNR_plot.png)
-
-(A) Attenuation zones evident in RSRP and skewed by SINR axis. (B) Vodacom shows poorer SINR than MTN. (CD) Significant variation in tests and ECL across both axes.
-
-SNR is spread relatively evenly for the different attenuation zones.
-
-\begin{minipage}{\linewidth}
-\begin{center}
-\includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/SNR_histogram.pdf}
-\captionof{figure}{Histogram distribution of SINR.}
-\label{fig:}
-\end{center}
-\end{minipage}
-
-[](../../../masters/code/tests/plotterk/SNR_histogram.png)
 
 
 
@@ -716,11 +599,121 @@ It is evident that on all attenuation levels there is a high degree of variation
 
 [](../../code/tests/logs/zte_mtn/rf_shield/quectel/scope/70.4mA_ant_0dB.jpg)
 
-## Data usage
+## Secondary Metrics
+
+## RF receive metrics
+
+![LTE RSRQ and SINR RF Conditions](../images/LTE-RF-Conditions.png)
+
+Tests were completed in good, mid cell and cell edge RF conditions.
+
+### MCL
+
+Once the module has an RRC connection, then the ECL, RSRP, RSRQ values allow to understand the
+RF link budget between the module and base station.
+
+|                | MCL     |
+| -------------- | ------- |
+| MTN-ZTE        | 157 dBm |
+| Vodacom-Nokia  | 137 dBm |
+| MTN-Ericsson   |         |
+| Vodacom-Huawei |         |
+
+
+
+### RSSI vs RSRP
+
+\begin{minipage}{\linewidth}
+\begin{center}
+\includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_Total_power_plot.pdf}
+\captionof{figure}[RSSI versus RSRP packets (389/1619).]{RSSI versus RSRP packets (389/1619) in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs.}
+\label{fig:}
+\end{center}
+\end{minipage}
+
+[](../../../masters/code/tests/plotterk/Signal_power_Total_power_plot.png)
+
+(A) Attenuation zones evident in both RSSI/RSRP. (B) Vodacom within a range of 40dBm and MTN within 50dBm. MTN is also 20dBm more sensitive in terms of RSRP. (C) Significant variation in tests across both axes. (D) ECL 2 mainly from -110dB RSRP or less and ECL 1 more. ECL 0 spread throughout.
+
+[](../../../masters/code/tests/plotterk/Total_power_histogram.png)
+
+[](../../../masters/code/tests/plotterk/Signal_power_histogram.png)
+
+### RSRQ
+
+**RSRQ = N x RSRP / RSSI**
+
+![LTE RSRQ reporting range](../images/CableFree-LTE-RSRQ-reporting-range.png)
+
+- N is the number of Physical Resource Blocks (PRBs) over which the RSSI is measured, typically equal to system bandwidth
+- RSSI is pure wide band power measurement, including intracell power, interference and noise
+- The reporting range of RSRQ is defined from -3…-19.5dB
+
+\begin{minipage}{\linewidth}
+\begin{center}
+\includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_RSRQ_plot.pdf}
+\captionof{figure}[RSRQ vs RSRP packets (389/1619).]{RSRQ vs RSRP packets (389/1619) in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs.}
+\label{fig:}
+\end{center}
+\end{minipage}
+
+[](../../../masters/code/tests/plotterk/Signal_power_RSRQ_plot.png)
+
+(A) Attenuation zones evident in RSRP and skewed by RSRQ axis. (B) Vodacom shows poorer RSRQ than MTN. (CD) Significant variation in tests and ECL across both axes.
+
+\begin{minipage}{\linewidth}
+\begin{center}
+\includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/RSRQ_histogram.pdf}
+\captionof{figure}{Histogram distribution of RSRQ.}
+\label{fig:}
+\end{center}
+\end{minipage}
+
+[](../../../masters/code/tests/plotterk/RSRQ_histogram.png)
+
+### SINR
+
+https://www.cablefree.net/wirelesstechnology/4glte/lte-rsrq-sinr/
+
+SINR is a measure of signal quality as well but it is not defined in the 3GPP specs but defined by the UE vendor.
+
+It is not reported to the network. SINR is used a lot by operators, and the LTE industry in general, as it better quantifies the **relationship between RF conditions and Throughput**. LTE UEs typically use SINR to calculate the CQI (Channel Quality Indicator) they report to the network.
+
+It is a common practice to use Signal-to-Interference Ratio (SINR) as an indicator for network quality. It should be however noted that 3GPP specifications do not define SINR and  therefore UE does not report SINR to the network. SINR is still internally measured by most UEs and recorded by drive test tools.
+
+Unfortunately UE chipset and RF scanner manufacturers have implemented SINR measurement in various different ways which are not always easily comparable. While at first it may seem that defining SINR should be unambiguous, in case of LTE downlink this is not the case. This is because different REs within a radio frame carry different physical signals and channels each of which, in turn, see different interference power depending on inter-cell radio frame synchronization.
+
+For example, in a frame-synchronized network, **SINR estimation based on synchronization signals**(PSS/SSS) results in different SINR than SINR estimation based on Reference Signals, since in the latter case the frequency shift of the RS depends on the PCI plan.
+
+\begin{minipage}{\linewidth}
+\begin{center}
+\includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_RSRQ_plot.pdf}
+\captionof{figure}{SINR versus RSRP packets (389/1619) in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs.}
+\label{fig:}
+\end{center}
+\end{minipage}
+
+[](../../../masters/code/tests/plotterk/Signal_power_SNR_plot.png)
+
+(A) Attenuation zones evident in RSRP and skewed by SINR axis. (B) Vodacom shows poorer SINR than MTN. (CD) Significant variation in tests and ECL across both axes.
+
+SNR is spread relatively evenly for the different attenuation zones.
+
+\begin{minipage}{\linewidth}
+\begin{center}
+\includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/SNR_histogram.pdf}
+\captionof{figure}{Histogram distribution of SINR.}
+\label{fig:}
+\end{center}
+\end{minipage}
+
+[](../../../masters/code/tests/plotterk/SNR_histogram.png)
+
+### Data Overhead
 
 Considering the variance in figure \ref{fig:udpsize}, taking the mean will make for a simpler representation per UDP size.
 
-### TX, RX bytes
+#### TX, RX bytes
 
 It displays the BLER and total number of bytes transmitted and received by the RLC Layer and
 Physical Layer.
@@ -791,7 +784,7 @@ In general packet sizes are up to 200 bytes.
 
 Attenuation zones do not affect packet size Quectel-MTN and Ublox-Vodacom pairs are essentially the only outliers above 300 bytes already. All outliers are as a result of UDP packet tests and ECL does not seem to affect packet size.
 
-### ACK to NACK Ratio
+#### ACK to NACK Ratio
 
 Check the Ack/Nak ratio to see a general view of the link
 quality.
@@ -812,7 +805,7 @@ up to 30 required, and one outlier at 80.
 
 (A) Attenuation zones evident and do not affect number of ACK/NACKs. (B) Vodacom requires more ACK/NACK responses than MTN. They share similar characteristics at a difference of 40dBm RSRP. (C) Significant variation in tests, although eDRX tests show the greatest number. (D) ECL does not seem to affect ACK/NACK count
 
-### Throughput
+#### Throughput
 
 It displays the throughput measurement for the RLC and physical layers.
 
@@ -831,7 +824,9 @@ scan for base station, etc. This is simply over the protocol stack itself.
 
 ## Estimations
 
+### Telemetry Interval
 
+### Battery longevity
 
 \newpage
 
@@ -846,6 +841,10 @@ Avoid -120 dBm - -130 dBm region
 ## Use Cases
 
 Use cases suitable for NB-IoT considering results
+
+## Future Work
+
+Compare NB-IoT to Dash7, which can be considered a prominent bi-directional contender. It has the capability of using LoRa's physical layer (RF frontend) so has the added benefit of long range.
 
 # Conclusion {#conclusion}
 
@@ -924,7 +923,7 @@ only caveat is battery life
 
 # Appendix A {-#appendixA}
 
-## Latency Measurements
+## Measured Latency
 
 
 
@@ -1040,7 +1039,7 @@ Table: Average Power (uWh) {#tbl:energy}
 |                  |        |        |         |         |         |        |        |        |        |
 
 \newpage
-## Telemetry Interval Estimate
+## Telemetry Interval
 
 
 Table: Interval estimate in minutes using energy measurements for 9.36Wh AA battery (Lithium Thionyl Chloride) to last 1 year. {#tbl:energy_interval}
@@ -1098,7 +1097,7 @@ Table: Interval estimate in minutes using energy measurements for 9.36Wh AA batt
 
 
 \newpage
-## Longevity Estimate
+## Battery Longevity
 
 
 Table: Longevity Estimate (years) for 9.36Wh AA battery (Lithium Thionyl Chloride) with hourly uses. {#tbl:energy_longevity}
@@ -1158,7 +1157,7 @@ Table: Longevity Estimate (years) for 9.36Wh AA battery (Lithium Thionyl Chlorid
 
 # Appendix B {-#appendixB}
 
-## TX Time
+## RF Transmit Time
 
 Table: TX Time (s) {#tbl:txTimeNW}
 
@@ -1215,7 +1214,7 @@ Table: TX Time (s) {#tbl:txTimeNW}
 
 \newpage
 
-## RX Time
+## RF Receive Time
 
 Table: RX Time (s) {#tbl:rxTimeNW}
 
@@ -1328,7 +1327,7 @@ Table: Average Power (uWh) {#tbl:energyE}
 
 \newpage
 
-## Telemetry Interval Estimate
+## Telemetry Interval
 
 Table: Interval Estimate in minutes using reported RX, TX Time for 9.36Wh AA battery (Lithium Thionyl Chloride) to last 1 year. {#tbl:energy_interval}
 
@@ -1384,7 +1383,7 @@ Table: Interval Estimate in minutes using reported RX, TX Time for 9.36Wh AA bat
 
 \newpage
 
-## Longevity Estimate
+## Battery Longevity
 
 Table: Longevity Estimate in years using Reported RX, TX Time for 9.36Wh AA battery (Lithium Thionyl Chloride) with hourly uses. {#tbl:energy_longevity}
 
@@ -1441,6 +1440,8 @@ Table: Longevity Estimate in years using Reported RX, TX Time for 9.36Wh AA batt
 \newpage
 
 # Appendix C {-#appendixC}
+
+* Compare Appendix A and B?
 
 \newpage
 

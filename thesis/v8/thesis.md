@@ -28,6 +28,11 @@ tablenos-number-by-section: true
 
 # Acknowledgements {-#acknowledgements}
 
+* **Prof Thinus Booysen** - for his unrelenting care, innovative passion and inspiring belief in people.
+* **Family** - for their love and dedication.
+* **Friends** - for their wisdoms, experiencing the journey together and sharing moments in highs and lows.
+* **MTN Mobile Intelligence Lab** - for providing funding, expertise and a decent laboratory environment.
+
 # Acronyms {-#acronyms}
 
 |      |      |
@@ -56,6 +61,7 @@ tablenos-number-by-section: true
 | **IP** | Internet Protocol |
 | **LPWAN** | Low-Power Wide-Area-Network |
 | **LTE Cat-NB1/2** | Long Term Evolution Narrow-Band Category 1/2 |
+| **MCL** | Maximum Coupling Link |
 | **MCS** | Message Coding Scheme |
 | **MNO** | Mobile Network Operator |
 | **MO** | Mobile Originated |
@@ -65,6 +71,7 @@ tablenos-number-by-section: true
 | **NW** | Network |
 | **OTDOA** | Observed Time Difference Of Arrival |
 | **PCI** | Physical Channel ID |
+| **PDR** | Packet Delivery Ratio |
 | **PS** | Packet Switched |
 | **PTAU** | Periodic Tracking Area Update |
 | **PTAU** | Periodic Tracking Area Update |
@@ -107,50 +114,50 @@ NB-IoT is a promising contender to fill the role that 2G/GPRS leaves behind as c
 
 ## Why NB-IoT?
 
-NB-IoT shows performance benefits over alternatives in terms of uplink and downlink throughput, range. 
+NB-IoT shows performance benefits over alternatives in terms of up and downlink throughput, range and longevity.
 
-* ~ 10 years
-* < 10 seconds
-* \+ 20 dB improvement over 2G/GPRS
+According to 3GPP specifications and manufacturer claims, highlights include:
 
-Energy consumption remains a problem [@Durand2019], [@Martinez2019].
+* ~ 10 year battery-lifetime.
+* Under 10 second transmission acknowledgement for latency-tolerant applications
+* \+ 20 dB improvement over 2G/GPRS via enhanced coverage levels (ECL).
 
-## Problem statement {#probstat}
+## Problem Statement {#probstat}
 
-To evaluate the performance of NB-IoT using multiple user equipment (UE) and (MNOs).
+NB-IoT (LTE Cat-NB) is a competitive alternative to LoRaWAN, SigFox and other LPWANs. Application developers require network coverage, and cellular service providers require consumer and enterprise demand or a business case before rolling it out nationally. Although there is a great deal of theoretical analysis and simulations in research, the lack of empirical evidence may be contributing to a general uncertainty in the standing of the technology with respect to alternatives and a thus a slower adoption. This thesis aims to bridge that divide by evaluating NB-IoT's performance empirically using a set of metrics and estimate optimal use.
 
-There exists an interest in implementing NB-IoT (LTE Cat-NB) as an alternative to LoRaWAN, SigFox and other LPWANs. Application developers require network coverage, and cellular service providers require consumer and enterprise demand or reasonable motivation before rolling it out nationally. Although there is a great deal of theoretical analysis and simulations in research, the lack of empirical evidence may be contributing to a general uncertainty in the standing of the technology with respect to alternatives and a thus a slower adoption. This thesis aims to bridge that divide by evaluating NB-IoT's performance empirically using a set of metrics and to make certain estimations.
-
-Whilst theoretical models provide value in showing how factors affect an approximation, an empirical approach shows the variability induced due to network conditions.
+Whilst theoretical models provide value in showing how factors affect an approximation, it is no match for the variability induced by unpredictable network conditions and the underlying complexities of LTE architecture. Thus, an empirical approach is proposed. To emphasize the point, the energy efficiency of a single network is already questionable in Durand [@Durand2019] and Martinez [@Martinez2019].
 
 ## Research Objectives {#resobj}
 
-To evaluate the latency and power consumption of 
+The aim of this study is to evaluate latency and power efficiency of NB-IoT with a set of metric tests comparing user equipment (UE) devices against multiple mobile network operator (MNO) vendors exposing the change in variability due to proprietary LTE complexities.
 
-* Secondary metrics
+Battery longevity and recommended telemetry intervals are to be estimated, and secondary metrics such as signal strength, throughput and data overhead are to be investigated.
 
-Estimate:
+This in turn evaluates robustness, stability, capabilities, sources of variability and claimed versus actual core features.
 
-* Battery life
-* Data billing
+## Scope of Work {#scopework}
 
-Aim:
+The study will be limited to the following in Table \ref{tbl:metric_summary}.
 
-* Evaluate robustness, stability, capabilities, claimed vs actual. 
-* Core features/metrics.
-* Investigate sources of variability
+Table: UE devices, MNO vendors, metric comparisons and estimations {#tbl:metric_summary}
 
-## Scope of work {#scopework}
+| MNO Vendors | UE Manufacturers | Main Metrics     | Secondary Metrics | Estimations        |
+| ----------- | ---------------- | ---------------- | ----------------- | ------------------ |
+| ZTE         | Ublox            | Power Efficiency | Signal Strength   | Battery Longevity  |
+| Nokia       | Quectel          | Latency          | Throughput        | Telemetry Interval |
+| Ericsson    | Nordic           |                  | Data Overhead     |                    |
+| Huawei      | SimCom           |                  |                   |                    |
 
-Energy, latency, data billing. Durand: THP, MCL, Scalability. Martinez ~
+A more comprehensive study on throughput, packet delivery ratio (PDR), maximum coupling link (MCL) and scalability has been performed by Durand [@Durand2019]. Martinez has investigated the performance boundaries of NB-IoT for a Vodafone network in Barcelona, Spain [@Martinez2019].
 
-Ericsson, Nokia, ZTE, Huawei. Top 5 LTE vendors.
+Huawei, Ericsson, Nokia and ZTE are among the top 5 LTE vendors in the world. Ublox, Quectel, Nordic and SimCom are among the more popular NB-IoT module manufacturers, besides Telit, Gemalto, akorIoT and so on. Power efficiency and and latency is affected by variability important considerations have to be made in application development.
 
-Not MQTT, CoAP. Not UEMonitor, QXDM etc.
+Telemetry tests will be limited to LTE protocols and UDP packets, which is the simplest layer and used by CoAP. Unlike UDP, MQTT uses TCP which is not a connectionless protocol. TCP streams data orderly, reliably, and at a cost to data overhead.
 
-Method should be easily repeatable.
+QXDM is a diagnostic program built for UE devices with Qualcomm chipsets, yet it costs in excess of a few thousand USD. On the other hand, UEMonitor is free and can capture debug traces from both Ublox and Quectel. An opensource decoder by LanternD offers further analytical leverage, yet it is still in beta and unstable. There is no support or alternative for Nordic or SimCom devices, however. The capture method should be easily repeatable and expandable for new UE devices. On the basis that the AT command API is familiar to all UE devices, a framework will be built to extract data via this method.
 
-Aware of MTN internal documentation. Independent study.
+Whilst this research is funded by MTN and being aware of internal documentation, this is an independent study which should aid any potential adopters of the technology.
 
 ## Terminology {#terminology}
 
@@ -166,7 +173,7 @@ LPWANs enable many use cases (Section \ref{usecases}) in sensors, actuator contr
 
 GSM and GPRS fall under 2G and 2.5G which started development in the early 90s. Data transmission (such as USSD, SMS, WAP, IP) is circuit-switched over GSM, and packet-switched over GPRS. Circuit switched data is billed per time interval such as seconds or minutes, and packet-switched is charged per number of bytes (kB, MB, etcetra). It evolved into 3G in Release 99 at the turn of the millenium and LTE in Release 8 (Q4 2008).
 
-Long Term Evolution (LTE) is a cellular architecture which is a subset of an even more complex 3GPP body that guides its development. In LTE, the narrowband category is known as LTE Cat-NB or NB-IoT. For their M2M applications, LTE Cat-M is similar, yet it features VoIP, faster throughput and _. There are two different versions of NB-IoT, with LTE Cat-NB1 being release 13 and LTE Cat-NB2 being release 14. Their specifications have been frozen in Q1 2016 and mid-2017, respectively.
+Long Term Evolution (LTE) is a cellular architecture which is a subset of an even more complex 3GPP body that guides its development. In LTE, the narrowband category is known as LTE Cat-NB or NB-IoT. For their M2M applications, LTE Cat-M is similar, yet it features VoIP, faster throughput and is more similar to the LTE protocol. There are two different versions of NB-IoT, with LTE Cat-NB1 being release 13 and LTE Cat-NB2 being release 14. Their specifications have been frozen in Q1 2016 and mid-2017, respectively.
 
 ## Background {#background}
 
@@ -201,6 +208,8 @@ In 2014, Gartner estimated that Internet of Things (IoT) had reached the height 
 ![Gartner's Hype Cycle for Emerging Technologies, 2019](../images/CTMKT_741609_CTMKT_for_Emerging_Tech_Hype_Cycle_LargerText-1.png)
 
 ![[Gartner's 2018 Hype Cycle for ICT in Africa](http://www.gartner.com/newsroom/id/3884512)](../images/42881085945_739bbdc8e9_c.jpg)
+
+IoT hype becomes many other emerging technologies. https://blogs.sas.com/content/hiddeninsights/2016/07/06/long-live-the-iot-hype/
 
 Hype yields investment, regardless whether the underlying innovation holds value. IoT holds value in connecting things to the internet, as in its namesake. This can be seen in the venture capital injection into companies and start-ups and the number of connected devices over time.
 
@@ -283,7 +292,7 @@ LPWANs enable a vast array of use cases.
 * **Down link throughput**: Any applications requiring bi-directional communication of more than 120 bytes per 24 h, should use NB- IoT or GPRS, as Sigfox and LoRaWAN are limited by the duty- cycle limitations of the base station. 
 * **FoTa**: GPRS and NB-IoT are able to offer FOTA upgrades to IoT devices, as Sigfox ha s limited bandwidth. This feature is supported by LoRaWAN, through the fragmentation of large payloads [22].
 
-## Use cases {#usecases_intro}
+## Use Cases {#usecases_intro}
 
 - Public Safety
 - Agriculture
@@ -296,7 +305,7 @@ IoT has use case requirements in UL/DL throughput, battery longevity and scalabi
 
 The most popular use case in IoT is smart metering.
 
-## Smart metering {#smartmetering}
+## Smart Metering {#smartmetering}
 
 One of the simplest use cases in IoT is smart metering. Periodically sending uplink data at regular intervals from a static location has the advantage of remote monitoring and reducing the need for physical readings. It also opened up new features for users (such as dynamic pricing and usage pattern analysis) and operators (such as load balancing a large number of clients). The clear value proposition and success is partially due to the belief that IoT should be low powered and low data transmissions which still exists today.
 
@@ -304,13 +313,13 @@ One of the simplest use cases in IoT is smart metering. Periodically sending upl
 
 Smart metering can be considered the traditional IoT model.
 
-## Push-pull model
+## Push-Pull Model
 
 Traditionally, IoT devices push data to the internet at regular intervals. This push model can be considered quite energy inefficient, especially when the data is only occasionally actionable. For example, in asset tracking or remote monitoring.
 
 A pull model is ideal for dynamic rule engines, pulling data only when necessary and ultimately edge computing, where building an application around this idea can greatly enhance battery life.
 
-## Edge computing
+## Edge Computing
 
 Edge computing is the practice of offloading cloud processes to the endpoint. It saves on data overhead, especially when there are data charges involved and battery longevity is desired.
 
@@ -372,17 +381,17 @@ Compared to LTE
 
 
 
-Although most users interact only with the UE which runs its own proprietary firmware stack, NB-IoT also has a complex backend architecture.
+Although most users interact only with the UE device which runs its own proprietary firmware stack, NB-IoT also has a complex backend architecture.
 
 ## LTE Architecture
 
 ![LTE_classic_architecture](../images/LTE_classic_architecture.png)
 
-The complexities of LTE architecture further increases the chance of performance degradation with respect to 3GPP specifications due to the vast array of setup parameters. It would be beneficial to analyze the performance of multiple UE against various MNO vendors. It is important to note that MNOs may use various vendors in their architecture, and thus this study is mainly focused on the eNodeB vendor which is also UE facing and has the greatest chance of performance degradation due network quality, RF interference and so forth.
+The complexities of LTE architecture further increases the chance of performance degradation with respect to 3GPP specifications due to the vast array of setup parameters. It would be beneficial to analyze the performance of multiple UE devices against various MNO vendors. It is important to note that MNOs may use various vendors in their architecture, and thus this study is mainly focused on the eNodeB vendor which is also UE device facing and has the greatest chance of performance degradation due network quality, RF interference and so forth.
 
 * Both UDP socket commands and datagram commands use the IP data transport through the SGi.
 
-## Performance evaluation
+## Performance Evaluation
 
 It would be useful for the application developer to know the boundaries resulting from this approach. Drawbacks and optimizations targeting IoT can be discussed. The application developer is a potential adopter of the technology and focuses on parameters that fall within end-user control.
 
@@ -393,7 +402,6 @@ To this end it would be beneficial to:
 - Analyze critical metrics at the core of NB-IoT, such as energy consumption, coverage, cost and latency.
 - Create a testing framework to characterize NB-IoT devices in actual operation and using various networks.
 - Set optimal operating boundaries based on the obtained results. This should also re-evaluate suitability in certain use cases.
-- Compare NB-IoT to Dash7, which can be considered a prominent bi-directional contender. It has the capability of using LoRa's physical layer (RF frontend) so has the added benefit of long range.
 
 There are over 50 MNOs in the world that are using NB-IoT, yet most draw from a subset of the [top 5 LTE vendors](https://www.rcrwireless.com/20160531/network-infrastructure/top-5-wireless-infrastructure-makers-tag4-tag99):
 
@@ -497,7 +505,7 @@ Several studies provide theoretical models not only for the energy consumption o
 
 Only Martinez [@Martinez2019] focuses effort on the adopter and presents an operational and empirical analysis of the technology when it is deployed in a real network (such as Vodafone in the Metropolitan area of Barcelona). Durand [@Thomas2018] compares different LPWANs empirically including NB-IoT.
 
-Despite the unquestionable value of the theoretical models (for example, to understand orders of magnitude or to guess the theoretical upper and lower bounds), an empirical approach provides real insights into the variability that a UE experiences when deployed in real conditions. This work therefore complements Martinez and related works, and it further provides empirical measurements for UEs that are deployed using a real-world NB-IoT network always while taking the perspective of an application developer.
+Despite the unquestionable value of the theoretical models (for example, to understand orders of magnitude or to guess the theoretical upper and lower bounds), an empirical approach provides real insights into the variability that a UE device experiences when deployed in real conditions. This work therefore complements Martinez and related works, and it further provides empirical measurements for UEs that are deployed using a real-world NB-IoT network always while taking the perspective of an application developer.
 
 * GSM RF equipment testing and performance analysis [@Kasbah2005]
 * Analysis of NB-IoT Deployment in LTE Guard-Band [@Ratasuk2017c]
@@ -522,8 +530,8 @@ SigFox is a contender for NB-IoT. It lacks bidirectionality and datarate.
 
 - This section describes NB-IoT in more detail and the setup procedures involved.
 - 3GPP
-- the UE is to a large extent/entirely controlled by the network/eNodeB.
-  - UE must follow NW settings broadcast inside the SIB and allocations for UL/DL data.
+- the UE device is to a large extent/entirely controlled by the network/eNodeB.
+  - UE devices must follow NW settings broadcast inside the SIB and allocations for UL/DL data.
 - 
 
 ## Standing/Positioning
@@ -649,7 +657,7 @@ For the same example in bad SNR, the TBS allocated 32 bytes per chunk, with a re
 
 
 
-## eDRX, PSM, Active and PTAU
+## Power Saving Mechanisms
 
 The NB-IoT protocol allows for power save mode (PSM), and the SARA-N2 series modules also
 support a Deep Sleep mode where the module is running at very low current, ~3 $uA$. The module
@@ -686,7 +694,7 @@ common activities and the various states it will be in after registration.
 ### T3324 Active Timer
 
 * The T3324 Timer is reset after a downlink message is received. The negative impact on energy savings should be taken into account if downlink data is fragmented.
-* the Active Timer (T3324) controls the time lapse during which the UE is reachable by the network in RRC Idle, i.e., the number of eDRX cycles.
+* the Active Timer (T3324) controls the time lapse during which the UE device is reachable by the network in RRC Idle, i.e., the number of eDRX cycles.
 
 * Bits 5 to 1 represent the binary coded timer value. Bits 6 to 8 define the timer value unit for the GPRS
   timer as follows
@@ -705,9 +713,9 @@ common activities and the various states it will be in after registration.
 
 ## System Information Blocks (SIB) {#sib}
 
-The SIB describes the method of attachment and what repetitions the UE must use to first transmit
+The SIB describes the method of attachment and what repetitions the UE device must use to first transmit
 to the base station. Once a RRC connection is made, the base station then uses the perceived SNR
-to configure the uplink allocations the UE will use to transmit the messages.
+to configure the uplink allocations the UE device will use to transmit the messages.
 Because allocations for each uplink/downlink are dynamically set by the base station it is difficult to
 calculate the power consumption of a single message deployed in the field.
 
@@ -907,10 +915,10 @@ $$P = \frac{E_{msg}}{T_{msg}}$$ {#eq:avgpower}
 * The module has a limited dynamic message queue size. For IoT applications, the message size should be of the order of tens of bytes. UDP socket commands limit their payload size to 512 bytes.
 * There is no indication when the UDP data has been sent.
 * Downlink data from the cloud server must also be 512 bytes or less, because otherwise the messages will be lost.
-* The module has an internal message buffer. If the module is unable to send the messages to the network before this buffer is full, because the application is queueing quicker than it can send them, then the UE will return ERROR for the +NSOST/+NSOSTF commands.
+* The module has an internal message buffer. If the module is unable to send the messages to the network before this buffer is full, because the application is queueing quicker than it can send them, then the UE device will return ERROR for the +NSOST/+NSOSTF commands.
 * If a message cannot be sent because of communication issues between the module and eNB, the module will attempt to send the message a second time. If this fails, the message will be dropped. As +NSOST/+NSOSTF messages are UDP, there is no indication the message has been dropped.
 * The UDP header is about 48-60 bytes in length, and so an application sending 100 bytes will actually send about 160 bytes. For devices in the extreme coverage class 2, this can be quite costly.
-* The UE may later resume the RRC Connected state with that context, thus avoiding the AS setup and saving considerable signaling overhead for the transmission of infrequent small data packets.
+* The UE device may later resume the RRC Connected state with that context, thus avoiding the AS setup and saving considerable signaling overhead for the transmission of infrequent small data packets.
 
 ## Application Architecture
 
@@ -918,7 +926,7 @@ $$P = \frac{E_{msg}}{T_{msg}}$$ {#eq:avgpower}
 * At the far left the customer’s device contains a u-blox NB-IoT module that communicates over the radio network with a cell tower that supports the NB-IoT network. The cellular network links the cell tower with an IoT platform. This IoT platform stores uplink datagrams from the NB-IoT module. The customer server communicates with the IoT platform to retrieve uplink datagrams and to send downlink datagrams to the NB-IoT. The IoT platform holds downlink datagrams until the NB-IoT module is awake to receive them.
 * The SARA-N2 series modules implement basic UDP socket commands for directly communicating with an external service. With these commands the customer can build a simple IoT platform. With an external processor other IoT layers could be implemented to aid this system design. SARA-N2 series modules support AT commands for general CoAP messaging. This allows the customer to not require CoAP in their external processor.
 * Many developers coming from a GPRS type background may expect an always on type connection, normally using TCP. NB-IoT is not session oriented, latencies are much higher and the device will enter a power save mode. This is very different to always-on modems with “chatty” protocols like TCP.
-* UDP sockets do not create connections to servers; UDP is a connection-less datagram protocol. Because of this MO messages may not be received by the server and lost. The application should take this in to consideration and provide its own acknowledgements between the UE and server. CoAP is one protocol which can be used on top of UDP to provide this.
+* UDP sockets do not create connections to servers; UDP is a connection-less datagram protocol. Because of this MO messages may not be received by the server and lost. The application should take this in to consideration and provide its own acknowledgements between the UE device and server. CoAP is one protocol which can be used on top of UDP to provide this.
 * For resolving the issue of sending MT messages to a very sleepy module, when a MO message is sent to the cloud server, the cloud server will know the module is active and connected to the network. As seen in section 7 the connection is alive until the RRC connection is released by the network and then still contactable when paging inside the T3324 period. If there are MT messages to be sent to the module, the cloud server should send this message in this time.
 
 ## Use cases
@@ -927,7 +935,7 @@ Use cases suitable for NB-IoT
 
 ## Martinez
 
-Martinez et al. [@Martinez2019] did empirical tests within the Vodafone Network in Barcelona. They observed UE and NW behavior, measured current traces, and did various tests in different modes.
+Martinez et al. [@Martinez2019] did empirical tests within the Vodafone Network in Barcelona. They observed UE device and NW behavior, measured current traces, and did various tests in different modes.
 
 Table: NW Config {#tbl:nw_config}
 

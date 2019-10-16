@@ -16,7 +16,6 @@ cc_compare = [(237/255, 189/255, 0), 'red']
 ccui = ['tab:cyan', 'tab:green', 'tab:blue', 'tab:purple', 'tab:orange', 'tab:brown', 'tab:red']
 cc = ['tab:orange', 'tab:green', 'tab:red', 'tab:purple', 'tab:blue', 'tab:brown', 'tab:cyan']
 testl = ['1-16 B', '64-128 B', '256-512 B', 'Echo', 'COPS', 'eDRX', 'PTAU']
-uenwl = ['Ublox-MTN', 'Quectel-MTN', 'Ublox-Vodacom', 'Quectel-Vodacom']
 attl = [a for a in p.attdt()]
 
 def lc(color, amount=0.4):
@@ -48,6 +47,8 @@ def plot(mdb, kx, ky, xlabel='', ylabel='', scale=[1,1], invert=[True,False], co
     print('plot @3x3')
     outcounts = acounts = oiutcounts = 0
     nwl = ['MTN-Ericsson', 'Vodacom-Huawei'] if joburg else ['MTN-ZTE', 'Vodacom-Nokia']
+    uenwl = ['Ublox-Ericsson', 'Quectel-Ericsson', 'Ublox-Huawei', 'Quectel-Huawei'] if joburg else \
+            ['Ublox-ZTE', 'Quectel-ZTE', 'Ublox-Nokia', 'Quectel-Nokia']
     hytest, hyuenw, hyatt = [], [], []
     hxtest, hxuenw, hxatt = [], [], []
     ecl_list = []
@@ -307,11 +308,12 @@ def plot(mdb, kx, ky, xlabel='', ylabel='', scale=[1,1], invert=[True,False], co
     # plt.tight_layout()
     plt.show()
     print('Plots Shown.', ti+1, ui+1, ai+1)
-    # fig.savefig(folder + kx + '_' + ky + '_plot.png', bbox_inches='tight')
-    # fig.savefig(folder + kx + '_' + ky + '_plot.pdf', bbox_inches='tight')
-    # fig2.savefig(folder + kx + '_' + ky + '_outliers.png', bbox_inches='tight')
-    # fig2.savefig(folder + kx + '_' + ky + '_outliers.pdf', bbox_inches='tight')
-    # print('Plots Saved.')
+    fig.savefig(folder + kx + '_' + ky + '_plot.png', bbox_inches='tight')
+    fig.savefig(folder + kx + '_' + ky + '_plot.pdf', bbox_inches='tight')
+    if not log:
+        fig2.savefig(folder + kx + '_' + ky + '_outliers.png', bbox_inches='tight')
+        fig2.savefig(folder + kx + '_' + ky + '_outliers.pdf', bbox_inches='tight')
+    print('Plots Saved.')
 
 def hist(plotx=False, kx='A', ky='B', bins=20):
     global kkx, kky

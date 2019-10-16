@@ -246,6 +246,7 @@ https://www.etsi.org/deliver/etsi_TS/125100_125199/125133/13.00.00_60/ts_125133v
 
 It would be a good idea to use Martinez' work and complement it.
 
+\newpage
 
 # Results {#results}
 
@@ -278,7 +279,7 @@ Extended Coverage Levels (ECL) are determined by the network. The eNB (base stat
 \begin{minipage}{1.0\linewidth}
 \begin{center}
 \includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/SNR_txTime_outliers.pdf}
-\captionof{figure}[Measured latency outliers (51/61) up to 300 seconds against SINR.]{Measured latency outliers (51/61) up to 300 seconds in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs against SINR.}
+\captionof{figure}[Measured latency outliers (51/61) up to 300 seconds against SINR.]{Measured latency outliers (51/61) up to 300 seconds in comparison (AB) of UE-Vendors, (C) MNO-Vendors, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs against SINR.}
 \label{fig:sinr_latency_otl}
 \end{center}
 \end{minipage}
@@ -321,6 +322,8 @@ Extended Coverage Levels (ECL) are determined by the network. The eNB (base stat
 
 Since the only difference between the outliers of latency versus SINR (Figure \ref{fig:sinr_latency}) and latency versus RSRP is the fact that the attenuation zones are evident per decade, it is not necessary to show here. What can also be said is that extreme outliers are not cased by attenuation, but is rather network controlled.
 
+![](../../../masters/code/tests/joplotterk/Signal_power_txTime_plot.png)
+
 ### Reported latency
 
 The UE reports TX and RX time via the `AT+NUESTATS="RADIO"` command. It is the transmit and receive time spent on air (using its allocated bandwidth in the RF spectrum).
@@ -335,7 +338,7 @@ The UE reports TX and RX time via the `AT+NUESTATS="RADIO"` command. It is the t
 \end{center}
 \end{minipage}
 
-![](../../../masters/code/tests/plotterk/Signal_power_txTimeNW_plot.png)
+[](../../../masters/code/tests/plotterk/Signal_power_txTimeNW_plot.png)
 
 In Figure \ref{fig:txTimeNW}, (AF) the effect of K-means clustering can be seen as it simplifies the variance around -110 to -130dBm as more tests had been take than necessary. Nevertheless, this coincides with (I) higher ECL 2 values. However, ECL is not the only metric that affects latency as there are ECL 0 values in that range as well. As a whole, the UE have low latency and means under 1 second with MTN-ZTE. (BF) Ublox shows poorer performance than Quectel here, yet both have means around 2-3 seconds. (C) The data is almost mutually exclusive and only shares a boundary with TX times under 2 seconds. (DE) Attenuation zones are clearly defined per decade. (GH) UDP packet transmissions are reported greater than 5 seconds, and the rest of the tests as less. (I) ECL might affect latency according to reported TX time.
 
@@ -354,6 +357,8 @@ Although the UE reports satisfactory TX time according to 3GPP standards (under 
 [](../../../masters/code/tests/plotterk/txTimeNW_histogram.png)
 
 In Figure \ref{fig:txTimeNW_otl}, (ADFG) MTN-ZTE shows no outliers, but (BC) Vodacom-Nokia shows outliers for both Ublox and Quectel. (E) Attenuation does not affect TX time. (H) If not a lengthy UDP packet transmission, both eDRX and PTAU have a single outlier which could be a result of an RRC connection with a long inactivity timer, synchronization error or else.
+
+![](../../../masters/code/tests/joplotterk/Signal_power_txTimeNW_plot.png)
 
 #### RX Time
 
@@ -385,6 +390,8 @@ The on-air time for receiving from the network is at least twice as much as the 
 
 show RX time up to almost 400 seconds and majority when connected to Vodacom towers. It includes mostly the UDP packet tests and at ECL 1.
 
+![](../../../masters/code/tests/plotterk/Signal_power_rxTimeNW_plot.png)
+
 ### C-DRX duty cycle
 
 On the Vodafone network in connected-DRX (C-DRX) mode, the UE is observed to show peaks spaced at regular 2.048s intervals [@Martinez2019]. On both Vodacom and MTN networks, these peaks are not visible and instead a steady stream of peaks can be seen as on the following images. The peaks indicate an on time of roughly 12ms and idle of 4 seconds. With a cycle of 16ms, it fits the LTE requirements of between 10ms and 2560ms in terms of 1ms subframes. However, NB-IoT has a minimum requirement of 256ms to 9216ms for the interval length between C-DRX transmissions. This means that NB-IoT is utilizing vastly more time on air than permitted by the 3GPP and it is having a detrimental effect on the estimated battery life. Lastly, this does not bode well for the scaling up of devices due to the interference, especially on the shared uplink (NPUSCH) channel.
@@ -397,7 +404,7 @@ On the Vodafone network in connected-DRX (C-DRX) mode, the UE is observed to sho
 \end{center}
 \end{minipage}
 
-![](../../code/tests/logs/zte_mtn/rf_shield/ublox/scope/12_8ms.jpg)
+[](../../code/tests/logs/zte_mtn/rf_shield/ublox/scope/12_8ms.jpg)
 
 \begin{minipage}{1.0\linewidth}
 \begin{center}
@@ -592,7 +599,7 @@ It is evident that on all attenuation levels there is a high degree of variation
 \begin{minipage}{\linewidth}
 \begin{center}
 \includegraphics[width=1.0\linewidth]{../../code/tests/logs/zte_mtn/rf_shield/quectel/scope/70.4mA_ant_0dB.jpg}
-\captionof{figure}[C-DRX MTN-Quectel current measurement]{Current measurement of MTN-Ublox during connected DRX mode (C-DRX). The UE uses 73.6mA at 110dB attenuation with the RF shield enclosure door slightly open}
+\captionof{figure}[C-DRX MTN-Quectel current measurement]{Current measurement of MTN-Ublox during connected DRX mode (C-DRX). The UE uses 70.4mA at 110dB attenuation with the RF shield enclosure door slightly open}
 \label{fig:}
 \end{center}
 \end{minipage}
@@ -826,7 +833,53 @@ scan for base station, etc. This is simply over the protocol stack itself.
 
 ### Telemetry Interval
 
+[](../../code/tests/box/intervalECL1.png)
+
+[](../../code/tests/box/intervalEstECL1.png)
+
+\begin{figure}[ht]
+  \subfloat[Energy measurements from Appendix A]{
+	\begin{minipage}[c][1\width]{
+	   0.5\textwidth}
+	   \centering
+	   \includegraphics[width=1\textwidth]{../../code/tests/box/intervalECL1.pdf}
+	\end{minipage}}
+ \hfill 	
+  \subfloat[Reported RF time from Appendix B]{
+	\begin{minipage}[c][1\width]{
+	   0.5\textwidth}
+	   \centering
+	   \includegraphics[width=1\textwidth]{../../code/tests/box/intervalEstECL1.pdf}
+	\end{minipage}}
+\caption{Telemetry interval estimation sending 16-512 byte packet payloads in ECL 1 network conditions}
+\end{figure}
+
 ### Battery longevity
+
+[](../../code/tests/box/longevityECL1.png)
+
+[](../../code/tests/box/longevityEstECL1.png)
+
+
+
+\begin{figure}[ht]
+  \subfloat[Energy measurements from Appendix A]{
+	\begin{minipage}[c][1\width]{
+	   0.5\textwidth}
+	   \centering
+	   \includegraphics[width=1\textwidth]{../../code/tests/box/longevityECL1.pdf}
+	\end{minipage}}
+ \hfill 	
+  \subfloat[Reported RF time from Appendix B]{
+	\begin{minipage}[c][1\width]{
+	   0.5\textwidth}
+	   \centering
+	   \includegraphics[width=1\textwidth]{../../code/tests/box/longevityEstECL1.pdf}
+	\end{minipage}}
+\caption{Battery longevity estimation sending 16-512 byte packet payloads in ECL 1 network conditions}
+\end{figure}
+
+
 
 \newpage
 
@@ -841,6 +894,8 @@ Avoid -120 dBm - -130 dBm region
 ## Use Cases
 
 Use cases suitable for NB-IoT considering results
+
+
 
 ## Future Work
 
@@ -1042,59 +1097,58 @@ Table: Average Power (uWh) {#tbl:energy}
 ## Telemetry Interval
 
 
-Table: Interval estimate in minutes using energy measurements for 9.36Wh AA battery (Lithium Thionyl Chloride) to last 1 year. {#tbl:energy_interval}
+Table: Interval Estimate (hours) for 9.36Wh AA battery (Lithium Thionyl Chloride) to last 1 year. {#tbl:energy_interval}
 
 |                  | 16 B   | 64 B   | 128 B   | 256 B   | 512 B   | Echo   | COPS   | eDRX   | PTAU   |
 |------------------|--------|--------|---------|---------|---------|--------|--------|--------|--------|
-| Ublox-ZTE        | 466.45 | 79.175 | 46.511  | 687.45  | 73.525  | 152.73 | 651.20 | 2.3482 | 16.777 |
-| Quectel-ZTE      | 41.553 | 28.124 | 31.128  | 50.388  | 63.372  | 43.745 | 102.02 | 2.9387 | 773.69 |
-| Ublox-Nokia      | 770.32 | 570.63 | 644.21  | 1775.7  | 390.58  | 1184.1 | 2691.3 | 212.16 | 628.34 |
-| Quectel-Nokia    | 426.25 | 203.21 | 248.25  | 338.04  | 569.36  | 363.19 | 28.920 | 116.97 | 318.06 |
-| Ublox-Ericsson   | 15.346 | 13.144 | 16.370  | 25.481  | 41.009  | 553.93 | 175.96 | 3.4535 | 9.3848 |
-| Quectel-Ericsson | 11.512 | 8.3857 | 10.051  | 8.0316  | 19.374  | 133.51 | 19.551 | 5.1621 | 3.5810 |
-| Ublox-Huawei     | 28.346 | 21.109 | 23.815  | 22.280  | 22.708  | 260.29 | 174.47 | 0.2130 | 112.62 |
-| Quectel-Huawei   | 965.72 | 73.480 | 319.19  | 175.59  | 159.99  | 343.86 | 128.75 | 0.0482 | 445.71 |
+| Ublox-ZTE        | 7.7742 | 1.3195 | 0.7751  | 11.457  | 1.2197  | 2.5455 | 10.853 | 0.0391 | 0.2796 |
+| Quectel-ZTE      | 0.6925 | 0.4687 | 0.5188  | 0.8398  | 1.0562  | 0.7290 | 1.7004 | 0.0489 | 12.894 |
+| Ublox-Nokia      | 12.838 | 9.5105 | 10.736  | 29.595  | 6.5097  | 19.736 | 44.855 | 3.5361 | 10.472 |
+| Quectel-Nokia    | 7.1042 | 3.3869 | 4.1375  | 5.6341  | 9.4894  | 6.0533 | 0.4820 | 1.9495 | 5.3010 |
+| Ublox-Ericsson   | 0.2557 | 0.2190 | 0.2728  | 0.4246  | 0.6834  | 9.2322 | 2.9327 | 0.0575 | 0.1564 |
+| Quectel-Ericsson | 0.1918 | 0.1397 | 0.1675  | 0.1338  | 0.3229  | 2.2253 | 0.3258 | 0.0860 | 0.0596 |
+| Ublox-Huawei     | 0.4724 | 0.3518 | 0.3969  | 0.3713  | 0.3784  | 4.3382 | 2.9079 | 0.0035 | 1.8771 |
+| Quectel-Huawei   | 16.095 | 1.2246 | 5.3199  | 2.9265  | 2.6665  | 5.7310 | 2.1459 | 0.0008 | 7.4285 |
 |                  |        |        |         |         |         |        |        |        |        |
-| ZTE              | 254.00 | 53.650 | 38.820  | 368.91  | 68.448  | 98.239 | 376.61 | 2.6434 | 395.23 |
-| Nokia            | 598.29 | 386.92 | 446.23  | 1056.8  | 479.97  | 773.69 | 1360.1 | 164.56 | 473.20 |
-| Ericsson         | 13.429 | 10.764 | 13.210  | 16.756  | 30.191  | 343.72 | 97.757 | 4.3078 | 6.4829 |
-| Huawei           | 497.03 | 47.295 | 171.50  | 98.936  | 91.350  | 302.07 | 151.61 | 0.1306 | 279.17 |
-| *Ublox*          | 320.11 | 171.01 | 182.72  | 627.72  | 131.95  | 537.79 | 923.24 | 54.544 | 191.78 |
-| *Quectel*        | 361.26 | 78.301 | 152.15  | 143.01  | 203.02  | 221.08 | 69.814 | 31.281 | 385.26 |
-| MTN              | 133.71 | 32.207 | 26.015  | 192.83  | 49.320  | 220.98 | 237.18 | 3.4756 | 200.85 |
-| Vodacom          | 547.66 | 217.10 | 308.87  | 577.90  | 285.66  | 537.88 | 755.86 | 82.350 | 376.18 |
+| ZTE              | 4.2334 | 0.8941 | 0.6470  | 6.1486  | 1.1379  | 1.6373 | 6.2769 | 0.0440 | 6.5872 |
+| Nokia            | 9.9715 | 6.4487 | 7.4372  | 17.614  | 7.9995  | 12.894 | 22.668 | 2.7428 | 7.8866 |
+| Ericsson         | 0.2238 | 0.1794 | 0.2201  | 0.2792  | 0.5031  | 5.7287 | 1.6292 | 0.0717 | 0.1080 |
+| Huawei           | 8.2839 | 0.7882 | 2.8584  | 1.6489  | 1.5225  | 5.0346 | 2.5269 | 0.0021 | 4.6528 |
+| *Ublox*          | 5.3353 | 2.8502 | 3.0454  | 10.462  | 2.1978  | 8.9631 | 15.387 | 0.9090 | 3.1963 |
+| *Quectel*        | 6.0210 | 1.3050 | 2.5359  | 2.3835  | 3.3837  | 3.6846 | 1.1635 | 0.5213 | 6.4210 |
+| MTN              | 2.2286 | 0.5367 | 0.4335  | 3.2139  | 0.8205  | 3.6830 | 3.9531 | 0.0579 | 3.3476 |
+| Vodacom          | 9.1277 | 3.6184 | 5.1478  | 9.6317  | 4.7610  | 8.9647 | 12.597 | 1.3725 | 6.2697 |
 |                  |        |        |         |         |         |        |        |        |        |
 | **ECL 0**        |        |        |         |         |         |        |        |        |        |
-| ZTE              | 242.   | 39.5   | 27.1    | 372.    | 24.4    | 76.3   | 325.   | 1.17   | 1989   |
-| Nokia            |        | 5.26   | 38.1    | 8.60    |         | 1189   |        | 653.   | 62.3   |
-| Ericsson         | 4.67   | 3.62   | 4.26    | 4.77    | 5.24    | 44.6   | 93.1   | 5.65   | 2.26   |
-| Huawei           | 0.80   | 0.35   | 0.29    | 3.87    | 2.02    | 222.   | 30.1   |        | 4.60   |
-| *Ublox*          | 118.   | 21.1   | 13.2    | 178.    | 12.1    | 508.   | 218.   | 1.45   | 10.7   |
-| *Quectel*        | 5.62   | 3.22   | 21.7    | 16.0    | 3.64    | 258.   | 5.89   | 328.   | 1018   |
-| MTN              | 123.   | 21.6   | 15.7    | 188.    | 14.8    | 60.4   | 209.   | 3.41   | 996.   |
-| Vodacom          | 0.40   | 2.80   | 19.2    | 6.23    | 1.01    | 706.   | 15.0   | 326.   | 33.4   |
+| ZTE              | 4.04   | 0.65   | 0.45    | 6.20    | 0.40    | 1.27   | 5.42   | 0.01   | 33.1   |
+| Nokia            |        | 0.08   | 0.63    | 0.14    |         | 19.8   |        | 10.8   | 1.03   |
+| Ericsson         | 0.07   | 0.06   | 0.07    | 0.07    | 0.08    | 0.74   | 1.55   | 0.09   | 0.03   |
+| Huawei           | 0.01   |        |         | 0.06    | 0.03    | 3.71   | 0.50   | 6.70   | 0.07   |
+| *Ublox*          | 1.97   | 0.35   | 0.22    | 2.98    | 0.20    | 8.47   | 3.64   | 0.02   | 0.17   |
+| *Quectel*        | 0.09   | 0.05   | 0.36    | 0.26    | 0.06    | 4.30   | 0.09   | 5.48   | 16.9   |
+| MTN              | 2.06   | 0.36   | 0.26    | 3.14    | 0.24    | 1.00   | 3.48   | 0.05   | 16.6   |
+| Vodacom          |        | 0.04   | 0.32    | 0.10    | 0.01    | 11.7   | 0.25   | 5.44   | 0.55   |
 |                  |        |        |         |         |         |        |        |        |        |
 | **ECL 1**        |        |        |         |         |         |        |        |        |        |
-| ZTE              | 9.11   | 12.1   | 9.09    | 179.    | 32.6    | 17.1   | 70.4   | 0.05   | 12.8   |
-| Nokia            | 612.   | 395.   | 447.    | 1077    | 502.    | 673.   | 1345   | 1.33   | 363.   |
-| Ericsson         | 24.0   | 19.9   | 26.1    | 41.3    | 71.6    | 425.   | 18.9   | 0.11   | 14.2   |
-| Huawei           | 10.9   | 5.02   | 8.26    | 58.5    | 30.2    | 24.6   | 227.   | 0.09   | 4.66   |
-| *Ublox*          | 204.   | 152.   | 174.    | 551.    | 147.    | 415.   | 753.   | 0.18   | 106.   |
-| *Quectel*        | 124.   | 63.5   | 71.4    | 127.    | 170.    | 154.   | 77.2   | 0.61   | 90.8   |
-| MTN              | 16.5   | 16.0   | 17.6    | 110.    | 52.1    | 221.   | 44.6   | 0.08   | 13.5   |
-| Vodacom          | 311.   | 200.   | 227.    | 568.    | 266.    | 349.   | 786.   | 0.71   | 183.   |
+| ZTE              | 0.15   | 0.20   | 0.15    | 2.99    | 0.54    | 0.28   | 1.17   |        | 0.21   |
+| Nokia            | 10.2   | 6.59   | 7.45    | 17.9    | 8.37    | 11.2   | 22.4   | 0.02   | 6.05   |
+| Ericsson         | 0.40   | 0.33   | 0.43    | 0.68    | 1.19    | 7.08   | 0.31   |        | 0.23   |
+| Huawei           | 0.18   | 0.08   | 0.13    | 0.97    | 0.50    | 0.41   | 3.79   |        | 0.07   |
+| *Ublox*          | 3.40   | 2.54   | 2.90    | 9.19    | 2.46    | 6.92   | 12.5   |        | 1.77   |
+| *Quectel*        | 2.06   | 1.05   | 1.19    | 2.11    | 2.84    | 2.57   | 1.28   | 0.01   | 1.51   |
+| MTN              | 0.27   | 0.26   | 0.29    | 1.84    | 0.86    | 3.68   | 0.74   |        | 0.22   |
+| Vodacom          | 5.19   | 3.33   | 3.79    | 9.47    | 4.43    | 5.81   | 13.1   | 0.01   | 3.06   |
 |                  |        |        |         |         |         |        |        |        |        |
 | **ECL 2**        |        |        |         |         |         |        |        |        |        |
-| ZTE              | 38.1   | 16.8   | 25.9    | 49.3    | 413.    | 29.3   | 31.5   | 2.88   | 116.   |
-| Nokia            | 113.   |        | 198.    | 98.4    | 36.4    | 889.   | 1133   | 9.48   | 2850   |
-| Ericsson         | 17.4   | 13.3   | 15.5    | 12.5    | 34.8    | 347.   |        |        | 5.52   |
-| Huawei           | 750.   | 118.   | 270.    | 159.    | 149.    | 909.   | 426.   | 0.31   | 717.   |
-| *Ublox*          | 15.7   | 17.8   | 17.1    | 15.7    | 189.    | 819.   | 690.   | 0.69   | 1507   |
-| *Quectel*        | 444.   | 56.6   | 237.    | 143.    | 127.    | 267.   | 105.   | 5.65   | 338.   |
-| MTN              | 27.7   | 15.1   | 20.7    | 30.9    | 224.    | 188.   | 15.7   | 1.44   | 60.9   |
-| Vodacom          | 432.   | 59.4   | 234.    | 128.    | 92.9    | 899.   | 779.   | 4.90   | 1784   |
+| ZTE              | 0.63   | 0.28   | 0.43    | 0.82    | 6.88    | 0.48   | 0.52   | 0.04   | 1.94   |
+| Nokia            | 1.89   |        | 3.30    | 1.64    | 0.60    | 14.8   | 18.8   | 0.16   | 47.5   |
+| Ericsson         | 0.29   | 0.22   | 0.25    | 0.20    | 0.58    | 5.78   |        |        | 0.09   |
+| Huawei           | 12.5   | 1.98   | 4.50    | 2.65    | 2.49    | 15.1   | 7.10   |        | 11.9   |
+| *Ublox*          | 0.26   | 0.29   | 0.28    | 0.26    | 3.15    | 13.6   | 11.5   | 0.01   | 25.1   |
+| *Quectel*        | 7.40   | 0.94   | 3.96    | 2.39    | 2.12    | 4.46   | 1.75   | 0.09   | 5.63   |
+| MTN              | 0.46   | 0.25   | 0.34    | 0.51    | 3.73    | 3.13   | 0.26   | 0.02   | 1.01   |
+| Vodacom          | 7.20   | 0.99   | 3.90    | 2.14    | 1.54    | 14.9   | 12.9   | 0.08   | 29.7   |
 |                  |        |        |         |         |         |        |        |        |        |
-
 
 \newpage
 ## Battery Longevity

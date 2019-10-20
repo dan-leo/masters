@@ -36,6 +36,24 @@ model, taking the 5th/95th-percentiles for the best/worst case scenarios, and th
 
 This information can be applied to multiple application use cases.
 
+## Mobility
+
+Using a Sierra Wireless WP7702 on Ericsson Test BTS 'L06009A3' and EARFCN 3734, the UE had to periodically ping an internet-facing server and the dead time was measured before it reconnected received a response:
+
+| Mobility test         | Time   |
+| --------------------- | ------ |
+| Standalone to In-band | ~ 11 s |
+| In-band to Standalone | ~ 11 s |
+|                       |        |
+
+|      | Uplink              | Downlink            |
+| ---- | ------------------- | ------------------- |
+| GPRS | 158 kbps or 20 kB/s | 254 kpbs or 31 kB/s |
+|      |                     |                     |
+|      |                     |                     |
+
+
+
 ## Optimized Setup
 
 * AT+COPS
@@ -174,6 +192,8 @@ Since it appears that ECL is the ultimate factor that should influence latency a
 
 The Cell ID in this response is the physical network cell ID.
 
+The **PCI** value is created from two components - PSS and SSS. The PSS, Primary Synchronization Signal, has the value 0, 1, or 2. The SSS, Secondary Synchronization Signal, can have a value between 0 and 167.
+
 \begin{minipage}{\linewidth}
 \begin{center}
 \includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_ECL_plot.pdf}
@@ -229,6 +249,22 @@ Table: EARFCN for serving cell {#tbl:earfcn}
 The E-UTRA Absolute Radio Frequency Channel Number (EARFCN) designates the carrier frequency in the uplink and downlink, and ranges between 0-65535.
 
 Since the frequency of the three towers was the same on all three MTN towers, this shows that intra-cell reselection does indeed work.
+
+## Hardware
+
+The following tests measure current for a Ublox SARA N200 connected to a ZTE base station.
+
+![Block diagram of current consumption setup for SARA-N2](C:\Users\d7rob\AppData\Roaming\Typora\typora-user-images\1555535660456.png)
+
+The digital multimeter in the figure is replaced with a ZXCT1008 high-side current monitor in series with the modem. 
+
+![ZXCT1008  high-side current monitor https://www.diodes.com/assets/Datasheets/ZXCT1008.pdf](../images/arduino86-1-1571303569557.png)
+
+Rs is set to a 1 ohm resistor and Rg is set as a 1k ohm resistor such that 100mA supplied to the modem makes 1V.
+
+$V_{out} = I_{load} [mA] * 10 [\frac{V}{mA}]$
+
+![zxct1008](C:\GIT\masters\thesis\images\zxct1008.jpeg)
 
 
 

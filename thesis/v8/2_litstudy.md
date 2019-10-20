@@ -33,7 +33,7 @@ The empirical results of NB-IoT depend on the device used (UE) and underlying ve
 
 ## LoRaWAN {#lorawan}
 
-LoRaWAN is a contender for NB-IoT. It lacks bidirectionality and datarate.
+LoRaWAN is a contender for NB-IoT. It lacks bidirectionality and data rate.
 
 * LoRaWAN performs better for short messages, but it is subjected to a very high penalty when
   more than one message per data block is required.
@@ -224,11 +224,17 @@ common activities and the various states it will be in after registration.
   1 1 1 value indicates that the timer is deactivated
 * Example: "00100100" = 4 x1 minute = 4 minutes
 
-### eDRX Cycle
+### eDRX Cycles and PTW
 
 * An eDRX cycle is composed of an active phase, controlled by a Paging Time Window (PTW) timer, which ranges from 2.56 s to 40.96 s followed by a sleep phase until the end of the eDRX cycle. Within the PTW, the standard LTE paging is observed.
 
-### PTW
+Extended Discontinuous Reception (eDRX) mode means that paging windows can be scheduled such that the modem can be contacted by the server.
+
+![eDRX mode](C:\Users\d7rob\AppData\Roaming\Typora\typora-user-images\1555540836196.png)
+
+
+
+
 
 ## System Information Blocks (SIB) {#sib}
 

@@ -20,7 +20,25 @@ tablenos-number-by-section: true
 
 ![](../images/whitespace.png)
 
+\newpage
+
 # Declaration {-#declaration}
+
+By submitting this report electronically, I declare that the entirety of the work contained therein is my own, original work, that I am the sole author thereof (save to the extent explicitly otherwise stated), that reproduction and publication thereof by Stellenbosch University will not infringe any third party rights and that I have not previously in its entirety or in part submitted it for obtaining any qualification.
+
+\vspace{1cm}
+
+Date: .......................................................
+
+
+
+\vspace{15cm}
+
+Copyright © 2020 Stellenbosch University 
+
+All rights reserved.
+
+\newpage
 
 # Abstract {-#abstract}
 
@@ -55,12 +73,14 @@ A number of tests have been developed, performed and analyzed for multiple UEs (
 | **EARFCN** | E-UTRA Absolute Radio Frequency Channel Number |
 | **EARFCN** | Extended Absolute Radio-Frequency Channel Number |
 | **ECL** | Enhanced Coverage Level |
-| **eDRX** | Extended Discontinuous Receive X |
+| **eDRX** | Extended Discontinuous Receive |
 | **eNB - eNodeB** | E-UTRAN Node B |
 | **GPRS** | General Packet Radio Service |
+| **ICT** | Information and Communications Technology |
 | **IMEI** | International Mobile Equipment Identity |
 | **IMSI** | International Mobile Station Identity |
 | **IP** | Internet Protocol |
+| **LBT** | Listen Before Talk |
 | **LPWAN** | Low-Power Wide-Area-Network |
 | **LTE Cat-NB1/2** | Long Term Evolution Narrow-Band Category 1/2 |
 | **MCL** | Maximum Coupling Link |
@@ -69,6 +89,7 @@ A number of tests have been developed, performed and analyzed for multiple UEs (
 | **MO** | Mobile Originated |
 | **MQTT** | Message Queuing Telemetry Transport |
 | **MT** | Mobile Terminated |
+| **MTC** | Machine Type Communications |
 | **MTN** | Mobile Telephone Network |
 | **NW** | Network |
 | **OTDOA** | Observed Time Difference Of Arrival |
@@ -107,7 +128,7 @@ A number of tests have been developed, performed and analyzed for multiple UEs (
 
 # Introduction {#intro}
 
-This chapter introduces the reader to various concepts relating to the main focus of this study being NB-IoT and the performance evaluation thereof. It begins with the question "why?" before moving on to the research problem, objectives, scope, terminology, background and other various related concepts.
+This chapter introduces the reader to various concepts relating to NB-IoT and (reasons for?) the performance evaluation thereof. It begins with the question "why?" before moving on to the research problem, objectives, scope, terminology, background and other various related concepts.
 
 ## Why NB-IoT?
 
@@ -121,13 +142,13 @@ According to 3GPP specifications and manufacturer claims, highlights include:
 
 ## Problem Statement {#probstat}
 
-NB-IoT (LTE Cat-NB) is a competitive alternative to LoRaWAN, SigFox and other LPWANs. Application developers require network coverage, and cellular service providers require consumer and enterprise demand or a business case before rolling it out nationally. Although there is a great deal of theoretical analysis and simulations in research, the lack of empirical evidence may be contributing to a general uncertainty in the standing of the technology with respect to alternatives and thus a slower adoption. This thesis aims to bridge that divide by evaluating NB-IoT's performance empirically using a set of metrics and estimate optimal use.
-
-Whilst theoretical models provide value in showing how factors affect an approximation, the boundless underlying complexities of LTE architecture make it hard to predict the variability induced by unpredictable network conditions. Thus, an empirical approach is proposed. We know already that the energy efficiency of a single network is questionable in Durand [@Durand2019] and Martinez [@Martinez2019].
+NB-IoT (LTE Cat-NB) is a competitive alternative to LoRaWAN, SigFox and other LPWANs, yet it does not have strong uptake in South Africa yet. As opposed to alternatives, it offers energy efficient bidirectionality using extended discrete periodic reception, yet variation in transmission energy and latency can affect battery lifetime drastically. Uptake is limited by the stasis between application developers requiring network coverage and cellular service providers require consumer and enterprise demand or a business case before rolling out national network coverage. Finally, although there is a great deal of theoretical analysis and simulations in research, the lack of empirical evidence may be contributing to a general uncertainty in the standing of the technology with respect to alternatives and thus a slower adoption. This thesis aims to bridge that divide by evaluating NB-IoT's performance empirically using a set of metrics and estimate optimal use.
 
 ## Research Objectives {#resobj}
 
 The aim of this study is to evaluate latency and power efficiency of NB-IoT with a set of metric tests comparing user equipment (UE) devices against multiple mobile network operator (MNO) vendors exposing the change in variability due to proprietary LTE complexities.
+
+Whilst theoretical models provide value in showing how factors affect an approximation, the boundless underlying complexities of LTE architecture make it hard to predict the variability induced by unpredictable network conditions. Thus, an empirical approach is proposed. We know already that the energy efficiency of a single network is questionable in Durand [@Durand2019] and Martinez [@Martinez2019].
 
 Battery longevity and recommended telemetry intervals are estimated, and secondary metrics such as signal strength, throughput and data overhead are investigated.
 
@@ -135,7 +156,7 @@ This in turn evaluates robustness, stability, capabilities, sources of variabili
 
 ## Scope of Work {#scopework}
 
-The study will be limited to the following in Table \ref{tbl:metric_summary}.
+Although there exist a multitude of UE devices, LTE vendors, estimations and metrics, the study will be limited to the following in Table \ref{tbl:metric_summary}.
 
 Table: UE devices, MNO vendors, metric comparisons and estimations {#tbl:metric_summary}
 
@@ -194,7 +215,23 @@ A user would consider critical characteristics such as energy consumption, cover
 
 Network operators are looking to enter the LPWAN sphere. 3GPP have made this possible by adapting LTE into Cat-M and NB-IoT.
 
-Application developers are always on the lookout for viable technologies, and tend to use the most prolific ones
+Application developers are always on the lookout for viable technologies, and tend to use the most prolific ones.
+
+---
+
+In recent years, 3GPP have developed new LPWANs for the cellular industry on the roadmap towards 5G, namely LTE Cat-M, EC-GSM-IoT and NB-IoT to supersede the sun-setting 2G/GPRS networks. GSM was first deployed in 1991 and offered calls and SMS as circuit switched data. In 2000, 2G/GPRS added internet at speeds comparable to dialup as packet switched data. Circuit switched data is ideal for real-time connections and means that links have bandwidth pre-allocated. This also increases the QoS guarantee of information transferred timeously. Packet switched data is connectionless on the other hand, with higher bandwidths possible in shared channels. GSM had been a cost-effective way to keep in touch with people around world, as well as the poorer communities in Africa. Due to the proliferation of WhatsApp, Facebook, Telegram and other social media platforms, there is a shift away from calls and sms. 
+
+![sms_usage](../notebooks/sms_usage.png)
+
+<!---Facebook, penetration
+Africa
+World Bank-->
+
+Due to high user demand in bandwidth-hungry applications such as voice, video and file sharing, it evolved into 3G and 4G LTE which is currently in use today in the form of VoIP and IMS. Since the more affordable packet switched networks can handle more bandwidth than circuit switched networks, the transition is sensible.
+
+![ims voip](C:\GIT\masters\thesis\images\ims voip.jpg)
+
+That left 2G/GPRS to serve as a gateway for smart devices and sensors in the M2M sphere, but due to its high-powered nature it is not sustainable for applications which require battery longevity of up to 10 years or more. 3GPP developed dedicated LPWAN technologies to serve this purpose. In lieu of its absence, although the spectrum it held can be re-farmed for cellular LPWANs, it also opens up opportunities for market entrants of unlicensed frequencies such as LoRaWAN and SigFox. Each LPWAN technology has its own unique flaws and benefits and there is yet to be a clear winner when it comes to connecting 'things' to the internet. In South Africa, there is a push by at least two major cellular service providers to adopt a cellular LPWAN to fill the void left behind by 2G/GPRS now and in the future. NB-IoT is being investigated by MTN South Africa, and since they are also funding this research, have also provided network coverage for testing to Stellenbosch University. Ideally, the technology can be rolled out to existing base stations as a software upgrade for national coverage, but it is limited by factors such as use case demand, expensive licensing and general uncertainty about the technology. This thesis aims to highlight the challenges, advantages and disadvantages of the technology. By doing endpoint tests with multiple manufacturers and base station vendors, one can paint an accurate picture of the capabilities of the technology. The technology is robust in certain test cases and scenarios, but additional work is required from the 3GPP to enhance the technology.
 
 ## Internet of Things{#iot}
 
@@ -206,9 +243,9 @@ In 2014, Gartner estimated that Internet of Things (IoT) had reached the height 
 
 ![[Gartner's 2018 Hype Cycle for ICT in Africa. NB-IoT is high on the list of expectations.](http://www.gartner.com/newsroom/id/3884512)](../images/42881085945_739bbdc8e9_c.jpg)
 
-![Gartner's Hype Cycle for Emerging Technologies, 2019. IoT is inextricably linked to at least a third of emerging technologies and also has uses in NB-IoT.](https://blogs.sas.com/content/hiddeninsights/2016/07/06/long-live-the-iot-hype/)(../images/CTMKT_741609_CTMKT_for_Emerging_Tech_Hype_Cycle_LargerText-1.png)
+![Gartner's Hype Cycle for Emerging Technologies, 2019. IoT is inextricably linked to at least a third of emerging technologies and also has uses in NB-IoT.](../images/CTMKT_741609_CTMKT_for_Emerging_Tech_Hype_Cycle_LargerText-1.png)
 
-
+[https://blogs.sas.com/content/hiddeninsights/2016/07/06/long-live-the-iot-hype/](https://blogs.sas.com/content/hiddeninsights/2016/07/06/long-live-the-iot-hype/)
 
 ![Ali estimates exponential growth [@Ali2015]. Hype yields investment, especially when the underlying innovation holds value, such as connecting billions of 'things' to the internet. NB-IoT can be integral to aid this growth.](../images/Expected-number-of-connected-devices-to-the-Internet-This-chart-is-obtained-from-recent.png)
 
@@ -227,34 +264,37 @@ Although there are many ways to connect IoT to the internet, NB-IoT is an LPWAN 
 
 There are many wireless technologies out there, with some standardized, including but not limited to SigFox, LoRaWAN, Dash7, Bluetooth, 6LowPan, RPMA, Weightless, and IETF 6TiSCH. Many are proprietary to retain company value and they try to meet application specific requirements also limited by technological constraints. Matching custom applications with a wireless technology is non-trivial as there is no silver bullet that matches all use-cases. On the contrary, many technologies overlap in their capabilities.
 
-Table: Brief comparison of wireless LPWANs {#tbl:lpwan_comparison}
+Table: Brief comparison of NB-IoT against wireless LPWANs {#tbl:lpwan_comparison}
 
-|                       | NB-IoT | LoRaWAN           | SigFox   |      |      |
-| --------------------- | ------ | ----------------- | -------- | ---- | ---- |
-| Frequency             |        | 433, 868, 915 MHz | ~868 MHz |      |      |
-| Bandwidth             |        |                   | 200 kHz  |      |      |
-| Throughput            |        | 27 kbps           | 0.1 kbps |      |      |
-| Duty cycle limitation |        | 1-10%             | 1%       |      |      |
-| Messages per day      |        |                   | 140      |      |      |
-| Bytes per message     |        |                   | 12       |      |      |
+|                         | NB-IoT       | LoRaWAN           | SigFox   | Dash7             |
+| ----------------------- | ------------ | ----------------- | -------- | ----------------- |
+| Frequency               | 450-2200 MHz | 433, 868, 915 MHz | 868 MHz  | 433, 868, 915 MHz |
+| Bandwidth               | 200 kHz      | 125-500 kHz       | 200 kHz  | 25, 200 kHz       |
+| Throughput              | 250 kbps     | 27 kbps           | 0.1 kbps | 167 kbps          |
+| Duty cycle limitation   | 0%           | 90-99%            | 99%      | LBT ~ 0-99%       |
+| Messages per day (12 B) |              | 10-243            | 140      |                   |
+| Bytes per message       | 512          | 255               | 12       | 256               |
+| Uplink Latency          | 0.1 - 10 s   | < 3 s             | ~ 6 s    |                   |
+| Battery Lifetime        | 10 years     | 10 years          | 16 years |                   |
+| MCL                     | 164 dBm      | 157 dBm           | 160 dBm  |                   |
+| Scalability             |              |                   | > 50k    |                   |
+| Outage                  | 1%           | > 2%              | 1%       |                   |
+| Average Power           |              |                   |          |                   |
 
-Table: Brief comparison of cellular technologies {#tbl:cellular_comparison}
+Table: Brief comparison of NB-IoT against cellular technologies {#tbl:cellular_comparison}
 
-|                   | 2G/GSM/GPRS | EC-GSM-IoT | LTE Cat-M | NB-IoT     |
-| ----------------- | ----------- | ---------- | --------- | ---------- |
-| Frequencies       |             |            |           | 0.8-2.6GHz |
-| Bandwidth         |             |            |           | 200kHz     |
-| Throughput        | 56–114 kbps |            |           | 250 kbps   |
-| Bytes per message |             |            |           | 512        |
+|                   | NB-IoT       | 2G/GSM/GPRS  | EC-GSM-IoT     | LTE Cat-M    |      |
+| ----------------- | ------------ | ------------ | -------------- | ------------ | ---- |
+| Frequencies       | 450-2200 MHz | 850-1900 MHz | 850 - 1900 MHz | 450-2600 MHz |      |
+| Bandwidth         | 200 kHz      |              | 200 kHz        | 1.4MHz       |      |
+| Throughput        | 250 kbps     | 56–114 kbps  | 70-240 kpbs    | 375 kbps     |      |
+| Bytes per message | 512          |              |                |              |      |
+| Uplink Latency    | < 10 s       |              | 0.7 - 2 s      |              |      |
+| Battery Lifetime  | 10 years     | 3 months     | 10 years       | 10 years     |      |
+| MCL               | 164 dBm      | 148 dBm      |                |              |      |
+| Scalability       |              |              |                |              |      |
 
-LPWANs enable a vast array of use cases.
-
-|              | MCL    | Scalability | Battery life | Throughput |
-| ------------ | ------ | ----------- | ------------ | ---------- |
-| NB-IoT       | 164dBm | >50k        |              |            |
-| GPRS         | 148dBm |             |              |            |
-| LoRaWAN SF12 | 157dBm |             |              |            |
-| SigFox       | `dBm   | >50k        |              |            |
+Table: LPWAN strengths
 
 | Technology   | MCL  | Scalability | Battery life | Throughput |
 | ------------ | ---- | ----------- | ------------ | ---------- |
@@ -442,6 +482,8 @@ Table: Cellular control {#tbl:cellular_control}
 
 MNO/BTS Vendors are open to all UE manufacturers.
 
+Other Vendors include: Broadcom Corporation, Cisco Systems, Gemalto NV, Intel Corporation, KDDI Corporation, LG Electronics, MediaTek, Oberthur Technologies, Ooredoo, Orange, Samsung Electronics, Saudi Telecom Company, Sierra Wireless, Telit Communications and VimpelCom.
+
 ## UE Manufacturers
 
 UE devices specifically used:
@@ -495,3 +537,13 @@ When it comes to base stations, the user does not have control over the inactivi
 ## Thesis structure {#thesis-struct}
 
 NB-IoT is introduced to the reader in Chapter \ref{intro}. A literature study reviews the current empirical research in Chapter \ref{litstudy}. Design and methodology shows the steps taken to capture different metrics and process the resulting dataset in Chapter \ref{design}. Results are analyzed in Chapter \ref{results} and discussed with recommendations in Chapter \ref{#discussion}. Lastly, a conclusion is made in Chapter \ref{conclusion}.
+
+\newpage
+
+# Notes
+
+* rename MNO vendors to LTE vendors?
+
+\newpage
+
+# References

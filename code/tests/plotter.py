@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-import jupyter as j
+import jupyterlib as j
 import importlib
 import pandas as pd
 import seaborn as sns
@@ -13,6 +13,8 @@ import matplotlib.ticker as ticker
 import glob
 
 cc = ['tab:orange', 'tab:green', 'tab:red', 'tab:purple', 'tab:blue', 'tab:brown', 'tab:cyan']
+
+print('plotter @Daniel.Robinson')
 
 def attdt():
     atf = {}
@@ -250,8 +252,8 @@ def scatternuator(name, kx, ky, thresh, plotlim, scale, limited, dirrs, files, k
         # ax.legend(bbox_to_anchor=(0.97, 1.15))
         if overlay and legend:
             # print('legend', dirrs[di])
-            # handles = [mpatches.Patch(color=colour[i], label=lab) for i, lab in enumerate(labels)]
-            handles = [Line2D(range(1), range(1), color="white", marker='o', label=lab, markersize=8, markerfacecolor=colour[i]) for i, lab in enumerate(labels)]
+            handles = [mpatches.Patch(color=colour[i], label=lab) for i, lab in enumerate(labels)]
+            # handles = [Line2D(range(1), range(1), color="white", marker='o', label=lab, markersize=8, markerfacecolor=colour[i]) for i, lab in enumerate(labels)]
             if bbox:
                 ax.legend(handles=handles, bbox_to_anchor=bbox)
             else:

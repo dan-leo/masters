@@ -4,7 +4,7 @@ import matplotlib.ticker as ticker
 import pandas as pd
 import seaborn as sns
 import plotter as p
-import jupyter as j
+import jupyterlib as j
 import importlib
 import matplotlib.colors as mc
 import colorsys

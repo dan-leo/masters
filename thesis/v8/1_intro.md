@@ -48,10 +48,15 @@ A number of tests have been developed, performed and analyzed for multiple UEs (
 
 # Acknowledgements {-#acknowledgements}
 
-* **Prof Thinus Booysen** - for his unrelenting care, innovative passion and inspiring belief in people.
+* **Prof Thinus Booysen** - for his unrelenting care, innovative passion, inspiring belief in people and charming charisma.
 * **Family** - for their love and dedication.
 * **Friends** - for their wisdoms, experiencing the journey together and sharing moments in highs and lows.
 * **MTN Mobile Intelligence Lab** - for providing funding, expertise and laboratory working environment.
+* **Ryan van den Bergh** - for driving innovative ideas at MTN.
+* **Michael Beetge** - for his expertise in the MTN Phase 3: Test Plant and extensive knowledge of LTE
+* **Collin Mamdoo** - for his knowledge on IoT and helpful assistance at Vodacom
+* **Helene  Lambrechts** - for her aid in coherence and cohesion.
+* **RF Design** - for providing samples and development kits.
 
 # Acronyms {-#acronyms}
 

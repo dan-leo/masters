@@ -394,7 +394,20 @@ Around -100 dBm devices decrease their output power at roughly 10 dBm per decade
 
 ### Throughput
 
+It displays the throughput measurement for the RLC and physical layers.
 
+These values provide an indication of the efficiency of the radio link. With bad BLER, these values will
+be low. With very good BLER, these values will be near the theoretical throughput of NB-IoT – and
+because of this, may not change over time, as it does not take into account the time to wake up,
+scan for base station, etc. This is simply over the protocol stack itself.
+
+![Signal_power_RLC_DL_plot](../../code/tests/plotterk/Signal_power_RLC_DL_plot.png)
+
+![Signal_power_RLC_UL_plot](../../code/tests/plotterk/Signal_power_RLC_UL_plot.png)
+
+![Signal_power_MAC_DL_plot](../../code/tests/plotterk/Signal_power_MAC_DL_plot.png)
+
+![Signal_power_MAC_UL_plot](../../code/tests/plotterk/Signal_power_MAC_UL_plot.png)
 
 ### Data Overhead
 
@@ -491,23 +504,6 @@ quality.
 up to 30 required, and one outlier at 80. 
 
 (A) Attenuation zones evident and do not affect number of ACK/NACKs. (B) Vodacom requires more ACK/NACK responses than MTN. They share similar characteristics at a difference of 40dBm RSRP. (C) Significant variation in tests, although eDRX tests show the greatest number. (D) ECL does not seem to affect ACK/NACK count
-
-#### Throughput
-
-It displays the throughput measurement for the RLC and physical layers.
-
-These values provide an indication of the efficiency of the radio link. With bad BLER, these values will
-be low. With very good BLER, these values will be near the theoretical throughput of NB-IoT – and
-because of this, may not change over time, as it does not take into account the time to wake up,
-scan for base station, etc. This is simply over the protocol stack itself.
-
-![Signal_power_RLC_DL_plot](../../code/tests/plotterk/Signal_power_RLC_DL_plot.png)
-
-![Signal_power_RLC_UL_plot](../../code/tests/plotterk/Signal_power_RLC_UL_plot.png)
-
-![Signal_power_MAC_DL_plot](../../code/tests/plotterk/Signal_power_MAC_DL_plot.png)
-
-![Signal_power_MAC_UL_plot](../../code/tests/plotterk/Signal_power_MAC_UL_plot.png)
 
 ## Estimations
 

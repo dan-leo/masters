@@ -64,6 +64,7 @@ A number of tests have been developed, performed and analyzed for multiple UEs (
 | ---- | ---- |
 | **3GPP** |    Third Generation Partnership Project |
 | **AMQP** |    Advanced Message Queue Protocol |
+| **AMOS** | Advanced Managed Object Script |
 | **AT** |      Attention |
 | **BPSK** | Binary Phase-Shift Keying |
 | **BTS** | Base Transceiver Station |
@@ -92,6 +93,7 @@ A number of tests have been developed, performed and analyzed for multiple UEs (
 | **MCS** | Message Coding Scheme |
 | **MNO** | Mobile Network Operator |
 | **MO** | Mobile Originated |
+| **MO** | Managed Object |
 | **MQTT** | Message Queuing Telemetry Transport |
 | **MT** | Mobile Terminated |
 | **MTC** | Machine Type Communications |

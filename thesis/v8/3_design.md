@@ -160,6 +160,12 @@ On the Vodafone network in connected-DRX (C-DRX) mode, the UE is observed to sho
 
 [](../../code/tests/logs/zte_mtn/rf_shield/quectel/scope/70.4mA_ant_0dB.jpg)
 
+####  E-UTRAN Node B (eNB/eNodeB)
+
+Ericsson eNodeBs run Linux and their commands are accessible via MOShell, or the scripting language AMOS.
+
+To get an idea of the complexity of a node (eNodeB) in a base station (BTS), running `$ get .` in the terminal of B06009-TESTPLANT returned 7037 Managed Objects (MOs) with 27989 parameters. This highlights how easy it is for a BTS to produce different results in this study depending on the network configuration and environment.
+
 ### Range Field Test
 
 This gives a good idea as to the range expected according to RSRP.
@@ -237,6 +243,16 @@ Lastly, all the test data including raw data on the way to Technopark, we see a 
 Looking at the ICMP ping response according to different RSSI values, we see high jitter of a few seconds from -80dBm or less.
 
 ![jitter](C:\GIT\masters\thesis\images\jitter.png)
+
+#### Dash7
+
+A Dash7 field test was performed using STM32L0, but due to 10dBm transmit power it limited range to about 300m.
+
+![Dash7 Field Test](../images/1571685763894.png)
+
+Although Dash7 is considered a viable alternative, it fell short on range expectations.
+
+Haystack Technologies has developed a Dash7-over-LoRa implementation that expects ranges of over a few kilometers and can be considered in future research.
 
 ### Power Saving Mechanisms
 
@@ -316,13 +332,16 @@ Also, what is the current usage of running a specific command? Is it negligible 
 
 ### Mobility Tests
 
-Using a Sierra Wireless WP7702 on Ericsson Test BTS 'L06009A3' and EARFCN 3734, the UE had to periodically ping an internet-facing server and the dead time was measured before it reconnected received a response:
+Using a Sierra Wireless WP7702 on Ericsson Test BTS 'L06009A3' and EARFCN 3734/3752, the UE had to periodically ping an internet-facing server and the dead time was measured before it reconnected received a response. The RSRP was in the range -50 to -80 dBm and therefore in ECL 0.
+
+The tests took place within a faraday cage to isolate the test network from the live RAN, else by opening the door of the faraday cage it deregistered from the network and MME.
+
+Table: NB-IoT and LTE Cat-M handover.
 
 | Mobility test         | Time   |
 | --------------------- | ------ |
 | Standalone to In-band | ~ 11 s |
 | In-band to Standalone | ~ 11 s |
-|                       |        |
 
 |      | Uplink              | Downlink            |
 | ---- | ------------------- | ------------------- |

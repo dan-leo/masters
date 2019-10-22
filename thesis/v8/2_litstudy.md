@@ -39,7 +39,8 @@ LoRaWAN is a contender for NB-IoT. It lacks bidirectionality and data rate.
   more than one message per data block is required.
 * Second, the LoRaWAN reliability mechanism must be ensured at the
   upper layers, and thus may incur higher energy costs.
-* 
+
+## Dash7
 
 ## SigFox {#sigfox}
 
@@ -53,7 +54,9 @@ SigFox is a contender for NB-IoT. It lacks bidirectionality and datarate.
   - UE devices must follow NW settings broadcast inside the SIB and allocations for UL/DL data.
 - 
 
-## Standing/Positioning
+## Standing or Positioning {#lit_standing}
+
+* Comparison
 
 [@Martinez2019]
 
@@ -88,14 +91,15 @@ Ownership model
 - connectivity service, contract, charged per byte
 - coverage depends on deployed infrastructure
 
-## Hardware
+## Hardware {#lit_hardware}
 
 * Modem
 * Antenna
 * RX/TX lines
 
-## Setup
+## Setup Procedure {#lit_setup}
 
+* There exist application development manuals.
 * AT+NCONFIG
   * AUTOCONNECT
   * CR_0859_SI_AVOID
@@ -103,7 +107,7 @@ Ownership model
 * URCs
 * APN
 
-## Network Registration
+## Network Registration and Info {#nw_reg_info}
 
 - By default the SARA-N2 series modules will automatically try and connect to the network. This
   feature will read the SIM for the PLMN and attempt to register with the network. The device will use
@@ -121,7 +125,11 @@ Ownership model
   command will be 1 (registered) or 5 (registered & roaming).
 - See [@ubloxAppNote2018]] for a connection status compatibility matrix.
 
-## RRC Connection and Inactivity Timer
+* PCI value is assigned.
+
+The **PCI** value is created from two components - PSS and SSS. The PSS, Primary Synchronization Signal, has the value 0, 1, or 2. The SSS, Secondary Synchronization Signal, can have a value between 0 and 167.
+
+## RRC Connection and Inactivity Timer {#rrc_inactivity}
 
 After network registration or transmitting a data packet, the device usually enters RRC connected (C-DRX) mode for a specified inactivity timeout specified by the network.
 
@@ -246,7 +254,7 @@ calculate the power consumption of a single message deployed in the field.
 
 * example SIB
 
-## Repetitions (ECL)
+## Repetitions and Extended Coverage Level (ECL)
 
 * ECL
 * Module interference increases the number of repetitions
@@ -260,7 +268,7 @@ calculate the power consumption of a single message deployed in the field.
 
 * 
 
-## Behavior
+## UE Device and Network Behavior
 
 * The application can monitor the status of the module’s connection, registration and PSM state by
   polling or configuring URCs. By monitoring the module status the application can behave more

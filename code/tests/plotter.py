@@ -38,7 +38,7 @@ def flatten(hist):
 
 # def db(dirrs, files):
 def scatternuator(name, kx, ky, thresh, plotlim, scale, limited, dirrs, files, kz=None, atd=None, scaled=False, log=True, overlay=False, \
-    labels=['Ublox', 'Quectel'], legend=True, title='metric', ttype='fade', fig=None, offset=0, colour='tab:blue', fx=5, fy=3, \
+    labels=['Ublox', 'Quectel'], legend=True, title='', ttype='fade', fig=None, offset=0, colour='tab:blue', fx=5, fy=3, \
     print_outliers=True, mean=False, bbox=None, ):
     # (1.03, 0.97)):
     savefig = fig == None
@@ -72,7 +72,7 @@ def scatternuator(name, kx, ky, thresh, plotlim, scale, limited, dirrs, files, k
                 else:
                     print('else', file, f)
                     atf['40-110 dB'].append(file)
-        # print(atf)
+        # print('atf', atf)
 
         ####################### database {} prep #######################
 
@@ -230,7 +230,7 @@ def scatternuator(name, kx, ky, thresh, plotlim, scale, limited, dirrs, files, k
                 ka.append(k)
             except (KeyError, IndexError) as e:
                 if k == '0 dB':
-                    print('KeyError, IndexError', e, k, atd[k], labels[di], files)
+                    print('KeyError, IndexError', e, k, labels[di], files)
         # hist.append([x, y])
         # print('x', len(x))
         # x = sum(x, [])
@@ -252,8 +252,8 @@ def scatternuator(name, kx, ky, thresh, plotlim, scale, limited, dirrs, files, k
         # ax.legend(bbox_to_anchor=(0.97, 1.15))
         if overlay and legend:
             # print('legend', dirrs[di])
-            handles = [mpatches.Patch(color=colour[i], label=lab) for i, lab in enumerate(labels)]
-            # handles = [Line2D(range(1), range(1), color="white", marker='o', label=lab, markersize=8, markerfacecolor=colour[i]) for i, lab in enumerate(labels)]
+            # handles = [mpatches.Patch(color=colour[i], label=lab) for i, lab in enumerate(labels)]
+            handles = [Line2D(range(1), range(1), color="white", marker='o', label=lab, markersize=8, markerfacecolor=colour[i]) for i, lab in enumerate(labels)]
             if bbox:
                 ax.legend(handles=handles, bbox_to_anchor=bbox)
             else:

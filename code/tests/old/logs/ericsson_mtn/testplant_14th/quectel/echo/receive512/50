@@ -1,0 +1,2 @@
+index,idleTime,txTime,totalTime,energy,maxCurrent,Signal power,Total power,TX power,TX time,RX time,Cell ID,ECL,SNR,EARFCN,PCI,RSRQ,OPERATOR MODE,LC UL BLE,LC DL BLE,AC UL BLE,AC DL BLE,otal TX byte,otal RX byte,otal TX block,otal RX block,otal RTX block,otal ACK/NACK R,LC U,LC D,AC U,AC D,urrent Allocate,otal Fre,ax Fre,um Alloc,um Free,primary_cell,rsrp,rsrq,rssi,snr,
+0,2419,12941,4862,9964.04,115.0,-703,-611,-50,24423,101744,1538426,0,278,3725,66,-108,2,0,0,0,0,6470,9444,120,189,0,0,21,381,63,415,26192,17144,15264,6253,6039,1,-703,-108,-611,278,

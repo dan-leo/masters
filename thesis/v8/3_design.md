@@ -52,8 +52,6 @@ Todo: get SIB block from UE monitor.
 
 The Cell ID in this response is the physical network cell ID.
 
-The **PCI** value is created from two components - PSS and SSS. The PSS, Primary Synchronization Signal, has the value 0, 1, or 2. The SSS, Secondary Synchronization Signal, can have a value between 0 and 167.
-
 \begin{minipage}{\linewidth}
 \begin{center}
 \includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_ECL_plot.pdf}
@@ -353,6 +351,22 @@ Table: NB-IoT and LTE Cat-M handover.
 
 Each Field Test will make use of various subtests.
 
+### Hardware
+
+The following tests measure current for a Ublox SARA N200 connected to a ZTE base station.
+
+![Block diagram of current consumption setup for SARA-N2](C:\Users\d7rob\AppData\Roaming\Typora\typora-user-images\1555535660456.png)
+
+The digital multimeter in the figure is replaced with a ZXCT1008 high-side current monitor in series with the modem. 
+
+![ZXCT1008  high-side current monitor https://www.diodes.com/assets/Datasheets/ZXCT1008.pdf](../images/arduino86-1-1571303569557.png)
+
+Rs is set to a 1 ohm resistor and Rg is set as a 1k ohm resistor such that 100mA supplied to the modem makes 1V.
+
+$V_{out} = I_{load} [mA] * 10 [\frac{V}{mA}]$
+
+![zxct1008](C:\GIT\masters\thesis\images\zxct1008.jpeg)
+
 ### PyTest Framework
 
 PyTest is a unit testing framework used to setup the UE for each test using AT commands.
@@ -393,11 +407,19 @@ Peak current is approximately 70mA.
 
 This test is designed to measure client and server initiated echo requests.
 
-## Main Metrics
+## Power Efficiency
 
 ### Energy vs SINR
 
-![MTN Energy (mJ or J) vs SINR (dB)](../images/1568089288965.png)
+![Ublox (blue) and Quectel (red) energy (J) per datagram as a function of the SINR (dB) as reported by the UE on the MTN-ZTE network limited to 1500 mJ.\label{fig:energy_sinr1400}](../images/1571781182963.png)
+
+With the fading colour scheme and range just as in Martinez [@Martinez2019], Fig. \ref{fig:energy_sinr1400} shows the impact of SNR on energy consumption. As observed in the figure, there is a trend of increasing energy with respect to lower SNR levels and high variability. Unfortunately, the effect of different ECLs is unclear.
+
+![Ublox (blue) and Quectel (red) energy (mJ) per datagram as a function of the SINR (dB) as reported by the UE on the MTN-ZTE network.\label{fig:energy_sinr_log}](../images/1571781152992.png)
+
+Increasing the range fully and using logarithms in Fig. \ref{fig:energy_sinr_log}, one can see that there is significant overshoot on the MTN-ZTE network. The trend mentioned in Fig. \ref{fig:energy_sinr1400} continues.
+
+[](../images/1571785381395.png)
 
 ### Energy vs Datagram Size
 
@@ -409,7 +431,9 @@ This test is designed to measure client and server initiated echo requests.
 \end{center}
 \end{minipage}
 
-[](../../code/tests/datagrams/mtn_ublox_energy.png)
+![](../../code/tests/datagrams/mtn_ublox_energy.png)
+
+Fig. \ref{fig:udpsize} shows 
 
 ### eDRX Energy
 
@@ -457,6 +481,14 @@ roughly between 70 and 120mA, and skewed towards higher consumption. It is also 
 
 [](../../../masters/code/tests/plotterk/maxCurrent_histogram.png)
 
+## Latency and Timing
+
+### Latency vs SINR
+
+![Latency per datagram as a function of the SINR (dB) as reported by the UE on the (D) MTN-ZTE and (E) Vodacom-Nokia network respectively.\label{fig:latency_sinr_comp}](../images/1571781751620.png)
+
+In Fig. \ref{fig:latency_sinr_comp}, there is a poor distinction between attenuation zones as the SINR varies throughout the reported RSRP range. Grouping the data according to attenuation decade is important to see the effect of network conditions clearly.
+
 ## Secondary Metrics
 
 ### Signal Strength
@@ -475,6 +507,8 @@ Signal strength can be measured using the following metrics:
 Data can be extracted from UDP packet transmissions using latency and data size
 
 $THP = \frac{Datagram\ Size}{Latency}$
+
+It also comes from RLC and MAC reporting.
 
 ### Data Overhead
 
@@ -592,26 +626,6 @@ Instead of finding a single mean for all the entries and associated files, at le
 ## Visualization
 
 Since it appears that ECL is the ultimate factor that should influence latency and energy usage, it is the metric used for battery life estimation as well.
-
-## Preliminary results
-
-## Hardware
-
-The following tests measure current for a Ublox SARA N200 connected to a ZTE base station.
-
-![Block diagram of current consumption setup for SARA-N2](C:\Users\d7rob\AppData\Roaming\Typora\typora-user-images\1555535660456.png)
-
-The digital multimeter in the figure is replaced with a ZXCT1008 high-side current monitor in series with the modem. 
-
-![ZXCT1008  high-side current monitor https://www.diodes.com/assets/Datasheets/ZXCT1008.pdf](../images/arduino86-1-1571303569557.png)
-
-Rs is set to a 1 ohm resistor and Rg is set as a 1k ohm resistor such that 100mA supplied to the modem makes 1V.
-
-$V_{out} = I_{load} [mA] * 10 [\frac{V}{mA}]$
-
-![zxct1008](C:\GIT\masters\thesis\images\zxct1008.jpeg)
-
-
 
 ## Notes
 

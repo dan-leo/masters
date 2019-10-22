@@ -1,0 +1,196 @@
+test_setup.py::test_CEREG AT+CEREG?
++CEREG: 5,1,"9C40","23DC10D",7,,,"00000000","00000110"
+PASSED
+test_setup.py::test_ping at+nping="8.8.8.8"
+OK
+OK
++NPING: "8.8.8.8",52,701
+{'Signal power': '-936', 'Total power': '-843', 'TX power': '140', 'TX time': '506', 'RX time': '3717', 'Cell ID': '37601549', 'ECL': '0', 'SNR': '103', 'EARFCN': '3609', 'PCI': '75', 'RSRQ': '-109', 'RLC UL BLER': '0', 'RLC DL BLER': '0', 'MAC UL BLER': '0', 'MAC DL BLER': '0',
+'Total TX bytes': '399', 'Total RX bytes': '570', 'Total TX blocks': '17', 'Total RX blocks': '14', 'Total RTX blocks': '0', 'Total ACK/NACK RX': '0', 'RLC UL': '399', 'RLC DL': '495', 'MAC UL': '834', 'MAC DL': '1147', 'Current Allocated': '16276', 'Total Free': '6724', 'Max Free': '6724', 'Num Allocs': '140', 'Num Frees': '74', 'primary_cell': '1', 'rsrp': '-932', 'rsrq': '-108', 'rssi': '-889', 'snr': '111'}
+CAPTURE START
+./logs/ericsson_mtn/testplant_14th/ublox/setup/ping/0
+index,
+idleTime,txTime,totalTime,energy,maxCurrent,Signal power,Total power,TX power,TX time,RX time,Cell ID,ECL,SNR,EARFCN,PCI,RSRQ,RLC UL BLER,RLC DL BLER,MAC UL BLER,MAC DL BLER,Total TX bytes,Total RX bytes,Total TX blocks,Total RX blocks,Total RTX blocks,Total ACK/NACK RX,RLC UL,RLC DL,MAC UL,MAC DL,Current Allocated,Total Free,Max Free,Num Allocs,Num Frees,primary_cell,rsrp,rsrq,rssi,snr,
+0,1762,798,121,7.36,80.0,-926,-885,140,516,4021,37601549,0,123,3609,75,-108,0,0,0,0,399,570,17,14,0,0,399,495,834,1147,16276,6724,6724,143,77,1,-934,-108,-891,113,
+CAPTURE END
+PASSED
+
+================================================ 7 passed, 44 deselected in 15.18 seconds =================================================
+PS C:\GIT\masters\code\tests> pytest -svk ping
+=========================================================== test session starts ===========================================================
+platform win32 -- Python 3.7.3, pytest-4.6.2, py-1.8.0, pluggy-0.12.0 -- c:\users\d7rob\appdata\local\programs\python\python37\python.exe
+cachedir: .pytest_cache
+rootdir: C:\GIT\masters\code\tests, inifile: pytest.ini
+collected 51 items / 50 deselected / 1 selected                                                                                            
+
+test_setup.py::test_ping
+at+nping="8.8.8.8"
+OK
++NPSMR: 0
++CSCON: 1
++NPING: "8.8.8.8",52,2360
+{'Signal power': '-947', 'Total power': '-854', 'TX power': '140', 'TX time': '644', 'RX time': '24201', 'Cell ID': '37601549', 'ECL': '0',
+'SNR': '106', 'EARFCN': '3609', 'PCI': '75', 'RSRQ': '-110', 'RLC UL BLER': '0', 'RLC DL BLER': '0', 'MAC UL BLER': '0', 'MAC DL BLER': '0', 'Total TX bytes': '554', 'Total RX bytes': '736', 'Total TX blocks': '21', 'Total RX blocks': '18', 'Total RTX blocks': '0', 'Total ACK/NACK RX': '0', 'RLC UL': '399', 'RLC DL': '19', 'MAC UL': '13', 'MAC DL': '36', 'Current Allocated': '16276', 'Total Free': '6724', 'Max Free': '6724', 'Num Allocs': '149', 'Num Frees': '83', 'primary_cell': '1', 'rsrp': '-950', 'rsrq': '-110', 'rssi': '-903', 'snr': '96'}
+CAPTURE START
+./logs/huawei_vodacom/testplant_14th/ublox/setup/ping/10
+index,
+idleTime,txTime,totalTime,energy,maxCurrent,Signal power,Total power,TX power,TX time,RX time,Cell ID,ECL,SNR,EARFCN,PCI,RSRQ,RLC UL BLER,RLC DL BLER,MAC UL BLER,MAC DL BLER,Total TX bytes,Total RX bytes,Total TX blocks,Total RX blocks,Total RTX blocks,Total ACK/NACK RX,RLC UL,RLC DL,MAC UL,MAC DL,Current Allocated,Total Free,Max Free,Num Allocs,Num Frees,
+0,97806,23309,16166,5001.13,127.0,-946,-844,220,700,43476,37601549,0,130,3609,75,-108,0,0,0,0,565,754,22,19,0,0,399,24,13,46,16276,6724,6724,152,86,
+CAPTURE END
+PASSED
+
+================================================ 1 passed, 50 deselected in 28.85 seconds =================================================
+PS C:\GIT\masters\code\tests> pytest -svk ping
+=========================================================== test session starts ===========================================================
+platform win32 -- Python 3.7.3, pytest-4.6.2, py-1.8.0, pluggy-0.12.0 -- c:\users\d7rob\appdata\local\programs\python\python37\python.exe
+cachedir: .pytest_cache
+rootdir: C:\GIT\masters\code\tests, inifile: pytest.ini
+collected 51 items / 50 deselected / 1 selected                                                                                            
+
+test_setup.py::test_ping
+at+nping="8.8.8.8"
+OK
++NPSMR: 0
++CSCON: 1
++NPING: "8.8.8.8",52,2247
+{'Signal power': '-1056', 'Total power': '-960', 'TX power': '230', 'TX time': '804', 'RX time': '44796', 'Cell ID': '37601549', 'ECL': '0', 'SNR': '77', 'EARFCN': '3609', 'PCI': '75', 'RSRQ': '-113', 'RLC UL BLER': '0', 'RLC DL BLER': '0', 'MAC UL BLER': '0', 'MAC DL BLER': '0', 'Total TX bytes': '703', 'Total RX bytes': '898', 'Total TX blocks': '25', 'Total RX blocks': '22', 'Total RTX blocks': '0', 'Total ACK/NACK RX': '0', 'RLC UL': '399', 'RLC DL': '24', 'MAC UL': '13', 'MAC DL': '46', 'Current Allocated': '16276', 'Total Free': '6724', 'Max Free': '6724', 'Num Allocs': '158', 'Num Frees': '92', 'primary_cell': '1', 'rsrp': '-1062', 'rsrq': '-114', 'rssi': '-1003', 'snr': '69'}
+CAPTURE START
+CAPTURE END
+PASSED
+
+================================================ 1 passed, 50 deselected in 18.17 seconds =================================================
+PS C:\GIT\masters\code\tests> pytest -svk ping
+=========================================================== test session starts ===========================================================
+platform win32 -- Python 3.7.3, pytest-4.6.2, py-1.8.0, pluggy-0.12.0 -- c:\users\d7rob\appdata\local\programs\python\python37\python.exe
+cachedir: .pytest_cache
+rootdir: C:\GIT\masters\code\tests, inifile: pytest.ini
+collected 51 items / 50 deselected / 1 selected                                                                                            
+
+test_setup.py::test_ping
+at+nping="8.8.8.8"
+OK
++NPSMR: 0
++CSCON: 1
++NPING: "8.8.8.8",52,1999
+{'Signal power': '-1076', 'Total power': '-958', 'TX power': '230', 'TX time': '1068', 'RX time': '65378', 'Cell ID': '37601549', 'ECL': '1', 'SNR': '25', 'EARFCN': '3609', 'PCI': '75', 'RSRQ': '-128', 'RLC UL BLER': '0', 'RLC DL BLER': '0', 'MAC UL BLER': '0', 'MAC DL BLER': '0', 'Total TX bytes': '852', 'Total RX bytes': '1035', 'Total TX blocks': '29', 'Total RX blocks': '27', 'Total RTX blocks': '0', 'Total ACK/NACK RX': '0', 'RLC UL': '399', 'RLC DL': '24', 'MAC UL': '13', 'MAC DL': '46', 'Current Allocated': '16276', 'Total Free': '6724', 'Max Free': '6724', 'Num Allocs': '164', 'Num Frees': '98', 'primary_cell': '1', 'rsrp': '-1075', 'rsrq': '-126', 'rssi': '-982', 'snr': '29'}
+CAPTURE START
+./logs/huawei_vodacom/testplant_14th/ublox/setup/ping/5
+0,72533,22986,16535,2421.75,124.0,-966,-876,170,1096,85619,37601549,1,46,3609,75,-122,0,0,0,0,870,1046,30,28,0,0,399,24,55,39,16276,6724,6724,167,101,
+CAPTURE END
+PASSED
+
+================================================ 1 passed, 50 deselected in 28.02 seconds =================================================
+PS C:\GIT\masters\code\tests> pytest -svk ping
+=========================================================== test session starts ===========================================================
+platform win32 -- Python 3.7.3, pytest-4.6.2, py-1.8.0, pluggy-0.12.0 -- c:\users\d7rob\appdata\local\programs\python\python37\python.exe
+cachedir: .pytest_cache
+rootdir: C:\GIT\masters\code\tests, inifile: pytest.ini
+collected 51 items / 50 deselected / 1 selected                                                                                            
+
+test_setup.py::test_ping
+at+nping="8.8.8.8"
+OK
++NPSMR: 0
++CSCON: 1
++NPING: "8.8.8.8",52,2448
+{'Signal power': '-998', 'Total power': '-896', 'TX power': '230', 'TX time': '1282', 'RX time': '86992', 'Cell ID': '37601549', 'ECL': '1', 'SNR': '60', 'EARFCN': '3609', 'PCI': '75', 'RSRQ': '-117', 'RLC UL BLER': '0', 'RLC DL BLER': '0', 'MAC UL BLER': '0', 'MAC DL BLER': '0', 'Total TX bytes': '990', 'Total RX bytes': '1158', 'Total TX blocks': '32', 'Total RX blocks': '31', 'Total RTX blocks': '0', 'Total ACK/NACK RX': '0', 'RLC UL': '399', 'RLC DL': '24', 'MAC UL': '55', 'MAC DL': '39', 'Current Allocated': '16276', 'Total Free': '6724', 'Max Free': '6724', 'Num Allocs': '173', 'Num Frees': '107', 'primary_cell': '1', 'rsrp': '-996', 'rsrq': '-117', 'rssi': '-927', 'snr': '59'}
+CAPTURE START
+./logs/huawei_vodacom/testplant_14th/ublox/setup/ping/10
+index,
+idleTime,txTime,totalTime,energy,maxCurrent,Signal power,Total power,TX power,TX time,RX time,Cell ID,ECL,SNR,EARFCN,PCI,RSRQ,RLC UL BLER,RLC DL BLER,MAC UL BLER,MAC DL BLER,Total TX bytes,Total RX bytes,Total TX blocks,Total RX blocks,Total RTX blocks,Total ACK/NACK RX,RLC UL,RLC DL,MAC UL,MAC DL,Current Allocated,Total Free,Max Free,Num Allocs,Num Frees,
+0,31944,23095,16621,67699.4,122.0,-991,-913,180,1310,107130,37601549,1,79,3609,75,-115,0,0,0,0,1026,1169,34,32,0,0,399,24,55,37,16276,6724,6724,176,110,
+CAPTURE END
+PASSED
+
+================================================ 1 passed, 50 deselected in 28.71 seconds =================================================
+PS C:\GIT\masters\code\tests> pytest -svk ping
+=========================================================== test session starts ===========================================================
+platform win32 -- Python 3.7.3, pytest-4.6.2, py-1.8.0, pluggy-0.12.0 -- c:\users\d7rob\appdata\local\programs\python\python37\python.exe
+cachedir: .pytest_cache
+rootdir: C:\GIT\masters\code\tests, inifile: pytest.ini
+collected 51 items / 50 deselected / 1 selected                                                                                            
+
+test_setup.py::test_ping
+at+nping="8.8.8.8"
+OK
++NPSMR: 0
++CSCON: 1
++NPING: "8.8.8.8",52,2111
+{'Signal power': '-1087', 'Total power': '-969', 'TX power': '230', 'TX time': '1508', 'RX time': '108426', 'Cell ID': '37601549', 'ECL': '1', 'SNR': '54', 'EARFCN': '3609', 'PCI': '75', 'RSRQ': '-119', 'RLC UL BLER': '0', 'RLC DL BLER': '0', 'MAC UL BLER': '0', 'MAC DL BLER': '0', 'Total TX bytes': '1164', 'Total RX bytes': '1288', 'Total TX blocks': '37', 'Total RX blocks': '36', 'Total RTX blocks': '0', 'Total ACK/NACK RX': '0', 'RLC UL': '399', 'RLC DL': '24', 'MAC UL': '55', 'MAC DL': '37', 'Current Allocated': '16276', 'Total Free': '6724', 'Max Free': '6724', 'Num Allocs': '182', 'Num Frees': '116', 'primary_cell': '1', 'rsrp': '-1081', 'rsrq': '-119', 'rssi': '-995', 'snr': '53'}
+CAPTURE START
+./logs/huawei_vodacom/testplant_14th/ublox/setup/ping/20
+index,
+idleTime,txTime,totalTime,energy,maxCurrent,Signal power,Total power,TX power,TX time,RX time,Cell ID,ECL,SNR,EARFCN,PCI,RSRQ,RLC UL BLER,RLC DL BLER,MAC UL BLER,MAC DL BLER,Total TX bytes,Total RX bytes,Total TX blocks,Total RX blocks,Total RTX blocks,Total ACK/NACK RX,RLC UL,RLC DL,MAC UL,MAC DL,Current Allocated,Total Free,Max Free,Num Allocs,Num Frees,
+0,29417,23062,16618,67858.63,119.0,-1076,-1001,230,1537,128665,37601549,0,92,3609,75,-111,0,0,0,0,1182,1299,38,37,0,0,399,24,55,39,16276,6724,6724,185,119,
+CAPTURE END
+PASSED
+
+================================================ 1 passed, 50 deselected in 28.12 seconds =================================================
+PS C:\GIT\masters\code\tests> pytest -svk ping
+=========================================================== test session starts ===========================================================
+platform win32 -- Python 3.7.3, pytest-4.6.2, py-1.8.0, pluggy-0.12.0 -- c:\users\d7rob\appdata\local\programs\python\python37\python.exe
+cachedir: .pytest_cache
+rootdir: C:\GIT\masters\code\tests, inifile: pytest.ini
+collected 51 items / 50 deselected / 1 selected                                                                                            
+
+test_setup.py::test_ping
+at+nping="8.8.8.8"
+OK
++NPSMR: 0
++CSCON: 1
++NPING: "8.8.8.8",52,1953
+{'Signal power': '-1181', 'Total power': '-1073', 'TX power': '230', 'TX time': '1724', 'RX time': '129873', 'Cell ID': '37601549', 'ECL': '1', 'SNR': '47', 'EARFCN': '3609', 'PCI': '75', 'RSRQ': '-120', 'RLC UL BLER': '0', 'RLC DL BLER': '0', 'MAC UL BLER': '0', 'MAC DL BLER': '0', 'Total TX bytes': '1302', 'Total RX bytes': '1411', 'Total TX blocks': '40', 'Total RX blocks': '40', 'Total RTX blocks': '0', 'Total ACK/NACK RX': '0', 'RLC UL': '399', 'RLC DL': '24', 'MAC UL': '55', 'MAC DL': '39', 'Current Allocated': '16276', 'Total Free': '6724', 'Max Free': '6724', 'Num Allocs': '191', 'Num Frees': '125', 'primary_cell': '1', 'rsrp': '-1176', 'rsrq': '-121', 'rssi': '-1095', 'snr': '45'}
+CAPTURE START
+./logs/huawei_vodacom/testplant_14th/ublox/setup/ping/30
+index,
+idleTime,txTime,totalTime,energy,maxCurrent,Signal power,Total power,TX power,TX time,RX time,Cell ID,ECL,SNR,EARFCN,PCI,RSRQ,RLC UL BLER,RLC DL BLER,MAC UL BLER,MAC DL BLER,Total TX bytes,Total RX bytes,Total TX blocks,Total RX blocks,Total RTX blocks,Total ACK/NACK RX,RLC UL,RLC DL,MAC UL,MAC DL,Current Allocated,Total Free,Max Free,Num Allocs,Num Frees,
+0,16831,22848,16510,68867.6,121.0,-1175,-1085,230,1754,150023,37601549,1,52,3609,75,-120,0,0,0,0,1338,1422,42,41,0,0,399,24,55,37,16276,6724,6724,194,128,
+CAPTURE END
+PASSED
+
+================================================ 1 passed, 50 deselected in 29.93 seconds =================================================
+PS C:\GIT\masters\code\tests> pytest -svk ping
+=========================================================== test session starts ===========================================================
+platform win32 -- Python 3.7.3, pytest-4.6.2, py-1.8.0, pluggy-0.12.0 -- c:\users\d7rob\appdata\local\programs\python\python37\python.exe
+cachedir: .pytest_cache
+rootdir: C:\GIT\masters\code\tests, inifile: pytest.ini
+collected 51 items / 50 deselected / 1 selected                                                                                            
+
+test_setup.py::test_ping
+at+nping="8.8.8.8"
+OK
++NPSMR: 0
++CSCON: 1
++NPING: "8.8.8.8",52,1961
+{'Signal power': '-1185', 'Total power': '-1063', 'TX power': '230', 'TX time': '1963', 'RX time': '151215', 'Cell ID': '37601549', 'ECL': '1', 'SNR': '32', 'EARFCN': '3609', 'PCI': '75', 'RSRQ': '-126', 'RLC UL BLER': '0', 'RLC DL BLER': '0', 'MAC UL BLER': '0', 'MAC DL BLER': '0', 'Total TX bytes': '1476', 'Total RX bytes': '1541', 'Total TX blocks': '45', 'Total RX blocks': '45', 'Total RTX blocks': '0', 'Total ACK/NACK RX': '0', 'RLC UL': '399', 'RLC DL': '24', 'MAC UL': '55', 'MAC DL': '37', 'Current Allocated': '16276', 'Total Free': '6724', 'Max Free': '6724', 'Num Allocs': '200', 'Num Frees': '134', 'primary_cell': '1', 'rsrp': '-1181', 'rsrq': '-122', 'rssi': '-1090', 'snr': '41'}
+CAPTURE START
+./logs/huawei_vodacom/testplant_14th/ublox/setup/ping/40
+index,
+idleTime,txTime,totalTime,energy,maxCurrent,Signal power,Total power,TX power,TX time,RX time,Cell ID,ECL,SNR,EARFCN,PCI,RSRQ,RLC UL BLER,RLC DL BLER,MAC UL BLER,MAC DL BLER,Total TX bytes,Total RX bytes,Total TX blocks,Total RX blocks,Total RTX blocks,Total ACK/NACK RX,RLC UL,RLC DL,MAC UL,MAC DL,Current Allocated,Total Free,Max Free,Num Allocs,Num Frees,primary_cell,rsrp,rsrq,rssi,snr,
+0,12496,24273,17947,11965.79,120.0,-1214,-1101,230,3306,171695,37601549,2,32,3609,75,-128,0,0,0,0,1487,1552,46,46,0,0,399,24,55,39,16276,6724,6724,203,137,1,-1214,-128,-1101,32,
+CAPTURE END
+PASSED
+
+================================================ 1 passed, 50 deselected in 29.97 seconds =================================================
+PS C:\GIT\masters\code\tests> pytest -svk ping
+=========================================================== test session starts ===========================================================
+platform win32 -- Python 3.7.3, pytest-4.6.2, py-1.8.0, pluggy-0.12.0 -- c:\users\d7rob\appdata\local\programs\python\python37\python.exe
+cachedir: .pytest_cache
+rootdir: C:\GIT\masters\code\tests, inifile: pytest.ini
+collected 51 items / 50 deselected / 1 selected                                                                                            
+
+test_setup.py::test_ping
+at+nping="8.8.8.8"
+OK
++NPSMR: 0
++CSCON: 1
++NPING: "8.8.8.8",52,4096
+{'Signal power': '-1221', 'Total power': '-1107', 'TX power': '230', 'TX time': '4914', 'RX time': '173703', 'Cell ID': '37601549', 'ECL': '2', 'SNR': '5', 'EARFCN': '3609', 'PCI': '75', 'RSRQ': '-137', 'RLC UL BLER': '0', 'RLC DL BLER': '0', 'MAC UL BLER': '0', 'MAC DL BLER': '0', 'Total TX bytes': '1607', 'Total RX bytes': '1675', 'Total TX blocks': '48', 'Total RX blocks': '51', 'Total RTX blocks': '0', 'Total ACK/NACK RX': '2', 'RLC UL': '399', 'RLC DL': '24', 'MAC UL': '55', 'MAC DL': '39', 'Current Allocated': '16276', 'Total Free': '6724', 'Max Free': '6724', 'Num Allocs': '209', 'Num Frees': '143', 'primary_cell': '1', 'rsrp': '-1224', 'rsrq': '-139', 'rssi': '-1109', 'snr': '0'}
+CAPTURE START
+./logs/huawei_vodacom/testplant_14th/ublox/setup/ping/40
+0,13000,25189,18573,8706.47,121.0,-1234,-1129,230,4955,194387,37601549,2,29,3609,75,-129,0,0,25,0,1642,1686,50,52,0,2,399,23,92,39,16276,6724,6724,212,146,
+CAPTURE END
+PASSED
+
+================================================ 1 passed, 50 deselected in 30.31 seconds =================================================
+PS C:\GIT\masters\code\tests>

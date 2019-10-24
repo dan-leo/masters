@@ -431,7 +431,9 @@ Increasing the range fully and using logarithms in Fig. \ref{fig:energy_sinr_log
 \end{center}
 \end{minipage}
 
-![](../../code/tests/datagrams/mtn_ublox_energy.png)
+[](../../code/tests/datagrams/mtn_ublox_energy.png)
+
+![quectel_sizes](../../code/tests/datagrams/quectel_sizes.png)
 
 Fig. \ref{fig:udpsize} shows 
 
@@ -551,49 +553,49 @@ Due to the large dataset and requiring a reasonable means of visualization, we c
 
 \begin{minipage}{\linewidth}
 \begin{center}
-\includegraphics[width=.6\linewidth]{../../code/tests/.old/img2/histogram_counts.pdf}
+\includegraphics[width=.6\linewidth]{../../code/tests/old/img2/histogram_counts.pdf}
 \captionof{figure}{Example python histogram of a univariate latency distribution showing counts}
 \label{fig:}
 \end{center}
 \end{minipage}
 
-[](../../code/tests/.old/img2/histogram_counts.png)
+[](../../code/tests/old/img2/histogram_counts.png)
 
 Histogram counts vary among various datasets when their sizes differ, so it would be a good idea to normalize it such that the area under the graph makes 1.0. The probability of the discrete data can also be estimated in a continuous probability density function (PDF) with the kernel density estimation.
 
 \begin{minipage}{\linewidth}
 \begin{center}
-\includegraphics[width=.6\linewidth]{../../code/tests/.old/img2/probability_density_function_seaborn.pdf}
+\includegraphics[width=.6\linewidth]{../../code/tests/old/img2/probability_density_function_seaborn.pdf}
 \captionof{figure}{Example python histogram of a univariate latency distribution with a normalized density and a gaussian kernel density estimate}
 \label{fig:}
 \end{center}
 \end{minipage}
 
-[](../../code/tests/.old/img2/probability_density_function_seaborn.png)
+[](../../code/tests/old/img2/probability_density_function_seaborn.png)
 
 There are also various types of kernel density estimation, as can be seen here.
 
 \begin{minipage}{\linewidth}
 \begin{center}
-\includegraphics[width=.6\linewidth]{../../code/tests/.old/img2/probability_density_function.pdf}
+\includegraphics[width=.6\linewidth]{../../code/tests/old/img2/probability_density_function.pdf}
 \captionof{figure}{Various types of kernel density estimation (KDE)}
 \label{fig:}
 \end{center}
 \end{minipage}
 
-[](../../code/tests/.old/img2/probability_density_function.png)
+[](../../code/tests/old/img2/probability_density_function.png)
 
 If the histogram bin values are normalized by dividing by the bin count, adding the values makes 1 instead of integrating along the x-axis. Similarly, multiplying the PDF by its x-axis gives the following result. Although all the plotted values are now truly under 1, the KDE is shifted and doesn't seem usable.  The integration to 1 visualization typical in statistics has to be used.
 
 \begin{minipage}{\linewidth}
 \begin{center}
-\includegraphics[width=.6\linewidth]{../../code/tests/.old/img2/probability_mass_function.pdf}
+\includegraphics[width=.6\linewidth]{../../code/tests/old/img2/probability_mass_function.pdf}
 \captionof{figure}{Various types of kernel density estimation (KDE) with histogram and KDE normalized in attempted probability mass function}
 \label{fig:}
 \end{center}
 \end{minipage}
 
-[](../../code/tests/.old/img2/probability_mass_function.png)
+[](../../code/tests/old/img2/probability_mass_function.png)
 
 In fact, good practice would be viewing the data as is and not trying to analyze it from what is essentially an entirely new perspective. Thus, the data will be viewed as 2D plotted points and histograms. Colour will be used to group the data according to attenuation and packet size.
 

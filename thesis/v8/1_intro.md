@@ -135,7 +135,12 @@ A number of tests have been developed, performed and analyzed for multiple UEs (
 
 # Introduction {#intro}
 
-This chapter introduces the reader to various concepts relating to NB-IoT and (reasons for?) the performance evaluation thereof. It begins with the question "why?" before moving on to the research problem, objectives, scope, terminology, background and other various related concepts.
+In the world of IoT/ in South Africa, NB-IoT is the 3GPPs response to the growing need for LPWANs.
+
+* short description
+* captivating
+
+This chapter introduces the reader to various concepts relating to NB-IoT +concept can also exist here+. It also provides reasons for the performance evaluation thereof. It begins with the question "Why NB-IoT?" before moving on to the research problem, objectives, scope, terminology, background and other various related concepts to fully understand/grasp the big picture.
 
 ## Why NB-IoT?
 
@@ -147,6 +152,11 @@ According to 3GPP specifications and manufacturer claims, highlights include:
 * Under 10 second transmission acknowledgement for latency-tolerant applications
 * \+ 20 dB improvement over 2G/GPRS via enhanced coverage levels (ECL).
 
+
+
+* why it came about?
+* why it is useful to look at?
+
 ## Problem Statement {#probstat}
 
 NB-IoT (LTE Cat-NB) is a competitive alternative to LoRaWAN, SigFox and other LPWANs, yet it does not have strong uptake in South Africa yet. As opposed to alternatives, it offers energy efficient bidirectionality using extended discrete periodic reception, yet variation in transmission energy and latency can affect battery lifetime drastically. Uptake is limited by the stasis between application developers requiring network coverage and cellular service providers require consumer and enterprise demand or a business case before rolling out national network coverage. Finally, although there is a great deal of theoretical analysis and simulations in research, the lack of empirical evidence may be contributing to a general uncertainty in the standing of the technology with respect to alternatives and thus a slower adoption. This thesis aims to bridge that divide by evaluating NB-IoT's performance empirically using a set of metrics and estimate optimal use.
@@ -157,36 +167,48 @@ The aim of this study is to evaluate latency and power efficiency of NB-IoT with
 
 Whilst theoretical models provide value in showing how factors affect an approximation, the boundless underlying complexities of LTE architecture make it hard to predict the variability induced by unpredictable network conditions. Thus, an empirical approach is proposed. We know already that the energy efficiency of a single network is questionable in Durand [@Durand2019] and Martinez [@Martinez2019].
 
-Battery longevity and recommended telemetry intervals are estimated, and secondary metrics such as signal strength, throughput and data overhead are investigated.
+Battery longevity and recommended telemetry intervals are estimated, and secondary metrics such as signal strength, throughput and data overhead are investigated. 
 
-This in turn evaluates robustness, stability, capabilities, sources of variability and claimed versus actual core features.
+In turn, the above objectives evaluate robustness, stability, capabilities, sources of variability and claimed versus actual core features.
+
+* ask Thinus if he's happy with objectives like so or in a sentence, bulleted?
+
+\newpage
 
 ## Scope of Work {#scopework}
 
-Although there exist a multitude of UE devices, LTE vendors, estimations and metrics, the study will be limited to the following in Table \ref{tbl:metric_summary}.
+Although there exists a multitude of UE devices, LTE vendors, estimations and metrics, the study will be limited to the following as seen in Table \ref{tbl:metric_summary}.
 
 Table: UE devices, MNO vendors, metric comparisons and estimations {#tbl:metric_summary}
 
-| MNO Vendors | UE Manufacturers | Main Metrics     | Secondary Metrics | Estimations        |
-| ----------- | ---------------- | ---------------- | ----------------- | ------------------ |
-| ZTE         | Ublox            | Power Efficiency | Signal Strength   | Battery Longevity  |
-| Nokia       | Quectel          | Latency          | Throughput        | Telemetry Interval |
-| Ericsson    | Nordic           |                  | Data Overhead     |                    |
-| Huawei      | SimCom           |                  |                   |                    |
+| LTE Vendors | UE Manufacturers | Main Metrics     | Secondary Metrics | Estimations        | Telemetry  Tests |
+| ----------- | ---------------- | ---------------- | ----------------- | ------------------ | ---------------- |
+| ZTE         | Ublox            | Power Efficiency | Signal Strength   | Battery Longevity  | UDP Packets      |
+| Nokia       | Quectel          | Latency          | Throughput        | Telemetry Interval | eDRX and PTAU    |
+| Ericsson    | Nordic           |                  | Data Overhead     |                    | COPS             |
+| Huawei      | SimCom           |                  |                   |                    | Echo             |
 
-A more comprehensive study on throughput, packet delivery ratio (PDR), maximum coupling link (MCL) and scalability has been performed by Durand [@Durand2019]. Martinez has investigated the performance boundaries of NB-IoT for a Vodafone network in Barcelona, Spain [@Martinez2019].
+Regarding metrics, a more comprehensive study has been performed on throughput, packet delivery ratio (PDR), maximum coupling link (MCL) and scalability by Durand [@Durand2019]. Martinez has investigated the performance boundaries of NB-IoT for a Vodafone network in Barcelona, Spain [@Martinez2019]. Which metrics?
 
-Huawei, Ericsson, Nokia and ZTE are among the top 5 LTE vendors in the world. Ublox, Quectel, Nordic and SimCom are among the more popular NB-IoT module manufacturers, besides Telit, Gemalto, akorIoT and so on. Power efficiency and and latency is affected by variability important considerations have to be made in application development.
+The following LTE vendors are among the top 5 in the world: Huawei, Ericsson, Nokia and ZTE. Since there are over a hundred MNOs across the world, performing this study on the main LTE vendors will also benefit the MNOs. Ublox, Quectel, Nordic and SimCom are among the more popular NB-IoT module manufacturers, besides Telit, Gemalto, akorIoT and so on. +maintream +relevant to application developers Power efficiency and and latency is affected by variability. Important considerations have to be made in application development. +link main metrics to this. +why is it a main metric? +
 
-Telemetry tests will be limited to LTE protocols and UDP packets, which is the simplest layer and used by CoAP. Unlike UDP, MQTT uses TCP which is not a connectionless protocol. TCP streams data orderly, reliably, and at a cost to data overhead.
+Telemetry tests will be limited to LTE protocols and UDP packets, which is the simplest layer and used by CoAP. Unlike UDP, MQTT uses TCP which is not a connectionless protocol. TCP streams data orderly, reliably, and at a cost to data overhead. ++++
 
-QXDM is a diagnostic program built for UE devices with Qualcomm chipsets, yet it costs in excess of a few thousand USD. On the other hand, UEMonitor is free and can capture debug traces from both Ublox and Quectel. An opensource decoder by LanternD offers further analytical leverage, yet it is still in beta and unstable. There is no support or alternative for Nordic or SimCom devices, however. The capture method should be easily repeatable and expandable for new UE devices. On the basis that the AT command API is familiar to all UE devices, a framework will be built to extract data via this method.
+* There are alternative diagnostic methods such as QXDM, UEMonitor etc.. ++. Yet, proprietary, money etc. not investigating that route. Ho
 
-Whilst this research is funded by MTN and being aware of internal documentation, this is an independent study which should aid any potential adopters of the technology.
+QXDM is a diagnostic program built for UE devices with Qualcomm chipsets, yet it costs in excess of a few thousand USD. An opensource decoder by LanternD offers further analytical leverage, yet it is still in beta and unstable and therefore these are not included in the study.
+
+UEMonitor is free and can capture debug traces from both Ublox and Quectel. Therefore, Ublox and Quectel will be used to compare LTE Vendors. There is no support or alternative for Nordic or SimCom devices, however. The capture method should be easily repeatable and expandable for new UE devices. On the basis that the AT command API is familiar to all UE devices, a framework will be built to extract data via this method.
+
+Whilst this research is funded by MTN and being aware of internal documentation, this is an independent study which should aid any potential adopters of the technology. +ask Thinus?
 
 ## Terminology {#terminology}
 
-This section briefly introduces various IoT, LPWAN, LTE and metric related topics and is expanded upon in Section \ref{background}.
+* assuming the reader does not necessarily know terms/topics
+  * LTE, 3GPP is/are broad, complex etc
+* 
+
+Because ___, this section briefly introduces various IoT, LPWAN, LTE and metric related topics and is expanded upon in Section, \ref{iot}, \ref{lpwans} and _. The background of _ is discussed in Section \ref{background}.
 
 The Internet of Things (IoT in Section \ref{iot}) is a blanket term for smart devices that connect to the internet. These devices are typically found in remote or urban areas where it would be more efficient for a device to control and monitor the status of the surrounding environment than human intervention. 
 
@@ -200,7 +222,16 @@ GSM and GPRS fall under 2G and 2.5G which started development in the early 90s. 
 
 Long Term Evolution (LTE) is a cellular architecture which is a subset of an even more complex 3GPP body that guides its development. In LTE, the narrowband category is known as LTE Cat-NB or NB-IoT. For their M2M applications, LTE Cat-M is similar, yet it features VoIP, faster throughput and is more similar to the LTE protocol. There are two different versions of NB-IoT, with LTE Cat-NB1 being release 13 and LTE Cat-NB2 being release 14. Their specifications have been frozen in Q1 2016 and mid-2017, respectively.
 
-## Background {#background}
+* group terms
+* don't be disjointed
+
+## Background of NB-IoT{#background}
+
+* how it "fits" in South Africa and LPWAN sphere
+* history
+* 
+
+---
 
 Uncertainty about NB-IoT.
 

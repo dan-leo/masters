@@ -180,3 +180,21 @@ Extended Coverage Levels (ECL) are determined by the network. The eNB (base stat
 ![](../../../masters/code/tests/plotterk/SNR_txTime_outliers.png)
 
 Furthermore, in Figure \label{fig:sinr_latency_otl} latency outliers are (ABC) mostly as a result of Vodacom-Nokia. Both MNOs have outliers up to 300 seconds, but that is for cases where the inactivity timer is active. Since the inactivity timer cannot be controlled by the UE, the next step is to deregister from the network with `AT+COPS=2`. On MTN-ZTE, this is a quick action taking at most a few seconds, however on the Vodacom-Nokia network it can take 40 seconds or more. This is the real latency caveat which makes the Vodacom-Nokia network unusable.
+
+
+
+# background intro
+
++Application developers are always on the lookout for viable technologies, and tend to use the most prolific ones.
+
++Network operators are looking to enter the LPWAN sphere. 3GPP have made this possible by adapting LTE into Cat-M and NB-IoT.
+
+ +GSM had been a cost-effective way to keep in touch with people around world, as well as the poorer communities in Africa. Due to the proliferation of WhatsApp, Facebook, Telegram and other social media platforms, there is a shift away from calls and sms. 
+
+![sms_usage](../notebooks/sms_usage.png){ width=50% }
+
+<!---Facebook, penetration
+Africa
+World Bank-->
+
++Due to high user demand in bandwidth-hungry applications such as voice, video and file sharing, it evolved into 3G and 4G LTE which is currently in use today in the form of VoIP and IMS. Since the more affordable packet switched networks can handle more bandwidth than circuit switched networks, the transition is sensible.

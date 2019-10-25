@@ -52,7 +52,12 @@ SigFox is a contender for NB-IoT. It lacks bidirectionality and datarate.
 - 3GPP
 - the UE device is to a large extent/entirely controlled by the network/eNodeB.
   - UE devices must follow NW settings broadcast inside the SIB and allocations for UL/DL data.
-- 
+
+
+
+Martinez [@Martinez2019] has explored NB-IoT from the perspective of the application developer. When evaluating performance, it would do well to find the limits of the technology as well as find the optimum 'sweet spot' or range for efficient operation.
+
+A user would consider critical characteristics such as energy consumption, coverage, cost, network latency and behavior. Martinez looks at these except for cost, which is better looked at by Ali [@Ali2015]. A set of tests were devised and results showed that in some cases its energy consumption performed better than an LPWAN referenced technology such as LoRa, with the added benefit of guaranteeing delivery. However, the high variability in energy consumption and network latency call into question its reliability especially for mission-critical applications.
 
 ## Standing or Positioning {#lit_standing}
 

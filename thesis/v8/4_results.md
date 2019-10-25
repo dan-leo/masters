@@ -45,8 +45,6 @@ This section handles measured and reported latencies and timings versus signal s
 
 This is the time spent consuming current and is measured externally.
 
-#### Latency vs RSRP
-
 \begin{minipage}{\linewidth}
 \begin{center}
 \includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_txTime_plot.pdf}
@@ -1147,5 +1145,352 @@ Table: Longevity Estimate in years using Reported RX, TX Time for 9.36Wh AA batt
 # Appendix C {-#appendixC}
 
 * Compare Appendix A and B?
+
+\newpage
+
+# Appendix D {-#appendixD}
+
+```c
+RRC_DEBUG_ASN
+header.message_id=190840832
+header.src=LAYER_RRC
+header.dest=LAYER_RRC
+header.length=8
+len=5
+channel_type=RRC_ASN_BCCH_BCH_Message_NB_PDU
+data=44
+Additional Info=BCCH-BCH-Message-NB:
+{
+  message 
+  {
+    systemFrameNumber-MSB-r13 '0010'B,
+    hyperSFN-LSB-r13 '11'B,
+    schedulingInfoSIB1-r13 2,
+    systemInfoValueTag-r13 19,
+    ab-Enabled-r13 FALSE,
+    operationModeInfo-r13 standalone-r13 : 
+    {
+      spare '00000'B
+    },
+    spare '00000000 000'B
+  }
+}
+```
+
+```c
+RRC_DEBUG_ASN
+header.message_id=190840832
+header.src=LAYER_RRC
+header.dest=LAYER_RRC
+header.length=29
+len=26
+channel_type=RRC_ASN_BCCH_DL_SCH_Message_NB_PDU
+data=64
+Additional Info=BCCH-DL-SCH-Message-NB:
+{
+  message c1 : systemInformationBlockType1-r13 : 
+  {
+    hyperSFN-MSB-r13 '00110001'B,
+    cellAccessRelatedInfo-r13 
+    {
+      plmn-IdentityList-r13 
+      {
+        {
+          plmn-Identity-r13 
+          {
+            mcc 
+            {
+              6,
+              5,
+              5
+            },
+            mnc 
+            {
+              0,
+              1
+            }
+          },
+          cellReservedForOperatorUse-r13 notReserved
+        }
+      },
+      trackingAreaCode-r13 '10011100 01000000'B,
+      cellIdentity-r13 '00000000 00000000 00000000 0000'B,
+      cellBarred-r13 notBarred,
+      intraFreqReselection-r13 allowed
+    },
+    cellSelectionInfo-r13 
+    {
+      q-RxLevMin-r13 -60,
+      q-QualMin-r13 -23
+    },
+    freqBandIndicator-r13 8,
+    schedulingInfoList-r13 
+    {
+      {
+        si-Periodicity-r13 rf512,
+        si-RepetitionPattern-r13 every4thRF,
+        sib-MappingInfo-r13 
+        {
+        },
+        si-TB-r13 b256
+      },
+      {
+        si-Periodicity-r13 rf2048,
+        si-RepetitionPattern-r13 every4thRF,
+        sib-MappingInfo-r13 
+        {
+          sibType3-NB-r13
+        },
+        si-TB-r13 b56
+      }
+    },
+    si-WindowLength-r13 ms960,
+    systemInfoValueTagList-r13 
+    {
+      2,
+      2
+    }
+  }
+}
+```
+
+```c
+RRC_DEBUG_ASN
+header.message_id=190840832
+header.src=LAYER_RRC
+header.dest=LAYER_RRC
+header.length=35
+len=32
+channel_type=RRC_ASN_BCCH_DL_SCH_Message_NB_PDU
+data=0
+Additional Info=BCCH-DL-SCH-Message-NB:
+{
+  message c1 : systemInformation-r13 : 
+  {
+    criticalExtensions systemInformation-r13 : 
+    {
+      sib-TypeAndInfo-r13 
+      {
+        sib2-r13 : 
+        {
+          radioResourceConfigCommon-r13 
+          {
+            rach-ConfigCommon-r13 
+            {
+              preambleTransMax-CE-r13 n10,
+              powerRampingParameters-r13 
+              {
+                powerRampingStep dB2,
+                preambleInitialReceivedTargetPower dBm-104
+              },
+              rach-InfoList-r13 
+              {
+                {
+                  ra-ResponseWindowSize-r13 pp5,
+                  mac-ContentionResolutionTimer-r13 pp8
+                },
+                {
+                  ra-ResponseWindowSize-r13 pp5,
+                  mac-ContentionResolutionTimer-r13 pp8
+                },
+                {
+                  ra-ResponseWindowSize-r13 pp5,
+                  mac-ContentionResolutionTimer-r13 pp8
+                }
+              }
+            },
+            bcch-Config-r13 
+            {
+              modificationPeriodCoeff-r13 n32
+            },
+            pcch-Config-r13 
+            {
+              defaultPagingCycle-r13 rf256,
+              nB-r13 one64thT,
+              npdcch-NumRepetitionPaging-r13 r32
+            },
+            nprach-Config-r13 
+            {
+              nprach-CP-Length-r13 us66dot7,
+              rsrp-ThresholdsPrachInfoList-r13 
+              {
+                31,
+                21
+              },
+              nprach-ParametersList-r13 
+              {
+                {
+                  nprach-Periodicity-r13 ms640,
+                  nprach-StartTime-r13 ms8,
+                  nprach-SubcarrierOffset-r13 n36,
+                  nprach-NumSubcarriers-r13 n12,
+                  nprach-SubcarrierMSG3-RangeStart-r13 one,
+                  maxNumPreambleAttemptCE-r13 n4,
+                  numRepetitionsPerPreambleAttempt-r13 n2,
+                  npdcch-NumRepetitions-RA-r13 r8,
+                  npdcch-StartSF-CSS-RA-r13 v2,
+                  npdcch-Offset-RA-r13 zero
+                },
+                {
+                  nprach-Periodicity-r13 ms640,
+                  nprach-StartTime-r13 ms64,
+                  nprach-SubcarrierOffset-r13 n36,
+                  nprach-NumSubcarriers-r13 n12,
+                  nprach-SubcarrierMSG3-RangeStart-r13 one,
+                  maxNumPreambleAttemptCE-r13 n4,
+                  numRepetitionsPerPreambleAttempt-r13 n8,
+                  npdcch-NumRepetitions-RA-r13 r16,
+                  npdcch-StartSF-CSS-RA-r13 v2,
+                  npdcch-Offset-RA-r13 zero
+                },
+                {
+                  nprach-Periodicity-r13 ms640,
+                  nprach-StartTime-r13 ms128,
+                  nprach-SubcarrierOffset-r13 n36,
+                  nprach-NumSubcarriers-r13 n12,
+                  nprach-SubcarrierMSG3-RangeStart-r13 one,
+                  maxNumPreambleAttemptCE-r13 n4,
+                  numRepetitionsPerPreambleAttempt-r13 n32,
+                  npdcch-NumRepetitions-RA-r13 r32,
+                  npdcch-StartSF-CSS-RA-r13 v2,
+                  npdcch-Offset-RA-r13 zero
+                }
+              }
+            },
+            npdsch-ConfigCommon-r13 
+            {
+              nrs-Power-r13 24
+            },
+            npusch-ConfigCommon-r13 
+            {
+              ack-NACK-NumRepetitions-Msg4-r13 
+              {
+                r4,
+                r8,
+                r64
+              },
+              ul-ReferenceSignalsNPUSCH-r13 
+              {
+                groupHoppingEnabled-r13 FALSE,
+                groupAssignmentNPUSCH-r13 0
+              }
+            },
+            uplinkPowerControlCommon-r13 
+            {
+              p0-NominalNPUSCH-r13 -80,
+              alpha-r13 al08,
+              deltaPreambleMsg3-r13 4
+            }
+          },
+          ue-TimersAndConstants-r13 
+          {
+            t300-r13 ms10000,
+            t301-r13 ms25000,
+            t310-r13 ms2000,
+            n310-r13 n10,
+            t311-r13 ms30000,
+            n311-r13 n1
+          },
+          freqInfo-r13 
+          {
+            additionalSpectrumEmission-r13 1
+          },
+          timeAlignmentTimerCommon-r13 infinity
+        }
+      }
+    }
+  }
+}
+
+```
+
+```c
+RRC_DEBUG_ASN
+Additional Info=UL-CCCH-Message-NB:
+{
+  message c1 : rrcConnectionRequest-r13 : 
+  {
+    criticalExtensions rrcConnectionRequest-r13 : 
+    {
+      ue-Identity-r13 s-TMSI : 
+      {
+        mmec '11110100'B,
+        m-TMSI '11110101 00011001 01111010 00000011'B
+      },
+      establishmentCause-r13 mo-Signalling,
+      spare '00000000 00000000 000000'B
+    }
+  }
+}
+```
+
+
+
+```c
+Additional Info=DL-CCCH-Message-NB:
+{
+  message c1 : rrcConnectionSetup-r13 : 
+  {
+    rrc-TransactionIdentifier 1,
+    criticalExtensions c1 : rrcConnectionSetup-r13 : 
+    {
+      radioResourceConfigDedicated-r13 
+      {
+        srb-ToAddModList-r13 
+        {
+          {
+            rlc-Config-r13 explicitValue : am : 
+            {
+              ul-AM-RLC-r13 
+              {
+                t-PollRetransmit-r13 ms10000,
+                maxRetxThreshold-r13 t32
+              },
+              dl-AM-RLC-r13 
+              {
+              }
+            },
+            logicalChannelConfig-r13 explicitValue : 
+            {
+              priority-r13 1,
+              logicalChannelSR-Prohibit-r13 FALSE
+            }
+          }
+        },
+        mac-MainConfig-r13 explicitValue-r13 : 
+        {
+          ul-SCH-Config-r13 
+          {
+            retxBSR-Timer-r13 pp16
+          },
+          timeAlignmentTimerDedicated-r13 infinity
+        },
+        physicalConfigDedicated-r13 
+        {
+          npdcch-ConfigDedicated-r13 
+          {
+            npdcch-NumRepetitions-r13 r8,
+            npdcch-StartSF-USS-r13 v2,
+            npdcch-Offset-USS-r13 zero
+          },
+          npusch-ConfigDedicated-r13 
+          {
+            ack-NACK-NumRepetitions-r13 r2,
+            npusch-AllSymbols-r13 TRUE,
+            groupHoppingDisabled-r13 true
+          },
+          uplinkPowerControlDedicated-r13 
+          {
+            p0-UE-NPUSCH-r13 0
+          }
+        }
+      }
+    }
+  }
+}
+
+```
+
+
 
 \newpage

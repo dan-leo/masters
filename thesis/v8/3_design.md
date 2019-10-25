@@ -48,6 +48,7 @@ These tests better orient the reader to the behavior of UE devices and network.
 
 Todo: get SIB block from UE monitor.
 
+
 #### Extended Coverage Level (ECL)
 
 The Cell ID in this response is the physical network cell ID.

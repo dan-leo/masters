@@ -135,31 +135,23 @@ A number of tests have been developed, performed and analyzed for multiple UEs (
 
 # Introduction {#intro}
 
-In the world of IoT/ in South Africa, NB-IoT is the 3GPPs response to the growing need for LPWANs.
+Narrowing the spectrum bandwidth for LTE results in a low data-throughput, low energy technology which matches the requirements for wireless IoT, hence NB-IoT.
 
-* short description
-* captivating
-
-This chapter introduces the reader to various concepts relating to NB-IoT +concept can also exist here+. It also provides reasons for the performance evaluation thereof. It begins with the question "Why NB-IoT?" before moving on to the research problem, objectives, scope, terminology, background and other various related concepts to fully understand/grasp the big picture.
+This chapter introduces the reader to various concepts relating to NB-IoT and the performance characteristics thereof. It begins with the question "Why NB-IoT?" before developing the research question, objectives, scope, terminology, background and other various related concepts to fully orient the reader with regards to NB-IoT.
 
 ## Why NB-IoT?
 
-NB-IoT is a promising contender to fill the role that 2G/GPRS leaves behind as countries around the world schedule its departure. It shows performance benefits over alternatives in terms of up and downlink throughput, range and longevity.
-
-According to 3GPP specifications and manufacturer claims, highlights include:
+NB-IoT is an LTE technology developed by the 3GPP as a response to the growing need for an LPWAN to fill the role 2G/GPRS leaves behind as countries around the world schedule its departure. The technology shows performance benefits over alternative LPWANS in terms of up and downlink throughput, range and longevity, yet current research shows that variation in energy consumption leaves battery longevity in question. Nevertheless, according to 3GPP specifications and manufacturer claims, highlights include:
 
 * ~ 10 year battery-lifetime.
 * Under 10 second transmission acknowledgement for latency-tolerant applications
 * \+ 20 dB improvement over 2G/GPRS via enhanced coverage levels (ECL).
 
-
-
-* why it came about?
-* why it is useful to look at?
+It would be useful to further investigate variation in energy consumption in the technology.
 
 ## Problem Statement {#probstat}
 
-NB-IoT (LTE Cat-NB) is a competitive alternative to LoRaWAN, SigFox and other LPWANs, yet it does not have strong uptake in South Africa yet. As opposed to alternatives, it offers energy efficient bidirectionality using extended discrete periodic reception, yet variation in transmission energy and latency can affect battery lifetime drastically. Uptake is limited by the stasis between application developers requiring network coverage and cellular service providers require consumer and enterprise demand or a business case before rolling out national network coverage. Finally, although there is a great deal of theoretical analysis and simulations in research, the lack of empirical evidence may be contributing to a general uncertainty in the standing of the technology with respect to alternatives and thus a slower adoption. This thesis aims to bridge that divide by evaluating NB-IoT's performance empirically using a set of metrics and estimate optimal use.
+Knowing that NB-IoT (LTE Cat-NB) is a competitive alternative to LoRaWAN, SigFox and other LPWANs, it does not have strong uptake in South Africa yet. It offers energy efficient bidirectionality (as opposed to the uplink-centric norm) using extended discrete periodic reception (eDRX), yet variation in transmission energy and latency can affect battery lifetime drastically. Application developers require network coverage before they are interested in developing business cases, and cellular service providers require consumer and enterprise demand or business cases before rolling out national network coverage. This creates a paradoxical situation where neither party gives in unless they are both willing to come to a compromise. Such efforts can be limited by a lack of understanding in the technology, and this is not helped by the fact that although there is a great deal of theoretical analysis and simulations in research, the lack of empirical evidence may be contributing to a general uncertainty in the standing of the technology with respect to alternatives and thus a slower adoption. This thesis aims to bridge that divide in South Africa by evaluating NB-IoT's performance empirically using a set of metrics and estimate optimal use.
 
 ## Research Objectives {#resobj}
 
@@ -171,56 +163,55 @@ Battery longevity and recommended telemetry intervals are estimated, and seconda
 
 In turn, the above objectives evaluate robustness, stability, capabilities, sources of variability and claimed versus actual core features.
 
-* ask Thinus if he's happy with objectives like so or in a sentence, bulleted?
-
-\newpage
+* ask Thinus if he's happy with objectives like so in sentences, or bulleted?
 
 ## Scope of Work {#scopework}
 
-Although there exists a multitude of UE devices, LTE vendors, estimations and metrics, the study will be limited to the following as seen in Table \ref{tbl:metric_summary}.
+Although there exists a multitude of UE devices, LTE vendors, estimations and metrics, the study will be limited to the following as seen in Table \ref{tbl:metric_summary} and \ref{tbl:telemetry_ue_lte}.
 
-Table: UE devices, MNO vendors, metric comparisons and estimations {#tbl:metric_summary}
+Table: Metrics and Estimations {#tbl:metric_summary}
 
-| LTE Vendors | UE Manufacturers | Main Metrics     | Secondary Metrics | Estimations        | Telemetry  Tests |
-| ----------- | ---------------- | ---------------- | ----------------- | ------------------ | ---------------- |
-| ZTE         | Ublox            | Power Efficiency | Signal Strength   | Battery Longevity  | UDP Packets      |
-| Nokia       | Quectel          | Latency          | Throughput        | Telemetry Interval | eDRX and PTAU    |
-| Ericsson    | Nordic           |                  | Data Overhead     |                    | COPS             |
-| Huawei      | SimCom           |                  |                   |                    | Echo             |
+| Main Metrics     | Secondary Metrics | Estimations        |
+| ---------------- | ----------------- | ------------------ |
+| Power Efficiency | Signal Strength   | Battery Longevity  |
+| Latency          | Throughput        | Telemetry Interval |
+|                  | Data Overhead     |                    |
+|                  | ECL               |                    |
 
-Regarding metrics, a more comprehensive study has been performed on throughput, packet delivery ratio (PDR), maximum coupling link (MCL) and scalability by Durand [@Durand2019]. Martinez has investigated the performance boundaries of NB-IoT for a Vodafone network in Barcelona, Spain [@Martinez2019]. Which metrics?
+Table: Telemetry Types, UE devices and LTE vendors {#tbl:telemetry_ue_lte}
 
-The following LTE vendors are among the top 5 in the world: Huawei, Ericsson, Nokia and ZTE. Since there are over a hundred MNOs across the world, performing this study on the main LTE vendors will also benefit the MNOs. Ublox, Quectel, Nordic and SimCom are among the more popular NB-IoT module manufacturers, besides Telit, Gemalto, akorIoT and so on. +maintream +relevant to application developers Power efficiency and and latency is affected by variability. Important considerations have to be made in application development. +link main metrics to this. +why is it a main metric? +
+| Telemetry Types | LTE Vendors | UE Manufacturers |
+| --------------- | ----------- | ---------------- |
+| UDP Packets     | ZTE         | Ublox            |
+| eDRX and PTAU   | Nokia       | Quectel          |
+| COPS            | Ericsson    | Nordic           |
+| Data Echo       | Huawei      | SimCom           |
 
-Telemetry tests will be limited to LTE protocols and UDP packets, which is the simplest layer and used by CoAP. Unlike UDP, MQTT uses TCP which is not a connectionless protocol. TCP streams data orderly, reliably, and at a cost to data overhead. ++++
+Considering Table  \ref{tbl:metric_summary} and metrics, a more comprehensive study has been performed on throughput, packet delivery ratio (PDR), maximum coupling link (MCL) and scalability by Durand [@Durand2019]. Martinez has investigated the performance boundaries of NB-IoT for a Vodafone network in Barcelona, Spain [@Martinez2019] including metrics such as energy consumption, transmission delay, enhanced coverage levels (ECLs) and different data sizes. Because power efficiency and latency is significantly affected by variability, important considerations have to be made in application development and thus it is of the main metrics this study is focused on. Between UE device and LTE basestation (BTS) both signal strength (RSRP) and coverage enhancement levels (ECL) can be causes of variability. 
 
-* There are alternative diagnostic methods such as QXDM, UEMonitor etc.. ++. Yet, proprietary, money etc. not investigating that route. Ho
+In terms of estimations, variability affects battery lifetime and telemetry interval amongst others. Battery lifetime is defined as the length of time a device will last on an AA battery in years. Telemetry interval is defined as the time between different types of messages to last a year on an AA battery. These two estimations are necessary for developers to consider in battery-powered applications and form an important basis for this study.
 
-QXDM is a diagnostic program built for UE devices with Qualcomm chipsets, yet it costs in excess of a few thousand USD. An opensource decoder by LanternD offers further analytical leverage, yet it is still in beta and unstable and therefore these are not included in the study.
+The different types of telemetry messages in Table \ref{tbl:telemetry_ue_lte} include UDP datagram transmission, cellular operator selection (COPS), UDP Echo, extended discontinuous reception (eDRX) and periodic tracking area updates (PTAU). UE devices give the option of using the following main data transmission protocols: UDP, TCP, CoAP and MQTT. UDP is a connectionless protocol used for low latency applications and TCP is used to stream data orderly, reliably, but at a cost to data overhead.  CoAP and MQTT are lightweight message transfer protocols based off of UDP and TCP respectively. To measure the data overhead secondary metric caused by network repetitions and other mechanisms, it would be preferable to avoid overhead from other protocols and thus the simplest option is chosen, namely UDP. 
 
-UEMonitor is free and can capture debug traces from both Ublox and Quectel. Therefore, Ublox and Quectel will be used to compare LTE Vendors. There is no support or alternative for Nordic or SimCom devices, however. The capture method should be easily repeatable and expandable for new UE devices. On the basis that the AT command API is familiar to all UE devices, a framework will be built to extract data via this method.
+Table \ref{tbl:telemetry_ue_lte} also gives us the following LTE vendors which are among the top 5 in the world: Huawei, Ericsson, Nokia and ZTE. Since there are over a hundred MNOs across the world which also use these LTE vendors, performing this study on the main LTE vendors will also benefit the MNOs. With regard to NB-IoT connectivity on MNOs in South Africa, MTN will be used for ZTE and Ericsson, and Vodacom will be used for Nokia and Huawei. Finally, application developers are likely to use more popular NB-IoT module manufacturers such as Ublox, Quectel, Nordic and SimCom, besides lesser known ones such as Telit, Gemalto, akorIoT and so on. 
 
-Whilst this research is funded by MTN and being aware of internal documentation, this is an independent study which should aid any potential adopters of the technology. +ask Thinus?
+The capture method should be easily repeatable and expandable for new UE devices. On the basis that the AT command API is familiar to all UE devices, a framework will be built to extract data via this method. Although all UE devices are usually accessible through AT commands, there are alternative diagnostic methods such as Qualcomm QXDM, UEMonitor and an opensource decoder by LanternD which monitors the debug stream provided over UART at 921600 baud. QXDM is a proprietary diagnostic program built for UE devices with Qualcomm chipsets, yet it costs in excess of a few thousand USD. UEMonitor is free and can capture debug traces from both Ublox and Quectel. LanternD's decoder is still in beta and unstable. Since both Ublox and Quectel's debug messages can be accessed by UEMonitor and LanternD, these UE devices will be used to compare LTE Vendors. There is no support or alternative for Nordic or SimCom devices, however. 
 
 ## Terminology {#terminology}
 
-* assuming the reader does not necessarily know terms/topics
-  * LTE, 3GPP is/are broad, complex etc
-* 
-
-Because ___, this section briefly introduces various IoT, LPWAN, LTE and metric related topics and is expanded upon in Section, \ref{iot}, \ref{lpwans} and _. The background of _ is discussed in Section \ref{background}.
+Because the nature of this thesis provides many broad concepts and complex terms, this section briefly introduces to the reader various IoT, LPWAN, LTE related topics and is expanded upon in the rest of the chapter. The background of NB-IoT is discussed in Section \ref{background}.
 
 The Internet of Things (IoT in Section \ref{iot}) is a blanket term for smart devices that connect to the internet. These devices are typically found in remote or urban areas where it would be more efficient for a device to control and monitor the status of the surrounding environment than human intervention. 
 
-Wired devices usually connect using ethernet, although it is not uncommon to use industry grade protocols such as RS232, CAN, ModBus, ProffiBus, and so on before data reaches a network hub and the internet. On the other hand, wireless connections have the benefit of easy installation and really shine in inaccessible areas. It is quite effective to connect Bluetooth and WiFi for short range applications, or using Low Powered Wide Area Networks (LPWANs in Section \ref{lpwans}) such as LoRaWAN, SigFox and NB-IoT for ranges exceeding a few kilometers and especially for limited sources of power.
+Smart devices or 'things' can connect to the internet by wire or wirelessly. Wired devices usually connect using ethernet, although it is not uncommon to use industry grade protocols such as RS232, CAN, ModBus, ProffiBus, and so on before data reaches a network hub and the internet. Wireless connections, on the other hand, have the benefit of easy installation and really shine in inaccessible areas. It is quite effective to connect Bluetooth and WiFi for short range applications, or using Low Powered Wide Area Networks (LPWANs in Section \ref{lpwans}) such as LoRaWAN, SigFox and NB-IoT for ranges exceeding a few kilometers and especially for limited sources of power.
 
-Long-Range Radio (LoRa or LoRaWAN in Section \ref{lorawan}) uses chirp-spread-spectrum (CSS) modulation to make it quite immune to doppler effect motion and SigFox (Section \ref{sigfox}) uses binary phase-shift keying (BPSK) which increases noise immunity.
+Considering how LPWANs usually fill niche applications and just looking in terms of modulation differences, Long-Range Radio (LoRa or LoRaWAN in Section \ref{lorawan}) uses chirp-spread-spectrum (CSS) modulation to make it quite immune to doppler effect motion and SigFox (Section \ref{sigfox}) uses binary phase-shift keying (BPSK) in an ultra-narrow band which increases noise immunity, but devices cannot move more than 6 km/h.
 
-LPWANs enable many use cases (Section \ref{usecases}) in sensors, actuator control and location tracking to name a few.
+LPWANs enable many use cases (Section \ref{usecases}) such as remote sensing, actuator control and location tracking.
 
-GSM and GPRS fall under 2G and 2.5G which started development in the early 90s. Data transmission (such as USSD, SMS, WAP, IP) is circuit-switched over GSM, and packet-switched over GPRS. Circuit switched data is billed per time interval such as seconds or minutes, and packet-switched is charged per number of bytes (kB, MB, etcetra). It evolved into 3G in Release 99 at the turn of the millenium and LTE in Release 8 (Q4 2008).
+GSM and GPRS fall under 2G and 2.5G which started development in the early 90s. Data transmission (such as USSD, SMS, WAP, IP) is circuit-switched over GSM, and packet-switched over GPRS. Circuit switched data is billed per time interval such as seconds or minutes, and packet-switched is charged per number of bytes (kB, MB, etcetra). It evolved into 3G in Release 99 at the turn of the millenium and 4G/LTE in Release 8 (Q4 2008).
 
-Long Term Evolution (LTE) is a cellular architecture which is a subset of an even more complex 3GPP body that guides its development. In LTE, the narrowband category is known as LTE Cat-NB or NB-IoT. For their M2M applications, LTE Cat-M is similar, yet it features VoIP, faster throughput and is more similar to the LTE protocol. There are two different versions of NB-IoT, with LTE Cat-NB1 being release 13 and LTE Cat-NB2 being release 14. Their specifications have been frozen in Q1 2016 and mid-2017, respectively.
+Long Term Evolution (LTE) is a cellular architecture which is a subset of an even more complex 3GPP body that guides its development. In LTE, the narrowband category is known as LTE Cat-NB or NB-IoT. LTE Cat-M is designated for M2M applications, and although it is quite similar to NB-IoT, it features VoIP, faster throughput and is more similar to the LTE protocol. There are two different versions of NB-IoT, with LTE Cat-NB1 being release 13 and LTE Cat-NB2 being release 14. Their specifications have been frozen in Q1 2016 and mid-2017, respectively.
 
 * group terms
 * don't be disjointed
@@ -257,7 +248,7 @@ Application developers are always on the lookout for viable technologies, and te
 
 ---
 
-In recent years, 3GPP have developed new LPWANs for the cellular industry on the roadmap towards 5G, namely LTE Cat-M, EC-GSM-IoT and NB-IoT to supersede the sun-setting 2G/GPRS networks. GSM was first deployed in 1991 and offered calls and SMS as circuit switched data. In 2000, 2G/GPRS added internet at speeds comparable to dialup as packet switched data. Circuit switched data is ideal for real-time connections and means that links have bandwidth pre-allocated. This also increases the QoS guarantee of information transferred timeously. Packet switched data is connectionless on the other hand, with higher bandwidths possible in shared channels. GSM had been a cost-effective way to keep in touch with people around world, as well as the poorer communities in Africa. Due to the proliferation of WhatsApp, Facebook, Telegram and other social media platforms, there is a shift away from calls and sms. 
+In recent years, 3GPP have developed new LPWANs for the cellular industry on the roadmap towards 5G, namely LTE Cat-M, EC-GSM-IoT and NB-IoT to supersede the sun-setting 2G/GSM/GPRS networks. GSM was first deployed in 1991 and offered calls and SMS as circuit switched data. In 2000, 2G/GPRS added internet at speeds comparable to dialup as packet switched data. Circuit switched data is ideal for real-time connections and means that links have bandwidth pre-allocated. This also increases the QoS guarantee of information transferred timeously. Packet switched data is connectionless on the other hand, with higher bandwidths possible in shared channels. GSM had been a cost-effective way to keep in touch with people around world, as well as the poorer communities in Africa. Due to the proliferation of WhatsApp, Facebook, Telegram and other social media platforms, there is a shift away from calls and sms. 
 
 ![sms_usage](../notebooks/sms_usage.png)
 

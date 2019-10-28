@@ -1,0 +1,35 @@
+\contentsline {section}{\numberline {1}Literature Study}{1}{section.1}
+\contentsline {subsection}{\numberline {1.1}LoRaWAN}{2}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.2}Dash7}{2}{subsection.1.2}
+\contentsline {subsection}{\numberline {1.3}SigFox}{2}{subsection.1.3}
+\contentsline {subsection}{\numberline {1.4}NB-IoT}{2}{subsection.1.4}
+\contentsline {subsection}{\numberline {1.5}Standing or Positioning}{2}{subsection.1.5}
+\contentsline {subsection}{\numberline {1.6}Hardware}{3}{subsection.1.6}
+\contentsline {subsection}{\numberline {1.7}Setup Procedure}{3}{subsection.1.7}
+\contentsline {subsection}{\numberline {1.8}Network Registration and Info}{3}{subsection.1.8}
+\contentsline {subsection}{\numberline {1.9}RRC Connection and Inactivity Timer}{4}{subsection.1.9}
+\contentsline {subsection}{\numberline {1.10}Release Assistance}{4}{subsection.1.10}
+\contentsline {subsection}{\numberline {1.11}Power Saving Mechanisms}{5}{subsection.1.11}
+\contentsline {subsubsection}{\numberline {1.11.1}T3412 PTAU Timer}{5}{subsubsection.1.11.1}
+\contentsline {subsubsection}{\numberline {1.11.2}T3324 Active Timer}{5}{subsubsection.1.11.2}
+\contentsline {subsubsection}{\numberline {1.11.3}eDRX Cycles and PTW}{6}{subsubsection.1.11.3}
+\contentsline {subsection}{\numberline {1.12}System Information Blocks (SIB)}{6}{subsection.1.12}
+\contentsline {subsection}{\numberline {1.13}Repetitions and Extended Coverage Level (ECL)}{6}{subsection.1.13}
+\contentsline {subsection}{\numberline {1.14}UE Device and Network Behavior}{7}{subsection.1.14}
+\contentsline {subsection}{\numberline {1.15}Data transmission}{7}{subsection.1.15}
+\contentsline {subsubsection}{\numberline {1.15.1}Ping}{8}{subsubsection.1.15.1}
+\contentsline {subsubsection}{\numberline {1.15.2}Echo}{8}{subsubsection.1.15.2}
+\contentsline {subsection}{\numberline {1.16}Available Metrics}{8}{subsection.1.16}
+\contentsline {subsubsection}{\numberline {1.16.1}RSRP}{8}{subsubsection.1.16.1}
+\contentsline {subsubsection}{\numberline {1.16.2}Total power}{8}{subsubsection.1.16.2}
+\contentsline {subsubsection}{\numberline {1.16.3}Transmit power}{8}{subsubsection.1.16.3}
+\contentsline {subsubsection}{\numberline {1.16.4}TX, RX Time}{8}{subsubsection.1.16.4}
+\contentsline {subsubsection}{\numberline {1.16.5}ECL}{9}{subsubsection.1.16.5}
+\contentsline {subsubsection}{\numberline {1.16.6}SNR}{9}{subsubsection.1.16.6}
+\contentsline {subsection}{\numberline {1.17}Latency}{9}{subsection.1.17}
+\contentsline {subsection}{\numberline {1.18}Power Consumption}{9}{subsection.1.18}
+\contentsline {subsection}{\numberline {1.19}Data Usage}{9}{subsection.1.19}
+\contentsline {subsection}{\numberline {1.20}Application Architecture}{10}{subsection.1.20}
+\contentsline {subsection}{\numberline {1.21}Use cases}{10}{subsection.1.21}
+\contentsline {subsection}{\numberline {1.22}Martinez}{11}{subsection.1.22}
+\contentsline {subsection}{\numberline {1.23}Notes}{11}{subsection.1.23}

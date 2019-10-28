@@ -198,3 +198,15 @@ Africa
 World Bank-->
 
 +Due to high user demand in bandwidth-hungry applications such as voice, video and file sharing, it evolved into 3G and 4G LTE which is currently in use today in the form of VoIP and IMS. Since the more affordable packet switched networks can handle more bandwidth than circuit switched networks, the transition is sensible.
+
+The technology is robust in certain test cases and scenarios, but additional work is required from the 3GPP to enhance the technology.
+
+
+
+
+
+Hype yields investment, especially when the underlying innovation holds value, such as connecting billions of 'things' to the internet.
+
+
+
+IoT shows great potential for exponential growth, and unless a technology disruption occurs which means we do not require connections or our devices, then there is undoubtedly an [uptrend](https://amarketresearchgazette.com/global-narrowband-iot-nb-iot-market-2019-2025-vodafone-china-unicom-china-telecom-att-etisalat-telstra-orange-telefonica-sk-telecom-deutsche-telekom/).

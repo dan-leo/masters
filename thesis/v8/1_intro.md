@@ -139,7 +139,7 @@ Narrowing the spectrum bandwidth for LTE results in a low data-throughput, low e
 
 This chapter introduces the reader to various concepts relating to NB-IoT and the performance characteristics thereof. It begins with the question "Why NB-IoT?" before developing the research question, objectives, scope, terminology, background and other various related concepts to fully orient the reader with regards to NB-IoT.
 
-## Why NB-IoT?
+## Why NB-IoT? {#why}
 
 NB-IoT is an LTE technology developed by the 3GPP as a response to the growing need for an LPWAN to fill the role 2G/GPRS leaves behind as countries around the world schedule its departure. The technology shows performance benefits over alternative LPWANS in terms of up and downlink throughput, range and longevity, yet current research shows that variation in energy consumption leaves battery longevity in question. Nevertheless, according to 3GPP specifications and manufacturer claims, highlights include:
 
@@ -221,13 +221,25 @@ In recent years, 3GPP have developed new LPWANs for the cellular industry on the
 
 ![A simplified representation of the transition from 2G to LTE with regard to technologies that keep people and 'things' in contact.\label{fig:2G_LTE_transition}](C:\GIT\masters\thesis\images\ims voip.jpg){ width=50% }
 
-Although NB-IoT joined LPWANs circa 2016-2017, world-wide coverage is still growing. This can be seen in Fig. \ref{fig:worldwide_coverage}.
+In South Africa, there is a push by cellular service providers to adopt a cellular LPWAN to fill the void left behind by 2G/GPRS now and in the future. NB-IoT is being investigated by MTN South Africa, and since they are also funding this research, have also provided network coverage for testing to Stellenbosch University. Ideally, the technology can be rolled out to existing base stations as a software upgrade for national coverage, but it is limited by factors such as use case demand, expensive licensing and general uncertainty about the technology.
 
- ![Countries with deployed/launched NB-IoT and LTE-M networks \@GSA, 2019 \label{fig:worldwide_coverage}](../images/countries-deployed-nb-iot-lte-m-networks.jpg){ width=90% } 
+2G/GPRS has served as the gateway for smart devices and sensors in the M2M sphere for many years, but due to its high-powered nature it is not sustainable for applications which require battery longevity of up to 10 years or more. In lieu of its absence, although the spectrum it held can be re-farmed for cellular LPWANs, it also opens up opportunities for market entrants of unlicensed frequencies such as LoRaWAN and SigFox. Each LPWAN technology has its own unique flaws and benefits and there is yet to be a clear winner when it comes to connecting 'things' to the internet.
+
+When considering rolling out more coverage, since NB-IoT is based off LTE it makes integration and upgrading of existing infrastructure more seamless than an entirely separate technology. Although it still retains the drawbacks and complexities of legacy LTE such as the vast array of sub-protocols, this still includes the low power, low bandwidth benefits and others which match the requirements for smart devices and IoT. It should be mentioned that much of the RF spectrum which can be used for digital communications is still used by analogue television broadcast by SABC. ICASA, who controls the spectrum, can solve this issue but over the years they have been a strong limiting factor as well since they are slow (if at all) to release new spectrum to MNOs. To increase demand for application developers in IoT, because they will be interested in a hands-on approach with the technology they will use, more network coverage is necessary to scale up production such that volumes of 1000 devices or more can be connected. [^background]
+
+[^background]: **history** - from GSM in 90s to 5G NB-IoT. **SA and coverage** - how it "fits" in South Africa and LPWAN sphere. **IoT** - how relevent. **coverage** - ICASA. 3GPP - why they designed it. future. Uncertainty about NB-IoT. standing. uptake. optimal use
+
+## Network Coverage {#coverage}
+
+Although NB-IoT joined LPWANs circa 2016-2017, world-wide coverage is still growing. This can be seen in Fig. \ref{fig:worldwide_coverage}.  [AT&T announced](https://blog.nordicsemi.com/getconnected/att-launches-nb-iot-network-in-usa) nation-wide coverage of NB-IoT in the USA, alongside its existing LTE Cat-M coverage. Deutsche Telekom and Vodafone cover Europe and China enables millions more IoT devices [@china2019].
+
+ ![Countries with deployed/launched NB-IoT and LTE-M networks \textcopyright{GSA, 2019} \label{fig:worldwide_coverage}](../images/countries-deployed-nb-iot-lte-m-networks.jpg){ width=90% } 
 
 In South Africa, NB-IoT has most of its coverage in the Gauteng province as well as a few sites in other towns and cities. Although Gauteng only covers 1.49% of the land mass in South Africa, it holds ~22% of its ~57 million people so understandably it is great as a live trial run before pushing for national coverage.
 
  ![NB-IoT coverage in South Africa](../images/GautengvsSouthAfrica.png){ width=50% }
+
+### Connectivity in South Africa {#connectivity}
 
 Table: NB-IoT connectivity in South Africa with regard to MNO, LTE vendor and location. 
 
@@ -238,44 +250,38 @@ Table: NB-IoT connectivity in South Africa with regard to MNO, LTE vendor and lo
 | MTN     | Ericsson   | MTN Phase 3: Test Plant        |
 | Vodacom | Huawei     | Gauteng Province               |
 
-In South Africa, there is a push by cellular service providers to adopt a cellular LPWAN to fill the void left behind by 2G/GPRS now and in the future. NB-IoT is being investigated by MTN South Africa, and since they are also funding this research, have also provided network coverage for testing to Stellenbosch University. Ideally, the technology can be rolled out to existing base stations as a software upgrade for national coverage, but it is limited by factors such as use case demand, expensive licensing and general uncertainty about the technology.
+To connect via NB-IoT on the Vodacom network, sim cards must be purchased with a M2M contract over 24 months at 5.00 ZAR/month. At the time of registering in this study, data bundles range from 5 Mb for 7.50 ZAR to 30 Mb for 29.00 ZAR.
 
-2G/GPRS has served as the gateway for smart devices and sensors in the M2M sphere for many years, but due to its high-powered nature it is not sustainable for applications which require battery longevity of up to 10 years or more. In lieu of its absence, although the spectrum it held can be re-farmed for cellular LPWANs, it also opens up opportunities for market entrants of unlicensed frequencies such as LoRaWAN and SigFox. Each LPWAN technology has its own unique flaws and benefits and there is yet to be a clear winner when it comes to connecting 'things' to the internet.
+MTN NB-IoT sim cards can currently be obtained only for testing purposes, and it would be best to speak directly to MTN.
 
-When considering rolling out more coverage, since NB-IoT is based off LTE it makes integration and upgrading of existing infrastructure more seamless than an entirely separate technology. Although it still retains the drawbacks and complexities of legacy LTE such as the vast array of sub-protocols, this still includes the low power, low bandwidth benefits and others which match the requirements for smart devices and IoT. It should be mentioned that much of the RF spectrum which can be used for digital communications is still used by analogue television broadcast by SABC. ICASA, who controls the spectrum, can solve this issue but over the years they have been a strong limiting factor as well since they are slow (if at all) to release new spectrum to MNOs. To increase demand for application developers in IoT, because they will be interested in a hands-on approach with the technology they will use, more network coverage is necessary to scale up production such that volumes of 1000 devices or more can be connected. [^background]
+ ![Vodacom and MTN NB-IoT SIM cards](../images/LTE-Sims-640-1572213347177.jpg){width=30%} 
 
-[^background]: **history** - from GSM in 90s to 5G NB-IoT. **SA and coverage** - how it "fits" in South Africa and LPWAN sphere. **IoT** - how relevent. **coverage** - ICASA. 3GPP - why they designed it. future. Uncertainty about NB-IoT. standing. uptake. optimal use
+ [](../images/MTN-Sim-card.jpg) 
 
 ## Internet of Things{#iot}
 
-The internet of things is an interconnected system of devices that transfer data over a network without requiring human interaction.
+The internet of things has surged in popularity over recent years as an interconnected system of devices that transfer data over a network without requiring human interaction.
 
-In 2014, Gartner estimated that Internet of Things (IoT) had reached the height of inflated expectations, and the hype it generated lives on in a rich ecosystem of emerging technologies.
+Looking at Gartner's analysis of technology expectations with regards to NB-IoT and related technologies, in 2014 Gartner estimated that Internet of Things (IoT) had reached the height of inflated expectations, and the hype it generated lives on in a rich ecosystem of emerging technologies. As of July 2018, NB-IoT and IoT has falling interest (and hype) in Fig. \ref{fig:gartner_ictAfrica}, yet it will reach productivity in 2-10 years time. Since new coverage has not been rolled out for almost two years to date, we believe there is a strong chance for renewed NB-IoT interest in Africa.
 
-[Gartner's IoT hype 2014](../images/hype-cycle-2014-100371840-large.idge.jpeg)
+[](../images/hype-cycle-2014-100371840-large.idge.jpeg)
 
-![[Gartner's 2018 Hype Cycle for ICT in Africa. NB-IoT is high on the list of expectations.](http://www.gartner.com/newsroom/id/3884512)](../images/42881085945_739bbdc8e9_c.jpg){ width=90% }
+![[Gartner's 2018 Hype Cycle for ICT in Africa. NB-IoT is high on the list of expectations. \label{fig:gartner_ictAfrica}](http://www.gartner.com/newsroom/id/3884512)](../images/42881085945_739bbdc8e9_c.jpg){ width=90% }
 
-![Gartner's Hype Cycle for Emerging Technologies, 2019. IoT is inextricably linked to at least a third of emerging technologies and also has uses in NB-IoT.](../images/CTMKT_741609_CTMKT_for_Emerging_Tech_Hype_Cycle_LargerText-1.png){ width=90% }
+As of August 2019, Gartner has high expectations for 5G and other emerging technologies which can make use of what [IoT has to offer](https://blogs.sas.com/content/hiddeninsights/2016/07/06/long-live-the-iot-hype/). This can be seen in Fig. \ref{fig:gartner_emergingTech}.
 
-[https://blogs.sas.com/content/hiddeninsights/2016/07/06/long-live-the-iot-hype/](https://blogs.sas.com/content/hiddeninsights/2016/07/06/long-live-the-iot-hype/)
+![Gartner's Hype Cycle for Emerging Technologies, 2019. IoT is inextricably linked to at least a third of emerging technologies and also has uses in NB-IoT. \label{fig:gartner_emergingTech}](../images/CTMKT_741609_CTMKT_for_Emerging_Tech_Hype_Cycle_LargerText-1.png){ width=90% }
 
-![Ali estimates exponential growth [@Ali2015]. Hype yields investment, especially when the underlying innovation holds value, such as connecting billions of 'things' to the internet. NB-IoT can be integral to aid this growth.](../images/Expected-number-of-connected-devices-to-the-Internet-This-chart-is-obtained-from-recent.png){ width=80% }
+On the other hand, this does not slow the growth in number of devices connected as in Fig. \ref{fig:iot_growth}. IoT merely manifests itself in other uses and forms such as we have already seen in Fig. \ref{fig:gartner_emergingTech}. NB-IoT can be integral to aid this growth.
 
-IoT shows great potential for exponential growth, and unless a technology disruption occurs which means we do not require connections or our devices, then there is undoubtedly an [uptrend](https://amarketresearchgazette.com/global-narrowband-iot-nb-iot-market-2019-2025-vodafone-china-unicom-china-telecom-att-etisalat-telstra-orange-telefonica-sk-telecom-deutsche-telekom/).
+![Exponential growth of IoT is estimated [@Ali2015]. \label{fig:iot_growth}](../images/Expected-number-of-connected-devices-to-the-Internet-This-chart-is-obtained-from-recent.png){ width=80% }
 
-Massive IoT is the deployment of an immense number of low-powered devices with infrequent reporting and both NB-IoT and LTE Cat-M fulfill the requirements of 5G massive MTC/IoT.
-
-A few months before publishing, [AT&T announces](https://blog.nordicsemi.com/getconnected/att-launches-nb-iot-network-in-usa) nation-wide coverage of NB-IoT in the USA, alongside its existing LTE Cat-M coverage. Deutsche Telekom and Vodafone cover Europe and China enables millions more IoT devices [@china2019].
-
-* Matching emerging applications with existing technologies has become one of the
-  main challenges for IoT initiatives, especially when a new technology appears in the landscape and the map must be redrawn.
-
-Although there are many ways to connect IoT to the internet, NB-IoT is an LPWAN which is the focus of this study.
+Matching emerging applications with existing technologies has become one of the
+main challenges for IoT initiatives, especially when a new technology appears in the landscape and the map must be redrawn. Massive IoT is the deployment of an immense number of low-powered devices with infrequent reporting and both NB-IoT and LTE Cat-M fulfill the requirements of 5G massive MTC/IoT.
 
 ## Low-Powered Wide-Area Networks {#lpwans}
 
-There are many wireless technologies out there, with some standardized, including but not limited to SigFox, LoRaWAN, Dash7, Bluetooth, 6LowPan, RPMA, Weightless, and IETF 6TiSCH. Many are proprietary to retain company value and they try to meet application specific requirements also limited by technological constraints. Matching custom applications with a wireless technology is non-trivial as there is no silver bullet that matches all use-cases. On the contrary, many technologies overlap in their capabilities.
+There are many wireless technologies out there, with some standardized, including but not limited to SigFox, LoRaWAN, Dash7, Bluetooth, 6LowPan, RPMA, Weightless, and IETF 6TiSCH. A brief comparison is drawn on NB-IoT against prominent unlicensed frequency LPWANs in Table \ref{tbl:lpwan_comparison}, and cellular LPWANs in Table \ref{tbl:cellular_comparison}.
 
 Table: Brief comparison of NB-IoT against wireless LPWANs {#tbl:lpwan_comparison}
 
@@ -285,45 +291,53 @@ Table: Brief comparison of NB-IoT against wireless LPWANs {#tbl:lpwan_comparison
 | Bandwidth               | 200 kHz      | 125-500 kHz       | 200 kHz  | 25, 200 kHz       |
 | Throughput              | 250 kbps     | 27 kbps           | 0.1 kbps | 167 kbps          |
 | Duty cycle limitation   | 0%           | 90-99%            | 99%      | LBT ~ 0-99%       |
-| Messages per day (12 B) |              | 10-243            | 140      |                   |
+| Messages per day (12 B) | 14 million   | 10-243            | 140      | 86400+            |
 | Bytes per message       | 512          | 255               | 12       | 256               |
-| Uplink Latency          | 0.1 - 10 s   | < 3 s             | ~ 6 s    |                   |
+| Uplink Latency          | 0.1 - 10 s   | < 3 s             | ~ 6 s    | < 0.015 s         |
 | Battery Lifetime        | 10 years     | 10 years          | 16 years |                   |
 | MCL                     | 164 dBm      | 157 dBm           | 160 dBm  |                   |
 | Scalability             |              |                   | > 50k    |                   |
 | Outage                  | 1%           | > 2%              | 1%       |                   |
 | Average Power           |              |                   |          |                   |
+| Range                   |              | 5km (85% PDR)     | 3-10 km  |                   |
 
 Table: Brief comparison of NB-IoT against cellular technologies {#tbl:cellular_comparison}
 
-|                   | NB-IoT       | 2G/GSM/GPRS  | EC-GSM-IoT     | LTE Cat-M    |      |
-| ----------------- | ------------ | ------------ | -------------- | ------------ | ---- |
-| Frequencies       | 450-2200 MHz | 850-1900 MHz | 850 - 1900 MHz | 450-2600 MHz |      |
-| Bandwidth         | 200 kHz      |              | 200 kHz        | 1.4MHz       |      |
-| Throughput        | 250 kbps     | 56–114 kbps  | 70-240 kpbs    | 375 kbps     |      |
-| Bytes per message | 512          |              |                |              |      |
-| Uplink Latency    | < 10 s       |              | 0.7 - 2 s      |              |      |
-| Battery Lifetime  | 10 years     | 3 months     | 10 years       | 10 years     |      |
-| MCL               | 164 dBm      | 148 dBm      |                |              |      |
-| Scalability       |              |              |                |              |      |
+|                  | NB-IoT       | 2G/GSM/GPRS  | EC-GSM-IoT[^ec_gsm_available] | LTE Cat-M    |
+| ---------------- | ------------ | ------------ | ----------------------------- | ------------ |
+| Frequencies      | 450-2200 MHz | 850-1900 MHz | 850 - 1900 MHz                | 450-2600 MHz |
+| Bandwidth        | 180 kHz      | 200 kHz      | 200 kHz                       | 1.4MHz       |
+| Throughput       | 250 kbps     | 56–114 kbps  | 70-240 kpbs                   | 375 kbps     |
+| Packet size      | 512          | ~ 1400       | -                             | ~ 1024       |
+| Uplink Latency   | 0.1 - 10 s   | 0.3 - 1 s    | 0.7 - 2 s                     | 0.1 - 10 s   |
+| Battery Lifetime | 10 years     | 3 months     | 10 years                      | 10 years     |
+| MCL              | 164 dBm      | 148 dBm      | 154 - 164 dBm                 | 164 dBm      |
+| Scalability      | 55,000       | 52,000       | 50,000                        | 55,000       |
+| Range (urban)    | 2.5 - 5 km   | 1 - 2 km     | -                             | 2.5 - 5 km   |
 
-Table: LPWAN strengths
+[^ec_gsm_available]: eGPRS/EDGE-based EC-GSM-IoT is not available anywhere in the world yet.
 
-| Technology   | MCL  | Scalability | Battery life | Throughput |
-| ------------ | ---- | ----------- | ------------ | ---------- |
-| NB-IoT       | X    | X           |              | X          |
-| GPRS         |      | X           |              | X          |
-| LoRaWAN SF7  |      |             | X            |            |
-| LoRaWAN SF12 | X    |             |              |            |
-| SigFox       | X    | X           |              |            |
+To meet application specific requirements, the uniqueness of each technology gives each its advantages and disadvantages. Matching custom applications with a wireless technology is non-trivial as there is no silver bullet that matches all use-cases. In terms of a few metric capabilities, a best-and-worst case matrix is shown in Table \ref{tbl:lpwan_strengths}. NB-IoT is shown to be closest to being an all-round winner, with battery life the exception. This is another reason why battery life is investigated in this study.
+
+Table: LPWAN strengths with \checkmark,  $\times$  denoting best and worst case respectively. {#tbl:lpwan_strengths}
+
+| Technology   | MCL        | Scalability | Battery life | Throughput |
+| ------------ | ---------- | ----------- | ------------ | ---------- |
+| NB-IoT       | \checkmark | \checkmark  |              | \checkmark |
+| GPRS         | $\times$   | \checkmark  | $\times$     | \checkmark |
+| LoRaWAN SF7  |            |             | \checkmark   |            |
+| LoRaWAN SF12 | \checkmark | $\times$    |              | $\times$   |
+| SigFox       | \checkmark | \checkmark  |              |            |
 
 * Competition in the LPWAN space and regional momentum will ensure that the various technologies will continue to develop and improve to support more features and expand the network coverage. 
-* We expect selected uptake of each technology in specific application areas and our results show that each technology is better suited to specific applications and their concomitant requirements. Sigfox, NB-IoT, and LoraWAN SF12 performed equally well for applications where MCL (range) is paramount, with LoraWAN SF7 doing slightly worse. In applcitions where the main consideration is scalability, Sigfox, and NB-IoT substantially outperformed the LoraWAN varieties. However, if battery life is the most important consideration, LoraWAN SF7 seems to have the edge, with NB-IoT (the default setup we tested) performing worse. NB-IoT performed the best for uplink throughput, with LoraWAN SF7 coming in second. For all the other two-related metrics evaluated, namely downlink throughput and firmware upgradability, NB-IoT performs substantially better than the other technologies.
+* 
 * Poor for asset tracking and utility metering.
 * Average for smart bicyles, parking, garbage bins, agriculture and intelligent buildings.
 * Good for pet tracking, POS, healthcare.
 * NB-IoT outperforms SigFox and LoRaWAN in UL/DL throughput, scalability, MCL range and FoTA updates. It is superseded by LoRaWAN in battery life for SF7.
 * If NB-IoT worked with the mobile network operators to reduce its RRC-idle phase, it could develop a minimal power consumption to compare with that of LoRaWAN and Sigfox.
+
+Although there are many ways to connect IoT to the internet, NB-IoT is an LPWAN which is the focus of this study.
 
 ## Metrics {#metrics_intro}
 
@@ -351,6 +365,12 @@ Table: LPWAN strengths
 - Actuator Control
 - Real-time Monitoring
 - Asset Tracking
+
+* Logistics
+* Health Care
+* Industrial Production
+* Energy, Utilities
+* Retail 
 
 IoT has use case requirements in UL/DL throughput, battery longevity and scalability.
 

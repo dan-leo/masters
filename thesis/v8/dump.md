@@ -210,3 +210,25 @@ Hype yields investment, especially when the underlying innovation holds value, s
 
 
 IoT shows great potential for exponential growth, and unless a technology disruption occurs which means we do not require connections or our devices, then there is undoubtedly an [uptrend](https://amarketresearchgazette.com/global-narrowband-iot-nb-iot-market-2019-2025-vodafone-china-unicom-china-telecom-att-etisalat-telstra-orange-telefonica-sk-telecom-deutsche-telekom/).
+
+
+
+### Performance Evaluation
+
+It would be useful for the application developer to know the boundaries resulting from this approach. Drawbacks and optimizations targeting IoT can be discussed. The application developer is a potential adopter of the technology and focuses on parameters that fall within end-user control.
+
+Cellular operators would also benefit by knowing where they can improve upon their configurations and equipment.
+
+To this end it would be beneficial to:
+
+- Analyze critical metrics at the core of NB-IoT, such as energy consumption, coverage, cost and latency.
+- Create a testing framework to characterize NB-IoT devices in actual operation and using various networks.
+- Set optimal operating boundaries based on the obtained results. This should also re-evaluate suitability in certain use cases.
+
+There are over 50 MNOs in the world that are using NB-IoT, yet most draw from a subset of the [top 5 LTE vendors](https://www.rcrwireless.com/20160531/network-infrastructure/top-5-wireless-infrastructure-makers-tag4-tag99):
+
+1. Huawei
+2. Ericsson
+3. Nokia
+4. ZTE
+5. Samsung

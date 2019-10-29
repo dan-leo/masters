@@ -31,34 +31,6 @@ Whilst this research is funded by MTN and being aware of internal documentation,
 
 The empirical results of NB-IoT depend on the device used (UE) and underlying LTE vendor architecture of the MNO providing coverage. Thus, 
 
-## LoRaWAN {#lorawan}
-
-LoRaWAN is a contender for NB-IoT. It lacks bidirectionality and data rate.
-
-* LoRaWAN performs better for short messages, but it is subjected to a very high penalty when
-  more than one message per data block is required.
-* Second, the LoRaWAN reliability mechanism must be ensured at the
-  upper layers, and thus may incur higher energy costs.
-
-## Dash7
-
-## SigFox {#sigfox}
-
-SigFox is a contender for NB-IoT. It lacks bidirectionality and datarate.
-
-## NB-IoT {#nbiot_lit}
-
-- This section describes NB-IoT in more detail and the setup procedures involved.
-- 3GPP
-- the UE device is to a large extent/entirely controlled by the network/eNodeB.
-  - UE devices must follow NW settings broadcast inside the SIB and allocations for UL/DL data.
-
-
-
-Martinez [@Martinez2019] has explored NB-IoT from the perspective of the application developer. When evaluating performance, it would do well to find the limits of the technology as well as find the optimum 'sweet spot' or range for efficient operation.
-
-A user would consider critical characteristics such as energy consumption, coverage, cost, network latency and behavior. Martinez looks at these except for cost, which is better looked at by Ali [@Ali2015]. A set of tests were devised and results showed that in some cases its energy consumption performed better than an LPWAN referenced technology such as LoRa, with the added benefit of guaranteeing delivery. However, the high variability in energy consumption and network latency call into question its reliability especially for mission-critical applications.
-
 
 ## Internet of Things{#iot}
 
@@ -80,6 +52,18 @@ On the other hand, this does not slow the growth in number of devices connected 
 
 Matching emerging applications with existing technologies has become one of the
 main challenges for IoT initiatives, especially when a new technology appears in the landscape and the map must be redrawn. Massive IoT is the deployment of an immense number of low-powered devices with infrequent reporting and both NB-IoT and LTE Cat-M fulfill the requirements of 5G massive MTC/IoT.
+
+### Push-Pull Model
+
+Traditionally, IoT devices push data to the internet at regular intervals. This push model can be considered quite energy inefficient, especially when the data is only occasionally actionable. For example, in asset tracking or remote monitoring.
+
+A pull model is ideal for dynamic rule engines, pulling data only when necessary and ultimately edge computing, where building an application around this idea can greatly enhance battery life.
+
+### Edge Computing
+
+Edge computing is the practice of offloading cloud processes to the endpoint. It saves on data overhead, especially when there are data charges involved and battery longevity is desired.
+
+Since NB-IoT is optimized for downlink communications, it can be the ideal candidate.
 
 ## Low-Powered Wide-Area Networks {#lpwans}
 
@@ -141,6 +125,34 @@ Table: LPWAN strengths with \checkmark,  $\times$  denoting best and worst case 
 
 Although there are many ways to connect IoT to the internet, NB-IoT is an LPWAN which is the focus of this study.
 
+### LoRaWAN {#lorawan}
+
+LoRaWAN is a contender for NB-IoT. It lacks bidirectionality and data rate.
+
+* LoRaWAN performs better for short messages, but it is subjected to a very high penalty when
+  more than one message per data block is required.
+* Second, the LoRaWAN reliability mechanism must be ensured at the
+  upper layers, and thus may incur higher energy costs.
+
+### Dash7
+
+### SigFox {#sigfox}
+
+SigFox is a contender for NB-IoT. It lacks bidirectionality and datarate.
+
+### NB-IoT {#nbiot_lit}
+
+- This section describes NB-IoT in more detail and the setup procedures involved.
+- 3GPP
+- the UE device is to a large extent/entirely controlled by the network/eNodeB.
+  - UE devices must follow NW settings broadcast inside the SIB and allocations for UL/DL data.
+
+
+
+Martinez [@Martinez2019] has explored NB-IoT from the perspective of the application developer. When evaluating performance, it would do well to find the limits of the technology as well as find the optimum 'sweet spot' or range for efficient operation.
+
+A user would consider critical characteristics such as energy consumption, coverage, cost, network latency and behavior. Martinez looks at these except for cost, which is better looked at by Ali [@Ali2015]. A set of tests were devised and results showed that in some cases its energy consumption performed better than an LPWAN referenced technology such as LoRa, with the added benefit of guaranteeing delivery. However, the high variability in energy consumption and network latency call into question its reliability especially for mission-critical applications.
+
 
 ## Use Cases {#usecases_intro}
 
@@ -161,7 +173,7 @@ IoT has use case requirements in UL/DL throughput, battery longevity and scalabi
 
 The most popular use case in IoT is smart metering.
 
-## Smart Metering {#smartmetering}
+### Smart Metering {#smartmetering}
 
 One of the simplest use cases in IoT is smart metering. Periodically sending uplink data at regular intervals from a static location has the advantage of remote monitoring and reducing the need for physical readings. It also opened up new features for users (such as dynamic pricing and usage pattern analysis) and operators (such as load balancing a large number of clients). The clear value proposition and success is partially due to the belief that IoT should be low powered and low data transmissions which still exists today.
 
@@ -169,17 +181,7 @@ One of the simplest use cases in IoT is smart metering. Periodically sending upl
 
 Smart metering can be considered the traditional IoT model.
 
-## Push-Pull Model
-
-Traditionally, IoT devices push data to the internet at regular intervals. This push model can be considered quite energy inefficient, especially when the data is only occasionally actionable. For example, in asset tracking or remote monitoring.
-
-A pull model is ideal for dynamic rule engines, pulling data only when necessary and ultimately edge computing, where building an application around this idea can greatly enhance battery life.
-
-## Edge Computing
-
-Edge computing is the practice of offloading cloud processes to the endpoint. It saves on data overhead, especially when there are data charges involved and battery longevity is desired.
-
-Since NB-IoT is optimized for downlink communications, it can be the ideal candidate.
+### Actuator Control
 
 ## NB-IoT {#nbiot}
 
@@ -237,38 +239,7 @@ Compared to LTE
 
 
 
-Although most users interact only with the UE device which runs its own proprietary firmware stack, NB-IoT also has a complex backend architecture.
-
-## LTE Architecture
-
-![LTE_classic_architecture](../images/LTE_classic_architecture.png)
-
-The complexities of LTE architecture further increases the chance of performance degradation with respect to 3GPP specifications due to the vast array of setup parameters. It would be beneficial to analyze the performance of multiple UE devices against various MNO vendors. It is important to note that MNOs may use various vendors in their architecture, and thus this study is mainly focused on the eNodeB vendor which is also UE device facing and has the greatest chance of performance degradation due network quality, RF interference and so forth.
-
-* Both UDP socket commands and datagram commands use the IP data transport through the SGi.
-
-## Performance Evaluation
-
-It would be useful for the application developer to know the boundaries resulting from this approach. Drawbacks and optimizations targeting IoT can be discussed. The application developer is a potential adopter of the technology and focuses on parameters that fall within end-user control.
-
-Cellular operators would also benefit by knowing where they can improve upon their configurations and equipment.
-
-To this end it would be beneficial to:
-
-- Analyze critical metrics at the core of NB-IoT, such as energy consumption, coverage, cost and latency.
-- Create a testing framework to characterize NB-IoT devices in actual operation and using various networks.
-- Set optimal operating boundaries based on the obtained results. This should also re-evaluate suitability in certain use cases.
-
-There are over 50 MNOs in the world that are using NB-IoT, yet most draw from a subset of the [top 5 LTE vendors](https://www.rcrwireless.com/20160531/network-infrastructure/top-5-wireless-infrastructure-makers-tag4-tag99):
-
-1. Huawei
-2. Ericsson
-3. Nokia
-4. ZTE
-5. Samsung
-
-
-## Standing or Positioning {#lit_standing}
+### Standing or Positioning {#lit_standing}
 
 We expect selected uptake of each technology in specific application areas and our results show that each technology is better suited to specific applications and their concomitant requirements. Sigfox, NB-IoT, and LoraWAN SF12 performed equally well for applications where MCL (range) is paramount, with LoraWAN SF7 doing slightly worse. In applcitions where the main consideration is scalability, Sigfox, and NB-IoT substantially outperformed the LoraWAN varieties. However, if battery life is the most important consideration, LoraWAN SF7 seems to have the edge, with NB-IoT (the default setup we tested) performing worse. NB-IoT performed the best for uplink throughput, with LoraWAN SF7 coming in second. For all the other two-related metrics evaluated, namely downlink throughput and firmware upgradability, NB-IoT performs substantially better than the other technologies.
 
@@ -317,13 +288,23 @@ Ownership model
 - connectivity service, contract, charged per byte
 - coverage depends on deployed infrastructure
 
-## Hardware {#lit_hardware}
+### LTE Architecture
+
+Although most users interact only with the UE device which runs its own proprietary firmware stack, NB-IoT also has a complex backend architecture.
+
+![LTE_classic_architecture](../images/LTE_classic_architecture.png)
+
+The complexities of LTE architecture further increases the chance of performance degradation with respect to 3GPP specifications due to the vast array of setup parameters. It would be beneficial to analyze the performance of multiple UE devices against various MNO vendors. It is important to note that MNOs may use various vendors in their architecture, and thus this study is mainly focused on the eNodeB vendor which is also UE device facing and has the greatest chance of performance degradation due network quality, RF interference and so forth.
+
+* Both UDP socket commands and datagram commands use the IP data transport through the SGi.
+
+### Hardware {#lit_hardware}
 
 * Modem
 * Antenna
 * RX/TX lines
 
-## Setup Procedure {#lit_setup}
+### Setup Procedure {#lit_setup}
 
 * There exist application development manuals.
 * AT+NCONFIG
@@ -333,7 +314,7 @@ Ownership model
 * URCs
 * APN
 
-## Network Registration and Info {#nw_reg_info}
+### Network Registration and Info {#nw_reg_info}
 
 - By default the SARA-N2 series modules will automatically try and connect to the network. This
   feature will read the SIM for the PLMN and attempt to register with the network. The device will use
@@ -355,7 +336,7 @@ Ownership model
 
 The **PCI** value is created from two components - PSS and SSS. The PSS, Primary Synchronization Signal, has the value 0, 1, or 2. The SSS, Secondary Synchronization Signal, can have a value between 0 and 167.
 
-## RRC Connection and Inactivity Timer {#rrc_inactivity}
+### RRC Connection and Inactivity Timer {#rrc_inactivity}
 
 After network registration or transmitting a data packet, the device usually enters RRC connected (C-DRX) mode for a specified inactivity timeout specified by the network.
 
@@ -388,7 +369,7 @@ After network registration or transmitting a data packet, the device usually ent
 - To configure a URC for this command, issue the AT+CSCON=1 command. A URC will be issued at
   each RRC connection status change. 
 
-## Release Assistance {#release_a}
+### Release Assistance {#release_a}
 
 Release assistance requests the eNodeB to release the RRC connection immediately. By avoiding 20 seconds of idle RRC in C-DRX mode, there is a 93% improvement in power consumption for a 200 byte transmission in ECL 1.
 
@@ -410,7 +391,7 @@ For the same example in bad SNR, the TBS allocated 32 bytes per chunk, with a re
 
 
 
-## Power Saving Mechanisms
+### Power Saving Mechanisms
 
 The NB-IoT protocol allows for power save mode (PSM), and the SARA-N2 series modules also
 support a Deep Sleep mode where the module is running at very low current, ~3 $uA$. The module
@@ -419,7 +400,7 @@ common activities and the various states it will be in after registration.
 
 * T3324 / T3412 timer values
 
-### T3412 PTAU Timer
+#### T3412 PTAU Timer
 
 * (GPRS timer 3)
 *  3GPP TS 24.008 [4], figure 10.5.147a and table 10.5.163a.
@@ -444,7 +425,7 @@ common activities and the various states it will be in after registration.
   is received, the T3412 extended value IE shall be considered as not included in the message (see
   3GPP TS 24.301 [5]).
 
-### T3324 Active Timer
+#### T3324 Active Timer
 
 * The T3324 Timer is reset after a downlink message is received. The negative impact on energy savings should be taken into account if downlink data is fragmented.
 * the Active Timer (T3324) controls the time lapse during which the UE device is reachable by the network in RRC Idle, i.e., the number of eDRX cycles.
@@ -458,7 +439,7 @@ common activities and the various states it will be in after registration.
   1 1 1 value indicates that the timer is deactivated
 * Example: "00100100" = 4 x1 minute = 4 minutes
 
-### eDRX Cycles and PTW
+#### eDRX Cycles and PTW
 
 * An eDRX cycle is composed of an active phase, controlled by a Paging Time Window (PTW) timer, which ranges from 2.56 s to 40.96 s followed by a sleep phase until the end of the eDRX cycle. Within the PTW, the standard LTE paging is observed.
 
@@ -470,7 +451,7 @@ Extended Discontinuous Reception (eDRX) mode means that paging windows can be sc
 
 
 
-## System Information Blocks (SIB) {#sib}
+### System Information Blocks (SIB) {#sib}
 
 The SIB describes the method of attachment and what repetitions the UE device must use to first transmit
 to the base station. Once a RRC connection is made, the base station then uses the perceived SNR
@@ -480,7 +461,7 @@ calculate the power consumption of a single message deployed in the field.
 
 * example SIB
 
-## Repetitions and Extended Coverage Level (ECL)
+### Repetitions and Extended Coverage Level (ECL)
 
 * ECL
 * Module interference increases the number of repetitions
@@ -494,7 +475,7 @@ calculate the power consumption of a single message deployed in the field.
 
 * 
 
-## UE Device and Network Behavior
+### UE Device and Network Behavior
 
 * The application can monitor the status of the module’s connection, registration and PSM state by
   polling or configuring URCs. By monitoring the module status the application can behave more

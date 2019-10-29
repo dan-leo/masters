@@ -1,4 +1,8 @@
 *.pdf
+err.log
+*.aux
+*.lof
+*.out
 
 tex2pdf*
 .metadata

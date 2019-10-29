@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500) (preloaded format=pdflatex 2018.6.10)  28 OCT 2019 03:04
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500) (preloaded format=pdflatex 2018.6.10)  29 OCT 2019 13:25
 entering extended mode
-**C:/GIT/masters/thesis/v8/2_litstudy.tex
-(C:/GIT/masters/thesis/v8/2_litstudy.tex
+**C:/GIT/masters/thesis/v8/4_results.tex
+(C:/GIT/masters/thesis/v8/4_results.tex
 LaTeX2e <2017-04-15>
 Babel <3.15> and hyphenation patterns for 75 language(s) loaded.
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\article.cls"
@@ -824,22 +824,34 @@ Package: geometry 2010/09/12 v5.6 Page Geometry
 \Gm@dimlist=\toks24
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\geometry\geometry.cfg"))
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\fancyvrb\fancyvrb.sty"
+Package: fancyvrb 2008/02/07
+
+Style option: `fancyvrb' v2.7a, with DG/SPQR fixes, and firstline=lastline fix 
+<2008/02/07> (tvz)
+\FV@CodeLineNo=\count114
+\FV@InFile=\read1
+\FV@TabBox=\box28
+\c@FancyVerbLine=\count115
+\FV@StepNumber=\count116
+\FV@OutFile=\write3
+)
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\tools\longtable.sty"
 Package: longtable 2014/10/28 v4.11 Multi-page Table package (DPC)
 \LTleft=\skip48
 \LTright=\skip49
 \LTpre=\skip50
 \LTpost=\skip51
-\LTchunksize=\count114
+\LTchunksize=\count117
 \LTcapwidth=\dimen125
-\LT@head=\box28
-\LT@firsthead=\box29
-\LT@foot=\box30
-\LT@lastfoot=\box31
-\LT@cols=\count115
-\LT@rows=\count116
-\c@LT@tables=\count117
-\c@LT@chunks=\count118
+\LT@head=\box29
+\LT@firsthead=\box30
+\LT@foot=\box31
+\LT@lastfoot=\box32
+\LT@cols=\count118
+\LT@rows=\count119
+\c@LT@tables=\count120
+\c@LT@chunks=\count121
 \LT@p@ftn=\toks25
 )
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\booktabs\booktabs.sty"
@@ -854,17 +866,17 @@ Package: booktabs 2005/04/14 v1.61803 publication quality tables
 \cmidrulesep=\dimen133
 \cmidrulekern=\dimen134
 \defaultaddspace=\dimen135
-\@cmidla=\count119
-\@cmidlb=\count120
+\@cmidla=\count122
+\@cmidlb=\count123
 \@aboverulesep=\dimen136
 \@belowrulesep=\dimen137
-\@thisruleclass=\count121
-\@lastruleclass=\count122
+\@thisruleclass=\count124
+\@lastruleclass=\count125
 \@thisrulewidth=\dimen138
 )
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\mdwtools\footnote.sty"
 Package: footnote 1997/01/28 1.13 Save footnotes around boxes
-\fn@notes=\box32
+\fn@notes=\box33
 \fn@width=\dimen139
 )
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\graphicx.sty"
@@ -893,11 +905,11 @@ Package grffile Info: \Gin@ii of package `graphicx' fixed on input line 486.
 )
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\float\float.sty"
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count123
+\c@float@type=\count126
 \float@exts=\toks26
-\float@box=\box33
+\float@box=\box34
 \@float@everytoks=\toks27
-\@floatcapt=\box34
+\@floatcapt=\box35
 )
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\subfig\subfig.sty"
 Package: subfig 2005/06/28 ver: 1.3 subfig package
@@ -916,8 +928,8 @@ Package caption3 Info: TeX engine: e-TeX on input line 64.
 \caption@parindent=\dimen147
 \caption@hangindent=\dimen148
 )
-\c@caption@flags=\count124
-\c@ContinuedFloat=\count125
+\c@caption@flags=\count127
+\c@ContinuedFloat=\count128
 Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
 Package caption Info: longtable package is loaded.
@@ -925,57 +937,57 @@ Package caption Info: longtable package is loaded.
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\caption\ltcaption.sty"
 Package: ltcaption 2018/08/26 v1.4-95 longtable captions (AR)
 ))
-\c@KVtest=\count126
+\c@KVtest=\count129
 \sf@farskip=\skip52
 \sf@captopadj=\dimen149
 \sf@capskip=\skip53
 \sf@nearskip=\skip54
-\c@subfigure=\count127
-\c@subfigure@save=\count128
-\c@lofdepth=\count129
-\c@subtable=\count130
-\c@subtable@save=\count131
-\c@lotdepth=\count132
+\c@subfigure=\count130
+\c@subfigure@save=\count131
+\c@lofdepth=\count132
+\c@subtable=\count133
+\c@subtable@save=\count134
+\c@lotdepth=\count135
 \sf@top=\skip55
 \sf@bottom=\skip56
 )
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\chngcntr\chngcntr.sty"
 Package: chngcntr 2018/04/09 v1.1a change counter resetting
 )
-\c@tableno=\count133
+\c@tableno=\count136
 
-No file 2_litstudy.aux.
-\openout1 = `2_litstudy.aux'.
+No file 4_results.aux.
+\openout1 = `4_results.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 118.
-LaTeX Font Info:    ... okay on input line 118.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 118.
-LaTeX Font Info:    ... okay on input line 118.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 118.
-LaTeX Font Info:    ... okay on input line 118.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 118.
-LaTeX Font Info:    ... okay on input line 118.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 118.
-LaTeX Font Info:    ... okay on input line 118.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 118.
-LaTeX Font Info:    ... okay on input line 118.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 118.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 118.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 156.
+LaTeX Font Info:    ... okay on input line 156.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 156.
+LaTeX Font Info:    ... okay on input line 156.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 156.
+LaTeX Font Info:    ... okay on input line 156.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 156.
+LaTeX Font Info:    ... okay on input line 156.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 156.
+LaTeX Font Info:    ... okay on input line 156.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 156.
+LaTeX Font Info:    ... okay on input line 156.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 156.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 156.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\ts1cmr.fd"
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 118.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 118.
-LaTeX Font Info:    ... okay on input line 118.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 118.
-LaTeX Font Info:    ... okay on input line 118.
-LaTeX Font Info:    Try loading font information for T1+lmr on input line 118.
+LaTeX Font Info:    ... okay on input line 156.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 156.
+LaTeX Font Info:    ... okay on input line 156.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 156.
+LaTeX Font Info:    ... okay on input line 156.
+LaTeX Font Info:    Try loading font information for T1+lmr on input line 156.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\lm\t1lmr.fd"
 File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Info: Redefining \microtypecontext on input line 118.
+LaTeX Info: Redefining \microtypecontext on input line 156.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using protrusion set `basicmath'.
@@ -992,16 +1004,16 @@ File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman
 )
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count134
+\scratchcounter=\count137
 \scratchdimen=\dimen150
-\scratchbox=\box35
-\nofMPsegments=\count135
-\nofMParguments=\count136
+\scratchbox=\box36
+\nofMPsegments=\count138
+\nofMParguments=\count139
 \everyMPshowfont=\toks28
-\MPscratchCnt=\count137
+\MPscratchCnt=\count140
 \MPscratchDim=\dimen151
-\MPnumerator=\count138
-\makeMPintoPDFobject=\count139
+\MPnumerator=\count141
+\makeMPintoPDFobject=\count142
 \everyMPtoPDFconversion=\toks29
 ) ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\oberdiek\epstopdf-base.sty"
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
@@ -1016,8 +1028,8 @@ Package grfext Info: Graphics extension search list:
 G,.JBIG2,.JB2,.eps]
 (grfext)             \AppendGraphicsExtensions on input line 456.
 )
-\AtBeginShipoutBox=\box36
-Package hyperref Info: Link coloring ON on input line 118.
+\AtBeginShipoutBox=\box37
+Package hyperref Info: Link coloring ON on input line 156.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\hyperref\nameref.sty"
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
@@ -1025,13 +1037,13 @@ Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\gettitlestring.sty"
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count140
+\c@section@level=\count143
 )
-LaTeX Info: Redefining \ref on input line 118.
-LaTeX Info: Redefining \pageref on input line 118.
-LaTeX Info: Redefining \nameref on input line 118.
-\@outlinefile=\write3
-\openout3 = `2_litstudy.out'.
+LaTeX Info: Redefining \ref on input line 156.
+LaTeX Info: Redefining \pageref on input line 156.
+LaTeX Info: Redefining \nameref on input line 156.
+\@outlinefile=\write4
+\openout4 = `4_results.out'.
 
 
 *geometry* driver: auto-detecting
@@ -1071,36 +1083,36 @@ LaTeX Info: Redefining \nameref on input line 118.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: subfig package v1.3 is loaded.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Font Info:    Try loading font information for OT1+lmr on input line 120.
+LaTeX Font Info:    Try loading font information for OT1+lmr on input line 158.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\lm\ot1lmr.fd"
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OML+lmm on input line 120.
+LaTeX Font Info:    Try loading font information for OML+lmm on input line 158.
 
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\lm\omllmm.fd"
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 120
+LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 158
 .
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\lm\omslmsy.fd"
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMX+lmex on input line 120
+LaTeX Font Info:    Try loading font information for OMX+lmex on input line 158
 .
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\lm\omxlmex.fd"
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 120.
+(Font)              <12> on input line 158.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 120.
+(Font)              <8> on input line 158.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 120.
-LaTeX Font Info:    Try loading font information for U+msa on input line 120.
+(Font)              <6> on input line 158.
+LaTeX Font Info:    Try loading font information for U+msa on input line 158.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
@@ -1108,7 +1120,7 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\microtype\mt-msa.cfg"
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 120.
+LaTeX Font Info:    Try loading font information for U+msb on input line 158.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -1116,102 +1128,1281 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\microtype\mt-msb.cfg"
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
-\tf@toc=\write4
-\openout4 = `2_litstudy.toc'.
+\tf@toc=\write5
+\openout5 = `4_results.toc'.
 
-\tf@lot=\write5
-\openout5 = `2_litstudy.lot'.
+\tf@lot=\write6
+\openout6 = `4_results.lot'.
 
-\tf@lof=\write6
-\openout6 = `2_litstudy.lof'.
+\tf@lof=\write7
+\openout7 = `4_results.lof'.
 
-LaTeX Font Info:    Try loading font information for TS1+lmr on input line 170.
+LaTeX Font Info:    Try loading font information for TS1+lmr on input line 189.
 
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\lm\ts1lmr.fd"
 File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 ) [1
 
-{C:/Users/d7rob/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] [2] [3] [4]
+{C:/Users/d7rob/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
+
+LaTeX Warning: Reference `design' on page 2 undefined on input line 209.
+
+<../../../masters/code/tests/plotterk/Signal_power_txTime_plot.pdf, id=20, page
+box=cropbox, 734.52873pt x 717.76837pt>
+File: ../../../masters/code/tests/plotterk/Signal_power_txTime_plot.pdf Graphic
+ file (type pdf)
+<use ../../../masters/code/tests/plotterk/Signal_power_txTime_plot.pdf>
+Package pdftex.def Info: ../../../masters/code/tests/plotterk/Signal_power_txTi
+me_plot.pdf  used on input line 225. on input line 225.
+Package pdftex.def Info: Requested size: 443.58987pt x 433.46812pt on input lin
+e 225.
+
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 226.
+See the caption package documentation for explanation.
+
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 518.
+(Font)              <10> on input line 229.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 518.
+(Font)              <7> on input line 229.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 518.
- [5]
-<C:/Users/d7rob/AppData/Roaming/Typora/typora-user-images/1555540836196.png, id
-=98, 689.57625pt x 270.00874pt>
-File: C:/Users/d7rob/AppData/Roaming/Typora/typora-user-images/1555540836196.pn
-g Graphic file (type png)
-<use C:/Users/d7rob/AppData/Roaming/Typora/typora-user-images/1555540836196.png
->
-Package pdftex.def Info: C:/Users/d7rob/AppData/Roaming/Typora/typora-user-imag
-es/1555540836196.png  used on input line 604. on input line 604.
-Package pdftex.def Info: Requested size: 443.57901pt x 173.68668pt on input lin
-e 604.
- [6 <C:/Users/d7rob/AppData/Roaming/Typora/typora-user-images/1555540836196.png
->] [7]
-[8]
+(Font)              <5> on input line 229.
 
-LaTeX Warning: Reference `eq:avgpower' on page 9 undefined on input line 904.
-
-[9]
-<../images/1569744612309.png, id=156, 667.49374pt x 178.6675pt>
-File: ../images/1569744612309.png Graphic file (type png)
-<use ../images/1569744612309.png>
-Package pdftex.def Info: ../images/1569744612309.png  used on input line 954. o
-n input line 954.
-Package pdftex.def Info: Requested size: 418.58812pt x 112.04312pt on input lin
-e 954.
- [10 <../images/1569744612309.png>] [11]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1171.
- [12]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1171.
- (2_litstudy.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1171.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1171.
+Package hyperref Warning: Suppressing empty link on input line 231.
 
 
+Package hyperref Warning: Suppressing empty link on input line 233.
 
-Package rerunfilecheck Warning: File `2_litstudy.out' has changed.
+[2 <../../../masters/code/tests/plotterk/Signal_power_txTime_plot.pdf>]
+
+LaTeX Warning: Reference `fig:sinr_latency' on page 3 undefined on input line 2
+46.
+
+
+LaTeX Warning: Reference `fig:latency_rsrp' on page 3 undefined on input line 2
+47.
+
+
+Package hyperref Warning: Suppressing empty link on input line 266.
+
+
+LaTeX Warning: Reference `fig:sinr_latency' on page 3 undefined on input line 2
+69.
+
+<../../../masters/code/tests/joplotterk/Signal_power_txTime_plot.png, id=1450, 
+730.73pt x 717.68124pt>
+File: ../../../masters/code/tests/joplotterk/Signal_power_txTime_plot.png Graph
+ic file (type png)
+<use ../../../masters/code/tests/joplotterk/Signal_power_txTime_plot.png>
+Package pdftex.def Info: ../../../masters/code/tests/joplotterk/Signal_power_tx
+Time_plot.png  used on input line 276. on input line 276.
+Package pdftex.def Info: Requested size: 443.58154pt x 435.66045pt on input lin
+e 276.
+[3]
+LaTeX Font Info:    Try loading font information for T1+lmtt on input line 283.
+
+ ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\lm\t1lmtt.fd"
+File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+<../../../masters/code/tests/plotterk/Signal_power_txTimeNW_plot.pdf, id=1456, 
+pagebox=cropbox, 734.52873pt x 717.76837pt>
+File: ../../../masters/code/tests/plotterk/Signal_power_txTimeNW_plot.pdf Graph
+ic file (type pdf)
+<use ../../../masters/code/tests/plotterk/Signal_power_txTimeNW_plot.pdf>
+Package pdftex.def Info: ../../../masters/code/tests/plotterk/Signal_power_txTi
+meNW_plot.pdf  used on input line 292. on input line 292.
+Package pdftex.def Info: Requested size: 443.58987pt x 433.46812pt on input lin
+e 292.
+
+
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 293.
+See the caption package documentation for explanation.
+
+
+Package hyperref Warning: Suppressing empty link on input line 298.
+
+[4 <../../../masters/code/tests/joplotterk/Signal_power_txTime_plot.png>]
+
+LaTeX Warning: Reference `fig:txTimeNW' on page 5 undefined on input line 300.
+
+<../../../masters/code/tests/plotterk/Signal_power_txTimeNW_outliers.pdf, id=14
+68, pagebox=cropbox, 736.88728pt x 435.32024pt>
+File: ../../../masters/code/tests/plotterk/Signal_power_txTimeNW_outliers.pdf G
+raphic file (type pdf)
+<use ../../../masters/code/tests/plotterk/Signal_power_txTimeNW_outliers.pdf>
+Package pdftex.def Info: ../../../masters/code/tests/plotterk/Signal_power_txTi
+meNW_outliers.pdf  used on input line 323. on input line 323.
+Package pdftex.def Info: Requested size: 443.57501pt x 262.04439pt on input lin
+e 323.
+
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 324.
+See the caption package documentation for explanation.
+
+
+Package hyperref Warning: Suppressing empty link on input line 329.
+
+
+Package hyperref Warning: Suppressing empty link on input line 331.
+
+[5 <../../../masters/code/tests/plotterk/Signal_power_txTimeNW_plot.pdf>]
+
+LaTeX Warning: Reference `fig:txTimeNW_otl' on page 6 undefined on input line 3
+33.
+
+<../../../masters/code/tests/joplotterk/Signal_power_txTimeNW_plot.png, id=2179
+, 733.74126pt x 717.68124pt>
+File: ../../../masters/code/tests/joplotterk/Signal_power_txTimeNW_plot.png Gra
+phic file (type png)
+<use ../../../masters/code/tests/joplotterk/Signal_power_txTimeNW_plot.png>
+Package pdftex.def Info: ../../../masters/code/tests/joplotterk/Signal_power_tx
+TimeNW_plot.png  used on input line 342. on input line 342.
+Package pdftex.def Info: Requested size: 443.58455pt x 433.87544pt on input lin
+e 342.
+[6 <../../../masters/code/tests/plotterk/Signal_power_txTimeNW_outliers.pdf>]
+<../../../masters/code/tests/plotterk/Signal_power_rxTimeNW_plot.pdf, id=2285, 
+pagebox=cropbox, 731.32928pt x 717.76837pt>
+File: ../../../masters/code/tests/plotterk/Signal_power_rxTimeNW_plot.pdf Graph
+ic file (type pdf)
+<use ../../../masters/code/tests/plotterk/Signal_power_rxTimeNW_plot.pdf>
+Package pdftex.def Info: ../../../masters/code/tests/plotterk/Signal_power_rxTi
+meNW_plot.pdf  used on input line 351. on input line 351.
+Package pdftex.def Info: Requested size: 443.57709pt x 435.35191pt on input lin
+e 351.
+
+
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 352.
+See the caption package documentation for explanation.
+
+
+Package hyperref Warning: Suppressing empty link on input line 357.
+
+[7 <../../../masters/code/tests/joplotterk/Signal_power_txTimeNW_plot.png>]
+<../../../masters/code/tests/plotterk/Signal_power_rxTimeNW_outliers.pdf, id=22
+95, pagebox=cropbox, 731.32928pt x 435.32024pt>
+File: ../../../masters/code/tests/plotterk/Signal_power_rxTimeNW_outliers.pdf G
+raphic file (type pdf)
+<use ../../../masters/code/tests/plotterk/Signal_power_rxTimeNW_outliers.pdf>
+Package pdftex.def Info: ../../../masters/code/tests/plotterk/Signal_power_rxTi
+meNW_outliers.pdf  used on input line 377. on input line 377.
+Package pdftex.def Info: Requested size: 443.57709pt x 264.03711pt on input lin
+e 377.
+
+
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 378.
+See the caption package documentation for explanation.
+
+
+Package hyperref Warning: Suppressing empty link on input line 383.
+
+
+Package hyperref Warning: Suppressing empty link on input line 385.
+
+[8 <../../../masters/code/tests/plotterk/Signal_power_rxTimeNW_plot.pdf>]
+<../../../masters/code/tests/joplotterk/Signal_power_rxTimeNW_plot.png, id=3439
+, 730.73pt x 717.68124pt>
+File: ../../../masters/code/tests/joplotterk/Signal_power_rxTimeNW_plot.png Gra
+phic file (type png)
+<use ../../../masters/code/tests/joplotterk/Signal_power_rxTimeNW_plot.png>
+Package pdftex.def Info: ../../../masters/code/tests/joplotterk/Signal_power_rx
+TimeNW_plot.png  used on input line 392. on input line 392.
+Package pdftex.def Info: Requested size: 443.58154pt x 435.66045pt on input lin
+e 392.
+
+[9 <../../../masters/code/tests/plotterk/Signal_power_rxTimeNW_outliers.pdf>]
+<../../../masters/code/tests/plotterk/Signal_power_energy_plot.pdf, id=3628, pa
+gebox=cropbox, 724.94606pt x 717.76837pt>
+File: ../../../masters/code/tests/plotterk/Signal_power_energy_plot.pdf Graphic
+ file (type pdf)
+<use ../../../masters/code/tests/plotterk/Signal_power_energy_plot.pdf>
+Package pdftex.def Info: ../../../masters/code/tests/plotterk/Signal_power_ener
+gy_plot.pdf  used on input line 418. on input line 418.
+Package pdftex.def Info: Requested size: 443.57706pt x 439.1852pt on input line
+ 418.
+
+
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 419.
+See the caption package documentation for explanation.
+
+
+Package hyperref Warning: Suppressing empty link on input line 424.
+
+[10 <../../../masters/code/tests/joplotterk/Signal_power_rxTimeNW_plot.png>]
+<../../../masters/code/tests/plotterk/Signal_power_energy_outliers.pdf, id=3640
+, pagebox=cropbox, 731.32928pt x 435.32024pt>
+File: ../../../masters/code/tests/plotterk/Signal_power_energy_outliers.pdf Gra
+phic file (type pdf)
+<use ../../../masters/code/tests/plotterk/Signal_power_energy_outliers.pdf>
+Package pdftex.def Info: ../../../masters/code/tests/plotterk/Signal_power_ener
+gy_outliers.pdf  used on input line 438. on input line 438.
+Package pdftex.def Info: Requested size: 443.57709pt x 264.03711pt on input lin
+e 438.
+
+
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 439.
+See the caption package documentation for explanation.
+
+
+Package hyperref Warning: Suppressing empty link on input line 444.
+
+[11 <../../../masters/code/tests/plotterk/Signal_power_energy_plot.pdf>]
+
+Package hyperref Warning: Suppressing empty link on input line 464.
+
+<../../../masters/code/tests/joplotterk/Signal_power_energy_plot.png, id=4963, 
+749.80125pt x 717.68124pt>
+File: ../../../masters/code/tests/joplotterk/Signal_power_energy_plot.png Graph
+ic file (type png)
+<use ../../../masters/code/tests/joplotterk/Signal_power_energy_plot.png>
+Package pdftex.def Info: ../../../masters/code/tests/joplotterk/Signal_power_en
+ergy_plot.png  used on input line 468. on input line 468.
+Package pdftex.def Info: Requested size: 443.58022pt x 424.57811pt on input lin
+e 468.
+[12 <../../../masters/code/tests/plotterk/Signal_power_energy_outliers.pdf>]
+<../../../masters/code/tests/plotterk/txTime_energy_plot.pdf, id=5139, pagebox=
+cropbox, 726.12527pt x 717.76837pt>
+File: ../../../masters/code/tests/plotterk/txTime_energy_plot.pdf Graphic file 
+(type pdf)
+<use ../../../masters/code/tests/plotterk/txTime_energy_plot.pdf>
+Package pdftex.def Info: ../../../masters/code/tests/plotterk/txTime_energy_plo
+t.pdf  used on input line 477. on input line 477.
+Package pdftex.def Info: Requested size: 443.58948pt x 438.48425pt on input lin
+e 477.
+
+
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 478.
+See the caption package documentation for explanation.
+
+
+Package hyperref Warning: Suppressing empty link on input line 483.
+
+[13 <../../../masters/code/tests/joplotterk/Signal_power_energy_plot.png>]
+<../../../masters/code/tests/plotterk/txTime_energy_outliers.pdf, id=5148, page
+box=cropbox, 737.71251pt x 435.32024pt>
+File: ../../../masters/code/tests/plotterk/txTime_energy_outliers.pdf Graphic f
+ile (type pdf)
+<use ../../../masters/code/tests/plotterk/txTime_energy_outliers.pdf>
+Package pdftex.def Info: ../../../masters/code/tests/plotterk/txTime_energy_out
+liers.pdf  used on input line 502. on input line 502.
+Package pdftex.def Info: Requested size: 443.58772pt x 261.75876pt on input lin
+e 502.
+
+
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 503.
+See the caption package documentation for explanation.
+
+
+Package hyperref Warning: Suppressing empty link on input line 508.
+
+[14 <../../../masters/code/tests/plotterk/txTime_energy_plot.pdf>]
+<../../../masters/code/tests/joplotterk/txTime_energy_plot.png, id=6204, 739.76
+375pt x 717.68124pt>
+File: ../../../masters/code/tests/joplotterk/txTime_energy_plot.png Graphic fil
+e (type png)
+<use ../../../masters/code/tests/joplotterk/txTime_energy_plot.png>
+Package pdftex.def Info: ../../../masters/code/tests/joplotterk/txTime_energy_p
+lot.png  used on input line 523. on input line 523.
+Package pdftex.def Info: Requested size: 443.57947pt x 430.33829pt on input lin
+e 523.
+ [15 <../../../masters/code/tests/plotterk/txTime_energy_outliers.pdf>]
+<../images/LTE-RF-Conditions.png, id=6358, 225.84375pt x 95.6072pt>
+File: ../images/LTE-RF-Conditions.png Graphic file (type png)
+<use ../images/LTE-RF-Conditions.png>
+Package pdftex.def Info: ../images/LTE-RF-Conditions.png  used on input line 54
+1. on input line 541.
+Package pdftex.def Info: Requested size: 225.85352pt x 95.61131pt on input line
+ 541.
+ [16 <../../../masters/code/tests/joplotterk/txTime_energy_plot.png> <../images
+/LTE-RF-Conditions.png>]
+
+Package longtable Warning: Column widths have changed
+(longtable)                in table tableno:1 on input line 566.
+
+<../../../masters/code/tests/plotterk/Signal_power_Total_power_plot.pdf, id=637
+1, pagebox=cropbox, 739.73569pt x 717.76837pt>
+File: ../../../masters/code/tests/plotterk/Signal_power_Total_power_plot.pdf Gr
+aphic file (type pdf)
+<use ../../../masters/code/tests/plotterk/Signal_power_Total_power_plot.pdf>
+Package pdftex.def Info: ../../../masters/code/tests/plotterk/Signal_power_Tota
+l_power_plot.pdf  used on input line 575. on input line 575.
+Package pdftex.def Info: Requested size: 443.58522pt x 430.41245pt on input lin
+e 575.
+
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 576.
+See the caption package documentation for explanation.
+
+
+Package hyperref Warning: Suppressing empty link on input line 581.
+
+[17 <../../../masters/code/tests/plotterk/Signal_power_Total_power_plot.pdf>]
+
+Package hyperref Warning: Suppressing empty link on input line 594.
+
+
+Package hyperref Warning: Suppressing empty link on input line 596.
+
+<../images/CableFree-LTE-RSRQ-reporting-range.png, id=7487, 225.84375pt x 89.58
+469pt>
+File: ../images/CableFree-LTE-RSRQ-reporting-range.png Graphic file (type png)
+<use ../images/CableFree-LTE-RSRQ-reporting-range.png>
+Package pdftex.def Info: ../images/CableFree-LTE-RSRQ-reporting-range.png  used
+ on input line 605. on input line 605.
+Package pdftex.def Info: Requested size: 225.85696pt x 89.58992pt on input line
+ 605.
+<../../../masters/code/tests/plotterk/Signal_power_RSRQ_plot.pdf, id=7488, page
+box=cropbox, 733.35246pt x 717.76837pt>
+File: ../../../masters/code/tests/plotterk/Signal_power_RSRQ_plot.pdf Graphic f
+ile (type pdf)
+<use ../../../masters/code/tests/plotterk/Signal_power_RSRQ_plot.pdf>
+Package pdftex.def Info: ../../../masters/code/tests/plotterk/Signal_power_RSRQ
+_plot.pdf  used on input line 623. on input line 623.
+Package pdftex.def Info: Requested size: 443.5733pt x 434.14716pt on input line
+ 623.
+
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 624.
+See the caption package documentation for explanation.
+
+
+Package hyperref Warning: Suppressing empty link on input line 629.
+
+[18 <../images/CableFree-LTE-RSRQ-reporting-range.png>]
+<../../../masters/code/tests/plotterk/RSRQ_histogram.pdf, id=7497, pagebox=crop
+box, 1011.78pt x 289.08pt>
+File: ../../../masters/code/tests/plotterk/RSRQ_histogram.pdf Graphic file (typ
+e pdf)
+<use ../../../masters/code/tests/plotterk/RSRQ_histogram.pdf>
+Package pdftex.def Info: ../../../masters/code/tests/plotterk/RSRQ_histogram.pd
+f  used on input line 642. on input line 642.
+Package pdftex.def Info: Requested size: 443.57896pt x 126.73685pt on input lin
+e 642.
+
+
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 643.
+See the caption package documentation for explanation.
+
+
+Package hyperref Warning: Suppressing empty link on input line 648.
+
+[19 <../../../masters/code/tests/plotterk/Signal_power_RSRQ_plot.pdf> <../../..
+/masters/code/tests/plotterk/RSRQ_histogram.pdf
+
+pdfTeX warning: pdflatex (file ../../../masters/code/tests/plotterk/RSRQ_histog
+ram.pdf): PDF inclusion: multiple pdfs with page group included in a single pag
+e
+>]
+File: ../../../masters/code/tests/plotterk/Signal_power_RSRQ_plot.pdf Graphic f
+ile (type pdf)
+<use ../../../masters/code/tests/plotterk/Signal_power_RSRQ_plot.pdf>
+Package pdftex.def Info: ../../../masters/code/tests/plotterk/Signal_power_RSRQ
+_plot.pdf  used on input line 685. on input line 685.
+Package pdftex.def Info: Requested size: 443.5733pt x 434.14716pt on input line
+ 685.
+
+
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 686.
+See the caption package documentation for explanation.
+
+
+Package hyperref Warning: Suppressing empty link on input line 691.
+
+[20]
+<../../../masters/code/tests/plotterk/SNR_histogram.pdf, id=8669, pagebox=cropb
+ox, 1011.78pt x 289.08pt>
+File: ../../../masters/code/tests/plotterk/SNR_histogram.pdf Graphic file (type
+ pdf)
+<use ../../../masters/code/tests/plotterk/SNR_histogram.pdf>
+Package pdftex.def Info: ../../../masters/code/tests/plotterk/SNR_histogram.pdf
+  used on input line 706. on input line 706.
+Package pdftex.def Info: Requested size: 443.57896pt x 126.73685pt on input lin
+e 706.
+
+
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 707.
+See the caption package documentation for explanation.
+
+
+Package hyperref Warning: Suppressing empty link on input line 712.
+
+[21 <../../../masters/code/tests/plotterk/SNR_histogram.pdf>]
+<../../../masters/code/tests/plotterk/Signal_power_TX_power_plot.pdf, id=8726, 
+pagebox=cropbox, 733.35246pt x 717.76837pt>
+File: ../../../masters/code/tests/plotterk/Signal_power_TX_power_plot.pdf Graph
+ic file (type pdf)
+<use ../../../masters/code/tests/plotterk/Signal_power_TX_power_plot.pdf>
+Package pdftex.def Info: ../../../masters/code/tests/plotterk/Signal_power_TX_p
+ower_plot.pdf  used on input line 719. on input line 719.
+Package pdftex.def Info: Requested size: 443.5733pt x 434.14716pt on input line
+ 719.
+
+
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 720.
+See the caption package documentation for explanation.
+
+
+Package hyperref Warning: Suppressing empty link on input line 725.
+
+
+Package hyperref Warning: Suppressing empty link on input line 743.
+
+[22 <../../../masters/code/tests/plotterk/Signal_power_TX_power_plot.pdf>]
+<../../code/tests/plotterk/Signal_power_RLC_DL_plot.png, id=9482, 730.73pt x 71
+7.68124pt>
+File: ../../code/tests/plotterk/Signal_power_RLC_DL_plot.png Graphic file (type
+ png)
+<use ../../code/tests/plotterk/Signal_power_RLC_DL_plot.png>
+Package pdftex.def Info: ../../code/tests/plotterk/Signal_power_RLC_DL_plot.png
+  used on input line 768. on input line 768.
+Package pdftex.def Info: Requested size: 443.58154pt x 435.66045pt on input lin
+e 768.
+<../../code/tests/plotterk/Signal_power_RLC_UL_plot.png, id=9483, 737.75626pt x
+ 717.68124pt>
+File: ../../code/tests/plotterk/Signal_power_RLC_UL_plot.png Graphic file (type
+ png)
+<use ../../code/tests/plotterk/Signal_power_RLC_UL_plot.png>
+Package pdftex.def Info: ../../code/tests/plotterk/Signal_power_RLC_UL_plot.png
+  used on input line 774. on input line 774.
+Package pdftex.def Info: Requested size: 443.58026pt x 431.51004pt on input lin
+e 774.
+
+[23 <../../code/tests/plotterk/Signal_power_RLC_DL_plot.png>]
+<../../code/tests/plotterk/Signal_power_MAC_DL_plot.png, id=9491, 736.7525pt x 
+717.68124pt>
+File: ../../code/tests/plotterk/Signal_power_MAC_DL_plot.png Graphic file (type
+ png)
+<use ../../code/tests/plotterk/Signal_power_MAC_DL_plot.png>
+Package pdftex.def Info: ../../code/tests/plotterk/Signal_power_MAC_DL_plot.png
+  used on input line 780. on input line 780.
+Package pdftex.def Info: Requested size: 443.57257pt x 432.09044pt on input lin
+e 780.
+ [24 <../../code/tests/plotterk/Signal_power_RLC_UL_plot.png>]
+<../../code/tests/plotterk/Signal_power_MAC_UL_plot.png, id=9498, 737.75626pt x
+ 717.68124pt>
+File: ../../code/tests/plotterk/Signal_power_MAC_UL_plot.png Graphic file (type
+ png)
+<use ../../code/tests/plotterk/Signal_power_MAC_UL_plot.png>
+Package pdftex.def Info: ../../code/tests/plotterk/Signal_power_MAC_UL_plot.png
+  used on input line 786. on input line 786.
+Package pdftex.def Info: Requested size: 443.58026pt x 431.51004pt on input lin
+e 786.
+ [25 <../../code/tests/plotterk/Signal_power_MAC_DL_plot.png>]
+
+LaTeX Warning: Reference `fig:udpsize' on page 26 undefined on input line 793.
+
+<../../../masters/code/tests/plotterk/Signal_power_txBytes_plot.pdf, id=9506, p
+agebox=cropbox, 740.91196pt x 717.76837pt>
+File: ../../../masters/code/tests/plotterk/Signal_power_txBytes_plot.pdf Graphi
+c file (type pdf)
+<use ../../../masters/code/tests/plotterk/Signal_power_txBytes_plot.pdf>
+Package pdftex.def Info: ../../../masters/code/tests/plotterk/Signal_power_txBy
+tes_plot.pdf  used on input line 811. on input line 811.
+Package pdftex.def Info: Requested size: 443.57834pt x 429.72244pt on input lin
+e 811.
+
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 812.
+See the caption package documentation for explanation.
+
+
+Package hyperref Warning: Suppressing empty link on input line 817.
+
+[26 <../../code/tests/plotterk/Signal_power_MAC_UL_plot.png>]
+<../../../masters/code/tests/plotterk/Signal_power_txBytes_outliers.pdf, id=951
+7, pagebox=cropbox, 734.447pt x 435.32024pt>
+File: ../../../masters/code/tests/plotterk/Signal_power_txBytes_outliers.pdf Gr
+aphic file (type pdf)
+<use ../../../masters/code/tests/plotterk/Signal_power_txBytes_outliers.pdf>
+Package pdftex.def Info: ../../../masters/code/tests/plotterk/Signal_power_txBy
+tes_outliers.pdf  used on input line 835. on input line 835.
+Package pdftex.def Info: Requested size: 443.57414pt x 262.91454pt on input lin
+e 835.
+
+
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 836.
+See the caption package documentation for explanation.
+
+
+Package hyperref Warning: Suppressing empty link on input line 841.
+
+[27 <../../../masters/code/tests/plotterk/Signal_power_txBytes_plot.pdf>]
+<../../../masters/code/tests/plotterk/Signal_power_rxBytes_plot.pdf, id=9580, p
+agebox=cropbox, 747.29518pt x 717.76837pt>
+File: ../../../masters/code/tests/plotterk/Signal_power_rxBytes_plot.pdf Graphi
+c file (type pdf)
+<use ../../../masters/code/tests/plotterk/Signal_power_rxBytes_plot.pdf>
+Package pdftex.def Info: ../../../masters/code/tests/plotterk/Signal_power_rxBy
+tes_plot.pdf  used on input line 861. on input line 861.
+Package pdftex.def Info: Requested size: 443.57999pt x 426.05345pt on input lin
+e 861.
+
+
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 862.
+See the caption package documentation for explanation.
+
+
+Package hyperref Warning: Suppressing empty link on input line 867.
+
+[28 <../../../masters/code/tests/plotterk/Signal_power_txBytes_outliers.pdf>]
+<../../../masters/code/tests/plotterk/Signal_power_rxBytes_outliers.pdf, id=963
+1, pagebox=cropbox, 728.06378pt x 435.32024pt>
+File: ../../../masters/code/tests/plotterk/Signal_power_rxBytes_outliers.pdf Gr
+aphic file (type pdf)
+<use ../../../masters/code/tests/plotterk/Signal_power_rxBytes_outliers.pdf>
+Package pdftex.def Info: ../../../masters/code/tests/plotterk/Signal_power_rxBy
+tes_outliers.pdf  used on input line 883. on input line 883.
+Package pdftex.def Info: Requested size: 443.59613pt x 265.23276pt on input lin
+e 883.
+
+
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 884.
+See the caption package documentation for explanation.
+
+
+Package hyperref Warning: Suppressing empty link on input line 889.
+
+
+Package hyperref Warning: Suppressing empty link on input line 891.
+
+[29 <../../../masters/code/tests/plotterk/Signal_power_rxBytes_plot.pdf>]
+<../../../masters/code/tests/plotterk/Signal_power_Total_ACK_NACK_RX_plot.pdf, 
+id=9688, pagebox=cropbox, 724.94606pt x 717.76837pt>
+File: ../../../masters/code/tests/plotterk/Signal_power_Total_ACK_NACK_RX_plot.
+pdf Graphic file (type pdf)
+<use ../../../masters/code/tests/plotterk/Signal_power_Total_ACK_NACK_RX_plot.p
+df>
+Package pdftex.def Info: ../../../masters/code/tests/plotterk/Signal_power_Tota
+l_ACK_NACK_RX_plot.pdf  used on input line 905. on input line 905.
+Package pdftex.def Info: Requested size: 443.57706pt x 439.1852pt on input line
+ 905.
+
+
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 906.
+See the caption package documentation for explanation.
+
+
+Package hyperref Warning: Suppressing empty link on input line 911.
+
+
+Package hyperref Warning: Suppressing empty link on input line 913.
+
+[30 <../../../masters/code/tests/plotterk/Signal_power_rxBytes_outliers.pdf>]
+
+Package hyperref Warning: Suppressing empty link on input line 934.
+
+
+Package hyperref Warning: Suppressing empty link on input line 936.
+
+<../../code/tests/box/intervalECL1.pdf, id=9740, pagebox=cropbox, 433.62pt x 28
+9.08pt>
+File: ../../code/tests/box/intervalECL1.pdf Graphic file (type pdf)
+<use ../../code/tests/box/intervalECL1.pdf>
+Package pdftex.def Info: ../../code/tests/box/intervalECL1.pdf  used on input l
+ine 944. on input line 944.
+Package pdftex.def Info: Requested size: 221.79169pt x 147.86111pt on input lin
+e 944.
+<../../code/tests/box/intervalEstECL1.pdf, id=9741, pagebox=cropbox, 433.62pt x
+ 289.08pt>
+File: ../../code/tests/box/intervalEstECL1.pdf Graphic file (type pdf)
+<use ../../code/tests/box/intervalEstECL1.pdf>
+Package pdftex.def Info: ../../code/tests/box/intervalEstECL1.pdf  used on inpu
+t line 951. on input line 951.
+Package pdftex.def Info: Requested size: 221.79169pt x 147.86111pt on input lin
+e 951.
+
+Overfull \hbox (6.66664pt too wide) in paragraph at lines 944--952
+[][] [][] 
+ []
+
+[31 <../../../masters/code/tests/plotterk/Signal_power_Total_ACK_NACK_RX_plot.p
+df>]
+
+Package hyperref Warning: Suppressing empty link on input line 958.
+
+
+Package hyperref Warning: Suppressing empty link on input line 960.
+
+<../../code/tests/box/longevityECL1.pdf, id=10107, pagebox=cropbox, 433.62pt x 
+289.08pt>
+File: ../../code/tests/box/longevityECL1.pdf Graphic file (type pdf)
+<use ../../code/tests/box/longevityECL1.pdf>
+Package pdftex.def Info: ../../code/tests/box/longevityECL1.pdf  used on input 
+line 968. on input line 968.
+Package pdftex.def Info: Requested size: 221.79169pt x 147.86111pt on input lin
+e 968.
+<../../code/tests/box/longevityEstECL1.pdf, id=10108, pagebox=cropbox, 433.62pt
+ x 289.08pt>
+File: ../../code/tests/box/longevityEstECL1.pdf Graphic file (type pdf)
+<use ../../code/tests/box/longevityEstECL1.pdf>
+Package pdftex.def Info: ../../code/tests/box/longevityEstECL1.pdf  used on inp
+ut line 975. on input line 975.
+Package pdftex.def Info: Requested size: 221.79169pt x 147.86111pt on input lin
+e 975.
+
+Overfull \hbox (6.66664pt too wide) in paragraph at lines 968--976
+[][] [][] 
+ []
+
+[32 <../../code/tests/box/intervalECL1.pdf> <../../code/tests/box/intervalEstEC
+L1.pdf
+
+pdfTeX warning: pdflatex (file ../../code/tests/box/intervalEstECL1.pdf): PDF i
+nclusion: multiple pdfs with page group included in a single page
+> <../../code/tests/box/longevityECL1.pdf
+
+pdfTeX warning: pdflatex (file ../../code/tests/box/longevityECL1.pdf): PDF inc
+lusion: multiple pdfs with page group included in a single page
+> <../../code/tests/box/longevityEstECL1.pdf
+
+pdfTeX warning: pdflatex (file ../../code/tests/box/longevityEstECL1.pdf): PDF 
+inclusion: multiple pdfs with page group included in a single page
+>]
+Underfull \hbox (badness 10000) in paragraph at lines 1060--1061
+[]\T1/lmr/m/n/10 (+20) https://www.vodafone.com/business/news-and-insights/blog
+/gigabit-thinking/the-art-of-the-
+ []
+
+[33]
+Overfull \hbox (0.18471pt too wide) in paragraph at lines 1097--1098
+[]\T1/lmr/m/n/10 (+5) https://enterpriseiotinsights.com/20190506/nb-iot/samsung
+-kt-launch-nbiot-service-through-ps-
+ []
+
+[34] [35]
+
+Package longtable Warning: Column widths have changed
+(longtable)                in table 1 on input line 1251.
+
+
+Overfull \vbox (0.67409pt too high) has occurred while \output is active []
+
+
+[36]
+
+Package longtable Warning: Column widths have changed
+(longtable)                in table 2 on input line 1358.
+
+[37]
+
+Package longtable Warning: Column widths have changed
+(longtable)                in table 3 on input line 1467.
+
+[38]
+
+Package longtable Warning: Column widths have changed
+(longtable)                in table 4 on input line 1576.
+
+[39]
+
+Package longtable Warning: Column widths have changed
+(longtable)                in table 5 on input line 1685.
+
+[40]
+
+Package longtable Warning: Column widths have changed
+(longtable)                in table 6 on input line 1791.
+
+[41]
+Overfull \hbox (0.72221pt too wide) in paragraph at lines 1820--1821
+[]\T1/lmr/m/n/10 (-20) PTAU|  
+ []
+
+
+Overfull \hbox (0.72221pt too wide) in paragraph at lines 1844--1845
+[]\T1/lmr/m/n/10 (-20) PTAU|  
+ []
+
+
+Overfull \hbox (0.60855pt too wide) in paragraph at lines 1851--1852
+[]\T1/lmr/m/n/10 (-20) 640.80|  
+ []
+
+
+Overfull \hbox (0.60855pt too wide) in paragraph at lines 1857--1858
+[]\T1/lmr/m/n/10 (-20) 574.20|  
+ []
+
+
+Overfull \hbox (5.25854pt too wide) in paragraph at lines 1893--1894
+[]\T1/lmr/m/n/10 (-20) 3213.00|  
+ []
+
+
+Overfull \hbox (5.00854pt too wide) in paragraph at lines 1895--1896
+[]\T1/lmr/m/n/10 (-20) 1287.00|  
+ []
+
+
+Overfull \hbox (0.56842pt too wide) in paragraph at lines 1897--1898
+[]\T1/lmr/m/n/10 (-20) 1534.50|  
+ []
+
+
+Overfull \hbox (0.60855pt too wide) in paragraph at lines 1899--1900
+[]\T1/lmr/m/n/10 (-20) 913.00|  
+ []
+
+
+Overfull \hbox (0.56842pt too wide) in paragraph at lines 1901--1902
+[]\T1/lmr/m/n/10 (-20) 1316.30|  
+ []
+
+
+Overfull \hbox (0.60855pt too wide) in paragraph at lines 1903--1904
+[]\T1/lmr/m/n/10 (-20) 598.50|  
+ []
+
+
+Overfull \hbox (5.00854pt too wide) in paragraph at lines 1905--1906
+[]\T1/lmr/m/n/10 (-20) 1108.70|  
+ []
+
+
+Overfull \hbox (0.60855pt too wide) in paragraph at lines 1909--1910
+[]\T1/lmr/m/n/10 (-20) 957.50|  
+ []
+
+
+Overfull \hbox (5.50854pt too wide) in paragraph at lines 1914--1915
+[]\T1/lmr/m/n/10 (-20) 9030.00|  
+ []
+
+
+Overfull \hbox (5.50854pt too wide) in paragraph at lines 1916--1917
+[]\T1/lmr/m/n/10 (-20) 9720.00|  
+ []
+
+
+Overfull \hbox (5.46841pt too wide) in paragraph at lines 1918--1919
+[]\T1/lmr/m/n/10 (-20) 10080.00|  
+ []
+
+
+Overfull \hbox (5.50854pt too wide) in paragraph at lines 1920--1921
+[]\T1/lmr/m/n/10 (-20) 9540.00|  
+ []
+
+
+Overfull \hbox (5.46841pt too wide) in paragraph at lines 1922--1923
+[]\T1/lmr/m/n/10 (-20) 10200.00|  
+ []
+
+
+Overfull \hbox (0.60855pt too wide) in paragraph at lines 1926--1927
+[]\T1/lmr/m/n/10 (-20) 858.40|  
+ []
+
+
+Overfull \hbox (5.00854pt too wide) in paragraph at lines 1928--1929
+[]\T1/lmr/m/n/10 (-20) 1116.00|  
+ []
+
+
+Overfull \hbox (0.60855pt too wide) in paragraph at lines 1945--1946
+[]\T1/lmr/m/n/10 (-20) 958.30|  
+ []
+
+
+Overfull \hbox (5.50854pt too wide) in paragraph at lines 1987--1988
+[]\T1/lmr/m/n/10 (-20) 5144.00|  
+ []
+
+
+Overfull \hbox (0.60855pt too wide) in paragraph at lines 1993--1994
+[]\T1/lmr/m/n/10 (-20) 534.40|  
+ []
+
+
+Overfull \hbox (5.00854pt too wide) in paragraph at lines 1998--1999
+[]\T1/lmr/m/n/10 (-20) 1739.50|  
+ []
+
+
+Overfull \hbox (0.60855pt too wide) in paragraph at lines 2004--2005
+[]\T1/lmr/m/n/10 (-20) 627.70|  
+ []
+
+
+Overfull \hbox (5.00854pt too wide) in paragraph at lines 2008--2009
+[]\T1/lmr/m/n/10 (-20) 1998.00|  
+ []
+
+
+Overfull \hbox (0.60855pt too wide) in paragraph at lines 2014--2015
+[]\T1/lmr/m/n/10 (-20) 652.50|  
+ []
+
+
+Overfull \hbox (5.50854pt too wide) in paragraph at lines 2061--2062
+[]\T1/lmr/m/n/10 (-20) 6133.50|  
+ []
+
+
+Overfull \hbox (5.50854pt too wide) in paragraph at lines 2063--2064
+[]\T1/lmr/m/n/10 (-20) 5503.50|  
+ []
+
+
+Overfull \hbox (1.06842pt too wide) in paragraph at lines 2065--2066
+[]\T1/lmr/m/n/10 (-20) 5815.00|  
+ []
+
+
+Overfull \hbox (5.50854pt too wide) in paragraph at lines 2067--2068
+[]\T1/lmr/m/n/10 (-20) 5238.50|  
+ []
+
+
+Overfull \hbox (1.06842pt too wide) in paragraph at lines 2069--2070
+[]\T1/lmr/m/n/10 (-20) 5756.00|  
+ []
+
+
+Overfull \hbox (0.60855pt too wide) in paragraph at lines 2073--2074
+[]\T1/lmr/m/n/10 (-20) 984.50|  
+ []
+
+
+Overfull \hbox (0.60855pt too wide) in paragraph at lines 2075--2076
+[]\T1/lmr/m/n/10 (-20) 612.00|  
+ []
+
+
+Overfull \hbox (0.60855pt too wide) in paragraph at lines 2077--2078
+[]\T1/lmr/m/n/10 (-20) 854.20|  
+ []
+
+
+Overfull \hbox (0.60855pt too wide) in paragraph at lines 2092--2093
+[]\T1/lmr/m/n/10 (-20) 842.10|  
+ []
+
+
+Overfull \hbox (0.60855pt too wide) in paragraph at lines 2103--2104
+[]\T1/lmr/m/n/10 (-20) 981.00|  
+ []
+
+
+Overfull \hbox (5.25854pt too wide) in paragraph at lines 2113--2114
+[]\T1/lmr/m/n/10 (-20) 3571.00|  
+ []
+
+
+Overfull \hbox (0.60855pt too wide) in paragraph at lines 2119--2120
+[]\T1/lmr/m/n/10 (-20) 595.00|  
+ []
+
+
+Overfull \hbox (5.00854pt too wide) in paragraph at lines 2124--2125
+[]\T1/lmr/m/n/10 (-20) 1066.50|  
+ []
+
+
+Overfull \hbox (0.60855pt too wide) in paragraph at lines 2126--2127
+[]\T1/lmr/m/n/10 (-20) 540.20|  
+ []
+
+
+Overfull \hbox (0.60855pt too wide) in paragraph at lines 2130--2131
+[]\T1/lmr/m/n/10 (-20) 502.80|  
+ []
+
+
+Overfull \hbox (5.00854pt too wide) in paragraph at lines 2134--2135
+[]\T1/lmr/m/n/10 (-20) 1723.50|  
+ []
+
+
+Overfull \hbox (5.25854pt too wide) in paragraph at lines 2145--2146
+[]\T1/lmr/m/n/10 (-20) 2773.50|  
+ []
+
+
+Overfull \hbox (5.25854pt too wide) in paragraph at lines 2147--2148
+[]\T1/lmr/m/n/10 (-20) 2598.50|  
+ []
+
+
+Overfull \hbox (0.81842pt too wide) in paragraph at lines 2149--2150
+[]\T1/lmr/m/n/10 (-20) 2723.50|  
+ []
+
+
+Overfull \hbox (5.25854pt too wide) in paragraph at lines 2151--2152
+[]\T1/lmr/m/n/10 (-20) 2658.00|  
+ []
+
+
+Overfull \hbox (0.81842pt too wide) in paragraph at lines 2153--2154
+[]\T1/lmr/m/n/10 (-20) 2827.50|  
+ []
+
+
+Overfull \hbox (5.25854pt too wide) in paragraph at lines 2187--2188
+[]\T1/lmr/m/n/10 (-20) 3558.50|  
+ []
+
+
+Overfull \hbox (5.25854pt too wide) in paragraph at lines 2189--2190
+[]\T1/lmr/m/n/10 (-20) 2881.00|  
+ []
+
+
+Overfull \hbox (0.81842pt too wide) in paragraph at lines 2191--2192
+[]\T1/lmr/m/n/10 (-20) 3083.00|  
+ []
+
+
+Overfull \hbox (5.25854pt too wide) in paragraph at lines 2193--2194
+[]\T1/lmr/m/n/10 (-20) 2835.50|  
+ []
+
+
+Overfull \hbox (0.81842pt too wide) in paragraph at lines 2195--2196
+[]\T1/lmr/m/n/10 (-20) 3062.50|  
+ []
+
+
+Overfull \hbox (5.25854pt too wide) in paragraph at lines 2197--2198
+[]\T1/lmr/m/n/10 (-20) 2028.00|  
+ []
+
+
+Overfull \hbox (0.60855pt too wide) in paragraph at lines 2199--2200
+[]\T1/lmr/m/n/10 (-20) 585.00|  
+ []
+
+
+Overfull \hbox (0.60855pt too wide) in paragraph at lines 2271--2272
+[]\T1/lmr/m/n/10 (-20) 822.00|  
+ []
+
+
+Overfull \hbox (0.60855pt too wide) in paragraph at lines 2281--2282
+[]\T1/lmr/m/n/10 (-20) 872.40|  
+ []
+
+
+Overfull \hbox (5.25854pt too wide) in paragraph at lines 2323--2324
+[]\T1/lmr/m/n/10 (-20) 2556.50|  
+ []
+
+
+Overfull \hbox (0.60855pt too wide) in paragraph at lines 2334--2335
+[]\T1/lmr/m/n/10 (-20) 606.50|  
+ []
+
+
+Overfull \hbox (5.00854pt too wide) in paragraph at lines 2365--2366
+[]\T1/lmr/m/n/10 (-20) 1659.00|  
+ []
+
+
+Overfull \hbox (5.00854pt too wide) in paragraph at lines 2407--2408
+[]\T1/lmr/m/n/10 (-20) 1713.00|  
+ []
+
+
+Overfull \hbox (5.50854pt too wide) in paragraph at lines 2481--2482
+[]\T1/lmr/m/n/10 (-20) 6637.50|  
+ []
+
+
+Overfull \hbox (5.50854pt too wide) in paragraph at lines 2483--2484
+[]\T1/lmr/m/n/10 (-20) 5503.50|  
+ []
+
+
+Overfull \hbox (1.06842pt too wide) in paragraph at lines 2485--2486
+[]\T1/lmr/m/n/10 (-20) 5815.00|  
+ []
+
+
+Overfull \hbox (5.50854pt too wide) in paragraph at lines 2487--2488
+[]\T1/lmr/m/n/10 (-20) 5238.50|  
+ []
+
+
+Overfull \hbox (1.06842pt too wide) in paragraph at lines 2489--2490
+[]\T1/lmr/m/n/10 (-20) 5756.00|  
+ []
+
+
+Overfull \hbox (5.00854pt too wide) in paragraph at lines 2495--2496
+[]\T1/lmr/m/n/10 (-20) 1062.00|  
+ []
+
+
+Overfull \hbox (0.60855pt too wide) in paragraph at lines 2497--2498
+[]\T1/lmr/m/n/10 (-20) 841.50|  
+ []
+
+
+Overfull \hbox (5.25854pt too wide) in paragraph at lines 2533--2534
+[]\T1/lmr/m/n/10 (-20) 3042.00|  
+ []
+
+
+Overfull \hbox (5.00854pt too wide) in paragraph at lines 2544--2545
+[]\T1/lmr/m/n/10 (-20) 1110.50|  
+ []
+
+
+Overfull \hbox (5.00854pt too wide) in paragraph at lines 2554--2555
+[]\T1/lmr/m/n/10 (-20) 1372.50|  
+ []
+
+
+Overfull \hbox (5.25854pt too wide) in paragraph at lines 2565--2566
+[]\T1/lmr/m/n/10 (-20) 2557.50|  
+ []
+
+
+Overfull \hbox (5.25854pt too wide) in paragraph at lines 2567--2568
+[]\T1/lmr/m/n/10 (-20) 2527.50|  
+ []
+
+
+Overfull \hbox (0.81842pt too wide) in paragraph at lines 2569--2570
+[]\T1/lmr/m/n/10 (-20) 2654.50|  
+ []
+
+
+Overfull \hbox (5.25854pt too wide) in paragraph at lines 2571--2572
+[]\T1/lmr/m/n/10 (-20) 2493.00|  
+ []
+
+
+Overfull \hbox (0.81842pt too wide) in paragraph at lines 2573--2574
+[]\T1/lmr/m/n/10 (-20) 2709.50|  
+ []
+
+
+Overfull \hbox (0.60855pt too wide) in paragraph at lines 2575--2576
+[]\T1/lmr/m/n/10 (-20) 505.60|  
+ []
+
+
+Overfull \hbox (0.60855pt too wide) in paragraph at lines 2579--2580
+[]\T1/lmr/m/n/10 (-20) 511.20|  
+ []
+
+
+Overfull \hbox (5.25854pt too wide) in paragraph at lines 2607--2608
+[]\T1/lmr/m/n/10 (-20) 3391.00|  
+ []
+
+
+Overfull \hbox (5.25854pt too wide) in paragraph at lines 2609--2610
+[]\T1/lmr/m/n/10 (-20) 2807.50|  
+ []
+
+
+Overfull \hbox (0.81842pt too wide) in paragraph at lines 2611--2612
+[]\T1/lmr/m/n/10 (-20) 2999.00|  
+ []
+
+
+Overfull \hbox (5.25854pt too wide) in paragraph at lines 2613--2614
+[]\T1/lmr/m/n/10 (-20) 2688.00|  
+ []
+
+
+Overfull \hbox (0.81842pt too wide) in paragraph at lines 2615--2616
+[]\T1/lmr/m/n/10 (-20) 2999.50|  
+ []
+
+
+Overfull \hbox (5.00854pt too wide) in paragraph at lines 2617--2618
+[]\T1/lmr/m/n/10 (-20) 1699.50|  
+ []
+
+
+Overfull \hbox (0.60855pt too wide) in paragraph at lines 2621--2622
+[]\T1/lmr/m/n/10 (-20) 547.80|  
+ []
+
+
+Overfull \hbox (5.00854pt too wide) in paragraph at lines 2676--2677
+[]\T1/lmr/m/n/10 (-20) 1337.60|  
+ []
+
+
+Overfull \hbox (0.56842pt too wide) in paragraph at lines 2678--2679
+[]\T1/lmr/m/n/10 (-20) 1002.50|  
+ []
+
+
+Overfull \hbox (5.00854pt too wide) in paragraph at lines 2691--2692
+[]\T1/lmr/m/n/10 (-20) 1224.00|  
+ []
+
+
+Overfull \hbox (0.60855pt too wide) in paragraph at lines 2701--2702
+[]\T1/lmr/m/n/10 (-20) 683.30|  
+ []
+
+
+Overfull \hbox (5.00854pt too wide) in paragraph at lines 2703--2704
+[]\T1/lmr/m/n/10 (-20) 1441.00|  
+ []
+
+
+Overfull \hbox (5.00854pt too wide) in paragraph at lines 2707--2708
+[]\T1/lmr/m/n/10 (-20) 1722.00|  
+ []
+
+
+Overfull \hbox (0.60855pt too wide) in paragraph at lines 2722--2723
+[]\T1/lmr/m/n/10 (-20) 896.30|  
+ []
+
+
+Overfull \hbox (5.00854pt too wide) in paragraph at lines 2733--2734
+[]\T1/lmr/m/n/10 (-20) 1534.50|  
+ []
+
+
+Overfull \hbox (0.60855pt too wide) in paragraph at lines 2735--2736
+[]\T1/lmr/m/n/10 (-20) 625.20|  
+ []
+
+
+Overfull \hbox (0.60855pt too wide) in paragraph at lines 2739--2740
+[]\T1/lmr/m/n/10 (-20) 821.30|  
+ []
+
+
+Overfull \hbox (5.25854pt too wide) in paragraph at lines 2743--2744
+[]\T1/lmr/m/n/10 (-20) 3657.00|  
+ []
+
+
+Overfull \hbox (5.00854pt too wide) in paragraph at lines 2749--2750
+[]\T1/lmr/m/n/10 (-20) 1303.50|  
+ []
+
+
+Overfull \hbox (0.60855pt too wide) in paragraph at lines 2760--2761
+[]\T1/lmr/m/n/10 (-20) 644.20|  
+ []
+
+
+Overfull \hbox (5.25854pt too wide) in paragraph at lines 2764--2765
+[]\T1/lmr/m/n/10 (-20) 2457.50|  
+ []
+
+
+Overfull \hbox (5.00854pt too wide) in paragraph at lines 2770--2771
+[]\T1/lmr/m/n/10 (-20) 1158.50|  
+ []
+
+
+Overfull \hbox (5.00854pt too wide) in paragraph at lines 2775--2776
+[]\T1/lmr/m/n/10 (-20) 1368.00|  
+ []
+
+
+Overfull \hbox (0.60855pt too wide) in paragraph at lines 2781--2782
+[]\T1/lmr/m/n/10 (-20) 507.90|  
+ []
+
+
+Overfull \hbox (5.00854pt too wide) in paragraph at lines 2817--2818
+[]\T1/lmr/m/n/10 (-20) 1378.00|  
+ []
+
+
+Overfull \hbox (5.25854pt too wide) in paragraph at lines 2827--2828
+[]\T1/lmr/m/n/10 (-20) 2173.50|  
+ []
+
+
+Overfull \hbox (5.00854pt too wide) in paragraph at lines 2833--2834
+[]\T1/lmr/m/n/10 (-20) 1514.50|  
+ []
+
+[42]
+
+Package longtable Warning: Column widths have changed
+(longtable)                in table 8 on input line 2943.
+
+[43]
+
+Package longtable Warning: Column widths have changed
+(longtable)                in table 9 on input line 3050.
+
+[44] [45]
+LaTeX Font Info:    Try loading font information for TS1+lmtt on input line 308
+4.
+ ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\lm\ts1lmtt.fd"
+File: ts1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+[46] [47] [48] [49] [50] [51]
+
+Package longtable Warning: Table widths have changed. Rerun LaTeX.
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 3419.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 3419.
+(4_results.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 3419.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 3419.
+
+
+
+Package rerunfilecheck Warning: File `4_results.out' has changed.
 (rerunfilecheck)                Rerun to get outlines right
 (rerunfilecheck)                or use package `bookmark'.
 
-Package rerunfilecheck Info: Checksums for `2_litstudy.out':
+Package rerunfilecheck Info: Checksums for `4_results.out':
 (rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  5DF6087D381F19775B5B13E953DBA95B;4919.
+(rerunfilecheck)             After:  01F26A90893ED5C1B20E3DEFA7A8AE1B;5148.
 
 LaTeX Warning: There were undefined references.
 
 
 LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1171.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 3419.
  ) 
 Here is how much of TeX's memory you used:
- 14498 strings out of 493312
- 213513 string characters out of 3136307
- 335040 words of memory out of 3000000
- 17622 multiletter control sequences out of 15000+200000
- 65117 words of font info for 111 fonts, out of 3000000 for 9000
+ 15242 strings out of 493312
+ 231507 string characters out of 3136307
+ 384413 words of memory out of 3000000
+ 18259 multiletter control sequences out of 15000+200000
+ 68298 words of font info for 111 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 44i,9n,52p,260b,469s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Program Files (x86)/MiKTeX 2.9/fonts/enc/dvips/lm/lm-ec.enc}{C:/Program F
-iles (x86)/MiKTeX 2.9/fonts/enc/dvips/lm/lm-mathit.enc}{C:/Program Files (x86)/
-MiKTeX 2.9/fonts/enc/dvips/lm/lm-rm.enc}{C:/Program Files (x86)/MiKTeX 2.9/font
-s/enc/dvips/lm/lm-ts1.enc}<C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public
-/lm/lmbx10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/lm/lmbx12.
-pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/lm/lmbx9.pfb><C:/Prog
-ram Files (x86)/MiKTeX 2.9/fonts/type1/public/lm/lmmi10.pfb><C:/Program Files (
-x86)/MiKTeX 2.9/fonts/type1/public/lm/lmmi7.pfb><C:/Program Files (x86)/MiKTeX 
-2.9/fonts/type1/public/lm/lmr10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/ty
-pe1/public/lm/lmr12.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/l
-m/lmr17.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/lm/lmr9.pfb><
-C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/lm/lmri10.pfb>
-Output written on 2_litstudy.pdf (12 pages, 334608 bytes).
+ 44i,10n,54p,340b,478s stack positions out of 5000i,500n,10000p,200000b,50000s
+{C:/Program Files (x86)/MiKTeX 2.9/fonts/enc/dvips/lm/lm-ts1.enc}{C:/Program 
+Files (x86)/MiKTeX 2.9/fonts/enc/dvips/lm/lm-ec.enc}<C:/Program Files (x86)/MiK
+TeX 2.9/fonts/type1/public/lm/lmbx10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fon
+ts/type1/public/lm/lmbx12.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/pu
+blic/lm/lmbx9.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/lm/lmr1
+0.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/lm/lmr12.pfb><C:/Pr
+ogram Files (x86)/MiKTeX 2.9/fonts/type1/public/lm/lmr17.pfb><C:/Program Files 
+(x86)/MiKTeX 2.9/fonts/type1/public/lm/lmr8.pfb><C:/Program Files (x86)/MiKTeX 
+2.9/fonts/type1/public/lm/lmr9.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/typ
+e1/public/lm/lmri10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/l
+m/lmtt10.pfb>
+Output written on 4_results.pdf (51 pages, 6766594 bytes).
 PDF statistics:
- 249 PDF objects out of 1000 (max. 8388607)
- 107 named destinations out of 1000 (max. 500000)
- 14347 words of extra memory for PDF output out of 14400 (max. 10000000)
+ 10497 PDF objects out of 10688 (max. 8388607)
+ 206 named destinations out of 1000 (max. 500000)
+ 16555 words of extra memory for PDF output out of 17280 (max. 10000000)
 

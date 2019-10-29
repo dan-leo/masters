@@ -13,7 +13,7 @@ link-citations: true
 csl: ieee.csl
 linkcolor: blue
 geometry: "left=3cm,right=3cm,top=2cm,bottom=2cm"
-numbersections: true
+numbersections: truew
 tablenos-warning-level: 1
 tablenos-number-by-section: true
 ---

@@ -59,9 +59,228 @@ Martinez [@Martinez2019] has explored NB-IoT from the perspective of the applica
 
 A user would consider critical characteristics such as energy consumption, coverage, cost, network latency and behavior. Martinez looks at these except for cost, which is better looked at by Ali [@Ali2015]. A set of tests were devised and results showed that in some cases its energy consumption performed better than an LPWAN referenced technology such as LoRa, with the added benefit of guaranteeing delivery. However, the high variability in energy consumption and network latency call into question its reliability especially for mission-critical applications.
 
+
+## Internet of Things{#iot}
+
+The internet of things has surged in popularity over recent years as an interconnected system of devices that transfer data over a network without requiring human interaction.
+
+Looking at Gartner's analysis of technology expectations with regards to NB-IoT and related technologies, in 2014 Gartner estimated that Internet of Things (IoT) had reached the height of inflated expectations, and the hype it generated lives on in a rich ecosystem of emerging technologies. As of July 2018, NB-IoT and IoT has falling interest (and hype) in Fig. \ref{fig:gartner_ictAfrica}, yet it will reach productivity in 2-10 years time. Since new coverage has not been rolled out for almost two years to date, we believe there is a strong chance for renewed NB-IoT interest in Africa.
+
+[](../images/hype-cycle-2014-100371840-large.idge.jpeg)
+
+![[Gartner's 2018 Hype Cycle for ICT in Africa. NB-IoT is high on the list of expectations. \label{fig:gartner_ictAfrica}](http://www.gartner.com/newsroom/id/3884512)](../images/42881085945_739bbdc8e9_c.jpg){ width=90% }
+
+As of August 2019, Gartner has high expectations for 5G and other emerging technologies which can make use of what [IoT has to offer](https://blogs.sas.com/content/hiddeninsights/2016/07/06/long-live-the-iot-hype/). This can be seen in Fig. \ref{fig:gartner_emergingTech}.
+
+![Gartner's Hype Cycle for Emerging Technologies, 2019. IoT is inextricably linked to at least a third of emerging technologies and also has uses in NB-IoT. \label{fig:gartner_emergingTech}](../images/CTMKT_741609_CTMKT_for_Emerging_Tech_Hype_Cycle_LargerText-1.png){ width=90% }
+
+On the other hand, this does not slow the growth in number of devices connected as in Fig. \ref{fig:iot_growth}. IoT merely manifests itself in other uses and forms such as we have already seen in Fig. \ref{fig:gartner_emergingTech}. NB-IoT can be integral to aid this growth.
+
+![Exponential growth of IoT is estimated [@Ali2015]. \label{fig:iot_growth}](../images/Expected-number-of-connected-devices-to-the-Internet-This-chart-is-obtained-from-recent.png){ width=80% }
+
+Matching emerging applications with existing technologies has become one of the
+main challenges for IoT initiatives, especially when a new technology appears in the landscape and the map must be redrawn. Massive IoT is the deployment of an immense number of low-powered devices with infrequent reporting and both NB-IoT and LTE Cat-M fulfill the requirements of 5G massive MTC/IoT.
+
+## Low-Powered Wide-Area Networks {#lpwans}
+
+There are many wireless technologies out there, with some standardized, including but not limited to SigFox, LoRaWAN, Dash7, Bluetooth, 6LowPan, RPMA, Weightless, and IETF 6TiSCH. A brief comparison is drawn on NB-IoT against prominent unlicensed frequency LPWANs in Table \ref{tbl:lpwan_comparison}, and cellular LPWANs in Table \ref{tbl:cellular_comparison}.
+
+Table: Brief comparison of NB-IoT against wireless LPWANs {#tbl:lpwan_comparison}
+
+|                         | NB-IoT       | LoRaWAN           | SigFox   | Dash7             |
+| ----------------------- | ------------ | ----------------- | -------- | ----------------- |
+| Frequency               | 450-2200 MHz | 433, 868, 915 MHz | 868 MHz  | 433, 868, 915 MHz |
+| Bandwidth               | 200 kHz      | 125-500 kHz       | 200 kHz  | 25, 200 kHz       |
+| Throughput              | 250 kbps     | 27 kbps           | 0.1 kbps | 167 kbps          |
+| Duty cycle limitation   | 0%           | 90-99%            | 99%      | LBT ~ 0-99%       |
+| Messages per day (12 B) | 14 million   | 10-243            | 140      | 86400+            |
+| Bytes per message       | 512          | 255               | 12       | 256               |
+| Uplink Latency          | 0.1 - 10 s   | < 3 s             | ~ 6 s    | < 0.015 s         |
+| Battery Lifetime        | 10 years     | 10 years          | 16 years | 3-5 years         |
+| MCL                     | 164 dBm      | 157 dBm           | 160 dBm  | -                 |
+| Scalability             | 55,000       | ~500              | > 50,000 | -                 |
+| Outage                  | 1%           | > 2%              | 1%       | -                 |
+| Average Power           | 550 uWh      | 15-66 uWh         | 144 uWh  | -                 |
+| Range                   | 2.5 - 5 km   | 5km (85% PDR)     | 3-10 km  | 2 km              |
+
+Table: Brief comparison of NB-IoT against cellular technologies {#tbl:cellular_comparison}
+
+|                  | NB-IoT       | 2G/GSM/GPRS  | EC-GSM-IoT[^ec_gsm_available] | LTE Cat-M    |
+| ---------------- | ------------ | ------------ | ----------------------------- | ------------ |
+| Frequencies      | 450-2200 MHz | 850-1900 MHz | 850 - 1900 MHz                | 450-2600 MHz |
+| Bandwidth        | 180 kHz      | 200 kHz      | 200 kHz                       | 1.4MHz       |
+| Throughput       | 250 kbps     | 56–114 kbps  | 70-240 kpbs                   | 375 kbps     |
+| Packet size      | 512          | ~ 1400       | -                             | ~ 1024       |
+| Uplink Latency   | 0.1 - 10 s   | 0.3 - 1 s    | 0.7 - 2 s                     | 0.1 - 10 s   |
+| Battery Lifetime | 10 years     | 3 months     | 10 years                      | 10 years     |
+| MCL              | 164 dBm      | 148 dBm      | 154 - 164 dBm                 | 164 dBm      |
+| Scalability      | 55,000       | 52,000       | 50,000                        | 55,000       |
+| Range (urban)    | 2.5 - 5 km   | 1 - 2 km     | -                             | 2.5 - 5 km   |
+
+[^ec_gsm_available]: eGPRS/EDGE-based EC-GSM-IoT is not available anywhere in the world yet.
+
+To meet application specific requirements, the uniqueness of each technology gives each its advantages and disadvantages. Matching custom applications with a wireless technology is non-trivial as there is no silver bullet that matches all use-cases. In terms of a few metric capabilities, a best-and-worst case matrix is shown in Table \ref{tbl:lpwan_strengths}. NB-IoT is shown to be closest to being an all-round winner, with battery life the exception. This is another reason why battery life is investigated in this study.
+
+Table: LPWAN strengths with \checkmark,  $\times$  denoting best and worst case respectively. {#tbl:lpwan_strengths}
+
+| Technology   | MCL        | Scalability | Battery life | Throughput |
+| ------------ | ---------- | ----------- | ------------ | ---------- |
+| NB-IoT       | \checkmark | \checkmark  |              | \checkmark |
+| GPRS         | $\times$   | \checkmark  | $\times$     | \checkmark |
+| LoRaWAN SF7  |            |             | \checkmark   |            |
+| LoRaWAN SF12 | \checkmark | $\times$    |              | $\times$   |
+| SigFox       | \checkmark | \checkmark  |              |            |
+
+* Competition in the LPWAN space and regional momentum will ensure that the various technologies will continue to develop and improve to support more features and expand the network coverage. 
+* 
+* Poor for asset tracking and utility metering.
+* Average for smart bicyles, parking, garbage bins, agriculture and intelligent buildings.
+* Good for pet tracking, POS, healthcare.
+* NB-IoT outperforms SigFox and LoRaWAN in UL/DL throughput, scalability, MCL range and FoTA updates. It is superseded by LoRaWAN in battery life for SF7.
+* If NB-IoT worked with the mobile network operators to reduce its RRC-idle phase, it could develop a minimal power consumption to compare with that of LoRaWAN and Sigfox.
+
+Although there are many ways to connect IoT to the internet, NB-IoT is an LPWAN which is the focus of this study.
+
+
+## Use Cases {#usecases_intro}
+
+- Public Safety
+- Agriculture
+- Smart Metering
+- Actuator Control
+- Real-time Monitoring
+- Asset Tracking
+
+* Logistics
+* Health Care
+* Industrial Production
+* Energy, Utilities
+* Retail 
+
+IoT has use case requirements in UL/DL throughput, battery longevity and scalability.
+
+The most popular use case in IoT is smart metering.
+
+## Smart Metering {#smartmetering}
+
+One of the simplest use cases in IoT is smart metering. Periodically sending uplink data at regular intervals from a static location has the advantage of remote monitoring and reducing the need for physical readings. It also opened up new features for users (such as dynamic pricing and usage pattern analysis) and operators (such as load balancing a large number of clients). The clear value proposition and success is partially due to the belief that IoT should be low powered and low data transmissions which still exists today.
+
+**Smart metering can be considered as defeating the purpose of NB-IoT when considering its downlink capabilities.**
+
+Smart metering can be considered the traditional IoT model.
+
+## Push-Pull Model
+
+Traditionally, IoT devices push data to the internet at regular intervals. This push model can be considered quite energy inefficient, especially when the data is only occasionally actionable. For example, in asset tracking or remote monitoring.
+
+A pull model is ideal for dynamic rule engines, pulling data only when necessary and ultimately edge computing, where building an application around this idea can greatly enhance battery life.
+
+## Edge Computing
+
+Edge computing is the practice of offloading cloud processes to the endpoint. It saves on data overhead, especially when there are data charges involved and battery longevity is desired.
+
+Since NB-IoT is optimized for downlink communications, it can be the ideal candidate.
+
+## NB-IoT {#nbiot}
+
+Formed by the 3GPP from LTE, NB-IoT was developed within that framework and its capabilities are particularly well suited to smart metering.
+
+![IoT Market representation [@Martinez2019]](../images/1559246290186.png)
+
+Taking it one step further, the 3GPP defined two device categories, namely Cat NB1 and NB2, with the latter adding support for:
+
+- Support of Positioning of Device using OTDOA
+  - seamless cell re-selection
+- Push to talk voice messaging
+- New Device Power Class (14 dBm)
+- Multicast transmission
+
+ OTDOA positioning, 
+
+Compared to LTE
+
+- devices are stationary
+
+- intermittent burst transmissions
+
+- low data bandwidth
+
+- delay-tolerant applications
+
+- support for huge number of devices
+
+- deals with poor coverage (indoor penetration)
+
+- battery lifetime of a few years
+
+  
+
+* eDRX and PSM
+* Debugging
+  * QXDM, UEMonitor etc
+  * [@ubloxAppNote2018]
+
+
+
+* NB-IoT devices are seen as stationary, only small chunks of data are intermittently transmitted and applications are envisaged as delay-tolerant.
+* NB-IoT technology is designed such that it can be used in areas beyond the radio coverage of current
+  cellular standards and in devices which must run from battery power for many years. The devices
+  will generally send small amounts of data infrequently; a typical usage scenario might be 100 to
+  200 bytes sent twice per day for battery powered devices. For mains powered devices the limit is not
+  based on battery size, but cost and network bandwidth/resources.
+* The system operation is analogous to SMS in that it is a datagram-oriented, stored-and-forward
+  system, rather than a GPRS-like IP pipe. This is because NB-IoT devices spend most of their time
+  asleep, making possible the required long battery life. The system implements extended DRX cycles
+  for paging, but as this window will be limited to save battery life, the delivery of downlink messages
+  occurs mainly when the system detects that uplink messages have been received from a device
+  (indicating that it is awake). Here a store-and-forward system, an “IoT Platform”, is useful.
+
+
+
+Although most users interact only with the UE device which runs its own proprietary firmware stack, NB-IoT also has a complex backend architecture.
+
+## LTE Architecture
+
+![LTE_classic_architecture](../images/LTE_classic_architecture.png)
+
+The complexities of LTE architecture further increases the chance of performance degradation with respect to 3GPP specifications due to the vast array of setup parameters. It would be beneficial to analyze the performance of multiple UE devices against various MNO vendors. It is important to note that MNOs may use various vendors in their architecture, and thus this study is mainly focused on the eNodeB vendor which is also UE device facing and has the greatest chance of performance degradation due network quality, RF interference and so forth.
+
+* Both UDP socket commands and datagram commands use the IP data transport through the SGi.
+
+## Performance Evaluation
+
+It would be useful for the application developer to know the boundaries resulting from this approach. Drawbacks and optimizations targeting IoT can be discussed. The application developer is a potential adopter of the technology and focuses on parameters that fall within end-user control.
+
+Cellular operators would also benefit by knowing where they can improve upon their configurations and equipment.
+
+To this end it would be beneficial to:
+
+- Analyze critical metrics at the core of NB-IoT, such as energy consumption, coverage, cost and latency.
+- Create a testing framework to characterize NB-IoT devices in actual operation and using various networks.
+- Set optimal operating boundaries based on the obtained results. This should also re-evaluate suitability in certain use cases.
+
+There are over 50 MNOs in the world that are using NB-IoT, yet most draw from a subset of the [top 5 LTE vendors](https://www.rcrwireless.com/20160531/network-infrastructure/top-5-wireless-infrastructure-makers-tag4-tag99):
+
+1. Huawei
+2. Ericsson
+3. Nokia
+4. ZTE
+5. Samsung
+
+
 ## Standing or Positioning {#lit_standing}
 
 We expect selected uptake of each technology in specific application areas and our results show that each technology is better suited to specific applications and their concomitant requirements. Sigfox, NB-IoT, and LoraWAN SF12 performed equally well for applications where MCL (range) is paramount, with LoraWAN SF7 doing slightly worse. In applcitions where the main consideration is scalability, Sigfox, and NB-IoT substantially outperformed the LoraWAN varieties. However, if battery life is the most important consideration, LoraWAN SF7 seems to have the edge, with NB-IoT (the default setup we tested) performing worse. NB-IoT performed the best for uplink throughput, with LoraWAN SF7 coming in second. For all the other two-related metrics evaluated, namely downlink throughput and firmware upgradability, NB-IoT performs substantially better than the other technologies.
+
+
+
+* Poor for asset tracking and utility metering.
+* Average for smart bicyles, parking, garbage bins, agriculture and intelligent buildings.
+* Good for pet tracking, POS, healthcare.
+* NB-IoT outperforms SigFox and LoRaWAN in UL/DL throughput, scalability, MCL range and FoTA updates. It is superseded by LoRaWAN in battery life for SF7.
+* If NB-IoT worked with the mobile network operators to reduce its RRC-idle phase, it could develop a minimal power consumption to compare with that of LoRaWAN and Sigfox.
+
+
 
 * Comparison
 
@@ -472,6 +691,34 @@ $$P = \frac{E_{msg}}{T_{msg}}$$ {#eq:avgpower}
 ## Use cases
 
 Use cases suitable for NB-IoT
+
+## AT Commands {#atcommands}
+
+This section outlines the capabilities of the UEs.
+
+Table: Summary AT Command set for Ublox {tbl:atcommands}
+
+|                      | Command    | Description                                                  |
+| -------------------- | ---------- | ------------------------------------------------------------ |
+| Set configuration    | AT+NCONFIG | Change configuration for SI_AVOID, Scrambling etc.           |
+| Network Registration | AT+COPS    | This command initiates search for cell towers to connect to depending on MNO-related SIM-card and registers/deregisters accordingly. |
+| Set APN              | AT+CGDCONT | Sets the relevant APN for the MNO.                           |
+|                      |            |                                                              |
+
+* SARA-N2 series modules implement a FOTA solution based on CoAP. It is possible to configure the
+  module’s poll timer for when the module checks the FOTA CoAP server for new firmware. When the
+  feature is enabled and a new package is available, the module will automatically download the FOTA
+  update and provide URCs about its progress. The module’s firmware is not updated automatically
+  when the download has completed and so the application must start the upgrade process step.
+* The +UTEST AT command allows the user to set the module in non-signaling (or test) mode, or
+  returns to the signaling (or normal) mode. In test/non-signaling mode, the module switches off the
+  protocol stack for performing single tests which could not be performed during the signaling mode.
+* MO Datagrams sent and received by IoT platform has these commands wrapped internally in a Constrained Application Protocol (CoAP) message and sent over UDP sockets. Once the module accepted a datagram it cannot be removed and will be transmitted to the network as soon as radio conditions permit. The only way to clear the module’s transmit queue is to reboot it. In good radio conditions, the transmission might take a few seconds. In bad radio conditions a transmission opportunity may not occur for minutes, days or weeks but the datagram will be transmitted once radio conditions are good enough. When a MO message is queued, the module will try to send the message to the base station. It will only send the next message once the previous message has been sent. If there is a radio link failure (RLF), the device will re-scan the channel ranges and try to reconnect to a base station. There may be a back off time where the device goes into deep-sleep mode before trying again.
+* An unsolicited result code (URC) is a string message (provided by the DCE) that is not a response to
+  a previous AT command. It can be output, when enabled, at any time to inform the DTE of a specific
+  event or status change.
+
+When it comes to base stations, the user does not have control over the inactivity timer. Release assistance can request the eNB/network to disconnect the modem from Radio Resource Control (RRC) connected mode.
 
 ## Martinez
 

@@ -3,6 +3,9 @@ err.log
 *.aux
 *.lof
 *.out
+*.lot
+*.tex
+*.toc
 
 tex2pdf*
 .metadata
@@ -12,3 +15,7 @@ TUINO_ZERO_96
 *.pyc
 **/.ipynb_checkpoints/
 **/ipch/
+thesis/v8/1_intro.log
+thesis/v8/4_results.log
+thesis/v8/3_design.log
+thesis/v8/2_litstudy.log

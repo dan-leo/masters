@@ -188,8 +188,8 @@ All rights reserved.
 \pagenumbering{arabic}
 
 \pagestyle{fancy}
-\fancyhead[LE,RO]{\large\leftmark}
-\fancyhead[RE,LO]{\normalsize\rightmark}
+\fancyhead[LE,LO]{\large\leftmark}
+\fancyhead[RE,RO]{\normalsize\rightmark}
 \fancyfoot[CE,CO]{Page \thepage \hspace{1pt} of \pageref{LastPage}}
 
 # Introduction {#intro}

@@ -18,7 +18,7 @@ tablenos-number-by-section: true
 \pagestyle{fancy}
 \fancyfoot[CE,CO]{Page \thepage \hspace{1pt} of \pageref{LastPage}}
 
-# Design and Methodology CH3 {#design}
+# Design and Methodology {#design}
 
 * Includes some preliminary results to analyze UE device and LTE network behavior.
 

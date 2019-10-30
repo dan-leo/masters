@@ -33,7 +33,7 @@ Application developers and cellular service providers alike are interested in im
 
 \newpage
 
-# Results CH4 {#results}
+# Results {#results}
 
 This chapter visualizes and analyses the results from the dataset obtained in Chapter \ref{design}.
 
@@ -1150,6 +1150,8 @@ Table: Longevity Estimate in years using Reported RX, TX Time for 9.36Wh AA batt
 
 # Appendix D {-#appendixD}
 
+These are examples of some of the information accessible in UEMonitor of SIB blocks and RRC signalling communications.
+
 ```c
 RRC_DEBUG_ASN
 header.message_id=190840832
@@ -1492,5 +1494,3 @@ Additional Info=DL-CCCH-Message-NB:
 ```
 
 
-
-\newpage

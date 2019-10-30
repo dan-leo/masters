@@ -18,7 +18,7 @@ tablenos-number-by-section: true
 \pagestyle{fancy}
 \fancyfoot[CE,CO]{Page \thepage \hspace{1pt} of \pageref{LastPage}}
 
-# Literature Study CH2 {#litstudy}
+# Literature Study {#litstudy}
 
 Considering current literature, several studies provide theoretical models not only for the energy consumption of NB-IoT networks [@Andres-Maldonado2017], but also for their latency and delay bounds [@Feltrin2019], impact of coverage extensions [@Andres-Maldonado2018b], coverage performance [@Adhikary2016], battery lifetimes [@Yeoh2018d],[@Lauridsen2018], theoretically optimal configuration strategies [@Feltrin2018] and overall performance for particular verticals [@Soussi2018],[@Beyene2017b].
 

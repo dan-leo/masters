@@ -213,7 +213,7 @@ IoT shows great potential for exponential growth, and unless a technology disrup
 
 
 
-### Performance Evaluation
+# Performance Evaluation
 
 It would be useful for the application developer to know the boundaries resulting from this approach. Drawbacks and optimizations targeting IoT can be discussed. The application developer is a potential adopter of the technology and focuses on parameters that fall within end-user control.
 
@@ -232,3 +232,17 @@ There are over 50 MNOs in the world that are using NB-IoT, yet most draw from a 
 3. Nokia
 4. ZTE
 5. Samsung
+
+# cellular control
+
+Table: Cellular control {#tbl:cellular_control}
+
+|                             | Cellular operators | Users       |
+| --------------------------- | ------------------ | ----------- |
+| NB-IoT Base stations (BTS)  | **X**              |             |
+| NB-IoT User Equipment (UE)  |                    | **X**       |
+| LoRaWAN Gateways            |                    | **X**       |
+| LoRaWAN Devices             |                    | **X**       |
+| NB-IoT licensed spectrum    |                    | billed      |
+| LoRaWAN unlicensed spectrum |                    | duty-cycled |
+

@@ -1,18 +1,10 @@
 ---
-title: LTE Cat-NB (Narrowband) Performance Evaluation
-author: Daniel Robinson
-date: Stellenbosch University, Sept 2019
+title: 
 tags: [LTE, NB-IoT]
-abstract: |
-  2G/GPRS is a sun-setting technology leaving behind a void for LPWANs such as LoRaWAN and SigFox to fill. The viability of NB-IoT being such a technology for South Africa is investigated. Multiple endpoint manufacturers and base station vendors are tested to compare capabilities with respect to power efficiency, latency, signal strength and other metrics. The results proved promising.
-
-toc: true
-lot: true
-lof: true
 link-citations: true
 csl: ieee.csl
 linkcolor: blue
-geometry: "left=3cm,right=3cm,top=2cm,bottom=2cm"
+geometry: "left=3cm,right=3cm,top=3cm,bottom=2cm"
 numbersections: true
 tablenos-warning-level: 1
 tablenos-number-by-section: true
@@ -20,7 +12,41 @@ tablenos-number-by-section: true
 
 [](../images/whitespace.png)
 
+[](../images/UScrest-WM.jpg){width=25%}
+
+ \pagenumbering{gobble} 
+
+\begin{minipage}{\linewidth}
+\begin{center}
+\includegraphics[width=10cm]{../images/USlogo-top.pdf}
+\end{center}
+\end{minipage}
+
+\begin{center}
+\vspace{1cm}
+\huge{LTE Cat-NB (Narrowband) Performance Evaluation}\\
+\vspace{0.5cm}
+\Large{by}\\
+\vspace{0.5cm}
+\LARGE{Daniel Robinson}\\18361137
+\vspace{1cm}
+
+\begin{minipage}{\linewidth}
+\begin{center}
+\includegraphics[width=0.25\linewidth]{../images/UScrest.pdf}
+\end{center}
+\end{minipage}
+
+\vspace{2cm}
+\Large{Thesis presented in partial fulfillment of the requirements for the degree of Masters of Engineering (Research) in the Department of Electrical and Electronic Engineering at Stellenbosch University}\\
+\vspace{1cm}
+\Large{November 2019}\\
+\end{center}
+
+\normalsize
 \newpage
+
+\pagenumbering{roman}
 
 # Declaration {-#declaration}
 
@@ -42,23 +68,49 @@ All rights reserved.
 
 # Abstract {-#abstract}
 
-A number of tests have been developed, performed and analyzed for multiple UEs (Ublox and Quectel) and MNOs (MTN and Vodacom) via ZTE and Nokia vendors. Power saving, latency, RF, packet and network metrics are evaluated using UDP, Echo, COPS (network registration), eDRX and PTAU tests.
+2G/GPRS is a sun-setting technology leaving behind a void for LPWANs such as LoRaWAN and SigFox to fill. The viability of NB-IoT being such a technology for South Africa is investigated. A number of telemetry tests have been performed for multiple UEs (Ublox and Quectel), LTE vendors (ZTE, Nokia, Ericsson and Huawei) and MNOs (MTN and Vodacom) at different RF attenuation decades. This has resulted in analysis for metrics such as latency and power efficiency, as well as estimates for telemetry periodicity and battery longevity.
+
+\vspace{5cm}
 
 # Uittreksel {-#uittreksel}
 
+\vspace{10cm}
+
+
+
+\newpage
+
 # Acknowledgements {-#acknowledgements}
 
-* **Prof Thinus Booysen** - for his unrelenting care, innovative passion, inspiring belief in people and charming charisma.
-* **Family** - for their love and dedication.
-* **Friends** - for their wisdoms, experiencing the journey together and sharing moments in highs and lows.
+* **Prof Thinus Booysen** - for unrelenting care, innovative passion, inspiring belief in people and charming charisma.
+
+* **Family** - for love and dedication.
+
+* **Friends** - for wisdoms, experiencing the journey together and sharing moments in highs and lows.
+
 * **MTN Mobile Intelligence Lab** - for providing funding, expertise and laboratory working environment.
+
 * **Ryan van den Bergh** - for driving innovative ideas at MTN.
+
 * **Michael Beetge** - for his expertise in the MTN Phase 3: Test Plant and extensive knowledge of LTE
+
 * **Collin Mamdoo** - for his knowledge on IoT and helpful assistance at Vodacom
+
 * **Helene  Lambrechts** - for her aid in coherence and cohesion.
+
 * **RF Design** - for providing samples and development kits.
 
-# Acronyms {-#acronyms}
+* **You, the reader** - for reading this thesis. Hopefully it may be of benefit to you, the research community, science, technology, society and beyond!
+
+\newpage
+
+\tableofcontents
+
+\listoftables  
+
+\listoffigures
+
+# Nomenclature {-#acronyms}
 
 |      |      |
 | ---- | ---- |
@@ -133,6 +185,13 @@ A number of tests have been developed, performed and analyzed for multiple UEs (
 
 \newpage
 
+\pagenumbering{arabic}
+
+\pagestyle{fancy}
+\fancyhead[LE,RO]{\large\leftmark}
+\fancyhead[RE,LO]{\normalsize\rightmark}
+\fancyfoot[CE,CO]{Page \thepage \hspace{1pt} of \pageref{LastPage}}
+
 # Introduction {#intro}
 
 Narrowing the spectrum bandwidth for LTE results in a low data-throughput, low energy technology which matches the requirements for wireless IoT, hence Narrowband-IoT (or NB-IoT).
@@ -173,7 +232,7 @@ In turn, the above objectives evaluate robustness, stability, capabilities, sour
 
 This thesis aims to highlight the challenges, advantages and disadvantages of the technology. By doing endpoint tests with multiple manufacturers and base station vendors, one can paint an accurate picture of the capabilities of the technology. [^bullets]
 
-[^bullets]: ask Thinus if he's happy with objectives like so in sentences, or bulleted?
+[^bullets]: Thinus are you happy with objectives like so in sentences and bulleted?
 
 ## Scope of Work {#scopework}
 
@@ -183,12 +242,12 @@ Whilst theoretical models provide value in showing how factors affect an approxi
 
 Table: Metrics and Estimations {#tbl:metric_summary}
 
-| Main Metrics     | Secondary Metrics | Estimations        |
-| ---------------- | ----------------- | ------------------ |
-| Power Efficiency | Signal Strength   | Battery Longevity  |
-| Latency          | Throughput        | Telemetry Interval |
-|                  | Data Overhead     |                    |
-|                  | ECL               |                    |
+| Main Metrics     | Secondary Metrics | Estimations         |
+| ---------------- | ----------------- | ------------------- |
+| Power Efficiency | Signal Strength   | Battery Longevity   |
+| Latency          | Throughput        | Telemetry Intervals |
+|                  | Data Overhead     |                     |
+|                  | ECL               |                     |
 
 Table: Telemetry Types, UE devices and LTE vendors {#tbl:telemetry_ue_lte}
 
@@ -262,28 +321,13 @@ Theoretically, one can assume that these manufacturers meet 3GPP's specification
 
 With a testing framework, one can evaluate these capabilities in a transparent manner for both developers and cellular operators alike and work towards improving the quality thereof.
 
-Cellular operators are in control of some things, and users of others.
-
-Table: Cellular control {#tbl:cellular_control}
-
-|                             | Cellular operators | Users       |
-| --------------------------- | ------------------ | ----------- |
-| NB-IoT Base stations (BTS)  | **X**              |             |
-| NB-IoT User Equipment (UE)  |                    | **X**       |
-| LoRaWAN Gateways            |                    | **X**       |
-| LoRaWAN Devices             |                    | **X**       |
-| NB-IoT licensed spectrum    |                    | billed      |
-| LoRaWAN unlicensed spectrum |                    | duty-cycled |
-|                             |                    |             |
-|                             |                    |             |
-
-MNO/BTS Vendors are open to all UE manufacturers.
-
 Other Vendors include: Broadcom Corporation, Cisco Systems, Gemalto NV, Intel Corporation, KDDI Corporation, LG Electronics, MediaTek, Oberthur Technologies, Ooredoo, Orange, Samsung Electronics, Saudi Telecom Company, Sierra Wireless, Telit Communications and VimpelCom.
 
  ![Top LTE vendors in the world showing VoIP and IMS equipment revenue share worldwide in 2017. \textcopyright{Statista, IHS Markit}](../images/chartoftheday_17097_voip_worldwide_revenue_n-1572347674712.jpg){width=80%}
 
 ### ZTE
+
+
 
 ### Nokia
 
@@ -304,6 +348,8 @@ and the following recommended in future:
 
 - Nordic nRF9160
 - SimCom SIM7020E
+
+Although LTE vendors are open to all UE manufacturers, mobile network operators (MNOs) are still in control of LTE vendor equipment and some aspects of UE devices via RF signalling. Thus it is important for MNOs to recognize the effect they have on the technologies they use, especially when it differs from theory.
 
 ### Ublox
 
@@ -327,7 +373,7 @@ In South Africa, NB-IoT has most of its coverage in the Gauteng province as well
 
  ![NB-IoT coverage in South Africa](../images/GautengvsSouthAfrica.png){ width=50% }
 
-Table: NB-IoT connectivity in South Africa with regard to MNO, LTE vendor and location. 
+Table: NB-IoT connectivity in South Africa with regard to MNO, LTE vendor and location. {#tbl:nbiot_connectivity}
 
 | MNO     | LTE Vendor | Location                       |
 | ------- | ---------- | ------------------------------ |

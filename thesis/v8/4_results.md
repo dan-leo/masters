@@ -1,22 +1,22 @@
 ---
 title: LTE Cat-NB (Narrowband) Performance Evaluation
 author: Daniel Robinson
-date: Stellenbosch University, Sept 2019
+date: Stellenbosch University, November 2019
 tags: [LTE, NB-IoT]
-abstract: |
-  2G/GPRS is a sun-setting technology leaving behind a void for LPWANs such as LoRaWAN and SigFox to fill. The viability of NB-IoT being such a technology for South Africa is investigated. Multiple endpoint manufacturers and base station vendors are tested to compare capabilities with respect to power efficiency, latency, signal strength and other metrics. The results proved promising.
-
 toc: true
 lot: true
 lof: true
 link-citations: true
 csl: ieee.csl
 linkcolor: blue
-geometry: "left=3cm,right=3cm,top=2cm,bottom=2cm"
+geometry: "left=3cm,right=3cm,top=3cm,bottom=2cm"
 numbersections: truew
 tablenos-warning-level: 1
 tablenos-number-by-section: true
 ---
+
+\pagestyle{fancy}
+\fancyfoot[CE,CO]{Page \thepage \hspace{1pt} of \pageref{LastPage}}
 
 # Objective
 
@@ -33,7 +33,7 @@ Application developers and cellular service providers alike are interested in im
 
 \newpage
 
-# Results {#results}
+# Results CH4 {#results}
 
 This chapter visualizes and analyses the results from the dataset obtained in Chapter \ref{design}.
 

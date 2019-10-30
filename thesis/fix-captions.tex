@@ -2,6 +2,17 @@
 \usepackage{graphicx}
 \usepackage{subfig}
 \usepackage{chngcntr}
+\usepackage{titling}
+\usepackage{caption} %% pandoc-tablenos: required package
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+
+% \pretitle{%
+%   \begin{center}
+%   \LARGE
+%   \includegraphics[width=10cm]{../images/USlogo-top.pdf}\\[\bigskipamount]
+% }
+% \posttitle{\end{center}}
 
 \counterwithin{figure}{section}
 
@@ -12,9 +23,6 @@
 } {
     \endorigfigure
 }
-
-%% pandoc-tablenos: required package
-\usepackage{caption}
 
 %% pandoc-tablenos: environment to disable table caption prefixes
 \makeatletter
@@ -37,3 +45,47 @@
     }
 }
 \makeatother
+
+
+
+
+% \setuppagenumbering[location={footer,middle},style=\bfc,conversion=romannumerals]
+
+% \fancyhf{}
+% \fancyhead[LE]{\large\leftmark}
+% \fancyhead[RO]{\large\leftmark}
+% \fancyhead[LE,RO]{Overleaf}
+% \fancyhead[RE,LO]{Guides and tutorials}
+
+% \RequirePackage[pagestyles]{titlesec}%............... Sectioning and headings
+
+%     \titleformat{\section}      {\normalfont\large\secfont}{\thesection}{1em}{}
+%     \titleformat{\subsection}   {\normalfont\normalsize\secfont}{\thesubsection}{1em}{}
+%     \titleformat{\subsubsection}{\normalfont\normalsize\secfont}{\thesubsubsection}{1em}{}
+%     \titlespacing*{\section}      {0pt}{3.5ex plus 1ex minus .2ex} {2.3ex plus .2ex}
+%     \titlespacing*{\subsection}   {0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+%     \titlespacing*{\subsubsection}{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+%     \providecommand{\minisec}[1]{% Un-numbered section type heading
+%         \@afterindentfalse\vskip1.5ex%
+%        {\parindent\z@\raggedright%
+%         \normalfont\secfont#1%
+%         \par\nobreak\addvspace{\smallskipamount}}%
+%         \@afterheading}
+
+
+
+ % \setcounter{chapter}{1} 
+ % \stepcounter{chapter} 
+
+% \usepackage{xpatch}
+
+% \xpatchcmd{\chapter}{%
+%   \normalfont\scshape\centering}{%
+%   \normalfont\scshape}{\typeout{Success}}{\typeout{Failure}}%
+
+
+
+% \pagenumbering{roman}
+% \frontmatter
+% \mainmatter

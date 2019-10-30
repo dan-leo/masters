@@ -1,24 +1,24 @@
 ---
 title: LTE Cat-NB (Narrowband) Performance Evaluation
 author: Daniel Robinson
-date: Stellenbosch University, Sept 2019
+date: Stellenbosch University, November 2019
 tags: [LTE, NB-IoT]
-abstract: |
-  2G/GPRS is a sun-setting technology leaving behind a void for LPWANs such as LoRaWAN and SigFox to fill. The viability of NB-IoT being such a technology for South Africa is investigated. Multiple endpoint manufacturers and base station vendors are tested to compare capabilities with respect to power efficiency, latency, signal strength and other metrics. The results proved promising.
-
 toc: true
 lot: true
 lof: true
 link-citations: true
 csl: ieee.csl
 linkcolor: blue
-geometry: "left=3cm,right=3cm,top=2cm,bottom=2cm"
+geometry: "left=3cm,right=3cm,top=3cm,bottom=2cm"
 numbersections: true
 tablenos-warning-level: 1
 tablenos-number-by-section: true
 ---
 
-# Design and Methodology {#design}
+\pagestyle{fancy}
+\fancyfoot[CE,CO]{Page \thepage \hspace{1pt} of \pageref{LastPage}}
+
+# Design and Methodology CH3 {#design}
 
 * Includes some preliminary results to analyze UE device and LTE network behavior.
 
@@ -342,6 +342,8 @@ Table: NB-IoT and LTE Cat-M handover.
 | Standalone to In-band | ~ 11 s |
 | In-band to Standalone | ~ 11 s |
 
+### Throughput
+
 |      | Uplink              | Downlink            |
 | ---- | ------------------- | ------------------- |
 | GPRS | 158 kbps or 20 kB/s | 254 kpbs or 31 kB/s |
@@ -372,7 +374,7 @@ $V_{out} = I_{load} [mA] * 10 [\frac{V}{mA}]$
 
 PyTest is a unit testing framework used to setup the UE for each test using AT commands.
 
-### Subtest Types
+### Telemetry Tests
 
 Subtests measure various aspects of the required metrics.
 

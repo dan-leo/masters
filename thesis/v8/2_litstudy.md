@@ -593,7 +593,7 @@ needing to send a UDP IP header.
 
 See [@ubloxAppNote2018] for an Application example.
 
-### UDP
+### UDP Datagrams
 
 ### Echo
 

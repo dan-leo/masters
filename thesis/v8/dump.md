@@ -380,3 +380,27 @@ Adding the previous test data together we see the following shape and form.
 \end{center}
 \end{minipage}
 
+\begin{minipage}{\linewidth}
+\begin{center}
+\includegraphics[width=.6\linewidth]{../../code/tests/old/img2/probability_density_function_seaborn.pdf}
+\captionof{figure}{Example python histogram of a univariate latency distribution with a normalized density and a gaussian kernel density estimate}
+\label{fig:}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{\linewidth}
+\begin{center}
+\includegraphics[width=.6\linewidth]{../../code/tests/old/img2/probability_density_function.pdf}
+\captionof{figure}{Various types of kernel density estimation (KDE)}
+\label{fig:}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{\linewidth}
+\begin{center}
+\includegraphics[width=.6\linewidth]{../../code/tests/old/img2/probability_mass_function.pdf}
+\captionof{figure}{Various types of kernel density estimation (KDE) with histogram and KDE normalized in attempted probability mass function}
+\label{fig:}
+\end{center}
+\end{minipage}
+

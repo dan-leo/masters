@@ -387,7 +387,7 @@ Nordic Semiconductor is a fabless semiconductor company. The company specializes
 
 ### SimCom
 
-**SIMCom Wireless Solutions** is a subsidiary of SIM Technology Group Ltd. It is a fast-growing wireless [M2M](https://en.wikipedia.org/wiki/Machine_to_machine) company, designing and offering a variety of wireless modules based on [GSM](https://en.wikipedia.org/wiki/GSM)/[GPRS](https://en.wikipedia.org/wiki/GPRS)/[EDGE](https://en.wikipedia.org/wiki/EDGE),[WCDMA](https://en.wikipedia.org/wiki/WCDMA)/HSDPA and [TD-SCDMA](https://en.wikipedia.org/wiki/TD-SCDMA) technical platforms 
+**SIMCom Wireless Solutions** is a subsidiary of SIM Technology Group Ltd. It is a fast-growing wireless M2M company, designing and offering a variety of wireless modules based on GSM/GPRS/EDGE,WCDMA/HSDPA and TD-SCDMA technical platforms.
 
 ## Network Coverage Worldwide {#coverage}
 

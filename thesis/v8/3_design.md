@@ -326,7 +326,9 @@ Haystack Technologies has developed a Dash7-over-LoRa implementation that expect
 
 ### Terrestrial Localization
 
+Of the prominent LPWANs, SigFox is the only one that offers a simple localization service. Unfortunately it is  has poor accuracy as can be seen in Fig. \ref{fig:sigfox_map}.
 
+![With a 17.783km radius in this example, SigFox is poor when it comes to being considered as a source of localization using RSSI triangulation, and it may be better to use TOF techniques such as in OTDOA in NB-IoT \label{fig:sigfox_map}](../images/image-20191105141405835.png){width=80%}
 
 ### Power Saving Mechanisms
 
@@ -401,6 +403,10 @@ In the debug logs we see the timer expires after exactly 32 seconds.
 (These tests should continue until an eDRX value of 2621,44s, or 43.69 minutes and repeated for Quectel, Nordic, SimCom and on Nokia, Ericsson and Huawei basestations)
 
 Also, what is the current usage of running a specific command? Is it negligible or is, for example, polling AT+CSQ constantly detrimental on battery life?
+
+![Typical eDRX pattern.](../images/image-20191105163855934.png)
+
+![Irregular eDRX time if not properly configured.](../images/image-20191105162759288.png)
 
 ### Ultra-low Current Sleep Measurements
 

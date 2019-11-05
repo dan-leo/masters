@@ -34,7 +34,7 @@ Consider a unidirectional wireless network that, although it has many kilometers
 
 A more effective alternative can be periodically observing the receive signal strength indicator (RSSI) for changes which directly translate to movement in meters which warrant a GPS/GNSS location update. RSSI has been used in fingerprinting localization for GSM-based devices [@Ibrahim2012]. Listening for a terrestrial tower certainly doesn't require a lower receive sensitivity than for a satellite a few hundred kilometers in the sky, and with a much higher throughput than the typical 50 bit/s of GPS/GNSS. GPS/GNSS signals can also be relayed indoors using an outdoor and indoor antenna [@Haddrell2001].
 
-One of the benefits of bidirectional LPWANs in satellite localization is the fact that they have the capability of beaconing a positioning reference signal [@Lin2017].
+One of the benefits of bidirectional LPWANs over satellite localization is the fact that they have the capability of beaconing a positioning reference signal [@Lin2017].
 
 There are many LPWANs out there, but we can split them up into two groups. Just a few of the unidirectional ones there is:
 
@@ -238,7 +238,7 @@ Simulations and trials.
 
 ### RPMA
 
-North America. Equivalent to cellular standard but expensive .
+North America. Equivalent to cellular standard but expensive.
 
 ### Weightless SIG
 

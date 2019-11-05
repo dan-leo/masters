@@ -246,3 +246,137 @@ Table: Cellular control {#tbl:cellular_control}
 | NB-IoT licensed spectrum    |                    | billed      |
 | LoRaWAN unlicensed spectrum |                    | duty-cycled |
 
+
+
+# Design
+
+\begin{minipage}{1.0\linewidth}
+\begin{center}
+\includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_txTimeNW_outliers.pdf}
+\captionof{figure}[TX time outliers (11/11) up to 100 seconds]{TX time outliers (11/11) exist up to 100 seconds in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs against RSRP.}
+\label{fig:txTimeNW_otl}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{1.0\linewidth}
+\begin{center}
+\includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_rxTimeNW_outliers.pdf}
+\captionof{figure}[RX time outliers (36/47) up to 400 seconds against RSRP.]{RX time outliers (36/47) up to 400 seconds in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs against RSRP.}
+\label{fig:}
+\end{center}
+\end{minipage}
+
+
+
+\begin{minipage}{\linewidth}
+\begin{center}
+\includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_energy_outliers.pdf}
+\captionof{figure}[Energy outliers (46/79) up to 750 Joules against RSRP.]{Energy outliers (46/79) up to 750 Joules or 200mWh in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs against RSRP.}
+\label{fig:}
+\end{center}
+\end{minipage}
+
+
+
+
+
+\begin{minipage}{\linewidth}
+\begin{center}
+\includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/txTime_energy_outliers.pdf}
+\captionof{figure}[Energy versus latency outliers (47/74) against RSRP.]{Energy vs latency outliers (47/74) in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs against RSRP.}
+\label{fig:}
+\end{center}
+\end{minipage}
+
+
+
+# C-DRX
+
+\begin{figure}[ht]
+  \subfloat[C-DRX current measurement on MTN-Ublox]{
+	\begin{minipage}[c][1\width]{
+	   0.5\textwidth}
+	   \centering
+	   \includegraphics[width=1.0\linewidth]{../../code/tests/logs/zte_mtn/rf_shield/ublox/scope/cdrx73_6mA_110dB.jpg}
+	\end{minipage}}
+ \hfill 	
+  \subfloat[C-DRX current measurement on MTN-Quectel]{
+	\begin{minipage}[c][1\width]{
+	   0.5\textwidth}
+	   \centering
+	   \includegraphics[width=1.0\linewidth]{../../code/tests/logs/zte_mtn/rf_shield/quectel/scope/70.4mA_ant_0dB.jpg}
+	\end{minipage}}
+\captionof{figure}[C-DRX current measurement]{Current measurement of MTN-Ublox during connected DRX mode (C-DRX). The UE uses 73.6mA at 110dB attenuation with the RF shield enclosure door slightly open}
+\end{figure}
+
+\begin{minipage}{\linewidth}
+\begin{center}
+\includegraphics[width=1.0\linewidth]{../../code/tests/logs/zte_mtn/rf_shield/ublox/scope/cdrx73_6mA_110dB.jpg}
+\captionof{figure}[C-DRX MTN-Ublox current measurement]{Current measurement of MTN-Ublox during connected DRX mode (C-DRX). The UE uses 73.6mA at 110dB attenuation with the RF shield enclosure door slightly open}
+\label{fig:}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{\linewidth}
+\begin{center}
+\includegraphics[width=1.0\linewidth]{../../code/tests/logs/zte_mtn/rf_shield/quectel/scope/70.4mA_ant_0dB.jpg}
+\captionof{figure}[C-DRX MTN-Quectel current measurement]{Current measurement of MTN-Ublox during connected DRX mode (C-DRX). The UE uses 70.4mA at 110dB attenuation with the RF shield enclosure door slightly open}
+\label{fig:}
+\end{center}
+\end{minipage}
+
+
+
+# Lit study
+
+
+
+* GSM RF equipment testing and performance analysis [@Kasbah2005]
+* Analysis of NB-IoT Deployment in LTE Guard-Band [@Ratasuk2017c]
+
+
+
+*The empirical results of NB-IoT depend on the device used (UE) and underlying LTE vendor architecture of the MNO providing coverage. Thus?*
+
+
+
+* eDRX and PSM
+* Debugging
+  * QXDM, UEMonitor etc
+  * [@ubloxAppNote2018]
+
+
+
+# Ping tests
+
+Adding the previous test data together we see the following shape and form.
+
+![alltests1](C:\GIT\masters\thesis\images\alltests1.png)
+
+\begin{figure}
+  \begin{subfigure}[t]{0.475\textwidth}
+    \includegraphics[width=\textwidth]{../images/1568090001158.png}
+    \caption{Modello compartimentale mammellare (o mammillare).}
+    \label{fig-a}
+  \end{subfigure}\hfill
+  \begin{subfigure}[t]{0.475\textwidth}
+    \includegraphics[width=\textwidth]{../images/1568090070185.png}
+    \caption{Modello compartimentale catenario.}
+    \label{fig-b}
+  \end{subfigure}
+  \caption{Principali topologie dei modelli compartimentali.} 
+  \label{fig:main}
+\end{figure}
+
+
+
+# prob est
+
+\begin{minipage}{\linewidth}
+\begin{center}
+\includegraphics[width=.6\linewidth]{../../code/tests/old/img2/histogram_counts.pdf}
+\captionof{figure}{Example python histogram of a univariate latency distribution showing counts}
+\label{fig:}
+\end{center}
+\end{minipage}
+

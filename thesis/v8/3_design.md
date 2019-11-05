@@ -111,51 +111,38 @@ The E-UTRA Absolute Radio Frequency Channel Number (EARFCN) designates the carri
 
 Since the frequency of the three towers was the same on all three MTN towers, this shows that intra-cell reselection does indeed work.
 
-#### C-DRX Duty Cycle
+#### C-DRX mode
 
 On the Vodafone network in connected-DRX (C-DRX) mode, the UE is observed to show peaks spaced at regular 2.048s intervals [@Martinez2019]. On both Vodacom and MTN networks, these peaks are not visible and instead a steady stream of peaks can be seen as on the following images. The peaks indicate an on time of roughly 12ms and idle of 4 seconds. With a cycle of 16ms, it fits the LTE requirements of between 10ms and 2560ms in terms of 1ms subframes. However, NB-IoT has a minimum requirement of 256ms to 9216ms for the interval length between C-DRX transmissions. This means that NB-IoT is utilizing vastly more time on air than permitted by the 3GPP and it is having a detrimental effect on the estimated battery life. Lastly, this does not bode well for the scaling up of devices due to the interference, especially on the shared uplink (NPUSCH) channel.
 
-\begin{minipage}{1.0\linewidth}
-\begin{center}
-\includegraphics[width=1.0\linewidth]{../../code/tests/logs/zte_mtn/rf_shield/ublox/scope/12_8ms.jpg}
-\captionof{figure}[C-DRX MTN-Ublox]{Timing measurement of MTN-Ublox during C-DRX. Although the duty cycles vary in C-DRX mode, it can be estimated that pulses are roughly 12.8ms in length with 4ms idle between. This means that 75\% of the time the UE device is drawing current.}
-\label{fig:}
-\end{center}
-\end{minipage}
+\begin{figure}[ht]
+  \subfloat[C-DRX timing on MTN-Ublox]{
+	\begin{minipage}[c][1\width]{
+	   0.5\textwidth}
+	   \centering
+	   \includegraphics[width=1.0\linewidth]{../../code/tests/logs/zte_mtn/rf_shield/ublox/scope/12_8ms.jpg}
+	\label{fig:cdrx1}
+	\end{minipage}}
+ \hfill 	
+  \subfloat[C-DRX timing on MTN-Quectel]{
+	\begin{minipage}[c][1\width]{
+	   0.5\textwidth}
+	   \centering
+	   \includegraphics[width=1.0\linewidth]{../../code/tests/logs/zte_mtn/rf_shield/quectel/scope/12ms.jpg}
+	\label{fig:cdrx2}
+	\end{minipage}}
+\captionof{figure}[C-DRX timing measurement]{Timing measurement of two LTE vendors during C-DRX. Although the duty cycles vary in C-DRX mode, it can be estimated that pulses are roughly 12ms in length with 4ms idle between. This means that ~75\% of the time the UE device is drawing current.}
+\end{figure}
+
+In Fig. \ref{fig:cdrx1}, the Ublox UE uses 73.6mA at 110dB attenuation with the RF shield enclosure door slightly open and in Fig. \ref{fig:cdrx2}, with the same environment the Quectel UE uses 73.6mA.
 
 [](../../code/tests/logs/zte_mtn/rf_shield/ublox/scope/12_8ms.jpg)
 
-\begin{minipage}{1.0\linewidth}
-\begin{center}
-\includegraphics[width=1.0\linewidth]{../../code/tests/logs/zte_mtn/rf_shield/quectel/scope/12ms.jpg}
-\captionof{figure}[C-DRX MTN-Quectel]{Timing measurent of C-DRX mode for MTN-Quectel. Although the duty cycles vary in C-DRX mode, it can be estimated that pulses are roughly 12ms in length with 4ms idle between. This means that 75\% of the time the UE device is drawing current.}
-\label{fig:}
-\end{center}
-\end{minipage}
-
 [](../../code/tests/logs/zte_mtn/rf_shield/quectel/scope/12ms.jpg)
-
-#### C-DRX Current Usage
-
-\begin{minipage}{\linewidth}
-\begin{center}
-\includegraphics[width=1.0\linewidth]{../../code/tests/logs/zte_mtn/rf_shield/ublox/scope/cdrx73_6mA_110dB.jpg}
-\captionof{figure}[C-DRX MTN-Ublox current measurement]{Current measurement of MTN-Ublox during connected DRX mode (C-DRX). The UE uses 73.6mA at 110dB attenuation with the RF shield enclosure door slightly open}
-\label{fig:}
-\end{center}
-\end{minipage}
 
 [](../../code/tests/logs/zte_mtn/rf_shield/ublox/scope/73.6mA.jpg_110dB_slightly_open.jpg)
 
 [](../../code/tests/logs/zte_mtn/rf_shield/ublox/scope/cdrx73_6mA_110dB.jpg)
-
-\begin{minipage}{\linewidth}
-\begin{center}
-\includegraphics[width=1.0\linewidth]{../../code/tests/logs/zte_mtn/rf_shield/quectel/scope/70.4mA_ant_0dB.jpg}
-\captionof{figure}[C-DRX MTN-Quectel current measurement]{Current measurement of MTN-Ublox during connected DRX mode (C-DRX). The UE uses 70.4mA at 110dB attenuation with the RF shield enclosure door slightly open}
-\label{fig:}
-\end{center}
-\end{minipage}
 
 [](../../code/tests/logs/zte_mtn/rf_shield/quectel/scope/70.4mA_ant_0dB.jpg)
 
@@ -169,89 +156,177 @@ To get an idea of the complexity of a node (eNodeB) in a base station (BTS), run
 
 This gives a good idea as to the range expected according to RSRP.
 
-Using a Quectel BG96, the following tests were taken on the roof outside the HF RF lab on the 5th floor of the Electrical & Electronic Engineering building. The base station it connected to is on the General Building, and is just over 150m away at the same elevation with a single building blocking line-of-sight. The base station is situated on the bottom left if the picture at an altitude of approximately 138m.
+#### NB-IoT
 
-![rooftop_maps](C:\GIT\masters\thesis\images\rooftop_maps.JPG)
+Using a Quectel BG96, the following tests were taken on the rooftop described in Fig. \ref{fig:rooftop}.
 
-The tests involve sending a set of 10 pings multiple times at a certain attenuation and resulting RSSI measurement.
+![Rooftop outside the HF RF lab on the 5th floor of the Electrical & Electronic Engineering building. The base station it connected to is on the General Building, and is just over 150m away at the same elevation with a single building blocking line-of-sight. The base station is situated on the bottom left if the picture at an altitude of approximately 138m. \label{fig:rooftop}](C:\GIT\masters\thesis\images\rooftop_maps.JPG){width=50%}
 
-With an antenna and the attenuator set to 0dB, we find most of the values around the mean of 185.2ms, except for the tail at around 500ms which is the time of the first ping in a set of 10.
+The tests involve sending a set of 10 pings multiple times at a certain attenuation and resulting RSSI measurement using a Quectel BG96 modem.
 
-![rooftest1](C:\GIT\masters\thesis\images\rooftest1.png)
+\begin{figure}[ht]
+  \subfloat[With an antenna and the attenuator set to 0dB, we find most of the values around the mean of 185.2ms, except for the tail at around 500ms which is the time of the first ping in a set of 10.]{
+	\begin{minipage}[c][1\width]{
+	   0.48\textwidth}
+	   \centering
+	   \includegraphics[width=1.0\linewidth]{../images/rooftest1.png}
+	\label{fig:ping1}
+	\end{minipage}}
+ \hfill 	
+  \subfloat[Setting the attenuator to the max of 110dB, we see no change in the ping measurements which have a mean of 185.9ms. The tail has increased to a max of just over 600ms. ECL 0.]{
+	\begin{minipage}[c][1\width]{
+	   0.48\textwidth}
+	   \centering
+	   \includegraphics[width=1.0\linewidth]{../images/rooftest2.png}
+	\label{fig:ping2}
+	\end{minipage}}
+\captionof{figure}[Ping tests]{Ping tests on Engineering rooftop}
+\end{figure}
 
-Setting the attenuator to the max of 110dB, we see no change in the ping measurements which have a mean of 185.9ms. The tail has increased to a max of just over 600ms. ECL 0.
+[](C:\GIT\masters\thesis\images\rooftest1.png)
 
-![rooftest2](C:\GIT\masters\thesis\images\rooftest2.png)
+[](C:\GIT\masters\thesis\images\rooftest2.png)
 
-Removing the antenna from the attenuator, we find that the data has a slightly thicker tail, and averages around 207.1ms. ECL 0.
+\begin{figure}[ht]
+  \subfloat[Removing the antenna from the attenuator, we find that the data has a slightly thicker tail, and averages around 207.1ms. ECL 0.]{
+	\begin{minipage}[c][1\width]{
+	   0.48\textwidth}
+	   \centering
+	   \includegraphics[width=1.0\linewidth]{../images/rooftest3.png}
+	\label{fig:ping3}
+	\end{minipage}}
+ \hfill 	
+  \subfloat[Lastly, having no attenuator nor antenna we still have a connection at -107dBm with a mean of 190.6ms.]{
+	\begin{minipage}[c][1\width]{
+	   0.48\textwidth}
+	   \centering
+	   \includegraphics[width=1.0\linewidth]{../images/rooftest4.png}
+	\label{fig:ping4}
+	\end{minipage}}
+\captionof{figure}[Ping tests]{Ping tests on Engineering rooftop}
+\end{figure}
 
-![rooftest3](C:\GIT\masters\thesis\images\rooftest3.png)
+[](C:\GIT\masters\thesis\images\rooftest3.png)
 
-Lastly, having no attenuator nor antenna we still have a connection at -107dBm with a mean of 190.6ms.
+[](C:\GIT\masters\thesis\images\rooftest4.png)
 
+To be able to attenuate the signal until disconnection, one must increase the range from the base station such that leakage transmission from traces, soldering and attenuator connectors do not interfere with the test. As such, there must not be a connection to the base station at all if the antenna or attenuator is disconnected or connected at maximum attenuation.
 
+\begin{figure}[ht]
+  \subfloat[A test was performed from 10pm onwards at Technopark on 14 March 2019. A connection was made at a range of 4.8 km at -93dBm and an altitude of 132m. This is a relative elevation of -6m. The altitude is -13m relative to the base station.]{
+	\begin{minipage}[c][1\width]{
+	   0.48\textwidth}
+	   \centering
+	   \includegraphics[width=1.0\linewidth]{../images/techno_map.PNG}
+	\label{fig:map_techno}
+	\end{minipage}}
+ \hfill 	
+  \subfloat[The greatest distance measured was 5.5km from the intersection of the R44 and the turn-off to Stellenbosch Square or Jamestown at an altitude of 106m. This is a relative elevation of -32m to the base station.]{
+	\begin{minipage}[c][1\width]{
+	   0.48\textwidth}
+	   \centering
+	   \includegraphics[width=1.0\linewidth]{../images/jamestown_map.PNG}
+	\label{fig:map_jamestown}
+	\end{minipage}}
+\captionof{figure}[Long-range tests map]{Long-range tests map}
+\end{figure}
 
-![rooftest4](C:\GIT\masters\thesis\images\rooftest4.png)
+[](C:\GIT\masters\thesis\images\techno_map4.8km.JPG){width=50%}
 
-To be able to attenuate the signal until disconnection, one must increase the range from the base station such that leakage transmission from traces, soldering and attenuator connectors do not interfere with the test.
-
-There must not be a connection to the base station at all if the antenna or attenuator is disconnected or connected at maximum attenuation.
-
-A test was performed from 10pm onwards at Technopark on 14 March 2019. A connection was made at a range of 4.8 km at -93dBm and an altitude of 132m. This is a relative elevation of -6m. At a point just below technopark and slightly closer, the altitude is -13m relative to the base station.
-
-![techno_map4.8km](C:\GIT\masters\thesis\images\techno_map4.8km.JPG)
-
-At 0dB attenuation the data has a mean of 196.7ms and a tail just above 500ms.
-
-![techno1](C:\GIT\masters\thesis\images\techno1.png)
-
-At 10dB the data is more spread out from 200 - 500ms with a mean of 396.4ms and a tail at just under 1000ms in ECL 1.
-
-![techno2](C:\GIT\masters\thesis\images\techno2.png)
-
-At 20dB attenuation, the data is more spread across 350 - 1000ms with a mean of 793.4ms and a tail that extends to over 4500ms in ECL 2.
-
-![techno3](C:\GIT\masters\thesis\images\techno3.png)
-
-Any more attenuation and the signal is lost.
-
-The greatest distance measured was 5.5km from the intersection of the R44 and the turn-off to Stellenbosch Square at an altitude of 106m. This is a relative elevation of -32m to the base station.
-
-![jamestownmap](C:\GIT\masters\thesis\images\jamestownmap.JPG)
-
-At this point, the signal strength increased to -89dBm and resumed a mean of around 209.6ms with a tail around 500ms.
-
-![stelliesquare](C:\GIT\masters\thesis\images\stelliesquare.png)
-
-A similar pattern was seen at Parmalat, but driving closer there were a few spots where connection was lost or many retries were needed such that the tail extended up to almost 3000ms for the ICMP ping time.
-
-![parmalat](C:\GIT\masters\thesis\images\parmalat.png)
-
-
-
-Adding the previous test data together we see the following shape and form.
-
-![alltests1](C:\GIT\masters\thesis\images\alltests1.png)
-
-Lastly, all the test data including raw data on the way to Technopark, we see a similar form.
-
-![alltests2](C:\GIT\masters\thesis\images\alltests2.png)
+\begin{figure}[ht]
+  \subfloat[At 0dB attenuation the data has a mean of 196.7ms and a tail just above 500ms in ECL 0]{
+	\begin{minipage}[c][1\width]{
+	   0.48\textwidth}
+	   \centering
+	   \includegraphics[width=1.0\linewidth]{../images/techno1.png}
+	\label{fig:ping5}
+	\end{minipage}}
+ \hfill 	
+  \subfloat[At 10dB the data is more spread out from 200 - 500ms with a mean of 396.4ms and a tail at just under 1000ms in ECL 1.]{
+	\begin{minipage}[c][1\width]{
+	   0.48\textwidth}
+	   \centering
+	   \includegraphics[width=1.0\linewidth]{../images/techno2.png}
+	\label{fig:ping6}
+	\end{minipage}}
+\captionof{figure}[Long-range ping tests]{Long-range ping tests}
+\end{figure}
 
 
 
-Looking at the ICMP ping response according to different RSSI values, we see high jitter of a few seconds from -80dBm or less.
+[](C:\GIT\masters\thesis\images\techno1.png)
 
-![jitter](C:\GIT\masters\thesis\images\jitter.png)
+[](C:\GIT\masters\thesis\images\techno2.png)
+
+\begin{figure}[ht]
+  \subfloat[At 20dB attenuation, the data is more spread across 350 - 1000ms with a mean of 793.4ms and a tail that extends to over 4500ms in ECL 2. Any more attenuation and the signal is lost.]{
+	\begin{minipage}[c][1\width]{
+	   0.48\textwidth}
+	   \centering
+	   \includegraphics[width=1.0\linewidth]{../images/techno3.png}
+	\label{fig:ping7}
+	\end{minipage}}
+ \hfill 	
+  \subfloat[At this point, the signal strength increased to -89dBm and resumed a mean of around 209.6ms with a tail around 500ms.]{
+	\begin{minipage}[c][1\width]{
+	   0.48\textwidth}
+	   \centering
+	   \includegraphics[width=1.0\linewidth]{../images/stelliesquare.png}
+	\label{fig:ping8}
+	\end{minipage}}
+\captionof{figure}[Long-range ping tests]{Long-range ping tests}
+\end{figure}
+
+[](C:\GIT\masters\thesis\images\techno3.png)
+
+[](C:\GIT\masters\thesis\images\jamestownmap.JPG)
+
+[](C:\GIT\masters\thesis\images\stelliesquare.png)
+
+\begin{figure}[ht]
+  \subfloat[A similar pattern was seen at Parmalat, but driving closer there were a few spots where connection was lost or many retries were needed such that the tail extended up to almost 3000ms for the ICMP ping time.]{
+	\begin{minipage}[c][1\width]{
+	   0.48\textwidth}
+	   \centering
+	   \includegraphics[width=1.0\linewidth]{../images/parmalat.png}
+	\label{fig:ping9}
+	\end{minipage}}
+ \hfill 	
+  \subfloat[Lastly, all the test data including raw data on the way to Technopark, we see a similar form.]{
+	\begin{minipage}[c][1\width]{
+	   0.48\textwidth}
+	   \centering
+	   \includegraphics[width=1.0\linewidth]{../images/alltests2.png}
+	\label{fig:ping10}
+	\end{minipage}}
+\captionof{figure}[Long-range ping tests]{Long-range ping tests}
+\end{figure}
+
+[](C:\GIT\masters\thesis\images\parmalat.png)
+
+[](C:\GIT\masters\thesis\images\alltests2.png)
+
+![Looking at the ICMP ping response according to different RSSI values, we see high jitter of a few seconds from -80dBm or less.](C:\GIT\masters\thesis\images\jitter.png){width=50%}
 
 #### Dash7
 
 A Dash7 field test was performed using STM32L0, but due to 10dBm transmit power it limited range to about 300m.
 
-![Dash7 Field Test](../images/1571685763894.png)
+![Dash7 field test reaching 300m max NLOS range](../images/1571685763894.png){width=65%}
 
 Although Dash7 is considered a viable alternative, it fell short on range expectations.
 
 Haystack Technologies has developed a Dash7-over-LoRa implementation that expects ranges of over a few kilometers and can be considered in future research.
+
+### RF Spectrum Tests
+
+![5 dB SINR NB-IoT transmissions using Sierra Wireless WP7702 at 908.2 MHz and EARFCN 3734 of length 2282ms, 1560ms and 1380ms respectively.](../images/image-20191105144302036.png)
+
+![SigFox and LoRa RF signals \@868 MHz](../images/image-20191104223939783.png){width=30%}
+
+### Terrestrial Localization
+
+
 
 ### Power Saving Mechanisms
 
@@ -265,9 +340,9 @@ AT+NPTWEDRXS=2,5,"0001","0011"
 AT+CEREG says that the T3324 active time is 48 seconds, or 2 seconds * 24 binary coded timer value. This is not the expected outcome, even according to Table 10.5.5.32/3GPP
 TS 24.008: Extended DRX parameters information as referenced in Ublox documentation, which expects 40.96s. Besides, the paging time interval is also not working as expected.
 
-![eDRX](C:\Users\d7rob\AppData\Roaming\Typora\typora-user-images\1555567465123.png)
+![eDRX](C:\Users\d7rob\AppData\Roaming\Typora\typora-user-images\1555567465123.png){width=50%}
 
-![eDRX](C:\Users\d7rob\AppData\Roaming\Typora\typora-user-images\1555570254042.png)
+[](C:\Users\d7rob\AppData\Roaming\Typora\typora-user-images\1555570254042.png){width=50%}
 
 The T3324 active timer value is modified to 5.12s.
 
@@ -294,9 +369,9 @@ In the debug logs we see the timer expires after exactly 30 seconds.
 
 
 
-![eDRX](C:\Users\d7rob\AppData\Roaming\Typora\typora-user-images\1555568148322.png)
+![eDRX](C:\Users\d7rob\AppData\Roaming\Typora\typora-user-images\1555568148322.png){width=50%}
 
-![eDRX](C:\Users\d7rob\AppData\Roaming\Typora\typora-user-images\1555569320664.png)
+![eDRX](C:\Users\d7rob\AppData\Roaming\Typora\typora-user-images\1555569320664.png){width=50%}
 
 Increasing the T3324 active timer value to 10.24s, the following results are obtained. It is exactly the same as before.
 
@@ -321,13 +396,17 @@ In the debug logs we see the timer expires after exactly 32 seconds.
 	timer_handle=16871576
 ```
 
-![eDRX](C:\Users\d7rob\AppData\Roaming\Typora\typora-user-images\1555569718434.png)
+[](C:\Users\d7rob\AppData\Roaming\Typora\typora-user-images\1555569718434.png){width=50%}
 
 (These tests should continue until an eDRX value of 2621,44s, or 43.69 minutes and repeated for Quectel, Nordic, SimCom and on Nokia, Ericsson and Huawei basestations)
 
 Also, what is the current usage of running a specific command? Is it negligible or is, for example, polling AT+CSQ constantly detrimental on battery life?
 
+### Ultra-low Current Sleep Measurements
 
+Using an MX 58HD DMM, one can measure 4.501 mA through a 4615 ohm resistor at 21.15V. Theoretically it should be 4.582 mA so that gives an error of 1.82% or ~2%.
+
+*Todo: measure sleep current of devices*
 
 ### Mobility Tests
 
@@ -350,25 +429,49 @@ Table: NB-IoT and LTE Cat-M handover.
 |      |                     |                     |
 |      |                     |                     |
 
+## Example Application
+
+![Top and bottom layers of example PCB](../images/image-20191104224412975.png){width=100%}
+
+![PCB](../images/image-20191105153024907.png){width=75%}
+
+
+
+![Sending data to Thingsboard cloud](../images/image-20191105143716571.png){width=65%}
+
 ## Setup Procedure
 
 Each Field Test will make use of various subtests.
 
 ### Hardware
 
+#### Attenuator
+
+Two of these will be used in series: the HP8494B and the HP8496A. One has a range of 11dB in 1dB steps, and the other has a range of 110dB in 10dB steps, so it is possible to get a full range of 110dB in 1dB steps.
+
+#### Current Measurements
+
 The following tests measure current for a Ublox SARA N200 connected to a ZTE base station.
 
-![Block diagram of current consumption setup for SARA-N2](C:\Users\d7rob\AppData\Roaming\Typora\typora-user-images\1555535660456.png)
+![Block diagram of current consumption setup for SARA-N2](../images/1555535660456.png){width=65%}
+
+
 
 The digital multimeter in the figure is replaced with a ZXCT1008 high-side current monitor in series with the modem. 
 
-![ZXCT1008  high-side current monitor https://www.diodes.com/assets/Datasheets/ZXCT1008.pdf](../images/arduino86-1-1571303569557.png)
+![ZXCT1008  high-side current monitor https://www.diodes.com/assets/Datasheets/ZXCT1008.pdf](../images/arduino86-1-1571303569557.png){width=25%}
 
 Rs is set to a 1 ohm resistor and Rg is set as a 1k ohm resistor such that 100mA supplied to the modem makes 1V.
 
 $V_{out} = I_{load} [mA] * 10 [\frac{V}{mA}]$
 
 ![zxct1008](C:\GIT\masters\thesis\images\zxct1008.jpeg)
+
+### Network Registration
+
+#### e-SIMs
+
+![Hologram e-sim](../images/image-20191105152621948.png){width=50%}
 
 ### PyTest Framework
 
@@ -378,6 +481,20 @@ PyTest is a unit testing framework used to setup the UE for each test using AT c
 
 Subtests measure various aspects of the required metrics.
 
+The SARA-N2 series modules are able to send raw data through UDP sockets to an IP address. The
+data sent over the socket AT commands is not wrapped in any other layer, and the data provided is
+the data that is sent.
+
+The Constrained Application Protocol (CoAP) is a datagram-based client/server application protocol
+for devices on the constrained network (e.g. low overhead, low-power), designed to easily translate
+to HTTP for simplified integration with the web. CoAP clients can use the GET, PUT, POST and
+DELETE methods using requests and responses with a CoAP server.
+
+The usage of the Non-IP method during the sending or receiving of messages saves the overhead of
+needing to send a UDP IP header.
+
+See [@ubloxAppNote2018] for an Application example.
+
 #### UDP {#udp}
 
 UDP is used primarily for establishing low-latency and loss-tolerating connections between applications on the internet.
@@ -386,9 +503,32 @@ To test the capability of sending to the internet for multiple UEs, a simple pro
 
 This test sends a UDP packet to an internet accessible IP address. The IP is 1.1.1.1 and it belongs to Warp which claims to be the fastest DNS resolver in the world, with OpenDNS, Google and Verisign taking the next respective rankings.
 
+
+
+For a more advanced check on sending data to an external server, send data to the u-blox echo
+server at echo.u-blox.com.
+
+* Because there is no DNS lookup function in the SARA-N2 module series, use the IP address
+  server which is 195.34.89.241.
+
+Command Response Description
+AT+NSOCR="DGRAM",17,10000 0
+OK
+Create a UDP socket.
+AT+NSOST=0,"195.34.89.241",7,5,"0102
+030405"
+0,5
+OK
+Send data on socket 0.
++NSONMI: 0,5
+Receive data on socket 0.
+AT+NSORF=0,5 +NSORF: 0,"195.34.89.241",7,5
+,"0102030405",0
+OK
+Request data from socket 0.
+Echo’d data received
+
 #### Periodic Tracking Area Update (PTAU)
-
-
 
 #### Extended Discrete Reception (eDRX)
 
@@ -410,15 +550,50 @@ Peak current is approximately 70mA.
 
 This test is designed to measure client and server initiated echo requests.
 
+#### Ping 
+
+Issue the +NPING AT command to check if the module is able to send and receive data.
+Check to see if the network can communicate to the internet, or it is needed another accessible
+server’s IP address to ping.
+To ping Google’s DNS server:
+AT+NPING="8.8.8.8"
+To ping OpenDNS DNS server:
+AT+NPING="208.67.222.222"
+The information text response to the +NPING AT command will be issued after a few seconds. If the
+information text response is +NPINGERR: 1, the ping has timed out.
+
+* The first ping might fail because it can take a few seconds to connect to the base station. Use
+  the +CSCON URC to show when the module is connected.
+
+
+
 ## Power Efficiency
+
+* ~ 10 years battery life
+
+Low power consumption is vital for battery longevity.
+
+* PCB layout, antenna matching and location will have an effect to the overall interference received by the module.
+* PSM and eDRX
+* On the other hand, although the average power is comparable, peaks in transmission of LoRaWAN’s radio are around 40 mA, while in NB-IoT they reach 220 mA. This causes additional stress on the battery, which has to be managed with care.
+* As can be observed, mean values for NB-IoT are similar to the energy that a LoRaWAN device requires to transmit while using the SF12 configuration. The 5th percentile results for NB-IoT (best observed performance) are comparable to the best case performance of LoRaWAN when operating at SF8. This is in our opinion a relevant result, as NB-IoT guarantees packet delivery with similar power consumption.
+* The expected achievable lifespan (on average) for a NB-IoT is on the order 2-3 years, depending on the datagram size.
+* However, adopters may take into consideration some differences. First, sending larger messages (up to 512 bytes) has almost no impact on NB-IoT.
+* In a simple periodic-reporting application with very limited computing requirements5, the average power can be modeled approximately by Eq. \ref{eq:avgpower}, as detailed in [21]:
+
+$$P = \frac{E_{msg}}{T_{msg}}$$ {#eq:avgpower}
+
+* **Power consumption**: In applications where device battery life is
+  a crucial factor we recommend, either LoRaWAN or Sigfox, because they are completely asynchronous. We found that the battery life of LoRaWAN SF 7 was five times that of LoRaWAN SF 12 and nearly 25 times that of Sigfox. This is mainly due to the extremely long time-on-air of LoRaWAN SF 12 and Sigfox. If NB- IoT worked with the mobile network operators to reduce its RRC- idle phase, it could develop a minimal power consumption to compare with that of LoRaWAN and Sigfox.
+  * It is clear that LoRaWAN SF7 is the most power-efficient, due to the short transmission burst. NB-IoT displays the worst power-consumption, due to the extended RRC-idle state. This can be reduced using Release Assistance as in Section \ref{release_a}.
 
 ### Energy vs SINR
 
-![Ublox (blue) and Quectel (red) energy (J) per datagram as a function of the SINR (dB) as reported by the UE on the MTN-ZTE network limited to 1500 mJ.\label{fig:energy_sinr1400}](../images/1571781182963.png)
+![Ublox (blue) and Quectel (red) energy (J) per datagram as a function of the SINR (dB) as reported by the UE on the MTN-ZTE network limited to 1500 mJ.\label{fig:energy_sinr1400}](../images/1571781182963.png){width=65%}
 
 With the fading colour scheme and range just as in Martinez [@Martinez2019], Fig. \ref{fig:energy_sinr1400} shows the impact of SNR on energy consumption. As observed in the figure, there is a trend of increasing energy with respect to lower SNR levels and high variability. Unfortunately, the effect of different ECLs is unclear.
 
-![Ublox (blue) and Quectel (red) energy (mJ) per datagram as a function of the SINR (dB) as reported by the UE on the MTN-ZTE network.\label{fig:energy_sinr_log}](../images/1571781152992.png)
+![Ublox (blue) and Quectel (red) energy (mJ) per datagram as a function of the SINR (dB) as reported by the UE on the MTN-ZTE network.\label{fig:energy_sinr_log}](../images/1571781152992.png){width=65%}
 
 Increasing the range fully and using logarithms in Fig. \ref{fig:energy_sinr_log}, one can see that there is significant overshoot on the MTN-ZTE network. The trend mentioned in Fig. \ref{fig:energy_sinr1400} continues.
 
@@ -426,39 +601,118 @@ Increasing the range fully and using logarithms in Fig. \ref{fig:energy_sinr_log
 
 ### Energy vs Datagram Size
 
-\begin{minipage}{\linewidth}
-\begin{center}
-\includegraphics[width=1.0\linewidth]{../../code/tests/datagrams/mtn_ublox_energy.pdf}
-\captionof{figure}[UDP Datagram energy-sizes]{Datagram sizes of MTN-Ublox pair up to 1500mJ. Note the steady increase in Energy consumption on the baseline, and the high variation.}
-\label{fig:udpsize}
-\end{center}
-\end{minipage}
-
 [](../../code/tests/datagrams/mtn_ublox_energy.png)
 
-![quectel_sizes](../../code/tests/datagrams/quectel_sizes.png)
+[](../../code/tests/datagrams/quectel_sizes.png){width=65%}
 
-Fig. \ref{fig:udpsize} shows 
+\begin{figure}[ht]
+  \subfloat[Datagram sizes of MTN-Ublox pair up to 1500 mJ. Note the steady increase in Energy consumption on the baseline, and the high variation.]{
+	\begin{minipage}[c][1\width]{
+	   0.48\textwidth}
+	   \centering
+	   \includegraphics[width=1.0\linewidth]{../../code/tests/datagrams/mtn_ublox_energy.pdf}
+	\label{fig:udpsize1}
+	\end{minipage}}
+ \hfill 	
+  \subfloat[Datagram sizes of MTN-Quectel pair up to 10 J]{
+	\begin{minipage}[c][1\width]{
+	   0.48\textwidth}
+	   \centering
+	   \includegraphics[width=1.0\linewidth]{../../code/tests/datagrams/quectel_sizes.png}
+	\label{fig:udpsize2}
+	\end{minipage}}
+\captionof{figure}[UDP Datagram energy-sizes]{UDP Datagram energy-sizes}
+\end{figure}
+
+Fig. \ref{fig:udpsize1} shows 
 
 ### eDRX Energy
 
-![MTN Ublox](../images/1568090120083.png)
+\begin{figure}[ht]
+  \subfloat[MTN-ZTE Ublox]{
+	\begin{minipage}[c][1\width]{
+	   0.48\textwidth}
+	   \centering
+	   \includegraphics[width=1.0\linewidth]{../images/1568090120083.png}
+	\end{minipage}}
+ \hfill 	
+  \subfloat[MTN-ZTE Quectel]{
+	\begin{minipage}[c][1\width]{
+	   0.48\textwidth}
+	   \centering
+	   \includegraphics[width=1.0\linewidth]{../images/1568090147760.png}
+	\end{minipage}}
+\captionof{figure}[eDRX Energy]{eDRX Energy}
+\end{figure}
 
-![MTN Quectel](../images/1568090147760.png)
+[](../images/1568090120083.png){width=45%}
 
-![Vodacom Ublox](../images/1568090173885.png)
+[](../images/1568090147760.png){width=50%}
 
-![Vodacom Quectel](../images/1568090209468.png)
+\begin{figure}[ht]
+  \subfloat[Vodacom-Nokia Ublox]{
+	\begin{minipage}[c][1\width]{
+	   0.48\textwidth}
+	   \centering
+	   \includegraphics[width=1.0\linewidth]{../images/1568090173885.png}
+	\end{minipage}}
+ \hfill 	
+  \subfloat[Vodacom-Nokia Quectel]{
+	\begin{minipage}[c][1\width]{
+	   0.48\textwidth}
+	   \centering
+	   \includegraphics[width=1.0\linewidth]{../images/1568090209468.png}
+	\end{minipage}}
+\captionof{figure}[eDRX Energy]{eDRX Energy}
+\end{figure}
+
+[](../images/1568090173885.png){width=65%}
+
+[](../images/1568090209468.png){width=65%}
 
 ### PTAU Energy
 
-![MTN Ublox PTAU Energy (mJ)](../images/1568089886942.png)
+\begin{figure}[ht]
+  \subfloat[MTN-ZTE Ublox (mJ)]{
+	\begin{minipage}[c][1\width]{
+	   0.48\textwidth}
+	   \centering
+	   \includegraphics[width=1.0\linewidth]{../images/1568089886942.png}
+	\end{minipage}}
+ \hfill 	
+  \subfloat[MTN-ZTE Quectel (mJ)]{
+	\begin{minipage}[c][1\width]{
+	   0.48\textwidth}
+	   \centering
+	   \includegraphics[width=1.0\linewidth]{../images/1568089931848.png}
+	\end{minipage}}
+\captionof{figure}[PTAU Energy]{PTAU Energy}
+\end{figure}
 
-![MTN Quectel PTAU Energy (mJ)](../images/1568089931848.png)
+[](../images/1568089886942.png){width=65%}
 
-![Vodacom Ublox PTAU (J)](../images/1568090001158.png)
+[](../images/1568089931848.png){width=65%}
 
-![Vodacom Quectel PTAU (J)](../images/1568090070185.png)
+\begin{figure}[ht]
+  \subfloat[Vodacom-Nokia Ublox (J)]{
+	\begin{minipage}[c][1\width]{
+	   0.48\textwidth}
+	   \centering
+	   \includegraphics[width=1.0\linewidth]{../images/1568090001158.png}
+	\end{minipage}}
+ \hfill 	
+  \subfloat[Vodacom-Nokia Quectel (J)]{
+	\begin{minipage}[c][1\width]{
+	   0.48\textwidth}
+	   \centering
+	   \includegraphics[width=1.0\linewidth]{../images/1568090070185.png}
+	\end{minipage}}
+\captionof{figure}[PTAU Energy]{PTAU Energy}
+\end{figure}
+
+[](../images/1568090001158.png){width=65%}
+
+[](../images/1568090070185.png){width=65%}
 
 ### Measured Max Current
 
@@ -488,13 +742,38 @@ roughly between 70 and 120mA, and skewed towards higher consumption. It is also 
 
 ## Latency and Timing
 
+* **Down link latency**: In applications where downlink latency is a
+  critical component, only GPRS will suffice, as it is the only technology in this study that requires constant paging between the base station and the end device. 
+* **Down link throughput**: Any applications requiring bi-directional communication of more than 120 bytes per 24 h, should use NB- IoT or GPRS, as Sigfox and LoRaWAN are limited by the duty- cycle limitations of the base station. 
+
+#### TX, RX Time
+
+TX Time is the duration for which the module’s transmitter has been switched on.
+
+RX Time is the duration for which the module’s receiver has been monitored for downlink
+activity (both expressed in milliseconds since the last reboot). Together these can be used to
+assess the time the module spends in each state and hence estimate the power consumed by
+the module.
+
+When the module first tries to register with the network, the Tx time will be zero as it will not have
+instantly found a base station. The Rx time will increase to show it is scanning for a base station.
+Once a base station is found it is possible to see that it is attempting to transmit to the base station
+as the Tx time will start to increase. If the base station does not respond to the module’s Tx, then
+the +CSCON: 1 URC will not be issued.
+
 ### Latency vs SINR
 
-![Latency per datagram as a function of the SINR (dB) as reported by the UE on the (D) MTN-ZTE and (E) Vodacom-Nokia network respectively.\label{fig:latency_sinr_comp}](../images/1571781751620.png)
+![Latency per datagram as a function of the SINR (dB) as reported by the UE on the (D) MTN-ZTE and (E) Vodacom-Nokia network respectively.\label{fig:latency_sinr_comp}](../images/1571781751620.png){width=50%}
 
 In Fig. \ref{fig:latency_sinr_comp}, there is a poor distinction between attenuation zones as the SINR varies throughout the reported RSRP range. Grouping the data according to attenuation decade is important to see the effect of network conditions clearly.
 
 ## Secondary Metrics
+
+### 
+
+![LTE RSRQ and SINR RF Conditions](../images/LTE-RF-Conditions.png)
+
+Tests were completed in good, mid cell and cell edge RF conditions.
 
 ### Signal Strength
 
@@ -507,6 +786,39 @@ Signal strength can be measured using the following metrics:
 * SNR
 * TX Power
 
+#### MCL
+
+For IoT devices used in extended coverage situations,
+such as deep-indoor devices or remote locations, we recommend either Sigfox or NB-IoT, as they offer a maximum MCL of more than 158 dB. IoT devices for general use would benefit from the large-scale deployment of the GPRS network, which provides excellent coverage because of its legacy infrastructure. It is clear that the extra overhead available in Sigfox, LoRaWAN, and NB-IoT allows for better indoor coverage than GPRS, which means that the LPWAN devices can be used in less than optimal operating conditions. Measured MCL correlates with theoretical values.
+
+#### RSRP
+
+RSRP or "Signal Power" is the power of the wanted part of the receive signal, the NB-IoT part.
+
+#### SNR
+
+Last SNR value.
+
+#### "Total power" or RSSI
+
+It is the radio signal strength within the receive bandwidth (both expressed in 10ths
+of a decibel). From this the signal to noise ratio can be calculated.
+
+#### Transmit power
+
+* It is the RF power output from the module. It may be a low number if the
+  received signal strength is good (and hence the module assumes that the base station is close
+  by).
+* Ideally the module
+  should consume 230 mA for +23 dBm.
+
+#### ECL
+
+  It is equivalent to "PRACH coverage enhancement level" defined in 3GPP 36.321 [3] sub
+  clause 5.1
+
+  * As observed, the ECL has an impact on energy consumption, but not on the delay.
+
 ### Throughput
 
 Data can be extracted from UDP packet transmissions using latency and data size
@@ -515,15 +827,36 @@ $THP = \frac{Datagram\ Size}{Latency}$
 
 It also comes from RLC and MAC reporting.
 
+
+
+**Throughput**: As throughput differs greatly between the four technologies, comparisons should rather be made in either the licensed (NB-IoT and GPRS) or unlicensed (Sigfox and LoRaWAN) spectrum categories. Applications that require huge amounts of data to be transmitted, such as real-time vehicle fleet monitoring, we recommend GPRS and NB-IoT as they are not duty cycle limited. The choice of GPRS or NB-IoT will be based on the battery life requirements of the IoT device, with NB-IoT having the advantage. In the case of extremely low-throughput applications, such as water meters, power meters, and weather stations, we recommend Sigfox, as it offers a scalable solution with no base station costs involved. Although it limits the 12 byte throughput per 24 h to 140 messages, this is more than the 20 messages offered by LoRaWAN SF12 (TTN).
+
+* As NB-IoT operates in the licensed spectrum, there are no
+  throughput restrictions, other than the data-rate restriction. We measured the uplink and downlink data rates in different signal quality environments (distances from the gateway) by querying the modem. The measured downlink rate varied from 2250 to 14,193 bps. We could find no clear correlation between the downlink data rate and the signal quality environment.
+
+#### FOTA Upgrades
+
+GPRS and NB-IoT are able to offer FOTA upgrades to IoT devices, as Sigfox has limited bandwidth. This feature is supported by LoRaWAN, through the fragmentation of large payloads [22].
+
 ### Data Overhead
 
 Variation in data overhead can be measured using TX, and RX byte counters.
+
+* The module has a limited dynamic message queue size. For IoT applications, the message size should be of the order of tens of bytes. UDP socket commands limit their payload size to 512 bytes.
+* There is no indication when the UDP data has been sent.
+* Downlink data from the cloud server must also be 512 bytes or less, because otherwise the messages will be lost.
+* The module has an internal message buffer. If the module is unable to send the messages to the network before this buffer is full, because the application is queueing quicker than it can send them, then the UE device will return ERROR for the +NSOST/+NSOSTF commands.
+* If a message cannot be sent because of communication issues between the module and eNB, the module will attempt to send the message a second time. If this fails, the message will be dropped. As +NSOST/+NSOSTF messages are UDP, there is no indication the message has been dropped.
+* The UDP header is about 48-60 bytes in length, and so an application sending 100 bytes will actually send about 160 bytes. For devices in the extreme coverage class 2, this can be quite costly.
+* The UE device may later resume the RRC Connected state with that context, thus avoiding the AS setup and saving considerable signaling overhead for the transmission of infrequent small data packets.
 
 ## Estimations
 
 ### Telemetry Interval
 
 The recommended telemetry interval can be estimated for a subtest.
+
+* Telemetry interval periodicity.
 
 ### Battery longevity
 
@@ -550,53 +883,61 @@ Ublox and Quectel data has been captured for:
 - 4 sentences when comparing nw, and tehn again ues
 - What is the take home?
 
+
+
+* what aspect is the plot trying to cover
+
+* what is it telling me on that topic
+* purpose
+* data in the plot saying / deduce / narrative / story
+* 4 sentences
+* 4 sentences when comparing nw, and tehn again ues
+
 ### Probability estimation
 
 Due to the large dataset and requiring a reasonable means of visualization, we can consider a histogram.
 
-\begin{minipage}{\linewidth}
-\begin{center}
-\includegraphics[width=.6\linewidth]{../../code/tests/old/img2/histogram_counts.pdf}
-\captionof{figure}{Example python histogram of a univariate latency distribution showing counts}
-\label{fig:}
-\end{center}
-\end{minipage}
+\begin{figure}[ht]
+  \subfloat[Example python histogram of a univariate latency distribution showing counts]{
+	\begin{minipage}[c][1\width]{
+	   0.48\textwidth}
+	   \centering
+	   \includegraphics[width=1.0\linewidth]{../../code/tests/old/img2/histogram_counts.pdf}
+	\end{minipage}}
+ \hfill 	
+  \subfloat[Histogram counts vary among various datasets when their sizes differ, so it would be a good idea to normalize it such that the area under the graph makes 1.0. The probability of the discrete data can also be estimated in a continuous probability density function (PDF) with the kernel density estimation.]{
+	\begin{minipage}[c][1\width]{
+	   0.48\textwidth}
+	   \centering
+	   \includegraphics[width=\linewidth]{../../code/tests/old/img2/probability_density_function_seaborn.pdf}
+	\end{minipage}}
+\captionof{figure}[Probability estimation on histogram latency sample]{Probability estimation on histogram latency sample}
+\end{figure}
 
 [](../../code/tests/old/img2/histogram_counts.png)
 
-Histogram counts vary among various datasets when their sizes differ, so it would be a good idea to normalize it such that the area under the graph makes 1.0. The probability of the discrete data can also be estimated in a continuous probability density function (PDF) with the kernel density estimation.
-
-\begin{minipage}{\linewidth}
-\begin{center}
-\includegraphics[width=.6\linewidth]{../../code/tests/old/img2/probability_density_function_seaborn.pdf}
-\captionof{figure}{Example python histogram of a univariate latency distribution with a normalized density and a gaussian kernel density estimate}
-\label{fig:}
-\end{center}
-\end{minipage}
-
 [](../../code/tests/old/img2/probability_density_function_seaborn.png)
 
-There are also various types of kernel density estimation, as can be seen here.
-
-\begin{minipage}{\linewidth}
-\begin{center}
-\includegraphics[width=.6\linewidth]{../../code/tests/old/img2/probability_density_function.pdf}
-\captionof{figure}{Various types of kernel density estimation (KDE)}
-\label{fig:}
-\end{center}
-\end{minipage}
+\begin{figure}[ht]
+  \subfloat[Various types of kernel density estimation (KDE)]{
+	\begin{minipage}[c][1\width]{
+	   0.48\textwidth}
+	   \centering
+	   \includegraphics[width=\linewidth]{../../code/tests/old/img2/probability_density_function.pdf}
+	\end{minipage}}
+ \hfill 	
+  \subfloat[Various types of kernel density estimation (KDE) with histogram and KDE normalized in attempted probability mass function]{
+	\begin{minipage}[c][1\width]{
+	   0.48\textwidth}
+	   \centering
+	   \includegraphics[width=\linewidth]{../../code/tests/old/img2/probability_mass_function.pdf}
+	\end{minipage}}
+\captionof{figure}[Probability estimation on histogram latency sample]{Probability estimation on histogram latency sample}
+\end{figure}
 
 [](../../code/tests/old/img2/probability_density_function.png)
 
 If the histogram bin values are normalized by dividing by the bin count, adding the values makes 1 instead of integrating along the x-axis. Similarly, multiplying the PDF by its x-axis gives the following result. Although all the plotted values are now truly under 1, the KDE is shifted and doesn't seem usable.  The integration to 1 visualization typical in statistics has to be used.
-
-\begin{minipage}{\linewidth}
-\begin{center}
-\includegraphics[width=.6\linewidth]{../../code/tests/old/img2/probability_mass_function.pdf}
-\captionof{figure}{Various types of kernel density estimation (KDE) with histogram and KDE normalized in attempted probability mass function}
-\label{fig:}
-\end{center}
-\end{minipage}
 
 [](../../code/tests/old/img2/probability_mass_function.png)
 
@@ -620,7 +961,7 @@ Instead of finding a single mean for all the entries and associated files, at le
 
 \begin{minipage}{\linewidth}
 \begin{center}
-\includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plots/dpoints.pdf}
+\includegraphics[width=0.8\linewidth]{../../../masters/code/tests/plots/dpoints.pdf}
 \captionof{figure}[K-means clustering]{Trace entries per test. Absolute maximum of 1811 traces has been reduced by removing duplicates and applying thresholds. K-means clustering achieves the desired effect of reducing dimensionality and skewness induced from low latency sampling on the dataset for different tests, yet keeps most of the features of the thresholded max.}
 \label{fig:}
 \end{center}

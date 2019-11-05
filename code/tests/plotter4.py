@@ -42,7 +42,7 @@ def lighten_color(color, amount):
 
 
 def plot(mdb, kx, ky, xlabel='', ylabel='', scale=[1,1], invert=[True,False], colour=cc, folder='', K=0, numerator=[None, None], testl=testl, 
-        joburg=False, log=False, loc='upper right', thresh=None, bbox=(1.05, 1.12)):
+        joburg=False, log=False, loc='upper right', thresh=None, threshx=None, ff1=None, ff2=None, bbox=(1.05, 1.12)):
     global hytest, hyuenw, hyatt, hxtest, hxuenw, hxatt, kkx, kky, xxlabel, yylabel, ffolder, outcounts, ally
     print('plot @3x3')
     outcounts = acounts = oiutcounts = 0
@@ -108,7 +108,7 @@ def plot(mdb, kx, ky, xlabel='', ylabel='', scale=[1,1], invert=[True,False], co
                                     atk['ECL'] = atd['ECL']
 
                                 # main
-                                rx = j.threshold(atk, kx)
+                                rx = j.threshold(atk, kx, threshx)
                                 ry = j.threshold(atk, ky, thresh)
                                 sirange = 1 if log else 2
                                 for si in range(sirange):
@@ -219,6 +219,8 @@ def plot(mdb, kx, ky, xlabel='', ylabel='', scale=[1,1], invert=[True,False], co
         # print('.', end='')
         if log:
             ax.set_yscale('log')
+            if i != 5:
+                ax.set_xscale('log')
     # print('Logarithmic Axes Done')
 
     sirange = 1 if log else 2
@@ -226,6 +228,8 @@ def plot(mdb, kx, ky, xlabel='', ylabel='', scale=[1,1], invert=[True,False], co
         ax = axo if si else axp
         ax[1][2].boxplot(ally)
         f1, f2, g1, g2 = ax[0][2].axis()
+        f1 = ff1 if ff1 else f1
+        f2 = ff2 if ff2 else f2
         g1 = min([b for a in ally for b in a])
         if (g1):
             g1 -= 0.2*np.abs(g1)
@@ -292,15 +296,18 @@ def plot(mdb, kx, ky, xlabel='', ylabel='', scale=[1,1], invert=[True,False], co
             ax2.set_ylim(y2 - 0.1*np.abs(y2), None)
         ax1.add_artist(AnchoredText(alph, loc='lower right' if i in [1,4,7] else 'lower left'))
         ax2.add_artist(AnchoredText(alph, loc='lower right' if i in [1,4,7] else 'lower left'))
+        if i != 5:
+            ax1.xaxis.set_major_formatter(ticker.FuncFormatter(lambda y,pos: ('{{:.{:1d}f}}'.format(int(np.maximum(-np.log10(max(y, 0.01)),0)))).format(y)))
         if log and not i in [1,4,7]:
             ax1.yaxis.set_major_formatter(ticker.FuncFormatter(lambda y,pos: ('{{:.{:1d}f}}'.format(int(np.maximum(-np.log10(max(y, 0.01)),0)))).format(y)))
-        if i != 5:
-            # if log:
-            #     ax1.set_yscale('log')
-            if joburg:
-                ax1.xaxis.set_major_locator(MultipleLocator(20))
-            else:
-                ax1.xaxis.set_major_locator(MultipleLocator(10))
+        # if i != 5:
+        #     if log:
+        #         # ax1.set_yscale('log')
+        #         ax1.set_xscale('log')
+        #     # if joburg:
+        #     #     ax1.xaxis.set_major_locator(MultipleLocator(20))
+        #     # else:
+        #     #     ax1.xaxis.set_major_locator(MultipleLocator(10))
 
     # print('Anchor Text Done')
     kx = '_'.join(kx.split())

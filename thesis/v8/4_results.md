@@ -18,28 +18,15 @@ tablenos-number-by-section: true
 \pagestyle{fancy}
 \fancyfoot[CE,CO]{Page \thepage \hspace{1pt} of \pageref{LastPage}}
 
-# Objective
-
-Application developers and cellular service providers alike are interested in implementing NB-IoT (LTE Cat-NB) as an alternative to LoRaWAN, SigFox and other LPWANs. Application developers require network coverage, and cellular service providers require consumer and enterprise demand or reasonable motivation before rolling it out nationally. Although there is a great deal of theoretical analysis and simulations in research, the lack of empirical evidence may be contributing to the impasse of growth in the network technology. This thesis aims to bridge that divide.
-
-* what aspect is the plot trying to cover
-
-* what is it telling me on that topic
-* purpose
-* data in the plot saying / deduce / narrative / story
-* 4 sentences
-* 4 sentences when comparing nw, and tehn again ues
-* 
-
 \newpage
 
 # Results {#results}
 
-This chapter visualizes and analyses the results from the dataset obtained in Chapter \ref{design}.
+This chapter visualizes and analyses the results from the datasets obtained in Chapter \ref{design}.
 
-## Latency and Timing
+## Latency and Delay
 
-This section handles measured and reported latencies and timings versus signal strength to see the effect of different attenuation zones and test types for multiple UE and MNOs.
+This section handles measured and reported latencies versus signal strength to see the effect of different attenuation zones and test types for multiple UE and MNOs.
 
 ### Measured latency
 
@@ -48,7 +35,7 @@ This is the time spent consuming current and is measured externally.
 \begin{minipage}{\linewidth}
 \begin{center}
 \includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_txTime_plot.pdf}
-\captionof{figure}[Measured Latency points (342/1558) under 25 seconds against RSRP.]{Latency points (342/1558) under 25 seconds in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs against RSRP.}
+\captionof{figure}[Measured Latency points (484/1619) against RSRP for ZTE, Nokia.]{Latency points (484/1619) in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs against RSRP for ZTE, Nokia.}
 \label{fig:latency_rsrp}
 \end{center}
 \end{minipage}
@@ -63,21 +50,21 @@ As opposed to Figure \ref{fig:sinr_latency}, in Figure \ref{fig:latency_rsrp} (A
 
 Extended Coverage Levels (ECL) are determined by the network. The eNB (base station) sets the number of transmission repetitions (ECL) according to received signal strength reported by the UE.
 
-<!--\begin{minipage}{\linewidth}
-\begin{center}
-\includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_txTime_outliers.pdf}
-\captionof{figure}[Measured latency outliers (42/61) up to 300 seconds against RSRP.]{Measured latency outliers (42/61) up to 300 seconds in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs against RSRP.}
-\label{fig:latency_rsrp_otl}
-\end{center}
-\end{minipage}-->
-
 [](../../../masters/code/tests/plotterk/Signal_power_txTime_outliers.png)
-
-<!--Furthermore, in Figure \label{fig:latency_rsrp_otl} latency outliers are-->
 
 Since the only difference between the outliers of latency versus SINR (Figure \ref{fig:sinr_latency}) and latency versus RSRP is the fact that the attenuation zones are evident per decade, it is not necessary to show here. What can also be said is that extreme outliers are not cased by attenuation, but is rather network controlled.
 
-![](../../../masters/code/tests/joplotterk/Signal_power_txTime_plot.png)
+\begin{minipage}{\linewidth}
+\begin{center}
+\includegraphics[width=1.0\linewidth]{../../../masters/code/tests/joplotterk/Signal_power_txTime_plot.pdf}
+\captionof{figure}[Measured Latency points (1082/2169) against RSRP for Huawei, Ericsson.]{Latency points (1082/2169) in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs against RSRP for Huawei, Ericsson.}
+\label{fig:latency_rsrp_joburg}
+\end{center}
+\end{minipage}
+
+[](../../../masters/code/tests/joplotterk/Signal_power_txTime_plot.png)
+
+In Figure \ref{fig:latency_rsrp_joburg}, variance between Quectel Ublox differs slightly, else they share similar traits. Ericsson shows slightly less latency on the MTN network.
 
 ### UE Reported Latency
 
@@ -88,7 +75,7 @@ The UE reports TX and RX time via the `AT+NUESTATS="RADIO"` command. It is the t
 \begin{minipage}{1.0\linewidth}
 \begin{center}
 \includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_txTimeNW_plot.pdf}
-\captionof{figure}[TX time points (325/539) under 20 seconds against RSRP.]{TX time points (325/539) under 20 seconds in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs against RSRP.}
+\captionof{figure}[TX time points (353/503) against RSRP for ZTE, Nokia.]{TX time points (353/503) in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs against RSRP for ZTE, Nokia.}
 \label{fig:txTimeNW}
 \end{center}
 \end{minipage}
@@ -99,28 +86,28 @@ In Figure \ref{fig:txTimeNW}, (AF) the effect of K-means clustering can be seen 
 
 Although the UE reports satisfactory TX time according to 3GPP standards (under 10 seconds) it is not indicative of the measured latency and it is likely necessary to look at RX time as well. Data for both MNOs falls within the first 5 seconds, unlike what was measured. It is possible that actual on-air time is less than when measuring latency from external energy measurements because the signals are modulated in the time domain (duty cycle, pulse width).
 
-\begin{minipage}{1.0\linewidth}
-\begin{center}
-\includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_txTimeNW_outliers.pdf}
-\captionof{figure}[TX time outliers (11/11) up to 100 seconds]{TX time outliers (11/11) exist up to 100 seconds in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs against RSRP.}
-\label{fig:txTimeNW_otl}
-\end{center}
-\end{minipage}
-
 [](../../../masters/code/tests/plotterk/Signal_power_txTimeNW_outliers.png)
 
 [](../../../masters/code/tests/plotterk/txTimeNW_histogram.png)
 
 In Figure \ref{fig:txTimeNW_otl}, (ADFG) MTN-ZTE shows no outliers, but (BC) Vodacom-Nokia shows outliers for both Ublox and Quectel. (E) Attenuation does not affect TX time. (H) If not a lengthy UDP packet transmission, both eDRX and PTAU have a single outlier which could be a result of an RRC connection with a long inactivity timer, synchronization error or else.
 
-![](../../../masters/code/tests/joplotterk/Signal_power_txTimeNW_plot.png)
+\begin{minipage}{1.0\linewidth}
+\begin{center}
+\includegraphics[width=1.0\linewidth]{../../../masters/code/tests/joplotterk/Signal_power_txTimeNW_plot.pdf}
+\captionof{figure}[TX time points (455/1276) against RSRP for Ericsson, Huawei.]{TX time points (455/1276) in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs against RSRP for Ericsson, Huawei.}
+\label{fig:txTimeNW}
+\end{center}
+\end{minipage}
+
+[](../../../masters/code/tests/joplotterk/Signal_power_txTimeNW_plot.png)
 
 #### Receive Time
 
 \begin{minipage}{1.0\linewidth}
 \begin{center}
 \includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_rxTimeNW_plot.pdf}
-\captionof{figure}[RX time packets (283/1069) under 20 seconds against RSRP.]{RX time packets (283/1069) under 20 seconds in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs against RSRP.}
+\captionof{figure}[RX time packets (388/1116) against RSRP for ZTE, Nokia.]{RX time packets (388/1116) in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs against RSRP for ZTE, Nokia.}
 \label{fig:}
 \end{center}
 \end{minipage}
@@ -131,21 +118,21 @@ In Figure \ref{fig:txTimeNW_otl}, (ADFG) MTN-ZTE shows no outliers, but (BC) Vod
 
 The on-air time for receiving from the network is at least twice as much as the TX time metric. It is more comparable to the external energy-latency measurements and suggests that more energy is spent on receiving than necessary.
 
-\begin{minipage}{1.0\linewidth}
-\begin{center}
-\includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_rxTimeNW_outliers.pdf}
-\captionof{figure}[RX time outliers (36/47) up to 400 seconds against RSRP.]{RX time outliers (36/47) up to 400 seconds in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs against RSRP.}
-\label{fig:}
-\end{center}
-\end{minipage}
-
 [](../../../masters/code/tests/plotterk/Signal_power_rxTimeNW_outliers.png)
 
 [](../../../masters/code/tests/plotterk/rxTimeNW_histogram.png)
 
-show RX time up to almost 400 seconds and majority when connected to Vodacom towers. It includes mostly the UDP packet tests and at ECL 1.
+Outliers show RX time up to almost 400 seconds and majority when connected to Vodacom towers. It includes mostly the UDP packet tests and at ECL 1.
 
-![](../../../masters/code/tests/joplotterk/Signal_power_rxTimeNW_plot.png)
+\begin{minipage}{1.0\linewidth}
+\begin{center}
+\includegraphics[width=1.0\linewidth]{../../../masters/code/tests/joplotterk/Signal_power_rxTimeNW_plot.pdf}
+\captionof{figure}[RX time packets (588/1677) against RSRP for Ericsson, Huawei.]{RX time packets (588/1677) in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs against RSRP for Ericsson, Huawei.}
+\label{fig:}
+\end{center}
+\end{minipage}
+
+[](../../../masters/code/tests/joplotterk/Signal_power_rxTimeNW_plot.png)
 
 
 
@@ -164,7 +151,7 @@ The inefficiency between the two South African MNOs can either be attributed to 
 \begin{minipage}{\linewidth}
 \begin{center}
 \includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_energy_plot.pdf}
-\captionof{figure}[Energy packets (340/1540) up to 50 Joules against RSRP.]{Energy packets (340/1540) up to 50 Joules or 14mWh in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs against RSRP.}
+\captionof{figure}[Energy packets (487/1619) against RSRP for ZTE, Nokia.]{Energy packets (487/1619) in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs against RSRP for ZTE, Nokia.}
 \label{fig:}
 \end{center}
 \end{minipage}
@@ -173,13 +160,7 @@ The inefficiency between the two South African MNOs can either be attributed to 
 
 (A) Attenuation zones per decade evident. (B) Vodacom energy consumption up to 10 times greater, excluding outliers. (C) All tests show variation in energy consumption except eDRX. (D) Vodacom at mostly ECL 1, yet MTN has varied ECL.
 
-\begin{minipage}{\linewidth}
-\begin{center}
-\includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_energy_outliers.pdf}
-\captionof{figure}[Energy outliers (46/79) up to 750 Joules against RSRP.]{Energy outliers (46/79) up to 750 Joules or 200mWh in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs against RSRP.}
-\label{fig:}
-\end{center}
-\end{minipage}
+
 
 [](../../../masters/code/tests/plotterk/Signal_power_energy_outliers.png)
 
@@ -193,7 +174,15 @@ With daily transmissions, one can hope for a year when connected to Vodacom, and
 
 [](../../../masters/code/tests/plotterk/energy_histogram.png)
 
-![](../../../masters/code/tests/joplotterk/Signal_power_energy_plot.png)
+\begin{minipage}{\linewidth}
+\begin{center}
+\includegraphics[width=1.0\linewidth]{../../../masters/code/tests/joplotterk/Signal_power_energy_plot.pdf}
+\captionof{figure}[Energy packets (1216/2169) against RSRP for Ericsson, Huawei.]{Energy packets (1216/2169) in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs against RSRP for Ericsson, Huawei.}
+\label{fig:}
+\end{center}
+\end{minipage}
+
+[](../../../masters/code/tests/joplotterk/Signal_power_energy_plot.png)
 
 
 
@@ -202,7 +191,7 @@ With daily transmissions, one can hope for a year when connected to Vodacom, and
 \begin{minipage}{\linewidth}
 \begin{center}
 \includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/txTime_energy_plot.pdf}
-\captionof{figure}[Energy versus latency packets (322/1640)]{Energy versus latency packets (322/1640) in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs against RSRP.}
+\captionof{figure}[Energy versus latency packets (503/1811) for ZTE, Nokia.]{Energy versus latency packets (503/1811) in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs against RSRP for ZTE, Nokia.}
 \label{fig:}
 \end{center}
 \end{minipage}
@@ -213,31 +202,27 @@ With daily transmissions, one can hope for a year when connected to Vodacom, and
 
 After 5 seconds UEs consume 1 Joule per second when connected to a tower and after 15 seconds 3 Joules per second at most. However, it is possible to use energy more efficiently and increase latency.
 
-\begin{minipage}{\linewidth}
-\begin{center}
-\includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/txTime_energy_outliers.pdf}
-\captionof{figure}[Energy versus latency outliers (47/74) against RSRP.]{Energy vs latency outliers (47/74) in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs against RSRP.}
-\label{fig:}
-\end{center}
-\end{minipage}
-
 [](../../../masters/code/tests/plotterk/txTime_energy_outliers.png)
 
  exist from 25 seconds onwards, and it follows the same structure as the above. The majority of outliers are Vodacom's.
 
 It is evident that on all attenuation levels there is a high degree of variation in latency and energy, and thus correlation with attenuation is unlikely. Considering the discrepancy between MTN and Vodacom is up to a ten-fold difference, the latter's Nokia towers are vastly inefficient. Lastly, most of the test data falls within the first 10 seconds, with eDRX power saving being the most efficient, and network registration or sending large UDP packets being the least.
 
-![](../../../masters/code/tests/joplotterk/txTime_energy_plot.png)
+\begin{minipage}{\linewidth}
+\begin{center}
+\includegraphics[width=1.0\linewidth]{../../../masters/code/tests/joplotterk/txTime_energy_plot.pdf}
+\captionof{figure}[Energy versus latency packets (661/2201) for Ericsson, Huawei.]{Energy versus latency packets (661/2201) in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs against RSRP for Ericsson, Huawei.}
+\label{fig:}
+\end{center}
+\end{minipage}
+
+[](../../../masters/code/tests/joplotterk/txTime_energy_plot.png)
 
 * Importance of low latency communications.
 
 ## Secondary Metrics
 
 ### Signal Strength Metrics
-
-![LTE RSRQ and SINR RF Conditions](../images/LTE-RF-Conditions.png)
-
-Tests were completed in good, mid cell and cell edge RF conditions.
 
 #### MCL
 
@@ -248,8 +233,8 @@ RF link budget between the module and base station.
 | -------------- | ------- |
 | MTN-ZTE        | 157 dBm |
 | Vodacom-Nokia  | 137 dBm |
-| MTN-Ericsson   |         |
-| Vodacom-Huawei |         |
+| MTN-Ericsson   | 145 dBm |
+| Vodacom-Huawei | 151 dBm |
 
 
 
@@ -532,6 +517,8 @@ up to 30 required, and one outlier at 80.
 # Discussion and Recommendations {#discussion}
 
 Fix NW config.
+
+* how well NB-IoT performs and facilitates these connections for IoT?
 
 ## Optimal Network Configuration and Setup
 
@@ -1151,6 +1138,8 @@ Table: Longevity Estimate in years using Reported RX, TX Time for 9.36Wh AA batt
 # Appendix D {-#appendixD}
 
 These are examples of some of the information accessible in UEMonitor of SIB blocks and RRC signalling communications.
+
+\newline
 
 ```c
 RRC_DEBUG_ASN

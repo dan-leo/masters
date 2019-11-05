@@ -135,6 +135,7 @@ All rights reserved.
 | **eNB - eNodeB** | E-UTRAN Node B |
 | **GPRS** | General Packet Radio Service |
 | **ICT** | Information and Communications Technology |
+| **ITS** | Intelligent Transportation Systems |
 | **IMEI** | International Mobile Equipment Identity |
 | **IMSI** | International Mobile Station Identity |
 | **IP** | Internet Protocol |
@@ -150,6 +151,7 @@ All rights reserved.
 | **MT** | Mobile Terminated |
 | **MTC** | Machine Type Communications |
 | **MTN** | Mobile Telephone Network |
+| **NLOS** | Non-Line-of-Sight |
 | **NW** | Network |
 | **OTDOA** | Observed Time Difference Of Arrival |
 | **PCI** | Physical Channel ID |
@@ -214,7 +216,7 @@ Knowing that NB-IoT (LTE Cat-NB) is a competitive alternative to LoRaWAN, SigFox
 
 ## Research Objectives {#resobj}
 
-This study has the following aims:
+This study has the following aims:[^bullets]
 
 * Latency, power efficiency and other metrics of NB-IoT are to be evaluated using a set of telemetry tests.
 
@@ -230,7 +232,7 @@ This study has the following aims:
 
 In turn, the above objectives evaluate robustness, stability, capabilities, sources of variability and claimed versus actual core features.
 
-This thesis aims to highlight the challenges, advantages and disadvantages of the technology. By doing endpoint tests with multiple manufacturers and base station vendors, one can paint an accurate picture of the capabilities of the technology. [^bullets]
+This thesis aims to highlight the challenges, advantages and disadvantages of the technology. By doing endpoint tests with multiple manufacturers and base station vendors, one can paint an accurate picture of the capabilities of the technology.
 
 [^bullets]: Thinus are you happy with objectives like so in sentences and bulleted?
 
@@ -274,7 +276,7 @@ GSM and GPRS fall under 2G and 2.5G which started development in the early 90s. 
 
 Long Term Evolution (LTE) is a cellular architecture which is a subset of an even more complex 3GPP body that guides its development. In LTE, the narrowband category is known as LTE Cat-NB or NB-IoT. LTE Cat-M is designated for M2M applications, and although it is quite similar to NB-IoT, it features VoIP, faster throughput and is more similar to the LTE protocol. There are two different versions of NB-IoT, with LTE Cat-NB1 being release 13 and LTE Cat-NB2 being release 14. Their specifications have been frozen in Q1 2016 and mid-2017, respectively. [^group_terms]
 
-[^group_terms]: group terms and don't be disjointed
+[^group_terms]: note: gr
 
 ## Background of NB-IoT{#background}
 
@@ -300,7 +302,19 @@ In terms of estimations, variability affects battery lifetime and telemetry inte
 
 The different types of telemetry messages in Table \ref{tbl:telemetry_ue_lte} include UDP datagram transmission, cellular operator selection (COPS), UDP Echo, extended discontinuous reception (eDRX) and periodic tracking area updates (PTAU). UE devices give the option of using the following main data transmission protocols: UDP, TCP, CoAP and MQTT. UDP is a connectionless protocol used for low latency applications and TCP is used to stream data orderly, reliably, but at a cost to data overhead.  CoAP and MQTT are lightweight message transfer protocols based off of UDP and TCP respectively. To measure the data overhead secondary metric caused by network repetitions and other mechanisms, it would be preferable to avoid overhead from other protocols and thus the simplest option is chosen, namely UDP. 
 
-## LTE Vendors
+## MNOs
+
+The following MNOs have NB-IoT coverage in South Africa which will be expanded upon in Section \ref{coverage}, namely MTN and Vodacom. NB-IoT uses their LTE infrastructure, and this will be expanded upon in Section \ref{lte-vendors}.
+
+### MTN
+
+MTN Group Limited, formerly M-Cell, is a South African multinational mobile telecommunications company, operating in many African, European and Asian countries. Its head office is in Johannesburg. 
+
+### Vodacom
+
+Vodacom Group Limited is a South African mobile communications company, providing voice, messaging, data and converged services to over 55 million customers. 
+
+## LTE Vendors {#lte-vendors}
 
 Table \ref{tbl:telemetry_ue_lte} gives us the following LTE vendors which are among the top 5 in the world: Huawei, Ericsson, Nokia and ZTE. Since there are over a hundred MNOs across the world which also use these LTE vendors, performing this study on the main LTE vendors will also benefit the MNOs. With regard to NB-IoT connectivity on MNOs in South Africa, MTN will be used for ZTE and Ericsson, and Vodacom will be used for Nokia and Huawei.
 
@@ -327,13 +341,19 @@ Other Vendors include: Broadcom Corporation, Cisco Systems, Gemalto NV, Intel Co
 
 ### ZTE
 
-
+ ZTE Corporation is a Chinese multinational telecommunications equipment and systems company headquartered in Shenzhen, Guangdong, China. It is one of China's leading telecom equipment manufacturers. 
 
 ### Nokia
 
+Nokia Corporation is a Finnish multinational telecommunications, information technology, and consumer electronics company, founded in 1865. Nokia's headquarters are in Espoo, in the greater Helsinki metropolitan area. 
+
 ### Ericsson
 
+Telefonaktiebolaget LM Ericsson, doing business as Ericsson, is a Swedish multinational networking and telecommunications company headquartered in Stockholm. 
+
 ### Huawei
+
+Huawei Technologies Co., Ltd. is a Chinese multinational technology company that provides telecommunications equipment and sells consumer electronics, including smartphones and is headquartered in Shenzhen, Guangdong province. The company was founded in 1987 by Ren Zhengfei. 
 
 ## UE Manufacturers
 
@@ -351,15 +371,23 @@ and the following recommended in future:
 
 Although LTE vendors are open to all UE manufacturers, mobile network operators (MNOs) are still in control of LTE vendor equipment and some aspects of UE devices via RF signalling. Thus it is important for MNOs to recognize the effect they have on the technologies they use, especially when it differs from theory.
 
+These UEs all share AT commands as the API to control their capabilities.
+
 ### Ublox
+
+u-blox is a Swiss company that creates wireless semiconductors and modules for consumer, automotive and industrial markets. They operate as a fabless IC and design house. 
 
 ### Quectel
 
+Quectel is the leading global supplier of cellular and GNSS modules, with a broad product portfolio covering the most recent wireless technologies of 5G, LTE/LTE-A, NB-IoT/LTE-M, UMTS/HSPA(+), GSM/GPRS and GNSS. As a professional IoT technology developer and cellular module supplier, Quectel is able to provide one-stop services for IoT cellular modules. Quectel products have been widely applied in IoT/M2M fields including smart payment, telematics and transport, smart energy, smart cities, security, wireless gateways, industry, healthcare, agriculture, and environment monitoring. 
+
 ### Nordic
+
+Nordic Semiconductor is a fabless semiconductor company. The company specializes in ultra-low power performance wireless system on a chip and connectivity devices for the 2.4 GHz ISM band, with power consumption and cost being the main focus areas. 
 
 ### SimCom
 
-These UEs all share AT commands as the API to control their capabilities.
+**SIMCom Wireless Solutions** is a subsidiary of SIM Technology Group Ltd. It is a fast-growing wireless [M2M](https://en.wikipedia.org/wiki/Machine_to_machine) company, designing and offering a variety of wireless modules based on [GSM](https://en.wikipedia.org/wiki/GSM)/[GPRS](https://en.wikipedia.org/wiki/GPRS)/[EDGE](https://en.wikipedia.org/wiki/EDGE),[WCDMA](https://en.wikipedia.org/wiki/WCDMA)/HSDPA and [TD-SCDMA](https://en.wikipedia.org/wiki/TD-SCDMA) technical platforms 
 
 ## Network Coverage Worldwide {#coverage}
 

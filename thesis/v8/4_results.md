@@ -9,8 +9,8 @@ lof: true
 link-citations: true
 csl: ieee.csl
 linkcolor: blue
-geometry: "left=3cm,right=3cm,top=3cm,bottom=2cm"
-numbersections: truew
+geometry: "left=3cm,right=3cm,top=2.5cm,bottom=1.8cm"
+numbersections: true
 tablenos-warning-level: 1
 tablenos-number-by-section: true
 ---
@@ -520,6 +520,14 @@ Fix NW config.
 
 * how well NB-IoT performs and facilitates these connections for IoT?
 
+2G/GSM is a sunsetting technology with great coverage and market penetration in SA. It certainly gathers a large share of revenue by calls and SMS.
+
+When looking at SigFox, we see a technology with far range, but data rates that could be considered too low for our application. LoRa has higher data rates, but is still subject to duty cycle limitations. Dash7 is a full-stack medium range wireless technology that overcomes many of the limitations, including the duty cycle by having listen-before-talk and adaptive data rates.
+
+NB-IoT is a very promising technology. It can coexist with 2G/GSM and LTE networks. When comparing to 2G it has 7 times greater range, and in power saving modes time to transmission is a few seconds, compared to about a minute for 2G. There are a few successful use cases for NB-IoT in South Africa, such as smart metering, asset tracking etc.
+
+There are also a couple of hurdles in the way. Although lauded as a mere software upgrade, it does require the latest basestations and licensing fees. There needs to be a substantial revenue model which ties in with demand.
+
 ## Optimal Network Configuration and Setup
 
 Avoid -120 dBm - -130 dBm region
@@ -550,6 +558,8 @@ Secondly it is 20dBm RSRP less sensitive than MTN’s ZTE infrastructure, which 
 satisfactory performance overall. Since the findings are reflected similarly across the
 Ublox and Quectel UE, it implies that the discrepancies are as a result of the MNO
 vendor.
+
+
 
 # Park {-#park}
 
@@ -612,7 +622,7 @@ only caveat is battery life
 <div id="refs"></div>
 \newpage
 
-# Appendix A {-#appendixA}
+# Appendix A {#appendixA}
 
 ## Measured Latency
 
@@ -845,7 +855,7 @@ Table: Longevity Estimate (years) for 9.36Wh AA battery (Lithium Thionyl Chlorid
 
 \newpage
 
-# Appendix B {-#appendixB}
+# Appendix B {#appendixB}
 
 ## RF Transmit Time
 
@@ -1129,13 +1139,13 @@ Table: Longevity Estimate in years using Reported RX, TX Time for 9.36Wh AA batt
 
 \newpage
 
-# Appendix C {-#appendixC}
+# Appendix C {#appendixC}
 
 * Compare Appendix A and B?
 
 \newpage
 
-# Appendix D {-#appendixD}
+# Appendix D {#appendixD}
 
 These are examples of some of the information accessible in UEMonitor of SIB blocks and RRC signalling communications.
 
@@ -1415,8 +1425,6 @@ Additional Info=UL-CCCH-Message-NB:
 }
 ```
 
-
-
 ```c
 Additional Info=DL-CCCH-Message-NB:
 {
@@ -1479,7 +1487,48 @@ Additional Info=DL-CCCH-Message-NB:
     }
   }
 }
-
 ```
 
+\newpage
 
+# Appendix E {#appendix_SCH_BRD}
+
+![Quectel BG96 modem schematic](../images/image-20191106135315605.png)
+
+![SIM card, USB and miscellaneous circuitry schematic](../images/image-20191106140747428.png)
+
+![Power circuity, antenna and logic level conversion](../images/image-20191106140001950.png)
+
+![Murata CMWX1ZZABZ-078 module schematic](../images/image-20191106140127903.png)
+
+[](../images/image-20191106140222681.png)
+
+![Atmel ATSAMD21G18a microcontroller schematic](../images/image-20191106135707965.png)
+
+![Top and bottom layout of example PCB](../images/image-20191104224412975.png){width=100%}
+
+
+
+\newpage
+
+# Appendix F {#appendix_Sierra}
+
+From 9-20 April 2018, the Sierra Wireless WP7702 modem was tested independently at MTN's Test Plant on 14th Avenue, Johannesburg.
+
+The board is quite impressive. It boasts EC-GSM, LTE Cat M1 and NB1. It uses a Qualcomm MDM 9206 chipset, and a Yocto Linux embedded environment. Because of the Qualcomm chipset, the board (including RF packets) can be thoroughly debugged using the proprietary QXDM tool from Qualcomm via the debug port.
+
+[](C:\Users\d7rob\AppData\Local\Temp\1526328911091.png)
+
+![Retry transmit signals for the WP7702 when extremely close to the edge of signal strength and outside the 180kHz bandwidth channel. \label{fig:overflow180}](C:\Users\d7rob\MEng\cut_many retries wp7702.png)
+
+Although it works as in Fig. \ref{fig:overflow180}, this device seems to have incomplete error handling especially when received signals are very low. On one instance, when connected to EC-GSM, it released from the network at around -90 dBm RSRP, but also threw a +CME sim failure error upon reattaching. Similarly it has happened a few times with NB1 and M1.
+
+If a network registration error (i.e. `+CME sim failure`) is thrown for M1 or NB1 when manually registering with `AT+COPS=1,2,"65510"`, it automatically changes the `at!selrat` from `lte only` to `gsm only`. This problem did happen with the sim card provisioned for M1 and NB1 for the test plant, but intermittently. Apparently it seems to be an issue on the Ericsson base stations. Nevertheless, it would be preferable that the board not have to be rebooted to clear the `+CME sim failure` error.
+
+Furthermore, and working around the supposed eNodeB bug, if `+CME sim failure` occurs for NB1, then one needs to register M1 first, sometimes needing to rearrange `at!selacq`. If M1 doesn't work (which also throws `+CME sim failure`, then one needs to register GSM, M1, then NB1 before NB1 finally registers. 
+
+Perhaps one way to induce the problems is to reboot the Ericsson test eNB with `acc 000100 restartunit y 000`, and try to register directly with NB-IoT. It will fail, and `at!selrat` will switch to `gsm only` instead of `lte only`(even though `at!band=0` / all bands is selected).
+
+Best is also to let the device register by itself in `at+cops=0` mode. Manually has some strange side effects, like the `+CME sim failure` one, and changing the `at!selrat` to `gsm only`.
+
+Perhaps the reason why these errors never showed up when connecting to Vodacom is due to the Idle Mode Mobility cell-selection having a certain rxLevel threshold in the SIB (System Information Block) radio packets which signal for the UE when it is advisable to switch to a tower/cell with better signal strength. This may have been confirmed by Thomas Durand who tested in Gauteng a few weeks later, and who couldn't hold a connection in Pretoria at -115dBm, and at less than -90 dBm the UE (in this case the Ublox modem mentioned later) supposedly tries to re-register with a tower stronger in strength, but GSM towers which then reject it. 

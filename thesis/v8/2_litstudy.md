@@ -142,7 +142,7 @@ DASH7 Alliance Protocol is an open source Wireless Sensor and Actuator Network p
 
 Dash7 is a military RFID standard that has also grown into a medium range LPWAN [@noraird7].
 
-Dash7 is considered a medium range LPWAN and is made for the full networking stack. It delivers an open standard for ultra low power mid-range sensor and actuator communication known as DASH7 Alliance Protocol (D7AP). D7AP is based on active RFID standards ISO 18000-7 for 433 MHz communication, however it has been significantly extended. It was originally intended by the US Department of Defense for container inventory and grew to become a medium range bidirectional wireless network system [@Weyn2015] useful in the indoor-outdoor realm. D7AP is modelled after a BLAST (Burst, Light, Asynchronous, Stealth, and Transitional) communication system which enables it to be a LPWAN competitor. D7AP is a full-stack protocol defining the complete OSI model, with support for three sub-GHz ISM bands, and three data rates (9.6 kbps, 55.55 kbps, and 166.67 kbps), as discussed above. D7AP uses 2-GFSK, the modulation schemes. D7AP can also re-use the PHY layer (radio frontend) of other LPWANs. Also, it should be possible to reuse the RF PHY layer of NB-IoT for Dash7's OSI stack, and in asset tracking, for example, it results in a compressed tracking solution that works well both indoors and outdoors.
+Dash7 is considered a medium range LPWAN and is made for the full networking stack. It delivers an open standard for ultra low power mid-range sensor and actuator communication known as DASH7 Alliance Protocol (D7AP). D7AP is based on active RFID standards ISO 18000-7 for 433 MHz communication, however it has been significantly extended. It was originally intended by the US Department of Defense for container inventory and grew to become a medium range bidirectional wireless network system [@Weyn2015] useful in the indoor-outdoor realm. D7AP is modelled after a BLAST (Burst, Light, Asynchronous, Stealth, and Transitional) communication system which enables it to be a LPWAN competitor. D7AP is a full-stack protocol defining the complete OSI model, with support for three sub-GHz ISM bands, and three data rates (9.6 kbps, 55.55 kbps, and 166.67 kbps), as discussed above. D7AP uses 2-GFSK, the modulation schemes. D7AP can also re-use the PHY layer (radio frontend) of other LPWANs. Also, according to Cortus it should be possible to reuse the RF PHY layer of NB-IoT for Dash7's OSI stack, and in asset tracking, for example, it results in a compressed tracking solution that works well both indoors and outdoors.
 
 Wizzilab is one of three main developers of Dash7. It offers the only full-kit open to development (at least in the form of an application processor). Haystack is another Dash7 developer with [https://github.com/jpnorair/OpenTag](https://github.com/jpnorair/OpenTag). Finally, the developer community with [https://github.com/MOSAIC-LoPoW/dash7-ap-open-source-stack](https://github.com/MOSAIC-LoPoW/dash7-ap-open-source-stack).
 
@@ -233,7 +233,7 @@ Smart metering can be easily applied to most LPWANs, but only a few have synchro
 
 An *actuator* is a component of a machine that is responsible for moving and *controlling* a mechanism or system, for example by opening a valve. In this use case, actuator control requires bidirectionality for its downlink controllability.
 
-### Asset tracking
+### Asset tracking {#asset_tracking}
 
 Many use cases in the Internet of Things (IoT) require or benefit from location information, making positioning a vital dimension in the IoT. The 3GPP has dedicated a significant effort during its Release 14 to enhance positioning support for its IoT technologies. There are still design challenges with regard to positioning support in LTE-M and NB-IoT that need to be taken into consideration. Nevertheless, the 3GPP is working on enhancing position support such as OTDOA, which is a downlink based positioning method. The OTDOA positioning reference signals can also be simulated to illustrate the positioning performance [@Lin2017],[@Miao2018].
 
@@ -292,7 +292,7 @@ for paging, but as this window will be limited to save battery life, the deliver
 occurs mainly when the system detects that uplink messages have been received from a device
 (indicating that it is awake). Here a store-and-forward system, an “IoT Platform”, is useful.
 
-### Standing {#lit_standing}
+### Present Standing {#lit_standing}
 
 NB-IoT has a certain standing in IoT and LPWANs, and this can be seen in Fig. \ref{fig:nbiot_positioning}.
 
@@ -309,6 +309,10 @@ Martinez [@Martinez2019] has explored NB-IoT from the perspective of the applica
 
 A user would consider critical characteristics such as energy consumption, coverage, cost, network latency and behavior. Martinez looks at these except for cost, which is better looked at by Ali [@Ali2015]. A set of tests were devised and results showed that in some cases its energy consumption performed better than an LPWAN referenced technology such as LoRa, with the added benefit of guaranteeing delivery. However, the high variability in energy consumption and network latency call into question its reliability especially for mission-critical applications.
 
+### Future {#future}
+
+In future NB-IoT will have the capability of D2D communications as outlined in 3GPP future release specifications.
+
 ### LTE Architecture
 
 Although most users interact only with the UE device which runs its own proprietary firmware stack, NB-IoT also has a complex backend architecture.
@@ -324,6 +328,14 @@ Both UDP socket commands and datagram commands use the IP data transport through
 This subsection looks at hardware specific to the UE device.
 
 ![Examples of different NB-IoT UE modems with A) Ublox Sara N200, B) Quectel BC95, C) Nordic nRF9160, D) SimCom 7020E](../images/ue_hardware.png){width=55%} 
+
+[](../images/image-20191105225743913.png)
+
+![Current usage decreases depending on eDRX power saving configuration. In this case, it is the SimCom 7020E modem.](../images/image-20191106012315421.png){width=60%}
+
+![Current usage across different LTE bands](../images/image-20191106005828336.png){width=100%}
+
+![Current versus transmit power for NB-IoT modems](../images/image-20191106012023102.png)
 
 ### Setup Procedure {#lit_setup}
 
@@ -550,7 +562,7 @@ roaming SIM by the state being “5”.
 
 This section outlines the capabilities of the UEs.
 
-Table: Summary AT Command set for Ublox {tbl:atcommands}
+Table: Summary AT Command set for Ublox {#tbl:atcommands}
 
 |                      | Command    | Description                                                  |
 | -------------------- | ---------- | ------------------------------------------------------------ |
@@ -599,8 +611,6 @@ Table: NW Config {#tbl:nw_config}
 ### RF
 
 When only a fraction of the existing LTE cell sites support NB-IoT, devices cannot attach to the best cell if that cell does not support NB-IoT. As a result, the path loss can be very high. In addition, they also suffer from high interference from non-NB-IoT cells [@Mangalvedhe2016a].
-
-### Specifics
 
 In the uplink, there are two physical layer channels. The random access channel connects to the base station and the uplink channel contains the data and control information. In downlink there are four channels. Synchronization is used by the endpoint to estimate symbol timing and carrier frequency and obtain the cell identity and frame boundary. The broadcast channel contains the master information block (MIB). The control channel carries downlink control information and can be repeated 2048 times, as well as the data channel which contains the payload, paging, system information and the random access response. [@Adhikary2016].
 

@@ -46,7 +46,7 @@ These tests better orient the reader to the behavior of UE devices and network.
 
 #### System Information Blocks (SIB)
 
-Todo: get SIB block from UE monitor.
+See Appendix \ref{appendixD}.
 
 
 #### Extended Coverage Level (ECL)
@@ -77,7 +77,7 @@ Table: PCI, Cell ID count and EARFCN after K-means cluster filtering with tuples
 | 2    | 484196    |      |          | (34, 32) |
 |      |           |      |          |          |
 |      | EARFCN    |      |          |          |
-|      | 3712      |      | (35, 35) |          |
+|      | 3712      |      | (48, 59) |          |
 |      | 3564      |      |          | (34, 32) |
 
 More than one tower proves that Intra-Frequency Cellular Reselection works as expected.
@@ -145,6 +145,34 @@ In Fig. \ref{fig:cdrx1}, the Ublox UE uses 73.6mA at 110dB attenuation with the 
 [](../../code/tests/logs/zte_mtn/rf_shield/ublox/scope/cdrx73_6mA_110dB.jpg)
 
 [](../../code/tests/logs/zte_mtn/rf_shield/quectel/scope/70.4mA_ant_0dB.jpg)
+
+Observing C-DRX on the Nokia-Vodacom network, we have slightly different results as can be seen summarized in Table \ref{tbl:cdrx_vals}. It seems that on ZTE-MTN and Nokia-Vodacom that cycles are of length 16ms and 256ms respectively.
+
+Table: C-DRX values {#tbl:cdrx_vals}
+
+|               | MTN-ZTE | Nokia-Vodacom |
+| ------------- | ------- | ------------- |
+| **Ublox**     |         |               |
+| Peak current  | 73.6 mA | 72 mA         |
+| Transmit time | 12.8 ms | 56 ms         |
+| Idle time     | 4 ms    | 200 ms        |
+|               |         |               |
+| **Quectel**   |         |               |
+| Peak current  | 70.4 mA | 66.4 mA       |
+| Transmit time | 12 ms   | 80 ms         |
+| Idle time     | 4 ms    | 180 ms        |
+
+[](../../code/tests/logs/nokia_vodacom/centurycity/ublox/cops/scope/cops_idle_56ms.jpg)
+
+[](../../code/tests/logs/nokia_vodacom/centurycity/ublox/cops/scope/cops_tx_200ms.jpg)
+
+[](../../code/tests/logs/nokia_vodacom/centurycity/ublox/cops/scope/cops_72mA.jpg)
+
+[](../../code/tests/logs/nokia_vodacom/centurycity/quectel/cops/scope/cops_80ms_idle.jpg)
+
+[](../../code/tests/logs/nokia_vodacom/centurycity/quectel/cops/scope/cops_66.4mA.jpg)
+
+[](../../code/tests/logs/nokia_vodacom/centurycity/quectel/cops/scope/cops_180ms_tx.jpg)
 
 ####  E-UTRAN Node B (eNB/eNodeB)
 
@@ -326,7 +354,7 @@ Haystack Technologies has developed a Dash7-over-LoRa implementation that expect
 
 ### Terrestrial Localization
 
-Of the prominent LPWANs, SigFox is the only one that offers a simple localization service. Unfortunately it is  has poor accuracy as can be seen in Fig. \ref{fig:sigfox_map}.
+Localization can be useful for asset tracking as discussed in Section \ref{asset_tracking}. Of the prominent LPWANs, SigFox is the only one that offers a simple localization service. NB-IoT will offer one when upgraded to 3GPP Release 14. Unfortunately SigFox is has poor accuracy as can be seen in Fig. \ref{fig:sigfox_map}.
 
 ![With a 17.783km radius in this example, SigFox is poor when it comes to being considered as a source of localization using RSSI triangulation, and it may be better to use TOF techniques such as in OTDOA in NB-IoT \label{fig:sigfox_map}](../images/image-20191105141405835.png){width=80%}
 
@@ -339,8 +367,8 @@ AT+NPTWEDRXS=2,5,"0001","0011"
 +CEREG: 5,1,"8CA7","28C464",7,,,"00011000","00101010"
 ```
 
-AT+CEREG says that the T3324 active time is 48 seconds, or 2 seconds * 24 binary coded timer value. This is not the expected outcome, even according to Table 10.5.5.32/3GPP
-TS 24.008: Extended DRX parameters information as referenced in Ublox documentation, which expects 40.96s. Besides, the paging time interval is also not working as expected.
+AT+CEREG says that the T3324 active time is 48 seconds, or 2 seconds * 24 binary coded timer value. This is not the expected outcome, even according to `Table 10.5.5.32/3GPP
+TS 24.008: Extended DRX parameters information` as referenced in Ublox documentation, which expects 40.96s. Besides, the paging time interval is also not working as expected.
 
 ![eDRX](C:\Users\d7rob\AppData\Roaming\Typora\typora-user-images\1555567465123.png){width=50%}
 
@@ -371,7 +399,7 @@ In the debug logs we see the timer expires after exactly 30 seconds.
 
 
 
-![eDRX](C:\Users\d7rob\AppData\Roaming\Typora\typora-user-images\1555568148322.png){width=50%}
+[](C:\Users\d7rob\AppData\Roaming\Typora\typora-user-images\1555568148322.png){width=50%}
 
 ![eDRX](C:\Users\d7rob\AppData\Roaming\Typora\typora-user-images\1555569320664.png){width=50%}
 
@@ -416,11 +444,11 @@ Using an MX 58HD DMM, one can measure 4.501 mA through a 4615 ohm resistor at 21
 
 ### Mobility Tests
 
-Using a Sierra Wireless WP7702 on Ericsson Test BTS 'L06009A3' and EARFCN 3734/3752, the UE had to periodically ping an internet-facing server and the dead time was measured before it reconnected received a response. The RSRP was in the range -50 to -80 dBm and therefore in ECL 0.
+Using a Sierra Wireless WP7702 on Ericsson Test BTS 'L06009A3' and EARFCN 3734/3752, the UE had to periodically ping an internet-facing server and the dead time was measured before it reconnected and received a response. The RSRP was in the range -50 to -80 dBm and in ECL 0.
 
 The tests took place within a faraday cage to isolate the test network from the live RAN, else by opening the door of the faraday cage it deregistered from the network and MME.
 
-Table: NB-IoT and LTE Cat-M handover.
+Table: NB-IoT and LTE Cat-M handover. {#tbl:mobility}
 
 | Mobility test         | Time   |
 | --------------------- | ------ |
@@ -437,13 +465,22 @@ Table: NB-IoT and LTE Cat-M handover.
 
 ## Example Application
 
-![Top and bottom layers of example PCB](../images/image-20191104224412975.png){width=100%}
+An example application was built to test and understand NB-IoT. See schematic and board layout in Appendix \ref{appendix_SCH_BRD}. The board includes not just NB-IoT but also LTE Cat-M, GPRS/EDGE, SigFox, LoRa, and Dash7. Initally designed to compare LPWANs, we decided to focus more purely on NB-IoT as there is a great deal of variance among UEs and LTE vendors already.
 
-![PCB](../images/image-20191105153024907.png){width=75%}
+Notable components include:
 
+* Quectel BG96 cellular modem
+* Murata CMWX1ZZABZ-078 which includes STM32L072CZ microcontroller and SX1276 transceiver 
+* Atmel SAMD21G18a microcontroller
+* Microchip MIC29302WU 3A LDO Regulator @3.8V
 
+[](../images/image-20191105153024907.png){width=75%}
 
-![Sending data to Thingsboard cloud](../images/image-20191105143716571.png){width=65%}
+ ![PCB application](../images/0_MX60dijDFSoBKpuZ.jpg){width=75%} 
+
+By adding a DHT22 temperature and humidity sensor, button and buzzer for and example application, we see the following dashboard result in Fig. \ref{fig:dashboard_thingsboard}.
+
+![Communication via MQTT to Thingsboard cloud with temperature, humidity, push button and downlink buzzer control \label{fig:dashboard_thingsboard}](../images/image-20191105143716571.png){width=65%}
 
 ## Setup Procedure
 
@@ -477,11 +514,13 @@ $V_{out} = I_{load} [mA] * 10 [\frac{V}{mA}]$
 
 #### e-SIMs
 
-![Hologram e-sim](../images/image-20191105152621948.png){width=50%}
+![Hologram e-sim](../images/image-20191105152621948.png){width=40%}
 
 ### PyTest Framework
 
-PyTest is a unit testing framework used to setup the UE for each test using AT commands.
+PyTest is a unit testing framework used to setup the UE for each test using AT commands and can be found on  [https://github.com/daniel-leonard-robinson/masters/tree/master/code/tests](https://github.com/daniel-leonard-robinson/masters/tree/master/code/tests).
+
+![`Python PyTest` framework written in `Microsoft VS Code` and test output can be seen in bottom-left window. `PlatformIO` compiles microcontroller code and uploads via `avrdude` as can be seen in bottom-right window.](../images/image-20191106145454691.png)
 
 ### Telemetry Tests
 
@@ -555,6 +594,10 @@ Peak current is approximately 70mA.
 #### Echo
 
 This test is designed to measure client and server initiated echo requests.
+
+[](../../code/tests/logs/huawei_vodacom/quellerina/ublox/echo/3.bmp)
+
+![Echo Test](../images/image-20191106153552851.png)
 
 #### Ping 
 

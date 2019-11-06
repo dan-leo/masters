@@ -160,6 +160,7 @@ All rights reserved.
 | **PTAU** | Periodic Tracking Area Update |
 | **PTAU** | Periodic Tracking Area Update |
 | **QXDM** | QUALCOMM eXtensible Diagnostic Monitor |
+| **RAN** | Radio Access Network |
 | **RRC** | Radio Resource Control |
 | **SIM** | Subscriber Identity Module |
 | **SMS** | Short Message Service |

@@ -142,7 +142,7 @@ DASH7 Alliance Protocol is an open source Wireless Sensor and Actuator Network p
 
 Dash7 is a military RFID standard that has also grown into a medium range LPWAN [@noraird7].
 
-Dash7 is considered a medium range LPWAN and is made for the full networking stack. It delivers an open standard for ultra low power mid-range sensor and actuator communication known as DASH7 Alliance Protocol (D7AP). D7AP is based on active RFID standards ISO 18000-7 for 433 MHz communication, however it has been significantly extended. It was originally intended by the US Department of Defense for container inventory and grew to become a medium range bidirectional wireless network system [@Weyn2015] useful in the indoor-outdoor realm. D7AP is modelled after a BLAST (Burst, Light, Asynchronous, Stealth, and Transitional) communication system which enables it to be a LPWAN competitor. D7AP is a full-stack protocol defining the complete OSI model, with support for three sub-GHz ISM bands, and three data rates (9.6 kbps, 55.55 kbps, and 166.67 kbps), as discussed above. D7AP uses 2-GFSK, the modulation schemes. D7AP can also re-use the PHY layer (radio frontend) of other LPWANs. Also, according to Cortus it should be possible to reuse the RF PHY layer of NB-IoT for Dash7's OSI stack, and in asset tracking, for example, it results in a compressed tracking solution that works well both indoors and outdoors.
+Dash7 is considered a medium range LPWAN and is made for the full networking stack. It delivers an open standard for ultra low power mid-range sensor and actuator communication known as DASH7 Alliance Protocol (D7AP). D7AP is based on active RFID standards ISO 18000-7 for 433 MHz communication, however it has been significantly extended. It was originally intended by the US Department of Defense for container inventory and grew to become a medium range bidirectional wireless network system [@Weyn2015] useful in the indoor-outdoor realm. D7AP is modelled after a BLAST (Burst, Light, Asynchronous, Stealth, and Transitional) communication system which enables it to be a LPWAN competitor. D7AP is a full-stack protocol defining the complete OSI model, with support for three sub-GHz ISM bands, and three data rates (9.6 kbps, 55.55 kbps, and 166.67 kbps), as discussed above. D7AP uses 2-GFSK, the modulation schemes. D7AP can also re-use the PHY layer (radio frontend) of other LPWANs. Also, according to Cortus it should be possible to reuse the RF PHY layer (MSK downlink, OFDM uplink) of NB-IoT for Dash7's OSI stack, and in asset tracking, for example, it results in a compressed tracking solution that works well both indoors and outdoors. Dash7 claims 1m indoor accuracy by using vertex data from reference nodes for RSSI & RF fingerprinting.
 
 Wizzilab is one of three main developers of Dash7. It offers the only full-kit open to development (at least in the form of an application processor). Haystack is another Dash7 developer with [https://github.com/jpnorair/OpenTag](https://github.com/jpnorair/OpenTag). Finally, the developer community with [https://github.com/MOSAIC-LoPoW/dash7-ap-open-source-stack](https://github.com/MOSAIC-LoPoW/dash7-ap-open-source-stack).
 
@@ -253,17 +253,17 @@ Durand [@Thomas2018] suggests NB-IoT is poor for asset tracking and utility mete
 
 |      |      |
 | ---- | ---- |
-| Public Safety | Smart bicycles  |
+| Public Safety & Security | Smart bicycles  |
 | Agriculture | Parking |
 | Smart Metering | Garbage bins |
 | Actuator Control | Intelligent buildings |
 | Real-time Monitoring | Pet tracking, Smart Lost and Found |
 | Asset Tracking | Point-of-sale terminals |
-| ITS - Logistics | predictive maintenance |
+| ITS, Automotive & Logistics | predictive maintenance |
 | Health Care | Mobile Advertising |
 | Industrial Production | Environmental Control Systems |
 | Energy, Utilities | Industrial Automation Systems |
-| Retail |      |
+| Retail | Wearables |
 
 
 ## A deeper look into NB-IoT {#nbiot}
@@ -588,6 +588,8 @@ When it comes to base stations, the user does not have control over the inactivi
 
 When the module is synchronized to the base station, the +NUESTATS AT command is able to describe the radio, cell, BLER, throughput statistics and other signaling info received.
 The most useful statistic is the "RADIO" type.
+
+See [@ubloxAppNote2018] for application examples.
 
 ### Application Architecture
 

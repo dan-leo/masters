@@ -160,6 +160,7 @@ All rights reserved.
 | **PTAU** | Periodic Tracking Area Update |
 | **PTAU** | Periodic Tracking Area Update |
 | **QXDM** | QUALCOMM eXtensible Diagnostic Monitor |
+| **RAN** | Radio Access Network |
 | **RRC** | Radio Resource Control |
 | **SIM** | Subscriber Identity Module |
 | **SMS** | Short Message Service |
@@ -368,6 +369,8 @@ and the following recommended in future:
 
 - Nordic nRF9160
 - SimCom SIM7020E
+- Mediatek MT2625
+- Sierra Wireless 7702
 
 Although LTE vendors are open to all UE manufacturers, mobile network operators (MNOs) are still in control of LTE vendor equipment and some aspects of UE devices via RF signalling. Thus it is important for MNOs to recognize the effect they have on the technologies they use, especially when it differs from theory.
 
@@ -387,7 +390,7 @@ Nordic Semiconductor is a fabless semiconductor company. The company specializes
 
 ### SimCom
 
-**SIMCom Wireless Solutions** is a subsidiary of SIM Technology Group Ltd. It is a fast-growing wireless [M2M](https://en.wikipedia.org/wiki/Machine_to_machine) company, designing and offering a variety of wireless modules based on [GSM](https://en.wikipedia.org/wiki/GSM)/[GPRS](https://en.wikipedia.org/wiki/GPRS)/[EDGE](https://en.wikipedia.org/wiki/EDGE),[WCDMA](https://en.wikipedia.org/wiki/WCDMA)/HSDPA and [TD-SCDMA](https://en.wikipedia.org/wiki/TD-SCDMA) technical platforms 
+**SIMCom Wireless Solutions** is a subsidiary of SIM Technology Group Ltd. It is a fast-growing wireless M2M company, designing and offering a variety of wireless modules based on GSM/GPRS/EDGE,WCDMA/HSDPA and TD-SCDMA technical platforms.
 
 ## Network Coverage Worldwide {#coverage}
 
@@ -546,7 +549,7 @@ DASH7 Alliance Protocol is an open source Wireless Sensor and Actuator Network p
 
 Dash7 is a military RFID standard that has also grown into a medium range LPWAN [@noraird7].
 
-Dash7 is considered a medium range LPWAN and is made for the full networking stack. It delivers an open standard for ultra low power mid-range sensor and actuator communication known as DASH7 Alliance Protocol (D7AP). D7AP is based on active RFID standards ISO 18000-7 for 433 MHz communication, however it has been significantly extended. It was originally intended by the US Department of Defense for container inventory and grew to become a medium range bidirectional wireless network system [@Weyn2015] useful in the indoor-outdoor realm. D7AP is modelled after a BLAST (Burst, Light, Asynchronous, Stealth, and Transitional) communication system which enables it to be a LPWAN competitor. D7AP is a full-stack protocol defining the complete OSI model, with support for three sub-GHz ISM bands, and three data rates (9.6 kbps, 55.55 kbps, and 166.67 kbps), as discussed above. D7AP uses 2-GFSK, the modulation schemes. D7AP can also re-use the PHY layer (radio frontend) of other LPWANs. Also, it should be possible to reuse the RF PHY layer of NB-IoT for Dash7's OSI stack, and in asset tracking, for example, it results in a compressed tracking solution that works well both indoors and outdoors.
+Dash7 is considered a medium range LPWAN and is made for the full networking stack. It delivers an open standard for ultra low power mid-range sensor and actuator communication known as DASH7 Alliance Protocol (D7AP). D7AP is based on active RFID standards ISO 18000-7 for 433 MHz communication, however it has been significantly extended. It was originally intended by the US Department of Defense for container inventory and grew to become a medium range bidirectional wireless network system [@Weyn2015] useful in the indoor-outdoor realm. D7AP is modelled after a BLAST (Burst, Light, Asynchronous, Stealth, and Transitional) communication system which enables it to be a LPWAN competitor. D7AP is a full-stack protocol defining the complete OSI model, with support for three sub-GHz ISM bands, and three data rates (9.6 kbps, 55.55 kbps, and 166.67 kbps), as discussed above. D7AP uses 2-GFSK, the modulation schemes. D7AP can also re-use the PHY layer (radio frontend) of other LPWANs. Also, according to Cortus it should be possible to reuse the RF PHY layer (MSK downlink, OFDM uplink) of NB-IoT for Dash7's OSI stack, and in asset tracking, for example, it results in a compressed tracking solution that works well both indoors and outdoors. Dash7 claims 1m indoor accuracy by using vertex data from reference nodes for RSSI & RF fingerprinting.
 
 Wizzilab is one of three main developers of Dash7. It offers the only full-kit open to development (at least in the form of an application processor). Haystack is another Dash7 developer with [https://github.com/jpnorair/OpenTag](https://github.com/jpnorair/OpenTag). Finally, the developer community with [https://github.com/MOSAIC-LoPoW/dash7-ap-open-source-stack](https://github.com/MOSAIC-LoPoW/dash7-ap-open-source-stack).
 
@@ -567,8 +570,6 @@ NB-IoT is LTE's replacement for the power hungry GSM that some IoT devices still
 ### LPWAN Comparison {#lpwan_comparison}
 
 There are many wireless technologies out there, with some standardized, including but not limited to SigFox, LoRaWAN, Dash7, Bluetooth, 6LowPan, RPMA, Weightless, and IETF 6TiSCH. A brief comparison is drawn on NB-IoT against prominent unlicensed frequency LPWANs in Table \ref{tbl:lpwan_comparison}, and cellular LPWANs in Table \ref{tbl:cellular_comparison}.
-
-![SigFox and LoRa RF signals \@868 MHz](../images/image-20191104223939783.png){width=30%}
 
 Table: Brief comparison of NB-IoT against wireless LPWANs {#tbl:lpwan_comparison}
 
@@ -606,15 +607,15 @@ Table: Brief comparison of NB-IoT against cellular technologies {#tbl:cellular_c
 
 To meet application specific requirements, the uniqueness of each technology gives each its advantages and disadvantages. Matching custom applications with a wireless technology is non-trivial as there is no silver bullet that matches all use-cases. In terms of a few metric capabilities, a best-and-worst case matrix is shown in Table \ref{tbl:lpwan_strengths}. NB-IoT is shown to be closest to being an all-round winner, with battery life the exception. This is another reason why battery life is investigated in this study.
 
-Table: LPWAN strengths with \checkmark,  $\times$  denoting best and worst case respectively. {#tbl:lpwan_strengths}
+Table: LPWAN strengths with \checkmark,  $[Math Processing Error]\times$  denoting best and worst case respectively. {#tbl:lpwan_strengths}
 
-| Technology   | MCL        | Scalability | Battery life | Throughput |
-| ------------ | ---------- | ----------- | ------------ | ---------- |
-| NB-IoT       | \checkmark | \checkmark  |              | \checkmark |
-| GPRS         | $\times$   | \checkmark  | $\times$     | \checkmark |
-| LoRaWAN SF7  |            |             | \checkmark   |            |
-| LoRaWAN SF12 | \checkmark | $\times$    |              | $\times$   |
-| SigFox       | \checkmark | \checkmark  |              |            |
+| Technology   | MCL                             | Scalability                     | Battery life                    | Throughput                      |
+| ------------ | ------------------------------- | ------------------------------- | ------------------------------- | ------------------------------- |
+| NB-IoT       | \checkmark                      | \checkmark                      |                                 | \checkmark                      |
+| GPRS         | $[Math Processing Error]\times$ | \checkmark                      | $[Math Processing Error]\times$ | \checkmark                      |
+| LoRaWAN SF7  |                                 |                                 | \checkmark                      |                                 |
+| LoRaWAN SF12 | \checkmark                      | $[Math Processing Error]\times$ |                                 | $[Math Processing Error]\times$ |
+| SigFox       | \checkmark                      | \checkmark                      |                                 |                                 |
 
 Competition in the LPWAN space, regional momentum and IoT demand will ensure that the various technologies will continue to develop and improve to support more features and expand the network coverage.
 
@@ -639,7 +640,7 @@ Smart metering can be easily applied to most LPWANs, but only a few have synchro
 
 An *actuator* is a component of a machine that is responsible for moving and *controlling* a mechanism or system, for example by opening a valve. In this use case, actuator control requires bidirectionality for its downlink controllability.
 
-### Asset tracking
+### Asset tracking {#asset_tracking}
 
 Many use cases in the Internet of Things (IoT) require or benefit from location information, making positioning a vital dimension in the IoT. The 3GPP has dedicated a significant effort during its Release 14 to enhance positioning support for its IoT technologies. There are still design challenges with regard to positioning support in LTE-M and NB-IoT that need to be taken into consideration. Nevertheless, the 3GPP is working on enhancing position support such as OTDOA, which is a downlink based positioning method. The OTDOA positioning reference signals can also be simulated to illustrate the positioning performance [@Lin2017],[@Miao2018].
 
@@ -657,28 +658,20 @@ Durand [@Thomas2018] suggests NB-IoT is poor for asset tracking and utility mete
 
 ### List of Use Cases
 
-- Public Safety
-- Agriculture
-- Smart Metering
-- Actuator Control
-- Real-time Monitoring
-- Asset Tracking
+|                             |                                    |
+| --------------------------- | ---------------------------------- |
+| Public Safety & Security    | Smart bicycles                     |
+| Agriculture                 | Parking                            |
+| Smart Metering              | Garbage bins                       |
+| Actuator Control            | Intelligent buildings              |
+| Real-time Monitoring        | Pet tracking, Smart Lost and Found |
+| Asset Tracking              | Point-of-sale terminals            |
+| ITS, Automotive & Logistics | predictive maintenance             |
+| Health Care                 | Mobile Advertising                 |
+| Industrial Production       | Environmental Control Systems      |
+| Energy, Utilities           | Industrial Automation Systems      |
+| Retail                      | Wearables                          |
 
-* ITS - Logistics
-* Health Care
-* Industrial Production
-* Energy, Utilities
-* Retail
-* Smart bicycles 
-* Parking
-* Garbage bins
-* Intelligent buildings
-* Pet tracking, Smart Lost and Found
-* Point-of-sale terminals
-* predictive maintenance
-* Mobile Advertising
-* Environmental Control Systems
-* Industrial Automation Systems
 
 ## A deeper look into NB-IoT {#nbiot}
 
@@ -706,7 +699,7 @@ for paging, but as this window will be limited to save battery life, the deliver
 occurs mainly when the system detects that uplink messages have been received from a device
 (indicating that it is awake). Here a store-and-forward system, an “IoT Platform”, is useful.
 
-### Standing {#lit_standing}
+### Present Standing {#lit_standing}
 
 NB-IoT has a certain standing in IoT and LPWANs, and this can be seen in Fig. \ref{fig:nbiot_positioning}.
 
@@ -723,6 +716,10 @@ Martinez [@Martinez2019] has explored NB-IoT from the perspective of the applica
 
 A user would consider critical characteristics such as energy consumption, coverage, cost, network latency and behavior. Martinez looks at these except for cost, which is better looked at by Ali [@Ali2015]. A set of tests were devised and results showed that in some cases its energy consumption performed better than an LPWAN referenced technology such as LoRa, with the added benefit of guaranteeing delivery. However, the high variability in energy consumption and network latency call into question its reliability especially for mission-critical applications.
 
+### Future {#future}
+
+In future NB-IoT will have the capability of D2D communications as outlined in 3GPP future release specifications.
+
 ### LTE Architecture
 
 Although most users interact only with the UE device which runs its own proprietary firmware stack, NB-IoT also has a complex backend architecture.
@@ -738,6 +735,14 @@ Both UDP socket commands and datagram commands use the IP data transport through
 This subsection looks at hardware specific to the UE device.
 
 ![Examples of different NB-IoT UE modems with A) Ublox Sara N200, B) Quectel BC95, C) Nordic nRF9160, D) SimCom 7020E](../images/ue_hardware.png){width=55%} 
+
+[](../images/image-20191105225743913.png)
+
+![Current usage decreases depending on eDRX power saving configuration. In this case, it is the SimCom 7020E modem.](../images/image-20191106012315421.png){width=60%}
+
+![Current usage across different LTE bands](../images/image-20191106005828336.png){width=100%}
+
+![Current versus transmit power for NB-IoT modems](../images/image-20191106012023102.png)
 
 ### Setup Procedure {#lit_setup}
 
@@ -829,7 +834,7 @@ For the same example in bad SNR, the TBS allocated 32 bytes per chunk, with a re
 ### Power Saving Mechanisms
 
 The NB-IoT protocol allows for power save mode (PSM), and the SARA-N2 series modules also
-support a Deep Sleep mode where the module is running at very low current, ~3 $uA$. The module
+support a Deep Sleep mode where the module is running at very low current, ~3 $[Math Processing Error]uA$. The module
 automatically enters various states depending on the device activity. Here below are listed the
 common activities and the various states it will be in after registration.
 
@@ -838,7 +843,7 @@ common activities and the various states it will be in after registration.
 #### T3412 PTAU Timer
 
 * (GPRS timer 3)
-*  3GPP TS 24.008 [4], figure 10.5.147a and table 10.5.163a.
+* 3GPP TS 24.008 [4], figure 10.5.147a and table 10.5.163a.
 
 * Bits 5 to 1 represent the binary coded timer value. Bits 6 to 8 define the timer value unit for the GPRS
   timer as follows
@@ -880,7 +885,7 @@ common activities and the various states it will be in after registration.
 
 Extended Discontinuous Reception (eDRX) mode means that paging windows can be scheduled such that the modem can be contacted by the server.
 
-![eDRX mode](C:\Users\d7rob\AppData\Roaming\Typora\typora-user-images\1555540836196.png)
+![eDRX mode](C:\Users\d7rob\AppData\Roaming\Typora\typora-user-images\1555540836196.png){width=80%}
 
 
 
@@ -923,6 +928,7 @@ Register the module to the NB-IoT network before to send or receive any messages
 registered the module will not be able to send or receive any messages.
 To check the network registration status issue the +CEREG read command. The second parameter
 of the information text response (+CEREG: <mode>,<state>) provides the interested information
+
 * 0: not registered, not registering
 * 1: registered
 * 2: not registered, but currently in the process to
@@ -964,7 +970,7 @@ roaming SIM by the state being “5”.
 
 This section outlines the capabilities of the UEs.
 
-Table: Summary AT Command set for Ublox {tbl:atcommands}
+Table: Summary AT Command set for Ublox {#tbl:atcommands}
 
 |                      | Command    | Description                                                  |
 | -------------------- | ---------- | ------------------------------------------------------------ |
@@ -1014,8 +1020,6 @@ Table: NW Config {#tbl:nw_config}
 
 When only a fraction of the existing LTE cell sites support NB-IoT, devices cannot attach to the best cell if that cell does not support NB-IoT. As a result, the path loss can be very high. In addition, they also suffer from high interference from non-NB-IoT cells [@Mangalvedhe2016a].
 
-### Specifics
-
 In the uplink, there are two physical layer channels. The random access channel connects to the base station and the uplink channel contains the data and control information. In downlink there are four channels. Synchronization is used by the endpoint to estimate symbol timing and carrier frequency and obtain the cell identity and frame boundary. The broadcast channel contains the master information block (MIB). The control channel carries downlink control information and can be repeated 2048 times, as well as the data channel which contains the payload, paging, system information and the random access response. [@Adhikary2016].
 
 NB-IoT operation requires a minimum bandwidth of 180 kHz, which is equal to the size of the smallest LTE Physical Resource Block (PRB). Depending on the availability of spectrum, NB-IoT can be either deployed on its own (“standalone operation”), in the guard carriers of existing LTE/UMTS spectrum (“guardband operation”) or within an existing LTE carrier by replacing one or more PRBs (“inband operation”). In order to support such flexible deployment scenarios, NB- IoT reuses the LTE design extensively, such as the OFDM (Orthogonal Frequency Division Multiplexing) type of modulation in downlink, SC-FDMA (Single Carrier Frequency Division Multiple Access) in uplink, channel coding, rate matching and interleaving. In addition, a host of new features are added to ensure the demands of IoT based applications. Key design changes from LTE include the synchronization sequences, the random access preamble, the broadcast channel and the control channel. These changes are primarily motivated by the fact that NB-IoT is required to operate on a minimum bandwidth of 180 kHz (1 PRB), whereas many channels in LTE were designed to span multiple PRBs occupying greater bandwidth compared to 180 kHz. These design changes achieve the IoT requirements while ensuring best co-existence performance with the existing LTE system [@Adhikary2016].
@@ -1038,52 +1042,75 @@ Ublox has an NB-IoT Application Development Guide [@ubloxAppNote2018] which deta
 
 # Design and Methodology {#design}
 
-* Includes some preliminary results to analyze UE device and LTE network behavior.
-
 As stated in Section \ref{resobj}, the aim of this study is to compare user equipment (UE) against mobile network operators (MNOs) with a set of tests that evaluate NB-IoT's performance according to a set of metrics which highlight striking differences due to the underlying complexities of LTE architecture.
 
 Four mobile network operators (MNOs) are compared in South Africa according to the underlying vendor
 infrastructure used, namely Nokia and ZTE in the Cape/coastal regions and Ericsson and Huawei based in Gauteng/inland regions.
 
-More than one UE is used to improve the accuracy of the result, namely Ublox and Quectel. There is an open possibility to test SimCom and Nordic as well.
-
-A unit testing framework has been carefully prepared in Python in combination with a Hewlett Packard rotary RF attenuator in 10dBm steps. 
-
-However, due to the demonstrated energy variability of NB-IoT, an estimate of the energy per message EMSG must be chosen in accordance with the application requirements, rang- ing from very optimistic (best case) to the most pessimistic (worst case). For that purpose, we use the data recorded as a probabilistic
-model, taking the 5th/95th-percentiles for the best/worst case scenarios, and the mean values as an estimate for the long- term behavior.
-
-This information can be applied to multiple application use cases.
-
-
+More than one UE is used to improve the accuracy of the result, namely Ublox and Quectel. A unit testing framework has been carefully prepared in Python in combination with a Hewlett Packard rotary RF attenuator in 10dBm steps. The results can be applied to multiple application use cases.
 
 ## Preliminary Tests
 
-These tests better orient the reader to the behavior of UE devices and network.
+These tests better orient the reader to the behavior of UE devices and LTE network.
 
 ### Network Info
 
+This section looks at certain aspects of LTE networks.
+
 #### System Information Blocks (SIB)
 
-Todo: get SIB block from UE monitor.
+SIBs carry relevant information for the UE, which helps UE to access a cell, perform cell re-selection, information related to INTRA-frequency, INTER-frequency and INTER-RAT cell selections. In LTE there are 13 types of SIBs as can be seen in Table \ref{tbl:sib_descr}.
 
+See Appendix \ref{appendixD} for examples of NB-IoT SIB blocks.
+
+* Downlink systemInformationBlockType1
+* Downlink systemInformation
+* Uplink rrcConnectionRequest
+* Downlink rrcConnectionSetup
+
+Table: System Information Blocks description {#tbl:sib_descr}
+
+| SIB    | Description                                                  |
+| ------ | ------------------------------------------------------------ |
+| SIB-1  | Cell access related parameters and scheduling of other SIBs  |
+| SIB-2  | Common and shared channel configuration, RACH related configuration are present |
+| SIB-3  | Parameters required for intra-frequency, inter-frequency and I-RAT cell re-selections |
+| SIB-4  | Information regarding INTRA-frequency neighboring cells (E-UTRA) |
+| SIB-5  | Information regarding INTER-frequency neighboring cells (E-UTRA) |
+| SIB-6  | Information for re-selection to INTER-RAT (UTRAN cells)      |
+| SIB-7  | Information for re-selection to INTER-RAT (GERAN cells)      |
+| SIB-8  | Information for re-selection to INTER-RAT (CDMA2000)         |
+| SIB-9  | Information related to Home eNodeB (FEMTOCELL)               |
+| SIB-10 | ETWS (Earthquake and Tsunami Warning System) information (Primary notification) |
+| SIB-11 | ETWS (Earthquake and Tsunami Warning System) information (Secondary notification) |
+| SIB-12 | Commercial Mobile Alert Service (CMAS) information.          |
+| SIB-13 | Contains the information required to acquire the MBMS control information associated with one or more MBSFN areas. |
+
+It is important to realize how intricate the underlying architecture of LTE is. For example, considering the singalling between UE and eNodeB using SIBs, we see this in action. This complexity hints that the probably cause of variation is due to the LTE network configuration.
 
 #### Extended Coverage Level (ECL)
 
-The Cell ID in this response is the physical network cell ID.
+Extended Coverage Levels increase the amount of repetitions between UE and eNodeB to increase range. Henceforth, this should mean that a weaker signal strength increases the ECL level. There are 3 levels, with level 0 being the least repetitions, and 2 being the most.
 
 \begin{minipage}{\linewidth}
 \begin{center}
 \includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_ECL_plot.pdf}
-\captionof{figure}[ECL vs RSRP.]{ECL not determined by attenuation.}
-\label{fig:}
+\captionof{figure}[ECL vs RSRP.]{ECL levels shown against RSRP for Ubloxa and Quectel on ZTE-MTN and Nokia-Vodacom networks.}
+\label{fig:ecl_example}
 \end{center}
 \end{minipage}
+
+In this Fig. \ref{fig:ecl_example}, ECL is shown as an example against two networks and it seems apparent that it is not determined by attenuation. Further investigation is necessary.
 
 [](../../../masters/code/tests/plotterk/Signal_power_ECL_plot.png)
 
 [](../../../masters/code/tests/plotterk/ECL_histogram.png)
 
 #### Cell ID, EARFCN, PCI
+
+These identifiers are related to the specific cell towers the UE is connected to.
+
+The Cell ID is the physical network cell ID.  EARFCN uniquely identifies the LTE band and carrier frequency. PCIs,  or Physical Cell Identifiers provide a psuedo-unique value for identifying eNodeBs and is a unique identifier for serving cells.
 
 Table: PCI, Cell ID count and EARFCN after K-means cluster filtering with tuples in (Ublox, Quectel) format. {#tbl:nw_parameters}
 
@@ -1095,10 +1122,10 @@ Table: PCI, Cell ID count and EARFCN after K-means cluster filtering with tuples
 | 2    | 484196    |      |          | (34, 32) |
 |      |           |      |          |          |
 |      | EARFCN    |      |          |          |
-|      | 3712      |      | (35, 35) |          |
+|      | 3712      |      | (48, 59) |          |
 |      | 3564      |      |          | (34, 32) |
 
-More than one tower proves that Intra-Frequency Cellular Reselection works as expected.
+In Table \ref{tbl:nw_parameters} we see three towers on the MTN-ZTE network. More than one tower at the same frequency or EARFCN proves that Intra-Frequency Cellular Reselection works as expected.
 
 [](../../../masters/code/tests/plotterk/Signal_power_Cell_ID_plot.png)
 
@@ -1107,27 +1134,6 @@ More than one tower proves that Intra-Frequency Cellular Reselection works as ex
 [](../../../masters/code/tests/plotterk/Signal_power_PCI_plot.png)
 
 [](../../../masters/code/tests/plotterk/PCI_histogram.png)
-
-Physical Cell ID (PCI) is the serving cell tower's unique identifier.
-
-On the MTN network, the UE connected to three different towers.
-
-Table: EARFCN for serving cell {#tbl:earfcn}
-
-| EARFCN          | 3564 | 3712 |
-| --------------- | ---- | ---- |
-| Ublox-MTN       |      | 35   |
-| Quectel-MTN     |      | 35   |
-| Ublox-Vodacom   | 34   |      |
-| Quectel-Vodacom | 32   |      |
-
-[](../../../masters/code/tests/plotterk/Signal_power_EARFCN_plot.png)
-
-[](../../../masters/code/tests/plotterk/EARFCN_histogram.png)
-
-The E-UTRA Absolute Radio Frequency Channel Number (EARFCN) designates the carrier frequency in the uplink and downlink, and ranges between 0-65535.
-
-Since the frequency of the three towers was the same on all three MTN towers, this shows that intra-cell reselection does indeed work.
 
 #### C-DRX mode
 
@@ -1164,6 +1170,34 @@ In Fig. \ref{fig:cdrx1}, the Ublox UE uses 73.6mA at 110dB attenuation with the 
 
 [](../../code/tests/logs/zte_mtn/rf_shield/quectel/scope/70.4mA_ant_0dB.jpg)
 
+Observing C-DRX on the Nokia-Vodacom network, we have slightly different results as can be seen summarized in Table \ref{tbl:cdrx_vals}. It seems that on ZTE-MTN and Nokia-Vodacom that cycles are of length 16ms and 256ms respectively.
+
+Table: C-DRX values {#tbl:cdrx_vals}
+
+|               | MTN-ZTE | Nokia-Vodacom |
+| ------------- | ------- | ------------- |
+| **Ublox**     |         |               |
+| Peak current  | 73.6 mA | 72 mA         |
+| Transmit time | 12.8 ms | 56 ms         |
+| Idle time     | 4 ms    | 200 ms        |
+|               |         |               |
+| **Quectel**   |         |               |
+| Peak current  | 70.4 mA | 66.4 mA       |
+| Transmit time | 12 ms   | 80 ms         |
+| Idle time     | 4 ms    | 180 ms        |
+
+[](../../code/tests/logs/nokia_vodacom/centurycity/ublox/cops/scope/cops_idle_56ms.jpg)
+
+[](../../code/tests/logs/nokia_vodacom/centurycity/ublox/cops/scope/cops_tx_200ms.jpg)
+
+[](../../code/tests/logs/nokia_vodacom/centurycity/ublox/cops/scope/cops_72mA.jpg)
+
+[](../../code/tests/logs/nokia_vodacom/centurycity/quectel/cops/scope/cops_80ms_idle.jpg)
+
+[](../../code/tests/logs/nokia_vodacom/centurycity/quectel/cops/scope/cops_66.4mA.jpg)
+
+[](../../code/tests/logs/nokia_vodacom/centurycity/quectel/cops/scope/cops_180ms_tx.jpg)
+
 ####  E-UTRAN Node B (eNB/eNodeB)
 
 Ericsson eNodeBs run Linux and their commands are accessible via MOShell, or the scripting language AMOS.
@@ -1173,6 +1207,8 @@ To get an idea of the complexity of a node (eNodeB) in a base station (BTS), run
 ### Range Field Test
 
 This gives a good idea as to the range expected according to RSRP.
+
+#### NB-IoT
 
 Using a Quectel BG96, the following tests were taken on the rooftop described in Fig. \ref{fig:rooftop}.
 
@@ -1334,6 +1370,18 @@ Although Dash7 is considered a viable alternative, it fell short on range expect
 
 Haystack Technologies has developed a Dash7-over-LoRa implementation that expects ranges of over a few kilometers and can be considered in future research.
 
+### RF Spectrum Tests
+
+![5 dB SINR NB-IoT transmissions using Sierra Wireless WP7702 at 908.2 MHz and EARFCN 3734 of length 2282ms, 1560ms and 1380ms respectively.](../images/image-20191105144302036.png)
+
+![SigFox and LoRa RF signals \@868 MHz](../images/image-20191104223939783.png){width=30%}
+
+### Terrestrial Localization
+
+Localization can be useful for asset tracking as discussed in Section \ref{asset_tracking}. Of the prominent LPWANs, SigFox is the only one that offers a simple localization service. NB-IoT will offer one when upgraded to 3GPP Release 14. Unfortunately SigFox is has poor accuracy as can be seen in Fig. \ref{fig:sigfox_map}.
+
+![With a 17.783km radius in this example, SigFox is poor when it comes to being considered as a source of localization using RSSI triangulation, and it may be better to use TOF techniques such as in OTDOA in NB-IoT \label{fig:sigfox_map}](../images/image-20191105141405835.png){width=80%}
+
 ### Power Saving Mechanisms
 
 With a paging time window interval of 2.54s and 4 hyper-frames making up 40.96s, the following output is obtained.
@@ -1343,12 +1391,12 @@ AT+NPTWEDRXS=2,5,"0001","0011"
 +CEREG: 5,1,"8CA7","28C464",7,,,"00011000","00101010"
 ```
 
-AT+CEREG says that the T3324 active time is 48 seconds, or 2 seconds * 24 binary coded timer value. This is not the expected outcome, even according to Table 10.5.5.32/3GPP
-TS 24.008: Extended DRX parameters information as referenced in Ublox documentation, which expects 40.96s. Besides, the paging time interval is also not working as expected.
+AT+CEREG says that the T3324 active time is 48 seconds, or 2 seconds * 24 binary coded timer value. This is not the expected outcome, even according to `Table 10.5.5.32/3GPP
+TS 24.008: Extended DRX parameters information` as referenced in Ublox documentation, which expects 40.96s. Besides, the paging time interval is also not working as expected.
 
 ![eDRX](C:\Users\d7rob\AppData\Roaming\Typora\typora-user-images\1555567465123.png){width=50%}
 
-![eDRX](C:\Users\d7rob\AppData\Roaming\Typora\typora-user-images\1555570254042.png){width=50%}
+[](C:\Users\d7rob\AppData\Roaming\Typora\typora-user-images\1555570254042.png){width=50%}
 
 The T3324 active timer value is modified to 5.12s.
 
@@ -1375,7 +1423,7 @@ In the debug logs we see the timer expires after exactly 30 seconds.
 
 
 
-![eDRX](C:\Users\d7rob\AppData\Roaming\Typora\typora-user-images\1555568148322.png){width=50%}
+[](C:\Users\d7rob\AppData\Roaming\Typora\typora-user-images\1555568148322.png){width=50%}
 
 ![eDRX](C:\Users\d7rob\AppData\Roaming\Typora\typora-user-images\1555569320664.png){width=50%}
 
@@ -1402,11 +1450,15 @@ In the debug logs we see the timer expires after exactly 32 seconds.
 	timer_handle=16871576
 ```
 
-![eDRX](C:\Users\d7rob\AppData\Roaming\Typora\typora-user-images\1555569718434.png){width=50%}
+[](C:\Users\d7rob\AppData\Roaming\Typora\typora-user-images\1555569718434.png){width=50%}
 
 (These tests should continue until an eDRX value of 2621,44s, or 43.69 minutes and repeated for Quectel, Nordic, SimCom and on Nokia, Ericsson and Huawei basestations)
 
 Also, what is the current usage of running a specific command? Is it negligible or is, for example, polling AT+CSQ constantly detrimental on battery life?
+
+![Typical eDRX pattern.](../images/image-20191105163855934.png)
+
+![Irregular eDRX time if not properly configured.](../images/image-20191105162759288.png)
 
 ### Ultra-low Current Sleep Measurements
 
@@ -1416,11 +1468,13 @@ Using an MX 58HD DMM, one can measure 4.501 mA through a 4615 ohm resistor at 21
 
 ### Mobility Tests
 
-Using a Sierra Wireless WP7702 on Ericsson Test BTS 'L06009A3' and EARFCN 3734/3752, the UE had to periodically ping an internet-facing server and the dead time was measured before it reconnected received a response. The RSRP was in the range -50 to -80 dBm and therefore in ECL 0.
+The Sierra Wireless 7702 has a Qualcomm 9206 modem which supports LTE Cat M1, NB1 and EC-GSM.
+
+Using a Sierra Wireless WP7702 on Ericsson Test BTS 'L06009A3' and EARFCN 3734/3752, the UE had to periodically ping an internet-facing server and the dead time was measured before it reconnected and received a response. The RSRP was in the range -50 to -80 dBm and in ECL 0.
 
 The tests took place within a faraday cage to isolate the test network from the live RAN, else by opening the door of the faraday cage it deregistered from the network and MME.
 
-Table: NB-IoT and LTE Cat-M handover.
+Table: NB-IoT and LTE Cat-M handover. {#tbl:mobility}
 
 | Mobility test         | Time   |
 | --------------------- | ------ |
@@ -1429,11 +1483,49 @@ Table: NB-IoT and LTE Cat-M handover.
 
 ### Throughput
 
-|      | Uplink              | Downlink            |
-| ---- | ------------------- | ------------------- |
-| GPRS | 158 kbps or 20 kB/s | 254 kpbs or 31 kB/s |
-|      |                     |                     |
-|      |                     |                     |
+NB-IoT downloading was tested on the Sierra Wireless 7702 using the following script.
+
+```bash
+while [ 1 ]; do	
+    # wget --retry-connrefused --waitretry=1 
+    # 	--read-timeout=20 --timeout=15 -t 0 --continue
+    wget -t 0 -c http://speedtest.ftp.otenet.gr/files/test100k.db
+    # check return value, break if not successful (0)
+    if [ $? != 0 ]; then break; fi;
+    sleep 1s;
+done;
+```
+
+A 100 kb file is downloaded at a rate of around 3kB/s. The script continues download if stalled or other errors occur. Since it is a `Yocto` installation[^yocto], the other `wget` arguments were not available.
+
+[^yocto]: It's not an embedded solution. Rather, it creates a custom one for you, regardless of hardware architecture [@yocto1].
+
+|        | Uplink              | Downlink            |
+| ------ | ------------------- | ------------------- |
+| GPRS   | 158 kbps or 20 kB/s | 254 kpbs or 31 kB/s |
+| NB-IoT |                     | 24 kbps or 3kB/s    |
+|        |                     |                     |
+
+
+
+## Example Application
+
+An example application was built to test and understand NB-IoT. See schematic and board layout in Appendix \ref{appendix_SCH_BRD}. The board includes not just NB-IoT but also LTE Cat-M, GPRS/EDGE, SigFox, LoRa, and Dash7. Initally designed to compare LPWANs, we decided to focus more purely on NB-IoT as there is a great deal of variance among UEs and LTE vendors already.
+
+Notable components include:
+
+* Quectel BG96 cellular modem
+* Murata CMWX1ZZABZ-078 which includes STM32L072CZ microcontroller and SX1276 transceiver 
+* Atmel SAMD21G18a microcontroller
+* Microchip MIC29302WU 3A LDO Regulator @3.8V
+
+[](../images/image-20191105153024907.png){width=75%}
+
+ ![PCB application](../images/0_MX60dijDFSoBKpuZ.jpg){width=75%} 
+
+By adding a DHT22 temperature and humidity sensor, button and buzzer for and example application, we see the following dashboard result in Fig. \ref{fig:dashboard_thingsboard}.
+
+![Communication via MQTT to Thingsboard cloud with temperature, humidity, push button and downlink buzzer control \label{fig:dashboard_thingsboard}](../images/image-20191105143716571.png){width=65%}
 
 ## Setup Procedure
 
@@ -1463,13 +1555,17 @@ $V_{out} = I_{load} [mA] * 10 [\frac{V}{mA}]$
 
 ![zxct1008](C:\GIT\masters\thesis\images\zxct1008.jpeg)
 
-#### Example PCB
+### Network Registration
 
-![Top and bottom layers of example PCB](../images/image-20191104224412975.png){width=100%}
+#### e-SIMs
+
+![Hologram e-sim](../images/image-20191105152621948.png){width=40%}
 
 ### PyTest Framework
 
-PyTest is a unit testing framework used to setup the UE for each test using AT commands.
+PyTest is a unit testing framework used to setup the UE for each test using AT commands and can be found on  [https://github.com/daniel-leonard-robinson/masters/tree/master/code/tests](https://github.com/daniel-leonard-robinson/masters/tree/master/code/tests).
+
+![`Python PyTest` framework written in `Microsoft VS Code` and test output can be seen in bottom-left window. `PlatformIO` compiles microcontroller code and uploads via `avrdude` as can be seen in bottom-right window.](../images/image-20191106145454691.png)
 
 ### Telemetry Tests
 
@@ -1543,6 +1639,10 @@ Peak current is approximately 70mA.
 #### Echo
 
 This test is designed to measure client and server initiated echo requests.
+
+[](../../code/tests/logs/huawei_vodacom/quellerina/ublox/echo/3.bmp)
+
+![Echo Test](../images/image-20191106153552851.png)
 
 #### Ping 
 
@@ -1980,8 +2080,6 @@ https://www.etsi.org/deliver/etsi_TS/125100_125199/125133/13.00.00_60/ts_125133v
 > 1966.08 and 2621.44 seconds, according to TS 24.008 [32]. 
 
 It would be a good idea to use Martinez' work and complement it.
-
-\newpage
 
 # Results {#results}
 
@@ -2483,6 +2581,14 @@ Fix NW config.
 
 * how well NB-IoT performs and facilitates these connections for IoT?
 
+2G/GSM is a sunsetting technology with great coverage and market penetration in SA. It certainly gathers a large share of revenue by calls and SMS.
+
+When looking at SigFox, we see a technology with far range, but data rates that could be considered too low for our application. LoRa has higher data rates, but is still subject to duty cycle limitations. Dash7 is a full-stack medium range wireless technology that overcomes many of the limitations, including the duty cycle by having listen-before-talk and adaptive data rates.
+
+NB-IoT is a very promising technology. It can coexist with 2G/GSM and LTE networks. When comparing to 2G it has 7 times greater range, and in power saving modes time to transmission is a few seconds, compared to about a minute for 2G. There are a few successful use cases for NB-IoT in South Africa, such as smart metering, asset tracking etc.
+
+There are also a couple of hurdles in the way. Although lauded as a mere software upgrade, it does require the latest basestations and licensing fees. There needs to be a substantial revenue model which ties in with demand.
+
 ## Optimal Network Configuration and Setup
 
 Avoid -120 dBm - -130 dBm region
@@ -2513,6 +2619,8 @@ Secondly it is 20dBm RSRP less sensitive than MTN’s ZTE infrastructure, which 
 satisfactory performance overall. Since the findings are reflected similarly across the
 Ublox and Quectel UE, it implies that the discrepancies are as a result of the MNO
 vendor.
+
+
 
 # Park {-#park}
 
@@ -2573,9 +2681,10 @@ only caveat is battery life
 # References
 
 <div id="refs"></div>
+
 \newpage
 
-# Appendix A {-#appendixA}
+# Appendix A {#appendixA}
 
 ## Measured Latency
 
@@ -2583,232 +2692,235 @@ only caveat is battery life
 
 Table: Latency Measurement (s) {#tbl:txTime}
 
-|                  | 16 B   | 64 B   | 128 B   | 256 B   | 512 B   | Echo   | COPS   | eDRX   | PTAU   |
-|------------------|--------|--------|---------|---------|---------|--------|--------|--------|--------|
-| Ublox-ZTE        | 15.5   | 3.54   | 3.60    | 15.3    | 4.97    | 5.04   | 23.3   | 0.39   | 1.87   |
-| Quectel-ZTE      | 2.77   | 2.70   | 2.85    | 3.18    | 3.56    | 2.20   | 3.26   | 0.58   | 18.1   |
-| Ublox-Nokia      | 21.0   | 15.4   | 32.8    | 72.6    | 13.5    | 26.9   | 97.5   | 5.89   | 13.1   |
-| Quectel-Nokia    | 19.0   | 8.84   | 9.22    | 10.6    | 14.0    | 13.3   | 1.88   | 3.67   | 9.38   |
-| Ublox-Ericsson   | 2.21   | 2.18   | 2.25    | 2.61    | 2.89    | 27.6   | 8.15   | 0.35   | 1.85   |
-| Quectel-Ericsson | 2.56   | 2.14   | 2.20    | 2.14    | 2.46    | 6.85   | 3.93   | 0.39   | 1.64   |
-| Ublox-Huawei     | 2.62   | 2.04   | 2.14    | 2.22    | 2.49    | 9.08   | 6.22   | 0.76   | 6.01   |
-| Quectel-Huawei   | 30.9   | 6.58   | 12.8    | 16.9    | 10.4    | 11.2   | 7.70   | 0.52   | 11.2   |
-|                  |        |        |         |         |         |        |        |        |        |
-| ZTE              | 9.15   | 3.12   | 3.23    | 9.27    | 4.26    | 3.62   | 13.2   | 0.49   | 10.0   |
-| Nokia            | 20.0   | 12.1   | 21.0    | 41.6    | 13.8    | 20.1   | 49.7   | 4.78   | 11.2   |
-| Ericsson         | 2.39   | 2.16   | 2.22    | 2.37    | 2.67    | 17.2   | 6.04   | 0.37   | 1.74   |
-| Huawei           | 16.7   | 4.31   | 7.49    | 9.57    | 6.46    | 10.1   | 6.96   | 0.64   | 8.61   |
-| *Ublox*          | 10.3   | 5.80   | 10.2    | 23.2    | 5.98    | 17.1   | 33.8   | 1.85   | 5.72   |
-| *Quectel*        | 13.8   | 5.06   | 6.78    | 8.23    | 7.62    | 8.40   | 4.19   | 1.29   | 10.1   |
-| MTN              | 5.77   | 2.64   | 2.72    | 5.82    | 3.47    | 10.4   | 9.66   | 0.43   | 5.89   |
-| Vodacom          | 18.4   | 8.23   | 14.2    | 25.6    | 10.1    | 15.1   | 28.3   | 2.71   | 9.94   |
-|                  |        |        |         |         |         |        |        |        |        |
-| **ECL 0**        |        |        |         |         |         |        |        |        |        |
-| ZTE              | 8.97   | 1.77   | 2.81    | 9.52    | 2.40    | 2.52   | 11.6   | 0.19   | 43.4   |
-| Nokia            |        | 1.17   | 2.75    | 1.38    |         | 19.8   |        | 33.1   | 3.39   |
-| Ericsson         | 2.03   | 1.76   | 1.82    | 1.90    | 1.89    | 3.20   | 5.89   | 0.35   | 1.36   |
-| Huawei           | 0.71   | 0.51   | 0.55    | 0.51    | 0.80    | 13.4   | 4.38   | 0.21   | 2.05   |
-| *Ublox*          | 4.68   | 1.58   | 1.62    | 4.68    | 1.60    | 9.51   | 8.98   | 0.18   | 1.96   |
-| *Quectel*        | 1.17   | 1.02   | 2.34    | 1.98    | 0.94    | 9.99   | 1.98   | 16.7   | 23.1   |
-| MTN              | 5.50   | 1.76   | 2.31    | 5.71    | 2.14    | 2.86   | 8.77   | 0.27   | 22.4   |
-| Vodacom          | 0.35   | 0.84   | 1.65    | 0.95    | 0.40    | 16.6   | 2.19   | 16.7   | 2.72   |
-|                  |        |        |         |         |         |        |        |        |        |
-| **ECL 1**        |        |        |         |         |         |        |        |        |        |
-| ZTE              | 1.18   | 1.30   | 1.23    | 5.50    | 2.93    | 1.21   | 2.02   | 0.12   | 1.45   |
-| Nokia            | 20.5   | 12.4   | 21.1    | 41.7    | 13.7    | 19.3   | 26.0   | 0.42   | 9.71   |
-| Ericsson         | 2.84   | 2.54   | 2.81    | 3.08    | 3.76    | 19.0   | 2.26   | 0.27   | 2.25   |
-| Huawei           | 2.04   | 2.47   | 2.91    | 6.96    | 3.37    | 2.72   | 8.59   | 0.60   | 2.03   |
-| *Ublox*          | 6.51   | 5.08   | 9.43    | 21.8    | 6.16    | 14.4   | 14.8   | 0.27   | 3.78   |
-| *Quectel*        | 6.79   | 4.29   | 4.64    | 6.82    | 5.76    | 6.71   | 4.63   | 0.44   | 3.94   |
-| MTN              | 2.01   | 1.92   | 2.02    | 4.29    | 3.34    | 10.1   | 2.14   | 0.20   | 1.85   |
-| Vodacom          | 11.2   | 7.45   | 12.0    | 24.3    | 8.57    | 11.0   | 17.3   | 0.51   | 5.87   |
-|                  |        |        |         |         |         |        |        |        |        |
-| **ECL 2**        |        |        |         |         |         |        |        |        |        |
-| ZTE              | 1.67   | 1.42   | 1.76    | 2.14    | 13.6    | 0.93   | 1.23   | 0.48   | 3.44   |
-| Nokia            | 3.88   |        | 4.66    | 8.49    | 7.42    | 23.5   | 55.4   | 3.32   | 45.0   |
-| Ericsson         | 1.73   | 1.67   | 1.58    | 1.58    | 2.18    | 15.4   |        |        | 1.31   |
-| Huawei           | 31.6   | 7.59   | 10.5    | 12.7    | 10.1    | 25.5   | 10.5   | 0.76   | 19.4   |
-| *Ublox*          | 1.00   | 1.06   | 1.03    | 1.12    | 6.50    | 25.3   | 30.0   | 1.51   | 25.9   |
-| *Quectel*        | 18.4   | 4.27   | 8.25    | 11.3    | 10.2    | 7.32   | 3.61   | 0.77   | 8.61   |
-| MTN              | 1.70   | 1.54   | 1.67    | 1.86    | 7.93    | 8.17   | 0.61   | 0.24   | 2.38   |
-| Vodacom          | 17.7   | 3.79   | 7.61    | 10.6    | 8.79    | 24.5   | 33.0   | 2.04   | 32.2   |
-|                  |        |        |         |         |         |        |        |        |        |
+|                  | 16 B | 64 B | 128 B | 256 B | 512 B | Echo | COPS | eDRX | PTAU |
+| ---------------- | ---- | ---- | ----- | ----- | ----- | ---- | ---- | ---- | ---- |
+| Ublox-ZTE        | 15.5 | 3.54 | 3.60  | 15.3  | 4.97  | 5.04 | 23.3 | 0.39 | 1.87 |
+| Quectel-ZTE      | 2.77 | 2.70 | 2.85  | 3.18  | 3.56  | 2.20 | 3.26 | 0.58 | 18.1 |
+| Ublox-Nokia      | 21.0 | 15.4 | 32.8  | 72.6  | 13.5  | 26.9 | 97.5 | 5.89 | 13.1 |
+| Quectel-Nokia    | 19.0 | 8.84 | 9.22  | 10.6  | 14.0  | 13.3 | 1.88 | 3.67 | 9.38 |
+| Ublox-Ericsson   | 2.21 | 2.18 | 2.25  | 2.61  | 2.89  | 27.6 | 8.15 | 0.35 | 1.85 |
+| Quectel-Ericsson | 2.56 | 2.14 | 2.20  | 2.14  | 2.46  | 6.85 | 3.93 | 0.39 | 1.64 |
+| Ublox-Huawei     | 2.62 | 2.04 | 2.14  | 2.22  | 2.49  | 9.08 | 6.22 | 0.76 | 6.01 |
+| Quectel-Huawei   | 30.9 | 6.58 | 12.8  | 16.9  | 10.4  | 11.2 | 7.70 | 0.52 | 11.2 |
+|                  |      |      |       |       |       |      |      |      |      |
+| ZTE              | 9.15 | 3.12 | 3.23  | 9.27  | 4.26  | 3.62 | 13.2 | 0.49 | 10.0 |
+| Nokia            | 20.0 | 12.1 | 21.0  | 41.6  | 13.8  | 20.1 | 49.7 | 4.78 | 11.2 |
+| Ericsson         | 2.39 | 2.16 | 2.22  | 2.37  | 2.67  | 17.2 | 6.04 | 0.37 | 1.74 |
+| Huawei           | 16.7 | 4.31 | 7.49  | 9.57  | 6.46  | 10.1 | 6.96 | 0.64 | 8.61 |
+| *Ublox*          | 10.3 | 5.80 | 10.2  | 23.2  | 5.98  | 17.1 | 33.8 | 1.85 | 5.72 |
+| *Quectel*        | 13.8 | 5.06 | 6.78  | 8.23  | 7.62  | 8.40 | 4.19 | 1.29 | 10.1 |
+| MTN              | 5.77 | 2.64 | 2.72  | 5.82  | 3.47  | 10.4 | 9.66 | 0.43 | 5.89 |
+| Vodacom          | 18.4 | 8.23 | 14.2  | 25.6  | 10.1  | 15.1 | 28.3 | 2.71 | 9.94 |
+|                  |      |      |       |       |       |      |      |      |      |
+| **ECL 0**        |      |      |       |       |       |      |      |      |      |
+| ZTE              | 8.97 | 1.77 | 2.81  | 9.52  | 2.40  | 2.52 | 11.6 | 0.19 | 43.4 |
+| Nokia            |      | 1.17 | 2.75  | 1.38  |       | 19.8 |      | 33.1 | 3.39 |
+| Ericsson         | 2.03 | 1.76 | 1.82  | 1.90  | 1.89  | 3.20 | 5.89 | 0.35 | 1.36 |
+| Huawei           | 0.71 | 0.51 | 0.55  | 0.51  | 0.80  | 13.4 | 4.38 | 0.21 | 2.05 |
+| *Ublox*          | 4.68 | 1.58 | 1.62  | 4.68  | 1.60  | 9.51 | 8.98 | 0.18 | 1.96 |
+| *Quectel*        | 1.17 | 1.02 | 2.34  | 1.98  | 0.94  | 9.99 | 1.98 | 16.7 | 23.1 |
+| MTN              | 5.50 | 1.76 | 2.31  | 5.71  | 2.14  | 2.86 | 8.77 | 0.27 | 22.4 |
+| Vodacom          | 0.35 | 0.84 | 1.65  | 0.95  | 0.40  | 16.6 | 2.19 | 16.7 | 2.72 |
+|                  |      |      |       |       |       |      |      |      |      |
+| **ECL 1**        |      |      |       |       |       |      |      |      |      |
+| ZTE              | 1.18 | 1.30 | 1.23  | 5.50  | 2.93  | 1.21 | 2.02 | 0.12 | 1.45 |
+| Nokia            | 20.5 | 12.4 | 21.1  | 41.7  | 13.7  | 19.3 | 26.0 | 0.42 | 9.71 |
+| Ericsson         | 2.84 | 2.54 | 2.81  | 3.08  | 3.76  | 19.0 | 2.26 | 0.27 | 2.25 |
+| Huawei           | 2.04 | 2.47 | 2.91  | 6.96  | 3.37  | 2.72 | 8.59 | 0.60 | 2.03 |
+| *Ublox*          | 6.51 | 5.08 | 9.43  | 21.8  | 6.16  | 14.4 | 14.8 | 0.27 | 3.78 |
+| *Quectel*        | 6.79 | 4.29 | 4.64  | 6.82  | 5.76  | 6.71 | 4.63 | 0.44 | 3.94 |
+| MTN              | 2.01 | 1.92 | 2.02  | 4.29  | 3.34  | 10.1 | 2.14 | 0.20 | 1.85 |
+| Vodacom          | 11.2 | 7.45 | 12.0  | 24.3  | 8.57  | 11.0 | 17.3 | 0.51 | 5.87 |
+|                  |      |      |       |       |       |      |      |      |      |
+| **ECL 2**        |      |      |       |       |       |      |      |      |      |
+| ZTE              | 1.67 | 1.42 | 1.76  | 2.14  | 13.6  | 0.93 | 1.23 | 0.48 | 3.44 |
+| Nokia            | 3.88 |      | 4.66  | 8.49  | 7.42  | 23.5 | 55.4 | 3.32 | 45.0 |
+| Ericsson         | 1.73 | 1.67 | 1.58  | 1.58  | 2.18  | 15.4 |      |      | 1.31 |
+| Huawei           | 31.6 | 7.59 | 10.5  | 12.7  | 10.1  | 25.5 | 10.5 | 0.76 | 19.4 |
+| *Ublox*          | 1.00 | 1.06 | 1.03  | 1.12  | 6.50  | 25.3 | 30.0 | 1.51 | 25.9 |
+| *Quectel*        | 18.4 | 4.27 | 8.25  | 11.3  | 10.2  | 7.32 | 3.61 | 0.77 | 8.61 |
+| MTN              | 1.70 | 1.54 | 1.67  | 1.86  | 7.93  | 8.17 | 0.61 | 0.24 | 2.38 |
+| Vodacom          | 17.7 | 3.79 | 7.61  | 10.6  | 8.79  | 24.5 | 33.0 | 2.04 | 32.2 |
+|                  |      |      |       |       |       |      |      |      |      |
 
 
 \newpage
+
 ## Average Power
 
 
 Table: Average Power (uWh) {#tbl:energy}
 
-|                  | 16 B   | 64 B   | 128 B   | 256 B   | 512 B   | Echo   | COPS   | eDRX   | PTAU   |
-|------------------|--------|--------|---------|---------|---------|--------|--------|--------|--------|
-| Ublox-ZTE        | 8306.7 | 1409.9 | 828.29  | 12242.  | 1309.3  | 2719.9 | 11596. | 41.817 | 298.77 |
-| Quectel-ZTE      | 739.98 | 500.84 | 554.34  | 897.32  | 1128.5  | 779.02 | 1816.9 | 52.334 | 13778. |
-| Ublox-Nokia      | 13718. | 10161. | 11472.  | 31622.  | 6955.6  | 21088. | 47927. | 3778.2 | 11189. |
-| Quectel-Nokia    | 7590.8 | 3618.9 | 4420.9  | 6020.0  | 10139.  | 6467.9 | 515.02 | 2083.1 | 5664.0 |
-| Ublox-Ericsson   | 273.28 | 234.07 | 291.53  | 453.77  | 730.29  | 9864.6 | 3133.5 | 61.501 | 167.12 |
-| Quectel-Ericsson | 205.01 | 149.33 | 178.99  | 143.03  | 345.02  | 2377.7 | 348.18 | 91.928 | 63.772 |
-| Ublox-Huawei     | 504.79 | 375.92 | 424.11  | 396.78  | 404.39  | 4635.4 | 3107.1 | 3.7946 | 2005.7 |
-| Quectel-Huawei   | 17197. | 1308.5 | 5684.3  | 3126.9  | 2849.1  | 6123.5 | 2292.9 | 0.8597 | 7937.3 |
-|                  |        |        |         |         |         |        |        |        |        |
-| ZTE              | 4523.3 | 955.41 | 691.31  | 6569.8  | 1218.9  | 1749.4 | 6706.8 | 47.075 | 7038.4 |
-| Nokia            | 10654. | 6890.4 | 7946.6  | 18821.  | 8547.5  | 13778. | 24221. | 2930.6 | 8426.8 |
-| Ericsson         | 239.14 | 191.70 | 235.26  | 298.40  | 537.66  | 6121.1 | 1740.8 | 76.715 | 115.45 |
-| Huawei           | 8851.3 | 842.24 | 3054.2  | 1761.8  | 1626.7  | 5379.4 | 2700.0 | 2.3272 | 4971.5 |
-| *Ublox*          | 5700.7 | 3045.4 | 3254.0  | 11178.  | 2349.9  | 9577.0 | 16441. | 971.34 | 3415.3 |
-| *Quectel*        | 6433.4 | 1394.4 | 2709.6  | 2546.8  | 3615.5  | 3937.0 | 1243.2 | 557.06 | 6860.8 |
-| MTN              | 2381.2 | 573.55 | 463.29  | 3434.1  | 878.30  | 3935.3 | 4223.8 | 61.895 | 3576.9 |
-| Vodacom          | 9752.9 | 3866.3 | 5500.4  | 10291.  | 5087.1  | 9578.8 | 13460. | 1466.5 | 6699.2 |
-|                  |        |        |         |         |         |        |        |        |        |
-| **ECL 0**        |        |        |         |         |         |        |        |        |        |
-| ZTE              | 4321   | 704.   | 484.    | 6634    | 434.    | 1359   | 5798   | 20.9   | 3543   |
-| Nokia            |        | 93.6   | 680.    | 153.    |         | 2118   |        | 1164   | 1110   |
-| Ericsson         | 83.3   | 64.6   | 75.9    | 85.0    | 93.3    | 794.   | 1659   | 100.   | 40.4   |
-| Huawei           | 14.4   | 6.31   | 5.33    | 69.0    | 36.0    | 3967   | 536.   | 0.07   | 82.0   |
-| *Ublox*          | 2109   | 377.   | 235.    | 3185    | 217.    | 9054   | 3892   | 25.8   | 191.   |
-| *Quectel*        | 100.   | 57.4   | 387.    | 285.    | 64.9    | 4600   | 104.   | 5856   | 1814   |
-| MTN              | 2202   | 384.   | 280.    | 3359    | 264.    | 1077   | 3728   | 60.7   | 1773   |
-| Vodacom          | 7.20   | 50.0   | 342.    | 111.    | 18.0    | 1257   | 268.   | 5821   | 596.   |
-|                  |        |        |         |         |         |        |        |        |        |
-| **ECL 1**        |        |        |         |         |         |        |        |        |        |
-| ZTE              | 162.   | 217.   | 161.    | 3201    | 581.    | 305.   | 1254   | 0.95   | 228.   |
-| Nokia            | 1090   | 7046   | 7968    | 1919    | 8949    | 1199   | 2395   | 23.7   | 6469   |
-| Ericsson         | 428.   | 354.   | 465.    | 735.    | 1275    | 7568   | 337.   | 2.03   | 253.   |
-| Huawei           | 194.   | 89.5   | 147.    | 1042    | 537.    | 439.   | 4051   | 1.77   | 83.0   |
-| *Ublox*          | 3637   | 2722   | 3099    | 9823    | 2629    | 7404   | 1342   | 3.37   | 1898   |
-| *Quectel*        | 2209   | 1131   | 1272    | 2263    | 3042    | 2750   | 1375   | 10.9   | 1618   |
-| MTN              | 295.   | 285.   | 313.    | 1968    | 928.    | 3937   | 796.   | 1.49   | 240.   |
-| Vodacom          | 5551   | 3567   | 4057    | 1011    | 4743    | 6217   | 1400   | 12.7   | 3276   |
-|                  |        |        |         |         |         |        |        |        |        |
-| **ECL 2**        |        |        |         |         |         |        |        |        |        |
-| ZTE              | 678.   | 300.   | 461.    | 878.    | 7359    | 521.   | 562.   | 51.3   | 2073   |
-| Nokia            | 2022   |        | 3527    | 1753    | 648.    | 1583   | 2017   | 168.   | 5076   |
-| Ericsson         | 311.   | 238.   | 276.    | 223.    | 620.    | 6184   |        |        | 98.4   |
-| Huawei           | 1337   | 2117   | 4817    | 2832    | 2661    | 1618   | 7596   | 5.60   | 1278   |
-| *Ublox*          | 279.   | 318.   | 305.    | 280.    | 3370    | 1459   | 1228   | 12.3   | 2684   |
-| *Quectel*        | 7912   | 1009   | 4235    | 2563    | 2275    | 4766   | 1880   | 100.   | 6021   |
-| MTN              | 494.   | 269.   | 368.    | 550.    | 3990    | 3353   | 281.   | 25.6   | 1085   |
-| Vodacom          | 7697   | 1058   | 4172    | 2293    | 1655    | 1601   | 1388   | 87.2   | 3177   |
-|                  |        |        |         |         |         |        |        |        |        |
+|                  | 16 B   | 64 B   | 128 B  | 256 B  | 512 B  | Echo   | COPS   | eDRX   | PTAU   |
+| ---------------- | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ |
+| Ublox-ZTE        | 8306.7 | 1409.9 | 828.29 | 12242. | 1309.3 | 2719.9 | 11596. | 41.817 | 298.77 |
+| Quectel-ZTE      | 739.98 | 500.84 | 554.34 | 897.32 | 1128.5 | 779.02 | 1816.9 | 52.334 | 13778. |
+| Ublox-Nokia      | 13718. | 10161. | 11472. | 31622. | 6955.6 | 21088. | 47927. | 3778.2 | 11189. |
+| Quectel-Nokia    | 7590.8 | 3618.9 | 4420.9 | 6020.0 | 10139. | 6467.9 | 515.02 | 2083.1 | 5664.0 |
+| Ublox-Ericsson   | 273.28 | 234.07 | 291.53 | 453.77 | 730.29 | 9864.6 | 3133.5 | 61.501 | 167.12 |
+| Quectel-Ericsson | 205.01 | 149.33 | 178.99 | 143.03 | 345.02 | 2377.7 | 348.18 | 91.928 | 63.772 |
+| Ublox-Huawei     | 504.79 | 375.92 | 424.11 | 396.78 | 404.39 | 4635.4 | 3107.1 | 3.7946 | 2005.7 |
+| Quectel-Huawei   | 17197. | 1308.5 | 5684.3 | 3126.9 | 2849.1 | 6123.5 | 2292.9 | 0.8597 | 7937.3 |
+|                  |        |        |        |        |        |        |        |        |        |
+| ZTE              | 4523.3 | 955.41 | 691.31 | 6569.8 | 1218.9 | 1749.4 | 6706.8 | 47.075 | 7038.4 |
+| Nokia            | 10654. | 6890.4 | 7946.6 | 18821. | 8547.5 | 13778. | 24221. | 2930.6 | 8426.8 |
+| Ericsson         | 239.14 | 191.70 | 235.26 | 298.40 | 537.66 | 6121.1 | 1740.8 | 76.715 | 115.45 |
+| Huawei           | 8851.3 | 842.24 | 3054.2 | 1761.8 | 1626.7 | 5379.4 | 2700.0 | 2.3272 | 4971.5 |
+| *Ublox*          | 5700.7 | 3045.4 | 3254.0 | 11178. | 2349.9 | 9577.0 | 16441. | 971.34 | 3415.3 |
+| *Quectel*        | 6433.4 | 1394.4 | 2709.6 | 2546.8 | 3615.5 | 3937.0 | 1243.2 | 557.06 | 6860.8 |
+| MTN              | 2381.2 | 573.55 | 463.29 | 3434.1 | 878.30 | 3935.3 | 4223.8 | 61.895 | 3576.9 |
+| Vodacom          | 9752.9 | 3866.3 | 5500.4 | 10291. | 5087.1 | 9578.8 | 13460. | 1466.5 | 6699.2 |
+|                  |        |        |        |        |        |        |        |        |        |
+| **ECL 0**        |        |        |        |        |        |        |        |        |        |
+| ZTE              | 4321   | 704.   | 484.   | 6634   | 434.   | 1359   | 5798   | 20.9   | 3543   |
+| Nokia            |        | 93.6   | 680.   | 153.   |        | 2118   |        | 1164   | 1110   |
+| Ericsson         | 83.3   | 64.6   | 75.9   | 85.0   | 93.3   | 794.   | 1659   | 100.   | 40.4   |
+| Huawei           | 14.4   | 6.31   | 5.33   | 69.0   | 36.0   | 3967   | 536.   | 0.07   | 82.0   |
+| *Ublox*          | 2109   | 377.   | 235.   | 3185   | 217.   | 9054   | 3892   | 25.8   | 191.   |
+| *Quectel*        | 100.   | 57.4   | 387.   | 285.   | 64.9   | 4600   | 104.   | 5856   | 1814   |
+| MTN              | 2202   | 384.   | 280.   | 3359   | 264.   | 1077   | 3728   | 60.7   | 1773   |
+| Vodacom          | 7.20   | 50.0   | 342.   | 111.   | 18.0   | 1257   | 268.   | 5821   | 596.   |
+|                  |        |        |        |        |        |        |        |        |        |
+| **ECL 1**        |        |        |        |        |        |        |        |        |        |
+| ZTE              | 162.   | 217.   | 161.   | 3201   | 581.   | 305.   | 1254   | 0.95   | 228.   |
+| Nokia            | 1090   | 7046   | 7968   | 1919   | 8949   | 1199   | 2395   | 23.7   | 6469   |
+| Ericsson         | 428.   | 354.   | 465.   | 735.   | 1275   | 7568   | 337.   | 2.03   | 253.   |
+| Huawei           | 194.   | 89.5   | 147.   | 1042   | 537.   | 439.   | 4051   | 1.77   | 83.0   |
+| *Ublox*          | 3637   | 2722   | 3099   | 9823   | 2629   | 7404   | 1342   | 3.37   | 1898   |
+| *Quectel*        | 2209   | 1131   | 1272   | 2263   | 3042   | 2750   | 1375   | 10.9   | 1618   |
+| MTN              | 295.   | 285.   | 313.   | 1968   | 928.   | 3937   | 796.   | 1.49   | 240.   |
+| Vodacom          | 5551   | 3567   | 4057   | 1011   | 4743   | 6217   | 1400   | 12.7   | 3276   |
+|                  |        |        |        |        |        |        |        |        |        |
+| **ECL 2**        |        |        |        |        |        |        |        |        |        |
+| ZTE              | 678.   | 300.   | 461.   | 878.   | 7359   | 521.   | 562.   | 51.3   | 2073   |
+| Nokia            | 2022   |        | 3527   | 1753   | 648.   | 1583   | 2017   | 168.   | 5076   |
+| Ericsson         | 311.   | 238.   | 276.   | 223.   | 620.   | 6184   |        |        | 98.4   |
+| Huawei           | 1337   | 2117   | 4817   | 2832   | 2661   | 1618   | 7596   | 5.60   | 1278   |
+| *Ublox*          | 279.   | 318.   | 305.   | 280.   | 3370   | 1459   | 1228   | 12.3   | 2684   |
+| *Quectel*        | 7912   | 1009   | 4235   | 2563   | 2275   | 4766   | 1880   | 100.   | 6021   |
+| MTN              | 494.   | 269.   | 368.   | 550.   | 3990   | 3353   | 281.   | 25.6   | 1085   |
+| Vodacom          | 7697   | 1058   | 4172   | 2293   | 1655   | 1601   | 1388   | 87.2   | 3177   |
+|                  |        |        |        |        |        |        |        |        |        |
 
 \newpage
+
 ## Telemetry Interval
 
 
 Table: Interval Estimate (hours) for 9.36Wh AA battery (Lithium Thionyl Chloride) to last 1 year. {#tbl:energy_interval}
 
-|                  | 16 B   | 64 B   | 128 B   | 256 B   | 512 B   | Echo   | COPS   | eDRX   | PTAU   |
-|------------------|--------|--------|---------|---------|---------|--------|--------|--------|--------|
-| Ublox-ZTE        | 7.7742 | 1.3195 | 0.7751  | 11.457  | 1.2197  | 2.5455 | 10.853 | 0.0391 | 0.2796 |
-| Quectel-ZTE      | 0.6925 | 0.4687 | 0.5188  | 0.8398  | 1.0562  | 0.7290 | 1.7004 | 0.0489 | 12.894 |
-| Ublox-Nokia      | 12.838 | 9.5105 | 10.736  | 29.595  | 6.5097  | 19.736 | 44.855 | 3.5361 | 10.472 |
-| Quectel-Nokia    | 7.1042 | 3.3869 | 4.1375  | 5.6341  | 9.4894  | 6.0533 | 0.4820 | 1.9495 | 5.3010 |
-| Ublox-Ericsson   | 0.2557 | 0.2190 | 0.2728  | 0.4246  | 0.6834  | 9.2322 | 2.9327 | 0.0575 | 0.1564 |
-| Quectel-Ericsson | 0.1918 | 0.1397 | 0.1675  | 0.1338  | 0.3229  | 2.2253 | 0.3258 | 0.0860 | 0.0596 |
-| Ublox-Huawei     | 0.4724 | 0.3518 | 0.3969  | 0.3713  | 0.3784  | 4.3382 | 2.9079 | 0.0035 | 1.8771 |
-| Quectel-Huawei   | 16.095 | 1.2246 | 5.3199  | 2.9265  | 2.6665  | 5.7310 | 2.1459 | 0.0008 | 7.4285 |
-|                  |        |        |         |         |         |        |        |        |        |
-| ZTE              | 4.2334 | 0.8941 | 0.6470  | 6.1486  | 1.1379  | 1.6373 | 6.2769 | 0.0440 | 6.5872 |
-| Nokia            | 9.9715 | 6.4487 | 7.4372  | 17.614  | 7.9995  | 12.894 | 22.668 | 2.7428 | 7.8866 |
-| Ericsson         | 0.2238 | 0.1794 | 0.2201  | 0.2792  | 0.5031  | 5.7287 | 1.6292 | 0.0717 | 0.1080 |
-| Huawei           | 8.2839 | 0.7882 | 2.8584  | 1.6489  | 1.5225  | 5.0346 | 2.5269 | 0.0021 | 4.6528 |
-| *Ublox*          | 5.3353 | 2.8502 | 3.0454  | 10.462  | 2.1978  | 8.9631 | 15.387 | 0.9090 | 3.1963 |
-| *Quectel*        | 6.0210 | 1.3050 | 2.5359  | 2.3835  | 3.3837  | 3.6846 | 1.1635 | 0.5213 | 6.4210 |
-| MTN              | 2.2286 | 0.5367 | 0.4335  | 3.2139  | 0.8205  | 3.6830 | 3.9531 | 0.0579 | 3.3476 |
-| Vodacom          | 9.1277 | 3.6184 | 5.1478  | 9.6317  | 4.7610  | 8.9647 | 12.597 | 1.3725 | 6.2697 |
-|                  |        |        |         |         |         |        |        |        |        |
-| **ECL 0**        |        |        |         |         |         |        |        |        |        |
-| ZTE              | 4.04   | 0.65   | 0.45    | 6.20    | 0.40    | 1.27   | 5.42   | 0.01   | 33.1   |
-| Nokia            |        | 0.08   | 0.63    | 0.14    |         | 19.8   |        | 10.8   | 1.03   |
-| Ericsson         | 0.07   | 0.06   | 0.07    | 0.07    | 0.08    | 0.74   | 1.55   | 0.09   | 0.03   |
-| Huawei           | 0.01   |        |         | 0.06    | 0.03    | 3.71   | 0.50   | 6.70   | 0.07   |
-| *Ublox*          | 1.97   | 0.35   | 0.22    | 2.98    | 0.20    | 8.47   | 3.64   | 0.02   | 0.17   |
-| *Quectel*        | 0.09   | 0.05   | 0.36    | 0.26    | 0.06    | 4.30   | 0.09   | 5.48   | 16.9   |
-| MTN              | 2.06   | 0.36   | 0.26    | 3.14    | 0.24    | 1.00   | 3.48   | 0.05   | 16.6   |
-| Vodacom          |        | 0.04   | 0.32    | 0.10    | 0.01    | 11.7   | 0.25   | 5.44   | 0.55   |
-|                  |        |        |         |         |         |        |        |        |        |
-| **ECL 1**        |        |        |         |         |         |        |        |        |        |
-| ZTE              | 0.15   | 0.20   | 0.15    | 2.99    | 0.54    | 0.28   | 1.17   |        | 0.21   |
-| Nokia            | 10.2   | 6.59   | 7.45    | 17.9    | 8.37    | 11.2   | 22.4   | 0.02   | 6.05   |
-| Ericsson         | 0.40   | 0.33   | 0.43    | 0.68    | 1.19    | 7.08   | 0.31   |        | 0.23   |
-| Huawei           | 0.18   | 0.08   | 0.13    | 0.97    | 0.50    | 0.41   | 3.79   |        | 0.07   |
-| *Ublox*          | 3.40   | 2.54   | 2.90    | 9.19    | 2.46    | 6.92   | 12.5   |        | 1.77   |
-| *Quectel*        | 2.06   | 1.05   | 1.19    | 2.11    | 2.84    | 2.57   | 1.28   | 0.01   | 1.51   |
-| MTN              | 0.27   | 0.26   | 0.29    | 1.84    | 0.86    | 3.68   | 0.74   |        | 0.22   |
-| Vodacom          | 5.19   | 3.33   | 3.79    | 9.47    | 4.43    | 5.81   | 13.1   | 0.01   | 3.06   |
-|                  |        |        |         |         |         |        |        |        |        |
-| **ECL 2**        |        |        |         |         |         |        |        |        |        |
-| ZTE              | 0.63   | 0.28   | 0.43    | 0.82    | 6.88    | 0.48   | 0.52   | 0.04   | 1.94   |
-| Nokia            | 1.89   |        | 3.30    | 1.64    | 0.60    | 14.8   | 18.8   | 0.16   | 47.5   |
-| Ericsson         | 0.29   | 0.22   | 0.25    | 0.20    | 0.58    | 5.78   |        |        | 0.09   |
-| Huawei           | 12.5   | 1.98   | 4.50    | 2.65    | 2.49    | 15.1   | 7.10   |        | 11.9   |
-| *Ublox*          | 0.26   | 0.29   | 0.28    | 0.26    | 3.15    | 13.6   | 11.5   | 0.01   | 25.1   |
-| *Quectel*        | 7.40   | 0.94   | 3.96    | 2.39    | 2.12    | 4.46   | 1.75   | 0.09   | 5.63   |
-| MTN              | 0.46   | 0.25   | 0.34    | 0.51    | 3.73    | 3.13   | 0.26   | 0.02   | 1.01   |
-| Vodacom          | 7.20   | 0.99   | 3.90    | 2.14    | 1.54    | 14.9   | 12.9   | 0.08   | 29.7   |
-|                  |        |        |         |         |         |        |        |        |        |
+|                  | 16 B   | 64 B   | 128 B  | 256 B  | 512 B  | Echo   | COPS   | eDRX   | PTAU   |
+| ---------------- | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ |
+| Ublox-ZTE        | 7.7742 | 1.3195 | 0.7751 | 11.457 | 1.2197 | 2.5455 | 10.853 | 0.0391 | 0.2796 |
+| Quectel-ZTE      | 0.6925 | 0.4687 | 0.5188 | 0.8398 | 1.0562 | 0.7290 | 1.7004 | 0.0489 | 12.894 |
+| Ublox-Nokia      | 12.838 | 9.5105 | 10.736 | 29.595 | 6.5097 | 19.736 | 44.855 | 3.5361 | 10.472 |
+| Quectel-Nokia    | 7.1042 | 3.3869 | 4.1375 | 5.6341 | 9.4894 | 6.0533 | 0.4820 | 1.9495 | 5.3010 |
+| Ublox-Ericsson   | 0.2557 | 0.2190 | 0.2728 | 0.4246 | 0.6834 | 9.2322 | 2.9327 | 0.0575 | 0.1564 |
+| Quectel-Ericsson | 0.1918 | 0.1397 | 0.1675 | 0.1338 | 0.3229 | 2.2253 | 0.3258 | 0.0860 | 0.0596 |
+| Ublox-Huawei     | 0.4724 | 0.3518 | 0.3969 | 0.3713 | 0.3784 | 4.3382 | 2.9079 | 0.0035 | 1.8771 |
+| Quectel-Huawei   | 16.095 | 1.2246 | 5.3199 | 2.9265 | 2.6665 | 5.7310 | 2.1459 | 0.0008 | 7.4285 |
+|                  |        |        |        |        |        |        |        |        |        |
+| ZTE              | 4.2334 | 0.8941 | 0.6470 | 6.1486 | 1.1379 | 1.6373 | 6.2769 | 0.0440 | 6.5872 |
+| Nokia            | 9.9715 | 6.4487 | 7.4372 | 17.614 | 7.9995 | 12.894 | 22.668 | 2.7428 | 7.8866 |
+| Ericsson         | 0.2238 | 0.1794 | 0.2201 | 0.2792 | 0.5031 | 5.7287 | 1.6292 | 0.0717 | 0.1080 |
+| Huawei           | 8.2839 | 0.7882 | 2.8584 | 1.6489 | 1.5225 | 5.0346 | 2.5269 | 0.0021 | 4.6528 |
+| *Ublox*          | 5.3353 | 2.8502 | 3.0454 | 10.462 | 2.1978 | 8.9631 | 15.387 | 0.9090 | 3.1963 |
+| *Quectel*        | 6.0210 | 1.3050 | 2.5359 | 2.3835 | 3.3837 | 3.6846 | 1.1635 | 0.5213 | 6.4210 |
+| MTN              | 2.2286 | 0.5367 | 0.4335 | 3.2139 | 0.8205 | 3.6830 | 3.9531 | 0.0579 | 3.3476 |
+| Vodacom          | 9.1277 | 3.6184 | 5.1478 | 9.6317 | 4.7610 | 8.9647 | 12.597 | 1.3725 | 6.2697 |
+|                  |        |        |        |        |        |        |        |        |        |
+| **ECL 0**        |        |        |        |        |        |        |        |        |        |
+| ZTE              | 4.04   | 0.65   | 0.45   | 6.20   | 0.40   | 1.27   | 5.42   | 0.01   | 33.1   |
+| Nokia            |        | 0.08   | 0.63   | 0.14   |        | 19.8   |        | 10.8   | 1.03   |
+| Ericsson         | 0.07   | 0.06   | 0.07   | 0.07   | 0.08   | 0.74   | 1.55   | 0.09   | 0.03   |
+| Huawei           | 0.01   |        |        | 0.06   | 0.03   | 3.71   | 0.50   | 6.70   | 0.07   |
+| *Ublox*          | 1.97   | 0.35   | 0.22   | 2.98   | 0.20   | 8.47   | 3.64   | 0.02   | 0.17   |
+| *Quectel*        | 0.09   | 0.05   | 0.36   | 0.26   | 0.06   | 4.30   | 0.09   | 5.48   | 16.9   |
+| MTN              | 2.06   | 0.36   | 0.26   | 3.14   | 0.24   | 1.00   | 3.48   | 0.05   | 16.6   |
+| Vodacom          |        | 0.04   | 0.32   | 0.10   | 0.01   | 11.7   | 0.25   | 5.44   | 0.55   |
+|                  |        |        |        |        |        |        |        |        |        |
+| **ECL 1**        |        |        |        |        |        |        |        |        |        |
+| ZTE              | 0.15   | 0.20   | 0.15   | 2.99   | 0.54   | 0.28   | 1.17   |        | 0.21   |
+| Nokia            | 10.2   | 6.59   | 7.45   | 17.9   | 8.37   | 11.2   | 22.4   | 0.02   | 6.05   |
+| Ericsson         | 0.40   | 0.33   | 0.43   | 0.68   | 1.19   | 7.08   | 0.31   |        | 0.23   |
+| Huawei           | 0.18   | 0.08   | 0.13   | 0.97   | 0.50   | 0.41   | 3.79   |        | 0.07   |
+| *Ublox*          | 3.40   | 2.54   | 2.90   | 9.19   | 2.46   | 6.92   | 12.5   |        | 1.77   |
+| *Quectel*        | 2.06   | 1.05   | 1.19   | 2.11   | 2.84   | 2.57   | 1.28   | 0.01   | 1.51   |
+| MTN              | 0.27   | 0.26   | 0.29   | 1.84   | 0.86   | 3.68   | 0.74   |        | 0.22   |
+| Vodacom          | 5.19   | 3.33   | 3.79   | 9.47   | 4.43   | 5.81   | 13.1   | 0.01   | 3.06   |
+|                  |        |        |        |        |        |        |        |        |        |
+| **ECL 2**        |        |        |        |        |        |        |        |        |        |
+| ZTE              | 0.63   | 0.28   | 0.43   | 0.82   | 6.88   | 0.48   | 0.52   | 0.04   | 1.94   |
+| Nokia            | 1.89   |        | 3.30   | 1.64   | 0.60   | 14.8   | 18.8   | 0.16   | 47.5   |
+| Ericsson         | 0.29   | 0.22   | 0.25   | 0.20   | 0.58   | 5.78   |        |        | 0.09   |
+| Huawei           | 12.5   | 1.98   | 4.50   | 2.65   | 2.49   | 15.1   | 7.10   |        | 11.9   |
+| *Ublox*          | 0.26   | 0.29   | 0.28   | 0.26   | 3.15   | 13.6   | 11.5   | 0.01   | 25.1   |
+| *Quectel*        | 7.40   | 0.94   | 3.96   | 2.39   | 2.12   | 4.46   | 1.75   | 0.09   | 5.63   |
+| MTN              | 0.46   | 0.25   | 0.34   | 0.51   | 3.73   | 3.13   | 0.26   | 0.02   | 1.01   |
+| Vodacom          | 7.20   | 0.99   | 3.90   | 2.14   | 1.54   | 14.9   | 12.9   | 0.08   | 29.7   |
+|                  |        |        |        |        |        |        |        |        |        |
 
 \newpage
+
 ## Battery Longevity
 
 
 Table: Longevity Estimate (years) for 9.36Wh AA battery (Lithium Thionyl Chloride) with hourly uses. {#tbl:energy_longevity}
 
-|                  | 16 B   | 64 B   | 128 B   | 256 B   | 512 B   | Echo   | COPS   | eDRX   | PTAU   |
-|------------------|--------|--------|---------|---------|---------|--------|--------|--------|--------|
-| Ublox-ZTE        | 0.128  | 0.757  | 1.289   | 0.087   | 0.816   | 0.392  | 0.092  | 25.55  | 3.576  |
-| Quectel-ZTE      | 1.443  | 2.133  | 1.927   | 1.190   | 0.946   | 1.371  | 0.588  | 20.41  | 0.077  |
-| Ublox-Nokia      | 0.077  | 0.105  | 0.093   | 0.033   | 0.153   | 0.050  | 0.022  | 0.282  | 0.095  |
-| Quectel-Nokia    | 0.140  | 0.295  | 0.241   | 0.177   | 0.105   | 0.165  | 2.074  | 0.512  | 0.188  |
-| Ublox-Ericsson   | 3.909  | 4.564  | 3.665   | 2.354   | 1.463   | 0.108  | 0.340  | 17.37  | 6.393  |
-| Quectel-Ericsson | 5.211  | 7.154  | 5.969   | 7.470   | 3.096   | 0.449  | 3.068  | 11.62  | 16.75  |
-| Ublox-Huawei     | 2.116  | 2.842  | 2.519   | 2.692   | 2.642   | 0.230  | 0.343  | 281.5  | 0.532  |
-| Quectel-Huawei   | 0.062  | 0.816  | 0.187   | 0.341   | 0.375   | 0.174  | 0.465  | 1242.  | 0.134  |
-|                  |        |        |         |         |         |        |        |        |        |
-| ZTE              | 0.236  | 1.118  | 1.545   | 0.162   | 0.876   | 0.610  | 0.159  | 22.69  | 0.151  |
-| Nokia            | 0.100  | 0.155  | 0.134   | 0.056   | 0.125   | 0.077  | 0.044  | 0.364  | 0.126  |
-| Ericsson         | 4.467  | 5.573  | 4.541   | 3.580   | 1.987   | 0.174  | 0.613  | 13.92  | 9.255  |
-| Huawei           | 0.120  | 1.268  | 0.349   | 0.606   | 0.656   | 0.198  | 0.395  | 459.1  | 0.214  |
-| *Ublox*          | 0.187  | 0.350  | 0.328   | 0.095   | 0.454   | 0.111  | 0.064  | 1.100  | 0.312  |
-| *Quectel*        | 0.166  | 0.766  | 0.394   | 0.419   | 0.295   | 0.271  | 0.859  | 1.918  | 0.155  |
-| MTN              | 0.448  | 1.862  | 2.306   | 0.311   | 1.216   | 0.271  | 0.252  | 17.26  | 0.298  |
-| Vodacom          | 0.109  | 0.276  | 0.194   | 0.103   | 0.210   | 0.111  | 0.079  | 0.728  | 0.159  |
-|                  |        |        |         |         |         |        |        |        |        |
-| **ECL 0**        |        |        |         |         |         |        |        |        |        |
-| ZTE              | 0.24   | 1.51   | 2.20    | 0.16    | 2.45    | 0.78   | 0.18   | 51.1   | 0.03   |
-| Nokia            |        | 11.4   | 1.57    | 6.97    |         | 0.05   |        | 0.09   | 0.96   |
-| Ericsson         | 12.8   | 16.5   | 14.0    | 12.5    | 11.4    | 1.34   | 0.64   | 10.6   | 26.4   |
-| Huawei           | 74.1   | 169.   | 200.    | 15.4    | 29.6    | 0.26   | 1.99   | 1492   | 13.0   |
-| *Ublox*          | 0.50   | 2.83   | 4.53    | 0.33    | 4.91    | 0.11   | 0.27   | 41.3   | 5.58   |
-| *Quectel*        | 10.6   | 18.5   | 2.75    | 3.74    | 16.4    | 0.23   | 10.1   | 0.18   | 0.05   |
-| MTN              | 0.48   | 2.77   | 3.81    | 0.31    | 4.04    | 0.99   | 0.28   | 17.5   | 0.06   |
-| Vodacom          | 148.   | 21.3   | 3.11    | 9.61    | 59.2    | 0.08   | 3.98   | 0.18   | 1.79   |
-|                  |        |        |         |         |         |        |        |        |        |
-| **ECL 1**        |        |        |         |         |         |        |        |        |        |
-| ZTE              | 6.58   | 4.92   | 6.59    | 0.33    | 1.83    | 3.50   | 0.85   | 1116   | 4.67   |
-| Nokia            | 0.09   | 0.15   | 0.13    | 0.05    | 0.11    | 0.08   | 0.04   | 44.8   | 0.16   |
-| Ericsson         | 2.49   | 3.01   | 2.29    | 1.45    | 0.83    | 0.14   | 3.16   | 523.   | 4.22   |
-| Huawei           | 5.49   | 11.9   | 7.26    | 1.02    | 1.98    | 2.43   | 0.26   | 600.   | 12.8   |
-| *Ublox*          | 0.29   | 0.39   | 0.34    | 0.10    | 0.40    | 0.14   | 0.07   | 316.   | 0.56   |
-| *Quectel*        | 0.48   | 0.94   | 0.83    | 0.47    | 0.35    | 0.38   | 0.77   | 97.8   | 0.66   |
-| MTN              | 3.61   | 3.73   | 3.40    | 0.54    | 1.15    | 0.27   | 1.34   | 713.   | 4.43   |
-| Vodacom          | 0.19   | 0.29   | 0.26    | 0.10    | 0.22    | 0.17   | 0.07   | 83.5   | 0.32   |
-|                  |        |        |         |         |         |        |        |        |        |
-| **ECL 2**        |        |        |         |         |         |        |        |        |        |
-| ZTE              | 1.57   | 3.55   | 2.31    | 1.21    | 0.14    | 2.04   | 1.90   | 20.7   | 0.51   |
-| Nokia            | 0.52   |        | 0.30    | 0.60    | 1.64    | 0.06   | 0.05   | 6.32   | 0.02   |
-| Ericsson         | 3.43   | 4.48   | 3.86    | 4.79    | 1.72    | 0.17   |        |        | 10.8   |
-| Huawei           | 0.07   | 0.50   | 0.22    | 0.37    | 0.40    | 0.06   | 0.14   | 190.   | 0.08   |
-| *Ublox*          | 3.81   | 3.35   | 3.49    | 3.80    | 0.31    | 0.07   | 0.08   | 86.6   | 0.03   |
-| *Quectel*        | 0.13   | 1.05   | 0.25    | 0.41    | 0.46    | 0.22   | 0.56   | 10.6   | 0.17   |
-| MTN              | 2.15   | 3.96   | 2.89    | 1.93    | 0.26    | 0.31   | 3.80   | 41.5   | 0.98   |
-| Vodacom          | 0.13   | 1.00   | 0.25    | 0.46    | 0.64    | 0.06   | 0.07   | 12.2   | 0.03   |
-|                  |        |        |         |         |         |        |        |        |        |
+|                  | 16 B  | 64 B  | 128 B | 256 B | 512 B | Echo  | COPS  | eDRX  | PTAU  |
+| ---------------- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- |
+| Ublox-ZTE        | 0.128 | 0.757 | 1.289 | 0.087 | 0.816 | 0.392 | 0.092 | 25.55 | 3.576 |
+| Quectel-ZTE      | 1.443 | 2.133 | 1.927 | 1.190 | 0.946 | 1.371 | 0.588 | 20.41 | 0.077 |
+| Ublox-Nokia      | 0.077 | 0.105 | 0.093 | 0.033 | 0.153 | 0.050 | 0.022 | 0.282 | 0.095 |
+| Quectel-Nokia    | 0.140 | 0.295 | 0.241 | 0.177 | 0.105 | 0.165 | 2.074 | 0.512 | 0.188 |
+| Ublox-Ericsson   | 3.909 | 4.564 | 3.665 | 2.354 | 1.463 | 0.108 | 0.340 | 17.37 | 6.393 |
+| Quectel-Ericsson | 5.211 | 7.154 | 5.969 | 7.470 | 3.096 | 0.449 | 3.068 | 11.62 | 16.75 |
+| Ublox-Huawei     | 2.116 | 2.842 | 2.519 | 2.692 | 2.642 | 0.230 | 0.343 | 281.5 | 0.532 |
+| Quectel-Huawei   | 0.062 | 0.816 | 0.187 | 0.341 | 0.375 | 0.174 | 0.465 | 1242. | 0.134 |
+|                  |       |       |       |       |       |       |       |       |       |
+| ZTE              | 0.236 | 1.118 | 1.545 | 0.162 | 0.876 | 0.610 | 0.159 | 22.69 | 0.151 |
+| Nokia            | 0.100 | 0.155 | 0.134 | 0.056 | 0.125 | 0.077 | 0.044 | 0.364 | 0.126 |
+| Ericsson         | 4.467 | 5.573 | 4.541 | 3.580 | 1.987 | 0.174 | 0.613 | 13.92 | 9.255 |
+| Huawei           | 0.120 | 1.268 | 0.349 | 0.606 | 0.656 | 0.198 | 0.395 | 459.1 | 0.214 |
+| *Ublox*          | 0.187 | 0.350 | 0.328 | 0.095 | 0.454 | 0.111 | 0.064 | 1.100 | 0.312 |
+| *Quectel*        | 0.166 | 0.766 | 0.394 | 0.419 | 0.295 | 0.271 | 0.859 | 1.918 | 0.155 |
+| MTN              | 0.448 | 1.862 | 2.306 | 0.311 | 1.216 | 0.271 | 0.252 | 17.26 | 0.298 |
+| Vodacom          | 0.109 | 0.276 | 0.194 | 0.103 | 0.210 | 0.111 | 0.079 | 0.728 | 0.159 |
+|                  |       |       |       |       |       |       |       |       |       |
+| **ECL 0**        |       |       |       |       |       |       |       |       |       |
+| ZTE              | 0.24  | 1.51  | 2.20  | 0.16  | 2.45  | 0.78  | 0.18  | 51.1  | 0.03  |
+| Nokia            |       | 11.4  | 1.57  | 6.97  |       | 0.05  |       | 0.09  | 0.96  |
+| Ericsson         | 12.8  | 16.5  | 14.0  | 12.5  | 11.4  | 1.34  | 0.64  | 10.6  | 26.4  |
+| Huawei           | 74.1  | 169.  | 200.  | 15.4  | 29.6  | 0.26  | 1.99  | 1492  | 13.0  |
+| *Ublox*          | 0.50  | 2.83  | 4.53  | 0.33  | 4.91  | 0.11  | 0.27  | 41.3  | 5.58  |
+| *Quectel*        | 10.6  | 18.5  | 2.75  | 3.74  | 16.4  | 0.23  | 10.1  | 0.18  | 0.05  |
+| MTN              | 0.48  | 2.77  | 3.81  | 0.31  | 4.04  | 0.99  | 0.28  | 17.5  | 0.06  |
+| Vodacom          | 148.  | 21.3  | 3.11  | 9.61  | 59.2  | 0.08  | 3.98  | 0.18  | 1.79  |
+|                  |       |       |       |       |       |       |       |       |       |
+| **ECL 1**        |       |       |       |       |       |       |       |       |       |
+| ZTE              | 6.58  | 4.92  | 6.59  | 0.33  | 1.83  | 3.50  | 0.85  | 1116  | 4.67  |
+| Nokia            | 0.09  | 0.15  | 0.13  | 0.05  | 0.11  | 0.08  | 0.04  | 44.8  | 0.16  |
+| Ericsson         | 2.49  | 3.01  | 2.29  | 1.45  | 0.83  | 0.14  | 3.16  | 523.  | 4.22  |
+| Huawei           | 5.49  | 11.9  | 7.26  | 1.02  | 1.98  | 2.43  | 0.26  | 600.  | 12.8  |
+| *Ublox*          | 0.29  | 0.39  | 0.34  | 0.10  | 0.40  | 0.14  | 0.07  | 316.  | 0.56  |
+| *Quectel*        | 0.48  | 0.94  | 0.83  | 0.47  | 0.35  | 0.38  | 0.77  | 97.8  | 0.66  |
+| MTN              | 3.61  | 3.73  | 3.40  | 0.54  | 1.15  | 0.27  | 1.34  | 713.  | 4.43  |
+| Vodacom          | 0.19  | 0.29  | 0.26  | 0.10  | 0.22  | 0.17  | 0.07  | 83.5  | 0.32  |
+|                  |       |       |       |       |       |       |       |       |       |
+| **ECL 2**        |       |       |       |       |       |       |       |       |       |
+| ZTE              | 1.57  | 3.55  | 2.31  | 1.21  | 0.14  | 2.04  | 1.90  | 20.7  | 0.51  |
+| Nokia            | 0.52  |       | 0.30  | 0.60  | 1.64  | 0.06  | 0.05  | 6.32  | 0.02  |
+| Ericsson         | 3.43  | 4.48  | 3.86  | 4.79  | 1.72  | 0.17  |       |       | 10.8  |
+| Huawei           | 0.07  | 0.50  | 0.22  | 0.37  | 0.40  | 0.06  | 0.14  | 190.  | 0.08  |
+| *Ublox*          | 3.81  | 3.35  | 3.49  | 3.80  | 0.31  | 0.07  | 0.08  | 86.6  | 0.03  |
+| *Quectel*        | 0.13  | 1.05  | 0.25  | 0.41  | 0.46  | 0.22  | 0.56  | 10.6  | 0.17  |
+| MTN              | 2.15  | 3.96  | 2.89  | 1.93  | 0.26  | 0.31  | 3.80  | 41.5  | 0.98  |
+| Vodacom          | 0.13  | 1.00  | 0.25  | 0.46  | 0.64  | 0.06  | 0.07  | 12.2  | 0.03  |
+|                  |       |       |       |       |       |       |       |       |       |
 
 \newpage
 
-# Appendix B {-#appendixB}
+# Appendix B {#appendixB}
 
 ## RF Transmit Time
 
@@ -3092,13 +3204,13 @@ Table: Longevity Estimate in years using Reported RX, TX Time for 9.36Wh AA batt
 
 \newpage
 
-# Appendix C {-#appendixC}
+# Appendix C {#appendixC}
 
 * Compare Appendix A and B?
 
 \newpage
 
-# Appendix D {-#appendixD}
+# Appendix D {#appendixD}
 
 These are examples of some of the information accessible in UEMonitor of SIB blocks and RRC signalling communications.
 
@@ -3378,8 +3490,6 @@ Additional Info=UL-CCCH-Message-NB:
 }
 ```
 
-
-
 ```c
 Additional Info=DL-CCCH-Message-NB:
 {
@@ -3442,5 +3552,48 @@ Additional Info=DL-CCCH-Message-NB:
     }
   }
 }
-
 ```
+
+\newpage
+
+# Appendix E {#appendix_SCH_BRD}
+
+![Quectel BG96 modem schematic](../images/image-20191106135315605.png)
+
+![SIM card, USB and miscellaneous circuitry schematic](../images/image-20191106140747428.png)
+
+![Power circuity, antenna and logic level conversion](../images/image-20191106140001950.png)
+
+![Murata CMWX1ZZABZ-078 module schematic](../images/image-20191106140127903.png)
+
+[](../images/image-20191106140222681.png)
+
+![Atmel ATSAMD21G18a microcontroller schematic](../images/image-20191106135707965.png)
+
+![Top and bottom layout of example PCB](../images/image-20191104224412975.png){width=100%}
+
+
+
+\newpage
+
+# Appendix F {#appendix_Sierra}
+
+From 9-20 April 2018, the Sierra Wireless WP7702 modem was tested independently at MTN's Test Plant on 14th Avenue, Johannesburg.
+
+The board is quite impressive. It boasts EC-GSM, LTE Cat M1 and NB1. It uses a Qualcomm MDM 9206 chipset, and a Yocto Linux embedded environment. Because of the Qualcomm chipset, the board (including RF packets) can be thoroughly debugged using the proprietary QXDM tool from Qualcomm via the debug port.
+
+[](C:\Users\d7rob\AppData\Local\Temp\1526328911091.png)
+
+![Retry transmit signals for the WP7702 when extremely close to the edge of signal strength and outside the 180kHz bandwidth channel. \label{fig:overflow180}](C:\Users\d7rob\MEng\cut_many retries wp7702.png)
+
+Although it works as in Fig. \ref{fig:overflow180}, this device seems to have incomplete error handling especially when received signals are very low. On one instance, when connected to EC-GSM, it released from the network at around -90 dBm RSRP, but also threw a +CME sim failure error upon reattaching. Similarly it has happened a few times with NB1 and M1.
+
+If a network registration error (i.e. `+CME sim failure`) is thrown for M1 or NB1 when manually registering with `AT+COPS=1,2,"65510"`, it automatically changes the `at!selrat` from `lte only` to `gsm only`. This problem did happen with the sim card provisioned for M1 and NB1 for the test plant, but intermittently. Apparently it seems to be an issue on the Ericsson base stations. Nevertheless, it would be preferable that the board not have to be rebooted to clear the `+CME sim failure` error.
+
+Furthermore, and working around the supposed eNodeB bug, if `+CME sim failure` occurs for NB1, then one needs to register M1 first, sometimes needing to rearrange `at!selacq`. If M1 doesn't work (which also throws `+CME sim failure`, then one needs to register GSM, M1, then NB1 before NB1 finally registers. 
+
+Perhaps one way to induce the problems is to reboot the Ericsson test eNB with `acc 000100 restartunit y 000`, and try to register directly with NB-IoT. It will fail, and `at!selrat` will switch to `gsm only` instead of `lte only`(even though `at!band=0` / all bands is selected).
+
+Best is also to let the device register by itself in `at+cops=0` mode. Manually has some strange side effects, like the `+CME sim failure` one, and changing the `at!selrat` to `gsm only`.
+
+Perhaps the reason why these errors never showed up when connecting to Vodacom is due to the Idle Mode Mobility cell-selection having a certain rxLevel threshold in the SIB (System Information Block) radio packets which signal for the UE when it is advisable to switch to a tower/cell with better signal strength. This may have been confirmed by Thomas Durand who tested in Gauteng a few weeks later, and who couldn't hold a connection in Pretoria at -115dBm, and at less than -90 dBm the UE (in this case the Ublox modem mentioned later) supposedly tries to re-register with a tower stronger in strength, but GSM towers which then reject it. 

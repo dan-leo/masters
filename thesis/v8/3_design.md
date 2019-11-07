@@ -20,52 +20,75 @@ tablenos-number-by-section: true
 
 # Design and Methodology {#design}
 
-* Includes some preliminary results to analyze UE device and LTE network behavior.
-
 As stated in Section \ref{resobj}, the aim of this study is to compare user equipment (UE) against mobile network operators (MNOs) with a set of tests that evaluate NB-IoT's performance according to a set of metrics which highlight striking differences due to the underlying complexities of LTE architecture.
 
 Four mobile network operators (MNOs) are compared in South Africa according to the underlying vendor
 infrastructure used, namely Nokia and ZTE in the Cape/coastal regions and Ericsson and Huawei based in Gauteng/inland regions.
 
-More than one UE is used to improve the accuracy of the result, namely Ublox and Quectel. There is an open possibility to test SimCom and Nordic as well.
-
-A unit testing framework has been carefully prepared in Python in combination with a Hewlett Packard rotary RF attenuator in 10dBm steps. 
-
-However, due to the demonstrated energy variability of NB-IoT, an estimate of the energy per message EMSG must be chosen in accordance with the application requirements, rang- ing from very optimistic (best case) to the most pessimistic (worst case). For that purpose, we use the data recorded as a probabilistic
-model, taking the 5th/95th-percentiles for the best/worst case scenarios, and the mean values as an estimate for the long- term behavior.
-
-This information can be applied to multiple application use cases.
-
-
+More than one UE is used to improve the accuracy of the result, namely Ublox and Quectel. A unit testing framework has been carefully prepared in Python in combination with a Hewlett Packard rotary RF attenuator in 10dBm steps. The results can be applied to multiple application use cases.
 
 ## Preliminary Tests
 
-These tests better orient the reader to the behavior of UE devices and network.
+These tests better orient the reader to the behavior of UE devices and LTE network.
 
 ### Network Info
 
+This section looks at certain aspects of LTE networks.
+
 #### System Information Blocks (SIB)
 
-See Appendix \ref{appendixD}.
+SIBs carry relevant information for the UE, which helps UE to access a cell, perform cell re-selection, information related to INTRA-frequency, INTER-frequency and INTER-RAT cell selections. In LTE there are 13 types of SIBs as can be seen in Table \ref{tbl:sib_descr}.
 
+See Appendix \ref{appendixD} for examples of NB-IoT SIB blocks.
+
+* Downlink systemInformationBlockType1
+* Downlink systemInformation
+* Uplink rrcConnectionRequest
+* Downlink rrcConnectionSetup
+
+Table: System Information Blocks description {#tbl:sib_descr}
+
+| SIB    | Description                                                  |
+| ------ | ------------------------------------------------------------ |
+| SIB-1  | Cell access related parameters and scheduling of other SIBs  |
+| SIB-2  | Common and shared channel configuration, RACH related configuration are present |
+| SIB-3  | Parameters required for intra-frequency, inter-frequency and I-RAT cell re-selections |
+| SIB-4  | Information regarding INTRA-frequency neighboring cells (E-UTRA) |
+| SIB-5  | Information regarding INTER-frequency neighboring cells (E-UTRA) |
+| SIB-6  | Information for re-selection to INTER-RAT (UTRAN cells)      |
+| SIB-7  | Information for re-selection to INTER-RAT (GERAN cells)      |
+| SIB-8  | Information for re-selection to INTER-RAT (CDMA2000)         |
+| SIB-9  | Information related to Home eNodeB (FEMTOCELL)               |
+| SIB-10 | ETWS (Earthquake and Tsunami Warning System) information (Primary notification) |
+| SIB-11 | ETWS (Earthquake and Tsunami Warning System) information (Secondary notification) |
+| SIB-12 | Commercial Mobile Alert Service (CMAS) information.          |
+| SIB-13 | Contains the information required to acquire the MBMS control information associated with one or more MBSFN areas. |
+
+It is important to realize how intricate the underlying architecture of LTE is. For example, considering the singalling between UE and eNodeB using SIBs, we see this in action. This complexity hints that the probably cause of variation is due to the LTE network configuration.
 
 #### Extended Coverage Level (ECL)
 
-The Cell ID in this response is the physical network cell ID.
+Extended Coverage Levels increase the amount of repetitions between UE and eNodeB to increase range. Henceforth, this should mean that a weaker signal strength increases the ECL level. There are 3 levels, with level 0 being the least repetitions, and 2 being the most.
 
 \begin{minipage}{\linewidth}
 \begin{center}
 \includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_ECL_plot.pdf}
-\captionof{figure}[ECL vs RSRP.]{ECL not determined by attenuation.}
-\label{fig:}
+\captionof{figure}[ECL vs RSRP.]{ECL levels shown against RSRP for Ubloxa and Quectel on ZTE-MTN and Nokia-Vodacom networks.}
+\label{fig:ecl_example}
 \end{center}
 \end{minipage}
+
+In this Fig. \ref{fig:ecl_example}, ECL is shown as an example against two networks and it seems apparent that it is not determined by attenuation. Further investigation is necessary.
 
 [](../../../masters/code/tests/plotterk/Signal_power_ECL_plot.png)
 
 [](../../../masters/code/tests/plotterk/ECL_histogram.png)
 
 #### Cell ID, EARFCN, PCI
+
+These identifiers are related to the specific cell towers the UE is connected to.
+
+The Cell ID is the physical network cell ID.  EARFCN uniquely identifies the LTE band and carrier frequency. PCIs,  or Physical Cell Identifiers provide a psuedo-unique value for identifying eNodeBs and is a unique identifier for serving cells.
 
 Table: PCI, Cell ID count and EARFCN after K-means cluster filtering with tuples in (Ublox, Quectel) format. {#tbl:nw_parameters}
 
@@ -80,7 +103,7 @@ Table: PCI, Cell ID count and EARFCN after K-means cluster filtering with tuples
 |      | 3712      |      | (48, 59) |          |
 |      | 3564      |      |          | (34, 32) |
 
-More than one tower proves that Intra-Frequency Cellular Reselection works as expected.
+In Table \ref{tbl:nw_parameters} we see three towers on the MTN-ZTE network. More than one tower at the same frequency or EARFCN proves that Intra-Frequency Cellular Reselection works as expected.
 
 [](../../../masters/code/tests/plotterk/Signal_power_Cell_ID_plot.png)
 
@@ -90,33 +113,12 @@ More than one tower proves that Intra-Frequency Cellular Reselection works as ex
 
 [](../../../masters/code/tests/plotterk/PCI_histogram.png)
 
-Physical Cell ID (PCI) is the serving cell tower's unique identifier.
-
-On the MTN network, the UE connected to three different towers.
-
-Table: EARFCN for serving cell {#tbl:earfcn}
-
-| EARFCN          | 3564 | 3712 |
-| --------------- | ---- | ---- |
-| Ublox-MTN       |      | 35   |
-| Quectel-MTN     |      | 35   |
-| Ublox-Vodacom   | 34   |      |
-| Quectel-Vodacom | 32   |      |
-
-[](../../../masters/code/tests/plotterk/Signal_power_EARFCN_plot.png)
-
-[](../../../masters/code/tests/plotterk/EARFCN_histogram.png)
-
-The E-UTRA Absolute Radio Frequency Channel Number (EARFCN) designates the carrier frequency in the uplink and downlink, and ranges between 0-65535.
-
-Since the frequency of the three towers was the same on all three MTN towers, this shows that intra-cell reselection does indeed work.
-
 #### C-DRX mode
 
-On the Vodafone network in connected-DRX (C-DRX) mode, the UE is observed to show peaks spaced at regular 2.048s intervals [@Martinez2019]. On both Vodacom and MTN networks, these peaks are not visible and instead a steady stream of peaks can be seen as on the following images. The peaks indicate an on time of roughly 12ms and idle of 4 seconds. With a cycle of 16ms, it fits the LTE requirements of between 10ms and 2560ms in terms of 1ms subframes. However, NB-IoT has a minimum requirement of 256ms to 9216ms for the interval length between C-DRX transmissions. This means that NB-IoT is utilizing vastly more time on air than permitted by the 3GPP and it is having a detrimental effect on the estimated battery life. Lastly, this does not bode well for the scaling up of devices due to the interference, especially on the shared uplink (NPUSCH) channel.
+On the Vodafone network in connected-DRX (C-DRX) mode, the UE is observed to show peaks spaced at regular 2.048s intervals [@Martinez2019]. On both Vodacom and MTN networks, these peaks are not visible and instead a steady stream of peaks can be seen as on the following images.
 
 \begin{figure}[ht]
-  \subfloat[C-DRX timing on MTN-Ublox]{
+  \subfloat[C-DRX timing on MTN-ZTE-Ublox]{
 	\begin{minipage}[c][1\width]{
 	   0.5\textwidth}
 	   \centering
@@ -124,17 +126,15 @@ On the Vodafone network in connected-DRX (C-DRX) mode, the UE is observed to sho
 	\label{fig:cdrx1}
 	\end{minipage}}
  \hfill 	
-  \subfloat[C-DRX timing on MTN-Quectel]{
+  \subfloat[C-DRX timing on MTN-ZTE-Quectel]{
 	\begin{minipage}[c][1\width]{
 	   0.5\textwidth}
 	   \centering
 	   \includegraphics[width=1.0\linewidth]{../../code/tests/logs/zte_mtn/rf_shield/quectel/scope/12ms.jpg}
 	\label{fig:cdrx2}
 	\end{minipage}}
-\captionof{figure}[C-DRX timing measurement]{Timing measurement of two LTE vendors during C-DRX. Although the duty cycles vary in C-DRX mode, it can be estimated that pulses are roughly 12ms in length with 4ms idle between. This means that ~75\% of the time the UE device is drawing current.}
+\captionof{figure}[C-DRX timing measurement]{Timing measurement of two UEs on MTN-ZTE during C-DRX. Although the duty cycles vary in C-DRX mode, it can be estimated that pulses are roughly 12ms in length with 4ms idle between. This means that ~75\% of the time the UE device is drawing current.}
 \end{figure}
-
-In Fig. \ref{fig:cdrx1}, the Ublox UE uses 73.6mA at 110dB attenuation with the RF shield enclosure door slightly open and in Fig. \ref{fig:cdrx2}, with the same environment the Quectel UE uses 73.6mA.
 
 [](../../code/tests/logs/zte_mtn/rf_shield/ublox/scope/12_8ms.jpg)
 
@@ -146,7 +146,7 @@ In Fig. \ref{fig:cdrx1}, the Ublox UE uses 73.6mA at 110dB attenuation with the 
 
 [](../../code/tests/logs/zte_mtn/rf_shield/quectel/scope/70.4mA_ant_0dB.jpg)
 
-Observing C-DRX on the Nokia-Vodacom network, we have slightly different results as can be seen summarized in Table \ref{tbl:cdrx_vals}. It seems that on ZTE-MTN and Nokia-Vodacom that cycles are of length 16ms and 256ms respectively.
+In Fig. \ref{fig:cdrx1}, the Ublox UE uses 73.6mA at 110dB attenuation with the RF shield enclosure door slightly open and in Fig. \ref{fig:cdrx2}, with the same environment the Quectel UE uses 73.6mA. Observing C-DRX on the Nokia-Vodacom network, we have slightly different results as can be seen summarized in Table \ref{tbl:cdrx_vals}. It seems that on ZTE-MTN and Nokia-Vodacom that cycles are of length 16ms and 256ms respectively.
 
 Table: C-DRX values {#tbl:cdrx_vals}
 
@@ -174,6 +174,8 @@ Table: C-DRX values {#tbl:cdrx_vals}
 
 [](../../code/tests/logs/nokia_vodacom/centurycity/quectel/cops/scope/cops_180ms_tx.jpg)
 
+On the MTN-ZTE network the peaks indicate an on time of roughly 12ms and idle of 4 seconds. With a cycle of 16ms, it fits the LTE requirements of between 10ms and 2560ms in terms of 1ms subframes. However, NB-IoT has a minimum requirement of 256ms to 9216ms for the interval length between C-DRX transmissions and Vodacom-Nokia is using this minimum value. MTN-ZTE is utilizing vastly more time on air than permitted by the 3GPP and it is having a detrimental effect on the estimated battery life. Vodacom-Nokia is using the minimum, but it is recommended to increase this value. Lastly, this does not bode well for the scaling up of devices due to the interference, especially on the shared uplink (NPUSCH) channel.
+
 ####  E-UTRAN Node B (eNB/eNodeB)
 
 Ericsson eNodeBs run Linux and their commands are accessible via MOShell, or the scripting language AMOS.
@@ -188,12 +190,12 @@ This gives a good idea as to the range expected according to RSRP.
 
 Using a Quectel BG96, the following tests were taken on the rooftop described in Fig. \ref{fig:rooftop}.
 
-![Rooftop outside the HF RF lab on the 5th floor of the Electrical & Electronic Engineering building. The base station it connected to is on the General Building, and is just over 150m away at the same elevation with a single building blocking line-of-sight. The base station is situated on the bottom left if the picture at an altitude of approximately 138m. \label{fig:rooftop}](C:\GIT\masters\thesis\images\rooftop_maps.JPG){width=50%}
+![Rooftop outside the HF RF lab on the 5th floor of the Electrical & Electronic Engineering building. The base station it connected to is on the General Building, and is just over 150m away at the same elevation with a single building blocking line-of-sight. The base station is situated on the bottom left of the picture at an altitude of approximately 138m. \label{fig:rooftop}](C:\GIT\masters\thesis\images\rooftop_maps.JPG){width=50%}
 
 The tests involve sending a set of 10 pings multiple times at a certain attenuation and resulting RSSI measurement using a Quectel BG96 modem.
 
 \begin{figure}[ht]
-  \subfloat[With an antenna and the attenuator set to 0dB, we find most of the values around the mean of 185.2ms, except for the tail at around 500ms which is the time of the first ping in a set of 10.]{
+  \subfloat[With an antenna and the attenuator set to 0dB, we find most of the values around the mean of 185.2ms, except for the tail at around 500ms which is the time of the first ping in a set of 10. ECL 0, RSRP -51 dBm.]{
 	\begin{minipage}[c][1\width]{
 	   0.48\textwidth}
 	   \centering
@@ -201,7 +203,7 @@ The tests involve sending a set of 10 pings multiple times at a certain attenuat
 	\label{fig:ping1}
 	\end{minipage}}
  \hfill 	
-  \subfloat[Setting the attenuator to the max of 110dB, we see no change in the ping measurements which have a mean of 185.9ms. The tail has increased to a max of just over 600ms. ECL 0.]{
+  \subfloat[Setting the attenuator to the max of 110dB, we see no change in the ping measurements which have a mean of 185.9ms. The tail has increased to a max of just over 600ms. ECL 0, RSRP -85 dBm.]{
 	\begin{minipage}[c][1\width]{
 	   0.48\textwidth}
 	   \centering
@@ -216,7 +218,7 @@ The tests involve sending a set of 10 pings multiple times at a certain attenuat
 [](C:\GIT\masters\thesis\images\rooftest2.png)
 
 \begin{figure}[ht]
-  \subfloat[Removing the antenna from the attenuator, we find that the data has a slightly thicker tail, and averages around 207.1ms. ECL 0.]{
+  \subfloat[Removing the antenna from the attenuator, we find that the data has a slightly thicker tail, and averages around 207.1ms. ECL 0, RSRP -91 dBm.]{
 	\begin{minipage}[c][1\width]{
 	   0.48\textwidth}
 	   \centering
@@ -224,7 +226,7 @@ The tests involve sending a set of 10 pings multiple times at a certain attenuat
 	\label{fig:ping3}
 	\end{minipage}}
  \hfill 	
-  \subfloat[Lastly, having no attenuator nor antenna we still have a connection at -107dBm with a mean of 190.6ms.]{
+  \subfloat[Lastly, having no attenuator nor antenna we still have a connection at -107dBm with a mean of 190.6ms. ECL 1, RSRP -107 dBm.]{
 	\begin{minipage}[c][1\width]{
 	   0.48\textwidth}
 	   \centering
@@ -241,7 +243,7 @@ The tests involve sending a set of 10 pings multiple times at a certain attenuat
 To be able to attenuate the signal until disconnection, one must increase the range from the base station such that leakage transmission from traces, soldering and attenuator connectors do not interfere with the test. As such, there must not be a connection to the base station at all if the antenna or attenuator is disconnected or connected at maximum attenuation.
 
 \begin{figure}[ht]
-  \subfloat[A test was performed from 10pm onwards at Technopark on 14 March 2019. A connection was made at a range of 4.8 km at -93dBm and an altitude of 132m. This is a relative elevation of -6m. The altitude is -13m relative to the base station.]{
+  \subfloat[A test was performed from 10pm onwards at Technopark on 14 March 2019. A connection was made at a range of 4.8 km at -93dBm and an altitude of 132m. This is a relative elevation of -6m to the base station.]{
 	\begin{minipage}[c][1\width]{
 	   0.48\textwidth}
 	   \centering
@@ -249,7 +251,7 @@ To be able to attenuate the signal until disconnection, one must increase the ra
 	\label{fig:map_techno}
 	\end{minipage}}
  \hfill 	
-  \subfloat[The greatest distance measured was 5.5km from the intersection of the R44 and the turn-off to Stellenbosch Square or Jamestown at an altitude of 106m. This is a relative elevation of -32m to the base station.]{
+  \subfloat[The greatest distance measured was 5.5km from the intersection of the R44 and the turn-off to Stellenbosch Square or Jamestown at an altitude of 106m. This is a relative elevation of -32m to the base station and at an RSRP of -89dBm.]{
 	\begin{minipage}[c][1\width]{
 	   0.48\textwidth}
 	   \centering
@@ -262,7 +264,7 @@ To be able to attenuate the signal until disconnection, one must increase the ra
 [](C:\GIT\masters\thesis\images\techno_map4.8km.JPG){width=50%}
 
 \begin{figure}[ht]
-  \subfloat[At 0dB attenuation the data has a mean of 196.7ms and a tail just above 500ms in ECL 0]{
+  \subfloat[In Technopark, at 0dB attenuation the data has a mean of 196.7ms and a tail just above 500ms in ECL 0, RSRP -93 dBm.]{
 	\begin{minipage}[c][1\width]{
 	   0.48\textwidth}
 	   \centering
@@ -270,7 +272,7 @@ To be able to attenuate the signal until disconnection, one must increase the ra
 	\label{fig:ping5}
 	\end{minipage}}
  \hfill 	
-  \subfloat[At 10dB the data is more spread out from 200 - 500ms with a mean of 396.4ms and a tail at just under 1000ms in ECL 1.]{
+  \subfloat[In Technopark, at 10dB the data is more spread out from 200 - 500ms with a mean of 396.4ms and a tail at just under 1000ms in ECL 1, RSRP -101 dBm.]{
 	\begin{minipage}[c][1\width]{
 	   0.48\textwidth}
 	   \centering
@@ -287,7 +289,7 @@ To be able to attenuate the signal until disconnection, one must increase the ra
 [](C:\GIT\masters\thesis\images\techno2.png)
 
 \begin{figure}[ht]
-  \subfloat[At 20dB attenuation, the data is more spread across 350 - 1000ms with a mean of 793.4ms and a tail that extends to over 4500ms in ECL 2. Any more attenuation and the signal is lost.]{
+  \subfloat[In Technopark, at 20dB attenuation, the data is more spread across 350 - 1000ms with a mean of 793.4ms and a tail that extends to over 4500ms in ECL 2, RSRP -107 dBm. Any more attenuation and the signal is lost.]{
 	\begin{minipage}[c][1\width]{
 	   0.48\textwidth}
 	   \centering
@@ -295,7 +297,7 @@ To be able to attenuate the signal until disconnection, one must increase the ra
 	\label{fig:ping7}
 	\end{minipage}}
  \hfill 	
-  \subfloat[At this point, the signal strength increased to -89dBm and resumed a mean of around 209.6ms with a tail around 500ms.]{
+  \subfloat[At the furthest point in Fig. \ref{fig:map_jamestown}, the signal strength increased to -89dBm and resumed a mean of around 209.6ms with a tail around 500ms. ECL 0]{
 	\begin{minipage}[c][1\width]{
 	   0.48\textwidth}
 	   \centering
@@ -312,7 +314,7 @@ To be able to attenuate the signal until disconnection, one must increase the ra
 [](C:\GIT\masters\thesis\images\stelliesquare.png)
 
 \begin{figure}[ht]
-  \subfloat[A similar pattern was seen at Parmalat, but driving closer there were a few spots where connection was lost or many retries were needed such that the tail extended up to almost 3000ms for the ICMP ping time.]{
+  \subfloat[A similar pattern was seen 3.0 km away at Parmalat, although driving closer there were a few spots where connection was lost or many retries were needed such that the tail extended up to almost 3000ms for the ICMP ping time.]{
 	\begin{minipage}[c][1\width]{
 	   0.48\textwidth}
 	   \centering
@@ -320,7 +322,7 @@ To be able to attenuate the signal until disconnection, one must increase the ra
 	\label{fig:ping9}
 	\end{minipage}}
  \hfill 	
-  \subfloat[Lastly, all the test data including raw data on the way to Technopark, we see a similar form.]{
+  \subfloat[Lastly, all the test data (including on the way to Technopark and back), we see a similar form except with a tail extending to almost 10 seconds, which is within 3GPP specifications.]{
 	\begin{minipage}[c][1\width]{
 	   0.48\textwidth}
 	   \centering
@@ -336,9 +338,11 @@ To be able to attenuate the signal until disconnection, one must increase the ra
 
 ![Looking at the ICMP ping response according to different RSSI values, we see high jitter of a few seconds from -80dBm or less.](C:\GIT\masters\thesis\images\jitter.png){width=50%}
 
+This means that in an urban area, NB-IoT satisfies the 2-5 km range specification.
+
 #### Dash7
 
-A Dash7 field test was performed using STM32L0, but due to 10dBm transmit power it limited range to about 300m.
+Since Dash7 was a curiosity at the time, a Dash7 field test was performed using a Murata CMWX1ZZABZ-091, but due to 10dBm transmit power it limited range to about 300m.
 
 ![Dash7 field test reaching 300m max NLOS range](../images/1571685763894.png){width=65%}
 
@@ -348,17 +352,23 @@ Haystack Technologies has developed a Dash7-over-LoRa implementation that expect
 
 ### RF Spectrum Tests
 
+Using an RTL2832 SDR dongle, we can capture RF signals. At the very least we can visualise how the signal propogates through the airspace.
+
 ![5 dB SINR NB-IoT transmissions using Sierra Wireless WP7702 at 908.2 MHz and EARFCN 3734 of length 2282ms, 1560ms and 1380ms respectively.](../images/image-20191105144302036.png)
 
 ![SigFox and LoRa RF signals \@868 MHz](../images/image-20191104223939783.png){width=30%}
 
+Each technology has their own modulation scheme and unique features, and with that their own set of advantages and disadvantages. More can be found in Section \ref{lpwans}.
+
 ### Terrestrial Localization
 
-Localization can be useful for asset tracking as discussed in Section \ref{asset_tracking}. Of the prominent LPWANs, SigFox is the only one that offers a simple localization service. NB-IoT will offer one when upgraded to 3GPP Release 14. Unfortunately SigFox is has poor accuracy as can be seen in Fig. \ref{fig:sigfox_map}.
+Localization can be useful for asset tracking as discussed in Section \ref{asset_tracking}. Of the prominent LPWANs, SigFox is the only one that offers a simple localization service. NB-IoT will offer one when upgraded to 3GPP Release 14. Unfortunately SigFox has poor accuracy as can be seen in Fig. \ref{fig:sigfox_map}.
 
 ![With a 17.783km radius in this example, SigFox is poor when it comes to being considered as a source of localization using RSSI triangulation, and it may be better to use TOF techniques such as in OTDOA in NB-IoT \label{fig:sigfox_map}](../images/image-20191105141405835.png){width=80%}
 
 ### Power Saving Mechanisms
+
+This section shows a brief investigation into the power saving mechanisms of NB-IoT.
 
 With a paging time window interval of 2.54s and 4 hyper-frames making up 40.96s, the following output is obtained.
 
@@ -397,8 +407,6 @@ In the debug logs we see the timer expires after exactly 30 seconds.
 	timer_handle=16871576
 ```
 
-
-
 [](C:\Users\d7rob\AppData\Roaming\Typora\typora-user-images\1555568148322.png){width=50%}
 
 ![eDRX](C:\Users\d7rob\AppData\Roaming\Typora\typora-user-images\1555569320664.png){width=50%}
@@ -428,21 +436,29 @@ In the debug logs we see the timer expires after exactly 32 seconds.
 
 [](C:\Users\d7rob\AppData\Roaming\Typora\typora-user-images\1555569718434.png){width=50%}
 
-(These tests should continue until an eDRX value of 2621,44s, or 43.69 minutes and repeated for Quectel, Nordic, SimCom and on Nokia, Ericsson and Huawei basestations)
+![Irregular eDRX time if not properly configured. \label{fig:irregular_edrx}](../images/image-20191105162759288.png)
 
-Also, what is the current usage of running a specific command? Is it negligible or is, for example, polling AT+CSQ constantly detrimental on battery life?
+It is important to note that if eDRX time is not configured properly, then the outcome does not show as expected as in Fig. \ref{fig:irregular_edrx}.
 
-![Typical eDRX pattern.](../images/image-20191105163855934.png)
+![Typical eDRX current profile. \label{fig:edrx_pattern}](../images/image-20191105163855934.png)
 
-![Irregular eDRX time if not properly configured.](../images/image-20191105162759288.png)
+Finally, an eDRX event has a typical current profile as shown in Fig. \ref{fig:edrx_pattern}. This shows how for the first few microseconds there is a large current spike.
+
+*Todo: add Debug trace of eDRX*
+
+*Todo: add Debug trace of PTAU*
 
 ### Ultra-low Current Sleep Measurements
 
-Using an MX 58HD DMM, one can measure 4.501 mA through a 4615 ohm resistor at 21.15V. Theoretically it should be 4.582 mA so that gives an error of 1.82% or ~2%.
+Using an MX 58HD DMM, one can measure the microamp sleep currents of UE devices.
 
-*Todo: measure sleep current of devices*
+Testing the accuracy, 4.501 mA is measured through a 4615 ohm resistor at 21.15V. Theoretically it should be 4.582 mA so that gives an error tolerance of 1.82% or ~2%.
+
+*Todo: measure sleep current of UE devices*
 
 ### Mobility Tests
+
+The Sierra Wireless 7702 has a Qualcomm 9206 modem which supports LTE Cat M1, NB1 and EC-GSM.
 
 Using a Sierra Wireless WP7702 on Ericsson Test BTS 'L06009A3' and EARFCN 3734/3752, the UE had to periodically ping an internet-facing server and the dead time was measured before it reconnected and received a response. The RSRP was in the range -50 to -80 dBm and in ECL 0.
 
@@ -457,15 +473,34 @@ Table: NB-IoT and LTE Cat-M handover. {#tbl:mobility}
 
 ### Throughput
 
-|      | Uplink              | Downlink            |
-| ---- | ------------------- | ------------------- |
-| GPRS | 158 kbps or 20 kB/s | 254 kpbs or 31 kB/s |
-|      |                     |                     |
-|      |                     |                     |
+NB-IoT downloading was tested on the Sierra Wireless 7702 using the following script.
+
+```bash
+while [ 1 ]; do	
+    # wget --retry-connrefused --waitretry=1 
+    # 	--read-timeout=20 --timeout=15 -t 0 --continue
+    wget -t 0 -c http://speedtest.ftp.otenet.gr/files/test100k.db
+    # check return value, break if not successful (0)
+    if [ $? != 0 ]; then break; fi;
+    sleep 1s;
+done;
+```
+
+A 100 kb file is downloaded at a rate of around 3kB/s. The script continues download if stalled or other errors occur. Since it is a `Yocto` installation[^yocto], the other `wget` arguments were not available.
+
+[^yocto]: It's not an embedded solution. Rather, it creates a custom one for you, regardless of hardware architecture [@yocto1].
+
+|        | Uplink              | Downlink            |
+| ------ | ------------------- | ------------------- |
+| GPRS   | 158 kbps or 20 kB/s | 254 kpbs or 31 kB/s |
+| NB-IoT |                     | 24 kbps or 3kB/s    |
+| LTE-M1 |                     |                     |
+
+
 
 ## Example Application
 
-An example application was built to test and understand NB-IoT. See schematic and board layout in Appendix \ref{appendix_SCH_BRD}. The board includes not just NB-IoT but also LTE Cat-M, GPRS/EDGE, SigFox, LoRa, and Dash7. Initally designed to compare LPWANs, we decided to focus more purely on NB-IoT as there is a great deal of variance among UEs and LTE vendors already.
+An example application was built to test and understand NB-IoT. See schematic and board layout in Appendix \ref{appendix_SCH_BRD}. The board includes not just NB-IoT but also LTE Cat-M, GPRS/EDGE, SigFox, LoRa, and Dash7. Initally designed to compare LPWANs, it was decided to focus more purely on NB-IoT as there is a great deal of variance among UEs and LTE vendors already.
 
 Notable components include:
 
@@ -482,9 +517,11 @@ By adding a DHT22 temperature and humidity sensor, button and buzzer for and exa
 
 ![Communication via MQTT to Thingsboard cloud with temperature, humidity, push button and downlink buzzer control \label{fig:dashboard_thingsboard}](../images/image-20191105143716571.png){width=65%}
 
+Luckily UE manufacturers usually provide a development kit with open source schemetics and board layouts. This study will use development kits so that tests are easily reproduceable.
+
 ## Setup Procedure
 
-Each Field Test will make use of various subtests.
+Each field test will make use of various UE hardware and telemetry tests.
 
 ### Hardware
 
@@ -492,53 +529,240 @@ Each Field Test will make use of various subtests.
 
 Two of these will be used in series: the HP8494B and the HP8496A. One has a range of 11dB in 1dB steps, and the other has a range of 110dB in 10dB steps, so it is possible to get a full range of 110dB in 1dB steps.
 
-#### Current Measurements
+ ![The Hewlett Packard attenuators used in this study to change the RF conditions for UE devices against multiple LTE vendors](../images/SgLabs_m_HP_11716A_8496B_8494B_1.JPG)
 
-The following tests measure current for a Ublox SARA N200 connected to a ZTE base station.
+The 1 dB attenuator is useful to attenuate the signal strength until the RSRP is on a decade multiple of 10. This way variation around the decade is more visible. 
 
-![Block diagram of current consumption setup for SARA-N2](../images/1555535660456.png){width=65%}
+#### Current Measurements {#current_measurements}
+
+By measuring current, the field tests can measure the energy usage of each datagram packet.
+
+![Block diagram of current consumption setup for SARA-N2 \ref{fig:current_setup}](../images/1555535660456.png){width=65%}
 
 
 
-The digital multimeter in the figure is replaced with a ZXCT1008 high-side current monitor in series with the modem. 
+The digital multimeter in Fig. \ref{fig:current_setup} is replaced with a ZXCT1008 high-side current monitor in series with the modem. 
 
 ![ZXCT1008  high-side current monitor https://www.diodes.com/assets/Datasheets/ZXCT1008.pdf](../images/arduino86-1-1571303569557.png){width=25%}
 
 Rs is set to a 1 ohm resistor and Rg is set as a 1k ohm resistor such that 100mA supplied to the modem makes 1V.
 
-$V_{out} = I_{load} [mA] * 10 [\frac{V}{mA}]$
+$$V_{out} = I_{load} [mA] * 10 [\frac{V}{mA}]$$ {#eq:iload_vout}
 
-![zxct1008](C:\GIT\masters\thesis\images\zxct1008.jpeg)
+![ZXCT1008 in action](..\images\zxct1008.jpeg)
 
 ### Network Registration
 
-#### e-SIMs
+As mentioned in Section \ref{connectivity}, the right SIM cards are necessary. It may even be possible to use e-SIMs as in Fig. \ref{fig:hologram_esim}.
 
-![Hologram e-sim](../images/image-20191105152621948.png){width=40%}
+![Hologram worldwide e-SIM \label{fig:hologram_esim}](../images/image-20191105152621948.png){width=40%}
+
+Then, the right APNs are necessary. To use MTN's test network, the APN `rflab` is used. On Vodacom's network, the APN `nbiot.vodacom.za` is used.
 
 ### PyTest Framework
 
-PyTest is a unit testing framework used to setup the UE for each test using AT commands and can be found on  [https://github.com/daniel-leonard-robinson/masters/tree/master/code/tests](https://github.com/daniel-leonard-robinson/masters/tree/master/code/tests).
+PyTest is a unit testing framework used to setup the UE for each test using AT commands and can be found on  [https://github.com/daniel-leonard-robinson/masters/tree/master/code/tests](https://github.com/daniel-leonard-robinson/masters/tree/master/code/tests). Although the testing framework is quite extensive, a few snippets of code will be discussed in this section to at least give an idea to the reader how this was developed.
 
 ![`Python PyTest` framework written in `Microsoft VS Code` and test output can be seen in bottom-left window. `PlatformIO` compiles microcontroller code and uploads via `avrdude` as can be seen in bottom-right window.](../images/image-20191106145454691.png)
 
+Every test fixture includes the following setup and teardown code to open a serial connection to the UE. It automatically detects the COM port based on the USB vid.
+
+```python
+def serialOpen():
+    # setup for each test fixture
+    global serAT, serTIM, serGPS, AT_PORT, uC_PORT
+    ATcount = 0
+    ports = serial.tools.list_ports.comports()
+    for port, desc, hwid in sorted(ports):
+        vid_pid = hwid.split('=')[1].split()[0]
+        if vid_pid == '2341:8036':
+            uC_PORT = port
+        if vid_pid == '0403:6010' and not ATcount:
+            AT_PORT = port
+            ATcount += 1
+            pytest.vendor = 'ublox'
+        if vid_pid == '04E2:1414' and ATcount < 3:
+            AT_PORT = port
+            ATcount += 1
+            pytest.vendor = 'quectel'
+        if vid_pid == '0403:6001':
+            AT_PORT = port
+            pytest.vendor = 'simcom'
+    try:
+        serAT = serial.Serial(AT_PORT, 115200, timeout=1)
+        serTIM = serial.Serial(uC_PORT, 115200, timeout=1)
+        serGPS = serial.Serial(GPS_PORT, 9600, timeout=1)
+    except serial.serialutil.SerialException as e:
+        print(e)
+
+def serialClose():
+    # tear down for each test fixture
+    global serAT, serTIM, serGPS
+    serAT.close()
+    serTIM.close()
+    serGPS.close()
+```
+
+The setup and teardown functions are defined in a global file that is imported into each file of test fixtures. The location for new data in the database depends on chosen manufacturer (LTE vendor), location, file description and connected UE. The file description is the current RF attenuation and ranges from 0 to 110.
+
+```python
+def setup_module(module):
+    serialOpen()
+    pytest.manufacturer = 'huawei' # 'ericsson', 'nokia', 'zte'
+    pytest.loc = 'mtn/testplant_14th/'
+    pytest.descr = '110'
+    # pytest.lock = threading.Lock()
+ 
+def teardown_module(module):
+    serialClose()
+```
+
+See Appendix \ref{appendix_pytest} to see how a Quectel or Ublox modem is set up. Running the following commands in Table \ref{tbl:pytest_setup} will set the device up.
+
+Table: PyTest setup commands to be run in terminal {#tbl:pytest_setup}
+
+|                      |                             |
+| -------------------- | --------------------------- |
+| `pytest -svm apn`    | Runs set APN fixture        |
+| `pytest -svm setup`  | Runs all the setup fixtures |
+| `pytest -svm reboot` | Reboots device if necessary |
+
+The following commands are wrappers for sending and receiving AT commands:
+
+```python
+def OK(cmd, t=0):
+    reply = sendAT(cmd, t)
+    assert 'OK' in reply
+    return reply
+
+def expect(cmd, reply, t=1, output=True):
+    replies = reply
+    if str(type(reply)) == "<class 'str'>":
+        replies = [reply]
+    data = sendAT(cmd, t, replies, output)
+    if not len(replies[0]):
+        return data
+    check = False
+    for r in replies:
+        if len(r):
+            if True in [r in i for i in data]:
+                check = True
+                break
+    if not check:
+        print(magenta + str(replies), data)
+    assert check
+    return data
+
+def sendAT(cmd, t=0, expect=['OK'], output=True):
+    if output:
+        print(yellow + cmd)
+    serAT.write(bytes(cmd + '\r', 'utf-8'))
+    return receiveAT(t, expect, output)
+
+def receiveAT(t=0, expect=['OK'], output=True):
+    if str(type(expect)) == "<class 'str'>":
+        expect = [expect]
+    c = 0
+    data = []
+    exp = expect[:]
+    exp.append('ERROR')
+    exp.append('FAILED')
+    while True:
+        d = serAT.readline().decode('utf-8')
+        if not len(d):
+            c += 1
+        d = d.strip()
+        if len(d) > 0:
+            if output:
+                print(cyan + d)
+            out = converter(d)
+            if out:
+                print(magenta + out)
+            data.append(d)
+        if t > 0:
+            if c >= t:
+                data.append('timeout')
+                return data
+        for e in exp:
+            if e in d:
+                return data
+```
+
+Finally, the testing framework has a `capture` command which is blocking until an energy capture event. In this event the energy is sent via serial from the energy capture device (Section \ref{energy_capture_device}) and triggers the testing framework to extract information from the `AT+NUESTATS="RADIO"` command.
+
+```python
+def receiveTIM():
+    data = {}
+    serTIM.flush()
+    d = serTIM.readline().decode('utf-8') # d = '2300,260,2560,10.0,100,'
+    if len(d):
+        try:
+            d = d.strip() # print(magenta + d)
+            data['idleTime'] = int(d.split(',')[0])
+            data['txTime'] = int(d.split(',')[1])
+            data['totalTime'] = int(d.split(',')[2])
+            data['energy'] = float(d.split(',')[3])
+            data['maxCurrent'] = float(d.split(',')[4])
+        except (ValueError, IndexError) as e:
+            print(red + d)
+            raise e
+    return data
+```
+
+### Energy Capture Device {#energy_capture_device}
+
+Code for energy capture device can be found on [https://github.com/daniel-leonard-robinson/masters/tree/master/code/edge/src](https://github.com/daniel-leonard-robinson/masters/tree/master/code/edge/src). It connects to the ZXCT1008 mentioned in Section \ref{current_measurements} and converts the results to energy measurements. It also returns via serial to the PyTest framework the timings of each datagram packet.
+
+```c
+void energyLoop(boolean pause) {
+    uint8_t reading = analogRead(A0);
+    if (reading > 60) {
+        if (reading > maxReading) maxReading = reading;
+        if (!readCount++) {
+            tStart = millis();
+            idleTime = tStart - tEnd;
+        }
+        tEnd = millis();
+        zeroM = tEnd;
+        zeroCounter = 0;
+        sum += reading;
+        tStepCount += micros() - tStep;
+    }
+    else if (pause) zeroM = millis();
+    else if (millis() - zeroM < 1000);
+    else if (readCount) {
+        txTime = tEnd - tStart;
+        tStepCount /= 1000;
+        energy = sum * 500 / 1023.0 * tStepCount / 1000 / 1000;
+        
+        buf.flush(); tx[0] = '\0'; // energyFlush();
+        buf.print(idleTime); buf.print(",");
+        buf.print(txTime); buf.print(",");
+        buf.print(tStepCount); buf.print(",");
+        buf.print(energy); buf.print(",");
+        buf.println(maxReading/2);
+        Serial.print(buf); // energyPrint();
+        
+        sum=idleTime=txTime=readCount=maxReading=energy=tStepCount= 0; // energySetup();
+    }
+    tStep = micros();
+}
+```
+
 ### Telemetry Tests
 
-Subtests measure various aspects of the required metrics.
+Telemetry tests measure various aspects of the required metrics. Running the following commands in Table \ref{tbl:pytest_run} will run through the desired telemetry test.
 
-The SARA-N2 series modules are able to send raw data through UDP sockets to an IP address. The
-data sent over the socket AT commands is not wrapped in any other layer, and the data provided is
-the data that is sent.
+Table: PyTest telemetry test commands to be run in terminal {#tbl:pytest_run}
 
-The Constrained Application Protocol (CoAP) is a datagram-based client/server application protocol
-for devices on the constrained network (e.g. low overhead, low-power), designed to easily translate
-to HTTP for simplified integration with the web. CoAP clients can use the GET, PUT, POST and
-DELETE methods using requests and responses with a CoAP server.
+|                     |                                     |
+| ------------------- | ----------------------------------- |
+| pytest -svm release | UDP test for multiple payload sizes |
+| pytest -svk ptau    | Run PTAU test                       |
+| pytest -svk drx     | Run eDRX test                       |
+| pytest -svm reg     | Run COPS test                       |
+| pytest -svk echo    | Runs echo test                      |
 
-The usage of the Non-IP method during the sending or receiving of messages saves the overhead of
-needing to send a UDP IP header.
-
-See [@ubloxAppNote2018] for an Application example.
 
 #### UDP {#udp}
 
@@ -548,48 +772,128 @@ To test the capability of sending to the internet for multiple UEs, a simple pro
 
 This test sends a UDP packet to an internet accessible IP address. The IP is 1.1.1.1 and it belongs to Warp which claims to be the fastest DNS resolver in the world, with OpenDNS, Google and Verisign taking the next respective rankings.
 
+As an alternative, data can be sent to the u-blox echo server at echo.u-blox.com. Because there is no DNS lookup function in the SARA-N2 module series, the server IP address that must be used is 195.34.89.241.
 
+UDP datagrams are sent with payloads of size 1, 16, 64, 128, 256 and 512 bytes.
 
-For a more advanced check on sending data to an external server, send data to the u-blox echo
-server at echo.u-blox.com.
+Here is a snippet of one of the test fixtures for Ublox sending a 16 byte UDP payload with Release Assistance flags set.
 
-* Because there is no DNS lookup function in the SARA-N2 module series, use the IP address
-  server which is 195.34.89.241.
+```python
+@pytest.fixture(autouse=True)
+def _config(request):
+    pytest.test = 'release/'
 
-Command Response Description
-AT+NSOCR="DGRAM",17,10000 0
-OK
-Create a UDP socket.
-AT+NSOST=0,"195.34.89.241",7,5,"0102
-030405"
-0,5
-OK
-Send data on socket 0.
-+NSONMI: 0,5
-Receive data on socket 0.
-AT+NSORF=0,5 +NSORF: 0,"195.34.89.241",7,5
-,"0102030405",0
-OK
-Request data from socket 0.
-Echo’d data received
+...
+@pytest.mark.release
+def test_release_release16(request):
+    pytest.subtest = request.node.name.split('_')[-1] + '/'
+    if pytest.vendor == 'ublox':
+        expect('at+nsocl=0', '')
+        receiveAT(1)
+        for i in range(5):
+            OK('AT+NSOCR="DGRAM",17,14000,1')
+            expect('AT+NSOSTF=0,"1.1.1.1",7,0x200,16,"FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"',
+                   '+CSCON: 0', 300)
+            OK('at+nsocl=0')
+            capture(1)
+    ...
+```
 
 #### Periodic Tracking Area Update (PTAU)
 
+This snippet sets up the eNodeB to schedule a PTAU event every 4 seconds (roughly ~5.5 seconds actual).
+
+```python
+...
+@pytest.fixture(autouse=True)
+def _config(request):
+    pytest.test = 'ptau/'
+
+def test_ptau_set(request):
+    pytest.subtest = request.node.name.split('_')[-1] + '/'
+    setEDRX(4, 1, 0, 0, 3, 2) # 5.5 sec ptau
+    capture(1)
+
+def test_ptau_capture(request):
+    pytest.subtest = request.node.name.split('_')[-1] + '/'
+    capture(10)
+```
+
 #### Extended Discrete Reception (eDRX)
+
+This snippet sets up the eNodeB to schedule a DRX event every 2.56 seconds.
+
+```python
+...
+@pytest.fixture(autouse=True)
+def _config(request):
+    pytest.test = 'drx/'
+
+def test_drx_set(request):
+    pytest.subtest = request.node.name.split('_')[-1] + '/'
+    setEDRX(4, 1, 2, 5, 6, 2) # 2.56 continuous
+    capture(1)
+
+def test_drx_cap(request):
+    pytest.subtest = request.node.name.split('_')[-1] + '/'
+    capture(10000)
+```
 
 #### Cellular Operator Selection (COPS)
 
-Network Registration is necessary when the device is not yet connected.
-
-An initial test was performed with AT+COPS=0 network registration until T3412 timeout of 270 seconds.
+Network Registration is necessary when the device is not yet connected. In Figure \ref{fig:lengthy_inactive}, An initial test was performed with AT+COPS=0 network registration until T3412 timeout of 270 seconds and peak current approximately 70mA.
 
 [](C:\GIT\masters\thesis\images\active_time.JPG)
 
-Peak current is approximately 70mA.
 
 
+![`AT+COPS=0` network registration on MTN-ZTE network with lengthy inactivity timer setting of 270s. \label{fig:lengthy_inactive}](C:\GIT\masters\thesis\images\activetime.jpg){width=50%}
 
-![activetime](C:\GIT\masters\thesis\images\activetime.jpg)
+This snippet registers the UE device on the network and as a workaround to shorten a long C-DRX inactivity timer of 10, 20 seconds or more (even up to ~265 seconds) it sends a UDP packet with a flag which tells the eNodeB that it would like to release the connection immediately, hence Release Assistance.
+
+```python
+...
+@pytest.fixture(autouse=True)
+def _config(request):
+    pytest.test = 'cops/'
+
+############## reg release ##############
+@pytest.mark.reg
+def test_cops_register2(request):
+    pytest.subtest = request.node.name.split('_')[-1] + '/'
+    flushTIM()
+    expect('AT+CFUN=1', 'OK', 3)
+    expect('AT+COPS=0', ['+CEREG: 1', '+CSCON: 0', '+CEREG:1', '+CSCON:0'], 300)
+
+@pytest.mark.reg
+def test_cops_release(request):
+    pytest.subtest = request.node.name.split('_')[-1] + '/'
+    fetchTIM()
+    if pytest.vendor == 'ublox':
+        expect('at+nsocl=0', '')
+        receiveAT(1)
+        OK('AT+NSOCR="DGRAM",17,14000,1')
+        receiveAT(1)
+        expect('AT+NSOSTF=0,"1.1.1.1",7,0x200,1,"FF"', '+CSCON: 0', 100)
+        OK('at+nsocl=0')
+    elif pytest.vendor == 'quectel':
+        ...
+        ...
+    receiveAT(1)
+    receiveAT(1)
+    fetchTIM()
+    capture(1, 3)
+
+############## dereg release ##############
+@pytest.mark.reg
+def test_cops_deregister(request):
+    pytest.subtest = request.node.name.split('_')[-1] + '/'
+    OK('AT+COPS=2', 5)
+    receiveAT(300, ['+NPSMR:'])
+    flushTIM()
+    capture(1, 20)
+...
+```
 
 #### Echo
 
@@ -597,24 +901,80 @@ This test is designed to measure client and server initiated echo requests.
 
 [](../../code/tests/logs/huawei_vodacom/quellerina/ublox/echo/3.bmp)
 
-![Echo Test](../images/image-20191106153552851.png)
+![Echo Test](../images/image-20191106153552851.png){width=50%}
+
+The following snippet shows how the framework sends to a custom echo server which responds immediately and then the echo server responds again after a ten second delay.
+
+```python
+...
+def test_echo_send(request):
+    pytest.subtest = request.node.name.split('_')[-1] + ('512/' if big else '/')
+    if pytest.vendor == 'ublox':
+        expect('at+nsocl=0', '')
+        receiveAT(1)
+        OK('AT+NSOCR="DGRAM",17,4444')
+        if big:
+            expect('AT+NSOSTF=0,"34.74.25.60",5555,0x400,512,"33333333333333333333...
+                   ... ... ... 3333333333333333333 ... ... ...
+                   ...3333333"', '+NSONMI: 0', 300)
+        else:
+            expect('AT+NSOSTF=0,"34.74.25.60",5555,0x400,3,"313232"', '+NSONMI: 0', 300)
+        receiveAT(1, '+CSCON: ')
+        OK('AT+NSORF=0,512', 3)
+    ...
+    capture(1, 8)
+...
+```
+
+The custom echo server has a static IP (34.74.25.60) and is open on port 5555.
+
+
+```python
+...
+def receive_next(sock):
+    "Repeatedly tries receiving on the given socket until some data comes in."
+    logger.debug("Waiting to receive data...")
+    while True:
+        try:
+            BUFFER_SIZE = 4096 # the buffer for receiving incoming messages
+            return sock.recvfrom(BUFFER_SIZE)
+        except socket.timeout:
+            logger.debug("No data received yet: retrying.")
+            pass
+
+def receive_and_send_one(sock):
+    "Waits for a single datagram over the socket and echoes it back."
+    input_data, addr = receive_next(sock)
+    message = input_data.decode()
+    output_len = sock.sendto(input_data, addr)
+    sleep(10) # 10 second delay before echoing back again
+    output_len = sock.sendto(input_data, addr)
+
+def start(args):
+    "Runs the server."
+    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    sock.settimeout(5) # seconds
+    sock.bind((args.host, args.port))
+    logger.info("Listening on %s:%s.", args.host, args.port)
+    try:
+        for i in itertools.count(1):
+            receive_and_send_one(sock)
+    ...
+```
+
+
 
 #### Ping 
 
-Issue the +NPING AT command to check if the module is able to send and receive data.
-Check to see if the network can communicate to the internet, or it is needed another accessible
-server’s IP address to ping.
+The +NPING AT command can be issued to check if the module is able to send and receive data via the internet, or an internal network location.
 To ping Google’s DNS server:
 AT+NPING="8.8.8.8"
-To ping OpenDNS DNS server:
-AT+NPING="208.67.222.222"
+
 The information text response to the +NPING AT command will be issued after a few seconds. If the
-information text response is +NPINGERR: 1, the ping has timed out.
+information text response is +NPINGERR: 1, the ping has timed out (usually within 10 seconds). The first ping might fail because it can take a few seconds to connect to the base station. Use
+the +CSCON URC to show when the module is connected.
 
-* The first ping might fail because it can take a few seconds to connect to the base station. Use
-  the +CSCON URC to show when the module is connected.
-
-
+Whilst the simple `Ping` command is useful to measure connectivity and latency, it unfortunately has no way to release the inactivity timer by itself, which means the modem continues to consume current in receive-mode/C-DRX. That is why the `Echo` telemetry test was designed.
 
 ## Power Efficiency
 
@@ -764,14 +1124,6 @@ Fig. \ref{fig:udpsize1} shows
 [](../images/1568090070185.png){width=65%}
 
 ### Measured Max Current
-
-\begin{minipage}{\linewidth}
-\begin{center}
-\includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_energy_outliers.pdf}
-\captionof{figure}[Max current of packets (372/1619) up to 128mA against RSRP.]{Max current of packets (372/1619) up to 128mA in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs against RSRP.}
-\label{fig:}
-\end{center}
-\end{minipage}
 
 [](../../../masters/code/tests/plotterk/Signal_power_maxCurrent_plot.png)
 

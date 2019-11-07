@@ -54,14 +54,11 @@ def test_URC(request):
         OK('ATE0')
     # todo: at+natspeed=115200,30,1
 
-
-# @pytest.mark.skip()
 @pytest.mark.apn
 def test_APN(request):
     pytest.subtest = request.node.name.split('_')[-1] + '/'
     apn = 'rflab'
     # apn = 'nbiot.vodacom.za'
-    
     if pytest.vendor in ['ublox', 'quectel']:
         OK('AT+CGDCONT=0,"IP","' + apn + '"')
     elif pytest.vendor == 'simcom':
@@ -91,7 +88,6 @@ def test_COPS(request):
 def test_CEREG(request):
     pytest.subtest = request.node.name.split('_')[-1] + '/'
     expect('AT+CEREG?', ['+CEREG: 5,1', '+CEREG:3,1'])
-    # capture(1)
 
 @pytest.mark.setup
 def test_ping(request):
@@ -106,15 +102,6 @@ def test_ping(request):
     print(nuestats())
     capture(1)
 
-# @pytest.mark.release
-# def test_release(request):
-#     pytest.subtest = request.node.name.split('_')[-1] + '/'
-#     # expect('at+cops=2', '+NPSMR: 1', 10)
-#     # expect('at+cops=0', '+CEREG: 1', 10)
-#     OK('AT+NSOCR="DGRAM",17,14000,1')
-#     expect('AT+NSOSTF=0,"1.1.1.1",7,0x200,1,"FF"', '+CSCON: 0', 10)
-#     OK('at+nsocl=0')
-
 @pytest.mark.reboot
 def test_reboot(request):
     pytest.subtest = request.node.name.split('_')[-1] + '/'
@@ -124,3 +111,12 @@ def test_edrxset2(request):
     pytest.subtest = request.node.name.split('_')[-1] + '/'
     setEDRX(0, 5, 0, 0, 0, 0) # 2.56 continuous
     capture(1)
+
+# @pytest.mark.release
+# def test_release(request):
+#     pytest.subtest = request.node.name.split('_')[-1] + '/'
+#     # expect('at+cops=2', '+NPSMR: 1', 10)
+#     # expect('at+cops=0', '+CEREG: 1', 10)
+#     OK('AT+NSOCR="DGRAM",17,14000,1')
+#     expect('AT+NSOSTF=0,"1.1.1.1",7,0x200,1,"FF"', '+CSCON: 0', 10)
+#     OK('at+nsocl=0')

@@ -250,6 +250,36 @@ Table: Cellular control {#tbl:cellular_control}
 
 # Design
 
+More than one UE is used to improve the accuracy of the result, namely Ublox and Quectel. There is an open possibility to test SimCom and Nordic as well.
+
+However, due to the aforementioned energy variability of NB-IoT, an estimate of the energy per message EMSG must be chosen in accordance with the application requirements, ranging from very optimistic (best case) to the most pessimistic (worst case). For that purpose, we use the data recorded as a probabilistic
+model, taking the 5th/95th-percentiles for the best/worst case scenarios, and the mean values as an estimate for the long- term behavior.
+
+Includes some preliminary results to analyze UE device and LTE network behavior.
+
+Physical Cell ID (PCI) is the serving cell tower's unique identifier.
+
+On the MTN network, the UE connected to three different towers.
+
+Table: EARFCN for serving cell {#tbl:earfcn}
+
+| EARFCN                | 3564 | 3712 |
+| --------------------- | ---- | ---- |
+| Ublox-MTN-ZTE         |      | 48   |
+| Quectel-MTN-ZTE       |      | 59   |
+| Ublox-Vodacom-Nokia   | 34   |      |
+| Quectel-Vodacom-Nokia | 32   |      |
+
+[](../../../masters/code/tests/plotterk/Signal_power_EARFCN_plot.png)
+
+[](../../../masters/code/tests/plotterk/EARFCN_histogram.png)
+
+The E-UTRA Absolute Radio Frequency Channel Number (EARFCN) designates the carrier frequency in the uplink and downlink, and ranges between 0-65535.
+
+Since the frequency of the three towers was the same on all three MTN towers, this shows that intra-cell reselection does indeed work.
+
+
+
 \begin{minipage}{1.0\linewidth}
 \begin{center}
 \includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_txTimeNW_outliers.pdf}
@@ -404,3 +434,70 @@ Adding the previous test data together we see the following shape and form.
 \end{center}
 \end{minipage}
 
+# Cell ID, EARFCN
+
+  (35, 35) -> ()
+
+# mermaid
+
+```mermaid
+graph LR
+A[Square Rect] -- Link text --> B((Circle))
+A --> C(Round Rect)
+B --> D{Rhombus}
+C --> D
+```
+
+# power saving mechanism
+
+(These tests should continue until an eDRX value of 2621,44s, or 43.69 minutes and repeated for Quectel, Nordic, SimCom and on Nokia, Ericsson and Huawei basestations)
+
+Also, what is the current usage of running a specific command? Is it negligible or is, for example, polling AT+CSQ constantly detrimental on battery life?
+
+
+
+# telemetry tests
+
+The SARA-N2 series modules are able to send raw data through UDP sockets to an IP address. The
+data sent over the socket AT commands is not wrapped in any other layer, and the data provided is
+the data that is sent.
+
+The Constrained Application Protocol (CoAP) is a datagram-based client/server application protocol
+for devices on the constrained network (e.g. low overhead, low-power), designed to easily translate
+to HTTP for simplified integration with the web. CoAP clients can use the GET, PUT, POST and
+DELETE methods using requests and responses with a CoAP server.
+
+The usage of the Non-IP method during the sending or receiving of messages saves the overhead of
+needing to send a UDP IP header.
+
+For a more advanced check on sending data to an external server, send data to the u-blox echo
+server at echo.u-blox.com. Because there is no DNS lookup function in the SARA-N2 module series, use the IP address server which is 195.34.89.241.
+
+
+
+Command Response Description
+AT+NSOCR="DGRAM",17,10000 0
+OK
+Create a UDP socket.
+AT+NSOST=0,"195.34.89.241",7,5,"0102
+030405"
+0,5
+OK
+Send data on socket 0.
++NSONMI: 0,5
+Receive data on socket 0.
+AT+NSORF=0,5 +NSORF: 0,"195.34.89.241",7,5
+,"0102030405",0
+OK
+Request data from socket 0.
+Echo’d data received
+
+# max current
+
+\begin{minipage}{\linewidth}
+\begin{center}
+\includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_energy_outliers.pdf}
+\captionof{figure}[Max current of packets (372/1619) up to 128mA against RSRP.]{Max current of packets (372/1619) up to 128mA in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs against RSRP.}
+\label{fig:}
+\end{center}
+\end{minipage}

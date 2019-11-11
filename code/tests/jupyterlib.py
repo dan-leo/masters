@@ -75,7 +75,7 @@ def threshold(a, key, thresh=None):
     a = np.array(a[key])
     r = a == a
     if thresh:
-        r *= a > thresh
+        r *= a < thresh
         return r
     lim = [None, None]
     if key == 'Signal power':

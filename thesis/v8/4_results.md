@@ -358,11 +358,21 @@ scan for base station, etc. This is simply over the protocol stack itself.
 
 ![Signal_power_RLC_DL_plot](../../code/tests/plotterk/Signal_power_RLC_DL_plot.png)
 
-![Signal_power_RLC_UL_plot](../../code/tests/plotterk/Signal_power_RLC_UL_plot.png)
+[](../../code/tests/plotterk/Signal_power_RLC_UL_plot.png)
 
-![Signal_power_MAC_DL_plot](../../code/tests/plotterk/Signal_power_MAC_DL_plot.png)
+![Signal_power_RLC_UL_plot](../images/image-20191107113829762.png)
 
-![Signal_power_MAC_UL_plot](../../code/tests/plotterk/Signal_power_MAC_UL_plot.png)
+
+
+[](../../code/tests/plotterk/Signal_power_MAC_DL_plot.png)
+
+![Signal_power_MAC_DL_plot](../images/image-20191107114123267.png)
+
+
+
+[](../../code/tests/plotterk/Signal_power_MAC_UL_plot.png)
+
+![Signal_power_MAC_UL_plot](../images/image-20191107114433379.png)
 
 ### Data Overhead
 
@@ -393,13 +403,7 @@ messages not to be sent or received.
 
 In general packets are around 100-300 bytes in size and all UE-MNO pairings share similar sizes. There are a few subtle trend lines which suggest that packet size increases proportionally to decreased RSRP. 
 
-\begin{minipage}{\linewidth}
-\begin{center}
-\includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_txBytes_outliers.pdf}
-\captionof{figure}[TX packet size outliers (37/65) up to 20kB against RSRP.]{TX packet size outliers (37/65) up to 20kB in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs against RSRP.}
-\label{fig:}
-\end{center}
-\end{minipage}
+
 
 [](../../../masters/code/tests/plotterk/Signal_power_txBytes_outliers.png)
 
@@ -408,6 +412,8 @@ In general packets are around 100-300 bytes in size and all UE-MNO pairings shar
 Attenuation zones do not affect packet size. Vodacom has outliers above 10kB. All outliers are as a result of UDP packet tests and ECL does not seem to affect packet size.
 
 There is a large degree of variation in packet sizes expected to be up to 512 bytes, with sizes up to 10kB or more recorded. That's a 20-fold difference which certainly means on can run out of budget on data costs sooner than expected. The prices of packet-switched data in South Africa is high due to ICASA regulations and is the cause of much competition for remaining spectrum when most is still being used for analogue television broadcast by the SABC.
+
+![Joburg](../images/image-20191107113432240.png)
 
 **RX bytes**
 
@@ -424,14 +430,6 @@ There is a large degree of variation in packet sizes expected to be up to 512 by
 (A) Attenuation zones evident and do not affect packet size. (B) UE-MNO pairs share similar characteristics. (C) Different tests are grouped with similar sizes with UDP packets being the largest, and COPS the smallest. (D) ECL does not seem to affect packet size.
 
 In general packet sizes are up to 200 bytes.
-
-\begin{minipage}{\linewidth}
-\begin{center}
-\includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_rxBytes_outliers.pdf}
-\captionof{figure}[RX packet size outliers (12/18) up to 6kB against RSRP.]{RX packet size outliers (12/18) up to 6kB in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs against RSRP.}
-\label{fig:}
-\end{center}
-\end{minipage}
 
 [](../../../masters/code/tests/plotterk/Signal_power_rxBytes_outliers.png)
 
@@ -1519,7 +1517,7 @@ The board is quite impressive. It boasts EC-GSM, LTE Cat M1 and NB1. It uses a Q
 
 [](C:\Users\d7rob\AppData\Local\Temp\1526328911091.png)
 
-![Retry transmit signals for the WP7702 when extremely close to the edge of signal strength and outside the 180kHz bandwidth channel. \label{fig:overflow180}](C:\Users\d7rob\MEng\cut_many retries wp7702.png)
+![Retry transmit signals for the WP7702 when extremely close to the edge of signal strength and outside the 180kHz bandwidth channel. \label{fig:overflow180}](../images/cut_many%20retries%20wp7702.png)
 
 Although it works as in Fig. \ref{fig:overflow180}, this device seems to have incomplete error handling especially when received signals are very low. On one instance, when connected to EC-GSM, it released from the network at around -90 dBm RSRP, but also threw a +CME sim failure error upon reattaching. Similarly it has happened a few times with NB1 and M1.
 
@@ -1635,3 +1633,6 @@ def test_reboot(request):
     expect('at+nrb', '')
 ```
 
+\newpage
+
+# References

@@ -440,7 +440,7 @@ In the debug logs we see the timer expires after exactly 32 seconds.
 
 It is important to note that if eDRX time is not configured properly, then the outcome does not show as expected as in Fig. \ref{fig:irregular_edrx}.
 
-![Typical eDRX current profile. \label{fig:edrx_pattern}](../images/image-20191105163855934.png)
+![Typical eDRX current profile. \label{fig:edrx_pattern}](../images/image-20191105163855934.png){width=65%}
 
 Finally, an eDRX event has a typical current profile as shown in Fig. \ref{fig:edrx_pattern}. This shows how for the first few microseconds there is a large current spike.
 

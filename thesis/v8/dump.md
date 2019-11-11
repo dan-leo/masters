@@ -501,3 +501,21 @@ Echo’d data received
 \label{fig:}
 \end{center}
 \end{minipage}
+
+# tx, rx bytes
+
+\begin{minipage}{\linewidth}
+\begin{center}
+\includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_txBytes_outliers.pdf}
+\captionof{figure}[TX packet size outliers (37/65) up to 20kB against RSRP.]{TX packet size outliers (37/65) up to 20kB in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs against RSRP.}
+\label{fig:}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{\linewidth}
+\begin{center}
+\includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_rxBytes_outliers.pdf}
+\captionof{figure}[RX packet size outliers (12/18) up to 6kB against RSRP.]{RX packet size outliers (12/18) up to 6kB in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs against RSRP.}
+\label{fig:}
+\end{center}
+\end{minipage}

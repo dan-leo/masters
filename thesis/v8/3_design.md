@@ -20,7 +20,7 @@ tablenos-number-by-section: true
 
 # Design and Methodology {#design}
 
-As stated in Section \ref{resobj}, the aim of this study is to compare user equipment (UE) against mobile network operators (MNOs) with a set of tests that evaluate NB-IoT's performance according to a set of metrics which highlight striking differences due to the underlying complexities of LTE architecture.
+As stated in \S\ref{resobj}, the aim of this study is to compare user equipment (UE) against mobile network operators (MNOs) with a set of tests that evaluate NB-IoT's performance according to a set of metrics which highlight striking differences due to the underlying complexities of LTE architecture.
 
 Four mobile network operators (MNOs) are compared in South Africa according to the underlying vendor
 infrastructure used, namely Nokia and ZTE in the Cape/coastal regions and Ericsson and Huawei based in Gauteng/inland regions.
@@ -88,7 +88,7 @@ In this Fig. \ref{fig:ecl_example}, ECL is shown as an example against two netwo
 
 These identifiers are related to the specific cell towers the UE is connected to.
 
-The Cell ID is the physical network cell ID.  EARFCN uniquely identifies the LTE band and carrier frequency. PCIs,  or Physical Cell Identifiers provide a psuedo-unique value for identifying eNodeBs and is a unique identifier for serving cells.
+The Cell ID is the physical network cell ID. EARFCN uniquely identifies the LTE band and carrier frequency. PCIs, or Physical Cell Identifiers provide a psuedo-unique value for identifying eNodeBs and is a unique identifier for serving cells.
 
 Table: PCI, Cell ID count and EARFCN after K-means cluster filtering with tuples in (Ublox, Quectel) format. {#tbl:nw_parameters}
 
@@ -180,7 +180,7 @@ On the MTN-ZTE network the peaks indicate an on time of roughly 12ms and idle of
 
 Ericsson eNodeBs run Linux and their commands are accessible via MOShell, or the scripting language AMOS.
 
-To get an idea of the complexity of a node (eNodeB) in a base station (BTS), running `$ get .` in the terminal of B06009-TESTPLANT returned 7037 Managed Objects (MOs) with 27989 parameters. This highlights how easy it is for a BTS to produce different results in this study depending on the network configuration and environment.
+To get an idea of the complexity of a node (eNodeB) in a base station (BTS), running `$ get .` in the terminal of B06009-TESTPLANT returned 7037 `Managed Objects` (MOs) with 27989 parameters. See Appendix \ref{appendix_eNB} for an example code snippet of the first two `Managed Objects`. This highlights how easy it is for a BTS to produce different results in this study depending on the network configuration and environment.
 
 ### Range Field Test
 
@@ -358,11 +358,11 @@ Using an RTL2832 SDR dongle, we can capture RF signals. At the very least we can
 
 ![SigFox and LoRa RF signals \@868 MHz](../images/image-20191104223939783.png){width=30%}
 
-Each technology has their own modulation scheme and unique features, and with that their own set of advantages and disadvantages. More can be found in Section \ref{lpwans}.
+Each technology has their own modulation scheme and unique features, and with that their own set of advantages and disadvantages. More can be found in \S\ref{lpwans}.
 
 ### Terrestrial Localization
 
-Localization can be useful for asset tracking as discussed in Section \ref{asset_tracking}. Of the prominent LPWANs, SigFox is the only one that offers a simple localization service. NB-IoT will offer one when upgraded to 3GPP Release 14. Unfortunately SigFox has poor accuracy as can be seen in Fig. \ref{fig:sigfox_map}.
+Localization can be useful for asset tracking as discussed in \S\ref{asset_tracking}. Of the prominent LPWANs, SigFox is the only one that offers a simple localization service. NB-IoT will offer one when upgraded to 3GPP Release 14. Unfortunately SigFox has poor accuracy as can be seen in Fig. \ref{fig:sigfox_map}.
 
 ![With a 17.783km radius in this example, SigFox is poor when it comes to being considered as a source of localization using RSSI triangulation, and it may be better to use TOF techniques such as in OTDOA in NB-IoT \label{fig:sigfox_map}](../images/image-20191105141405835.png){width=80%}
 
@@ -521,9 +521,11 @@ Luckily UE manufacturers usually provide a development kit with open source sche
 
 ## Setup Procedure
 
-Each field test will make use of various UE hardware and telemetry tests.
+Each field test will make use of various UE hardware and telemetry tests and this section outlines the steps taken to perform these field tests.
 
 ### Hardware
+
+This section outlines some of the hardware configurations required for field test captures.
 
 #### Attenuator
 
@@ -551,13 +553,59 @@ $$V_{out} = I_{load} [mA] * 10 [\frac{V}{mA}]$$ {#eq:iload_vout}
 
 ![ZXCT1008 in action](..\images\zxct1008.jpeg)
 
+
+
+#### Energy Capture Device {#energy_capture_device}
+
+The energy capture device measures the energy of each packet, and also returns the duration timings of each datagram packet for latency measurements.
+
+`PlatformIO` compiles code for the microcontroller, and in this case it is a simple Atmel ATmega328P 8-bit microcontroller.
+
+Code can be found on [https://github.com/daniel-leonard-robinson/masters/tree/master/code/edge/src](https://github.com/daniel-leonard-robinson/masters/tree/master/code/edge/src). It connects to the ZXCT1008 mentioned in \S\ref{current_measurements} and converts the results to energy measurements. It also returns via serial to the PyTest framework the timings of each datagram packet.
+
+```c
+void energyLoop(boolean pause) {
+    uint8_t reading = analogRead(A0);
+    if (reading > 60) {
+        if (reading > maxReading) maxReading = reading;
+        if (!readCount++) {
+            tStart = millis();
+            idleTime = tStart - tEnd;
+        }
+        tEnd = millis();
+        zeroM = tEnd;
+        zeroCounter = 0;
+        sum += reading;
+        tStepCount += micros() - tStep;
+    }
+    else if (pause) zeroM = millis();
+    else if (millis() - zeroM < 1000);
+    else if (readCount) {
+        txTime = tEnd - tStart;
+        tStepCount /= 1000;
+        energy = sum * 500 / 1023.0 * tStepCount / 1000 / 1000;
+        
+        buf.flush(); tx[0] = '\0'; // energyFlush();
+        buf.print(idleTime); buf.print(",");
+        buf.print(txTime); buf.print(",");
+        buf.print(tStepCount); buf.print(",");
+        buf.print(energy); buf.print(",");
+        buf.println(maxReading/2);
+        Serial.print(buf); // energyPrint();
+        
+        sum=idleTime=txTime=readCount=maxReading=energy=tStepCount= 0; // energySetup();
+    }
+    tStep = micros();
+}
+```
+
 ### Network Registration
 
-As mentioned in Section \ref{connectivity}, the right SIM cards are necessary. It may even be possible to use e-SIMs as in Fig. \ref{fig:hologram_esim}.
+As mentioned in \S\ref{connectivity}, the right SIM cards are necessary. It may even be possible to use e-SIMs as in Fig. \ref{fig:hologram_esim}.
 
 ![Hologram worldwide e-SIM \label{fig:hologram_esim}](../images/image-20191105152621948.png){width=40%}
 
-Then, the right APNs are necessary. To use MTN's test network, the APN `rflab` is used. On Vodacom's network, the APN `nbiot.vodacom.za` is used.
+Finally, the right APNs are necessary. To use MTN's test network, the APN `rflab` is used. On Vodacom's network, the APN `nbiot.vodacom.za` is used.
 
 ### PyTest Framework
 
@@ -688,7 +736,7 @@ def receiveAT(t=0, expect=['OK'], output=True):
                 return data
 ```
 
-Finally, the testing framework has a `capture` command which is blocking until an energy capture event. In this event the energy is sent via serial from the energy capture device (Section \ref{energy_capture_device}) and triggers the testing framework to extract information from the `AT+NUESTATS="RADIO"` command.
+Finally, the testing framework has a `capture` command which is blocking until an energy capture event. In this event the energy is sent via serial from the energy capture device (\S\ref{energy_capture_device}) and triggers the testing framework to extract information from the `AT+NUESTATS="RADIO"` command.
 
 ```python
 def receiveTIM():
@@ -707,46 +755,6 @@ def receiveTIM():
             print(red + d)
             raise e
     return data
-```
-
-### Energy Capture Device {#energy_capture_device}
-
-Code for energy capture device can be found on [https://github.com/daniel-leonard-robinson/masters/tree/master/code/edge/src](https://github.com/daniel-leonard-robinson/masters/tree/master/code/edge/src). It connects to the ZXCT1008 mentioned in Section \ref{current_measurements} and converts the results to energy measurements. It also returns via serial to the PyTest framework the timings of each datagram packet.
-
-```c
-void energyLoop(boolean pause) {
-    uint8_t reading = analogRead(A0);
-    if (reading > 60) {
-        if (reading > maxReading) maxReading = reading;
-        if (!readCount++) {
-            tStart = millis();
-            idleTime = tStart - tEnd;
-        }
-        tEnd = millis();
-        zeroM = tEnd;
-        zeroCounter = 0;
-        sum += reading;
-        tStepCount += micros() - tStep;
-    }
-    else if (pause) zeroM = millis();
-    else if (millis() - zeroM < 1000);
-    else if (readCount) {
-        txTime = tEnd - tStart;
-        tStepCount /= 1000;
-        energy = sum * 500 / 1023.0 * tStepCount / 1000 / 1000;
-        
-        buf.flush(); tx[0] = '\0'; // energyFlush();
-        buf.print(idleTime); buf.print(",");
-        buf.print(txTime); buf.print(",");
-        buf.print(tStepCount); buf.print(",");
-        buf.print(energy); buf.print(",");
-        buf.println(maxReading/2);
-        Serial.print(buf); // energyPrint();
-        
-        sum=idleTime=txTime=readCount=maxReading=energy=tStepCount= 0; // energySetup();
-    }
-    tStep = micros();
-}
 ```
 
 ### Telemetry Tests
@@ -978,6 +986,8 @@ Whilst the simple `Ping` command is useful to measure connectivity and latency, 
 
 ## Power Efficiency
 
+Power efficiency is one of the main metrics focused on in this study. This section outlines a few preliminary tests and the design for the final field tests comparing UEs and MNOs.
+
 * ~ 10 years battery life
 
 Low power consumption is vital for battery longevity.
@@ -994,7 +1004,7 @@ $$P = \frac{E_{msg}}{T_{msg}}$$ {#eq:avgpower}
 
 * **Power consumption**: In applications where device battery life is
   a crucial factor we recommend, either LoRaWAN or Sigfox, because they are completely asynchronous. We found that the battery life of LoRaWAN SF 7 was five times that of LoRaWAN SF 12 and nearly 25 times that of Sigfox. This is mainly due to the extremely long time-on-air of LoRaWAN SF 12 and Sigfox. If NB- IoT worked with the mobile network operators to reduce its RRC- idle phase, it could develop a minimal power consumption to compare with that of LoRaWAN and Sigfox.
-  * It is clear that LoRaWAN SF7 is the most power-efficient, due to the short transmission burst. NB-IoT displays the worst power-consumption, due to the extended RRC-idle state. This can be reduced using Release Assistance as in Section \ref{release_a}.
+  * It is clear that LoRaWAN SF7 is the most power-efficient, due to the short transmission burst. NB-IoT displays the worst power-consumption, due to the extended RRC-idle state. This can be reduced using Release Assistance as in \S\ref{release_a}.
 
 ### Energy vs SINR
 
@@ -1143,11 +1153,13 @@ roughly between 70 and 120mA, and skewed towards higher consumption. It is also 
 
 ## Latency and Timing
 
+Latency and timing is also one of the main metrics focused on in this study. This section outlines a few preliminary tests and the final design of field tests.
+
 * **Down link latency**: In applications where downlink latency is a
   critical component, only GPRS will suffice, as it is the only technology in this study that requires constant paging between the base station and the end device. 
 * **Down link throughput**: Any applications requiring bi-directional communication of more than 120 bytes per 24 h, should use NB- IoT or GPRS, as Sigfox and LoRaWAN are limited by the duty- cycle limitations of the base station. 
 
-#### TX, RX Time
+### TX, RX Time
 
 TX Time is the duration for which the module’s transmitter has been switched on.
 
@@ -1169,8 +1181,6 @@ the +CSCON: 1 URC will not be issued.
 In Fig. \ref{fig:latency_sinr_comp}, there is a poor distinction between attenuation zones as the SINR varies throughout the reported RSRP range. Grouping the data according to attenuation decade is important to see the effect of network conditions clearly.
 
 ## Secondary Metrics
-
-### 
 
 ![LTE RSRQ and SINR RF Conditions](../images/LTE-RF-Conditions.png)
 
@@ -1196,14 +1206,31 @@ such as deep-indoor devices or remote locations, we recommend either Sigfox or N
 
 RSRP or "Signal Power" is the power of the wanted part of the receive signal, the NB-IoT part.
 
+![](../../../masters/code/tests/plotterk/Signal_power_histogram.png)
+
+#### RSSI
+
+RSSI or "Total Power" in terms of UE reports, is the radio signal strength within the receive bandwidth (both expressed in 10ths of a decibel). From this the signal to noise ratio can be calculated.
+
+![RSSI](../images/image-20191112172439750.png){width=50%}
+
 #### SNR
 
 Last SNR value.
 
-#### "Total power" or RSSI
+#### RSRQ
 
-It is the radio signal strength within the receive bandwidth (both expressed in 10ths
-of a decibel). From this the signal to noise ratio can be calculated.
+**RSRQ = N x RSRP / RSSI**
+
+![LTE RSRQ reporting range](../images/CableFree-LTE-RSRQ-reporting-range.png)
+
+- N is the number of Physical Resource Blocks (PRBs) over which the RSSI is measured, typically equal to system bandwidth
+- RSSI is pure wide band power measurement, including intracell power, interference and noise
+- The reporting range of RSRQ is defined from -3…-19.5dB
+
+[](../../../masters/code/tests/plotterk/RSRQ_histogram.png)
+
+![RSRQ](../images/image-20191112173112378.png)
 
 #### Transmit power
 
@@ -1253,6 +1280,8 @@ Variation in data overhead can be measured using TX, and RX byte counters.
 
 ## Estimations
 
+A few metrics are estimated in this study.
+
 ### Telemetry Interval
 
 The recommended telemetry interval can be estimated for a subtest.
@@ -1273,26 +1302,6 @@ Ublox and Quectel data has been captured for:
 * Huawei in Fairlands, JHB
 
 ## Post-processing
-
-### Plots
-
-- what aspect is the plot trying to cover, what is it telling me on that topic, shows? observances?
-- purpose
-- data in the plot saying / deduce / narrative / story
-  - Example, Quectel, Vodacom is worse
-- 4 sentences
-- 4 sentences when comparing nw, and tehn again ues
-- What is the take home?
-
-
-
-* what aspect is the plot trying to cover
-
-* what is it telling me on that topic
-* purpose
-* data in the plot saying / deduce / narrative / story
-* 4 sentences
-* 4 sentences when comparing nw, and tehn again ues
 
 ### Probability estimation
 
@@ -1343,6 +1352,68 @@ If the histogram bin values are normalized by dividing by the bin count, adding 
 [](../../code/tests/old/img2/probability_mass_function.png)
 
 In fact, good practice would be viewing the data as is and not trying to analyze it from what is essentially an entirely new perspective. Thus, the data will be viewed as 2D plotted points and histograms. Colour will be used to group the data according to attenuation and packet size.
+
+### Plots {#plots}
+
+- what aspect is the plot trying to cover, what is it telling me on that topic, shows? observances?
+- purpose
+- data in the plot saying / deduce / narrative / story
+  - Example, Quectel, Vodacom is worse
+- 4 sentences
+- 4 sentences when comparing nw, and tehn again ues
+- What is the take home?
+
+
+
+* what aspect is the plot trying to cover
+* what is it telling me on that topic
+* purpose
+* data in the plot saying / deduce / narrative / story
+* 4 sentences
+* 4 sentences when comparing nw, and tehn again ues
+
+
+
+Jupyter is a python framework which is used for post-processing, and the following code snippet shows an example of the `9-plot` format used in the results (Chapter \ref{results}):
+
+```python
+import jupyterlib as j
+import plotter as p
+import plotter4 as p4
+
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
+
+import importlib
+
+def plot(*args, **kwargs):
+    importlib.reload(j)
+    importlib.reload(p)
+    importlib.reload(p4)
+    testl = ['1-16 B', '64-128 B', '256-512 B', 'Echo', 'COPS', 'eDRX', 'PTAU']
+    K = kwargs.pop('K') if 'K' in kwargs else None
+    p4.plot(db(), *args, **kwargs, K=K if K else 3, folder='plotterk', joburg=True,
+    	testl=testl)
+    
+...
+...
+    
+plot('SNR', 'txTime', 'SNR (dB)', 'Latency (s)', scale=[10,1000], K=5)
+plot('Signal power', 'energy', 'RSRP (dBm)', 'Power (uWh)', [10,3.6], K=6, log=True)
+```
+
+As there are numerous Jupyter files, most code resides in custom libraries which can be imported into each file to maintain consistency in case of duplication errors, and this can also be found on  [https://github.com/daniel-leonard-robinson/masters/tree/master/code/tests](https://github.com/daniel-leonard-robinson/masters/tree/master/code/tests). During development on the custom libraries, Jupyter requires `importlib` to `reload` each library when a master function such as `plot(*args, **kwargs)` is called.
+
+Table: Custom libraries imported by Jupyter and a description of their purpose {#tbl:jupyter_libs}
+
+| Library    | Purpose                                                     |
+| ---------- | ----------------------------------------------------------- |
+| jupyterlib | processing CSV files, directories, tests, thresholds        |
+| plotter    | gathering data into single dictionary database for plotting |
+| plotter4   | plotting data in 9-plot format, K-means clustering          |
+
+Other plots were more specialized and code was kept within the Jupyter file it was developed in.
 
 ## Dataset
 

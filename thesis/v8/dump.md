@@ -519,3 +519,130 @@ Echo’d data received
 \label{fig:}
 \end{center}
 \end{minipage}
+
+# eNB
+
+```bash
+interEnbCaTunnelDscp                 14
+interEnbUlCompTunnelDscp             14
+intraRanIpAddressRef                 
+ipsecEpAddressRef                    
+licCapDistrMethod                    0 (SYSTEM)
+licConnectedUsersPercentileConf      90
+licDlBbPercentileConf                90
+licDlPrbPercentileConf               90
+licUlBbPercentileConf                90
+licUlPrbPercentileConf               90
+maxNrOfInterEnbUlCompLbm             6
+maxRandc                             255
+measuringEcgiWithAgActive            false
+mfbiSupport                          false
+mfbiSupportPolicy                    false
+minRandc                             1
+mtRreWithoutNeighborActive           true
+nnsfMode                             1 (RPLMN_IF_SAME_AS_SPLMN)
+prioritizeAdditionalBands            false
+pwsPersistentStorage                 0 (OFF)
+randUpdateInterval                   200
+release                              not applicable
+releaseInactiveUesInactTime          1
+releaseInactiveUesMpLoadLevel        2 (VERY_HIGH_LOAD)
+rpUpIpAddressRef                     
+rrcConnReestActive                   true
+s1GtpuEchoDscp                       14
+s1GtpuEchoEnable                     0 (DISABLED)
+s1GtpuEchoFailureAction              0 (NONE)
+s1HODirDataPathAvail                 false
+s1RetryTimer                         30
+sctpRef                              SctpEndpoint=1
+sctpX2Ref                            
+softLockRwRWaitTimerInternal         60
+softLockRwRWaitTimerOperator         60
+tOutgoingHoExecCdma1xRtt             5
+tRelocOverall                        10
+tS1HoCancelTimer                     3
+tddVoipDrxProfileId                  -1
+timeAndPhaseSynchAlignment           false
+timeAndPhaseSynchCritical            false
+timePhaseMaxDevIeNBUlComp            30
+timePhaseMaxDeviation                100
+timePhaseMaxDeviationCdma2000        100
+timePhaseMaxDeviationEdrx            10
+timePhaseMaxDeviationIeNbCa          30
+timePhaseMaxDeviationMbms            50
+timePhaseMaxDeviationOtdoa           9
+timePhaseMaxDeviationSib16           100
+timePhaseMaxDeviationTdd             15
+timePhaseMaxDeviationTdd1            15
+...
+...
+timePhaseMaxDeviationTdd7            15
+timePhaseSyncStateEdrx               false
+timePhaseSyncStateIeNBUlComp         true
+timePhaseSynchStateCdma2000          true
+timePhaseSynchStateMbms              true
+timePhaseSynchStateOtdoa             true
+timePhaseSynchStateSib16             true
+ulBbCapacityMaxLimit                 1500
+ulBbCapacityNet                      150
+ulMaxWaitingTimeGlobal               0
+ulSchedulerDynamicBWAllocationEnabled  true
+upIpAddressRef                       Router=LRAT,InterfaceIPv4=1,AddressIPv4=1
+upX2IpAddressRef                     
+useBandPrioritiesInSCellEval         false
+useBandPrioritiesInSib1              false
+userLabel                            
+x2BlackList                          t[0] = 
+x2GtpuEchoDscp                       14
+x2GtpuEchoEnable                     0 (DISABLED)
+x2IpAddrViaS1Active                  true
+x2SetupTwoWayRelations               true
+x2WhiteList                          t[0] = 
+x2retryTimerMaxAuto                  1440
+x2retryTimerStart                    30
+zzzTemporary1                        
+zzzTemporary10                       -2000000000
+...
+```
+
+# signal strength
+
+#### RSSI
+
+\begin{minipage}{\linewidth}
+\begin{center}
+\includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_Total_power_plot.pdf}
+\captionof{figure}[RSSI versus RSRP packets (389/1619).]{RSSI versus RSRP packets (389/1619) in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs.}
+\label{fig:}
+\end{center}
+\end{minipage}
+
+![](../../../masters/code/tests/plotterk/Signal_power_Total_power_plot.png)
+
+(A) Attenuation zones evident in both RSSI/RSRP. (B) Vodacom within a range of 40dBm and MTN within 50dBm. MTN is also 20dBm more sensitive in terms of RSRP. (C) Significant variation in tests across both axes. (D) ECL 2 mainly from -110dB RSRP or less and ECL 1 more. ECL 0 spread throughout.
+
+![](../../../masters/code/tests/plotterk/Total_power_histogram.png)
+
+#### RSRQ
+
+\begin{minipage}{\linewidth}
+\begin{center}
+\includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_RSRQ_plot.pdf}
+\captionof{figure}[RSRQ vs RSRP packets (389/1619).]{RSRQ vs RSRP packets (389/1619) in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs.}
+\label{fig:}
+\end{center}
+\end{minipage}
+
+[](../../../masters/code/tests/plotterk/Signal_power_RSRQ_plot.png)
+
+(A) Attenuation zones evident in RSRP and skewed by RSRQ axis. (B) Vodacom shows poorer RSRQ than MTN. (CD) Significant variation in tests and ECL across both axes.
+
+\begin{minipage}{\linewidth}
+\begin{center}
+\includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/RSRQ_histogram.pdf}
+\captionof{figure}{Histogram distribution of RSRQ.}
+\label{fig:}
+\end{center}
+\end{minipage}
+
+[](../../../masters/code/tests/plotterk/RSRQ_histogram.png)

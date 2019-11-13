@@ -22,7 +22,7 @@ tablenos-number-by-section: true
 
 # Results {#results}
 
-This chapter visualizes and analyses the results from the datasets obtained in Chapter \ref{design}.
+This chapter visualizes and analyses the results from the datasets obtained in Chapter \ref{design}. The visualization format can be found in \S\ref{plots}.
 
 ## Latency and Delay
 
@@ -220,14 +220,16 @@ It is evident that on all attenuation levels there is a high degree of variation
 
 * Importance of low latency communications.
 
+### Summary
+
 ## Secondary Metrics
 
 ### Signal Strength Metrics
 
 #### MCL
 
-Once the module has an RRC connection, then the ECL, RSRP, RSRQ values allow to understand the
-RF link budget between the module and base station.
+Once the module has an RRC connection, then the MCL, RSRP, RSRQ values allow to understand the
+RF link characteristics between the module and base station.
 
 |                | MCL     |
 | -------------- | ------- |
@@ -235,58 +237,6 @@ RF link budget between the module and base station.
 | Vodacom-Nokia  | 137 dBm |
 | MTN-Ericsson   | 145 dBm |
 | Vodacom-Huawei | 151 dBm |
-
-
-
-#### RSSI
-
-\begin{minipage}{\linewidth}
-\begin{center}
-\includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_Total_power_plot.pdf}
-\captionof{figure}[RSSI versus RSRP packets (389/1619).]{RSSI versus RSRP packets (389/1619) in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs.}
-\label{fig:}
-\end{center}
-\end{minipage}
-
-[](../../../masters/code/tests/plotterk/Signal_power_Total_power_plot.png)
-
-(A) Attenuation zones evident in both RSSI/RSRP. (B) Vodacom within a range of 40dBm and MTN within 50dBm. MTN is also 20dBm more sensitive in terms of RSRP. (C) Significant variation in tests across both axes. (D) ECL 2 mainly from -110dB RSRP or less and ECL 1 more. ECL 0 spread throughout.
-
-[](../../../masters/code/tests/plotterk/Total_power_histogram.png)
-
-[](../../../masters/code/tests/plotterk/Signal_power_histogram.png)
-
-#### RSRQ
-
-**RSRQ = N x RSRP / RSSI**
-
-![LTE RSRQ reporting range](../images/CableFree-LTE-RSRQ-reporting-range.png)
-
-- N is the number of Physical Resource Blocks (PRBs) over which the RSSI is measured, typically equal to system bandwidth
-- RSSI is pure wide band power measurement, including intracell power, interference and noise
-- The reporting range of RSRQ is defined from -3…-19.5dB
-
-\begin{minipage}{\linewidth}
-\begin{center}
-\includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_RSRQ_plot.pdf}
-\captionof{figure}[RSRQ vs RSRP packets (389/1619).]{RSRQ vs RSRP packets (389/1619) in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs.}
-\label{fig:}
-\end{center}
-\end{minipage}
-
-[](../../../masters/code/tests/plotterk/Signal_power_RSRQ_plot.png)
-
-(A) Attenuation zones evident in RSRP and skewed by RSRQ axis. (B) Vodacom shows poorer RSRQ than MTN. (CD) Significant variation in tests and ECL across both axes.
-
-\begin{minipage}{\linewidth}
-\begin{center}
-\includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/RSRQ_histogram.pdf}
-\captionof{figure}{Histogram distribution of RSRQ.}
-\label{fig:}
-\end{center}
-\end{minipage}
-
-[](../../../masters/code/tests/plotterk/RSRQ_histogram.png)
 
 #### SINR
 
@@ -304,7 +254,7 @@ For example, in a frame-synchronized network, **SINR estimation based on synchro
 
 \begin{minipage}{\linewidth}
 \begin{center}
-\includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_RSRQ_plot.pdf}
+\includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_SNR_plot.pdf}
 \captionof{figure}{SINR versus RSRP packets (389/1619) in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs.}
 \label{fig:}
 \end{center}
@@ -332,12 +282,20 @@ SNR is spread relatively evenly for the different attenuation zones.
 \begin{minipage}{\linewidth}
 \begin{center}
 \includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_TX_power_plot.pdf}
-\captionof{figure}[Transmit powers of packets (204/1597) up to 23dBm against RSRP.]{Transmit powers of packets (204/1597) from -10 to 23 dBm in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs against RSRP.}
+\captionof{figure}[Transmit powers of packets (204/1597) up to 23dBm against RSRP for ZTE, Nokia.]{Transmit powers of packets (204/1597) from -10 to 23 dBm in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs against RSRP for ZTE, Nokia.}
 \label{fig:}
 \end{center}
 \end{minipage}
 
-[](../../../masters/code/tests/plotterk/Signal_power_TX_power_plot.png)
+\begin{minipage}{\linewidth}
+\begin{center}
+\includegraphics[width=1.0\linewidth]{../../../masters/code/tests/joplotterk/Signal_power_TX_power_plot.pdf}
+\captionof{figure}[Transmit powers of packets (340/2148) up to 23dBm against RSRP for Ericsson, Huawei.]{Transmit powers of packets (340/2148) from -60 to 23 dBm in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs against RSRP Ericsson, Huawei.}
+\label{fig:}
+\end{center}
+\end{minipage}
+
+[](../../../masters/code/tests/joplotterk/Signal_power_TX_power_plot.png)
 
 (A) Transmit power decreases proportional to RSRP from around -100 dBm and stronger. (B) Attenuation/RSRP affects transmit power on MTN, and Vodacom remains at the 23 dBm max. (C) Variation in all tests. (D) ECL 0 and 1 uses less power but ECL 2 remains at max power.
 
@@ -457,6 +415,8 @@ quality.
 up to 30 required, and one outlier at 80. 
 
 (A) Attenuation zones evident and do not affect number of ACK/NACKs. (B) Vodacom requires more ACK/NACK responses than MTN. They share similar characteristics at a difference of 40dBm RSRP. (C) Significant variation in tests, although eDRX tests show the greatest number. (D) ECL does not seem to affect ACK/NACK count
+
+### Summary
 
 ## Estimations
 
@@ -1635,4 +1595,59 @@ def test_reboot(request):
 
 \newpage
 
-# References
+# Appendix H {#appendix_eNB}
+
+```bash
+=== TPMME1 sysadm@eqm01s0fp2 ANCB ~ # get .
+
+180420-22:33:45 10.45.254.73 18.0a MSRBS_NODE_MODEL_17.Q3_330.27706.45_27e4
+	stopfile=/tmp/12068
+$ssh_pid = 2914
+Connected to 10.45.254.73 (SubNetwork=ONRM_ROOT_MO_R,SubNetwork=LTE_TEST,
+	MeContext=B06009-TESTPLANT,ManagedElement=B06009-TESTPLANT)
+=============================================================================
+0                                    ManagedElement=B06009-TESTPLANT
+=============================================================================
+                                     SubNetwork=ONRM_ROOT_MO_R,SubNetwork=LTE_TEST,
+dnPrefix                             MeContext=B06009-TESTPLANT
+managedElementId                     B06009-TESTPLANT
+managedElementType                   RadioNode
+networkManagedElementId              B06009-TESTPLANT
+release                              17.Q3
+siteLocation                         
+userLabel                            
+=============================================================================
+1                                    ENodeBFunction=1
+=============================================================================
+alignTtiBundWUlTrigSinr              0 (OFF)
+altNasBackTo                         0 (DEFAULT_DCN)
+biasThpWifiMobility                  10
+caAwareMfbiIntraCellHo               false
+checkEmergencySoftLock               false
+combCellSectorSelectThreshRx         300
+combCellSectorSelectThreshTx         300
+csfbMeasFromIdleMode                 true
+csfbUseRegisteredLai                 false
+csmMinHighHitThreshold               70
+dlBbCapacityMaxLimit                 3000
+dlBbCapacityNet                      300
+dlMaxWaitingTimeGlobal               0
+dnsLookupOnTai                       1 (ON)
+dnsLookupTimer                       0
+dnsSelectionS1X2Ref                  
+dscpLabel                            56
+eNBId                                6009
+eNodeBFunctionId                     1
+eNodeBPlmnId                         Struct{3}
+ >>> 1.mcc = 655
+ >>> 2.mnc = 10
+ >>> 3.mncLength = 2
+enabledUlTrigMeas                    false
+eranVlanPortRef                      
+extendedWaitTimeNb                   0
+forcedSiTunnelingActive              false
+gtpuErrorIndicationDscp              40
+inactivitySupervisionTimerNb         i[3] = 100 150 200 
+initPreschedulingEnable              true
+...
+```

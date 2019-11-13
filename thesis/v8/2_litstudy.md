@@ -58,7 +58,7 @@ Looking at Gartner's analysis of technology expectations with regards to NB-IoT 
 
 As of August 2019, Gartner has high expectations for 5G and other emerging technologies which can make use of what [IoT has to offer](https://blogs.sas.com/content/hiddeninsights/2016/07/06/long-live-the-iot-hype/). This can be seen in Fig. \ref{fig:gartner_emergingTech}.
 
-![Gartner's Hype Cycle for Emerging Technologies, 2019. IoT is inextricably linked to at least a third of emerging technologies and also has uses in NB-IoT. \label{fig:gartner_emergingTech}](../images/CTMKT_741609_CTMKT_for_Emerging_Tech_Hype_Cycle_LargerText-1.png){ width=90% }
+![Gartner's Hype Cycle for Emerging Technologies, 2019. IoT is inextricably linked to at least a third of emerging technologies and also has uses in NB-IoT. \label{fig:gartner_emergingTech}](../images/CTMKT_741609_CTMKT_for_Emerging_Tech_Hype_Cycle_LargerText-1.png){ width=85% }
 
 On the other hand, this does not slow the growth in number of devices connected as in Fig. \ref{fig:iot_growth}. IoT merely manifests itself in other uses and forms such as we have already seen in Fig. \ref{fig:gartner_emergingTech}. NB-IoT can be integral to aid this growth.
 
@@ -78,6 +78,8 @@ Most LPWANs are unidirectional, meaning they transmit data in one direction only
 Most importantly when looking at bidirectionality vs unidirectionality is that transmit current is usually much more than the receive current required. By limiting TX transmissions such that the user only requests data on-demand when it is required, battery savings ensue.
 
 There are many LPWANs out there, but we can split them up into two groups as in Table \ref{tbl:unibidirectional_lpwans}.
+
+\newline
 
 Table: Unidirectional and bidirectional LPWANs {#tbl:unibidirectional_lpwans}
 
@@ -108,17 +110,13 @@ NB-IoT is not the only network that can replace satellite IoT or 2G/GPRS with co
 
 ## Low-Powered Wide-Area Networks {#lpwans}
 
-A low-power wide-area network is a type of wireless telecommunication designed to allow long-range communications at a low bit rate among things, such as sensors operated on a battery. This section will compare a few prominent cellular and unlicensed frequency LPWANs against NB-IoT.
+A low-power wide-area network is a type of wireless telecommunication designed to allow long-range communications at a low bit rate among things, such as sensors operated on a battery. This section will compare a few prominent cellular and unlicensed frequency LPWANs against NB-IoT besides the following alternatives:
 
-EC-GSM-IoT is a form of eGPRS optimized for the IoT. It is still in the trial stages of development, however [@Bergman2017].
-
-RPMA by Ingenu is a 2.4GHz technology for M2M communications. It is primarily used in North America for the oil & gas industry, amongst others [@Ingenu2016]. It is equivalent to cellular standard but expensive.
-
-Weightless SIG reuses TV whitespace, and NB-IoT is actually formed off this protocol [@Weightless2015], [@Raza2017].
-
-NB-Fi Protocol is an open LPWAN protocol, which operates in unlicensed ISM radio band. Using the NB-Fi Protocol in devices ensures stable data transmission range of up to 10 km in dense urban conditions, and up to 30 km in rural areas with up to 10 years on battery power [@Ikpehai2018b].
-
-HaLow (pronounced halo) is a low-power, long-range version of the IEEE 802.11 Wi-Fi standard. HaLow is based on the Wi-Fi Alliance 802.11ah specification and is expected to play an important part in IoT. At this stage it has low market traction.
+* EC-GSM-IoT is a form of eGPRS optimized for the IoT. It is still in the trial stages of development, however [@Bergman2017].
+* RPMA by Ingenu is a 2.4GHz technology for M2M communications. It is primarily used in North America for the oil & gas industry, amongst others [@Ingenu2016]. It is equivalent to cellular standard but expensive.
+* Weightless SIG reuses TV whitespace, and NB-IoT is actually formed off this protocol [@Weightless2015], [@Raza2017].
+* NB-Fi Protocol is an open LPWAN protocol, which operates in unlicensed ISM radio band. Using the NB-Fi Protocol in devices ensures stable data transmission range of up to 10 km in dense urban conditions, and up to 30 km in rural areas with up to 10 years on battery power [@Ikpehai2018b].
+* HaLow (pronounced halo) is a low-power, long-range version of the IEEE 802.11 Wi-Fi standard. HaLow is based on the Wi-Fi Alliance 802.11ah specification and is expected to play an important part in IoT. At this stage it has low market traction.
 
 ### LoRaWAN {#lorawan}
 
@@ -202,13 +200,13 @@ To meet application specific requirements, the uniqueness of each technology giv
 
 Table: LPWAN strengths with \checkmark,  $\times$  denoting best and worst case respectively. {#tbl:lpwan_strengths}
 
-| Technology   | MCL        | Scalability | Battery life | Throughput |
-| ------------ | ---------- | ----------- | ------------ | ---------- |
-| NB-IoT       | \checkmark | \checkmark  |              | \checkmark |
-| GPRS         | $\times$   | \checkmark  | $\times$     | \checkmark |
-| LoRaWAN SF7  |            |             | \checkmark   |            |
-| LoRaWAN SF12 | \checkmark | $\times$    |              | $\times$   |
-| SigFox       | \checkmark | \checkmark  |              |            |
+| Technology   | MCL                             | Scalability | Battery life                    | Throughput |
+| ------------ | ------------------------------- | ----------- | ------------------------------- | ---------- |
+| NB-IoT       | \checkmark                      | \checkmark  |                                 | \checkmark |
+| GPRS         | $\times$ | \checkmark  | $\times$ | \checkmark |
+| LoRaWAN SF7  |                                 |             | \checkmark                      |            |
+| LoRaWAN SF12 | \checkmark                      | $\times$ |                                 | $\times$ |
+| SigFox       | \checkmark                      | \checkmark  |                                 |            |
 
 Competition in the LPWAN space, regional momentum and IoT demand will ensure that the various technologies will continue to develop and improve to support more features and expand the network coverage.
 
@@ -266,11 +264,11 @@ Durand [@Thomas2018] suggests NB-IoT is poor for asset tracking and utility mete
 | Retail | Wearables |
 
 
-## A deeper look into NB-IoT {#nbiot}
+## A Deeper Look into NB-IoT {#nbiot}
 
 This section describes NB-IoT in more detail and the setup procedures involved.
 
-### Development {#development}
+### Development and Present Standing {#lit_standing}
 
 Formed by the 3GPP from LTE, NB-IoT was developed within that framework and its capabilities are particularly well suited to smart metering.
 
@@ -292,8 +290,6 @@ for paging, but as this window will be limited to save battery life, the deliver
 occurs mainly when the system detects that uplink messages have been received from a device
 (indicating that it is awake). Here a store-and-forward system, an “IoT Platform”, is useful.
 
-### Present Standing {#lit_standing}
-
 NB-IoT has a certain standing in IoT and LPWANs, and this can be seen in Fig. \ref{fig:nbiot_positioning}.
 
 ![IoT Wireless Technology Representation [@Martinez2019] \label{fig:nbiot_positioning}](../images/1559246290186.png){width=85%}
@@ -309,8 +305,6 @@ Martinez [@Martinez2019] has explored NB-IoT from the perspective of the applica
 
 A user would consider critical characteristics such as energy consumption, coverage, cost, network latency and behavior. Martinez looks at these except for cost, which is better looked at by Ali [@Ali2015]. A set of tests were devised and results showed that in some cases its energy consumption performed better than an LPWAN referenced technology such as LoRa, with the added benefit of guaranteeing delivery. However, the high variability in energy consumption and network latency call into question its reliability especially for mission-critical applications.
 
-### Future {#future}
-
 In future NB-IoT will have the capability of D2D communications as outlined in 3GPP future release specifications.
 
 ### LTE Architecture
@@ -323,7 +317,7 @@ The complexities of LTE architecture further increases the chance of performance
 
 Both UDP socket commands and datagram commands use the IP data transport through the SGi.
 
-### Hardware {#lit_hardware}
+### UE Device Hardware {#lit_hardware}
 
 This subsection looks at hardware specific to the UE device.
 
@@ -610,7 +604,7 @@ Table: NW Config {#tbl:nw_config}
 | **Mode 2** | Inactivity timer = Immediate Release<br/>T3324 = 8s<br/>I-DRX = 2.56s<br/>eDRX/PTW = Disabled |
 | **Mode 3** | Inactivity timer = Immediate Release<br/>T3324 = 0s (disabled) |
 
-### RF
+### RF Characteristics {#rf_characteristics}
 
 When only a fraction of the existing LTE cell sites support NB-IoT, devices cannot attach to the best cell if that cell does not support NB-IoT. As a result, the path loss can be very high. In addition, they also suffer from high interference from non-NB-IoT cells [@Mangalvedhe2016a].
 

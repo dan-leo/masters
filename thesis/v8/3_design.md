@@ -984,7 +984,9 @@ the +CSCON URC to show when the module is connected.
 
 Whilst the simple `Ping` command is useful to measure connectivity and latency, it unfortunately has no way to release the inactivity timer by itself, which means the modem continues to consume current in receive-mode/C-DRX. That is why the `Echo` telemetry test was designed.
 
-## Power Efficiency
+## Main Metrics
+
+### Power Efficiency
 
 Power efficiency is one of the main metrics focused on in this study. This section outlines a few preliminary tests and the design for the final field tests comparing UEs and MNOs.
 
@@ -1006,7 +1008,7 @@ $$P = \frac{E_{msg}}{T_{msg}}$$ {#eq:avgpower}
   a crucial factor we recommend, either LoRaWAN or Sigfox, because they are completely asynchronous. We found that the battery life of LoRaWAN SF 7 was five times that of LoRaWAN SF 12 and nearly 25 times that of Sigfox. This is mainly due to the extremely long time-on-air of LoRaWAN SF 12 and Sigfox. If NB- IoT worked with the mobile network operators to reduce its RRC- idle phase, it could develop a minimal power consumption to compare with that of LoRaWAN and Sigfox.
   * It is clear that LoRaWAN SF7 is the most power-efficient, due to the short transmission burst. NB-IoT displays the worst power-consumption, due to the extended RRC-idle state. This can be reduced using Release Assistance as in \S\ref{release_a}.
 
-### Energy vs SINR
+#### Energy versus SINR
 
 ![Ublox (blue) and Quectel (red) energy (J) per datagram as a function of the SINR (dB) as reported by the UE on the MTN-ZTE network limited to 1500 mJ.\label{fig:energy_sinr1400}](../images/1571781182963.png){width=65%}
 
@@ -1018,7 +1020,7 @@ Increasing the range fully and using logarithms in Fig. \ref{fig:energy_sinr_log
 
 [](../images/1571785381395.png)
 
-### Energy vs Datagram Size
+#### Energy versus Datagram Size
 
 [](../../code/tests/datagrams/mtn_ublox_energy.png)
 
@@ -1045,7 +1047,7 @@ Increasing the range fully and using logarithms in Fig. \ref{fig:energy_sinr_log
 
 Fig. \ref{fig:udpsize1} shows 
 
-### eDRX Energy
+#### eDRX Energy
 
 \begin{figure}[ht]
   \subfloat[MTN-ZTE Ublox]{
@@ -1089,7 +1091,7 @@ Fig. \ref{fig:udpsize1} shows
 
 [](../images/1568090209468.png){width=65%}
 
-### PTAU Energy
+#### PTAU Energy
 
 \begin{figure}[ht]
   \subfloat[MTN-ZTE Ublox (mJ)]{
@@ -1133,7 +1135,7 @@ Fig. \ref{fig:udpsize1} shows
 
 [](../images/1568090070185.png){width=65%}
 
-### Measured Max Current
+#### Measured Max Current
 
 [](../../../masters/code/tests/plotterk/Signal_power_maxCurrent_plot.png)
 
@@ -1151,7 +1153,7 @@ roughly between 70 and 120mA, and skewed towards higher consumption. It is also 
 
 [](../../../masters/code/tests/plotterk/maxCurrent_histogram.png)
 
-## Latency and Timing
+### Latency and Timing
 
 Latency and timing is also one of the main metrics focused on in this study. This section outlines a few preliminary tests and the final design of field tests.
 
@@ -1159,7 +1161,7 @@ Latency and timing is also one of the main metrics focused on in this study. Thi
   critical component, only GPRS will suffice, as it is the only technology in this study that requires constant paging between the base station and the end device. 
 * **Down link throughput**: Any applications requiring bi-directional communication of more than 120 bytes per 24 h, should use NB- IoT or GPRS, as Sigfox and LoRaWAN are limited by the duty- cycle limitations of the base station. 
 
-### TX, RX Time
+#### TX, RX Time
 
 TX Time is the duration for which the module’s transmitter has been switched on.
 
@@ -1174,7 +1176,7 @@ Once a base station is found it is possible to see that it is attempting to tran
 as the Tx time will start to increase. If the base station does not respond to the module’s Tx, then
 the +CSCON: 1 URC will not be issued.
 
-### Latency vs SINR
+#### Latency vs SINR
 
 ![Latency per datagram as a function of the SINR (dB) as reported by the UE on the (D) MTN-ZTE and (E) Vodacom-Nokia network respectively.\label{fig:latency_sinr_comp}](../images/1571781751620.png){width=50%}
 

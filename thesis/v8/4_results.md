@@ -557,22 +557,6 @@ vendor.
 
 * 
 
-* 
-
-* 
-
-## Why is NB-IoT chosen?
-
-Due to the complexities of integrating 3GPP, LTE architecture, large MNOs and vendors, radio access networks and customers.
-
-There is a great deal of uncertainty
-
-promising
-
-throughput
-
-only caveat is battery life
-
 \newpage
 
 # References
@@ -580,9 +564,13 @@ only caveat is battery life
 <div id="refs"></div>
 \newpage
 
-# Appendix A {#appendixA}
+# Appendices {-#appendix}
 
-## Measured Latency
+\appendix
+
+# Measured Metrics and Estimations {#appendix_measured}
+
+## Latency
 
 
 
@@ -813,7 +801,7 @@ Table: Longevity Estimate (years) for 9.36Wh AA battery (Lithium Thionyl Chlorid
 
 \newpage
 
-# Appendix B {#appendixB}
+# UE Reported Metrics and Estimations {#appendix_ue_reported}
 
 ## RF Transmit Time
 
@@ -1103,7 +1091,25 @@ Table: Longevity Estimate in years using Reported RX, TX Time for 9.36Wh AA batt
 
 \newpage
 
-# Appendix D {#appendixD}
+# Example Application Board and Schematic {#appendix_SCH_BRD}
+
+![Quectel BG96 modem schematic](../images/image-20191106135315605.png)
+
+![SIM card, USB and miscellaneous circuitry schematic](../images/image-20191106140747428.png)
+
+![Power circuity, antenna and logic level conversion](../images/image-20191106140001950.png)
+
+![Murata CMWX1ZZABZ-078 module schematic](../images/image-20191106140127903.png)
+
+[](../images/image-20191106140222681.png)
+
+![Atmel ATSAMD21G18a microcontroller schematic](../images/image-20191106135707965.png)
+
+![Top and bottom layout of example PCB](../images/image-20191104224412975.png){width=100%}
+
+\newpage
+
+# System Information Block (SIB) Examples {#appendix_sibs}
 
 These are examples of some of the information accessible in UEMonitor of SIB blocks and RRC signalling communications.
 
@@ -1449,27 +1455,7 @@ Additional Info=DL-CCCH-Message-NB:
 
 \newpage
 
-# Appendix E {#appendix_SCH_BRD}
-
-![Quectel BG96 modem schematic](../images/image-20191106135315605.png)
-
-![SIM card, USB and miscellaneous circuitry schematic](../images/image-20191106140747428.png)
-
-![Power circuity, antenna and logic level conversion](../images/image-20191106140001950.png)
-
-![Murata CMWX1ZZABZ-078 module schematic](../images/image-20191106140127903.png)
-
-[](../images/image-20191106140222681.png)
-
-![Atmel ATSAMD21G18a microcontroller schematic](../images/image-20191106135707965.png)
-
-![Top and bottom layout of example PCB](../images/image-20191104224412975.png){width=100%}
-
-
-
-\newpage
-
-# Appendix F {#appendix_Sierra}
+# Sierra Wireless WP7702 Test Anomaly {#appendix_Sierra}
 
 From 9-20 April 2018, the Sierra Wireless WP7702 modem was tested independently at MTN's Test Plant on 14th Avenue, Johannesburg.
 
@@ -1493,7 +1479,7 @@ Perhaps the reason why these errors never showed up when connecting to Vodacom i
 
 \newpage
 
-# Appendix G {#appendix_pytest}
+# PyTest Setup Fixtures {#appendix_pytest}
 
 PyTest setup fixtures for Ublox and Quectel.
 
@@ -1595,7 +1581,7 @@ def test_reboot(request):
 
 \newpage
 
-# Appendix H {#appendix_eNB}
+# Ericsson eNodeB Managed Objects Snippet {#appendix_eNB}
 
 ```bash
 === TPMME1 sysadm@eqm01s0fp2 ANCB ~ # get .

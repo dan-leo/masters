@@ -14,7 +14,7 @@ tablenos-number-by-section: true
 
 [](../images/UScrest-WM.jpg){width=25%}
 
- \pagenumbering{gobble} 
+ \pagenumbering{gobble}
 
 \begin{minipage}{\linewidth}
 \begin{center}
@@ -135,12 +135,14 @@ All rights reserved.
 | **eNB - eNodeB** | E-UTRAN Node B |
 | **GPRS** | General Packet Radio Service |
 | **ICT** | Information and Communications Technology |
+| **IoT** | Internet of Things |
 | **ITS** | Intelligent Transportation Systems |
 | **IMEI** | International Mobile Equipment Identity |
 | **IMSI** | International Mobile Station Identity |
 | **IP** | Internet Protocol |
 | **LBT** | Listen Before Talk |
 | **LPWAN** | Low-Power Wide-Area-Network |
+| **LTE** | Long Term Evolution |
 | **LTE Cat-NB1/2** | Long Term Evolution Narrow-Band Category 1/2 |
 | **MCL** | Maximum Coupling Link |
 | **MCS** | Message Coding Scheme |
@@ -197,11 +199,15 @@ All rights reserved.
 
 # Introduction {#intro}
 
-Narrowing the spectrum bandwidth for LTE results in a low data-throughput, low energy technology which matches the requirements for wireless IoT, hence Narrowband-IoT (or NB-IoT).
+Narrowing the spectrum bandwidth for cellular Long Term Evolution (LTE) used in everyday life results in a low data-throughput and low energy technology which matches the requirements for wireless Internet of Things (IoT), hence Narrowband-IoT (or NB-IoT).
 
 This chapter introduces the reader to various concepts relating to NB-IoT and the performance characteristics thereof. It begins with the question "Why NB-IoT?" before developing the research question, objectives, scope, terminology, background and other various related concepts to fully orient the reader with regards to NB-IoT.
 
-## Why NB-IoT? {#why}
+## Background {#background}
+
+In recent years, 3GPP have developed new LPWANs for the cellular industry on the roadmap towards 5G, namely LTE Cat-M, EC-GSM-IoT and NB-IoT to supersede the sun-setting 2G/GSM/GPRS networks.
+
+### Why NB-IoT? {#why}
 
 Narrowband-IoT is an LTE technology developed by the 3GPP as a response to the growing need for an LPWAN to fill the role 2G/GPRS leaves behind as countries around the world schedule its departure. The technology shows performance benefits over alternative LPWANS in terms of up and downlink throughput, range and longevity, yet current research shows that variation in energy consumption leaves battery longevity in question. Nevertheless, according to 3GPP specifications and manufacturer claims, highlights include:
 
@@ -209,13 +215,45 @@ Narrowband-IoT is an LTE technology developed by the 3GPP as a response to the g
 * Under 10 second transmission acknowledgement for latency-tolerant applications
 * \+ 20 dB improvement over 2G/GPRS via enhanced coverage levels (ECL).
 
-It would be useful to further investigate variation in energy consumption in the technology.
+Despite these highlights, it would nevertheless be significant to further investigate variation in energy consumption of the technology to solidify the robustness of these claims.
 
-## Problem Statement {#probstat}
+### History and Development
 
-Knowing that NB-IoT (LTE Cat-NB) is a competitive alternative to LoRaWAN, SigFox and other LPWANs, it does not have strong uptake in South Africa yet. It offers energy efficient bidirectionality (as opposed to the uplink-centric norm) using extended discrete periodic reception (eDRX), yet variation in transmission energy and latency can affect battery lifetime drastically. Application developers require network coverage before they are interested in developing business cases, and cellular service providers require consumer and enterprise demand or business cases before rolling out national network coverage. This creates a paradoxical situation where neither party gives in unless they are both willing to come to a compromise. Such efforts can be limited by a lack of understanding in the technology, and this is not helped by the fact that although there is a great deal of theoretical analysis and simulations in research, the lack of empirical evidence may be contributing to a general uncertainty in the standing of the technology with respect to alternatives and thus a slower adoption. This thesis aims to bridge that divide in South Africa by evaluating NB-IoT's performance empirically using a set of metrics and estimate optimal use.
+The beginnings of these new cellular LPWANs started when GSM was first deployed in 1991 and offered calls and SMS as circuit switched data. In 2000, 2G/GPRS added internet at speeds comparable to dialup as packet switched data. Circuit switched data is ideal for real-time connections and means that links have bandwidth pre-allocated. This also increases the QoS guarantee of information transferred timeously. Packet switched data is connectionless on the other hand, with higher bandwidths possible in shared channels. In Fig. \ref{fig:2G_LTE_transition}, we see how technologies using 2G/GSM/GPRS transitioned to LTE. With regard to 'internet', we used emails, WAP and other 'web-based' forms of messaging to keep in touch. Over time, we moved to a plethora of IMS platforms such as WhatsApp, Telegram and WeChat to name a few. Machine-to-machine (M2M) communications started off with SMS, USSD and 2G/GPRS but now with the advent of LPWANs we have many to choose from including LoRaWAN, SigFox and cellular-based forms such as NB-IoT.
 
-## Research Objectives {#resobj}
+![A simplified representation of the transition from 2G to LTE with regard to technologies that keep people and 'things' in contact.\label{fig:2G_LTE_transition}](C:\GIT\masters\thesis\images\ims voip.jpg){ width=50% }
+
+In South Africa, there is a push by cellular service providers to adopt a cellular LPWAN to fill the void that 2G/GPRS leaves behind now and in the future. NB-IoT is being investigated by MTN South Africa, and since they are also funding this research, have also provided network coverage for testing to Stellenbosch University. Ideally, the technology can be rolled out to existing base stations as a software upgrade for national coverage, but it is limited by factors such as use case demand, expensive licensing and general uncertainty about the technology.
+
+2G/GPRS has served as the gateway for smart devices and sensors in the M2M sphere for many years, but due to its high-powered nature it is not sustainable for applications which require battery longevity of up to 10 years or more. In lieu of its absence, although the spectrum it held can be re-farmed for cellular LPWANs, it also opens up opportunities for market entrants of unlicensed frequencies such as LoRaWAN and SigFox. Each LPWAN technology has its own unique flaws and benefits and there is yet to be a clear winner when it comes to connecting 'things' to the internet.
+
+When considering rolling out more coverage, since NB-IoT is based off LTE, it makes integration and upgrading of existing infrastructure more seamless than an entirely separate technology. Although NB-IoT still retains the drawbacks and complexities of legacy LTE such as the vast array of sub-protocols and communication overhead, this still includes the low power, low bandwidth benefits and others which match the requirements for smart devices and IoT. It should be mentioned that much of the RF spectrum which can be used for digital communications is still used by analogue television broadcast by the SABC. ICASA, who controls the spectrum, can solve this issue but over the years they have been a strong limiting factor in the slow release of new spectrum to large MNOs. This has been the case for approximately 16 years to date, and ICASA has instead released spectrum to smaller players such as Rain Ltd, Liquid Telecom and Telkom. To increase demand for application developers in IoT, because they will be interested in a hands-on approach with the technology they will use, more network coverage is necessary to scale up production such that volumes of 1000 devices or more can be connected. [^background]
+
+[^background]: **history** - from GSM in 90s to 5G NB-IoT. **SA and coverage** - how it "fits" in South Africa and LPWAN sphere. **IoT** - how relevent. **coverage** - ICASA. 3GPP - why they designed it. future. Uncertainty about NB-IoT. standing. uptake. optimal use
+
+### Terminology {#terminology}
+
+Because the nature of this thesis provides many broad concepts and complex terms, this section briefly introduces to the reader various IoT, LPWAN and LTE related topics expanded upon in the rest of the thesis. The background of NB-IoT is discussed in \S\ref{background}.
+
+The Internet of Things (IoT in \S\ref{iot}) is a blanket term for smart devices that connect to the internet. These devices are typically found in remote or urban areas where it would be more efficient for a device to control and monitor the status of the surrounding environment than human intervention. 
+
+Smart devices or 'things' can connect to the internet by wire or wirelessly. Wired devices usually connect using ethernet, although it is not uncommon to use industry grade protocols such as RS232, CAN, ModBus, ProffiBus, and so on before data reaches a network hub and the internet. Wireless connections, on the other hand, have the benefit of easy installation and really shine in inaccessible areas. It is quite effective to connect Bluetooth and WiFi for short range applications, or using Low Powered Wide Area Networks (LPWANs in \S\ref{lpwans}) such as LoRaWAN, SigFox and NB-IoT for ranges exceeding a few kilometers and especially for limited sources of power.
+
+Considering how LPWANs usually fill niche applications and just looking in terms of modulation differences, Long-Range Radio (LoRa or LoRaWAN in \S\ref{lorawan}) uses chirp-spread-spectrum (CSS) modulation to make it quite immune to doppler effect motion and SigFox (\S\ref{sigfox}) uses binary phase-shift keying (BPSK) in an ultra-narrow band which increases noise immunity, but devices cannot move more than 6 km/h. LPWANs enable many use cases (\S\ref{usecases}) such as remote sensing, actuator control and asset/location tracking.
+
+GSM and GPRS fall under 2G and 2.5G which started development in the early 90s. Data transmission (such as USSD, SMS, WAP, IP) is circuit-switched over GSM, and packet-switched over GPRS. Circuit switched data is billed per time interval such as seconds or minutes, and packet-switched is charged per number of bytes (kB, MB, etcetra). It evolved into 3G in Release 99 at the turn of the millenium and 4G/LTE in Release 8 (Q4 2008).
+
+Long Term Evolution (LTE) is a cellular architecture which is a subset of an even more complex 3GPP governing body that guides its development. In LTE, the narrowband category is known as LTE Cat-NB or NB-IoT. LTE Cat-M is designated for M2M applications, and although it is quite similar to NB-IoT, it features VoIP, faster throughput and is more similar to the LTE protocol. Unfortunatly it is not considered in South Africa. There are two different versions of NB-IoT, with LTE Cat-NB1 being release 13 and LTE Cat-NB2 being release 14. Their specifications have been frozen in Q1 2016 and mid-2017, respectively. [^group_terms]
+
+[^group_terms]: note: group terms
+
+## Project Description
+
+### Problem Statement {#probstat}
+
+NB-IoT has unique features which hold a competitive advantage over alternatives such as LoRaWAN, SigFox and other LPWANs, however it does not have a strong uptake in South Africa yet. Most notably, NB-IoT offers energy efficient bidirectionality (as opposed to the uplink-centric norm) using extended discrete periodic reception (eDRX), yet variation in transmission energy and latency can affect battery lifetime drastically. Application developers require network coverage before they are interested in developing business cases, and cellular service providers require consumer and enterprise demand or business cases before rolling out national network coverage. This creates a paradoxical situation where neither party gives in unless they are both willing to come to a compromise. Such efforts can be limited by a lack of understanding in the technology, and this is not helped by the fact that although there is a great deal of theoretical analysis and simulations in research, the lack of empirical evidence may be contributing to a general uncertainty in the standing of the technology with respect to alternatives and thus a slower adoption. This thesis aims to bridge that divide in South Africa by evaluating NB-IoT's performance empirically using a set of metrics and estimate optimal use.
+
+### Research Objectives {#resobj}
 
 This study has the following aims:[^bullets]
 
@@ -223,25 +261,25 @@ This study has the following aims:[^bullets]
 
   
 
-* User equipment (UE) devices will be compared against multiple LTE vendors used by mobile network operator (MNOs) exposing the change in variability due to proprietary LTE complexities.
+* User equipment (UE) devices will be compared against multiple LTE vendors used by mobile network operators (MNOs) exposing the change in variability due to proprietary LTE complexities.
 
   
 
-* Battery longevity and recommended telemetry intervals are estimated, and other/secondary secondary metrics such as signal strength, throughput and data overhead are investigated.
+* Battery longevity and recommended telemetry intervals are estimated, and other secondary metrics such as signal strength, throughput and data overhead are investigated.
 
   
 
-In turn, the above objectives evaluate robustness, stability, capabilities, sources of variability and claimed versus actual core features.
+In turn, the above objectives evaluate the robustness, stability, capabilities, sources of variability and claimed versus actual core features of NB-IoT.
 
-This thesis aims to highlight the challenges, advantages and disadvantages of the technology. By doing endpoint tests with multiple manufacturers and base station vendors, one can paint an accurate picture of the capabilities of the technology.
+This thesis aims to highlight the advantages, disadvantages and challenges of NB-IoT. By doing endpoint tests between UE devices and multiple LTE base station vendors, one can paint an accurate picture of the capabilities of the technology.
 
 [^bullets]: Thinus are you happy with objectives like so in sentences and bulleted?
 
-## Scope of Work {#scopework}
+### Scope of Work {#scopework}
 
 Although there exists a multitude of UE devices, LTE vendors, estimations and metrics, the study will be limited to the following as seen in Table \ref{tbl:metric_summary} and \ref{tbl:telemetry_ue_lte}.
 
-Whilst theoretical models provide value in showing how factors affect an approximation, the boundless underlying complexities of LTE architecture make it hard to predict the variability induced by unpredictable network conditions. Thus, an empirical approach is proposed. Since the energy efficiency of a single network is questionable in Durand [@Durand2019], Martinez [@Martinez2019] and affected by latency, these will form the main metrics investigated in this study.
+Whilst theoretical models provide value in showing how factors affect an approximation, the boundless underlying complexities of LTE architecture make it hard to predict the variability induced by unpredictable network conditions. Thus, an empirical approach is proposed. Since the energy efficiency of a single network is already questionable in Durand [@Durand2019], Martinez [@Martinez2019] and affected by latency, these will form the main metrics investigated in this study.
 
 Table: Metrics and Estimations {#tbl:metric_summary}
 
@@ -261,67 +299,25 @@ Table: Telemetry Types, UE devices and LTE vendors {#tbl:telemetry_ue_lte}
 | COPS            | Ericsson    | Nordic           |
 | Data Echo       | Huawei      | SimCom           |
 
-The capture method should be easily repeatable and expandable for new UE devices. On the basis that the AT command API is familiar to all UE devices, a framework will be built to extract data via this method. Although all UE devices are usually accessible through AT commands, there are alternative diagnostic methods such as Qualcomm QXDM, UEMonitor and an opensource decoder by LanternD which monitors the debug stream provided over UART at 921600 baud. QXDM is a proprietary diagnostic program built for UE devices with Qualcomm chipsets, yet it costs in excess of a few thousand USD. UEMonitor is free and can capture debug traces from both Ublox and Quectel. LanternD's decoder is still in beta and unstable. Since both Ublox and Quectel's debug messages can be accessed by UEMonitor and LanternD, these UE devices will be used to compare LTE Vendors. There is no support or alternative for Nordic or SimCom devices, however. 
+The capture method should be easily repeatable and expandable for new UE devices. On the basis that the AT command API is familiar to all UE devices, a framework will be built to extract data via this method. Although all UE devices are usually accessible through AT commands, there are alternative diagnostic methods such as Qualcomm QXDM, UEMonitor and an opensource decoder by LanternD which monitors the debug stream provided over UART at 921600 baud. QXDM is a proprietary diagnostic program built for UE devices with Qualcomm chipsets, yet it costs in excess of a few thousand USD. UEMonitor is free and can capture debug traces from both Ublox and Quectel. LanternD's decoder is still in beta and thus unstable. Since both Ublox and Quectel's debug messages can be accessed by UEMonitor and LanternD, these UE devices will be used to compare LTE Vendors. There is no support or alternative for Nordic or SimCom devices, however.
 
-## Terminology {#terminology}
+## Project Overview {#overview}
 
-Because the nature of this thesis provides many broad concepts and complex terms, this section briefly introduces to the reader various IoT, LPWAN, LTE related topics expanded upon in the rest of the thesis. The background of NB-IoT is discussed in Section \ref{background}.
+This section looks at how user equipment (UE devices in \S\ref{ue_devices}) is compared against multiple LTE vendors (\S\ref{lte-vendors}) operated by mobile network operators (MNOs in \S\ref{MNOs}) which expose the change in variability due to proprietary LTE complexities. These comparisons are made according to a set of metrics, estimations (\S\ref{metrics_est}) and telemetry tests (\S\ref{telemetry_tests}).
 
-The Internet of Things (IoT in Section \ref{iot}) is a blanket term for smart devices that connect to the internet. These devices are typically found in remote or urban areas where it would be more efficient for a device to control and monitor the status of the surrounding environment than human intervention. 
+### MNOs: MTN and Vodacom {#MNOs}
 
-Smart devices or 'things' can connect to the internet by wire or wirelessly. Wired devices usually connect using ethernet, although it is not uncommon to use industry grade protocols such as RS232, CAN, ModBus, ProffiBus, and so on before data reaches a network hub and the internet. Wireless connections, on the other hand, have the benefit of easy installation and really shine in inaccessible areas. It is quite effective to connect Bluetooth and WiFi for short range applications, or using Low Powered Wide Area Networks (LPWANs in Section \ref{lpwans}) such as LoRaWAN, SigFox and NB-IoT for ranges exceeding a few kilometers and especially for limited sources of power.
-
-Considering how LPWANs usually fill niche applications and just looking in terms of modulation differences, Long-Range Radio (LoRa or LoRaWAN in Section \ref{lorawan}) uses chirp-spread-spectrum (CSS) modulation to make it quite immune to doppler effect motion and SigFox (Section \ref{sigfox}) uses binary phase-shift keying (BPSK) in an ultra-narrow band which increases noise immunity, but devices cannot move more than 6 km/h. LPWANs enable many use cases (Section \ref{usecases}) such as remote sensing, actuator control and location tracking.
-
-GSM and GPRS fall under 2G and 2.5G which started development in the early 90s. Data transmission (such as USSD, SMS, WAP, IP) is circuit-switched over GSM, and packet-switched over GPRS. Circuit switched data is billed per time interval such as seconds or minutes, and packet-switched is charged per number of bytes (kB, MB, etcetra). It evolved into 3G in Release 99 at the turn of the millenium and 4G/LTE in Release 8 (Q4 2008).
-
-Long Term Evolution (LTE) is a cellular architecture which is a subset of an even more complex 3GPP body that guides its development. In LTE, the narrowband category is known as LTE Cat-NB or NB-IoT. LTE Cat-M is designated for M2M applications, and although it is quite similar to NB-IoT, it features VoIP, faster throughput and is more similar to the LTE protocol. There are two different versions of NB-IoT, with LTE Cat-NB1 being release 13 and LTE Cat-NB2 being release 14. Their specifications have been frozen in Q1 2016 and mid-2017, respectively. [^group_terms]
-
-[^group_terms]: note: gr
-
-## Background of NB-IoT{#background}
-
-In recent years, 3GPP have developed new LPWANs for the cellular industry on the roadmap towards 5G, namely LTE Cat-M, EC-GSM-IoT and NB-IoT to supersede the sun-setting 2G/GSM/GPRS networks. The beginnings of these new cellular LPWANs started when GSM was first deployed in 1991 and offered calls and SMS as circuit switched data. In 2000, 2G/GPRS added internet at speeds comparable to dialup as packet switched data. Circuit switched data is ideal for real-time connections and means that links have bandwidth pre-allocated. This also increases the QoS guarantee of information transferred timeously. Packet switched data is connectionless on the other hand, with higher bandwidths possible in shared channels. In Fig. \ref{fig:2G_LTE_transition}, we see how technologies using 2G/GSM/GPRS transitioned to LTE. With regard to 'internet', we used emails, WAP and other 'web-based' forms of messaging to keep in touch. Over time, we moved to a plethora of IMS platforms such as WhatsApp, Telegram and WeChat to name a few. Machine-to-machine (M2M) communications started off with SMS, USSD and 2G/GPRS but now with the advent of LPWANs we have many to choose from including LoRaWAN, SigFox and cellular-based forms such as NB-IoT.
-
-![A simplified representation of the transition from 2G to LTE with regard to technologies that keep people and 'things' in contact.\label{fig:2G_LTE_transition}](C:\GIT\masters\thesis\images\ims voip.jpg){ width=50% }
-
-In South Africa, there is a push by cellular service providers to adopt a cellular LPWAN to fill the void left behind by 2G/GPRS now and in the future. NB-IoT is being investigated by MTN South Africa, and since they are also funding this research, have also provided network coverage for testing to Stellenbosch University. Ideally, the technology can be rolled out to existing base stations as a software upgrade for national coverage, but it is limited by factors such as use case demand, expensive licensing and general uncertainty about the technology.
-
-2G/GPRS has served as the gateway for smart devices and sensors in the M2M sphere for many years, but due to its high-powered nature it is not sustainable for applications which require battery longevity of up to 10 years or more. In lieu of its absence, although the spectrum it held can be re-farmed for cellular LPWANs, it also opens up opportunities for market entrants of unlicensed frequencies such as LoRaWAN and SigFox. Each LPWAN technology has its own unique flaws and benefits and there is yet to be a clear winner when it comes to connecting 'things' to the internet.
-
-When considering rolling out more coverage, since NB-IoT is based off LTE it makes integration and upgrading of existing infrastructure more seamless than an entirely separate technology. Although it still retains the drawbacks and complexities of legacy LTE such as the vast array of sub-protocols, this still includes the low power, low bandwidth benefits and others which match the requirements for smart devices and IoT. It should be mentioned that much of the RF spectrum which can be used for digital communications is still used by analogue television broadcast by SABC. ICASA, who controls the spectrum, can solve this issue but over the years they have been a strong limiting factor as well since they are slow (if at all) to release new spectrum to MNOs. To increase demand for application developers in IoT, because they will be interested in a hands-on approach with the technology they will use, more network coverage is necessary to scale up production such that volumes of 1000 devices or more can be connected. [^background]
-
-[^background]: **history** - from GSM in 90s to 5G NB-IoT. **SA and coverage** - how it "fits" in South Africa and LPWAN sphere. **IoT** - how relevent. **coverage** - ICASA. 3GPP - why they designed it. future. Uncertainty about NB-IoT. standing. uptake. optimal use
-
-## Metrics and Estimations {#metrics_intro}
-
-Considering Table  \ref{tbl:metric_summary} and metrics, a more comprehensive study has been performed on throughput, packet delivery ratio (PDR), maximum coupling link (MCL) and scalability by Durand [@Durand2019]. Martinez has investigated the performance boundaries of NB-IoT for a Vodafone network in Barcelona, Spain [@Martinez2019] including metrics such as energy consumption, transmission delay, enhanced coverage levels (ECLs) and different data sizes. Because power efficiency and latency is significantly affected by variability, important considerations have to be made in application development and thus it is of the main metrics this study is focused on. Between UE device and LTE basestation (BTS) both signal strength (RSRP) and coverage enhancement levels (ECL) can be causes of variability. 
-
-In terms of estimations, variability affects battery lifetime and telemetry interval amongst others. Battery lifetime is defined as the length of time a device will last on an AA battery in years. Telemetry interval is defined as the time between different types of messages to last a year on an AA battery. These two estimations are necessary for developers to consider in battery-powered applications and form an important basis for this study.
-
-## Telemetry Tests
-
-The different types of telemetry messages in Table \ref{tbl:telemetry_ue_lte} include UDP datagram transmission, cellular operator selection (COPS), UDP Echo, extended discontinuous reception (eDRX) and periodic tracking area updates (PTAU). UE devices give the option of using the following main data transmission protocols: UDP, TCP, CoAP and MQTT. UDP is a connectionless protocol used for low latency applications and TCP is used to stream data orderly, reliably, but at a cost to data overhead.  CoAP and MQTT are lightweight message transfer protocols based off of UDP and TCP respectively. To measure the data overhead secondary metric caused by network repetitions and other mechanisms, it would be preferable to avoid overhead from other protocols and thus the simplest option is chosen, namely UDP. 
-
-## MNOs
-
-The following MNOs have NB-IoT coverage in South Africa which will be expanded upon in Section \ref{coverage}, namely MTN and Vodacom. NB-IoT uses their LTE infrastructure, and this will be expanded upon in Section \ref{lte-vendors}.
-
-### MTN
+The following MNOs have NB-IoT coverage in South Africa which will be expanded upon in \S\ref{coverage}, namely MTN and Vodacom. NB-IoT uses their LTE infrastructure, and this will be expanded upon in \S\ref{lte-vendors}.
 
 MTN Group Limited, formerly M-Cell, is a South African multinational mobile telecommunications company, operating in many African, European and Asian countries. Its head office is in Johannesburg. 
 
-### Vodacom
-
 Vodacom Group Limited is a South African mobile communications company, providing voice, messaging, data and converged services to over 55 million customers. 
 
-## LTE Vendors {#lte-vendors}
+### LTE Vendors: ZTE, Nokia, Ericsson, Huawei {#lte-vendors}
 
 Table \ref{tbl:telemetry_ue_lte} gives us the following LTE vendors which are among the top 5 in the world: Huawei, Ericsson, Nokia and ZTE. Since there are over a hundred MNOs across the world which also use these LTE vendors, performing this study on the main LTE vendors will also benefit the MNOs. With regard to NB-IoT connectivity on MNOs in South Africa, MTN will be used for ZTE and Ericsson, and Vodacom will be used for Nokia and Huawei.
 
-
-
-In South Africa, there are two mobile network operators trialing NB-IoT and combined they use four of the top LTE vendors. Samsung has started using NB-IoT only as recently as May 2019, announcing a partnership with [KT to create a Public Safety](https://enterpriseiotinsights.com/20190506/nb-iot/samsung-kt-launch-nbiot-service-through-ps-lte-network-korea) (PS-LTE) network. They're also implementing device-to-device (D2D) communications to increase connectivity in unfavourable conditions.
+In South Africa, there are two mobile network operators trialing NB-IoT and combined they use four of these top LTE vendors. Samsung has started using NB-IoT only as recently as May 2019, announcing a partnership with [KT to create a Public Safety](https://enterpriseiotinsights.com/20190506/nb-iot/samsung-kt-launch-nbiot-service-through-ps-lte-network-korea) (PS-LTE) network. They're also implementing device-to-device (D2D) communications to increase connectivity in unfavourable conditions.
 
 Table: MNOs and their BTS Vendors {#tbl:mno_bts}
 
@@ -332,6 +328,11 @@ Table: MNOs and their BTS Vendors {#tbl:mno_bts}
 | Huawei      | Vodacom                 |
 | Ericsson    | MTN                     |
 
+* ZTE Corporation is a Chinese multinational telecommunications equipment and systems company headquartered in Shenzhen, Guangdong, China. It is one of China's leading telecom equipment manufacturers.
+* Nokia Corporation is a Finnish multinational telecommunications, information technology, and consumer electronics company, founded in 1865. Nokia's headquarters are in Espoo, in the greater Helsinki metropolitan area.
+* Telefonaktiebolaget LM Ericsson, doing business as Ericsson, is a Swedish multinational networking and telecommunications company headquartered in Stockholm.
+* Huawei Technologies Co., Ltd. is a Chinese multinational technology company that provides telecommunications equipment and sells consumer electronics, including smartphones and is headquartered in Shenzhen, Guangdong province. The company was founded in 1987 by Ren Zhengfei. 
+
 Theoretically, one can assume that these manufacturers meet 3GPP's specifications and that they have set up an optimal environment.
 
 With a testing framework, one can evaluate these capabilities in a transparent manner for both developers and cellular operators alike and work towards improving the quality thereof.
@@ -340,23 +341,9 @@ Other Vendors include: Broadcom Corporation, Cisco Systems, Gemalto NV, Intel Co
 
  ![Top LTE vendors in the world showing VoIP and IMS equipment revenue share worldwide in 2017. \textcopyright{Statista, IHS Markit}](../images/chartoftheday_17097_voip_worldwide_revenue_n-1572347674712.jpg){width=80%}
 
-### ZTE
 
- ZTE Corporation is a Chinese multinational telecommunications equipment and systems company headquartered in Shenzhen, Guangdong, China. It is one of China's leading telecom equipment manufacturers. 
 
-### Nokia
-
-Nokia Corporation is a Finnish multinational telecommunications, information technology, and consumer electronics company, founded in 1865. Nokia's headquarters are in Espoo, in the greater Helsinki metropolitan area. 
-
-### Ericsson
-
-Telefonaktiebolaget LM Ericsson, doing business as Ericsson, is a Swedish multinational networking and telecommunications company headquartered in Stockholm. 
-
-### Huawei
-
-Huawei Technologies Co., Ltd. is a Chinese multinational technology company that provides telecommunications equipment and sells consumer electronics, including smartphones and is headquartered in Shenzhen, Guangdong province. The company was founded in 1987 by Ren Zhengfei. 
-
-## UE Manufacturers
+### UE Device Manufacturers: Ublox, Quectel, Nordic, SimCom {#ue_devices}
 
 Finally, with regard to the UE devices in \ref{tbl:telemetry_ue_lte}, application developers are likely to use more popular NB-IoT module manufacturers such as Ublox, Quectel, Nordic and SimCom, besides lesser known ones such as Telit, Serra Wireless, Gemalto, and akorIoT. 
 
@@ -376,21 +363,20 @@ Although LTE vendors are open to all UE manufacturers, mobile network operators 
 
 These UEs all share AT commands as the API to control their capabilities.
 
-### Ublox
+* u-blox is a Swiss company that creates wireless semiconductors and modules for consumer, automotive and industrial markets. They operate as a fabless IC and design house. 
+* Quectel is the leading global supplier of cellular and GNSS modules, with a broad product portfolio covering the most recent wireless technologies of 5G, LTE/LTE-A, NB-IoT/LTE-M, UMTS/HSPA(+), GSM/GPRS and GNSS. As a professional IoT technology developer and cellular module supplier, Quectel is able to provide one-stop services for IoT cellular modules. Quectel products have been widely applied in IoT/M2M fields including smart payment, telematics and transport, smart energy, smart cities, security, wireless gateways, industry, healthcare, agriculture, and environment monitoring. 
+* Nordic Semiconductor is a fabless semiconductor company. The company specializes in ultra-low power performance wireless system on a chip and connectivity devices for the 2.4 GHz ISM band, with power consumption and cost being the main focus areas.
+* **SIMCom Wireless Solutions** is a subsidiary of SIM Technology Group Ltd. It is a fast-growing wireless M2M company, designing and offering a variety of wireless modules based on GSM/GPRS/EDGE,WCDMA/HSDPA and TD-SCDMA technical platforms.
 
-u-blox is a Swiss company that creates wireless semiconductors and modules for consumer, automotive and industrial markets. They operate as a fabless IC and design house. 
+### Metrics and Estimations: Power, Latency, Secondary and Interval, Longevity {#metrics_est}
 
-### Quectel
+Considering metrics and estimations in Table  \ref{tbl:metric_summary} above, a more comprehensive study has been performed on throughput, packet delivery ratio (PDR), maximum coupling link (MCL) and scalability by Durand [@Durand2019]. Martinez has investigated the performance boundaries of NB-IoT for a Vodafone network in Barcelona, Spain [@Martinez2019] including metrics such as energy consumption, transmission delay, enhanced coverage levels (ECLs) and different data sizes. Because power efficiency and latency is significantly affected by variability, important considerations have to be made in application development and thus it is of the main metrics this study is focused on. Between UE devices and LTE basestations (BTS) both signal strength (RSRP) and coverage enhancement levels (ECL) can be causes of variability. 
 
-Quectel is the leading global supplier of cellular and GNSS modules, with a broad product portfolio covering the most recent wireless technologies of 5G, LTE/LTE-A, NB-IoT/LTE-M, UMTS/HSPA(+), GSM/GPRS and GNSS. As a professional IoT technology developer and cellular module supplier, Quectel is able to provide one-stop services for IoT cellular modules. Quectel products have been widely applied in IoT/M2M fields including smart payment, telematics and transport, smart energy, smart cities, security, wireless gateways, industry, healthcare, agriculture, and environment monitoring. 
+In terms of estimations, variability affects battery lifetime and telemetry interval amongst others. Battery lifetime is defined as the length of time a device will last on an AA battery in years. Telemetry interval is defined as the periodicity time between different types of messages to last a year on an AA battery. These two estimations are necessary for developers to consider in battery-powered applications and form an important basis for this study.
 
-### Nordic
+### Telemetry Tests: UDP, Echo, COPS, eDRX, PTAU {#telemetry_tests}
 
-Nordic Semiconductor is a fabless semiconductor company. The company specializes in ultra-low power performance wireless system on a chip and connectivity devices for the 2.4 GHz ISM band, with power consumption and cost being the main focus areas. 
-
-### SimCom
-
-**SIMCom Wireless Solutions** is a subsidiary of SIM Technology Group Ltd. It is a fast-growing wireless M2M company, designing and offering a variety of wireless modules based on GSM/GPRS/EDGE,WCDMA/HSDPA and TD-SCDMA technical platforms.
+The different types of telemetry messages in Table \ref{tbl:telemetry_ue_lte} include UDP datagram transmission, cellular operator selection (COPS), UDP Echo, extended discontinuous reception (eDRX) and periodic tracking area updates (PTAU). UE devices usually give the option of using the following main data transmission protocols: UDP, TCP, CoAP and MQTT. UDP is a connectionless protocol used for low latency applications and TCP is used to stream data orderly, reliably, but at a cost to data overhead.  CoAP and MQTT are lightweight message transfer protocols based off of UDP and TCP respectively. To measure the data overhead secondary metric caused by network repetitions and other mechanisms, it would be preferable to avoid overhead from other protocols and thus the simplest option is chosen, namely UDP. 
 
 ## Network Coverage Worldwide {#coverage}
 
@@ -425,7 +411,6 @@ MTN NB-IoT sim cards can currently be obtained only for testing purposes, and it
 
 NB-IoT is introduced to the reader in Chapter \ref{intro}. A literature study reviews the current empirical research in Chapter \ref{litstudy}. Design and methodology shows the steps taken to capture different metrics and process the resulting dataset in Chapter \ref{design}. Results are analyzed in Chapter \ref{results} and discussed with recommendations in Chapter \ref{#discussion}. Lastly, a conclusion is made in Chapter \ref{conclusion}.
 
-
 # Literature Study {#litstudy}
 
 This chapter will look at NB-IoT performance-related literature, IoT, LPWANs, use cases, and a deeper look into NB-IoT itself.
@@ -440,13 +425,13 @@ Whilst this research is funded by MTN and being aware of internal documentation,
 
 ## Internet of Things{#iot}
 
-The Internet of Things (IoT), as briefly outlined in Section \ref{terminology}, is an ecosystem of smart devices that connect to the internet/cloud in various ways. Although IoT's requirements (Section \ref{iot_requirements}) are loosely defined due to the large variety of use cases (Section \ref{usecases}), it is still important to see how well NB-IoT performs and facilitates these connections for IoT (discussion in Section \ref{discussion}). This section looks at these requirements and other facets of IoT relevant to NB-IoT.
+The Internet of Things (IoT), as briefly outlined in \S\ref{terminology}, is an ecosystem of smart devices that connect to the internet/cloud in various ways. Although IoT's requirements (\S\ref{iot_requirements}) are loosely defined due to the large variety of use cases (\S\ref{usecases}), it is still important to see how well NB-IoT performs and facilitates these connections for IoT (discussion in \S\ref{discussion}). This section looks at these requirements and other facets of IoT relevant to NB-IoT.
 
-Since IoT is advancing in popularity (Section \ref{iot_advancement}), stakeholders in NB-IoT can be rest assured that the technology will be useful for years to come.
+Since IoT is advancing in popularity (\S\ref{iot_advancement}), stakeholders in NB-IoT can be rest assured that the technology will be useful for years to come.
 
-Although the simplest type of use case is smart metering (Section \ref{smartmetering}), useful for LPWANs which send data unidirectionally, NB-IoT shows its bidirectional strength in Push-Pull models (Section \ref{pushpull}). In fact, this makes NB-IoT well suited for edge computing (Section \ref{edge_computing}) too.
+Although the simplest type of use case is smart metering (\S\ref{smartmetering}), useful for LPWANs which send data unidirectionally, NB-IoT shows its bidirectional strength in Push-Pull models (\S\ref{pushpull}). In fact, this makes NB-IoT well suited for edge computing (\S\ref{edge_computing}) too.
 
-Finally, although satellite IoT has the benefit of worldwide coverage, by rolling out national NB-IoT coverage in South Africa, for example, it defeats the purpose of satellite IoT by being affordable and energy efficient (see Section \ref{satellite_iot}).
+Finally, although satellite IoT has the benefit of worldwide coverage, by rolling out national NB-IoT coverage in South Africa, for example, it defeats the purpose of satellite IoT by being affordable and energy efficient (see \S\ref{satellite_iot}).
 
 ### Requirements {#iot_requirements}
 
@@ -466,7 +451,7 @@ Looking at Gartner's analysis of technology expectations with regards to NB-IoT 
 
 As of August 2019, Gartner has high expectations for 5G and other emerging technologies which can make use of what [IoT has to offer](https://blogs.sas.com/content/hiddeninsights/2016/07/06/long-live-the-iot-hype/). This can be seen in Fig. \ref{fig:gartner_emergingTech}.
 
-![Gartner's Hype Cycle for Emerging Technologies, 2019. IoT is inextricably linked to at least a third of emerging technologies and also has uses in NB-IoT. \label{fig:gartner_emergingTech}](../images/CTMKT_741609_CTMKT_for_Emerging_Tech_Hype_Cycle_LargerText-1.png){ width=90% }
+![Gartner's Hype Cycle for Emerging Technologies, 2019. IoT is inextricably linked to at least a third of emerging technologies and also has uses in NB-IoT. \label{fig:gartner_emergingTech}](../images/CTMKT_741609_CTMKT_for_Emerging_Tech_Hype_Cycle_LargerText-1.png){ width=85% }
 
 On the other hand, this does not slow the growth in number of devices connected as in Fig. \ref{fig:iot_growth}. IoT merely manifests itself in other uses and forms such as we have already seen in Fig. \ref{fig:gartner_emergingTech}. NB-IoT can be integral to aid this growth.
 
@@ -486,6 +471,8 @@ Most LPWANs are unidirectional, meaning they transmit data in one direction only
 Most importantly when looking at bidirectionality vs unidirectionality is that transmit current is usually much more than the receive current required. By limiting TX transmissions such that the user only requests data on-demand when it is required, battery savings ensue.
 
 There are many LPWANs out there, but we can split them up into two groups as in Table \ref{tbl:unibidirectional_lpwans}.
+
+\newline
 
 Table: Unidirectional and bidirectional LPWANs {#tbl:unibidirectional_lpwans}
 
@@ -516,17 +503,13 @@ NB-IoT is not the only network that can replace satellite IoT or 2G/GPRS with co
 
 ## Low-Powered Wide-Area Networks {#lpwans}
 
-A low-power wide-area network is a type of wireless telecommunication designed to allow long-range communications at a low bit rate among things, such as sensors operated on a battery. This section will compare a few prominent cellular and unlicensed frequency LPWANs against NB-IoT.
+A low-power wide-area network is a type of wireless telecommunication designed to allow long-range communications at a low bit rate among things, such as sensors operated on a battery. This section will compare a few prominent cellular and unlicensed frequency LPWANs against NB-IoT besides the following alternatives:
 
-EC-GSM-IoT is a form of eGPRS optimized for the IoT. It is still in the trial stages of development, however [@Bergman2017].
-
-RPMA by Ingenu is a 2.4GHz technology for M2M communications. It is primarily used in North America for the oil & gas industry, amongst others [@Ingenu2016]. It is equivalent to cellular standard but expensive.
-
-Weightless SIG reuses TV whitespace, and NB-IoT is actually formed off this protocol [@Weightless2015], [@Raza2017].
-
-NB-Fi Protocol is an open LPWAN protocol, which operates in unlicensed ISM radio band. Using the NB-Fi Protocol in devices ensures stable data transmission range of up to 10 km in dense urban conditions, and up to 30 km in rural areas with up to 10 years on battery power [@Ikpehai2018b].
-
-HaLow (pronounced halo) is a low-power, long-range version of the IEEE 802.11 Wi-Fi standard. HaLow is based on the Wi-Fi Alliance 802.11ah specification and is expected to play an important part in IoT. At this stage it has low market traction.
+* EC-GSM-IoT is a form of eGPRS optimized for the IoT. It is still in the trial stages of development, however [@Bergman2017].
+* RPMA by Ingenu is a 2.4GHz technology for M2M communications. It is primarily used in North America for the oil & gas industry, amongst others [@Ingenu2016]. It is equivalent to cellular standard but expensive.
+* Weightless SIG reuses TV whitespace, and NB-IoT is actually formed off this protocol [@Weightless2015], [@Raza2017].
+* NB-Fi Protocol is an open LPWAN protocol, which operates in unlicensed ISM radio band. Using the NB-Fi Protocol in devices ensures stable data transmission range of up to 10 km in dense urban conditions, and up to 30 km in rural areas with up to 10 years on battery power [@Ikpehai2018b].
+* HaLow (pronounced halo) is a low-power, long-range version of the IEEE 802.11 Wi-Fi standard. HaLow is based on the Wi-Fi Alliance 802.11ah specification and is expected to play an important part in IoT. At this stage it has low market traction.
 
 ### LoRaWAN {#lorawan}
 
@@ -610,13 +593,13 @@ To meet application specific requirements, the uniqueness of each technology giv
 
 Table: LPWAN strengths with \checkmark,  $\times$  denoting best and worst case respectively. {#tbl:lpwan_strengths}
 
-| Technology   | MCL        | Scalability | Battery life | Throughput |
-| ------------ | ---------- | ----------- | ------------ | ---------- |
-| NB-IoT       | \checkmark | \checkmark  |              | \checkmark |
-| GPRS         | $\times$   | \checkmark  | $\times$     | \checkmark |
-| LoRaWAN SF7  |            |             | \checkmark   |            |
-| LoRaWAN SF12 | \checkmark | $\times$    |              | $\times$   |
-| SigFox       | \checkmark | \checkmark  |              |            |
+| Technology   | MCL                             | Scalability | Battery life                    | Throughput |
+| ------------ | ------------------------------- | ----------- | ------------------------------- | ---------- |
+| NB-IoT       | \checkmark                      | \checkmark  |                                 | \checkmark |
+| GPRS         | $\times$ | \checkmark  | $\times$ | \checkmark |
+| LoRaWAN SF7  |                                 |             | \checkmark                      |            |
+| LoRaWAN SF12 | \checkmark                      | $\times$ |                                 | $\times$ |
+| SigFox       | \checkmark                      | \checkmark  |                                 |            |
 
 Competition in the LPWAN space, regional momentum and IoT demand will ensure that the various technologies will continue to develop and improve to support more features and expand the network coverage.
 
@@ -674,11 +657,11 @@ Durand [@Thomas2018] suggests NB-IoT is poor for asset tracking and utility mete
 | Retail | Wearables |
 
 
-## A deeper look into NB-IoT {#nbiot}
+## A Deeper Look into NB-IoT {#nbiot}
 
 This section describes NB-IoT in more detail and the setup procedures involved.
 
-### Development {#development}
+### Development and Present Standing {#lit_standing}
 
 Formed by the 3GPP from LTE, NB-IoT was developed within that framework and its capabilities are particularly well suited to smart metering.
 
@@ -700,8 +683,6 @@ for paging, but as this window will be limited to save battery life, the deliver
 occurs mainly when the system detects that uplink messages have been received from a device
 (indicating that it is awake). Here a store-and-forward system, an “IoT Platform”, is useful.
 
-### Present Standing {#lit_standing}
-
 NB-IoT has a certain standing in IoT and LPWANs, and this can be seen in Fig. \ref{fig:nbiot_positioning}.
 
 ![IoT Wireless Technology Representation [@Martinez2019] \label{fig:nbiot_positioning}](../images/1559246290186.png){width=85%}
@@ -717,8 +698,6 @@ Martinez [@Martinez2019] has explored NB-IoT from the perspective of the applica
 
 A user would consider critical characteristics such as energy consumption, coverage, cost, network latency and behavior. Martinez looks at these except for cost, which is better looked at by Ali [@Ali2015]. A set of tests were devised and results showed that in some cases its energy consumption performed better than an LPWAN referenced technology such as LoRa, with the added benefit of guaranteeing delivery. However, the high variability in energy consumption and network latency call into question its reliability especially for mission-critical applications.
 
-### Future {#future}
-
 In future NB-IoT will have the capability of D2D communications as outlined in 3GPP future release specifications.
 
 ### LTE Architecture
@@ -731,7 +710,7 @@ The complexities of LTE architecture further increases the chance of performance
 
 Both UDP socket commands and datagram commands use the IP data transport through the SGi.
 
-### Hardware {#lit_hardware}
+### UE Device Hardware {#lit_hardware}
 
 This subsection looks at hardware specific to the UE device.
 
@@ -1006,7 +985,7 @@ See [@ubloxAppNote2018] for application examples.
 * The SARA-N2 series modules implement basic UDP socket commands for directly communicating with an external service. With these commands the customer can build a simple IoT platform. With an external processor other IoT layers could be implemented to aid this system design. SARA-N2 series modules support AT commands for general CoAP messaging. This allows the customer to not require CoAP in their external processor.
 * Many developers coming from a GPRS type background may expect an always on type connection, normally using TCP. NB-IoT is not session oriented, latencies are much higher and the device will enter a power save mode. This is very different to always-on modems with “chatty” protocols like TCP.
 * UDP sockets do not create connections to servers; UDP is a connection-less datagram protocol. Because of this MO messages may not be received by the server and lost. The application should take this in to consideration and provide its own acknowledgements between the UE device and server. CoAP is one protocol which can be used on top of UDP to provide this.
-* For resolving the issue of sending MT messages to a very sleepy module, when a MO message is sent to the cloud server, the cloud server will know the module is active and connected to the network. As seen in section 7 the connection is alive until the RRC connection is released by the network and then still contactable when paging inside the T3324 period. If there are MT messages to be sent to the module, the cloud server should send this message in this time.\
+* For resolving the issue of sending MT messages to a very sleepy module, when a MO message is sent to the cloud server, the cloud server will know the module is active and connected to the network. As seen in section 7 the connection is alive until the RRC connection is released by the network and then still contactable when paging inside the T3324 period. If there are MT messages to be sent to the module, the cloud server should send this message in this time.
 
 Martinez et al. [@Martinez2019] did empirical tests within the Vodafone Network in Barcelona. They observed UE device and NW behavior, measured current traces, and did various tests in different modes.
 
@@ -1018,7 +997,7 @@ Table: NW Config {#tbl:nw_config}
 | **Mode 2** | Inactivity timer = Immediate Release<br/>T3324 = 8s<br/>I-DRX = 2.56s<br/>eDRX/PTW = Disabled |
 | **Mode 3** | Inactivity timer = Immediate Release<br/>T3324 = 0s (disabled) |
 
-### RF
+### RF Characteristics {#rf_characteristics}
 
 When only a fraction of the existing LTE cell sites support NB-IoT, devices cannot attach to the best cell if that cell does not support NB-IoT. As a result, the path loss can be very high. In addition, they also suffer from high interference from non-NB-IoT cells [@Mangalvedhe2016a].
 
@@ -1026,9 +1005,29 @@ In the uplink, there are two physical layer channels. The random access channel 
 
 NB-IoT operation requires a minimum bandwidth of 180 kHz, which is equal to the size of the smallest LTE Physical Resource Block (PRB). Depending on the availability of spectrum, NB-IoT can be either deployed on its own (“standalone operation”), in the guard carriers of existing LTE/UMTS spectrum (“guardband operation”) or within an existing LTE carrier by replacing one or more PRBs (“inband operation”). In order to support such flexible deployment scenarios, NB- IoT reuses the LTE design extensively, such as the OFDM (Orthogonal Frequency Division Multiplexing) type of modulation in downlink, SC-FDMA (Single Carrier Frequency Division Multiple Access) in uplink, channel coding, rate matching and interleaving. In addition, a host of new features are added to ensure the demands of IoT based applications. Key design changes from LTE include the synchronization sequences, the random access preamble, the broadcast channel and the control channel. These changes are primarily motivated by the fact that NB-IoT is required to operate on a minimum bandwidth of 180 kHz (1 PRB), whereas many channels in LTE were designed to span multiple PRBs occupying greater bandwidth compared to 180 kHz. These design changes achieve the IoT requirements while ensuring best co-existence performance with the existing LTE system [@Adhikary2016].
 
+## Summary
+
+With a deeper understanding of NB-IoT in this chapter, we can see how it exhibits variable characteristics as opposed to what theoretical analysis or simulations can provide due to the complexities of the underlying legacy LTE architecture and most notably in the energy consumption of datagram packets, besides other metrics. NB-IoT has a strong footprint in IoT due to its low-power bidirectionality which gives it an edge over other LPWANs, and this enables a broad variety of use cases. Since we can now better understand the different facets of NB-IoT, related concepts and literature as stated above, we can further investigate the change in variability across different UE devices and LTE vendors in Chapter \ref{design}.
+
+## Notes
+
+**MTN Lab / 14th Ave Phase 3: Test Plant**
+
+NB-IoT PoC MTN South Africa (Ericsson RAN Connectivity Tests only) [@Ssengonzi2017]
+
+Industrial north Drive Test Requirements [@NorthDrive2017]
+
+**Stellenbosch**
+
+Evaluation of next-generation low-power communication technologies to replace GSM in IoT-applications [@Thomas2018]
+
+**Manufacturers**
+
+Ublox has an NB-IoT Application Development Guide [@ubloxAppNote2018] which details many of the capabilities of the UE.
+
 # Design and Methodology {#design}
 
-As stated in Section \ref{resobj}, the aim of this study is to compare user equipment (UE) against mobile network operators (MNOs) with a set of tests that evaluate NB-IoT's performance according to a set of metrics which highlight striking differences due to the underlying complexities of LTE architecture.
+As stated in \S\ref{resobj}, the aim of this study is to compare user equipment (UE) against mobile network operators (MNOs) with a set of tests that evaluate NB-IoT's performance according to a set of metrics which highlight striking differences due to the underlying complexities of LTE architecture.
 
 Four mobile network operators (MNOs) are compared in South Africa according to the underlying vendor
 infrastructure used, namely Nokia and ZTE in the Cape/coastal regions and Ericsson and Huawei based in Gauteng/inland regions.
@@ -1047,7 +1046,7 @@ This section looks at certain aspects of LTE networks.
 
 SIBs carry relevant information for the UE, which helps UE to access a cell, perform cell re-selection, information related to INTRA-frequency, INTER-frequency and INTER-RAT cell selections. In LTE there are 13 types of SIBs as can be seen in Table \ref{tbl:sib_descr}.
 
-See Appendix \ref{appendixD} for examples of NB-IoT SIB blocks.
+See Appendix \ref{appendix_sibs} for examples of NB-IoT SIB blocks.
 
 * Downlink systemInformationBlockType1
 * Downlink systemInformation
@@ -1096,7 +1095,7 @@ In this Fig. \ref{fig:ecl_example}, ECL is shown as an example against two netwo
 
 These identifiers are related to the specific cell towers the UE is connected to.
 
-The Cell ID is the physical network cell ID.  EARFCN uniquely identifies the LTE band and carrier frequency. PCIs,  or Physical Cell Identifiers provide a psuedo-unique value for identifying eNodeBs and is a unique identifier for serving cells.
+The Cell ID is the physical network cell ID. EARFCN uniquely identifies the LTE band and carrier frequency. PCIs, or Physical Cell Identifiers provide a psuedo-unique value for identifying eNodeBs and is a unique identifier for serving cells.
 
 Table: PCI, Cell ID count and EARFCN after K-means cluster filtering with tuples in (Ublox, Quectel) format. {#tbl:nw_parameters}
 
@@ -1188,7 +1187,7 @@ On the MTN-ZTE network the peaks indicate an on time of roughly 12ms and idle of
 
 Ericsson eNodeBs run Linux and their commands are accessible via MOShell, or the scripting language AMOS.
 
-To get an idea of the complexity of a node (eNodeB) in a base station (BTS), running `$ get .` in the terminal of B06009-TESTPLANT returned 7037 Managed Objects (MOs) with 27989 parameters. This highlights how easy it is for a BTS to produce different results in this study depending on the network configuration and environment.
+To get an idea of the complexity of a node (eNodeB) in a base station (BTS), running `$ get .` in the terminal of B06009-TESTPLANT returned 7037 `Managed Objects` (MOs) with 27989 parameters. See Appendix \ref{appendix_eNB} for an example code snippet of the first two `Managed Objects`. This highlights how easy it is for a BTS to produce different results in this study depending on the network configuration and environment.
 
 ### Range Field Test
 
@@ -1366,11 +1365,11 @@ Using an RTL2832 SDR dongle, we can capture RF signals. At the very least we can
 
 ![SigFox and LoRa RF signals \@868 MHz](../images/image-20191104223939783.png){width=30%}
 
-Each technology has their own modulation scheme and unique features, and with that their own set of advantages and disadvantages. More can be found in Section \ref{lpwans}.
+Each technology has their own modulation scheme and unique features, and with that their own set of advantages and disadvantages. More can be found in \S\ref{lpwans}.
 
 ### Terrestrial Localization
 
-Localization can be useful for asset tracking as discussed in Section \ref{asset_tracking}. Of the prominent LPWANs, SigFox is the only one that offers a simple localization service. NB-IoT will offer one when upgraded to 3GPP Release 14. Unfortunately SigFox has poor accuracy as can be seen in Fig. \ref{fig:sigfox_map}.
+Localization can be useful for asset tracking as discussed in \S\ref{asset_tracking}. Of the prominent LPWANs, SigFox is the only one that offers a simple localization service. NB-IoT will offer one when upgraded to 3GPP Release 14. Unfortunately SigFox has poor accuracy as can be seen in Fig. \ref{fig:sigfox_map}.
 
 ![With a 17.783km radius in this example, SigFox is poor when it comes to being considered as a source of localization using RSSI triangulation, and it may be better to use TOF techniques such as in OTDOA in NB-IoT \label{fig:sigfox_map}](../images/image-20191105141405835.png){width=80%}
 
@@ -1529,9 +1528,11 @@ Luckily UE manufacturers usually provide a development kit with open source sche
 
 ## Setup Procedure
 
-Each field test will make use of various UE hardware and telemetry tests.
+Each field test will make use of various UE hardware and telemetry tests and this section outlines the steps taken to perform these field tests.
 
 ### Hardware
+
+This section outlines some of the hardware configurations required for field test captures.
 
 #### Attenuator
 
@@ -1559,13 +1560,59 @@ $$V_{out} = I_{load} [mA] * 10 [\frac{V}{mA}]$$ {#eq:iload_vout}
 
 ![ZXCT1008 in action](..\images\zxct1008.jpeg)
 
+
+
+#### Energy Capture Device {#energy_capture_device}
+
+The energy capture device measures the energy of each packet, and also returns the duration timings of each datagram packet for latency measurements.
+
+`PlatformIO` compiles code for the microcontroller, and in this case it is a simple Atmel ATmega328P 8-bit microcontroller.
+
+Code can be found on [https://github.com/daniel-leonard-robinson/masters/tree/master/code/edge/src](https://github.com/daniel-leonard-robinson/masters/tree/master/code/edge/src). It connects to the ZXCT1008 mentioned in \S\ref{current_measurements} and converts the results to energy measurements. It also returns via serial to the PyTest framework the timings of each datagram packet.
+
+```c
+void energyLoop(boolean pause) {
+    uint8_t reading = analogRead(A0);
+    if (reading > 60) {
+        if (reading > maxReading) maxReading = reading;
+        if (!readCount++) {
+            tStart = millis();
+            idleTime = tStart - tEnd;
+        }
+        tEnd = millis();
+        zeroM = tEnd;
+        zeroCounter = 0;
+        sum += reading;
+        tStepCount += micros() - tStep;
+    }
+    else if (pause) zeroM = millis();
+    else if (millis() - zeroM < 1000);
+    else if (readCount) {
+        txTime = tEnd - tStart;
+        tStepCount /= 1000;
+        energy = sum * 500 / 1023.0 * tStepCount / 1000 / 1000;
+        
+        buf.flush(); tx[0] = '\0'; // energyFlush();
+        buf.print(idleTime); buf.print(",");
+        buf.print(txTime); buf.print(",");
+        buf.print(tStepCount); buf.print(",");
+        buf.print(energy); buf.print(",");
+        buf.println(maxReading/2);
+        Serial.print(buf); // energyPrint();
+        
+        sum=idleTime=txTime=readCount=maxReading=energy=tStepCount= 0; // energySetup();
+    }
+    tStep = micros();
+}
+```
+
 ### Network Registration
 
-As mentioned in Section \ref{connectivity}, the right SIM cards are necessary. It may even be possible to use e-SIMs as in Fig. \ref{fig:hologram_esim}.
+As mentioned in \S\ref{connectivity}, the right SIM cards are necessary. It may even be possible to use e-SIMs as in Fig. \ref{fig:hologram_esim}.
 
 ![Hologram worldwide e-SIM \label{fig:hologram_esim}](../images/image-20191105152621948.png){width=40%}
 
-Then, the right APNs are necessary. To use MTN's test network, the APN `rflab` is used. On Vodacom's network, the APN `nbiot.vodacom.za` is used.
+Finally, the right APNs are necessary. To use MTN's test network, the APN `rflab` is used. On Vodacom's network, the APN `nbiot.vodacom.za` is used.
 
 ### PyTest Framework
 
@@ -1696,7 +1743,7 @@ def receiveAT(t=0, expect=['OK'], output=True):
                 return data
 ```
 
-Finally, the testing framework has a `capture` command which is blocking until an energy capture event. In this event the energy is sent via serial from the energy capture device (Section \ref{energy_capture_device}) and triggers the testing framework to extract information from the `AT+NUESTATS="RADIO"` command.
+Finally, the testing framework has a `capture` command which is blocking until an energy capture event. In this event the energy is sent via serial from the energy capture device (\S\ref{energy_capture_device}) and triggers the testing framework to extract information from the `AT+NUESTATS="RADIO"` command.
 
 ```python
 def receiveTIM():
@@ -1715,46 +1762,6 @@ def receiveTIM():
             print(red + d)
             raise e
     return data
-```
-
-### Energy Capture Device {#energy_capture_device}
-
-Code for energy capture device can be found on [https://github.com/daniel-leonard-robinson/masters/tree/master/code/edge/src](https://github.com/daniel-leonard-robinson/masters/tree/master/code/edge/src). It connects to the ZXCT1008 mentioned in Section \ref{current_measurements} and converts the results to energy measurements. It also returns via serial to the PyTest framework the timings of each datagram packet.
-
-```c
-void energyLoop(boolean pause) {
-    uint8_t reading = analogRead(A0);
-    if (reading > 60) {
-        if (reading > maxReading) maxReading = reading;
-        if (!readCount++) {
-            tStart = millis();
-            idleTime = tStart - tEnd;
-        }
-        tEnd = millis();
-        zeroM = tEnd;
-        zeroCounter = 0;
-        sum += reading;
-        tStepCount += micros() - tStep;
-    }
-    else if (pause) zeroM = millis();
-    else if (millis() - zeroM < 1000);
-    else if (readCount) {
-        txTime = tEnd - tStart;
-        tStepCount /= 1000;
-        energy = sum * 500 / 1023.0 * tStepCount / 1000 / 1000;
-        
-        buf.flush(); tx[0] = '\0'; // energyFlush();
-        buf.print(idleTime); buf.print(",");
-        buf.print(txTime); buf.print(",");
-        buf.print(tStepCount); buf.print(",");
-        buf.print(energy); buf.print(",");
-        buf.println(maxReading/2);
-        Serial.print(buf); // energyPrint();
-        
-        sum=idleTime=txTime=readCount=maxReading=energy=tStepCount= 0; // energySetup();
-    }
-    tStep = micros();
-}
 ```
 
 ### Telemetry Tests
@@ -1984,7 +1991,11 @@ the +CSCON URC to show when the module is connected.
 
 Whilst the simple `Ping` command is useful to measure connectivity and latency, it unfortunately has no way to release the inactivity timer by itself, which means the modem continues to consume current in receive-mode/C-DRX. That is why the `Echo` telemetry test was designed.
 
-## Power Efficiency
+## Main Metrics
+
+### Power Efficiency
+
+Power efficiency is one of the main metrics focused on in this study. This section outlines a few preliminary tests and the design for the final field tests comparing UEs and MNOs.
 
 * ~ 10 years battery life
 
@@ -2002,9 +2013,9 @@ $$P = \frac{E_{msg}}{T_{msg}}$$ {#eq:avgpower}
 
 * **Power consumption**: In applications where device battery life is
   a crucial factor we recommend, either LoRaWAN or Sigfox, because they are completely asynchronous. We found that the battery life of LoRaWAN SF 7 was five times that of LoRaWAN SF 12 and nearly 25 times that of Sigfox. This is mainly due to the extremely long time-on-air of LoRaWAN SF 12 and Sigfox. If NB- IoT worked with the mobile network operators to reduce its RRC- idle phase, it could develop a minimal power consumption to compare with that of LoRaWAN and Sigfox.
-  * It is clear that LoRaWAN SF7 is the most power-efficient, due to the short transmission burst. NB-IoT displays the worst power-consumption, due to the extended RRC-idle state. This can be reduced using Release Assistance as in Section \ref{release_a}.
+  * It is clear that LoRaWAN SF7 is the most power-efficient, due to the short transmission burst. NB-IoT displays the worst power-consumption, due to the extended RRC-idle state. This can be reduced using Release Assistance as in \S\ref{release_a}.
 
-### Energy vs SINR
+#### Energy versus SINR
 
 ![Ublox (blue) and Quectel (red) energy (J) per datagram as a function of the SINR (dB) as reported by the UE on the MTN-ZTE network limited to 1500 mJ.\label{fig:energy_sinr1400}](../images/1571781182963.png){width=65%}
 
@@ -2016,7 +2027,7 @@ Increasing the range fully and using logarithms in Fig. \ref{fig:energy_sinr_log
 
 [](../images/1571785381395.png)
 
-### Energy vs Datagram Size
+#### Energy versus Datagram Size
 
 [](../../code/tests/datagrams/mtn_ublox_energy.png)
 
@@ -2043,7 +2054,7 @@ Increasing the range fully and using logarithms in Fig. \ref{fig:energy_sinr_log
 
 Fig. \ref{fig:udpsize1} shows 
 
-### eDRX Energy
+#### eDRX Energy
 
 \begin{figure}[ht]
   \subfloat[MTN-ZTE Ublox]{
@@ -2087,7 +2098,7 @@ Fig. \ref{fig:udpsize1} shows
 
 [](../images/1568090209468.png){width=65%}
 
-### PTAU Energy
+#### PTAU Energy
 
 \begin{figure}[ht]
   \subfloat[MTN-ZTE Ublox (mJ)]{
@@ -2131,7 +2142,7 @@ Fig. \ref{fig:udpsize1} shows
 
 [](../images/1568090070185.png){width=65%}
 
-### Measured Max Current
+#### Measured Max Current
 
 [](../../../masters/code/tests/plotterk/Signal_power_maxCurrent_plot.png)
 
@@ -2149,7 +2160,9 @@ roughly between 70 and 120mA, and skewed towards higher consumption. It is also 
 
 [](../../../masters/code/tests/plotterk/maxCurrent_histogram.png)
 
-## Latency and Timing
+### Latency and Timing
+
+Latency and timing is also one of the main metrics focused on in this study. This section outlines a few preliminary tests and the final design of field tests.
 
 * **Down link latency**: In applications where downlink latency is a
   critical component, only GPRS will suffice, as it is the only technology in this study that requires constant paging between the base station and the end device. 
@@ -2170,15 +2183,13 @@ Once a base station is found it is possible to see that it is attempting to tran
 as the Tx time will start to increase. If the base station does not respond to the module’s Tx, then
 the +CSCON: 1 URC will not be issued.
 
-### Latency vs SINR
+#### Latency vs SINR
 
 ![Latency per datagram as a function of the SINR (dB) as reported by the UE on the (D) MTN-ZTE and (E) Vodacom-Nokia network respectively.\label{fig:latency_sinr_comp}](../images/1571781751620.png){width=50%}
 
 In Fig. \ref{fig:latency_sinr_comp}, there is a poor distinction between attenuation zones as the SINR varies throughout the reported RSRP range. Grouping the data according to attenuation decade is important to see the effect of network conditions clearly.
 
 ## Secondary Metrics
-
-### 
 
 ![LTE RSRQ and SINR RF Conditions](../images/LTE-RF-Conditions.png)
 
@@ -2204,14 +2215,31 @@ such as deep-indoor devices or remote locations, we recommend either Sigfox or N
 
 RSRP or "Signal Power" is the power of the wanted part of the receive signal, the NB-IoT part.
 
+![](../../../masters/code/tests/plotterk/Signal_power_histogram.png)
+
+#### RSSI
+
+RSSI or "Total Power" in terms of UE reports, is the radio signal strength within the receive bandwidth (both expressed in 10ths of a decibel). From this the signal to noise ratio can be calculated.
+
+![RSSI](../images/image-20191112172439750.png){width=50%}
+
 #### SNR
 
 Last SNR value.
 
-#### "Total power" or RSSI
+#### RSRQ
 
-It is the radio signal strength within the receive bandwidth (both expressed in 10ths
-of a decibel). From this the signal to noise ratio can be calculated.
+**RSRQ = N x RSRP / RSSI**
+
+![LTE RSRQ reporting range](../images/CableFree-LTE-RSRQ-reporting-range.png)
+
+- N is the number of Physical Resource Blocks (PRBs) over which the RSSI is measured, typically equal to system bandwidth
+- RSSI is pure wide band power measurement, including intracell power, interference and noise
+- The reporting range of RSRQ is defined from -3…-19.5dB
+
+[](../../../masters/code/tests/plotterk/RSRQ_histogram.png)
+
+![RSRQ](../images/image-20191112173112378.png)
 
 #### Transmit power
 
@@ -2261,6 +2289,8 @@ Variation in data overhead can be measured using TX, and RX byte counters.
 
 ## Estimations
 
+A few metrics are estimated in this study.
+
 ### Telemetry Interval
 
 The recommended telemetry interval can be estimated for a subtest.
@@ -2280,29 +2310,21 @@ Ublox and Quectel data has been captured for:
 * Ericsson at MTN headquarters on 14th Avenue, Johannesburg
 * Huawei in Fairlands, JHB
 
-## Post-processing
+### Dataset
 
-### Plots
+Every UE device and MNO pair (4 total) has 7 main tests and each has its own attenuation zone (5 total). 424 files create a dataset with 1811 trace entries, 40 possible metrics and 79921 values.
 
-- what aspect is the plot trying to cover, what is it telling me on that topic, shows? observances?
-- purpose
-- data in the plot saying / deduce / narrative / story
-  - Example, Quectel, Vodacom is worse
-- 4 sentences
-- 4 sentences when comparing nw, and tehn again ues
-- What is the take home?
+Looking at the dataset as a whole this makes 140 unique outcomes (7x4x5). There are 15 subtest types which can be delved into, too.
 
+The dataset is also heavily skewed towards lower latency entries. Tests were repeated with the intent of increasing reliability, especially when it takes a couple of seconds, but when a test took up to 300 seconds it had a much lower chance of being repeated. Also considering that dataset capture may be repeated in different locations, one does not necessarily want to spend more than a day on-site.
 
+To solve for the skewness, each test can be normalized by taking a single mean of each of the associated trace entries and files. Now with a dataset of 140/1811 traces, it makes a minimum of 5600/79921 possible values.
 
-* what aspect is the plot trying to cover
+Unfortunately this created problems especially where only a few discrete values are concerned, such as in ECL, as multiple means exist. To solve this, k-means clustering is applied.
 
-* what is it telling me on that topic
-* purpose
-* data in the plot saying / deduce / narrative / story
-* 4 sentences
-* 4 sentences when comparing nw, and tehn again ues
+### Post-processing
 
-### Probability estimation
+#### Probability estimation
 
 Due to the large dataset and requiring a reasonable means of visualization, we can consider a histogram.
 
@@ -2352,19 +2374,7 @@ If the histogram bin values are normalized by dividing by the bin count, adding 
 
 In fact, good practice would be viewing the data as is and not trying to analyze it from what is essentially an entirely new perspective. Thus, the data will be viewed as 2D plotted points and histograms. Colour will be used to group the data according to attenuation and packet size.
 
-## Dataset
-
-Every UE device and MNO pair (4 total) has 7 main tests and each has its own attenuation zone (5 total). 424 files create a dataset with 1811 trace entries, 40 possible metrics and 79921 values.
-
-Looking at the dataset as a whole this makes 140 unique outcomes (7x4x5). There are 15 subtest types which can be delved into, too.
-
-The dataset is also heavily skewed towards lower latency entries. Tests were repeated with the intent of increasing reliability, especially when it takes a couple of seconds, but when a test took up to 300 seconds it had a much lower chance of being repeated. Also considering that dataset capture may be repeated in different locations, one does not necessarily want to spend more than a day on-site.
-
-To solve for the skewness, each test can be normalized by taking a single mean of each of the associated trace entries and files. Now with a dataset of 140/1811 traces, it makes a minimum of 5600/79921 possible values.
-
-Unfortunately this created problems especially where only a few discrete values are concerned, such as in ECL, as multiple means exist. To solve this, k-means clustering is applied.
-
-### K-Means Clustering
+#### K-Means Clustering
 
 Instead of finding a single mean for all the entries and associated files, at least two means are specified (K=2) to take into account the outliers that some tests produce or more if discrete values are involved or isolated regions (K=3+).
 
@@ -2378,13 +2388,75 @@ Instead of finding a single mean for all the entries and associated files, at le
 
 [](../../../masters/code/tests/plots/dpoints.png)
 
-## Visualization
+#### Plot Visualization {#plots}
+
+- what aspect is the plot trying to cover, what is it telling me on that topic, shows? observances?
+- purpose
+- data in the plot saying / deduce / narrative / story
+  - Example, Quectel, Vodacom is worse
+- 4 sentences
+- 4 sentences when comparing nw, and tehn again ues
+- What is the take home?
+
+
+
+* what aspect is the plot trying to cover
+* what is it telling me on that topic
+* purpose
+* data in the plot saying / deduce / narrative / story
+* 4 sentences
+* 4 sentences when comparing nw, and tehn again ues
+
+
+
+Jupyter is a python framework which is used for post-processing, and the following code snippet shows an example of the `9-plot` format used in the results (Chapter \ref{results}):
+
+```python
+import jupyterlib as j
+import plotter as p
+import plotter4 as p4
+
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
+
+import importlib
+
+def plot(*args, **kwargs):
+    importlib.reload(j)
+    importlib.reload(p)
+    importlib.reload(p4)
+    testl = ['1-16 B', '64-128 B', '256-512 B', 'Echo', 'COPS', 'eDRX', 'PTAU']
+    K = kwargs.pop('K') if 'K' in kwargs else None
+    p4.plot(db(), *args, **kwargs, K=K if K else 3, folder='plotterk', joburg=True,
+    	testl=testl)
+    
+...
+...
+    
+plot('SNR', 'txTime', 'SNR (dB)', 'Latency (s)', scale=[10,1000], K=5)
+plot('Signal power', 'energy', 'RSRP (dBm)', 'Power (uWh)', [10,3.6], K=6, log=True)
+```
+
+As there are numerous Jupyter files, most code resides in custom libraries which can be imported into each file to maintain consistency in case of duplication errors, and this can also be found on  [https://github.com/daniel-leonard-robinson/masters/tree/master/code/tests](https://github.com/daniel-leonard-robinson/masters/tree/master/code/tests). During development on the custom libraries, Jupyter requires `importlib` to `reload` each library when a master function such as `plot(*args, **kwargs)` is called.
+
+Table: Custom libraries imported by Jupyter and a description of their purpose {#tbl:jupyter_libs}
+
+| Library    | Purpose                                                     |
+| ---------- | ----------------------------------------------------------- |
+| jupyterlib | processing CSV files, directories, tests, thresholds        |
+| plotter    | gathering data into single dictionary database for plotting |
+| plotter4   | plotting data in 9-plot format, K-means clustering          |
+
+Other plots were more specialized and code was kept within the Jupyter file it was developed in.
+
+---
 
 Since it appears that ECL is the ultimate factor that should influence latency and energy usage, it is the metric used for battery life estimation as well.
 
 # Results {#results}
 
-This chapter visualizes and analyses the results from the datasets obtained in Chapter \ref{design}.
+This chapter visualizes and analyses the results from the datasets obtained in Chapter \ref{design}. The visualization format can be found in \S\ref{plots}.
 
 ## Latency and Delay
 
@@ -2582,14 +2654,16 @@ It is evident that on all attenuation levels there is a high degree of variation
 
 * Importance of low latency communications.
 
+### Summary
+
 ## Secondary Metrics
 
 ### Signal Strength Metrics
 
 #### MCL
 
-Once the module has an RRC connection, then the ECL, RSRP, RSRQ values allow to understand the
-RF link budget between the module and base station.
+Once the module has an RRC connection, then the MCL, RSRP, RSRQ values allow to understand the
+RF link characteristics between the module and base station.
 
 |                | MCL     |
 | -------------- | ------- |
@@ -2597,58 +2671,6 @@ RF link budget between the module and base station.
 | Vodacom-Nokia  | 137 dBm |
 | MTN-Ericsson   | 145 dBm |
 | Vodacom-Huawei | 151 dBm |
-
-
-
-#### RSSI
-
-\begin{minipage}{\linewidth}
-\begin{center}
-\includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_Total_power_plot.pdf}
-\captionof{figure}[RSSI versus RSRP packets (389/1619).]{RSSI versus RSRP packets (389/1619) in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs.}
-\label{fig:}
-\end{center}
-\end{minipage}
-
-[](../../../masters/code/tests/plotterk/Signal_power_Total_power_plot.png)
-
-(A) Attenuation zones evident in both RSSI/RSRP. (B) Vodacom within a range of 40dBm and MTN within 50dBm. MTN is also 20dBm more sensitive in terms of RSRP. (C) Significant variation in tests across both axes. (D) ECL 2 mainly from -110dB RSRP or less and ECL 1 more. ECL 0 spread throughout.
-
-[](../../../masters/code/tests/plotterk/Total_power_histogram.png)
-
-[](../../../masters/code/tests/plotterk/Signal_power_histogram.png)
-
-#### RSRQ
-
-**RSRQ = N x RSRP / RSSI**
-
-![LTE RSRQ reporting range](../images/CableFree-LTE-RSRQ-reporting-range.png)
-
-- N is the number of Physical Resource Blocks (PRBs) over which the RSSI is measured, typically equal to system bandwidth
-- RSSI is pure wide band power measurement, including intracell power, interference and noise
-- The reporting range of RSRQ is defined from -3…-19.5dB
-
-\begin{minipage}{\linewidth}
-\begin{center}
-\includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_RSRQ_plot.pdf}
-\captionof{figure}[RSRQ vs RSRP packets (389/1619).]{RSRQ vs RSRP packets (389/1619) in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs.}
-\label{fig:}
-\end{center}
-\end{minipage}
-
-[](../../../masters/code/tests/plotterk/Signal_power_RSRQ_plot.png)
-
-(A) Attenuation zones evident in RSRP and skewed by RSRQ axis. (B) Vodacom shows poorer RSRQ than MTN. (CD) Significant variation in tests and ECL across both axes.
-
-\begin{minipage}{\linewidth}
-\begin{center}
-\includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/RSRQ_histogram.pdf}
-\captionof{figure}{Histogram distribution of RSRQ.}
-\label{fig:}
-\end{center}
-\end{minipage}
-
-[](../../../masters/code/tests/plotterk/RSRQ_histogram.png)
 
 #### SINR
 
@@ -2666,7 +2688,7 @@ For example, in a frame-synchronized network, **SINR estimation based on synchro
 
 \begin{minipage}{\linewidth}
 \begin{center}
-\includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_RSRQ_plot.pdf}
+\includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_SNR_plot.pdf}
 \captionof{figure}{SINR versus RSRP packets (389/1619) in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs.}
 \label{fig:}
 \end{center}
@@ -2694,12 +2716,20 @@ SNR is spread relatively evenly for the different attenuation zones.
 \begin{minipage}{\linewidth}
 \begin{center}
 \includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/Signal_power_TX_power_plot.pdf}
-\captionof{figure}[Transmit powers of packets (204/1597) up to 23dBm against RSRP.]{Transmit powers of packets (204/1597) from -10 to 23 dBm in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs against RSRP.}
+\captionof{figure}[Transmit powers of packets (204/1597) up to 23dBm against RSRP for ZTE, Nokia.]{Transmit powers of packets (204/1597) from -10 to 23 dBm in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs against RSRP for ZTE, Nokia.}
 \label{fig:}
 \end{center}
 \end{minipage}
 
-[](../../../masters/code/tests/plotterk/Signal_power_TX_power_plot.png)
+\begin{minipage}{\linewidth}
+\begin{center}
+\includegraphics[width=1.0\linewidth]{../../../masters/code/tests/joplotterk/Signal_power_TX_power_plot.pdf}
+\captionof{figure}[Transmit powers of packets (340/2148) up to 23dBm against RSRP for Ericsson, Huawei.]{Transmit powers of packets (340/2148) from -60 to 23 dBm in comparison (AB) of UE, (C) MNOs, (DE) attenuation zones, (F) UE-MNO boxplots, (GH) test types, (I) and ECLs against RSRP Ericsson, Huawei.}
+\label{fig:}
+\end{center}
+\end{minipage}
+
+[](../../../masters/code/tests/joplotterk/Signal_power_TX_power_plot.png)
 
 (A) Transmit power decreases proportional to RSRP from around -100 dBm and stronger. (B) Attenuation/RSRP affects transmit power on MTN, and Vodacom remains at the 23 dBm max. (C) Variation in all tests. (D) ECL 0 and 1 uses less power but ECL 2 remains at max power.
 
@@ -2820,6 +2850,8 @@ up to 30 required, and one outlier at 80.
 
 (A) Attenuation zones evident and do not affect number of ACK/NACKs. (B) Vodacom requires more ACK/NACK responses than MTN. They share similar characteristics at a difference of 40dBm RSRP. (C) Significant variation in tests, although eDRX tests show the greatest number. (D) ECL does not seem to affect ACK/NACK count
 
+### Summary
+
 ## Estimations
 
 ### Telemetry Interval
@@ -2919,6 +2951,46 @@ satisfactory performance overall. Since the findings are reflected similarly acr
 Ublox and Quectel UE, it implies that the discrepancies are as a result of the MNO
 vendor.
 
+
+
+# Park {-#park}
+
+* Novice and seasoned adopters of new technology may struggle to find where NB-IoT stands
+
+* https://www.gsma.com/iot/rollout-vodafone/
+
+  * The NB-IoT coverage gain versus GSM is in line with Vodafone’s target, while recent testing activities have also demonstrated excellent network performance, exceeding Vodafone’s expectations: the uplink first transmission success rate is greater than 97%, reaching 99.9% with retransmissions.
+
+    Vodafone is working with multiple chipset and module suppliers to enable testing and trial opportunities, as well as device interoperability testing. It has tested devices from Neul and Qualcomm against Huawei, Ericsson and Nokia systems in multiple regions. All of these vendors’ NB-IoT Radio Access Network technology has been successfully interconnected with Vodafone’s core Internet of Things network.
+
+  * Neul and Qualcomm against Huawei, Ericsson and Nokia systems
+
+  * 1000 BS, Spain
+
+* https://www.vodafone.com/business/news-and-insights/blog/gigabit-thinking/the-art-of-the-possible-5-innovations-at-iot-solutions-world-congress-2018
+
+  * **1. Agriculture: Making sense of farming conditions**
+  * **2. Mobility: Bringing an end to parking pain**
+  * **3. Buildings: Remote surveillance gives peace of mind**
+  * **4. Retail: Digital tags improve product traceability**
+  * **5. Consumer: Connecting people and devices**
+
+* Features
+
+  * MCPTT
+    * Normalized platform for PS [https://www.mcopenplatform.org](https://www.mcopenplatform.org/)
+  * D2D
+  * MBMS
+  * RAN-sharing
+
+* https://enterpriseiotinsights.com/20190506/nb-iot/samsung-kt-launch-nbiot-service-through-ps-lte-network-korea
+
+  * In addition to LTE radio base stations that support 700 MHz, Samsung is providing KT with a virtualized core and the latest features of PS-LTE based on the 3GPP standard. Some of the key features include MCPTT solutions, Radio Access Network sharing, evolved Multimedia Broadcast Multicast Service, Public Network IoT based on NB-IoT, Isolated eUTRAN Operation for Public Safety (IOPS), and device-to-device (D2D) network solutions.
+
+    Samsung highlighted that D2D and NB-IoT play crucial roles in creating public safety network by ensuring stable, seamless, and reliable network in unfavorable environments. For instance, D2D allows direct and undisrupted communications between any two devices without traversing radio base stations or core network even in areas where bases stations are not provided.
+
+* 
+
 \newpage
 
 # References
@@ -2926,9 +2998,13 @@ vendor.
 <div id="refs"></div>
 \newpage
 
-# Appendix A {#appendixA}
+# Appendices {-#appendix}
 
-## Measured Latency
+\appendix
+
+# Measured Metrics and Estimations {#appendix_measured}
+
+## Latency
 
 
 
@@ -3159,7 +3235,7 @@ Table: Longevity Estimate (years) for 9.36Wh AA battery (Lithium Thionyl Chlorid
 
 \newpage
 
-# Appendix B {#appendixB}
+# UE Reported Metrics and Estimations {#appendix_ue_reported}
 
 ## RF Transmit Time
 
@@ -3449,7 +3525,25 @@ Table: Longevity Estimate in years using Reported RX, TX Time for 9.36Wh AA batt
 
 \newpage
 
-# Appendix D {#appendixD}
+# Example Application Board and Schematic {#appendix_SCH_BRD}
+
+![Quectel BG96 modem schematic](../images/image-20191106135315605.png)
+
+![SIM card, USB and miscellaneous circuitry schematic](../images/image-20191106140747428.png)
+
+![Power circuity, antenna and logic level conversion](../images/image-20191106140001950.png)
+
+![Murata CMWX1ZZABZ-078 module schematic](../images/image-20191106140127903.png)
+
+[](../images/image-20191106140222681.png)
+
+![Atmel ATSAMD21G18a microcontroller schematic](../images/image-20191106135707965.png)
+
+![Top and bottom layout of example PCB](../images/image-20191104224412975.png){width=100%}
+
+\newpage
+
+# System Information Block (SIB) Examples {#appendix_sibs}
 
 These are examples of some of the information accessible in UEMonitor of SIB blocks and RRC signalling communications.
 
@@ -3795,27 +3889,7 @@ Additional Info=DL-CCCH-Message-NB:
 
 \newpage
 
-# Appendix E {#appendix_SCH_BRD}
-
-![Quectel BG96 modem schematic](../images/image-20191106135315605.png)
-
-![SIM card, USB and miscellaneous circuitry schematic](../images/image-20191106140747428.png)
-
-![Power circuity, antenna and logic level conversion](../images/image-20191106140001950.png)
-
-![Murata CMWX1ZZABZ-078 module schematic](../images/image-20191106140127903.png)
-
-[](../images/image-20191106140222681.png)
-
-![Atmel ATSAMD21G18a microcontroller schematic](../images/image-20191106135707965.png)
-
-![Top and bottom layout of example PCB](../images/image-20191104224412975.png){width=100%}
-
-
-
-\newpage
-
-# Appendix F {#appendix_Sierra}
+# Sierra Wireless WP7702 Test Anomaly {#appendix_Sierra}
 
 From 9-20 April 2018, the Sierra Wireless WP7702 modem was tested independently at MTN's Test Plant on 14th Avenue, Johannesburg.
 
@@ -3839,7 +3913,7 @@ Perhaps the reason why these errors never showed up when connecting to Vodacom i
 
 \newpage
 
-# Appendix G {#appendix_pytest}
+# PyTest Setup Fixtures {#appendix_pytest}
 
 PyTest setup fixtures for Ublox and Quectel.
 
@@ -3937,5 +4011,64 @@ def test_ping(request):
 def test_reboot(request):
     pytest.subtest = request.node.name.split('_')[-1] + '/'
     expect('at+nrb', '')
+```
+
+\newpage
+
+# Ericsson eNodeB Managed Objects Snippet {#appendix_eNB}
+
+```bash
+=== TPMME1 sysadm@eqm01s0fp2 ANCB ~ # get .
+
+180420-22:33:45 10.45.254.73 18.0a MSRBS_NODE_MODEL_17.Q3_330.27706.45_27e4
+	stopfile=/tmp/12068
+$ssh_pid = 2914
+Connected to 10.45.254.73 (SubNetwork=ONRM_ROOT_MO_R,SubNetwork=LTE_TEST,
+	MeContext=B06009-TESTPLANT,ManagedElement=B06009-TESTPLANT)
+=============================================================================
+0                                    ManagedElement=B06009-TESTPLANT
+=============================================================================
+                                     SubNetwork=ONRM_ROOT_MO_R,SubNetwork=LTE_TEST,
+dnPrefix                             MeContext=B06009-TESTPLANT
+managedElementId                     B06009-TESTPLANT
+managedElementType                   RadioNode
+networkManagedElementId              B06009-TESTPLANT
+release                              17.Q3
+siteLocation                         
+userLabel                            
+=============================================================================
+1                                    ENodeBFunction=1
+=============================================================================
+alignTtiBundWUlTrigSinr              0 (OFF)
+altNasBackTo                         0 (DEFAULT_DCN)
+biasThpWifiMobility                  10
+caAwareMfbiIntraCellHo               false
+checkEmergencySoftLock               false
+combCellSectorSelectThreshRx         300
+combCellSectorSelectThreshTx         300
+csfbMeasFromIdleMode                 true
+csfbUseRegisteredLai                 false
+csmMinHighHitThreshold               70
+dlBbCapacityMaxLimit                 3000
+dlBbCapacityNet                      300
+dlMaxWaitingTimeGlobal               0
+dnsLookupOnTai                       1 (ON)
+dnsLookupTimer                       0
+dnsSelectionS1X2Ref                  
+dscpLabel                            56
+eNBId                                6009
+eNodeBFunctionId                     1
+eNodeBPlmnId                         Struct{3}
+ >>> 1.mcc = 655
+ >>> 2.mnc = 10
+ >>> 3.mncLength = 2
+enabledUlTrigMeas                    false
+eranVlanPortRef                      
+extendedWaitTimeNb                   0
+forcedSiTunnelingActive              false
+gtpuErrorIndicationDscp              40
+inactivitySupervisionTimerNb         i[3] = 100 150 200 
+initPreschedulingEnable              true
+...
 ```
 

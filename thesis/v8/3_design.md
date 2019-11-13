@@ -39,7 +39,7 @@ This section looks at certain aspects of LTE networks.
 
 SIBs carry relevant information for the UE, which helps UE to access a cell, perform cell re-selection, information related to INTRA-frequency, INTER-frequency and INTER-RAT cell selections. In LTE there are 13 types of SIBs as can be seen in Table \ref{tbl:sib_descr}.
 
-See Appendix \ref{appendixD} for examples of NB-IoT SIB blocks.
+See Appendix \ref{appendix_sibs} for examples of NB-IoT SIB blocks.
 
 * Downlink systemInformationBlockType1
 * Downlink systemInformation
@@ -1303,9 +1303,21 @@ Ublox and Quectel data has been captured for:
 * Ericsson at MTN headquarters on 14th Avenue, Johannesburg
 * Huawei in Fairlands, JHB
 
-## Post-processing
+### Dataset
 
-### Probability estimation
+Every UE device and MNO pair (4 total) has 7 main tests and each has its own attenuation zone (5 total). 424 files create a dataset with 1811 trace entries, 40 possible metrics and 79921 values.
+
+Looking at the dataset as a whole this makes 140 unique outcomes (7x4x5). There are 15 subtest types which can be delved into, too.
+
+The dataset is also heavily skewed towards lower latency entries. Tests were repeated with the intent of increasing reliability, especially when it takes a couple of seconds, but when a test took up to 300 seconds it had a much lower chance of being repeated. Also considering that dataset capture may be repeated in different locations, one does not necessarily want to spend more than a day on-site.
+
+To solve for the skewness, each test can be normalized by taking a single mean of each of the associated trace entries and files. Now with a dataset of 140/1811 traces, it makes a minimum of 5600/79921 possible values.
+
+Unfortunately this created problems especially where only a few discrete values are concerned, such as in ECL, as multiple means exist. To solve this, k-means clustering is applied.
+
+### Post-processing
+
+#### Probability estimation
 
 Due to the large dataset and requiring a reasonable means of visualization, we can consider a histogram.
 
@@ -1355,7 +1367,21 @@ If the histogram bin values are normalized by dividing by the bin count, adding 
 
 In fact, good practice would be viewing the data as is and not trying to analyze it from what is essentially an entirely new perspective. Thus, the data will be viewed as 2D plotted points and histograms. Colour will be used to group the data according to attenuation and packet size.
 
-### Plots {#plots}
+#### K-Means Clustering
+
+Instead of finding a single mean for all the entries and associated files, at least two means are specified (K=2) to take into account the outliers that some tests produce or more if discrete values are involved or isolated regions (K=3+).
+
+\begin{minipage}{\linewidth}
+\begin{center}
+\includegraphics[width=0.8\linewidth]{../../../masters/code/tests/plots/dpoints.pdf}
+\captionof{figure}[K-means clustering]{Trace entries per test. Absolute maximum of 1811 traces has been reduced by removing duplicates and applying thresholds. K-means clustering achieves the desired effect of reducing dimensionality and skewness induced from low latency sampling on the dataset for different tests, yet keeps most of the features of the thresholded max.}
+\label{fig:}
+\end{center}
+\end{minipage}
+
+[](../../../masters/code/tests/plots/dpoints.png)
+
+#### Plot Visualization {#plots}
 
 - what aspect is the plot trying to cover, what is it telling me on that topic, shows? observances?
 - purpose
@@ -1417,33 +1443,7 @@ Table: Custom libraries imported by Jupyter and a description of their purpose {
 
 Other plots were more specialized and code was kept within the Jupyter file it was developed in.
 
-## Dataset
-
-Every UE device and MNO pair (4 total) has 7 main tests and each has its own attenuation zone (5 total). 424 files create a dataset with 1811 trace entries, 40 possible metrics and 79921 values.
-
-Looking at the dataset as a whole this makes 140 unique outcomes (7x4x5). There are 15 subtest types which can be delved into, too.
-
-The dataset is also heavily skewed towards lower latency entries. Tests were repeated with the intent of increasing reliability, especially when it takes a couple of seconds, but when a test took up to 300 seconds it had a much lower chance of being repeated. Also considering that dataset capture may be repeated in different locations, one does not necessarily want to spend more than a day on-site.
-
-To solve for the skewness, each test can be normalized by taking a single mean of each of the associated trace entries and files. Now with a dataset of 140/1811 traces, it makes a minimum of 5600/79921 possible values.
-
-Unfortunately this created problems especially where only a few discrete values are concerned, such as in ECL, as multiple means exist. To solve this, k-means clustering is applied.
-
-### K-Means Clustering
-
-Instead of finding a single mean for all the entries and associated files, at least two means are specified (K=2) to take into account the outliers that some tests produce or more if discrete values are involved or isolated regions (K=3+).
-
-\begin{minipage}{\linewidth}
-\begin{center}
-\includegraphics[width=0.8\linewidth]{../../../masters/code/tests/plots/dpoints.pdf}
-\captionof{figure}[K-means clustering]{Trace entries per test. Absolute maximum of 1811 traces has been reduced by removing duplicates and applying thresholds. K-means clustering achieves the desired effect of reducing dimensionality and skewness induced from low latency sampling on the dataset for different tests, yet keeps most of the features of the thresholded max.}
-\label{fig:}
-\end{center}
-\end{minipage}
-
-[](../../../masters/code/tests/plots/dpoints.png)
-
-## Visualization
+---
 
 Since it appears that ECL is the ultimate factor that should influence latency and energy usage, it is the metric used for battery life estimation as well.
 

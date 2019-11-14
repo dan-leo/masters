@@ -4,7 +4,7 @@ import matplotlib.ticker as ticker
 import pandas as pd
 import seaborn as sns
 import plotter as p
-import jupyter as j
+import jupyterlib as j
 import importlib
 import matplotlib.colors as mc
 import colorsys
@@ -108,6 +108,7 @@ def plot(mdb, kx, ky, xlabel='', ylabel='', scale=[1,1], invert=[True,False], co
                                     for i in range(K_len):
                                         a[i] = int(round(np.mean(a[i]))) if a[i] else a[i]
                                     for e, vy in zip(a, atk[ky]):
+                                        # vy = vy / 1000 if ui >= 4 else vy
                                         hecl[e][ti][ui].append(vy/scale[1])
                                     # print(hecl)
 
@@ -120,8 +121,10 @@ def plot(mdb, kx, ky, xlabel='', ylabel='', scale=[1,1], invert=[True,False], co
                                     y = atk[ky]/scale[1]
                                     if y.size:
                                         for hy in y:
-                                            ally[ui].append(hy)
-                                            hytw[ti][ui].append(hy)
+                                            if not ti in [99]:
+                                                # hy = hy / 1000 if ui >= 4 else hy
+                                                ally[ui].append(hy)
+                                                hytw[ti][ui].append(hy)
                             except TypeError as e:
                                 print(e, atd[kx])
                         except (KeyError, TypeError) as e:

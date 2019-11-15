@@ -1216,7 +1216,7 @@ RSSI or "Total Power" in terms of UE reports, is the radio signal strength withi
 
 ![RSSI](../images/image-20191112172439750.png){width=50%}
 
-#### SNR
+#### SINR {#design_sinr}
 
 Last SNR value.
 
@@ -1233,6 +1233,16 @@ Last SNR value.
 [](../../../masters/code/tests/plotterk/RSRQ_histogram.png)
 
 ![RSRQ](../images/image-20191112173112378.png)
+
+ https://www.cablefree.net/wirelesstechnology/4glte/lte-rsrq-sinr/
+
+SINR is a measure of signal quality as well but it is not defined in the 3GPP specs but defined by the UE vendor. It is not reported to the network. SINR is used a lot by operators, and the LTE industry in general, as it better quantifies the relationship between RF conditions and throughput. 
+
+It is a common practice to use Signal-to-Interference Ratio (SINR) as an indicator for network quality. It should be however noted that 3GPP specifications do not define SINR and  therefore UE does not report SINR to the network. SINR is still internally measured by most UEs and recorded by drive test tools.
+
+Unfortunately UE chipset and RF scanner manufacturers have implemented SINR measurement in various different ways which are not always easily comparable. While at first it may seem that defining SINR should be unambiguous, in case of LTE downlink this is not the case. This is because different REs within a radio frame carry different physical signals and channels each of which, in turn, see different interference power depending on inter-cell radio frame synchronization.
+
+For example, in a frame-synchronized network, **SINR estimation based on synchronization signals**(PSS/SSS) results in different SINR than SINR estimation based on Reference Signals, since in the latter case the frequency shift of the RS depends on the PCI plan.
 
 #### Transmit power
 

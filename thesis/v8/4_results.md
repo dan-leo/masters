@@ -50,6 +50,8 @@ This section handles measured and reported latencies versus signal strength to s
 \label{fig:latency_boxplot}
 \end{figure}
 
+
+
 \begin{figure}[ht]
   \subfloat[Latency measurements from Appendix \ref{appendix_latency_MT}. Nokia has around 20 seconds latency. At around 6 seconds, Quectel is performing slightly better than Ublox around 8 seconds.]{
 	\begin{minipage}[c][0.6\width]{
@@ -73,20 +75,20 @@ There is a large discrepancy in the datagram latency between MTN and Vodacom due
 ### Power Efficiency
 
 \begin{figure}[ht]
-  \subfloat[Measured average power from Appendix \ref{appendix_plots}]{
+  \subfloat[Measured average power from Appendix \ref{appendix_energy_MP}. Huawei has a lower 25\% baseline at 10 uWh.]{
 	\begin{minipage}[c][0.6\width]{
 	   0.48\textwidth}
 	   \centering
 	   \includegraphics[width=1\textwidth]{../../code/tests/box/avgpower.pdf}
 	\end{minipage}}
  \hfill 	
-  \subfloat[UE reported average power estimation from Appendix \ref{appendix_plots}]{
+  \subfloat[UE reported average power estimation from Appendix \ref{appendix_tx_latency} and \ref{appendix_rx_latency}. ]{
 	\begin{minipage}[c][0.6\width]{
 	   0.48\textwidth}
 	   \centering
 	   \includegraphics[width=1\textwidth]{../../code/tests/box/avgpowerEst.pdf}
 	\end{minipage}}
-\caption{Average power of telemetry test datagrams}
+\caption{Average power of telemetry test datagrams with a 25\% baseline around 30 uWh. At least 50\% of values centered at median range from 30 uWh to 1000 uWh, except for Nokia extending up to 10 000 uWh in measurements. Quectel shows slightly better values than Ublox. MTN remains the leader for datagram power efficiency for various telemetry tests.}
 \end{figure}
 
 
@@ -114,12 +116,17 @@ The inefficiency between the two South African MNOs can either be attributed to 
 
 ## Secondary Metrics
 
+This section looks at secondary metrics as mentioned in \S\ref{proj_descr}.
+
 ### Signal Strength Metrics
+
+It is important to know the signal strength behavior between UE devices and LTE vendors due to varying network conditions in terms of MCL, SINR and transmit power.
 
 #### MCL
 
-Once the module has an RRC connection, then the MCL, RSRP, RSRQ values allow to understand the
-RF link characteristics between the module and base station.
+The RF link characteristics between the module and base station are useful in determining the range or indoor penetration the UE device can sustain.
+
+Table: MCL between MNO-LTE vendor pairs. {#tbl:mcl_results}
 
 |                | MCL     |
 | -------------- | ------- |
@@ -128,24 +135,16 @@ RF link characteristics between the module and base station.
 | MTN-Ericsson   | 145 dBm |
 | Vodacom-Huawei | 151 dBm |
 
+MTN-ZTE performed best, with Vodacom-Nokia performing the worst.
+
 #### SINR
 
-https://www.cablefree.net/wirelesstechnology/4glte/lte-rsrq-sinr/
-
-SINR is a measure of signal quality as well but it is not defined in the 3GPP specs but defined by the UE vendor.
-
-It is not reported to the network. SINR is used a lot by operators, and the LTE industry in general, as it better quantifies the **relationship between RF conditions and Throughput**. LTE UEs typically use SINR to calculate the CQI (Channel Quality Indicator) they report to the network.
-
-It is a common practice to use Signal-to-Interference Ratio (SINR) as an indicator for network quality. It should be however noted that 3GPP specifications do not define SINR and  therefore UE does not report SINR to the network. SINR is still internally measured by most UEs and recorded by drive test tools.
-
-Unfortunately UE chipset and RF scanner manufacturers have implemented SINR measurement in various different ways which are not always easily comparable. While at first it may seem that defining SINR should be unambiguous, in case of LTE downlink this is not the case. This is because different REs within a radio frame carry different physical signals and channels each of which, in turn, see different interference power depending on inter-cell radio frame synchronization.
-
-For example, in a frame-synchronized network, **SINR estimation based on synchronization signals**(PSS/SSS) results in different SINR than SINR estimation based on Reference Signals, since in the latter case the frequency shift of the RS depends on the PCI plan.
+SINR was considered over RSSI and RSRQ. RSSI is RSRP with transmit power included, and RSRQ is a formula between RSRP and RSSI which includes the number of PRBs measured. SINR is satisfactory in showing network RF characteristics.
 
 \begin{minipage}{\linewidth}
 \begin{center}
 \includegraphics[width=0.6\linewidth]{../../code/tests/box/SINRperceived.pdf}
-\captionof{figure}{UE reported SINR}
+\captionof{figure}{UE reported SINR. With respect to LTE vendors, SINR is reported to be approximately from -5 dB to 15 dB, except for Ericsson which extends up to 30 dB. This is not an indicator of superior signal strength, as Ericsson tests were performed in laboratory conditions which allowed an RSRP of up to -20 dBm, unlike the others around -70 to -80 dBm. Ublox and Quectel show similar values, unlike the defined disparity stated in \S\ref{design_sinr}.}
 \label{fig:}
 \end{center}
 \end{minipage}
@@ -153,56 +152,56 @@ For example, in a frame-synchronized network, **SINR estimation based on synchro
 
 #### Transmit Power
 
-
+Observing the results in Appendix \ref{appendix_transmit_power_RP}, UE devices decrease their output power at roughly 10 dBm per decade of RSRP amplification from -100 dBm onwards except for Vodacom-Nokia which maintains maximum output power.
 
 ### Throughput
 
-It displays the throughput measurement for the RLC and physical layers.
+It displays the throughput measurement for the RLC and MAC physical layers.
 
 These values provide an indication of the efficiency of the radio link. With bad BLER, these values will
 be low. With very good BLER, these values will be near the theoretical throughput of NB-IoT – and
 because of this, may not change over time, as it does not take into account the time to wake up,
-scan for base station, etc. This is simply over the protocol stack itself.
+scan for base station, etc. This is simply over the protocol stack itself. As stated in \S\ref{lpwan_comparison}, NB-IoT has an uplink and downlink throughput of ~250kbps.
 
 \begin{figure}[ht]
   \subfloat[RLC and MAC uplink throughput]{
-	\begin{minipage}[c][1\width]{
-	   0.5\textwidth}
+	\begin{minipage}[c][0.6\width]{
+	   0.48\textwidth}
 	   \centering
 	   \includegraphics[width=1\textwidth]{../../code/tests/box/mac_rlc_ul.pdf}
 	\end{minipage}}
  \hfill 	
   \subfloat[RLC and MAC downlink throughput]{
-	\begin{minipage}[c][1\width]{
-	   0.5\textwidth}
+	\begin{minipage}[c][0.6\width]{
+	   0.48\textwidth}
 	   \centering
 	   \includegraphics[width=1\textwidth]{../../code/tests/box/mac_rlc_dl.pdf}
 	\end{minipage}}
-\caption{RLC and MAC layer throughput}
+\caption{RLC and MAC layer throughput. 90\% of values under 10 kbps, except for Huawei taking the lead in downlink throughput. Quectel and Ublox exhibit similar characteristics and MTN leads Vodacom marginally.}
 \end{figure}
 
-
+UE reported throughput values under 10 kbps are well under the 250 kbps speeds claimed by NB-IoT manufacturers.
 
 ### Data Overhead
 
+Considering the variance in figure \ref{fig:udpsize}, taking the mean would make for a simpler representation per UDP size. However, a boxplot representation shows the characteristics of the data mroe fully.
+
 \begin{figure}[ht]
-  \subfloat[Transmission bytes]{
-	\begin{minipage}[c][1\width]{
-	   0.5\textwidth}
+  \subfloat[Transmission bytes with at least 50\% of values centered between 100 and 1000 bytes. Nokia extends up to 5000 bytes, or more in outliers.]{
+	\begin{minipage}[c][0.6\width]{
+	   0.48\textwidth}
 	   \centering
 	   \includegraphics[width=1\textwidth]{../../code/tests/box/txBytes.pdf}
 	\end{minipage}}
  \hfill 	
-  \subfloat[Receive bytes]{
-	\begin{minipage}[c][1\width]{
-	   0.5\textwidth}
+  \subfloat[Receive bytes with at least 50\% of values centered between 50 and 200 bytes. Nokia extends up to 2000 bytes, or more in outliers.]{
+	\begin{minipage}[c][0.6\width]{
+	   0.48\textwidth}
 	   \centering
 	   \includegraphics[width=1\textwidth]{../../code/tests/box/rxBytes.pdf}
 	\end{minipage}}
-\caption{Byte size distribution of different telemetry tests across different MNOs, LTE Vendors and UE devices}
+\caption{Byte size distribution of different telemetry tests across different MNOs, LTE Vendors and UE devices. Ublox and Quectel show equal characteristics. MTN leads Vodacom marginally.}
 \end{figure}
-
-Considering the variance in figure \ref{fig:udpsize}, taking the mean will make for a simpler representation per UDP size.
 
 
 
@@ -216,19 +215,19 @@ Considering the variance in figure \ref{fig:udpsize}, taking the mean will make 
 
 \begin{figure}[ht]
   \subfloat[Energy measurements from Appendix A]{
-	\begin{minipage}[c][1\width]{
-	   0.5\textwidth}
+	\begin{minipage}[c][0.6\width]{
+	   0.48\textwidth}
 	   \centering
 	   \includegraphics[width=1\textwidth]{../../code/tests/box/intervalECL1.pdf}
 	\end{minipage}}
  \hfill 	
   \subfloat[Reported RF time from Appendix B]{
-	\begin{minipage}[c][1\width]{
-	   0.5\textwidth}
+	\begin{minipage}[c][0.6\width]{
+	   0.48\textwidth}
 	   \centering
 	   \includegraphics[width=1\textwidth]{../../code/tests/box/intervalEstECL1.pdf}
 	\end{minipage}}
-\caption{Telemetry interval estimation sending 16-512 byte packet payloads in ECL 1 network conditions}
+\caption{Telemetry interval estimation sending 16-512 byte packet payloads in ECL 1 network conditions. LTE vendors require messages to be sent between 5 minutes to an hour to last a year on a 9.36 Wh battery (AA-sized), except for Nokia requiring a telemetry interval around 10 hours. Quectel is measured to be better than Ublox, yet Ublox reports better values than Quectel. MTN leads Vodacom due to Nokia's poor performance.}
 \end{figure}
 
 ### Battery longevity
@@ -241,19 +240,19 @@ Considering the variance in figure \ref{fig:udpsize}, taking the mean will make 
 
 \begin{figure}[ht]
   \subfloat[Energy measurements from Appendix A]{
-	\begin{minipage}[c][1\width]{
-	   0.5\textwidth}
+	\begin{minipage}[c][0.6\width]{
+	   0.48\textwidth}
 	   \centering
 	   \includegraphics[width=1\textwidth]{../../code/tests/box/longevityECL1.pdf}
 	\end{minipage}}
  \hfill 	
   \subfloat[Reported RF time from Appendix B]{
-	\begin{minipage}[c][1\width]{
-	   0.5\textwidth}
+	\begin{minipage}[c][0.6\width]{
+	   0.48\textwidth}
 	   \centering
 	   \includegraphics[width=1\textwidth]{../../code/tests/box/longevityEstECL1.pdf}
 	\end{minipage}}
-\caption{Battery longevity estimation sending 16-512 byte packet payloads in ECL 1 network conditions}
+\caption{Battery longevity estimation sending 16-512 byte packet payloads in ECL 1 network conditions. According to LTE vendor results, UE devices will last a couple of years up to 10 except for Nokia which will only last a few months. Measurements show Quectel is better than Ublox, yet Ublox reports better results than Quectel. MTN leads Vodacom due to Nokia's dismal performance.}
 \end{figure}
 
 
@@ -1034,7 +1033,7 @@ Outliers show RX time up to almost 400 seconds and majority when connected to Vo
 
 ## Power Efficiency
 
-### Measured Energy Consumption
+### Measured Energy Consumption {#appendix_energy_MP}
 
 \begin{minipage}{\linewidth}
 \begin{center}
@@ -1138,7 +1137,7 @@ SNR is spread relatively evenly for the different attenuation zones.
 
 [](../../../masters/code/tests/plotterk/SNR_histogram.png)
 
-#### Transmit Power
+#### Transmit Power {#appendix_transmit_power_RP}
 
 \begin{minipage}{\linewidth}
 \begin{center}

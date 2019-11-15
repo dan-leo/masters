@@ -662,3 +662,7 @@ zzzTemporary10                       -2000000000
 \label{fig:}
 \end{center}
 \end{minipage}
+
+
+
+Once the module has an RRC connection, then the MCL, RSRP, RSRQ values allow to understand t

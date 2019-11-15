@@ -984,7 +984,7 @@ the +CSCON URC to show when the module is connected.
 
 Whilst the simple `Ping` command is useful to measure connectivity and latency, it unfortunately has no way to release the inactivity timer by itself, which means the modem continues to consume current in receive-mode/C-DRX. That is why the `Echo` telemetry test was designed.
 
-## Main Metrics
+## Primary Metrics
 
 ### Power Efficiency
 

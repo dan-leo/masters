@@ -646,3 +646,19 @@ zzzTemporary10                       -2000000000
 \end{minipage}
 
 [](../../../masters/code/tests/plotterk/RSRQ_histogram.png)
+
+
+
+
+
+
+
+# dump
+
+\begin{minipage}{\linewidth}
+\begin{center}
+\includegraphics[width=0.6\linewidth]{../../code/tests/box/avgpower.pdf}
+\captionof{figure}{Average power measurements}
+\label{fig:}
+\end{center}
+\end{minipage}

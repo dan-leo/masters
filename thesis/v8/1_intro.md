@@ -247,7 +247,7 @@ Long Term Evolution (LTE) is a cellular architecture which is a subset of an eve
 
 [^group_terms]: note: group terms
 
-## Project Description
+## Project Description {#proj_descr}
 
 ### Problem Statement {#probstat}
 
@@ -410,6 +410,4 @@ MTN NB-IoT sim cards can currently be obtained only for testing purposes, and it
 ## Thesis structure {#thesis-struct}
 
 NB-IoT is introduced to the reader in Chapter \ref{intro}. A literature study reviews the current empirical research in Chapter \ref{litstudy}. Design and methodology shows the steps taken to capture different metrics and process the resulting dataset in Chapter \ref{design}. Results are analyzed in Chapter \ref{results} and discussed with recommendations in Chapter \ref{#discussion}. Lastly, a conclusion is made in Chapter \ref{conclusion}.
-
-# References
 

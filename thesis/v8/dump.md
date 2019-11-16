@@ -666,3 +666,49 @@ zzzTemporary10                       -2000000000
 
 
 Once the module has an RRC connection, then the MCL, RSRP, RSRQ values allow to understand t
+
+
+
+LTE UEs typically use SINR to calculate the CQI (Channel Quality Indicator) they report to the network.
+
+
+
+
+
+# Park {-#park}
+
+* Novice and seasoned adopters of new technology may struggle to find where NB-IoT stands
+
+* https://www.gsma.com/iot/rollout-vodafone/
+
+  * The NB-IoT coverage gain versus GSM is in line with Vodafone’s target, while recent testing activities have also demonstrated excellent network performance, exceeding Vodafone’s expectations: the uplink first transmission success rate is greater than 97%, reaching 99.9% with retransmissions.
+
+    Vodafone is working with multiple chipset and module suppliers to enable testing and trial opportunities, as well as device interoperability testing. It has tested devices from Neul and Qualcomm against Huawei, Ericsson and Nokia systems in multiple regions. All of these vendors’ NB-IoT Radio Access Network technology has been successfully interconnected with Vodafone’s core Internet of Things network.
+
+  * Neul and Qualcomm against Huawei, Ericsson and Nokia systems
+
+  * 1000 BS, Spain
+
+* https://www.vodafone.com/business/news-and-insights/blog/gigabit-thinking/the-art-of-the-possible-5-innovations-at-iot-solutions-world-congress-2018
+
+  * **1. Agriculture: Making sense of farming conditions**
+  * **2. Mobility: Bringing an end to parking pain**
+  * **3. Buildings: Remote surveillance gives peace of mind**
+  * **4. Retail: Digital tags improve product traceability**
+  * **5. Consumer: Connecting people and devices**
+
+* Features
+
+  * MCPTT
+    * Normalized platform for PS [https://www.mcopenplatform.org](https://www.mcopenplatform.org/)
+  * D2D
+  * MBMS
+  * RAN-sharing
+
+* https://enterpriseiotinsights.com/20190506/nb-iot/samsung-kt-launch-nbiot-service-through-ps-lte-network-korea
+
+  * In addition to LTE radio base stations that support 700 MHz, Samsung is providing KT with a virtualized core and the latest features of PS-LTE based on the 3GPP standard. Some of the key features include MCPTT solutions, Radio Access Network sharing, evolved Multimedia Broadcast Multicast Service, Public Network IoT based on NB-IoT, Isolated eUTRAN Operation for Public Safety (IOPS), and device-to-device (D2D) network solutions.
+
+    Samsung highlighted that D2D and NB-IoT play crucial roles in creating public safety network by ensuring stable, seamless, and reliable network in unfavorable environments. For instance, D2D allows direct and undisrupted communications between any two devices without traversing radio base stations or core network even in areas where bases stations are not provided.
+
+* 

@@ -38,6 +38,7 @@ def exclude(key, vals, thresh=None):
     r = a == a
     if key == 'Signal power':
         r *= a > -1450
+        # r *= a < -1000
     if key == 'Total power':
         r *= a > -1450
     if key == 'TX power':

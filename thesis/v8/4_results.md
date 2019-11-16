@@ -122,32 +122,64 @@ This section looks at secondary metrics as mentioned in \S\ref{proj_descr}.
 
 It is important to know the signal strength behavior between UE devices and LTE vendors due to varying network conditions in terms of MCL, SINR and transmit power.
 
-#### MCL
+#### Maximum Coupling Link
 
 The RF link characteristics between the module and base station are useful in determining the range or indoor penetration the UE device can sustain.
 
-Table: MCL between MNO-LTE vendor pairs. {#tbl:mcl_results}
+Table: MCL between LTE vendor-MNO pairs. {#tbl:mcl_results}
 
-|                | MCL     |
-| -------------- | ------- |
-| MTN-ZTE        | 157 dBm |
-| Vodacom-Nokia  | 137 dBm |
-| MTN-Ericsson   | 145 dBm |
-| Vodacom-Huawei | 151 dBm |
+|                | MCL        |
+| -------------- | ---------- |
+| ZTE-MTN        | 157.6 dBm  |
+| Nokia-Vodacom  | 148.0 dBm  |
+| Ericsson-MTN   | 159.0 dBm  |
+| Huawei-Vodacom | 160.0 dBm  |
+| Ublox          | 160.0 dBm  |
+| Quectel        | 157.45 dBm |
 
-MTN-ZTE performed best, with Vodacom-Nokia performing the worst.
+In terms of LTE vendors, Huawei-Vodacom and Ericsson-MTN performed best, with ZTE-MTN close behind and Vodacom-Nokia performing the worst. Ublox performed slightly better than Quectel.
 
-#### SINR
+#### RSRP and SINR
 
 SINR was considered over RSSI and RSRQ. RSSI is RSRP with transmit power included, and RSRQ is a formula between RSRP and RSSI which includes the number of PRBs measured. SINR is satisfactory in showing network RF characteristics.
 
-\begin{minipage}{\linewidth}
-\begin{center}
-\includegraphics[width=0.6\linewidth]{../../code/tests/box/SINRperceived.pdf}
-\captionof{figure}{UE reported SINR. With respect to LTE vendors, SINR is reported to be approximately from -5 dB to 15 dB, except for Ericsson which extends up to 30 dB. This is not an indicator of superior signal strength, as Ericsson tests were performed in laboratory conditions which allowed an RSRP of up to -20 dBm, unlike the others around -70 to -80 dBm. Ublox and Quectel show similar values, unlike the defined disparity stated in \S\ref{design_sinr}.}
-\label{fig:}
-\end{center}
-\end{minipage}
+\begin{figure}[ht]
+  \subfloat[UE reported RSRP. Although Ericsson RSRP extended up to -20 dBm due to laboratory conditions it is limited to -70 dBm.]{
+	\begin{minipage}[c][0.6\width]{
+	   0.48\textwidth}
+	   \centering
+	   \includegraphics[width=1\textwidth]{../../code/tests/box/RSRPperceived.pdf}
+	\end{minipage}}
+ \hfill 	
+  \subfloat[With respect to LTE vendors, SINR is reported to be approximately from -5 dB to 15 dB. ]{
+	\begin{minipage}[c][0.6\width]{
+	   0.48\textwidth}
+	   \centering
+	   \includegraphics[width=1\textwidth]{../../code/tests/box/SINRperceived.pdf}
+	\end{minipage}}
+\caption{UE reported RSRP and SINR. Ublox and Quectel show similar values, unlike the defined disparity stated in \S\ref{design_sinr}. MTN and Vodacom also show similar values.}
+\end{figure}
+
+#### Extended Coverage Level
+
+\begin{figure}[ht]
+  \subfloat[Bar chart showing ECL distribution.]{
+	\begin{minipage}[t][0.65\width]{
+	   0.48\textwidth}
+	   \centering
+	   \includegraphics[width=1\textwidth]{../../code/tests/box/ecl_bar.pdf}
+	\end{minipage}}
+ \hfill 	
+  \subfloat[Box plot showing ECL distribution is not as informative.]{
+	\begin{minipage}[t][0.65\width]{
+	   0.48\textwidth}
+	   \centering
+	   \includegraphics[width=1\textwidth]{../../code/tests/box/ecl.pdf}
+	\end{minipage}}
+\caption{UE reported ECL.}
+\end{figure}
+
+Visible in Appendix \ref{appendix_plots} we can see how an RF connection will be treated as ECL 0 until approximately -90 dBm. From thence until -110 dBm it will be in ECL 1 and any last bit of link budget can be accessed in ECL 2 until disconnection at most at -130 dBm.
 
 
 #### Transmit Power
@@ -184,7 +216,7 @@ UE reported throughput values under 10 kbps are well under the 250 kbps speeds c
 
 ### Data Overhead
 
-Considering the variance in figure \ref{fig:udpsize}, taking the mean would make for a simpler representation per UDP size. However, a boxplot representation shows the characteristics of the data mroe fully.
+Considering the variance in figure \ref{fig:udpsize}, taking the mean would make for a simpler representation per UDP size as in Appendix \ref{appendix_ue_reported}. However, a boxplot representation shows the characteristics of the data more fully.
 
 \begin{figure}[ht]
   \subfloat[Transmission bytes with at least 50\% of values centered between 100 and 1000 bytes. Nokia extends up to 5000 bytes, or more in outliers.]{
@@ -200,10 +232,8 @@ Considering the variance in figure \ref{fig:udpsize}, taking the mean would make
 	   \centering
 	   \includegraphics[width=1\textwidth]{../../code/tests/box/rxBytes.pdf}
 	\end{minipage}}
-\caption{Byte size distribution of different telemetry tests across different MNOs, LTE Vendors and UE devices. Ublox and Quectel show equal characteristics. MTN leads Vodacom marginally.}
+\caption{Byte size distribution of telemetry test set across different MNOs, LTE Vendors and UE devices with 512 byte limit line (purple). Ublox and Quectel show equal characteristics. MTN leads Vodacom marginally. In general, 25\% of uplink datagrams extend above 512 byte line as well as less than 5\% of downlink datagram outliers. Nokia extends well past the 512 byte limit to a few thousand bytes due to the repetition caused by the ECL mechanism.}
 \end{figure}
-
-
 
 ## Estimations
 
@@ -261,7 +291,7 @@ Considering the variance in figure \ref{fig:udpsize}, taking the mean would make
 
 # Discussion and Recommendations {#discussion}
 
-Fix NW config.
+The study investigated the following metrics and estimations using a set of telemetry tests performed on LTE vendors by UE devices: power efficiency, latency, signal strength, throughput, data overhead, telemetry interval and battery longevity with significant variation observed on all of these. Most clearly visible is how MTN leads Vodacom in results due to Nokia's poor performance. Even so, there still exists a significant degree of variation among LTE vendors which supports the notion that the complexities of network configuration itself do affect quality of service as it is mandatory for LTE vendors to meet 3GPP requirements. More than one UE device was chosen to determine if variation is further exacerbated by type of UE, namely Ublox and Quectel, although these devices return relatively similar results. This shows that the cause of variation lies merely with the LTE vendors and how MNOs have them configured. Power efficiency tests show that devices can last 10 years on an AA battery, especially in strong signal conditions, yet variation increases in ECL 1 and ECL 2 which calls into question the ability of the UE to reach the targeted lifespan. Application developers must take into account the longevity estimate of devices depending on their installation with respect to the nearest serving cell. The telemetry interval estimate, which indicates the periodicity of telemetry messages to last a year on an AA battery can be used to extend battery life prediction depending on the use case. A strong and overlooked use case is a push/pull model which incorporates edge computing. By pushing data only for when complex queries arrive, much battery life is saved due to downlink energy being much less than uplink. This is furthered aided by the eDRX interval 
 
 * how well NB-IoT performs and facilitates these connections for IoT?
 
@@ -303,46 +333,6 @@ Secondly it is 20dBm RSRP less sensitive than MTN’s ZTE infrastructure, which 
 satisfactory performance overall. Since the findings are reflected similarly across the
 Ublox and Quectel UE, it implies that the discrepancies are as a result of the MNO
 vendor.
-
-
-
-# Park {-#park}
-
-* Novice and seasoned adopters of new technology may struggle to find where NB-IoT stands
-
-* https://www.gsma.com/iot/rollout-vodafone/
-
-  * The NB-IoT coverage gain versus GSM is in line with Vodafone’s target, while recent testing activities have also demonstrated excellent network performance, exceeding Vodafone’s expectations: the uplink first transmission success rate is greater than 97%, reaching 99.9% with retransmissions.
-
-    Vodafone is working with multiple chipset and module suppliers to enable testing and trial opportunities, as well as device interoperability testing. It has tested devices from Neul and Qualcomm against Huawei, Ericsson and Nokia systems in multiple regions. All of these vendors’ NB-IoT Radio Access Network technology has been successfully interconnected with Vodafone’s core Internet of Things network.
-
-  * Neul and Qualcomm against Huawei, Ericsson and Nokia systems
-
-  * 1000 BS, Spain
-
-* https://www.vodafone.com/business/news-and-insights/blog/gigabit-thinking/the-art-of-the-possible-5-innovations-at-iot-solutions-world-congress-2018
-
-  * **1. Agriculture: Making sense of farming conditions**
-  * **2. Mobility: Bringing an end to parking pain**
-  * **3. Buildings: Remote surveillance gives peace of mind**
-  * **4. Retail: Digital tags improve product traceability**
-  * **5. Consumer: Connecting people and devices**
-
-* Features
-
-  * MCPTT
-    * Normalized platform for PS [https://www.mcopenplatform.org](https://www.mcopenplatform.org/)
-  * D2D
-  * MBMS
-  * RAN-sharing
-
-* https://enterpriseiotinsights.com/20190506/nb-iot/samsung-kt-launch-nbiot-service-through-ps-lte-network-korea
-
-  * In addition to LTE radio base stations that support 700 MHz, Samsung is providing KT with a virtualized core and the latest features of PS-LTE based on the 3GPP standard. Some of the key features include MCPTT solutions, Radio Access Network sharing, evolved Multimedia Broadcast Multicast Service, Public Network IoT based on NB-IoT, Isolated eUTRAN Operation for Public Safety (IOPS), and device-to-device (D2D) network solutions.
-
-    Samsung highlighted that D2D and NB-IoT play crucial roles in creating public safety network by ensuring stable, seamless, and reliable network in unfavorable environments. For instance, D2D allows direct and undisrupted communications between any two devices without traversing radio base stations or core network even in areas where bases stations are not provided.
-
-* 
 
 \newpage
 

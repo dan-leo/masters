@@ -2066,6 +2066,7 @@ Increasing the range fully and using logarithms in Fig. \ref{fig:energy_sinr_log
 	\label{fig:udpsize2}
 	\end{minipage}}
 \captionof{figure}[UDP Datagram energy-sizes]{UDP Datagram energy-sizes}
+\label(fig:udpsize)
 \end{figure}
 
 Fig. \ref{fig:udpsize1} shows 

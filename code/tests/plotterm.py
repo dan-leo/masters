@@ -43,7 +43,7 @@ def lighten_color(color, amount):
     return colorsys.hls_to_rgb(c[0], 1 - amount * (1 - c[1]), c[2])
 
 
-def plot(mdb, kx, ky, xlabel='', ylabel='', scale=[1,1], invert=[True,False], colour=cc, folder='', K=0, loc='upper right', bbox=(1.05, 1.12)):
+def plot(mdb, kx, ky, xlabel='', ylabel='', scale=[1,1], invert=[True,False], colour=cc, folder='', K=0, en_ECL=True, loc='upper right', bbox=(1.05, 1.12)):
     global hytest, hyuenw, hyatt, hxtest, hxuenw, hxatt, kkx, kky, xxlabel, yylabel, ffolder, outcounts, ally
     outcounts = acounts = oiutcounts = 0
     hytest, hyuenw, hyatt = [], [], []
@@ -87,7 +87,8 @@ def plot(mdb, kx, ky, xlabel='', ylabel='', scale=[1,1], invert=[True,False], co
                                 re = rex * rey
                                 atd[kx] = np.array(atd[kx])[re]
                                 atd[ky] = np.array(atd[ky])[re]
-                                atd['ECL'] = np.array(atd['ECL'])[re]
+                                if en_ECL:
+                                    atd['ECL'] = np.array(atd['ECL'])[re]
                                 atk = {}
                                 if K and len(atd[kx]) and len(atd[ky]) and oi:
                                     # remove duplicates
@@ -103,18 +104,21 @@ def plot(mdb, kx, ky, xlabel='', ylabel='', scale=[1,1], invert=[True,False], co
                                     # print(kmeans.labels_, atk[kx], atk[ky])
                                     # labels_   
                                     a = [[] for i in range(K_len)]
-                                    for e, k in zip(atd['ECL'], kmeans.labels_):
-                                        a[k].append(e)
+                                    if en_ECL:
+                                        for e, k in zip(atd['ECL'], kmeans.labels_):
+                                            a[k].append(e)
                                     for i in range(K_len):
                                         a[i] = int(round(np.mean(a[i]))) if a[i] else a[i]
-                                    for e, vy in zip(a, atk[ky]):
-                                        # vy = vy / 1000 if ui >= 4 else vy
-                                        hecl[e][ti][ui].append(vy/scale[1])
+                                    if en_ECL:
+                                        for e, vy in zip(a, atk[ky]):
+                                            # vy = vy / 1000 if ui >= 4 else vy
+                                            hecl[e][ti][ui].append(vy/scale[1])
                                     # print(hecl)
 
                                 else:
                                     atk[kx], atk[ky] = atd[kx], atd[ky]
-                                    atk['ECL'] = atd['ECL']
+                                    if en_ECL:
+                                        atk['ECL'] = atd['ECL']
 
                                 if oi:
                                     x = atk[kx]/scale[0]
@@ -128,6 +132,7 @@ def plot(mdb, kx, ky, xlabel='', ylabel='', scale=[1,1], invert=[True,False], co
                             except TypeError as e:
                                 print(e, atd[kx])
                         except (KeyError, TypeError) as e:
+                        # except (KeyError) as e:
                             pass
     # mean = [np.mean(m) for m in ally]
     # # f, (ax1, ax2, ax3) = plt.subplots(1, 3, sharey='row')

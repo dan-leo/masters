@@ -490,11 +490,11 @@ A 100 kb file is downloaded at a rate of around 3kB/s. The script continues down
 
 [^yocto]: It's not an embedded solution. Rather, it creates a custom one for you, regardless of hardware architecture [@yocto1].
 
-|        | Uplink              | Downlink            |
-| ------ | ------------------- | ------------------- |
-| GPRS   | 158 kbps or 20 kB/s | 254 kpbs or 31 kB/s |
-| NB-IoT |                     | 24 kbps or 3kB/s    |
-| LTE-M1 |                     |                     |
+|        | Uplink         | Downlink       |
+| ------ | -------------- | -------------- |
+| GPRS   | 158 kbps       | 254 kbps       |
+| NB-IoT | 56 / 65 kbps   | 24 / 27 kbps   |
+| LTE-M1 | 293 / 375 kbps | 264 / 300 kbps |
 
 
 
@@ -1043,6 +1043,7 @@ Increasing the range fully and using logarithms in Fig. \ref{fig:energy_sinr_log
 	\label{fig:udpsize2}
 	\end{minipage}}
 \captionof{figure}[UDP Datagram energy-sizes]{UDP Datagram energy-sizes}
+\label(fig:udpsize)
 \end{figure}
 
 Fig. \ref{fig:udpsize1} shows 
@@ -1456,17 +1457,3 @@ Other plots were more specialized and code was kept within the Jupyter file it w
 ---
 
 Since it appears that ECL is the ultimate factor that should influence latency and energy usage, it is the metric used for battery life estimation as well.
-
-## Notes
-
-> at+natspeed=115200,30,1
-
-> disables LPM. cannot do RSSI triangulation
-
-https://www.etsi.org/deliver/etsi_TS/125100_125199/125133/13.00.00_60/ts_125133v130000p.pdf
-
-> In idle mode, UE shall support DRX cycles lengths 0.64, 1.28, 2.56 and 5.12 s, according to [16] and UE shall, if it
-> supports eDRX_IDLE, support eDRX_IDLE cycle lengths 10.24, 20.48, 40.96, 81.92, 163.84, 327.68, 55.36,1310.72,
-> 1966.08 and 2621.44 seconds, according to TS 24.008 [32]. 
-
-It would be a good idea to use Martinez' work and complement it.

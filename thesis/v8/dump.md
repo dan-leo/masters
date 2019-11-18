@@ -712,3 +712,27 @@ LTE UEs typically use SINR to calculate the CQI (Channel Quality Indicator) they
     Samsung highlighted that D2D and NB-IoT play crucial roles in creating public safety network by ensuring stable, seamless, and reliable network in unfavorable environments. For instance, D2D allows direct and undisrupted communications between any two devices without traversing radio base stations or core network even in areas where bases stations are not provided.
 
 * 
+
+
+
+## Notes
+
+> at+natspeed=115200,30,1
+
+> disables LPM. cannot do RSSI triangulation
+
+https://www.etsi.org/deliver/etsi_TS/125100_125199/125133/13.00.00_60/ts_125133v130000p.pdf
+
+> In idle mode, UE shall support DRX cycles lengths 0.64, 1.28, 2.56 and 5.12 s, according to [16] and UE shall, if it
+> supports eDRX_IDLE, support eDRX_IDLE cycle lengths 10.24, 20.48, 40.96, 81.92, 163.84, 327.68, 55.36,1310.72,
+> 1966.08 and 2621.44 seconds, according to TS 24.008 [32]. 
+
+It would be a good idea to use Martinez' work and complement it.
+
+
+
+
+
+[^background]
+
+[^background]: **history** - from GSM in 90s to 5G NB-IoT. **SA and coverage** - how it "fits" in South Africa and LPWAN sphere. **IoT** - how relevent. **coverage** - ICASA. 3GPP - why they designed it. future. Uncertainty about NB-IoT. standing. uptake. optimal use

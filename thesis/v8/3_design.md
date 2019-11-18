@@ -9,7 +9,7 @@ lof: true
 link-citations: true
 csl: ieee.csl
 linkcolor: blue
-geometry: "left=3cm,right=3cm,top=3cm,bottom=2cm"
+geometry: "left=2.5cm,right=2.5cm,top=2.5cm,bottom=1.8cm"
 numbersections: true
 tablenos-warning-level: 1
 tablenos-number-by-section: true

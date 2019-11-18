@@ -9,7 +9,7 @@ lof: true
 link-citations: true
 csl: ieee.csl
 linkcolor: blue
-geometry: "left=3cm,right=3cm,top=2.5cm,bottom=1.8cm"
+geometry: "left=2.5cm,right=2.5cm,top=2.5cm,bottom=1.8cm"
 numbersections: true
 tablenos-warning-level: 1
 tablenos-number-by-section: true
@@ -176,7 +176,7 @@ SINR was considered over RSSI and RSRQ. RSSI is RSRP with transmit power include
 	   \centering
 	   \includegraphics[width=1\textwidth]{../../code/tests/box/ecl.pdf}
 	\end{minipage}}
-\caption{UE reported ECL.}
+\caption{UE reported ECL. Notably, most of Nokia's dataset lies within ECL 1.}
 \end{figure}
 
 Visible in Appendix \ref{appendix_plots} we can see how an RF connection will be treated as ECL 0 until approximately -90 dBm. From thence until -110 dBm it will be in ECL 1 and any last bit of link budget can be accessed in ECL 2 until disconnection at most at -130 dBm.
@@ -285,23 +285,15 @@ Considering the variance in figure \ref{fig:udpsize}, taking the mean would make
 \caption{Battery longevity estimation sending 16-512 byte packet payloads in ECL 1 network conditions. According to LTE vendor results, UE devices will last a couple of years up to 10 except for Nokia which will only last a few months. Measurements show Quectel is better than Ublox, yet Ublox reports better results than Quectel. MTN leads Vodacom due to Nokia's dismal performance.}
 \end{figure}
 
+## Summary
 
+The study investigated the following metrics and estimations using a set of telemetry tests performed on LTE vendors by UE devices: power efficiency, latency, signal strength, throughput, data overhead, telemetry interval and battery longevity with significant variation observed on all of these. Most clearly visible is how MTN leads Vodacom in results due to Nokia's poor performance. Even so, there still exists a significant degree of variation among LTE vendors which supports the notion that the complexities of network configuration itself do affect quality of service as it is mandatory for LTE vendors to meet 3GPP requirements. More than one UE device was chosen to determine if variation is further exacerbated by type of UE, namely Ublox and Quectel, although these devices return relatively similar results. This shows that the cause of variation lies merely with the LTE vendors and how MNOs have them configured. Power efficiency tests show that devices can last 10 years on an AA battery, especially in strong signal conditions, yet variation increases in ECL 1 and ECL 2 which calls into question the ability of the UE to reach the targeted lifespan. Application developers must take into account the longevity estimate of devices depending on their installation with respect to the nearest serving cell. The telemetry interval estimate, which indicates the periodicity of telemetry messages to last a year on an AA battery, can be used to extend battery life prediction depending on the use case. A strong and overlooked use case is a push/pull model which incorporates edge computing. By pushing data only when complex queries arrive, much battery life is saved due to downlink energy being much less than uplink. This is furthered aided by the configurable eDRX interval which allows UE devices to be paged by the network serving cell(s) it is registered to.
 
 \newpage
 
 # Discussion and Recommendations {#discussion}
 
-The study investigated the following metrics and estimations using a set of telemetry tests performed on LTE vendors by UE devices: power efficiency, latency, signal strength, throughput, data overhead, telemetry interval and battery longevity with significant variation observed on all of these. Most clearly visible is how MTN leads Vodacom in results due to Nokia's poor performance. Even so, there still exists a significant degree of variation among LTE vendors which supports the notion that the complexities of network configuration itself do affect quality of service as it is mandatory for LTE vendors to meet 3GPP requirements. More than one UE device was chosen to determine if variation is further exacerbated by type of UE, namely Ublox and Quectel, although these devices return relatively similar results. This shows that the cause of variation lies merely with the LTE vendors and how MNOs have them configured. Power efficiency tests show that devices can last 10 years on an AA battery, especially in strong signal conditions, yet variation increases in ECL 1 and ECL 2 which calls into question the ability of the UE to reach the targeted lifespan. Application developers must take into account the longevity estimate of devices depending on their installation with respect to the nearest serving cell. The telemetry interval estimate, which indicates the periodicity of telemetry messages to last a year on an AA battery can be used to extend battery life prediction depending on the use case. A strong and overlooked use case is a push/pull model which incorporates edge computing. By pushing data only for when complex queries arrive, much battery life is saved due to downlink energy being much less than uplink. This is furthered aided by the eDRX interval 
 
-* how well NB-IoT performs and facilitates these connections for IoT?
-
-2G/GSM is a sunsetting technology with great coverage and market penetration in SA. It certainly gathers a large share of revenue by calls and SMS.
-
-When looking at SigFox, we see a technology with far range, but data rates that could be considered too low for our application. LoRa has higher data rates, but is still subject to duty cycle limitations. Dash7 is a full-stack medium range wireless technology that overcomes many of the limitations, including the duty cycle by having listen-before-talk and adaptive data rates.
-
-NB-IoT is a very promising technology. It can coexist with 2G/GSM and LTE networks. When comparing to 2G it has 7 times greater range, and in power saving modes time to transmission is a few seconds, compared to about a minute for 2G. There are a few successful use cases for NB-IoT in South Africa, such as smart metering, asset tracking etc.
-
-There are also a couple of hurdles in the way. Although lauded as a mere software upgrade, it does require the latest basestations and licensing fees. There needs to be a substantial revenue model which ties in with demand.
 
 ## Optimal Network Configuration and Setup
 
@@ -313,8 +305,6 @@ Avoid -120 dBm - -130 dBm region
 ## Use Cases
 
 Use cases suitable for NB-IoT considering results
-
-
 
 ## Future Work
 
@@ -333,6 +323,16 @@ Secondly it is 20dBm RSRP less sensitive than MTN’s ZTE infrastructure, which 
 satisfactory performance overall. Since the findings are reflected similarly across the
 Ublox and Quectel UE, it implies that the discrepancies are as a result of the MNO
 vendor.
+
+* how well NB-IoT performs and facilitates these connections for IoT?
+
+2G/GSM is a sunsetting technology with great coverage and market penetration in SA. It certainly gathers a large share of revenue by calls and SMS.
+
+When looking at SigFox, we see a technology with far range, but data rates that could be considered too low for our application. LoRa has higher data rates, but is still subject to duty cycle limitations. Dash7 is a full-stack medium range wireless technology that overcomes many of the limitations, including the duty cycle by having listen-before-talk and adaptive data rates.
+
+NB-IoT is a very promising technology. It can coexist with 2G/GSM and LTE networks. When comparing to 2G it has 7 times greater range, and in power saving modes time to transmission is a few seconds, compared to about a minute for 2G. There are a few successful use cases for NB-IoT in South Africa, such as smart metering, asset tracking etc.
+
+There are also a couple of hurdles in the way. Although lauded as a mere software upgrade, it does require the latest basestations and licensing fees. There needs to be a substantial revenue model which ties in with demand.
 
 \newpage
 

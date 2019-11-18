@@ -9,7 +9,7 @@ lof: true
 link-citations: true
 csl: ieee.csl
 linkcolor: blue
-geometry: "left=3cm,right=3cm,top=3cm,bottom=2cm"
+geometry: "left=2.5cm,right=2.5cm,top=2.5cm,bottom=1.8cm"
 numbersections: true
 tablenos-warning-level: 1
 tablenos-number-by-section: true
@@ -54,7 +54,9 @@ Looking at Gartner's analysis of technology expectations with regards to NB-IoT 
 
 [](../images/hype-cycle-2014-100371840-large.idge.jpeg)
 
-![Gartner's 2018 Hype Cycle for ICT in Africa. NB-IoT is high on the list of expectations. http://www.gartner.com/newsroom/id/3884512 \label{fig:gartner_ictAfrica}](../images/42881085945_739bbdc8e9_c.jpg){ width=90% }
+![Gartner's 201
+
+8 Hype Cycle for ICT in Africa. NB-IoT is high on the list of expectations. http://www.gartner.com/newsroom/id/3884512 \label{fig:gartner_ictAfrica}](../images/42881085945_739bbdc8e9_c.jpg){ width=90% }
 
 As of August 2019, Gartner has high expectations for 5G and other emerging technologies which can make use of what [IoT has to offer](https://blogs.sas.com/content/hiddeninsights/2016/07/06/long-live-the-iot-hype/). This can be seen in Fig. \ref{fig:gartner_emergingTech}.
 

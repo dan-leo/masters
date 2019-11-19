@@ -293,7 +293,7 @@ The study investigated the following metrics and estimations using a set of tele
 
 # Discussion and Recommendations {#discussion}
 
-
+Seeing that LTE Cat-M is on a par with NB-IoT, if not better in \S\ref{lit_standing}, it would be wise to consider LTE Cat-M for national coverage in South Africa in future.
 
 ## Optimal Network Configuration and Setup
 

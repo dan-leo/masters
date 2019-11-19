@@ -54,9 +54,7 @@ Looking at Gartner's analysis of technology expectations with regards to NB-IoT 
 
 [](../images/hype-cycle-2014-100371840-large.idge.jpeg)
 
-![Gartner's 201
-
-8 Hype Cycle for ICT in Africa. NB-IoT is high on the list of expectations. http://www.gartner.com/newsroom/id/3884512 \label{fig:gartner_ictAfrica}](../images/42881085945_739bbdc8e9_c.jpg){ width=90% }
+![Gartner's [2018 Hype Cycle for ICT in Africa](http://www.gartner.com/newsroom/id/3884512). NB-IoT is high on the list of expectations. \label{fig:gartner_ictAfrica}](../images/42881085945_739bbdc8e9_c.jpg){ width=90% }
 
 As of August 2019, Gartner has high expectations for 5G and other emerging technologies which can make use of what [IoT has to offer](https://blogs.sas.com/content/hiddeninsights/2016/07/06/long-live-the-iot-hype/). This can be seen in Fig. \ref{fig:gartner_emergingTech}.
 
@@ -194,7 +192,7 @@ Table: Brief comparison of NB-IoT against wireless LPWANs {#tbl:lpwan_comparison
 | Average Power           | 550 uWh      | 15-66 uWh         | 144 uWh  | -                 |
 | Range                   | 2.5 - 5 km   | 5km (85% PDR)     | 3-10 km  | 2 km              |
 
-Table: Brief comparison of NB-IoT against cellular technologies {#tbl:cellular_comparison}
+Table: Brief comparison of NB-IoT against cellular technologies [@Finnegan2018] {#tbl:cellular_comparison}
 
 |                  | NB-IoT       | 2G/GSM/GPRS  | EC-GSM-IoT[^ec_gsm_available] | LTE Cat-M    |
 | ---------------- | ------------ | ------------ | ----------------------------- | ------------ |
@@ -226,9 +224,7 @@ Competition in the LPWAN space, regional momentum and IoT demand will ensure tha
 
 Selected uptake of LPWANs is expected in specific use cases and results show that each technology is better suited to specific applications and their accompanying requirements. Sigfox, NB-IoT, and LoraWAN SF12 performed equally well for applications where MCL (range) is paramount, with LoraWAN SF7 doing slightly worse. In applications where the main consideration is scalability, Sigfox, and NB-IoT substantially outperformed the LoraWAN varieties. However, if battery life is the most important consideration, LoraWAN SF7 seems to have the edge, with NB-IoT performing worse. NB-IoT performed the best for uplink throughput, with LoraWAN SF7 coming in second. For the downlink throughput and firmware upgradability metric, NB-IoT performs substantially better than the other technologies. All in all, NB-IoT outperforms SigFox and LoRaWAN in UL/DL throughput, scalability, MCL range and FoTA updates. It is superseded by LoRaWAN in battery life for SF7. If NB-IoT worked with the mobile network operators to reduce its RRC-idle phase, it could develop a minimal power consumption to compare with that of LoRaWAN and Sigfox [@Thomas2018]. By finding ways to increase battery life, it may just be the 'silver bullet' for all IoT use cases.
 
-*Todo: add 'A Comparative Survey of LPWA Networking' [@Finnegan2018]*
-
-[^catm_nbiot]: Todo: find the reference.
+In places requiring deep indoor penetration with 30 dBm path loss, NB-IoT performs well with 8\% outage, while SigFox, LoRaWAN, GPRS are unable to cover 13\%, 20\% and 60\% of locations, respectively, in a 7800 km\textsuperscript{2} area simulated by Lauridsen [@Lauridsen2017]..
 
 
 ## Use Cases {#usecases}
@@ -313,7 +309,7 @@ Low Power Wide Area Networks (LPWANs) include SigFox, LoRaWAN, NB-IoT, Dash7, We
 Low Power Local Area Networks (LPLANs) include BLE, 6LoPAN, Thread, ZigBee, WiFi and others. 
 Unfortunately, due to country regulations the output power is limited especially for unlicensed frequencies. They may not even be suited for long range on the PHY layer, but they can essentially be considered indoor technologies with ranges of 10-100m [@Lee2007].
 
-Cellular-IoT includes LTE Cat-M, LTE Cat-NB or NB-IoT and EC-GSM-IoT. GSM has high battery usage due to constant synchronization in active mode, and un-optimized transmission of data. It is generally not considered in this thesis because it is a sunsetting technology. LTE-M is also considered a high-power technology and is not as suited for IoT as NB-IoT is [@EricssonAB2016a], although there is evidence that it is quite similar [^catm_nbiot].
+Cellular-IoT includes LTE Cat-M, LTE Cat-NB or NB-IoT and EC-GSM-IoT. GSM has high battery usage due to constant synchronization in active mode, and un-optimized transmission of data. It is generally not considered in this thesis because it is a sunsetting technology. LTE-M is also considered a high-power technology and is not as suited for IoT as NB-IoT is [@EricssonAB2016a], although there is evidence that it is quite similar [@realDiffs2016].  Maximum coupling loss (MCL), discussed more in \S\ref{lit_mcl}, is defined in different scenarios (3GPP 36.888, RP-150492 and 45.820 7A) giving NB-IoT a significant 8 dBm edge over LTE Cat-M, at 164 dBm. By using the same  assumptions, LTE Cat-M actually performs slightly better. In terms of power, LTE Cat-M uses 50% less power, except for deep penetration cases where NB-IoT's uplink fares better (LTE Cat-M will match this in Release 14). Finally, in terms of cost, NB-IoT is only marginally cheaper than LTE Cat-M by < 2\% [@realDiffs2016].
 
 Martinez [@Martinez2019] has explored NB-IoT from the perspective of the application developer. When evaluating performance, it would do well to find the limits of the technology as well as find the optimum 'sweet spot' or range for efficient operation. This decent study on the operational trade-offs of NB-IoT over LTE proves NB-IoT to be competitive in terms of energy consumption amongst other LPWANs. Although there are many complexities such as signalling, dynamic adjustments triggered by network conditions and  timings, its competitive energy consumption is due to 3GPP efforts to match LPWANs. By using proprietary spectrum over unlicensed ISM bands, NB-IoT avoids external interference and mandatory duty cycling. Even though employing increased repeatability due to the ECL mechanism increases unpredictability in device behavior, it ensures reliability by guaranteeing delivery unless outside the maximum range or signal strength bounds that a device can communicate with a tower. This variability in delivery time can be a deal-breaker for some critical applications, but on the whole it is suitable for delay-tolerant applications, and under 10 seconds will cater for most use cases. The ownership model is a connectivity service or contract, and is charged per byte. Coverage depends on deployed infrastructure.
 
@@ -329,8 +325,6 @@ Although most users interact only with the UE device which runs its own propriet
 
 The complexities of LTE architecture further increases the chance of performance degradation with respect to 3GPP specifications due to the vast array of setup parameters. It would be beneficial to analyze the performance of multiple UE devices against various MNO vendors. It is important to note that MNOs may use various vendors in their architecture, and thus this study is mainly focused on the eNodeB vendor which is also UE device facing and has the greatest chance of performance degradation due network quality, RF interference and so forth.
 
-Both UDP socket commands and datagram commands use the IP data transport through the SGi.
-
 ### UE Device Hardware {#lit_hardware}
 
 This subsection looks at hardware specific to the UE device.
@@ -341,84 +335,27 @@ This subsection looks at hardware specific to the UE device.
 
 ![Current usage decreases depending on eDRX power saving configuration. In this case, it is the SimCom 7020E modem.](../images/image-20191106012315421.png){width=60%}
 
-![Current usage across different LTE bands](../images/image-20191106005828336.png){width=100%}
+![Current usage across different LTE bands \label{fig:current_band}](../images/image-20191106005828336.png){width=100%}
 
-![Current versus transmit power for NB-IoT modems](../images/image-20191106012023102.png)
+![Current versus transmit power for NB-IoT modems \label{fig:current_txpower}](../images/image-20191106012023102.png)
 
-### Setup Procedure {#lit_setup}
+As seen in Figure \ref{fig:current_band}, \ref{fig:current_txpower}, Ublox and Quectel share similar traits, unlike Nordic and SimCom. Since Ublox and Quectel share similar traits, it is suitable for a comparison of LTE vendors.
 
-* There exist application development manuals.
-* AT+NCONFIG
-  * AUTOCONNECT
-  * CR_0859_SI_AVOID
-  * CR_0354_0338_SCRAMBLING
-* URCs
-* APN
+### Network Registration, RRC Connection and Inactivity Timer {#rrc_inactivity}
 
-### Network Registration and Info {#nw_reg_info}
+By default, NB-IoT modules usually try to register with the network defined by the current SIM card in the UE device at the time, and use the default APN from the network. During the registration process, an RRC connection is made to the base station. If the IMEI and IMSI of the module is not allowed on the network, the module will disconnect. This can be seen after the "1" then "0" response of the `+CSCON` AT command URC (provides signalling connection status) without `+CEREG` (network registration status) showing a "1" (registered) or "5" (registered and roaming), which means the module was not able to register on the network. It will also contain an EMM reject cause value, with more information in 3GPP TS 24.301. See [@ubloxAppNote2018] for a connection status compatibility matrix.
 
-- By default the SARA-N2 series modules will automatically try and connect to the network. This
-  feature will read the SIM for the PLMN and attempt to register with the network. The device will use
-  the default APN from the network. The auto-connect feature can be enabled by the +NCONFIG AT
-  command. Reset the module to save these settings to the non-volatile memory.
-- If the application requires more control over the registration process set the SARA-N2 series
-  modules into the manual registration mode. With the auto-connect feature turned off the module is
-  able to manually connect to a specific PLMN and specify an APN.
-- After a RRC connection is made to the base station the module will try and register with the
-  network. If the module IMEI or IMSI is not allowed on the network, the module will disconnect from
-  that base station and continue scanning for other base stations. This can be seen if the <mode>
-  parameter of the +CSCON AT command shows the “1” and then “0” response without +CEREG
-  changing to 1 or 5 means that the module was not able to register on that network.
-  In case the module is registered to the network, the <status> parameter of the +CEREG AT
-  command will be 1 (registered) or 5 (registered & roaming).
-- See [@ubloxAppNote2018]] for a connection status compatibility matrix.
+At the first registration or when the module wakes from the power save mode (PSM), it performs a
+Random Access CHannel (RACH) procedure to attach to the base station. This establishes a Radio
+Resource Control (RRC) connection to the base station. Once established only the base station can
+release this connection. The module cannot drop the RRC connection other than turning off the
+radio using the AT+CFUN=0 command.
 
-* PCI value is assigned.
-
-The **PCI** value is created from two components - PSS and SSS. The PSS, Primary Synchronization Signal, has the value 0, 1, or 2. The SSS, Secondary Synchronization Signal, can have a value between 0 and 167.
-
-### RRC Connection and Inactivity Timer {#rrc_inactivity}
-
-After network registration or transmitting a data packet, the device usually enters RRC connected (C-DRX) mode for a specified inactivity timeout specified by the network.
-
-- When the module is in RRC connected mode it will be receiving all the base station signaling. The
-  average power consumed in this mode is about 48 mA. If the RRC connection is left for 20 s of
-  inactivity before the RRC is released, then this will consume about 1 mWh @ 3.6V.
-- 48 mA in this mode
-- 20 seconds is about 1mWh @ 3.6V
-- AT+CSCON
-- After a short period, if no messages are being sent from the module, the +CSCON response will be
-  “0” to show the RRC connection has been released by the eNodeB.
-- At the first registration or when the module wakes from the power save mode (PSM), it performs a
-  Random Access CHannel (RACH) procedure to attach to the base station. This establishes a Radio
-  Resource Control (RRC) connection to the base station. Once established only the base station can
-  release this connection. The module cannot drop the RRC connection other than turning off the
-  radio using the AT+CFUN=0 command.
-- The base station has an “inactivity” timer for each module and if there is no activity the base station
-  will send a RRC release message to the module. The module should respond back to the base station
-  with an acknowledgment. The inactivity timer is nominally 20 s.
-- The module will be able to receive and send messages immediately when in connected mode.
-- During a RRC connection, the +CSCON AT command provide the signalling connection status. It is
-  also possible to enable the +CSCON URC.
-- When a MO message is sent from the module, the module must first create a RRC connection if
-  there is not already established with the base station. This status can be checked using the
-  AT+CSCON command.
-  To check the signalling connection status issue the +CSCON read command. The second parameter
-  of the information text response (+CSCON: <n>,<state>) provides the interested information:
-  * 0: idle mode (no RRC connection)
-  * 1: connected mode (RRC connection)
-- To configure a URC for this command, issue the AT+CSCON=1 command. A URC will be issued at
-  each RRC connection status change. 
+After network registration or transmission of a data packet, the device usually enters RRC connected (C-DRX) for a network-specified `inactivity timeout` and receives all the base station (BTS) signalling. Sending and receiving messages in this mode is immediate, otherwise with no activity average power is typically ~50mA. If the RRC connection is left for 20 s of inactivity before the RRC is released, then this will consume about 1 mWh @ 3.6V. At the end of this period, if no messages are being transmitted from the module, the +CSCON response will be “0” to show the RRC connection has been released by the eNodeB.
 
 ### Release Assistance {#release_a}
 
-Release assistance requests the eNodeB to release the RRC connection immediately. By avoiding 20 seconds of idle RRC in C-DRX mode, there is a 93% improvement in power consumption for a 200 byte transmission in ECL 1.
-
-[@ubloxAppNote2018]
-
-An example of sending a 200 byte message in ECL 2 with good SNR can include 5 RACH transmission bursts, a Transmission Block Size ~43 bytes, one repetition and taking just over 1 second, consuming 200uWh.
-
-For the same example in bad SNR, the TBS allocated 32 bytes per chunk, with a repetition of 8 and 4. It took 5.5 seconds and consumed 1.07mWh -- fives times as much as before.
+Release assistance requests the eNodeB to release the RRC connection immediately. By avoiding 20 seconds of idle RRC in C-DRX mode, there is a 93% improvement in power consumption for a 200 byte transmission in ECL 1 [@ubloxAppNote2018].
 
 - Some applications may not want to wait for the base station’s inactivity timer to expire after 20 s as
   this wastes power from the battery. In Release-13 the “Release Assistance” feature allows the
@@ -516,7 +453,8 @@ The UE device is to a large extent/entirely controlled by the network/eNodeB. UE
   transmitting data and therefore fundamentally consumes more power than it would in the other
   coverage classes.
 
-* 
+
+An example of sending a 200 byte message in ECL 2 with good SNR can include 5 RACH transmission bursts, a Transmission Block Size ~43 bytes, one repetition and taking just over 1 second, consuming 200uWh. For the same example in bad SNR, the TBS allocated 32 bytes per chunk, with a repetition of 8 and 4. It took 5.5 seconds and consumed 1.07mWh -- fives times as much as before.
 
 ### UE Device and Network Behavior
 
@@ -625,6 +563,10 @@ When only a fraction of the existing LTE cell sites support NB-IoT, devices cann
 In the uplink, there are two physical layer channels. The random access channel connects to the base station and the uplink channel contains the data and control information. In downlink there are four channels. Synchronization is used by the endpoint to estimate symbol timing and carrier frequency and obtain the cell identity and frame boundary. The broadcast channel contains the master information block (MIB). The control channel carries downlink control information and can be repeated 2048 times, as well as the data channel which contains the payload, paging, system information and the random access response. [@Adhikary2016].
 
 NB-IoT operation requires a minimum bandwidth of 180 kHz, which is equal to the size of the smallest LTE Physical Resource Block (PRB). Depending on the availability of spectrum, NB-IoT can be either deployed on its own (“standalone operation”), in the guard carriers of existing LTE/UMTS spectrum (“guardband operation”) or within an existing LTE carrier by replacing one or more PRBs (“inband operation”). In order to support such flexible deployment scenarios, NB- IoT reuses the LTE design extensively, such as the OFDM (Orthogonal Frequency Division Multiplexing) type of modulation in downlink, SC-FDMA (Single Carrier Frequency Division Multiple Access) in uplink, channel coding, rate matching and interleaving. In addition, a host of new features are added to ensure the demands of IoT based applications. Key design changes from LTE include the synchronization sequences, the random access preamble, the broadcast channel and the control channel. These changes are primarily motivated by the fact that NB-IoT is required to operate on a minimum bandwidth of 180 kHz (1 PRB), whereas many channels in LTE were designed to span multiple PRBs occupying greater bandwidth compared to 180 kHz. These design changes achieve the IoT requirements while ensuring best co-existence performance with the existing LTE system [@Adhikary2016].
+
+#### MCL {#lit_mcl}
+
+Maximum coupling loss (MCL) is defined as the maximal total channel loss between User Equipment (UE) and eNodeB (eNB) antenna ports at which the data service can still be delivered. Practically, it includes antenna gains, path loss, shadowing and any other impairments. The higher the MCL, the more robust the link is. 
 
 ## Summary
 

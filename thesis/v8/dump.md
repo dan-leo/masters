@@ -736,3 +736,15 @@ It would be a good idea to use Martinez' work and complement it.
 [^background]
 
 [^background]: **history** - from GSM in 90s to 5G NB-IoT. **SA and coverage** - how it "fits" in South Africa and LPWAN sphere. **IoT** - how relevent. **coverage** - ICASA. 3GPP - why they designed it. future. Uncertainty about NB-IoT. standing. uptake. optimal use
+
+
+
+### Setup Procedure {#lit_setup}
+
+* There exist application development manuals.
+* AT+NCONFIG
+  * AUTOCONNECT
+  * CR_0859_SI_AVOID
+  * CR_0354_0338_SCRAMBLING
+* URCs
+* APN

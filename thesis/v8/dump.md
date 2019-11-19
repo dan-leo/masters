@@ -731,6 +731,22 @@ It would be a good idea to use Martinez' work and complement it.
 
 
 
+## Notes
+
+**MTN Lab / 14th Ave Phase 3: Test Plant**
+
+NB-IoT PoC MTN South Africa (Ericsson RAN Connectivity Tests only) [@Ssengonzi2017]
+
+Industrial north Drive Test Requirements [@NorthDrive2017]
+
+**Stellenbosch**
+
+Evaluation of next-generation low-power communication technologies to replace GSM in IoT-applications [@Thomas2018]
+
+**Manufacturers**
+
+Ublox has an NB-IoT Application Development Guide [@ubloxAppNote2018] which details many of the capabilities of the UE.
+
 
 
 [^background]
@@ -748,3 +764,12 @@ It would be a good idea to use Martinez' work and complement it.
   * CR_0354_0338_SCRAMBLING
 * URCs
 * APN
+
+
+
+
+
+
+
+
+

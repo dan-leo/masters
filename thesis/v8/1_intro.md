@@ -146,6 +146,7 @@ All rights reserved.
 | **LTE Cat-NB1/2** | Long Term Evolution Narrow-Band Category 1/2 |
 | **MCL** | Maximum Coupling Link |
 | **MCS** | Message Coding Scheme |
+| **MME** | Mobile Management Entity |
 | **MNO** | Mobile Network Operator |
 | **MO** | Mobile Originated |
 | **MO** | Managed Object |
@@ -299,7 +300,10 @@ The capture method should be easily repeatable and expandable for new UE devices
 
 This section looks at how user equipment (UE devices in \S\ref{ue_devices}) is compared against multiple LTE vendors (\S\ref{lte-vendors}) operated by mobile network operators (MNOs in \S\ref{MNOs}) which expose the change in variability due to proprietary LTE complexities. These comparisons are made according to a set of metrics, estimations (\S\ref{metrics_est}) and telemetry tests (\S\ref{telemetry_tests}).
 
-### MNOs: MTN and Vodacom {#MNOs}
+\hypertarget{MNOs}{%
+\subsubsection[MNOs: MTN and Vodacom]{Mobile Network Operators}\label{MNOs}}
+
+<!--### MNOs: MTN and Vodacom {#MNOs}-->
 
 The following MNOs have NB-IoT coverage in South Africa which will be expanded upon in \S\ref{coverage}, namely MTN and Vodacom. NB-IoT uses their LTE infrastructure, and this will be expanded upon in \S\ref{lte-vendors}.
 
@@ -307,7 +311,11 @@ MTN Group Limited, formerly M-Cell, is a South African multinational mobile tele
 
 Vodacom Group Limited is a South African mobile communications company, providing voice, messaging, data and converged services to over 55 million customers part of the international Vodafone Group.
 
-### LTE Vendors: ZTE, Nokia, Ericsson, Huawei {#lte-vendors}
+\hypertarget{lte-vendors}{%
+\subsubsection[LTE Vendors: ZTE, Nokia, Ericsson,
+Huawei]{Long Term Evolution (LTE) Vendors}\label{lte-vendors}}
+
+<!--### LTE Vendors: ZTE, Nokia, Ericsson, Huawei {#lte-vendors}-->
 
 Table \ref{tbl:telemetry_ue_lte} gives the following LTE vendors which are among the top 5 in the world: Huawei, Ericsson, Nokia and ZTE. Since there are over a hundred MNOs across the world which also use these LTE vendors, performing this study on the main LTE vendors will also benefit the MNOs. With regard to NB-IoT connectivity on MNOs in South Africa, MTN will be used for ZTE and Ericsson, and Vodacom will be used for Nokia and Huawei.
 
@@ -333,9 +341,11 @@ Other vendors include: Broadcom Corporation, Cisco Systems, Gemalto NV, Intel Co
 
  ![Top LTE vendors in the world showing VoIP and IMS equipment revenue share worldwide in 2017. \textcopyright{Statista, IHS Markit}](../images/chartoftheday_17097_voip_worldwide_revenue_n-1572347674712.jpg){width=80%}
 
+\hypertarget{ue_devices}{%
+\subsubsection[UE Device Manufacturers: Ublox, Quectel, Nordic,
+SimCom]{UE Device Manufacturers}\label{ue_devices}}
 
-
-### UE Device Manufacturers: Ublox, Quectel, Nordic, SimCom {#ue_devices}
+<!--### UE Device Manufacturers: Ublox, Quectel, Nordic, SimCom {#ue_devices}-->
 
 Finally, with regard to the UE devices in \ref{tbl:telemetry_ue_lte}, application developers are likely to use more popular NB-IoT module manufacturers such as Ublox, Quectel, Nordic and SimCom, besides lesser known ones such as Telit, Sierra Wireless, Gemalto, and akorIoT. 
 
@@ -360,13 +370,21 @@ These UEs all share AT commands as the API to control their capabilities.
 * Nordic Semiconductor is a fabless semiconductor company. The company specializes in ultra-low power performance wireless system on a chip and connectivity devices for the 2.4 GHz ISM band, with power consumption and cost being the main focus areas.
 * **SIMCom Wireless Solutions** is a subsidiary of SIM Technology Group Ltd. It is a fast-growing wireless M2M company, designing and offering a variety of wireless modules based on GSM/GPRS/EDGE,WCDMA/HSDPA and TD-SCDMA technical platforms.
 
-### Metrics and Estimations: Power, Latency, Secondary and Interval, Longevity {#metrics_est}
+\hypertarget{metrics_est}{%
+\subsubsection[Metrics and Estimations: Power, Latency, Secondary and
+Interval, Longevity]{Metrics and Estimations}\label{metrics_est}}
+
+<!--### Metrics and Estimations: Power, Latency, Secondary and Interval, Longevity {#metrics_est}-->
 
 Considering metrics and estimations in Table  \ref{tbl:metric_summary} above, a more comprehensive study has been performed on throughput, packet delivery ratio (PDR), maximum coupling link (MCL) and scalability by Durand [@Durand2019]. Martinez has investigated the performance boundaries of NB-IoT for a Vodafone network in Barcelona, Spain [@Martinez2019] including metrics such as energy consumption, transmission delay, enhanced coverage levels (ECLs) and different data sizes. Because power efficiency and latency is significantly affected by variability, important considerations have to be made in application development and thus it is of the main metrics this study is focused on. Between UE devices and LTE basestations (BTS) both signal strength (RSRP) and coverage enhancement levels (ECL) can be causes of variability. 
 
 In terms of estimations, variability affects battery lifetime and telemetry interval amongst others. Battery lifetime is defined as the length of time a device will last on an AA battery in years. Telemetry interval is defined as the periodicity time between different types of messages to last a year on an AA battery. These two estimations are necessary for developers to consider in battery-powered applications and form an important basis for this study.
 
-### Telemetry Tests: UDP, Echo, COPS, eDRX, PTAU {#telemetry_tests}
+\hypertarget{telemetry_tests}{%
+\subsubsection[Telemetry Tests: UDP, Echo, COPS, eDRX,
+PTAU]{Telemetry Tests}\label{telemetry_tests}}
+
+<!--### Telemetry Tests: UDP, Echo, COPS, eDRX, PTAU {#telemetry_tests}-->
 
 The different types of telemetry messages in Table \ref{tbl:telemetry_ue_lte} include UDP datagram transmission, cellular operator selection (COPS), UDP Echo, extended discontinuous reception (eDRX) and periodic tracking area updates (PTAU). UE devices usually give the option of using the following main data transmission protocols: UDP, TCP, CoAP and MQTT. UDP is a connectionless protocol used for low latency applications and TCP is used to stream data orderly, reliably, but at a cost to data overhead.  CoAP and MQTT are lightweight message transfer protocols based off of UDP and TCP respectively. To measure the data overhead secondary metric caused by network repetitions and other mechanisms, it would be preferable to avoid overhead from other protocols and thus the simplest option is chosen, namely UDP. 
 

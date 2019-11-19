@@ -1,5 +1,5 @@
 ---
-title: LTE Cat-NB (Narrowband) Performance Evaluation
+1 1 0 value is incremented in multiples of 320 hours (Note 1)title: LTE Cat-NB (Narrowband) Performance Evaluation
 author: Daniel Robinson
 date: Stellenbosch University, November 2019
 tags: [LTE, NB-IoT]
@@ -317,13 +317,22 @@ A user would consider critical characteristics such as energy consumption, cover
 
 In future NB-IoT will have the capability of D2D communications as outlined in 3GPP future release specifications.
 
-### LTE Architecture
+\hypertarget{lte-architecture}{%
+\subsubsection[LTE Architecture and SIBs]{LTE Architecture}\label{lte-architecture}}
+
+### <!--### LTE Architecture-->
 
 Although most users interact only with the UE device which runs its own proprietary firmware stack, NB-IoT also has a complex backend architecture.
 
 ![LTE_classic_architecture](../images/LTE_classic_architecture.png)
 
 The complexities of LTE architecture further increases the chance of performance degradation with respect to 3GPP specifications due to the vast array of setup parameters. It would be beneficial to analyze the performance of multiple UE devices against various MNO vendors. It is important to note that MNOs may use various vendors in their architecture, and thus this study is mainly focused on the eNodeB vendor which is also UE device facing and has the greatest chance of performance degradation due network quality, RF interference and so forth.
+
+#### System Information Blocks (SIBs) {#sib}
+
+System Information Blocks define configurations for UE device to follow, such as the method of attachment and number of transmission repetitions. Once an RRC connection is made, the eNodeB uses the perceived SNR to allocate uplink throughput the UE device can use to transmit messages. Because of dynamic allocation, predicting power consumption of a single message in the field is difficult. Example SIBs can be found in Appendix \ref{appendix_sibs}.
+
+Since UE devices must follow NW settings broadcast inside the SIB, the UE device is to a large extent controlled by the network/eNodeB.
 
 ### UE Device Hardware {#lit_hardware}
 
@@ -353,110 +362,88 @@ radio using the AT+CFUN=0 command.
 
 After network registration or transmission of a data packet, the device usually enters RRC connected (C-DRX) for a network-specified `inactivity timeout` and receives all the base station (BTS) signalling. Sending and receiving messages in this mode is immediate, otherwise with no activity average power is typically ~50mA. If the RRC connection is left for 20 s of inactivity before the RRC is released, then this will consume about 1 mWh @ 3.6V. At the end of this period, if no messages are being transmitted from the module, the +CSCON response will be “0” to show the RRC connection has been released by the eNodeB.
 
-### Release Assistance {#release_a}
+\hypertarget{power-saving-mechanisms-t3324-active-t3412-ptau-edrx-ptw-release-a}{%
+\subsubsection[Power-Saving Mechanisms: T3324 Active, T3412 PTAU, eDRX,
+PTW,
+Release-A]{Power-Saving Mechanisms}\label{power-saving-mechanisms-t3324-active-t3412-ptau-edrx-ptw-release-a}}
 
-Release assistance requests the eNodeB to release the RRC connection immediately. By avoiding 20 seconds of idle RRC in C-DRX mode, there is a 93% improvement in power consumption for a 200 byte transmission in ECL 1 [@ubloxAppNote2018].
+### <!--### Power-Saving Mechanisms: T3324 Active, T3412 PTAU, eDRX, PTW, Release-A-->
 
-- Some applications may not want to wait for the base station’s inactivity timer to expire after 20 s as
-  this wastes power from the battery. In Release-13 the “Release Assistance” feature allows the
-  module to request for the RRC connection to be dropped as soon as the message has been received
-  by the network.
-- The flag is noticed by the MME on the network and sends a message back to the eNodeB base
-  station to drop the RRC connection. The network must support Release Assistance for this feature.
-- After the RRC connection has been released the module then goes in to a period where it could be
-  paging the base station. The timer for this period is called T3324. After T3324 has expired the
-  module goes into Power Save Mode (PSM). See section 11 for further information
+NB-IoT allows for various power saving mechanisms design to prolong the lifetime of battery-powered devices. Except for release assistance, the module automatically enters the different states depending on defined configuration. Release assistance, as explained in \S\ref{release_a}, terminates the network defined `inactivty timer` such that it enters into the states shown in Fig. \ref{fig:power_saving_mechanisms}.
 
+![Power Saving Mechanisms \label{fig:power_saving_mechanisms}](C:\Users\d7rob\AppData\Roaming\Typora\typora-user-images\1555540836196.png){width=80%}
 
+It is recommended to order the network configuration values of the following from smallest to largest for proper operation:
 
-### Power Saving Mechanisms
-
-The NB-IoT protocol allows for power save mode (PSM), and the SARA-N2 series modules also
-support a Deep Sleep mode where the module is running at very low current, ~3 $uA$. The module
-automatically enters various states depending on the device activity. Here below are listed the
-common activities and the various states it will be in after registration.
-
-* T3324 / T3412 timer values
-
-#### T3412 PTAU Timer
-
-* (GPRS timer 3)
-*  3GPP TS 24.008 [4], figure 10.5.147a and table 10.5.163a.
-
-* Bits 5 to 1 represent the binary coded timer value. Bits 6 to 8 define the timer value unit for the GPRS
-  timer as follows
-* 8 7 6
-  0 0 0 value is incremented in multiples of 10 minutes
-  0 0 1 value is incremented in multiples of 1 hour
-  0 1 0 value is incremented in multiples of 10 hours
-  0 1 1 value is incremented in multiples of 2 seconds
-  1 0 0 value is incremented in multiples of 30 seconds
-  1 0 1 value is incremented in multiples of 1 minute
-  1 1 0 value is incremented in multiples of 320 hours (Note 1)
-  1 1 1 value indicates that the timer is deactivated (Note 2)
-* Example: "01000111" = 7 x10 hours = 70 hours
-* NOTE 1: This timer value unit is only applicable to the T3312 extended value IE and the T3412
-  extended value IE (see 3GPP TS 24.301 [5]). If it is received in an integrity protected message, the
-  value shall be interpreted as multiples of 320 hours. Otherwise the value shall be interpreted as
-  multiples of 1 hour.
-* NOTE 2: This timer value unit is not applicable to the T3412 extended value IE. If this timer value
-  is received, the T3412 extended value IE shall be considered as not included in the message (see
-  3GPP TS 24.301 [5]).
+1. Paging Time Window (PTW)
+2. eDRX cycle value
+3. T3324 Active Timer
+4. T3412 PTAU Timer
 
 #### T3324 Active Timer
 
-* The T3324 Timer is reset after a downlink message is received. The negative impact on energy savings should be taken into account if downlink data is fragmented.
-* the Active Timer (T3324) controls the time lapse during which the UE device is reachable by the network in RRC Idle, i.e., the number of eDRX cycles.
+The T3324 Active Timer controls the time period during which the UE device can be paged by the network in RRC Idle, and the number of eDRX cycles. The inactivity and active timer is reset after a downlink message is received. Fragmented downlink data has a negative impact on energy savings which should be taken into account.
 
-* Bits 5 to 1 represent the binary coded timer value. Bits 6 to 8 define the timer value unit for the GPRS
-  timer as follows
-* 8 7 6
-  0 0 0 value is incremented in multiples of 2 seconds
-  0 0 1 value is incremented in multiples of 1 minute
-  0 1 0 value is incremented in multiples of deci-hours
-  1 1 1 value indicates that the timer is deactivated
-* Example: "00100100" = 4 x1 minute = 4 minutes
+Table: Configuring the T3324 Active Timer. Bits 5 to 1 represent the binary coded timer value. Bits 6 to 8 define the timer value unit for the Active timer as follows. See more in 3GPP TS 24.008 [4], figure 10.5.147a and table 10.5.163a.
+
+| 8 7 6 | Description                                     |
+| ----- | ----------------------------------------------- |
+| 0 0 0 | value is incremented in multiples of 2 seconds  |
+| 0 0 1 | value is incremented in multiples of 1 minute   |
+| 0 1 0 | value is incremented in multiples of deci-hours |
+| 1 1 1 | value indicates that the timer is deactivated   |
+
+* Example: "001 00101" = 5 x 1 minute = 5 minutes
+
+#### T3412 PTAU Timer
+
+During the RRC-connected phase (C-DRX), the eNodeB knows exactly in which cell/sector/antenna the UE device is on a relatively precise level. Outside of this it assigns a tracking area code (TAC) and broadcasts to all UEs in the area with the aim to wake it up if there is an incoming message. This is especially useful if the devices is semi-mobile and moves to a different area. The periodic tracking area update timer (PTAU) updates the network and UE devices with the tracking area that the residing device is currently connected at the end of the power saving mode (PSM) as in fig. \ref{fig:power_saving_mechanisms}.
+
+Table: Configuring the T3412 PTAU Timer. Bits 5 to 1 represent the binary coded timer value. Bits 6 to 8 define the timer value unit for the PTAU timer as follows. See more in 3GPP TS 24.008 [4], figure 10.5.147a and table 10.5.163a. {#tbl:ptau} 
+
+| 8 7 6 | Description                                             |
+| ----- | ------------------------------------------------------- |
+| 0 0 0 | value is incremented in multiples of 10 minutes         |
+| 0 0 1 | value is incremented in multiples of 1 hour             |
+| 0 1 0 | value is incremented in multiples of 10 hours           |
+| 0 1 1 | value is incremented in multiples of 2 seconds          |
+| 1 0 0 | value is incremented in multiples of 30 seconds         |
+| 1 0 1 | value is incremented in multiples of 1 minute           |
+| 1 1 0 | value is incremented in multiples of 320 hours[^NOTE_1] |
+| 1 1 1 | value indicates that the timer is deactivated[^NOTE_2]  |
+
+* Example: "000 00111" = 7 x 10 minutes = 70 minutes
+
+[^NOTE_1]: This timer value unit is only applicable to the T3312 and T3412 extended value (see 3GPP TS 24.301 [5]). If received in an integrity protected message, the value shall be interpreted as multiples of 320 hours, otherwise 1 hour.
+[^NOTE_2]: This timer value unit is not applicable to the T3412 extended value. If received, the T3412 extended value shall be considered as not included in the message (see 3GPP TS 24.301 [5]).
 
 #### eDRX Cycles and PTW
 
-* An eDRX cycle is composed of an active phase, controlled by a Paging Time Window (PTW) timer, which ranges from 2.56 s to 40.96 s followed by a sleep phase until the end of the eDRX cycle. Within the PTW, the standard LTE paging is observed.
+Extended Discontinuous Reception (eDRX) mode means that paging windows can be scheduled such that the modem can be contacted by the server. A single eDRX cycle is composed of an active phase, controlled by a Paging Time Window (PTW) timer, followed by a sleep phase until the end of the eDRX cycle. Within the PTW, the standard LTE paging is observed. DRX intervals are network controlled, and are usually set to every 1.28, 2.56, 5.12 or 10.24 seconds. Paging Time Windows (PTW), ranging from 2.56 s to 40.96 s, control the number of DRX intervals followed by a sleep phase until the end of the eDRX cycle.
 
-Extended Discontinuous Reception (eDRX) mode means that paging windows can be scheduled such that the modem can be contacted by the server.
+#### Release Assistance {#release_a}
 
-![eDRX mode](C:\Users\d7rob\AppData\Roaming\Typora\typora-user-images\1555540836196.png){width=80%}
+Release assistance requests the eNodeB to release the RRC connection immediately. By avoiding 20 seconds of idle RRC in C-DRX mode, there is a 93% improvement in power consumption for a 200 byte transmission in ECL 1 [@ubloxAppNote2018]. This can also be done for data  transmissions by sending a flag with the data packet. This flag is noticed by the MME on the network and the eNodeB releases the connection immediately thereafter. It remains within T3324 Active Time for a period of time where the eNodeB could be paging the device in eDRX intervals before going into deep sleep mode until the T3412 PTAU Timer expires. Unfortunately there is no support for release assistance for downlink data.
 
+### Repetitions and Enhanced Coverage Levels (ECLs)
 
-
-
-
-### System Information Blocks (SIB) {#sib}
-
-The SIB describes the method of attachment and what repetitions the UE device must use to first transmit
-to the base station. Once a RRC connection is made, the base station then uses the perceived SNR
-to configure the uplink allocations the UE device will use to transmit the messages.
-Because allocations for each uplink/downlink are dynamically set by the base station it is difficult to
-calculate the power consumption of a single message deployed in the field.
-
-* example SIB
-
-The UE device is to a large extent/entirely controlled by the network/eNodeB. UE devices must follow NW settings broadcast inside the SIB and allocations for UL/DL data.
-
-### Repetitions and Extended Coverage Level (ECL)
-
-* ECL
-* Module interference increases the number of repetitions
-* Minimize ECL 2.
-* Network operators should provide enough coverage to allow devices to be mostly in coverage class 0
-  or 1. Depending on the NB-IoT deployment, the network could have large areas, or devices located in
-  deep locations which unfortunately mean they operate in Coverage Class 2.
-* Coverage Class 2 uses high repetitions for the RACH process and also higher coding schemes when
-  transmitting data and therefore fundamentally consumes more power than it would in the other
-  coverage classes.
-
+Enhanced Coverage Levels determine the number of repetitions in the uplink channel. Coverage levels range from 0 for normal operation and 2 for the worst case scenario, and repetitions range from 2 to 128. Although the network determines the ECL for the UE device, it is factors such as RF network conditions interference that influence the number of repetitions. Network operators should provide enough coverage to allow devices to be mostly in coverage class 0 or 1. Depending on the NB-IoT deployment, the network could have large areas, or devices located in deep locations which unfortunately mean they operate in Coverage Class 2. It would be best to minimize ECL 2 except for deep indoor penetration use cases due to the high energy usage since it uses high repetitions for the RACH process and also higher coding schemes when transmitting data.
 
 An example of sending a 200 byte message in ECL 2 with good SNR can include 5 RACH transmission bursts, a Transmission Block Size ~43 bytes, one repetition and taking just over 1 second, consuming 200uWh. For the same example in bad SNR, the TBS allocated 32 bytes per chunk, with a repetition of 8 and 4. It took 5.5 seconds and consumed 1.07mWh -- fives times as much as before.
 
-### UE Device and Network Behavior
+### RF Characteristics, MCL and monitoring network behavior {#rf_characteristics}
+
+When only a fraction of the existing LTE cell sites support NB-IoT, devices cannot attach to the best cell if that cell does not support NB-IoT. As a result, the path loss can be very high. In addition, they also suffer from high interference from non-NB-IoT cells [@Mangalvedhe2016a].
+
+In the uplink, there are two physical layer channels. The random access channel connects to the base station and the uplink channel contains the data and control information. In downlink there are four channels. Synchronization is used by the endpoint to estimate symbol timing and carrier frequency and obtain the cell identity and frame boundary. The broadcast channel contains the master information block (MIB). The control channel carries downlink control information and can be repeated 2048 times, as well as the data channel which contains the payload, paging, system information and the random access response. [@Adhikary2016].
+
+NB-IoT operation requires a minimum bandwidth of 180 kHz, which is equal to the size of the smallest LTE Physical Resource Block (PRB). Depending on the availability of spectrum, NB-IoT can be either deployed on its own (“standalone operation”), in the guard carriers of existing LTE/UMTS spectrum (“guardband operation”) or within an existing LTE carrier by replacing one or more PRBs (“inband operation”). In order to support such flexible deployment scenarios, NB- IoT reuses the LTE design extensively, such as the OFDM (Orthogonal Frequency Division Multiplexing) type of modulation in downlink, SC-FDMA (Single Carrier Frequency Division Multiple Access) in uplink, channel coding, rate matching and interleaving. In addition, a host of new features are added to ensure the demands of IoT based applications. Key design changes from LTE include the synchronization sequences, the random access preamble, the broadcast channel and the control channel. These changes are primarily motivated by the fact that NB-IoT is required to operate on a minimum bandwidth of 180 kHz (1 PRB), whereas many channels in LTE were designed to span multiple PRBs occupying greater bandwidth compared to 180 kHz. These design changes achieve the IoT requirements while ensuring best co-existence performance with the existing LTE system [@Adhikary2016].
+
+#### MCL {#lit_mcl}
+
+Maximum coupling loss (MCL) is defined as the maximal total channel loss between User Equipment (UE) and eNodeB (eNB) antenna ports at which the data service can still be delivered. Practically, it includes antenna gains, path loss, shadowing and any other impairments. The higher the MCL, the more robust the link is. 
+
+#### UE Device and Network Behavior
 
 * The application can monitor the status of the module’s connection, registration and PSM state by
   polling or configuring URCs. By monitoring the module status the application can behave more
@@ -556,34 +543,6 @@ Table: NW Config {#tbl:nw_config}
 | **Mode 2** | Inactivity timer = Immediate Release<br/>T3324 = 8s<br/>I-DRX = 2.56s<br/>eDRX/PTW = Disabled |
 | **Mode 3** | Inactivity timer = Immediate Release<br/>T3324 = 0s (disabled) |
 
-### RF Characteristics {#rf_characteristics}
-
-When only a fraction of the existing LTE cell sites support NB-IoT, devices cannot attach to the best cell if that cell does not support NB-IoT. As a result, the path loss can be very high. In addition, they also suffer from high interference from non-NB-IoT cells [@Mangalvedhe2016a].
-
-In the uplink, there are two physical layer channels. The random access channel connects to the base station and the uplink channel contains the data and control information. In downlink there are four channels. Synchronization is used by the endpoint to estimate symbol timing and carrier frequency and obtain the cell identity and frame boundary. The broadcast channel contains the master information block (MIB). The control channel carries downlink control information and can be repeated 2048 times, as well as the data channel which contains the payload, paging, system information and the random access response. [@Adhikary2016].
-
-NB-IoT operation requires a minimum bandwidth of 180 kHz, which is equal to the size of the smallest LTE Physical Resource Block (PRB). Depending on the availability of spectrum, NB-IoT can be either deployed on its own (“standalone operation”), in the guard carriers of existing LTE/UMTS spectrum (“guardband operation”) or within an existing LTE carrier by replacing one or more PRBs (“inband operation”). In order to support such flexible deployment scenarios, NB- IoT reuses the LTE design extensively, such as the OFDM (Orthogonal Frequency Division Multiplexing) type of modulation in downlink, SC-FDMA (Single Carrier Frequency Division Multiple Access) in uplink, channel coding, rate matching and interleaving. In addition, a host of new features are added to ensure the demands of IoT based applications. Key design changes from LTE include the synchronization sequences, the random access preamble, the broadcast channel and the control channel. These changes are primarily motivated by the fact that NB-IoT is required to operate on a minimum bandwidth of 180 kHz (1 PRB), whereas many channels in LTE were designed to span multiple PRBs occupying greater bandwidth compared to 180 kHz. These design changes achieve the IoT requirements while ensuring best co-existence performance with the existing LTE system [@Adhikary2016].
-
-#### MCL {#lit_mcl}
-
-Maximum coupling loss (MCL) is defined as the maximal total channel loss between User Equipment (UE) and eNodeB (eNB) antenna ports at which the data service can still be delivered. Practically, it includes antenna gains, path loss, shadowing and any other impairments. The higher the MCL, the more robust the link is. 
-
 ## Summary
 
 With a deeper understanding of NB-IoT in this chapter, we can see how it exhibits variable characteristics as opposed to what theoretical analysis or simulations can provide due to the complexities of the underlying legacy LTE architecture and most notably in the energy consumption of datagram packets, besides other metrics. NB-IoT has a strong footprint in IoT due to its low-power bidirectionality which gives it an edge over other LPWANs, and this enables a broad variety of use cases. Since we can now better understand the different facets of NB-IoT, related concepts and literature as stated above, we can further investigate the change in variability across different UE devices and LTE vendors in Chapter \ref{design}.
-
-## Notes
-
-**MTN Lab / 14th Ave Phase 3: Test Plant**
-
-NB-IoT PoC MTN South Africa (Ericsson RAN Connectivity Tests only) [@Ssengonzi2017]
-
-Industrial north Drive Test Requirements [@NorthDrive2017]
-
-**Stellenbosch**
-
-Evaluation of next-generation low-power communication technologies to replace GSM in IoT-applications [@Thomas2018]
-
-**Manufacturers**
-
-Ublox has an NB-IoT Application Development Guide [@ubloxAppNote2018] which details many of the capabilities of the UE.

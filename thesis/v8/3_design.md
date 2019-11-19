@@ -450,6 +450,8 @@ Finally, an eDRX event has a typical current profile as shown in Fig. \ref{fig:e
 
 ### Ultra-low Current Sleep Measurements
 
+During deep sleep, UE devices typically use only a couple of microamps.
+
 Using an MX 58HD DMM, one can measure the microamp sleep currents of UE devices.
 
 Testing the accuracy, 4.501 mA is measured through a 4615 ohm resistor at 21.15V. Theoretically it should be 4.582 mA so that gives an error tolerance of 1.82% or ~2%.

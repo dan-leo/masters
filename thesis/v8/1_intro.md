@@ -330,16 +330,18 @@ Table: MNOs and their LTE base station (BTS) Vendors {#tbl:mno_bts}
 | Huawei      | Vodacom                 |
 | Ericsson    | MTN                     |
 
+![Top LTE vendors in the world showing VoIP and IMS equipment revenue share worldwide in 2017. \textcopyright{Statista, IHS Markit}](../images/chartoftheday_17097_voip_worldwide_revenue_n-1572347674712.jpg){width=80%}
+
 * ZTE Corporation is a Chinese multinational telecommunications equipment and systems company headquartered in Shenzhen, Guangdong, China. It is one of China's leading telecom equipment manufacturers.
 * Nokia Corporation is a Finnish multinational telecommunications, information technology, and consumer electronics company, founded in 1865. Nokia's headquarters are in Espoo, in the greater Helsinki metropolitan area.
 * Telefonaktiebolaget LM Ericsson, doing business as Ericsson, is a Swedish multinational networking and telecommunications company headquartered in Stockholm.
 * Huawei Technologies Co., Ltd. is a Chinese multinational technology company that provides telecommunications equipment and sells consumer electronics, including smartphones and is headquartered in Shenzhen, Guangdong province. The company was founded in 1987 by Ren Zhengfei. 
 
+
 Theoretically, one can assume that these manufacturers meet 3GPP's specifications. With a more rigorous testing framework, one can evaluate these capabilities in a transparent manner for both developers and cellular operators alike and work towards improving the quality thereof.
 
 Other vendors include: Broadcom Corporation, Cisco Systems, Gemalto NV, Intel Corporation, KDDI Corporation, LG Electronics, MediaTek, Oberthur Technologies, Ooredoo, Orange, Samsung Electronics, Saudi Telecom Company, Sierra Wireless, Telit Communications and VimpelCom.
 
- ![Top LTE vendors in the world showing VoIP and IMS equipment revenue share worldwide in 2017. \textcopyright{Statista, IHS Markit}](../images/chartoftheday_17097_voip_worldwide_revenue_n-1572347674712.jpg){width=80%}
 
 \hypertarget{ue_devices}{%
 \subsubsection[UE Device Manufacturers: Ublox, Quectel, Nordic,
@@ -368,7 +370,7 @@ These UEs all share AT commands as the API to control their capabilities.
 * u-blox is a Swiss company that creates wireless semiconductors and modules for consumer, automotive and industrial markets. They operate as a fabless IC and design house. 
 * Quectel is the leading global supplier of cellular and GNSS modules, with a broad product portfolio covering the most recent wireless technologies of 5G, LTE/LTE-A, NB-IoT/LTE-M, UMTS/HSPA(+), GSM/GPRS and GNSS. As a professional IoT technology developer and cellular module supplier, Quectel is able to provide one-stop services for IoT cellular modules. Quectel products have been widely applied in IoT/M2M fields including smart payment, telematics and transport, smart energy, smart cities, security, wireless gateways, industry, healthcare, agriculture, and environment monitoring. 
 * Nordic Semiconductor is a fabless semiconductor company. The company specializes in ultra-low power performance wireless system on a chip and connectivity devices for the 2.4 GHz ISM band, with power consumption and cost being the main focus areas.
-* **SIMCom Wireless Solutions** is a subsidiary of SIM Technology Group Ltd. It is a fast-growing wireless M2M company, designing and offering a variety of wireless modules based on GSM/GPRS/EDGE,WCDMA/HSDPA and TD-SCDMA technical platforms.
+* SIMCom Wireless Solutions is a subsidiary of SIM Technology Group Ltd. It is a fast-growing wireless M2M company, designing and offering a variety of wireless modules based on GSM/GPRS/EDGE,WCDMA/HSDPA and TD-SCDMA technical platforms.
 
 \hypertarget{metrics_est}{%
 \subsubsection[Metrics and Estimations: Power, Latency, Secondary and

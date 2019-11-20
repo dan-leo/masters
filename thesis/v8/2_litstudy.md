@@ -56,9 +56,13 @@ Looking at Gartner's analysis of technology expectations with regards to NB-IoT 
 
 ![Gartner's [2018 Hype Cycle for ICT in Africa](http://www.gartner.com/newsroom/id/3884512). NB-IoT is high on the list of expectations. \label{fig:gartner_ictAfrica}](../images/42881085945_739bbdc8e9_c.jpg){ width=90% }
 
+[](../images/image-20191120204059558.png)
+
 As of August 2019, Gartner has high expectations for 5G and other emerging technologies which can make use of what [IoT has to offer](https://blogs.sas.com/content/hiddeninsights/2016/07/06/long-live-the-iot-hype/). This can be seen in Fig. \ref{fig:gartner_emergingTech}.
 
 ![Gartner's Hype Cycle for Emerging Technologies, 2019. IoT is inextricably linked to at least a third of emerging technologies and also has uses in NB-IoT. \label{fig:gartner_emergingTech}](../images/CTMKT_741609_CTMKT_for_Emerging_Tech_Hype_Cycle_LargerText-1.png){ width=85% }
+
+[](../images/image-20191120204329349.png)
 
 On the other hand, this does not slow the growth in number of devices connected as in Fig. \ref{fig:iot_growth}. IoT merely manifests itself in other uses and forms such as we have already seen in Fig. \ref{fig:gartner_emergingTech}. NB-IoT can be integral to aid this growth.
 
@@ -75,12 +79,6 @@ A pull model is ideal for dynamic rule engines, pulling data only when necessary
 
 Most LPWANs are unidirectional, meaning they transmit data in one direction only. This is especially true in the case of LoRaWAN and SigFox and means they use a push model. A push model is bad for the battery when periodically sending data. It does help to make the data transmissions event-based, however. NB-IoT and Dash7 for example, are bidirectional which means they can stay quiet for longer and only send data on-demand ~ when it is needed. This would make it a pull model and is useful for critical use cases as well [@Mekki2018a].
 
-Most importantly when looking at bidirectionality vs unidirectionality is that transmit current is usually much more than the receive current required. By limiting TX transmissions such that the user only requests data on-demand when it is required, battery savings ensue.
-
-There are many LPWANs out there, but we can split them up into two groups as in Table \ref{tbl:unibidirectional_lpwans}.
-
-\newline\newpage
-
 Table: Unidirectional and bidirectional LPWANs {#tbl:unibidirectional_lpwans}
 
 | Unidirectional | Bidirectional  |
@@ -92,7 +90,7 @@ Table: Unidirectional and bidirectional LPWANs {#tbl:unibidirectional_lpwans}
 |                | Dash7          |
 |                | WiFi HaLow     |
 
-Later, we look at a few of these directional LPWANs in \S\ref{unidirectional_lpwans}-\ref{bidirectional_lpwans} and draw comparisons in \S\ref{lpwan_comparison}.
+Most importantly when looking at bidirectionality vs unidirectionality is that transmit current is usually much more than the receive current required. By limiting TX transmissions such that the user only requests data on-demand when it is required, battery savings ensue. There are many LPWANs out there, but we can split them up into two groups as in Table \ref{tbl:unibidirectional_lpwans}. Later, we look at a few of these directional LPWANs in \S\ref{unidirectional_lpwans}-\ref{bidirectional_lpwans} and draw comparisons in \S\ref{lpwan_comparison}.
 
 <!-- ###  Edge/Fog Computing {#edge_computing} -->
 
@@ -239,7 +237,23 @@ Smart metering can be easily applied to most LPWANs, but only a few have synchro
 
 ### Actuator Control
 
-An *actuator* is a component of a machine that is responsible for moving and *controlling* a mechanism or system, for example by opening a valve. In this use case, actuator control requires bidirectionality for its downlink controllability.
+An *actuator* is a component of a machine that is responsible for moving and *controlling* a mechanism or system, for example by opening a valve. In this use case, actuator control requires bidirectionality for its downlink controllability. Suprisingly, this bidirectionality can be applied to many fields as in Table \ref{tbl:use_cases_list}.
+
+Table: List of Use Cases {#tbl:use_cases_list}
+
+|      |      |
+| ---- | ---- |
+| Public Safety & Security | Smart bicycles  |
+| Agriculture | Parking |
+| Smart Metering | Garbage bins |
+| Actuator Control | Intelligent buildings |
+| Real-time Monitoring | Pet tracking, Smart Lost and Found |
+| Asset Tracking | Point-of-sale terminals |
+| ITS, Automotive & Logistics | predictive maintenance |
+| Health Care | Mobile Advertising |
+| Industrial Production | Environmental Control Systems |
+| Energy, Utilities | Industrial Automation Systems |
+| Retail | Wearables |
 
 ### Asset tracking {#asset_tracking}
 
@@ -256,22 +270,6 @@ Consider a unidirectional wireless network that, although it has many kilometers
 One of the benefits of bidirectional LPWANs over satellite localization is the fact that towers have the capability of beaconing a positioning reference signal [@Lin2017]. A more effective alternative to determining location besides satellite localization can be periodically observing the receive signal strength indicator (RSSI) for changes which directly translate to movement in meters which warrant a GPS/GNSS location update. RSSI has been used in fingerprinting localization for GSM-based devices [@Ibrahim2012]. Listening for a terrestrial tower certainly doesn't require a lower receive sensitivity than for a satellite a few hundred kilometers in the sky, and with a much higher throughput than the typical 50 bit/s of GPS/GNSS. GPS/GNSS signals can also be relayed indoors using an outdoor and indoor antenna [@Haddrell2001].
 
 Durand [@Thomas2018] suggests NB-IoT is poor for asset tracking and utility metering due to its high energy transmissions. By using the push-pull model as in \ref{pushpull} and only pulling data when a device's data/location is desired or pushing data when out of a geofence, one can save energy so much so that it can be considered better than LoRaWAN or SigFox, even though they may use less energy per transmission.
-
-### List of Use Cases
-
-|      |      |
-| ---- | ---- |
-| Public Safety & Security | Smart bicycles  |
-| Agriculture | Parking |
-| Smart Metering | Garbage bins |
-| Actuator Control | Intelligent buildings |
-| Real-time Monitoring | Pet tracking, Smart Lost and Found |
-| Asset Tracking | Point-of-sale terminals |
-| ITS, Automotive & Logistics | predictive maintenance |
-| Health Care | Mobile Advertising |
-| Industrial Production | Environmental Control Systems |
-| Energy, Utilities | Industrial Automation Systems |
-| Retail | Wearables |
 
 
 ## A Deeper Look into NB-IoT {#nbiot}
@@ -293,6 +291,8 @@ Taking it one step further, the 3GPP defined two device categories, namely Cat N
 
 NB-IoT devices are seen as stationary, only small chunks of data are intermittently transmitted and applications are envisaged as delay-tolerant. NB-IoT technology is designed such that it can be used in areas beyond the radio coverage of current cellular standards and in devices which must run from battery power for many years. The devices will generally send small amounts of data infrequently; a typical usage scenario might be 100 to 200 bytes sent twice per day for battery powered devices. For mains powered devices the limit is not based on battery size, but cost and network bandwidth/resources.
 
+![IoT Wireless Technology Representation [@Martinez2019] \label{fig:nbiot_positioning}](../images/1559246290186.png){width=85%}
+
 The system operation is analogous to SMS in that it is a datagram-oriented, stored-and-forward
 system, rather than a GPRS-like IP pipe. This is because NB-IoT devices spend most of their time
 asleep, making possible the required long battery life. The system implements extended DRX cycles
@@ -300,9 +300,7 @@ for paging, but as this window will be limited to save battery life, the deliver
 occurs mainly when the system detects that uplink messages have been received from a device
 (indicating that it is awake). Here a store-and-forward system, an “IoT Platform”, is useful.
 
-NB-IoT has a certain standing in IoT and LPWANs, and this can be seen in Fig. \ref{fig:nbiot_positioning}.
-
-![IoT Wireless Technology Representation [@Martinez2019] \label{fig:nbiot_positioning}](../images/1559246290186.png){width=85%}
+NB-IoT has a certain standing in IoT and LPWANs, and this can be seen in Fig. \ref{fig:nbiot_positioning}. It would be on a par with LPWANs except for variable energy consumption.
 
 Low Power Wide Area Networks (LPWANs) include SigFox, LoRaWAN, NB-IoT, Dash7, Weightless, N-Wave, NB-Fi, Thread and others. Some of these, like SigFox and LoRaWAN are unidirectional, which make them unsuitable for critical applications which require downlink acknowledgement or more. These have ranges from 2 - 20 km and can be considered outdoor technologies along with cellular IoT [@Ikpehai2018b].
 
@@ -320,17 +318,17 @@ In future NB-IoT will have the capability of D2D communications as outlined in 3
 \hypertarget{lte-architecture}{%
 \subsubsection[LTE Architecture and SIBs]{LTE Architecture}\label{lte-architecture}}
 
-### <!--### LTE Architecture-->
+<!--### LTE Architecture-->
 
 Although most users interact only with the UE device which runs its own proprietary firmware stack, NB-IoT also has a complex backend architecture.
 
-![LTE_classic_architecture](../images/LTE_classic_architecture.png)
+![LTE classic architecture](../images/LTE_classic_architecture.png)
 
 The complexities of LTE architecture further increases the chance of performance degradation with respect to 3GPP specifications due to the vast array of setup parameters. It would be beneficial to analyze the performance of multiple UE devices against various MNO vendors. It is important to note that MNOs may use various vendors in their architecture, and thus this study is mainly focused on the eNodeB vendor which is also UE device facing and has the greatest chance of performance degradation due network quality, RF interference and so forth.
 
 #### System Information Blocks (SIBs) {#sib}
 
-System Information Blocks define configurations for UE device to follow, such as the method of attachment and number of transmission repetitions. Once an RRC connection is made, the eNodeB uses the perceived SNR to allocate uplink throughput the UE device can use to transmit messages. Because of dynamic allocation, predicting power consumption of a single message in the field is difficult. Example SIBs can be found in Appendix \ref{appendix_sibs}.
+System Information Blocks define configurations for UE device to follow, such as the method of attachment and number of transmission repetitions. Once an RRC connection is made, the eNodeB uses the perceived SNR to allocate uplink throughput the UE device can use to transmit messages. Because of dynamic allocation, predicting power consumption of a single message in the field is difficult. Example SIBs can be found in Appendix \ref{appendix_sibs}. The most important one is known as the Master Information Block (MIB).
 
 Since UE devices must follow NW settings broadcast inside the SIB, the UE device is to a large extent controlled by the network/eNodeB.
 
@@ -338,7 +336,7 @@ Since UE devices must follow NW settings broadcast inside the SIB, the UE device
 
 This subsection looks at hardware specific to the UE device.
 
-![Examples of different NB-IoT UE modems with A) Ublox Sara N200, B) Quectel BC95, C) Nordic nRF9160, D) SimCom 7020E](../images/ue_hardware.png){width=55%} 
+![Examples of different NB-IoT UE modems with A) Ublox Sara N200, B) Quectel BC95, C) Nordic nRF9160, D) SimCom 7020E](../images/ue_hardware.png){width=45%}
 
 [](../images/image-20191105225743913.png)
 
@@ -365,9 +363,9 @@ After network registration or transmission of a data packet, the device usually 
 \hypertarget{power-saving-mechanisms-t3324-active-t3412-ptau-edrx-ptw-release-a}{%
 \subsubsection[Power-Saving Mechanisms: T3324 Active, T3412 PTAU, eDRX,
 PTW,
-Release-A]{Power-Saving Mechanisms}\label{power-saving-mechanisms-t3324-active-t3412-ptau-edrx-ptw-release-a}}
+Release-A]{Power-Saving Mechanisms}\label{power-saving-mechanisms}}
 
-### <!--### Power-Saving Mechanisms: T3324 Active, T3412 PTAU, eDRX, PTW, Release-A-->
+<!--### Power-Saving Mechanisms: T3324 Active, T3412 PTAU, eDRX, PTW, Release-A-->
 
 NB-IoT allows for various power saving mechanisms design to prolong the lifetime of battery-powered devices. Except for release assistance, the module automatically enters the different states depending on defined configuration. Release assistance, as explained in \S\ref{release_a}, terminates the network defined `inactivty timer` such that it enters into the states shown in Fig. \ref{fig:power_saving_mechanisms}.
 
@@ -380,24 +378,11 @@ It is recommended to order the network configuration values of the following fro
 3. T3324 Active Timer
 4. T3412 PTAU Timer
 
-#### T3324 Active Timer
-
-The T3324 Active Timer controls the time period during which the UE device can be paged by the network in RRC Idle, and the number of eDRX cycles. The inactivity and active timer is reset after a downlink message is received. Fragmented downlink data has a negative impact on energy savings which should be taken into account.
-
-Table: Configuring the T3324 Active Timer. Bits 5 to 1 represent the binary coded timer value. Bits 6 to 8 define the timer value unit for the Active timer as follows. See more in 3GPP TS 24.008 [4], figure 10.5.147a and table 10.5.163a.
-
-| 8 7 6 | Description                                     |
-| ----- | ----------------------------------------------- |
-| 0 0 0 | value is incremented in multiples of 2 seconds  |
-| 0 0 1 | value is incremented in multiples of 1 minute   |
-| 0 1 0 | value is incremented in multiples of deci-hours |
-| 1 1 1 | value indicates that the timer is deactivated   |
-
-* Example: "001 00101" = 5 x 1 minute = 5 minutes
-
 #### T3412 PTAU Timer
 
 During the RRC-connected phase (C-DRX), the eNodeB knows exactly in which cell/sector/antenna the UE device is on a relatively precise level. Outside of this it assigns a tracking area code (TAC) and broadcasts to all UEs in the area with the aim to wake it up if there is an incoming message. This is especially useful if the devices is semi-mobile and moves to a different area. The periodic tracking area update timer (PTAU) updates the network and UE devices with the tracking area that the residing device is currently connected at the end of the power saving mode (PSM) as in fig. \ref{fig:power_saving_mechanisms}.
+
+Timers can be configured using AT commands.
 
 Table: Configuring the T3412 PTAU Timer. Bits 5 to 1 represent the binary coded timer value. Bits 6 to 8 define the timer value unit for the PTAU timer as follows. See more in 3GPP TS 24.008 [4], figure 10.5.147a and table 10.5.163a. {#tbl:ptau} 
 
@@ -416,6 +401,21 @@ Table: Configuring the T3412 PTAU Timer. Bits 5 to 1 represent the binary coded 
 
 [^NOTE_1]: This timer value unit is only applicable to the T3312 and T3412 extended value (see 3GPP TS 24.301 [5]). If received in an integrity protected message, the value shall be interpreted as multiples of 320 hours, otherwise 1 hour.
 [^NOTE_2]: This timer value unit is not applicable to the T3412 extended value. If received, the T3412 extended value shall be considered as not included in the message (see 3GPP TS 24.301 [5]).
+
+#### T3324 Active Timer
+
+The T3324 Active Timer controls the time period during which the UE device can be paged by the network in RRC Idle, and the number of eDRX cycles. The inactivity and active timer is reset after a downlink message is received. Fragmented downlink data has a negative impact on energy savings which should be taken into account.
+
+Table: Configuring the T3324 Active Timer. Bits 5 to 1 represent the binary coded timer value. Bits 6 to 8 define the timer value unit for the Active timer as follows. See more in 3GPP TS 24.008 [4], figure 10.5.147a and table 10.5.163a. {#tbl:active}
+
+| 8 7 6 | Description                                     |
+| ----- | ----------------------------------------------- |
+| 0 0 0 | value is incremented in multiples of 2 seconds  |
+| 0 0 1 | value is incremented in multiples of 1 minute   |
+| 0 1 0 | value is incremented in multiples of deci-hours |
+| 1 1 1 | value indicates that the timer is deactivated   |
+
+* Example: "001 00101" = 5 x 1 minute = 5 minutes
 
 #### eDRX Cycles and PTW
 
@@ -445,103 +445,86 @@ Maximum coupling loss (MCL) is defined as the maximal total channel loss between
 
 #### UE Device and Network Behavior
 
-* The application can monitor the status of the module’s connection, registration and PSM state by
-  polling or configuring URCs. By monitoring the module status the application can behave more
-  efficiently, depending on the application type. For example, the application may want to know when
-  the module goes into Power Save Mode (PSM).
+Users can monitor the status of the module’s connection, registration and PSM state by
+polling or configuring URCs. By monitoring the module status, it can behave more efficiently for various applications. The `+CEREG` AT command can be used to check the network registration status, including registered, not registered, in the process of registering, denied registration, unknown and roaming. During this process, when the module is searching for a network, the `+NUESTATS` AT command can be polled to view receive and transmit time-on-air. Increasing receive time means the module scanning for a base station, and increase transmit time indicates an attempt to register with a base station. If the Total Power (RSSI) and Signal Power (RSRP) values are different than -32767 (invalid) then the module has
+read the MIB and SIB signals from the base station. With the `+CSCON` URC enabled to indicate each RRC connection change, it will show a "1" when connected and "0" when not.
 
-Register the module to the NB-IoT network before to send or receive any messages. Without being
-registered the module will not be able to send or receive any messages.
-To check the network registration status issue the +CEREG read command. The second parameter
-of the information text response (+CEREG: <mode>,<state>) provides the interested information
-* 0: not registered, not registering
-* 1: registered
-* 2: not registered, but currently in the process to
-* 3: registration denied. The application should have a re-try mechanism which does not simply try registration immediately, but has some back-off process
-* 4: unknown
-* 5: registered, roaming
+International SIMs (roaming SIM) can make the registration process take many minutes for the first time. Once registered, the network PLMN should be stored in the SIM for faster registration next time.
 
-When the module has started the network search process, poll the +NUESTATS AT command and
-view the Rx and Tx Time:
+The `+NUESTATS` AT command provides many other details, such as RF radio, network, throughput and data size characteristics.
 
-* If Rx Time is increasing then the module is trying to scan for a base station.
-* If Tx Time is increasing then the module has found a base station and is trying to communicate
-  with it.
-* If the Total Power and Signal Power values are different than -32767 (invalid) then the module has
-  read the MIB and SIB signals from the base station.
-* Once an RRC connection is made, the +CSCON read command will return 1. Turn on the +CSCON
-  URC which will be output at each RRC connection change.
+Registration EMM reject cause values, as mentioned in \S\ref{rrc_inactivity}, are described in the 3GPP TS 24.008 [4] with typical causes including:
 
+* #5 IMEI not accepted
+* #11 PLMN not allowed
+* #12 Location Area not allowed
+* #13 Roaming not allowed in this location area
+* #22 Congestion
 
+\hypertarget{atcommands}{%
+\subsubsection[AT Commands and Application
+Architecture]{AT Commands}\label{atcommands}}
 
-If the SIM used is an international SIM (roaming SIM) then the registration process can take many
-minutes for the first time. Once the module is registered on that network the PLMN should be
-stored in the SIM so that registration is quicker next time. The application can tell if it is using
-roaming SIM by the state being “5”.
+<!--### AT Commands and Application Architecture {#atcommands}-->
 
-* The +CEREG URC can be enabled to provide the network registration status. Depending on the
-  <mode> parameter it is possible to configure the interested URC parameters (i.e. <mode>=4 or 5 to
-  see the provided network timers). See SARA-N2 AT Commands Manual [2] for more details.
-* Properly setting the +CEREG AT command (<modem>=3, 4 or 5) it is possible to see the
-  registration EMM cause value. These values are described in the 3GPP TS 24.008 [4]. Typical
-  causes:
-  * #5 IMEI not accepted
-  * #11 PLMN not allowed
-  * #12 Location Area not allowed
-  * #13 Roaming not allowed in this location area
-  * #22 Congestion
+This section outlines how applications use the AT command API to access the capabilities of the UE device.
 
-### AT Commands {#atcommands}
+Table: Useful AT commands for Ublox, Quectel {#tbl:atcommands}
 
-This section outlines the capabilities of the UEs.
+| Command       | Description                                                  |
+| ------------- | ------------------------------------------------------------ |
+| AT+NCONFIG    | *Set configuration.* Customize configuration for SI_AVOID, Scrambling etc. |
+| AT+CFUN       | *Enable modem functionality*, turns on radio or flight mode. |
+| AT+COPS       | *Network Registration.* This command initiates search for cell towers to connect to depending on MNO-related SIM-card and registers/deregisters accordingly. |
+| AT+CEREG      | *Network status.* Provides the status of network registration. |
+| AT+CGDCONT    | *Sets the APN* for the relevant MNO.                         |
+| AT+NUESTATS   | *Read status.* The UE device provides various parameters to read such as RF characteristics, network information and data metrics |
+| AT+UTEST      | *Test in non-signalling mode* transmit and receive.          |
+| AT+CPSMS      | *Configure PSM modes* T3324 Active and T3412 PTAU timer      |
+| AT+NPTWEDRXS\hspace | Configure eDRX cycle value and paging time window (PTW)      |
+| AT+NPING      | *Ping remote host* such as google's DNS server 8.8.8.8       |
+| AT+NSOSF      | *Send UDP packet* up to 512 bytes with release assistance flags |
 
-Table: Summary AT Command set for Ublox {#tbl:atcommands}
+Unsolicited result codes (URCs) are asynchronous messages output by the UE device to inform at any time of specific events or status changes such as the following in Table \ref{tbl:URCs}.
 
-|                      | Command    | Description                                                  |
-| -------------------- | ---------- | ------------------------------------------------------------ |
-| Set configuration    | AT+NCONFIG | Change configuration for SI_AVOID, Scrambling etc.           |
-| Network Registration | AT+COPS    | This command initiates search for cell towers to connect to depending on MNO-related SIM-card and registers/deregisters accordingly. |
-| Set APN              | AT+CGDCONT | Sets the relevant APN for the MNO.                           |
-|                      |            |                                                              |
+Table: Useful URCs for Ublox, Quectel {#tbl:URCs}
 
-* SARA-N2 series modules implement a FOTA solution based on CoAP. It is possible to configure the
-  module’s poll timer for when the module checks the FOTA CoAP server for new firmware. When the
-  feature is enabled and a new package is available, the module will automatically download the FOTA
-  update and provide URCs about its progress. The module’s firmware is not updated automatically
-  when the download has completed and so the application must start the upgrade process step.
-* The +UTEST AT command allows the user to set the module in non-signaling (or test) mode, or
-  returns to the signaling (or normal) mode. In test/non-signaling mode, the module switches off the
-  protocol stack for performing single tests which could not be performed during the signaling mode.
-* MO Datagrams sent and received by IoT platform has these commands wrapped internally in a Constrained Application Protocol (CoAP) message and sent over UDP sockets. Once the module accepted a datagram it cannot be removed and will be transmitted to the network as soon as radio conditions permit. The only way to clear the module’s transmit queue is to reboot it. In good radio conditions, the transmission might take a few seconds. In bad radio conditions a transmission opportunity may not occur for minutes, days or weeks but the datagram will be transmitted once radio conditions are good enough. When a MO message is queued, the module will try to send the message to the base station. It will only send the next message once the previous message has been sent. If there is a radio link failure (RLF), the device will re-scan the channel ranges and try to reconnect to a base station. There may be a back off time where the device goes into deep-sleep mode before trying again.
-* An unsolicited result code (URC) is a string message (provided by the DCE) that is not a response to
-  a previous AT command. It can be output, when enabled, at any time to inform the DTE of a specific
-  event or status change.
+| URCs       | Description                  |
+| ---------- | ---------------------------- |
+| AT+CMEE=2  | Error result code            |
+| AT+NPSMR=1 | Power saving mode changes    |
+| AT+CSCON=1 | RRC connected changes        |
+| AT+CEREG=5 | Network registration changes |
+
+In the setup stage, it is important to use `AT+NCONFIG="CR_0859_SI_AVOID","TRUE"` and \newline`AT+NCONFIG="CR_0354_0338_SCRAMBLING","TRUE"` in South Africa as this is not documented in the application manual [@ubloxAppNote2018].
 
 When it comes to base stations, the user does not have control over the inactivity timer. Release assistance can request the eNB/network to disconnect the modem from Radio Resource Control (RRC) connected mode.
 
-When the module is synchronized to the base station, the +NUESTATS AT command is able to describe the radio, cell, BLER, throughput statistics and other signaling info received.
-The most useful statistic is the "RADIO" type.
+When the module is synchronized to the base station, the +NUESTATS AT command is able to describe the radio, cell, BLER, throughput statistics and other signaling info received. The most useful statistic is the "RADIO" type.
 
-See [@ubloxAppNote2018] for application examples.
+Manufacturers usually provide application examples useful to test each command in development [@ubloxAppNote2018].
 
-### Application Architecture
+#### Application Architecture
 
-* ![1569744612309](../images/1569744612309.png)
-* At the far left the customer’s device contains a u-blox NB-IoT module that communicates over the radio network with a cell tower that supports the NB-IoT network. The cellular network links the cell tower with an IoT platform. This IoT platform stores uplink datagrams from the NB-IoT module. The customer server communicates with the IoT platform to retrieve uplink datagrams and to send downlink datagrams to the NB-IoT. The IoT platform holds downlink datagrams until the NB-IoT module is awake to receive them.
-* The SARA-N2 series modules implement basic UDP socket commands for directly communicating with an external service. With these commands the customer can build a simple IoT platform. With an external processor other IoT layers could be implemented to aid this system design. SARA-N2 series modules support AT commands for general CoAP messaging. This allows the customer to not require CoAP in their external processor.
-* Many developers coming from a GPRS type background may expect an always on type connection, normally using TCP. NB-IoT is not session oriented, latencies are much higher and the device will enter a power save mode. This is very different to always-on modems with “chatty” protocols like TCP.
-* UDP sockets do not create connections to servers; UDP is a connection-less datagram protocol. Because of this MO messages may not be received by the server and lost. The application should take this in to consideration and provide its own acknowledgements between the UE device and server. CoAP is one protocol which can be used on top of UDP to provide this.
-* For resolving the issue of sending MT messages to a very sleepy module, when a MO message is sent to the cloud server, the cloud server will know the module is active and connected to the network. As seen in section 7 the connection is alive until the RRC connection is released by the network and then still contactable when paging inside the T3324 period. If there are MT messages to be sent to the module, the cloud server should send this message in this time.
+![Typical application example \textcopyright{Ublox} \label{fig:app_ex_ublox}](../images/1569744612309.png)
 
-Martinez et al. [@Martinez2019] did empirical tests within the Vodafone Network in Barcelona. They observed UE device and NW behavior, measured current traces, and did various tests in different modes.
+Users of NB-IoT modules include customers in industry, government enterprise and consumers and in essence they have the simple goal of reaching the internet. In Fig. \ref{fig:app_ex_ublox}, a typical customer's device communicates with a cell tower that supports NB-IoT. From there it propagates through the LTE infrastructure of the cellular network before it reaches the internet, usually in the form of an IoT platform and the customer's server. NB-IoT modules offer a few IoT layers to communicate, from simple UDP, TCP sockets to MQTT and CoAP messaging. Developers with a GPRS type background may expect a session-oriented always-on connection, however, NB-IoT has higher latencies which need to be considered, especially when setting up eDRX and PSM modes for the extended battery life lasting up to many years. 
 
-Table: NW Config {#tbl:nw_config}
+UDP sockets are connection-less, and packets may be lost. If the application doesn't provide its own acknowledgements, CoAP does take this into account when used over UDP.
+
+For devices that stay dormant for long periods of time, the server will know when they are active when devices send an outbound message. It will be in RRC-connected mode until the inactivity timer expires, and it can still be paged within the T3324 Active period, so servers should respond timeously.
+
+Martinez et al. [@Martinez2019] did empirical tests within the Vodafone Network in Barcelona. They observed UE device and NW behavior, measured current traces, and did various tests in different modes. Martinez suggested the following modes in Table \ref{tbl:nw_config}.
+
+Table: Suggested application power saving modes [@Martinez2019] {#tbl:nw_config}
 
 | Mode       | NW Configuration                                             |
 | ---------- | ------------------------------------------------------------ |
 | **Mode 1** | Inactivity timer = 20s (network default)<br/>T3324 = 0s (disabled)<br/>C-DRX = 2.048s (network default) |
 | **Mode 2** | Inactivity timer = Immediate Release<br/>T3324 = 8s<br/>I-DRX = 2.56s<br/>eDRX/PTW = Disabled |
 | **Mode 3** | Inactivity timer = Immediate Release<br/>T3324 = 0s (disabled) |
+
+With AT commands, UE devices can be controlled to an extent on the client-side except for LTE network-side settings, transmit power and message latency. This loss of control comes at the cost of energy consumption, yet guarantee of message acknowledgement. Luckily, server-side applications can be aware of devices too and send updated configurations and firmware-over-the-air (FoTA) updates for adaptability to devices due to their bidirectionality.
 
 ## Summary
 

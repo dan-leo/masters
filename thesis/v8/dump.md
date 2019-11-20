@@ -769,7 +769,20 @@ Ublox has an NB-IoT Application Development Guide [@ubloxAppNote2018] which deta
 
 
 
+SARA-N2 series modules implement a FOTA solution based on CoAP. It is possible to configure the
+module’s poll timer for when the module checks the FOTA CoAP server for new firmware. When the
+feature is enabled and a new package is available, the module will automatically download the FOTA
+update and provide URCs about its progress. The module’s firmware is not updated automatically
+when the download has completed and so the application must start the upgrade process step.
 
 
 
+The +UTEST AT command allows the user to set the module in non-signaling (or test) mode, or
+returns to the signaling (or normal) mode. In test/non-signaling mode, the module switches off the
+protocol stack for performing single tests which could not be performed during the signaling mode.
+
+
+
+* 
+* MO Datagrams sent and received by IoT platform has these commands wrapped internally in a Constrained Application Protocol (CoAP) message and sent over UDP sockets. Once the module accepted a datagram it cannot be removed and will be transmitted to the network as soon as radio conditions permit. The only way to clear the module’s transmit queue is to reboot it. In good radio conditions, the transmission might take a few seconds. In bad radio conditions a transmission opportunity may not occur for minutes, days or weeks but the datagram will be transmitted once radio conditions are good enough. When a MO message is queued, the module will try to send the message to the base station. It will only send the next message once the previous message has been sent. If there is a radio link failure (RLF), the device will re-scan the channel ranges and try to reconnect to a base station. There may be a back off time where the device goes into deep-sleep mode before trying again.
 

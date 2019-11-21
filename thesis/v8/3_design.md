@@ -184,7 +184,7 @@ To get an idea of the complexity of a node (eNodeB) in a base station (BTS), run
 
 ### Range Field Test
 
-This gives a good idea as to the range expected according to RSRP.
+This gives a good idea as to the range expected according to RSRP, with more information in \S\ref{ping}.
 
 #### NB-IoT
 
@@ -368,7 +368,7 @@ Localization can be useful for asset tracking as discussed in \S\ref{asset_track
 
 ### Power Saving Mechanisms
 
-This section shows a brief investigation into the power saving mechanisms of NB-IoT.
+This section shows a brief investigation into the power saving mechanisms of NB-IoT as mentioned in \S\ref{power-saving-mechanisms}.
 
 With a paging time window interval of 2.54s and 4 hyper-frames making up 40.96s, the following output is obtained.
 
@@ -377,14 +377,34 @@ AT+NPTWEDRXS=2,5,"0001","0011"
 +CEREG: 5,1,"8CA7","28C464",7,,,"00011000","00101010"
 ```
 
-AT+CEREG says that the T3324 active time is 48 seconds, or 2 seconds * 24 binary coded timer value. This is not the expected outcome, even according to `Table 10.5.5.32/3GPP
-TS 24.008: Extended DRX parameters information` as referenced in Ublox documentation, which expects 40.96s. Besides, the paging time interval is also not working as expected.
+AT+CEREG says that the T3324 active time is 48 seconds, or 2 seconds * 24 binary coded timer value. This is not the expected outcome, even according to "Table 10.5.5.32/3GPP TS 24.008: Extended DRX parameters informatio" as referenced in Ublox documentation, which expects 40.96s. Besides, the paging time interval is also not working as expected as in Figure \ref{fig:edrx1}.
 
-![eDRX](C:\Users\d7rob\AppData\Roaming\Typora\typora-user-images\1555567465123.png){width=50%}
+\begin{figure}[ht]
+  \subfloat[Initial attempt at setting eDRX mode failed.]{
+	\begin{minipage}[c][0.7\width]{
+	   0.48\textwidth}
+	   \centering
+	   \includegraphics[width=1.0\linewidth]{../images/image-20191120231120824.png}
+	\label{fig:edrx1}
+	\end{minipage}}
+ \hfill 	
+  \subfloat[Successful attempt at setting eDRX mode.]{
+	\begin{minipage}[c][0.7\width]{
+	   0.48\textwidth}
+	   \centering
+	   \includegraphics[width=1.0\linewidth]{../images/image-20191120231245349.png}
+	\label{fig:edrx2}
+	\end{minipage}}
+\captionof{figure}{eDRX tests}
+\end{figure}
+
+[](../images/image-20191120231120824.png)
+
+[](C:\Users\d7rob\AppData\Roaming\Typora\typora-user-images\1555567465123.png){width=50%}
 
 [](C:\Users\d7rob\AppData\Roaming\Typora\typora-user-images\1555570254042.png){width=50%}
 
-The T3324 active timer value is modified to 5.12s.
+The T3324 active timer value is then modified to 5.12s as in Figure \ref{fig:edrx2}.
 
 ```c
 AT+NPTWEDRXS=2,5,"0001","0000"
@@ -407,9 +427,11 @@ In the debug logs we see the timer expires after exactly 30 seconds.
 	timer_handle=16871576
 ```
 
+[](../images/image-20191120231245349.png)
+
 [](C:\Users\d7rob\AppData\Roaming\Typora\typora-user-images\1555568148322.png){width=50%}
 
-![eDRX](C:\Users\d7rob\AppData\Roaming\Typora\typora-user-images\1555569320664.png){width=50%}
+[](C:\Users\d7rob\AppData\Roaming\Typora\typora-user-images\1555569320664.png){width=50%}
 
 Increasing the T3324 active timer value to 10.24s, the following results are obtained. It is exactly the same as before.
 
@@ -444,7 +466,23 @@ It is important to note that if eDRX time is not configured properly, then the o
 
 Finally, an eDRX event has a typical current profile as shown in Fig. \ref{fig:edrx_pattern}. This shows how for the first few microseconds there is a large current spike.
 
-*Todo: add Debug trace of eDRX*
+The debug trace, every 2.56 seconds for ZTE-MTN, shows the following information. Besides logs showing time synchronization and other network information, the serving cell logs show signal strength metrics.
+
+```c
+102332,03:20.082306,LL1_EXIT_LOW_POWER_MODE
+102334,03:20.082367,LL1_LOG_FAST_FORWARD_TIME_CALC
+102360,03:20.165100,LL1_RESYNC
+102362,03:20.165222,LL1_TIMING_ADJUST_LPM_WAKEUP
+102364,03:20.165344,LL1_LOG_CURRENT_TIME_CALC
+102370,03:20.205993,PROTO_LL1_SERVING_CELL_MEASUREMENT_IND
+102372,03:20.206054,LL1_NRS_MEASUREMENT_LOG
+102377,03:20.206573,LL1_LOG_CURRENT_TIME_CALC
+102378,03:20.206665,LL1_CALC_PAGING_DATA
+102381,03:20.207062,LL1_KV_CACHE_FLUSH
+102382,03:20.207123,LL1_ENTER_LOW_POWER_MODE
+102384,03:20.207336,LL1_SERVING_CELL_MEAS_IND
+102385,03:20.207458,RRC_DBG_RESELECTION_MEASUREMENTS
+```
 
 *Todo: add Debug trace of PTAU*
 
@@ -452,9 +490,7 @@ Finally, an eDRX event has a typical current profile as shown in Fig. \ref{fig:e
 
 During deep sleep, UE devices typically use only a couple of microamps.
 
-Using an MX 58HD DMM, one can measure the microamp sleep currents of UE devices.
-
-Testing the accuracy, 4.501 mA is measured through a 4615 ohm resistor at 21.15V. Theoretically it should be 4.582 mA so that gives an error tolerance of 1.82% or ~2%.
+Using an MX 58HD DMM, one can measure the microamp sleep currents of UE devices. Testing the accuracy of the DMM, 4.501 mA is measured through a 4615 ohm resistor at 21.15V. Theoretically it should be 4.582 mA so that gives an error tolerance of 1.82% or ~2%.
 
 *Todo: measure sleep current of UE devices*
 
@@ -972,9 +1008,7 @@ def start(args):
     ...
 ```
 
-
-
-#### Ping 
+#### Ping {#ping}
 
 The +NPING AT command can be issued to check if the module is able to send and receive data via the internet, or an internal network location.
 To ping Google’s DNS server:
@@ -988,49 +1022,29 @@ Whilst the simple `Ping` command is useful to measure connectivity and latency, 
 
 ## Primary Metrics
 
+Primary metrics power efficiency and latency are investigated as mentioned in \S\ref{proj_descr}.
+
 ### Power Efficiency
 
-Power efficiency is one of the main metrics focused on in this study. This section outlines a few preliminary tests and the design for the final field tests comparing UEs and MNOs.
+Power efficiency is one of the main metrics focused on in this study. This section outlines a few preliminary tests and the design for the final field tests comparing UEs and MNOs. Low power consumption is vital for battery longevity up to ~10 years or more. Power consumption is affect by various factors. In the hardware design, PCB layout, antenna matching and location will have an effect on the overall interference received by the module, SINR and ultimately transmit power. Transmit power also depends on the range and path loss to the UE device. With a weak signal, more repetitions are required, hence ECLs in \S\\ref{ECLs}. Other power saving mechanisms such as release assistance, PSM and eDRX mode work together to extend battery life as in \S\\ref{power-saving-mechanisms}.
 
-* ~ 10 years battery life
+![Ublox (blue) and Quectel (red) energy (J) per datagram as a function of the SINR (dB) as reported by the UE on the MTN-ZTE network limited to 1500 mJ. With the fading colour scheme and range just as in Martinez [@Martinez2019], Fig. \ref{fig:energy_sinr1400} shows the impact of SNR on energy consumption. As observed in the figure, there is a trend of increasing energy with respect to lower SNR levels and high variability. Unfortunately, the effect of different ECLs is unclear. \label{fig:energy_sinr1400}](../images/1571781182963.png){width=65%}
 
-Low power consumption is vital for battery longevity.
 
-* PCB layout, antenna matching and location will have an effect to the overall interference received by the module.
-* PSM and eDRX
-* On the other hand, although the average power is comparable, peaks in transmission of LoRaWAN’s radio are around 40 mA, while in NB-IoT they reach 220 mA. This causes additional stress on the battery, which has to be managed with care.
-* As can be observed, mean values for NB-IoT are similar to the energy that a LoRaWAN device requires to transmit while using the SF12 configuration. The 5th percentile results for NB-IoT (best observed performance) are comparable to the best case performance of LoRaWAN when operating at SF8. This is in our opinion a relevant result, as NB-IoT guarantees packet delivery with similar power consumption.
-* The expected achievable lifespan (on average) for a NB-IoT is on the order 2-3 years, depending on the datagram size.
-* However, adopters may take into consideration some differences. First, sending larger messages (up to 512 bytes) has almost no impact on NB-IoT.
-* In a simple periodic-reporting application with very limited computing requirements5, the average power can be modeled approximately by Eq. \ref{eq:avgpower}, as detailed in [21]:
 
-$$P = \frac{E_{msg}}{T_{msg}}$$ {#eq:avgpower}
+![Ublox (blue) and Quectel (red) energy (mJ) per datagram as a function of the SINR (dB) as reported by the UE on the MTN-ZTE network. Increasing the range fully and using logarithms in Fig. \ref{fig:energy_sinr_log}, one can see that there is significant overshoot on the MTN-ZTE network. The trend mentioned in Fig. \ref{fig:energy_sinr1400} continues. \label{fig:energy_sinr_log}](../images/1571781152992.png){width=65%}
 
-* **Power consumption**: In applications where device battery life is
-  a crucial factor we recommend, either LoRaWAN or Sigfox, because they are completely asynchronous. We found that the battery life of LoRaWAN SF 7 was five times that of LoRaWAN SF 12 and nearly 25 times that of Sigfox. This is mainly due to the extremely long time-on-air of LoRaWAN SF 12 and Sigfox. If NB- IoT worked with the mobile network operators to reduce its RRC- idle phase, it could develop a minimal power consumption to compare with that of LoRaWAN and Sigfox.
-  * It is clear that LoRaWAN SF7 is the most power-efficient, due to the short transmission burst. NB-IoT displays the worst power-consumption, due to the extended RRC-idle state. This can be reduced using Release Assistance as in \S\ref{release_a}.
 
-#### Energy versus SINR
-
-![Ublox (blue) and Quectel (red) energy (J) per datagram as a function of the SINR (dB) as reported by the UE on the MTN-ZTE network limited to 1500 mJ.\label{fig:energy_sinr1400}](../images/1571781182963.png){width=65%}
-
-With the fading colour scheme and range just as in Martinez [@Martinez2019], Fig. \ref{fig:energy_sinr1400} shows the impact of SNR on energy consumption. As observed in the figure, there is a trend of increasing energy with respect to lower SNR levels and high variability. Unfortunately, the effect of different ECLs is unclear.
-
-![Ublox (blue) and Quectel (red) energy (mJ) per datagram as a function of the SINR (dB) as reported by the UE on the MTN-ZTE network.\label{fig:energy_sinr_log}](../images/1571781152992.png){width=65%}
-
-Increasing the range fully and using logarithms in Fig. \ref{fig:energy_sinr_log}, one can see that there is significant overshoot on the MTN-ZTE network. The trend mentioned in Fig. \ref{fig:energy_sinr1400} continues.
 
 [](../images/1571785381395.png)
-
-#### Energy versus Datagram Size
 
 [](../../code/tests/datagrams/mtn_ublox_energy.png)
 
 [](../../code/tests/datagrams/quectel_sizes.png){width=65%}
 
 \begin{figure}[ht]
-  \subfloat[Datagram sizes of MTN-Ublox pair up to 1500 mJ. Note the steady increase in Energy consumption on the baseline, and the high variation.]{
-	\begin{minipage}[c][1\width]{
+  \subfloat[Datagram sizes of MTN-Ublox pair up to 1500 mJ.]{
+	\begin{minipage}[c][0.65\width]{
 	   0.48\textwidth}
 	   \centering
 	   \includegraphics[width=1.0\linewidth]{../../code/tests/datagrams/mtn_ublox_energy.pdf}
@@ -1038,35 +1052,14 @@ Increasing the range fully and using logarithms in Fig. \ref{fig:energy_sinr_log
 	\end{minipage}}
  \hfill 	
   \subfloat[Datagram sizes of MTN-Quectel pair up to 10 J]{
-	\begin{minipage}[c][1\width]{
+	\begin{minipage}[c][0.65\width]{
 	   0.48\textwidth}
 	   \centering
 	   \includegraphics[width=1.0\linewidth]{../../code/tests/datagrams/quectel_sizes.png}
 	\label{fig:udpsize2}
 	\end{minipage}}
-\captionof{figure}[UDP Datagram energy-sizes]{UDP Datagram energy-sizes}
-\label(fig:udpsize)
-\end{figure}
-
-Fig. \ref{fig:udpsize1} shows 
-
-#### eDRX Energy
-
-\begin{figure}[ht]
-  \subfloat[MTN-ZTE Ublox]{
-	\begin{minipage}[c][1\width]{
-	   0.48\textwidth}
-	   \centering
-	   \includegraphics[width=1.0\linewidth]{../images/1568090120083.png}
-	\end{minipage}}
- \hfill 	
-  \subfloat[MTN-ZTE Quectel]{
-	\begin{minipage}[c][1\width]{
-	   0.48\textwidth}
-	   \centering
-	   \includegraphics[width=1.0\linewidth]{../images/1568090147760.png}
-	\end{minipage}}
-\captionof{figure}[eDRX Energy]{eDRX Energy}
+\captionof{figure}[UDP Datagram energy-sizes]{UDP Datagram energy for different datagram packet sizes. Note the steady increase in energy consumption on the baseline, and the high variation. Although there is a slight trend in Fig. \ref{fig:udpsize}, it is not significant compared to the total variation for each datagram packet size.}
+\label{fig:udpsize}
 \end{figure}
 
 [](../images/1568090120083.png){width=45%}
@@ -1074,82 +1067,85 @@ Fig. \ref{fig:udpsize1} shows
 [](../images/1568090147760.png){width=50%}
 
 \begin{figure}[ht]
+  \subfloat[MTN-ZTE Ublox]{
+	\begin{minipage}[c][0.4\width]{
+	   0.48\textwidth}
+	   \centering
+	   \includegraphics[width=0.85\linewidth]{../images/1568090120083.png}
+	\end{minipage}}
+\hfill 	
+  \subfloat[MTN-ZTE Quectel]{
+	\begin{minipage}[c][0.4\width]{
+	   0.48\textwidth}
+	   \centering
+	   \includegraphics[width=0.85\linewidth]{../images/1568090147760.png}
+	\end{minipage}}
+\vspace{1mm}
   \subfloat[Vodacom-Nokia Ublox]{
-	\begin{minipage}[c][1\width]{
+	\begin{minipage}[c][0.4\width]{
 	   0.48\textwidth}
 	   \centering
-	   \includegraphics[width=1.0\linewidth]{../images/1568090173885.png}
+	   \includegraphics[width=0.85\linewidth]{../images/1568090173885.png}
 	\end{minipage}}
- \hfill 	
+\hfill 	
   \subfloat[Vodacom-Nokia Quectel]{
-	\begin{minipage}[c][1\width]{
+	\begin{minipage}[c][0.4\width]{
 	   0.48\textwidth}
 	   \centering
-	   \includegraphics[width=1.0\linewidth]{../images/1568090209468.png}
+	   \includegraphics[width=0.85\linewidth]{../images/1568090209468.png}
 	\end{minipage}}
-\captionof{figure}[eDRX Energy]{eDRX Energy}
+\captionof{figure}[eDRX Energy histogram]{eDRX histograms of the energy produced by listening for paging occassions with respect to RF attenuation in dBm as mentioned in \S\ref{lit_edrx_ptw}. Martinez \cite{Martinez2019} measured values under 10mJ for both Ublox and quectel, yet on the MTN-ZTE and Vodacom-Nokia networks it is up to 5 times more. Thus, it is apparent that network configuration is the cause of these differences.}
 \end{figure}
 
 [](../images/1568090173885.png){width=65%}
 
 [](../images/1568090209468.png){width=65%}
 
-#### PTAU Energy
-
-\begin{figure}[ht]
-  \subfloat[MTN-ZTE Ublox (mJ)]{
-	\begin{minipage}[c][1\width]{
-	   0.48\textwidth}
-	   \centering
-	   \includegraphics[width=1.0\linewidth]{../images/1568089886942.png}
-	\end{minipage}}
- \hfill 	
-  \subfloat[MTN-ZTE Quectel (mJ)]{
-	\begin{minipage}[c][1\width]{
-	   0.48\textwidth}
-	   \centering
-	   \includegraphics[width=1.0\linewidth]{../images/1568089931848.png}
-	\end{minipage}}
-\captionof{figure}[PTAU Energy]{PTAU Energy}
-\end{figure}
-
 [](../images/1568089886942.png){width=65%}
 
 [](../images/1568089931848.png){width=65%}
 
 \begin{figure}[ht]
+  \subfloat[MTN-ZTE Ublox (mJ)]{
+	\begin{minipage}[c][0.4\width]{
+	   0.48\textwidth}
+	   \centering
+	   \includegraphics[width=0.85\linewidth]{../images/1568089886942.png}
+	\end{minipage}}
+\hfill 	
+  \subfloat[MTN-ZTE Quectel (mJ)]{
+	\begin{minipage}[c][0.4\width]{
+	   0.48\textwidth}
+	   \centering
+	   \includegraphics[width=0.85\linewidth]{../images/1568089931848.png}
+	\end{minipage}}
+\vspace{1mm}
   \subfloat[Vodacom-Nokia Ublox (J)]{
-	\begin{minipage}[c][1\width]{
+	\begin{minipage}[c][0.4\width]{
 	   0.48\textwidth}
 	   \centering
-	   \includegraphics[width=1.0\linewidth]{../images/1568090001158.png}
+	   \includegraphics[width=0.85\linewidth]{../images/1568090001158.png}
 	\end{minipage}}
- \hfill 	
+\hfill 	
   \subfloat[Vodacom-Nokia Quectel (J)]{
-	\begin{minipage}[c][1\width]{
+	\begin{minipage}[c][0.4\width]{
 	   0.48\textwidth}
 	   \centering
-	   \includegraphics[width=1.0\linewidth]{../images/1568090070185.png}
+	   \includegraphics[width=0.85\linewidth]{../images/1568090070185.png}
 	\end{minipage}}
-\captionof{figure}[PTAU Energy]{PTAU Energy}
+\captionof{figure}[PTAU Energy]{PTAU histograms of the energy produced when periodically updating UE devices and networks with tracking area IDs as mentioned in \S\ref{lit_ptau}}
 \end{figure}
 
 [](../images/1568090001158.png){width=65%}
 
 [](../images/1568090070185.png){width=65%}
 
-#### Measured Max Current
-
 [](../../../masters/code/tests/plotterk/Signal_power_maxCurrent_plot.png)
-
-roughly between 70 and 120mA, and skewed towards higher consumption. It is also clamped at 128mA due to measurement limitations. 
-
-(A) Attenuation zones evident. (B) Both MTN and Vodacom share similar distributions of max current usage. (C) Tests are varied, yet UDP packet transmission tend to use more current. (D) ECL does not affect current usage.
 
 \begin{minipage}{\linewidth}
 \begin{center}
 \includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/maxCurrent_histogram.pdf}
-\captionof{figure}[Max current of packets histogram]{The latency-energy measurement hardware is limited to 128mA, and therefore we can see some clamping here. It shouldn't affect the energy readings much however, as maximum current occurs only during the first few microseconds of the random access preamble.}
+\captionof{figure}[Histogram showing peak current corresponding to datagram packets]{Peak energy measurements from roughly 70mA and skewed towards 128mA. These high peak energies shouldn't affect the average power much as peak current occurs only during the first few microseconds of the random access preamble (PRACH).}
 \label{fig:}
 \end{center}
 \end{minipage}

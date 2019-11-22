@@ -56,25 +56,25 @@ def test_release_rrelease0(request):
         OK('AT+CSOCL=0')
     capture(1)
 
-@pytest.mark.release
-def test_release_release1(request):
-    pytest.subtest = request.node.name.split('_')[-1] + '/'
-    if pytest.vendor == 'ublox':
-        expect('at+nsocl=0', '')
-        receiveAT(1)
-        OK('AT+NSOCR="DGRAM",17,14000,1')
-        for i in range(5):
-            expect('AT+NSOSTF=0,"1.1.1.1",7,0x200,1,"FF"', '+CSCON: 0', 300)
-            capture(1)
-        OK('at+nsocl=0')
-    elif pytest.vendor == 'quectel':
-        expect('at+nsocl=1', '')
-        receiveAT(1)
-        OK('AT+NSOCR=DGRAM,17,14000,1')
-        for i in range(5):
-            expect('AT+NSOSTF=1,1.1.1.1,7,0x200,1,FF', '', 1) #['+CSCON:0', '+NPSMR:'], 300)
-            capture(1)
-        OK('at+nsocl=1')
+# @pytest.mark.release
+# def test_release_release1(request):
+#     pytest.subtest = request.node.name.split('_')[-1] + '/'
+#     if pytest.vendor == 'ublox':
+#         expect('at+nsocl=0', '')
+#         receiveAT(1)
+#         OK('AT+NSOCR="DGRAM",17,14000,1')
+#         for i in range(5):
+#             expect('AT+NSOSTF=0,"1.1.1.1",7,0x200,1,"FF"', '+CSCON: 0', 300)
+#             capture(1)
+#         OK('at+nsocl=0')
+#     elif pytest.vendor == 'quectel':
+#         expect('at+nsocl=1', '')
+#         receiveAT(1)
+#         OK('AT+NSOCR=DGRAM,17,14000,1')
+#         for i in range(5):
+#             expect('AT+NSOSTF=1,1.1.1.1,7,0x200,1,FF', '', 1) #['+CSCON:0', '+NPSMR:'], 300)
+#             capture(1)
+#         OK('at+nsocl=1')
 
 
 @pytest.mark.release

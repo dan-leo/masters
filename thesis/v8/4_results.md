@@ -22,7 +22,7 @@ tablenos-number-by-section: true
 
 # Results {#results}
 
-This chapter visualizes and analyses the results from the datasets obtained in Chapter \ref{design}. The visualization format can be found in \S\ref{plots}.
+This chapter visualizes and analyzes the results from the datasets obtained in Chapter \ref{design}. The visualization format can be found in \S\ref{plots}.
 
 ## Primary Metrics
 
@@ -30,7 +30,7 @@ This section looks at primary metrics as mentioned in \S\ref{proj_descr}.
 
 ### Latency and Delay
 
-This section handles measured and reported latencies versus signal strength to see the effect of different attenuation zones and telemetry test types for multiple UE and MNOs. Fig. \ref{fig:latency_boxplot} shows us latency values for the entire dataset, and Fig. \ref{fig:latencyECL_boxplot} shows an example in ECL 1 network conditions.
+This section presents measured and reported latencies versus signal strength to see the effect of different attenuation zones and telemetry test types for multiple UE and MNOs. Fig. \ref{fig:latency_boxplot} shows us latency values for the entire dataset, and Fig. \ref{fig:latencyECL_boxplot} shows an example in ECL 1 network conditions.
 
 \begin{figure}[ht]
   \subfloat[Latency measurements from Appendix \ref{appendix_measured_latency} with a baseline just over 1 second. Ublox and Quectel performing similarily.]{
@@ -70,12 +70,12 @@ This section handles measured and reported latencies versus signal strength to s
 \label{fig:latencyECL_boxplot}
 \end{figure}
 
-There is a large discrepancy in the datagram latency between MTN and Vodacom due to Nokia's poor performance. Ublox and Quectel show similar characteristics in measurements but differ in reported values with Quectel showing greater differentiation.
+There is a large discrepancy in the datagram latency between MTN and Vodacom due to Nokia's poor performance. Ublox reports similar characteristics to measurements, but Quectel reports characteristics worse than expected in measurements.
 
 ### Power Efficiency
 
 \begin{figure}[ht]
-  \subfloat[Measured average power from Appendix \ref{appendix_energy_MP}. Huawei has a lower 25\% baseline at 10 uWh.]{
+  \subfloat[Measured average power from Appendix \ref{appendix_energy_MP}. Huawei has a lower 25\% baseline at 10 $\mu{W}{h}$.]{
 	\begin{minipage}[c][0.6\width]{
 	   0.48\textwidth}
 	   \centering
@@ -88,7 +88,7 @@ There is a large discrepancy in the datagram latency between MTN and Vodacom due
 	   \centering
 	   \includegraphics[width=1\textwidth]{../../code/tests/box/avgpowerEst.pdf}
 	\end{minipage}}
-\caption{Average power of telemetry test datagrams with a 25\% baseline around 30 uWh. At least 50\% of values centered at median range from 30 uWh to 1000 uWh, except for Nokia extending up to 10 000 uWh in measurements. Quectel shows slightly better values than Ublox. MTN remains the leader for datagram power efficiency for various telemetry tests.}
+\caption{Average power of telemetry test datagrams with a 25\% baseline around 30 $\mu{W}{h}$. At least 50\% of values centered at median range from 30 $\mu{W}{h}$ to 1000 $\mu{W}{h}$, except for Nokia extending up to 10 000 $\mu{W}{h}$ in measurements. Quectel shows slightly better values than Ublox. MTN remains the leader for datagram power efficiency for various telemetry tests.}
 \end{figure}
 
 
@@ -237,7 +237,7 @@ Considering the variance in figure \ref{fig:udpsize}, taking the mean would make
 
 ## Estimations
 
-### Telemetry Interval
+### Telemetry Interval {#res_telem_int}
 
 [](../../code/tests/box/intervalECL1.png)
 
@@ -260,7 +260,7 @@ Considering the variance in figure \ref{fig:udpsize}, taking the mean would make
 \caption{Telemetry interval estimation sending 16-512 byte packet payloads in ECL 1 network conditions. LTE vendors require messages to be sent between 5 minutes to an hour to last a year on a 9.36 Wh battery (AA-sized), except for Nokia requiring a telemetry interval around 10 hours. Quectel is measured to be better than Ublox, yet Ublox reports better values than Quectel. MTN leads Vodacom due to Nokia's poor performance.}
 \end{figure}
 
-### Battery longevity
+### Battery longevity {#res_battery}
 
 [](../../code/tests/box/longevityECL1.png)
 
@@ -312,7 +312,7 @@ Compare NB-IoT to Dash7, which can be considered a prominent bi-directional cont
 
 # Conclusion {#conclusion}
 
-Attenuation does not affect performance as much as the ECL level does, and includes
+Attenuation does not affect performance as much as the ECL classes do, and includes
 degradation to latency, energy consumption and packet size.
 
 The inefficiency between the two South African MNOs can either be attributed to poor
@@ -333,6 +333,8 @@ When looking at SigFox, we see a technology with far range, but data rates that 
 NB-IoT is a very promising technology. It can coexist with 2G/GSM and LTE networks. When comparing to 2G it has 7 times greater range, and in power saving modes time to transmission is a few seconds, compared to about a minute for 2G. There are a few successful use cases for NB-IoT in South Africa, such as smart metering, asset tracking etc.
 
 There are also a couple of hurdles in the way. Although lauded as a mere software upgrade, it does require the latest basestations and licensing fees. There needs to be a substantial revenue model which ties in with demand.
+
+Since it appears that ECL is the ultimate factor that should influence latency and energy usage, it is the metric used for battery life estimation as well.
 
 \newpage
 
@@ -405,7 +407,7 @@ Table: Latency Measurement (s) {#tbl:txTime}
 ## Average Power
 
 
-Table: Average Power (uWh) {#tbl:energy}
+Table: Average Power ($\mu{W}{h}$) {#tbl:energy}
 
 |                  | 16 B   | 64 B   | 128 B   | 256 B   | 512 B   | Echo   | COPS   | eDRX   | PTAU   |
 |------------------|--------|--------|---------|---------|---------|--------|--------|--------|--------|
@@ -459,7 +461,7 @@ Table: Average Power (uWh) {#tbl:energy}
 |                  |        |        |         |         |         |        |        |        |        |
 
 \newpage
-## Telemetry Interval
+## Telemetry Interval {#appendix_telemetry_MT}
 
 
 Table: Interval Estimate (hours) using measured energy values for 9.36Wh AA battery (Lithium Thionyl Chloride) to last 1 year. {#tbl:energy_interval}
@@ -516,7 +518,7 @@ Table: Interval Estimate (hours) using measured energy values for 9.36Wh AA batt
 |                  |        |        |         |         |         |        |        |        |        |
 
 \newpage
-## Battery Longevity
+## Battery Longevity {#appendix_battery_MT}
 
 
 Table: Longevity Estimate (years) for 9.36Wh AA battery (Lithium Thionyl Chloride) with hourly uses. {#tbl:energy_longevity}
@@ -691,7 +693,7 @@ Table: RX Time (s) {#tbl:rxTimeNW}
 
 ## Average Power Estimate
 
-Table: Average Power (uWh) {#tbl:energyE}
+Table: Average Power ($\mu{W}{h}$) {#tbl:energyE}
 
 |                  | 16 B    | 64 B    | 128 B    | 256 B   | 512 B    | Echo    | COPS    | eDRX    | PTAU    |
 | ---------------- | ------- | ------- | -------- | ------- | -------- | ------- | ------- | ------- | ------- |
@@ -745,7 +747,7 @@ Table: Average Power (uWh) {#tbl:energyE}
 
 \newpage
 
-## Telemetry Interval
+## Telemetry Interval {#appendix_telemetry_RT}
 
 Table: Interval Estimate in minutes using reported RX, TX Time for 9.36Wh AA battery (Lithium Thionyl Chloride) to last 1 year. {#tbl:energy_interval}
 
@@ -801,7 +803,7 @@ Table: Interval Estimate in minutes using reported RX, TX Time for 9.36Wh AA bat
 
 \newpage
 
-## Battery Longevity
+## Battery Longevity {#appendix_battery_RT}
 
 Table: Longevity Estimate in years using Reported RX, TX Time for 9.36Wh AA battery (Lithium Thionyl Chloride) with hourly uses. {#tbl:energy_longevity}
 
@@ -935,7 +937,7 @@ This is the time spent consuming current and is measured externally.
 
 (A) Attenuation per decade is evident. (B) Vodacom latency is up to 5 times greater, excluding outliers. (C) All tests show variation in latency except eDRX. (D) ECL is influenced by RSRP on MTN networks, but does not affect latency. Vodacom's increased latency shows from ECL 1 onwards.
 
-As opposed to Figure \ref{fig:sinr_latency}, in Figure \ref{fig:latency_rsrp} (ABCF) the characteristics of each MNO is distributed more evenly. RSRP measurements are across a 50dBm range for MTN-ZTE and 40dBm for Vodacom-Nokia with the weakest signals around -130dBm and -110dBm respectively. (DE) Attenuation per decade is evident according to RSRP. This RF metric is most beneficial to compare against when measuring the outcome of attenuations. (GH) Tests are varied across RSRP. (G) eDRX paging cycles and PTAU have the quickest latencies under a few seconds whilst COPS has the longest up to 10 seconds. (H) Echo tests have outlier network (de)registrations at Vodacom-Nokia. UDP packet byte size has high variance, yet only has an effect on latency in the fastest transmissions. (I) Most of Vodacom-Nokia's dataset is on ECL 1, yet MTN-ZTE's ECL 1 has much lower latency and variance. Increased ECL levels do not necessarily correlate with latency. Closer inspection is needed per test.
+As opposed to Figure \ref{fig:sinr_latency}, in Figure \ref{fig:latency_rsrp} (ABCF) the characteristics of each MNO is distributed more evenly. RSRP measurements are across a 50dBm range for MTN-ZTE and 40dBm for Vodacom-Nokia with the weakest signals around -130dBm and -110dBm respectively. (DE) Attenuation per decade is evident according to RSRP. This RF metric is most beneficial to compare against when measuring the outcome of attenuations. (GH) Tests are varied across RSRP. (G) eDRX paging cycles and PTAU have the quickest latencies under a few seconds whilst COPS has the longest up to 10 seconds. (H) Echo tests have outlier network (de)registrations at Vodacom-Nokia. UDP packet byte size has high variance, yet only has an effect on latency in the fastest transmissions. (I) Most of Vodacom-Nokia's dataset is on ECL 1, yet MTN-ZTE's ECL 1 has much lower latency and variance. Increased ECL classes do not necessarily correlate with latency. Closer inspection is needed per test.
 
 Extended Coverage Levels (ECL) are determined by the network. The eNB (base station) sets the number of transmission repetitions (ECL) according to received signal strength reported by the UE.
 
@@ -1045,7 +1047,7 @@ Energy outliers mainly from Vodacom at ECL 1 and the COPS, PTAU or UDP packet te
 
 All in all, Vodacom uses up to 40 times (200 Joules) more than MTN (up to 5 Joules).
 
-On a generic 3.7V lithium battery with 4Ah of storage, it has 14800mWh in total. In worst case scenarios, at 14mWh it will last for 1057 transmissions, and at the outlying 200mWh it will last for 74 transmissions. In terms of MTN, at 5 Joules (1.4mWh) there are 10570 transmissions available, and with Vodacom at 200 Joules (56mWh) it will last for 266 transmissions.
+On a generic 3.7V lithium battery with 4Ah of storage, it has 14800$mWh$ in total. In worst case scenarios, at 14$mWh$ it will last for 1057 transmissions, and at the outlying 200$mWh$ it will last for 74 transmissions. In terms of MTN, at 5 Joules (1.4$mWh$) there are 10570 transmissions available, and with Vodacom at 200 Joules (56$mWh$) it will last for 266 transmissions.
 
 With daily transmissions, one can hope for a year when connected to Vodacom, and with MTN it far exceeds the 10 year 3GPP standard with 28 years. This leaves enough room for scheduled downlink transmissions using eDRX.
 
@@ -1153,7 +1155,7 @@ The UE maintains a max output power of 23 dBm when connected to Vodacom towers, 
 
 [](../../../masters/code/tests/plotterk/TX_power_histogram.png)
 
-Around -100 dBm devices decrease their output power at roughly 10 dBm per decade of RSRP amplification when connected to MTN towers. This might be attributable to the ECL level that the eNodeB sets for the UE. If the tests are repeated for RSRP signals greater than -70 dBm, it can be assumed that the transmit power will eventually decrease to -56 dBm according to the AT+UTEST command in the Ublox N2 datasheet. If the transmit power decreases linearly according to RSRP, minimum output power would be achieved at -20 dBm or greater.
+Around -100 dBm devices decrease their output power at roughly 10 dBm per decade of RSRP amplification when connected to MTN towers. This might be attributable to the ECL classes that the eNodeB sets for the UE. If the tests are repeated for RSRP signals greater than -70 dBm, it can be assumed that the transmit power will eventually decrease to -56 dBm according to the AT+UTEST command in the Ublox N2 datasheet. If the transmit power decreases linearly according to RSRP, minimum output power would be achieved at -20 dBm or greater.
 
 ### Throughput
 

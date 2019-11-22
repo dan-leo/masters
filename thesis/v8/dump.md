@@ -786,3 +786,180 @@ protocol stack for performing single tests which could not be performed during t
 * 
 * MO Datagrams sent and received by IoT platform has these commands wrapped internally in a Constrained Application Protocol (CoAP) message and sent over UDP sockets. Once the module accepted a datagram it cannot be removed and will be transmitted to the network as soon as radio conditions permit. The only way to clear the module’s transmit queue is to reboot it. In good radio conditions, the transmission might take a few seconds. In bad radio conditions a transmission opportunity may not occur for minutes, days or weeks but the datagram will be transmitted once radio conditions are good enough. When a MO message is queued, the module will try to send the message to the base station. It will only send the next message once the previous message has been sent. If there is a radio link failure (RLF), the device will re-scan the channel ranges and try to reconnect to a base station. There may be a back off time where the device goes into deep-sleep mode before trying again.
 
+
+
+
+
+Unfortunately UE chipset and RF scanner manufacturers have implemented SINR measurement in various different ways which are not always easily comparable. While at first it may seem that defining SINR should be unambiguous, in case of LTE downlink this is not the case. This is because different REs within a radio frame carry different physical signals and channels each of which, in turn, see different interference power depending on inter-cell radio frame synchronization.
+
+For example, in a frame-synchronized network, **SINR estimation based on synchronization signals**(PSS/SSS) results in different SINR than SINR estimation based on Reference Signals, since in the latter case the frequency shift of the RS depends on the PCI plan.
+
+#### RSRQ
+
+
+
+
+
+
+
+
+
+**Throughput**: As throughput differs greatly between the four technologies, comparisons should rather be made in either the licensed (NB-IoT and GPRS) or unlicensed (Sigfox and LoRaWAN) spectrum categories. Applications that require huge amounts of data to be transmitted, such as real-time vehicle fleet monitoring, we recommend GPRS and NB-IoT as they are not duty cycle limited. The choice of GPRS or NB-IoT will be based on the battery life requirements of the IoT device, with NB-IoT having the advantage. In the case of extremely low-throughput applications, such as water meters, power meters, and weather stations, we recommend Sigfox, as it offers a scalable solution with no base station costs involved. Although it limits the 12 byte throughput per 24 h to 140 messages, this is more than the 20 messages offered by LoRaWAN SF12 (TTN).
+
+* As NB-IoT operates in the licensed spectrum, there are no
+  throughput restrictions, other than the data-rate restriction. We measured the uplink and downlink data rates in different signal quality environments (distances from the gateway) by querying the modem. The measured downlink rate varied from 2250 to 14,193 bps. We could find no clear correlation between the downlink data rate and the signal quality environment.
+
+
+
+
+
+### Dataset {#dataset}
+
+Every UE device and MNO pair (8 total) has 7 main tests and each has its own attenuation zone (5 total). 424 files create a dataset with 1811 trace entries, 40 possible metrics and 79921 values.
+
+Looking at the dataset as a whole this makes 140 unique outcomes (7x4x5). There are 15 subtest types which can be delved into, too.
+
+The dataset is also heavily skewed towards lower latency entries. Tests were repeated with the intent of increasing reliability, especially when it takes a couple of seconds, but when a test took up to 300 seconds it had a much lower chance of being repeated. Also considering that dataset capture may be repeated in different locations, one does not necessarily want to spend more than a day on-site.
+
+To solve for the skewness, each test can be normalized by taking a single mean of each of the associated trace entries and files. Now with a dataset of 140/1811 traces, it makes a minimum of 5600/79921 possible values.
+
+Unfortunately this created problems especially where only a few discrete values are concerned, such as in ECL, as multiple means exist. To solve this, k-means clustering is applied.
+
+
+
+
+
+```mermaid
+graph LR
+A[Square Rect] -- Link text --> B((Circle))
+A --> Cr(Round Rect)
+B --> D{Rhombus}
+
+U(Ublox)
+Q(Quectel)
+Z[ZTE]
+N[Nokia]
+E[Ericsson]
+H[Huawei]
+M[MTN]
+V[Vodacom]
+U --> Z
+Q --> Z
+U --> N
+Q --> N
+U --> E
+Q --> E
+U --> H
+Q --> H
+Z -- CPT --> M
+N -- CPT --> V
+E -- JHB --> M
+H -- JHB --> V
+t[Telemetry Tests] --> U
+t --> Q
+tpower[Power] --> t
+tlat[Latency] --> t
+tsig[Secondary] --> t
+test[Estimations] --> t
+t --> t1{UDP}
+t --> t2{Echo}
+t --> t3{COPS}
+t --> t4{eDRX}
+t --> t5{PTAU}
+
+
+```
+
+```mermaid
+graph LR
+U(Ublox)
+Q(Quectel)
+Z[ZTE]
+N[Nokia]
+E[Ericsson]
+H[Huawei]
+M[MTN]
+V[Vodacom]
+U --> Z
+Q --> Z
+U --> N
+Q --> N
+U --> E
+Q --> E
+U --> H
+Q --> H
+Z -- CPT --> M
+N -- CPT --> V
+E -- JHB --> M
+H -- JHB --> V
+a[Attenuation decades] --> U
+a --> Q
+t1[UDP] --> a
+t2[Echo] --> a
+t3[COPS] --> a
+t4[eDRX] --> a
+t5[PTAU] --> a
+```
+
+```mermaid
+graph LR
+a[Energy] --> b[Telemetry Tests]
+c[Timings] --> b
+d[AT+NUESTATS] --> b
+b --> e[Attenuation Decades]
+e --> f[UEs, LTE vendors, MNOS]
+f --> g[Power]
+f --> h[Latency]
+f --> i[Secondaries]
+f --> j[Estimations]
+```
+
+#### Probability estimation
+
+Due to the large dataset and requiring a reasonable means of visualization, we can consider a histogram.
+
+\begin{figure}[ht]
+  \subfloat[Example python histogram of a univariate latency distribution showing counts]{
+	\begin{minipage}[c][1\width]{
+	   0.48\textwidth}
+	   \centering
+	   \includegraphics[width=1.0\linewidth]{../../code/tests/old/img2/histogram_counts.pdf}
+	\end{minipage}}
+ \hfill 	
+  \subfloat[Histogram counts vary among various datasets when their sizes differ, so it would be a good idea to normalize it such that the area under the graph makes 1.0. The probability of the discrete data can also be estimated in a continuous probability density function (PDF) with the kernel density estimation.]{
+	\begin{minipage}[c][1\width]{
+	   0.48\textwidth}
+	   \centering
+	   \includegraphics[width=\linewidth]{../../code/tests/old/img2/probability_density_function_seaborn.pdf}
+	\end{minipage}}
+\captionof{figure}[Probability estimation on histogram latency sample]{Probability estimation on histogram latency sample}
+\end{figure}
+
+[](../../code/tests/old/img2/histogram_counts.png)
+
+[](../../code/tests/old/img2/probability_density_function_seaborn.png)
+
+\begin{figure}[ht]
+  \subfloat[Various types of kernel density estimation (KDE)]{
+	\begin{minipage}[c][1\width]{
+	   0.48\textwidth}
+	   \centering
+	   \includegraphics[width=\linewidth]{../../code/tests/old/img2/probability_density_function.pdf}
+	\end{minipage}}
+ \hfill 	
+  \subfloat[Various types of kernel density estimation (KDE) with histogram and KDE normalized in attempted probability mass function]{
+	\begin{minipage}[c][1\width]{
+	   0.48\textwidth}
+	   \centering
+	   \includegraphics[width=\linewidth]{../../code/tests/old/img2/probability_mass_function.pdf}
+	\end{minipage}}
+\captionof{figure}[Probability estimation on histogram latency sample]{Probability estimation on histogram latency sample}
+\end{figure}
+
+[](../../code/tests/old/img2/probability_density_function.png)
+
+If the histogram bin values are normalized by dividing by the bin count, adding the values makes 1 instead of integrating along the x-axis. Similarly, multiplying the PDF by its x-axis gives the following result. Although all the plotted values are now truly under 1, the KDE is shifted and doesn't seem usable.  The integration to 1 visualization typical in statistics has to be used.
+
+[](../../code/tests/old/img2/probability_mass_function.png)
+
+In fact, good practice would be viewing the data as is and not trying to analyze it from what is essentially an entirely new perspective. Thus, the data will be viewed as 2D plotted points and histograms. Colour will be used to group the data according to attenuation and packet size.

@@ -10,6 +10,8 @@ tablenos-warning-level: 1
 tablenos-number-by-section: true
 ---
 
+<!-- TODO: check protect\hyperlink -->
+
 [](../images/whitespace.png)
 
 [](../images/UScrest-WM.jpg){width=25%}
@@ -187,7 +189,10 @@ All rights reserved.
 - **kbps** - kilobits per second
 - **mJ or J** - millijoules or joules
 - **s, ms, us** - second, millisecond, microsecond
-- **mWh** - average power in milliwatt-hours
+- **uWh, mWh** - average power in micro/milliwatt-hours
+- **dB** - decibel
+- **dBm** - decibel milliwatt
+- **MHz, GHz** - megahertz, gigahertz
 
 \newpage
 
@@ -364,7 +369,7 @@ Although LTE vendors are open to all UE manufacturers, mobile network operators 
 
 These UEs all share AT commands as the API to control their capabilities.
 
-* u-blox is a Swiss company that creates wireless semiconductors and modules for consumer, automotive and industrial markets. They operate as a fabless IC and design house. 
+* Ublox is a Swiss company that creates wireless semiconductors and modules for consumer, automotive and industrial markets. They operate as a fabless IC and design house. 
 * Quectel is the leading global supplier of cellular and GNSS modules, with a broad product portfolio covering the most recent wireless technologies of 5G, LTE/LTE-A, NB-IoT/LTE-M, UMTS/HSPA(+), GSM/GPRS and GNSS. As a professional IoT technology developer and cellular module supplier, Quectel is able to provide one-stop services for IoT cellular modules. Quectel products have been widely applied in IoT/M2M fields including smart payment, telematics and transport, smart energy, smart cities, security, wireless gateways, industry, healthcare, agriculture, and environment monitoring. 
 * Nordic Semiconductor is a fabless semiconductor company. The company specializes in ultra-low power performance wireless system on a chip and connectivity devices for the 2.4 GHz ISM band, with power consumption and cost being the main focus areas.
 * **SIMCom Wireless Solutions** is a subsidiary of SIM Technology Group Ltd. It is a fast-growing wireless M2M company, designing and offering a variety of wireless modules based on GSM/GPRS/EDGE,WCDMA/HSDPA and TD-SCDMA technical platforms.
@@ -417,35 +422,6 @@ MTN NB-IoT sim cards can currently be obtained only for testing purposes, and it
 ## Thesis structure {#thesis-struct}
 
 NB-IoT is introduced to the reader in Chapter \ref{intro}. A literature study reviews the current empirical research in Chapter \ref{litstudy}. Design and methodology shows the steps taken to capture different metrics and process the resulting dataset in Chapter \ref{design}. Results are analyzed in Chapter \ref{results} and discussed with recommendations in Chapter \ref{#discussion}. Lastly, a conclusion is made in Chapter \ref{conclusion}.
-
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
 
 \newpage
 
@@ -657,6 +633,12 @@ $$P = \frac{E_{msg}}{T_{msg}}$$ {#eq:avgpower}
 
 From Durand's results it is clear that LoRaWAN SF7 is the most power-efficient, due to the short transmission burst. NB-IoT displays the worst power-consumption, due to the extended RRC-idle state [@Thomas2018]. This can be reduced using Release Assistance as in \S\ref{release_a}.
 
+If downlink latency is a critical component without battery life constraints, GPRS would be better suited as it requires constant signaling between BTS and UE device. Otherwise, applications requiring bidirectional communications of more than 120 bytes per day should use GPRS or NB-IoT, as LoRaWAN and SigFox are limited by duty-cycle since they use unlicensed frequencies. In deep coverage situations, SigFox and NB-IoT is recommended as it offers an MCL of more than 158 dBm [@Thomas2018]. In South Africa, GPRS and SigFox have similar levels of coverage, and the choice in wireless technology depends on data throughput. Low bandwidth wireless technologies typically have more range than their high data throughput counterparts. That's why SigFox requires few sites to cover vast areas, compared to GPRS or LTE networks. NB-IoT should be similar to SigFox in this regard, as they share similar MCLs.
+
+For IoT devices used in extended coverage situations, such as deep-indoor devices or remote locations, we recommend either Sigfox or NB-IoT, as they offer a maximum MCL of more than 158 dB. IoT devices for general use would benefit from the large-scale deployment of the GPRS network, which provides excellent coverage because of its legacy infrastructure. It is clear that the extra overhead available in Sigfox, LoRaWAN, and NB-IoT allows for better indoor coverage than GPRS, which means that the LPWAN devices can be used in less than optimal operating conditions. Measured MCL correlates with theoretical values.
+
+In terms of throughput, it's important to note that unlicensed spectrum LPWANs such as SigFox and LoRaWAN are heavily duty cycled, unlike cellular technologies such as NB-IoT or GPRS.
+
 
 ## Use Cases {#usecases}
 
@@ -794,7 +776,7 @@ radio using the AT+CFUN=0 command.
 After network registration or transmission of a data packet, the device usually enters RRC connected (C-DRX) for a network-specified `inactivity timeout` and receives all the base station (BTS) signalling. Sending and receiving messages in this mode is immediate, otherwise with no activity average power is typically ~50mA. If the RRC connection is left for 20 s of inactivity before the RRC is released, then this will consume about 1 mWh @ 3.6V. At the end of this period, if no messages are being transmitted from the module, the +CSCON response will be “0” to show the RRC connection has been released by the eNodeB.
 
 \hypertarget{power-saving-mechanisms}{%
-\subsubsection[Power-Saving Mechanisms: T3324 Active, T3412 PTAU, eDRX,PTW,Release-A]{Power-Saving Mechanisms}\label{power-saving-mechanisms}}  
+\subsubsection[Power-Saving Mechanisms: T3324 Active, T3412 PTAU, eDRX,PTW, Release-A]{Power-Saving Mechanisms}\label{power-saving-mechanisms}}  
 
 <!--### Power-Saving Mechanisms: T3324 Active, T3412 PTAU, eDRX, PTW, Release-A-->
 
@@ -960,35 +942,6 @@ With AT commands, UE devices can be controlled to an extent on the client-side e
 
 With a deeper understanding of NB-IoT in this chapter, we can see how it exhibits variable characteristics as opposed to what theoretical analysis or simulations can provide due to the complexities of the underlying legacy LTE architecture and most notably in the energy consumption of datagram packets, besides other metrics. NB-IoT has a strong footprint in IoT due to its low-power bidirectionality which gives it an edge over other LPWANs, and this enables a broad variety of use cases. Since we can now better understand the different facets of NB-IoT, related concepts and literature as stated above, we can further investigate the change in variability across different UE devices and LTE vendors in Chapter \ref{design}.
 
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-
 \newpage
 
 # Design and Methodology {#design}
@@ -1004,9 +957,9 @@ More than one UE is used to improve the accuracy of the result, namely Ublox and
 
 These tests better orient the reader to the behavior of UE devices and LTE network.
 
-### Network Info
+### Network Info and Behavior
 
-This section looks at certain aspects of LTE networks.
+This section looks at certain informative aspects and behavior of LTE networks.
 
 #### System Information Blocks (SIB)
 
@@ -1014,10 +967,10 @@ SIBs carry relevant information for the UE, which helps UE to access a cell, per
 
 See Appendix \ref{appendix_sibs} for examples of NB-IoT SIB blocks.
 
-* Downlink systemInformationBlockType1
-* Downlink systemInformation
-* Uplink rrcConnectionRequest
-* Downlink rrcConnectionSetup
+* Downlink `systemInformationBlockType1`
+* Downlink `systemInformation`
+* Uplink `rrcConnectionRequest`
+* Downlink `rrcConnectionSetup`
 
 Table: System Information Blocks description {#tbl:sib_descr}
 
@@ -1039,7 +992,7 @@ Table: System Information Blocks description {#tbl:sib_descr}
 
 It is important to realize how intricate the underlying architecture of LTE is. For example, considering the singalling between UE and eNodeB using SIBs, we see this in action. This complexity hints that the probably cause of variation is due to the LTE network configuration.
 
-#### Extended Coverage Level (ECL)
+#### Extended Coverage Level (ECL) {#pre_ECL}
 
 Extended Coverage Levels increase the amount of repetitions between UE and eNodeB to increase range. Henceforth, this should mean that a weaker signal strength increases the ECL level. There are 3 levels, with level 0 being the least repetitions, and 2 being the most.
 
@@ -1063,20 +1016,20 @@ These identifiers are related to the specific cell towers the UE is connected to
 
 The Cell ID is the physical network cell ID. EARFCN uniquely identifies the LTE band and carrier frequency. PCIs, or Physical Cell Identifiers provide a psuedo-unique value for identifying eNodeBs and is a unique identifier for serving cells. The PCI value is created from two components - PSS and SSS. The PSS, Primary Synchronization Signal, has the value 0, 1, or 2. The SSS, Secondary Synchronization Signal, can have a value between 0 and 167.
 
-Table: PCI, Cell ID count and EARFCN after K-means cluster filtering with tuples in (Ublox, Quectel) format. {#tbl:nw_parameters}
+Table: PCI, Cell ID and EARFCN count as a result of registrations with LTE networks. Tuples are in (Ublox, Quectel) format. {#tbl:nw_parameters}
 
-| PCI  | Cell ID   |      | ZTE      | Nokia    |
-| ---- | --------- | ---- | -------- | -------- |
-| 123  | 239882509 |      | (34, 26) |          |
-| 14   | 2671716   |      | (13, 29) |          |
-| 11   | 2672484   |      | (1, 4)   |          |
-| 2    | 484196    |      |          | (34, 32) |
-|      |           |      |          |          |
-|      | EARFCN    |      |          |          |
-|      | 3712      |      | (48, 59) |          |
-|      | 3564      |      |          | (34, 32) |
+| PCI  | Cell ID   |      | ZTE-MTN  | Nokia-Vodacom |
+| ---- | --------- | ---- | -------- | ------------- |
+| 123  | 239882509 |      | (34, 26) |               |
+| 14   | 2671716   |      | (13, 29) |               |
+| 11   | 2672484   |      | (1, 4)   |               |
+| 2    | 484196    |      |          | (34, 32)      |
+|      |           |      |          |               |
+|      | EARFCN    |      |          |               |
+|      | 3712      |      | (48, 59) |               |
+|      | 3564      |      |          | (34, 32)      |
 
-In Table \ref{tbl:nw_parameters} we see three towers on the MTN-ZTE network. More than one tower at the same frequency or EARFCN proves that Intra-Frequency Cellular Reselection works as expected.
+In Table \ref{tbl:nw_parameters} we see three cell towers on the MTN-ZTE network. More than one tower at the same frequency or EARFCN proves that Intra-Frequency Cellular Reselection works as expected.
 
 [](../../../masters/code/tests/plotterk/Signal_power_Cell_ID_plot.png)
 
@@ -1161,9 +1114,11 @@ This gives a good idea as to the range expected according to RSRP, with more inf
 
 #### NB-IoT
 
-Using a Quectel BG96, the following tests were taken on the rooftop described in Fig. \ref{fig:rooftop}.
+Using a Quectel BG96, the following tests were taken on the rooftop described in Fig. \ref{fig:rooftop}[^zte_tests].
 
-![Rooftop outside the HF RF lab on the 5th floor of the Electrical & Electronic Engineering building. The base station it connected to is on the General Building, and is just over 150m away at the same elevation with a single building blocking line-of-sight. The base station is situated on the bottom left of the picture at an altitude of approximately 138m. \label{fig:rooftop}](C:\GIT\masters\thesis\images\rooftop_maps.JPG){width=50%}
+![Rooftop outside the HF RF lab on the 5th floor of the Electrical & Electronic Engineering building. The base station it connected to is on the General Building, and is just over 150m away at the same elevation with a single building blocking line-of-sight. The base station is situated on the bottom left of the picture at an altitude of approximately 138m. \label{fig:rooftop}](C:\GIT\masters\thesis\images\rooftop_maps.JPG){width=60%}
+
+[^zte_tests]: The MTN-ZTE test dataset \S\ref{dataset} was captured inside the RF enclosure inside the HF RF lab.
 
 The tests involve sending a set of 10 pings multiple times at a certain attenuation and resulting RSSI measurement using a Quectel BG96 modem.
 
@@ -1995,7 +1950,7 @@ Whilst the simple `Ping` command is useful to measure connectivity and latency, 
 
 ## Primary Metrics
 
-Primary metrics power efficiency and latency are investigated as mentioned in \S\ref{proj_descr}.
+Primary metrics power efficiency and latency are investigated as mentioned in \S\ref{proj_descr}. Primary and secondary metrics have a few preliminary tests performed using Ublox and Quectel devices on MTN-ZTE and Vodacom-Nokia networks.
 
 ### Power Efficiency
 
@@ -2067,7 +2022,7 @@ Power efficiency is one of the main metrics focused on in this study. This secti
 	   \centering
 	   \includegraphics[width=0.85\linewidth]{../images/1568090209468.png}
 	\end{minipage}}
-\captionof{figure}[eDRX Energy histogram]{eDRX histograms of the energy produced by listening for paging occassions with respect to RF attenuation in dBm as mentioned in \S\ref{lit_edrx_ptw}. Martinez \cite{Martinez2019} measured values under 10mJ for both Ublox and quectel, yet on the MTN-ZTE and Vodacom-Nokia networks it is up to 5 times more. Thus, it is apparent that network configuration is the cause of these differences.}
+\captionof{figure}[eDRX Energy histogram]{eDRX histograms of the energy produced by listening for paging occassions with respect to RF attenuation in dBm as mentioned in \S\ref{lit_edrx_ptw}. Martinez {[}\protect\hyperlink{ref-Martinez2019}{3}{]} measured values under 10mJ for both Ublox and Quectel, yet on the MTN-ZTE and Vodacom-Nokia networks it is up to 5 times more. Thus, it is apparent that network configuration is the cause of these differences.}
 \end{figure}
 
 [](../images/1568090173885.png){width=65%}
@@ -2106,7 +2061,7 @@ Power efficiency is one of the main metrics focused on in this study. This secti
 	   \centering
 	   \includegraphics[width=0.85\linewidth]{../images/1568090070185.png}
 	\end{minipage}}
-\captionof{figure}[PTAU Energy]{PTAU histograms of the energy produced when periodically updating UE devices and networks with tracking area IDs as mentioned in \S\ref{lit_ptau}}
+\captionof{figure}[PTAU Energy]{PTAU histograms of the energy produced when periodically updating UE devices and networks with tracking area IDs as mentioned in \S\ref{lit_ptau}. PTAU uses about 20-100 times more power than eDRX for MTE-ZTE and up to 4000 times more energy on Vodacom-Nokia. Frequent PTAU updates should definitely be taken into consideration.}
 \end{figure}
 
 [](../images/1568090001158.png){width=65%}
@@ -2127,262 +2082,179 @@ Power efficiency is one of the main metrics focused on in this study. This secti
 
 ### Latency and Timing
 
-Latency and timing is also one of the main metrics focused on in this study. This section outlines a few preliminary tests and the final design of field tests.
+Latency and timing is also one of the main metrics focused on in this study. This section outlines a few preliminary tests and the final design of field tests. Latency was measured externally using energy capture device (\S\ref{energy_capture_device}) and UE reported values. UE reported values are extracted from `AT+NUESTATS="RADIO"` and relevant variables include `TX Time` and `RX Time` which are expressed in milliseconds since boot. `TX Time` is the duration for which the modem has been transmitting RF signals. `RX Time` is the duration for which the modem's receiver has monitored the downlink channel for activity. Together these time values can be used to assess latency and estimate the power consumed by the module.
 
-* **Down link latency**: In applications where downlink latency is a
-  critical component, only GPRS will suffice, as it is the only technology in this study that requires constant paging between the base station and the end device. 
-* **Down link throughput**: Any applications requiring bi-directional communication of more than 120 bytes per 24 h, should use NB- IoT or GPRS, as Sigfox and LoRaWAN are limited by the duty- cycle limitations of the base station. 
+Initial network registration will show `RX Time` increasing as it scans for a BTS. Once found, `TX Time` will start to increase until successful registration.
 
-#### TX, RX Time
+![Latency per datagram as a function of the SINR (dB) as reported by the UE on the (D) MTN-ZTE and (E) Vodacom-Nokia network respectively. In Fig. \ref{fig:latency_sinr_comp}, there is a poor distinction between attenuation zones as the SINR varies throughout the reported RSRP range. Grouping the data according to attenuation decade is important to see the effect of network conditions clearly. \label{fig:latency_sinr_comp}](../images/1571781751620.png){width=50%}
 
-TX Time is the duration for which the module’s transmitter has been switched on.
 
-RX Time is the duration for which the module’s receiver has been monitored for downlink
-activity (both expressed in milliseconds since the last reboot). Together these can be used to
-assess the time the module spends in each state and hence estimate the power consumed by
-the module.
-
-When the module first tries to register with the network, the Tx time will be zero as it will not have
-instantly found a base station. The Rx time will increase to show it is scanning for a base station.
-Once a base station is found it is possible to see that it is attempting to transmit to the base station
-as the Tx time will start to increase. If the base station does not respond to the module’s Tx, then
-the +CSCON: 1 URC will not be issued.
-
-#### Latency vs SINR
-
-![Latency per datagram as a function of the SINR (dB) as reported by the UE on the (D) MTN-ZTE and (E) Vodacom-Nokia network respectively.\label{fig:latency_sinr_comp}](../images/1571781751620.png){width=50%}
-
-In Fig. \ref{fig:latency_sinr_comp}, there is a poor distinction between attenuation zones as the SINR varies throughout the reported RSRP range. Grouping the data according to attenuation decade is important to see the effect of network conditions clearly.
 
 ## Secondary Metrics
 
-![LTE RSRQ and SINR RF Conditions](../images/LTE-RF-Conditions.png)
+Secondary metrics, \S\ref{proj_descr}, are metrics of interest which have less of an impact than power or latency, namely signal strength, throughput and data overhead.
 
-Tests were completed in good, mid cell and cell edge RF conditions.
+### Signal Strength {#sigstrength}
 
-### Signal Strength
+Signal strength is affected by range and path loss. It also affects the ECL class that the network chooses depending on the signal strength that UE devices report to the network. Therefore, it is important to observe characteristics across a range of values.
 
-Signal strength can be measured using the following metrics:
+![LTE RSRQ and SINR RF Conditions. Tests were completed in good, mid cell and cell edge RF conditions as these would be the most common values in the field showing the typical network characteristics and variation.](../images/LTE-RF-Conditions.png)
 
-* MCL
-* RSRP
-* RSSI
-* RSRQ
-* SNR
-* TX Power
+Signal strength can be measured or reported from the UE device and the following metrics are all related: MCL, RSRP, RSSI, RSRQ, SNR, TX Power and ECLs.
 
 #### MCL
 
-For IoT devices used in extended coverage situations,
-such as deep-indoor devices or remote locations, we recommend either Sigfox or NB-IoT, as they offer a maximum MCL of more than 158 dB. IoT devices for general use would benefit from the large-scale deployment of the GPRS network, which provides excellent coverage because of its legacy infrastructure. It is clear that the extra overhead available in Sigfox, LoRaWAN, and NB-IoT allows for better indoor coverage than GPRS, which means that the LPWAN devices can be used in less than optimal operating conditions. Measured MCL correlates with theoretical values.
+Maximum Coupling Link (MCL), as defined in \S\ref{lit_mcl}, is the greatest link between UE device and eNodeB. This can be calculated by using the minimum values obtained in the field capture datasets in \S\ref{dataset}.
 
 #### RSRP
 
-RSRP or "Signal Power" is the power of the wanted part of the receive signal, the NB-IoT part.
+Reference Signal Receive Power (RSRP) or "Signal Power" is an average power measurement of the received power level in an LTE network, via a single reference signal in dBm.
 
-![](../../../masters/code/tests/plotterk/Signal_power_histogram.png)
+![RSRP distribution using Ublox and Quectel UE on ZTE-MTN and Nokia-Vodacom infrastructure as well as attenuation and telemetry test set. RSRP and telemetry tests have a relatively even distribution, although RSRP still has about 20 dBm variance per attenuation decade. ZTE signals have higher MCL than Nokia.](../../../masters/code/tests/plotterk/Signal_power_histogram.png)
 
 #### RSSI
 
-RSSI or "Total Power" in terms of UE reports, is the radio signal strength within the receive bandwidth (both expressed in 10ths of a decibel). From this the signal to noise ratio can be calculated.
+Received Signal Strength Indicator (RSSI) or "Total Power", is the radio signal strength within the receive bandwidth. It usually combines the value of transmit power in the index. From this the signal to noise ratio (SINR) can be calculated.
 
-![RSSI](../images/image-20191112172439750.png){width=50%}
+[](../images/image-20191121214503255.png)
+
+![RSSI against RSRP for Ublox and Quectel devices (similar, thus combined) on MTN-ZTE (left) and Vodacom-Nokia (right). RSSI has a shorter 'range' than RSRP due to transmit power being included, and thus more information can be observed when comparing metrics against RSRP.](../images/image-20191112172439750.png){width=65%}
 
 #### SINR {#design_sinr}
 
-Last SNR value.
+Signal-to-interference-plus-noise ratio (SINR) is a measure of signal quality. It is proprietary to LTE vendors since it is not defined in 3GPP specs, yet still widely used to better quantify the relationship between RF conditions and throughput.
+
+![SINR against RSRP for Ublox and Quectel devices (relatively similar for now, thus combined) on MTN-ZTE (left) and Vodacom-Nokia (right). Each attenuation zone shows similar ranges of SINR, thus not as useful as RSRP when comparing other metrics against it. Ideally it should show a more linear relationship, and it is possible that these SINR readings are not accurate and contributing to variations in measured metrics.](../images/image-20191121230109015.png){width=65%}
+
+
+
+Unfortunately, it has been implemented in various different ways which aren't trivially comparable. For example, using a synchronization signal (based off a PCI assigned by eNodeB) instead of a reference signal in estimation already results in a different SINR [@lte_rsrq_sinr2019].
 
 #### RSRQ
 
-**RSRQ = N x RSRP / RSSI**
+Reference Signal Received Quality (RSRQ) is a measure of the quality of received power and is defined by Eq. \ref{eq:RSRQ}.
 
-![LTE RSRQ reporting range](../images/CableFree-LTE-RSRQ-reporting-range.png)
+$$RSRQ\ =\ N\ x\ \frac{RSRP}{RSSI}$$ {#eq:RSRQ}
 
-- N is the number of Physical Resource Blocks (PRBs) over which the RSSI is measured, typically equal to system bandwidth
-- RSSI is pure wide band power measurement, including intracell power, interference and noise
-- The reporting range of RSRQ is defined from -3…-19.5dB
+![LTE RSRQ reporting range defined from -3…-19.5dB](../images/CableFree-LTE-RSRQ-reporting-range.png)
+
+In Eq. \ref{eq:RSRQ}, N is the number of Physical Resource Blocks (PRBs) over which the RSSI is measured, typically equal to system bandwidth, and RSSI is defined as above.
 
 [](../../../masters/code/tests/plotterk/RSRQ_histogram.png)
 
-![RSRQ](../images/image-20191112173112378.png)
-
- https://www.cablefree.net/wirelesstechnology/4glte/lte-rsrq-sinr/
-
-SINR is a measure of signal quality as well but it is not defined in the 3GPP specs but defined by the UE vendor. It is not reported to the network. SINR is used a lot by operators, and the LTE industry in general, as it better quantifies the relationship between RF conditions and throughput. 
-
-It is a common practice to use Signal-to-Interference Ratio (SINR) as an indicator for network quality. It should be however noted that 3GPP specifications do not define SINR and  therefore UE does not report SINR to the network. SINR is still internally measured by most UEs and recorded by drive test tools.
-
-Unfortunately UE chipset and RF scanner manufacturers have implemented SINR measurement in various different ways which are not always easily comparable. While at first it may seem that defining SINR should be unambiguous, in case of LTE downlink this is not the case. This is because different REs within a radio frame carry different physical signals and channels each of which, in turn, see different interference power depending on inter-cell radio frame synchronization.
-
-For example, in a frame-synchronized network, **SINR estimation based on synchronization signals**(PSS/SSS) results in different SINR than SINR estimation based on Reference Signals, since in the latter case the frequency shift of the RS depends on the PCI plan.
+![RSRQ against RSRP for Ublox and Quectel devices (similar, thus combined) on MTN-ZTE (left) and Vodacom-Nokia (right).](../images/image-20191112173112378.png){width=65%}
 
 #### Transmit power
 
-* It is the RF power output from the module. It may be a low number if the
-  received signal strength is good (and hence the module assumes that the base station is close
-  by).
-* Ideally the module
-  should consume 230 mA for +23 dBm.
+Transmit power is the RF power output from the modem. It should be a lower number if within good coverage. Modems would typically consume ~230 mA for +23 dBm.
 
-#### ECL
+#### ECLs
 
-  It is equivalent to "PRACH coverage enhancement level" defined in 3GPP 36.321 [3] sub
-  clause 5.1
+ECLs are equivalent to "PRACH coverage enhancement level" defined in 3GPP 36.321 [3] sub clause 5.1
 
-  * As observed, the ECL has an impact on energy consumption, but not on the delay.
+As observed in \S\ref{pre_ECL}, ECLs seem unaffected by RSRP. Due to repetition, it should have an impact on energy consumption and latency.
 
 ### Throughput
 
-Data can be extracted from UDP packet transmissions using latency and data size
+Data can be extracted from UDP packet transmissions using latency and data size as in Eq. \ref{eq:thp}.
 
-$THP = \frac{Datagram\ Size}{Latency}$
+$${THP}\ =\ \frac{Datagram\ Size}{Latency}$$ {#eq:thp}
 
-It also comes from RLC and MAC reporting.
-
-
-
-**Throughput**: As throughput differs greatly between the four technologies, comparisons should rather be made in either the licensed (NB-IoT and GPRS) or unlicensed (Sigfox and LoRaWAN) spectrum categories. Applications that require huge amounts of data to be transmitted, such as real-time vehicle fleet monitoring, we recommend GPRS and NB-IoT as they are not duty cycle limited. The choice of GPRS or NB-IoT will be based on the battery life requirements of the IoT device, with NB-IoT having the advantage. In the case of extremely low-throughput applications, such as water meters, power meters, and weather stations, we recommend Sigfox, as it offers a scalable solution with no base station costs involved. Although it limits the 12 byte throughput per 24 h to 140 messages, this is more than the 20 messages offered by LoRaWAN SF12 (TTN).
-
-* As NB-IoT operates in the licensed spectrum, there are no
-  throughput restrictions, other than the data-rate restriction. We measured the uplink and downlink data rates in different signal quality environments (distances from the gateway) by querying the modem. The measured downlink rate varied from 2250 to 14,193 bps. We could find no clear correlation between the downlink data rate and the signal quality environment.
+However, the UE reports RLC and MAC uplink and downlink separately, and therefore this will be used as these will be close to the theoretical maximum throughput of the UE device.
 
 #### FOTA Upgrades
 
-GPRS and NB-IoT are able to offer FOTA upgrades to IoT devices, as Sigfox has limited bandwidth. This feature is supported by LoRaWAN, through the fragmentation of large payloads [22].
+GPRS and NB-IoT are able to offer FOTA upgrades to IoT devices, as Sigfox has limited bandwidth. This feature is supported by LoRaWAN, through the fragmentation of large payloads [22]. Since no correlation was found by Durand [@Thomas2018] with repect to downlink throughput and received signal power, that downlink latency is much less due to the higher bandwidth the eNodeB can provide and that FoTA updates are insignificantly infrequent, they will not be investigated in this study, although it can be in future.
 
 ### Data Overhead
 
-Variation in data overhead can be measured using TX, and RX byte counters.
-
-* The module has a limited dynamic message queue size. For IoT applications, the message size should be of the order of tens of bytes. UDP socket commands limit their payload size to 512 bytes.
-* There is no indication when the UDP data has been sent.
-* Downlink data from the cloud server must also be 512 bytes or less, because otherwise the messages will be lost.
-* The module has an internal message buffer. If the module is unable to send the messages to the network before this buffer is full, because the application is queueing quicker than it can send them, then the UE device will return ERROR for the +NSOST/+NSOSTF commands.
-* If a message cannot be sent because of communication issues between the module and eNB, the module will attempt to send the message a second time. If this fails, the message will be dropped. As +NSOST/+NSOSTF messages are UDP, there is no indication the message has been dropped.
-* The UDP header is about 48-60 bytes in length, and so an application sending 100 bytes will actually send about 160 bytes. For devices in the extreme coverage class 2, this can be quite costly.
-* The UE device may later resume the RRC Connected state with that context, thus avoiding the AS setup and saving considerable signaling overhead for the transmission of infrequent small data packets.
+Variation in data overhead can be measured using TX, and RX byte counters. Usually the heavier the IoT protocol the more overhead, but we want to see the minimum overhead and therefore UDP is chosen out of TCP, CoAP and MQTT. UDP payloads are dynamic in size, but limited to 512 bytes. The UDP header is about 48-60 bytes in length, and so an application sending 100 bytes will actually send about 160 bytes. For devices in the extreme coverage class 2, this can be quite taxing on battery life and costly in terms of airtime. UDP sockets can remain open in PSM mode, so that the UE device may later resume the RRC connection with that context, thus saving considerable signaling overhead for the setup and transmission of infrequent small data packets.
 
 ## Estimations
 
-A few metrics are estimated in this study.
+Two metrics are estimated in this study, including telemetry interval and battery longevity.
 
 ### Telemetry Interval
 
-The recommended telemetry interval can be estimated for a subtest.
-
-* Telemetry interval periodicity.
+The recommended telemetry interval or periodicity can be estimated for each telemetry type, including differently-sized UDP transmissions, Echo, COPS, eDRX and PTAU. In \S\ref{res_telem_int}, telemetry interval is estimated in hours using the mean measured and UE reported values obtained in Appendix \ref{appendix_telemetry_MT} and \ref{appendix_telemetry_RT}.
 
 ### Battery longevity
 
-The battery longevity can be estimated for each subtest.
+Similarily, the battery longevity can be estimated for each telemetry type, including differently-sized UDP transmissions, Echo, COPS, eDRX and PTAU. In \S\ref{res_battery}, battery longevity is estimated in years using the mean measured and UE reported values obtained in Appendix \ref{appendix_battery_MT} and \ref{appendix_battery_RT}.
 
 ## Field Test Captures
 
 Ublox and Quectel data has been captured for:
 
 * Nokia networks at Vodacom head office in Century City, Cape Town
-* ZTE at the MTN Mobile Intelligence Lab, Stellenbosch inside an RF enclosure with the door slightly open before being sealed.
+* ZTE at the MTN Mobile Intelligence Lab, Stellenbosch inside an RF enclosure with the door slightly open (to ultimately reach the edge of received signal strength).
 * Ericsson at MTN headquarters on 14th Avenue, Johannesburg
-* Huawei in Fairlands, JHB
+* Huawei on the Vodacom network in Quellerina, Randburg, Johannesburg
 
-### Dataset
+### Dataset {#dataset}
 
-Every UE device and MNO pair (4 total) has 7 main tests and each has its own attenuation zone (5 total). 424 files create a dataset with 1811 trace entries, 40 possible metrics and 79921 values.
+The total dataset can be better represented visually in Figures \ref{fig:dataset1} and \ref{fig:dataset2}.
 
-Looking at the dataset as a whole this makes 140 unique outcomes (7x4x5). There are 15 subtest types which can be delved into, too.
+![Visual representation of dataset. Five telemetry tests performed to at least five attenuation zone decades on two UE devices, four LTE vendors and two MNOs in Cape Town and Johannesburg. \label{fig:dataset1}](../images/image-20191122053300705.png){width=85%}
 
-The dataset is also heavily skewed towards lower latency entries. Tests were repeated with the intent of increasing reliability, especially when it takes a couple of seconds, but when a test took up to 300 seconds it had a much lower chance of being repeated. Also considering that dataset capture may be repeated in different locations, one does not necessarily want to spend more than a day on-site.
+![Each telemtry test takes in readings from the external energy capture device and UE reported values and through attenuation zone decades, UEs, LTE vendors and MNOs we extract power efficiency, latency, secondary metrics and estimations. \label{fig:dataset2}](../images/image-20191122054556494.png)
 
-To solve for the skewness, each test can be normalized by taking a single mean of each of the associated trace entries and files. Now with a dataset of 140/1811 traces, it makes a minimum of 5600/79921 possible values.
+Every UE device and MNO pair (8 total) has 9 telemetry tests (of which 5 are differently-sized UDP datagrams) and each has its own attenuation zone decade (at least 5). The Cape Town dataset alone contains 424 files with 1811 trace entries, 40 possible submetrics (`AT+NUESTATS`, energy and timings combined in CSV files) and 79921 values. With the Johannesburg dataset included, there are 1390 CSV files in total.
 
-Unfortunately this created problems especially where only a few discrete values are concerned, such as in ECL, as multiple means exist. To solve this, k-means clustering is applied.
+The dataset is also heavily skewed towards lower latency entries in terms of a higher count. Multiple entries per test were captured, with the intent of increasing reliability, at a target of roughly 10 entries. Especially when entries takes a couple of seconds, but when an entry (unexpectedly) took up to 300 seconds it had a much lower chance of having 10 entries captured. Also considering that future dataset capture may be repeated in different locations, one does not necessarily want to spend more than a day on-site.
+
+To solve for the skewness, each test can be normalized by taking a single mean of each of the associated trace entries and files. With a dataset of 140/1811 traces, it would make a minimum of 5600/79921 possible values. Unfortunately this created the problem of lost features when multiple means are concerned, such as in ECL reports. To solve this, k-means clustering is applied as in \S\ref{kmeans}.
 
 ### Post-processing
 
+A method of post-processing the data for analysis is required for the dataset obtained in \S\ref{dataset}. Probability estimation was attempted, yet not considered as making histograms and kernel density estimations are two layers of manipulation on raw data before comparison. Instead, k-means clustering was performed on the dataset to lower low-latency skewedness and any other concentrated features to achieve a more normalized result with unique features for comparison. Finally, a plotting and extraction framework was developed in Jupyter with custom libraries developed in Microsoft Visual Studio Code (`vscode`). Plots are placed throughout this thesis, with "9-plots" that visualize the dataset in Appendix \ref{appendix_plots}, and measured or UE reported metrics and estimations in Appendix \ref{appendix_measured} and \ref{appendix_ue_reported}, respectively.
+
 #### Probability estimation
 
-Due to the large dataset and requiring a reasonable means of visualization, we can consider a histogram.
+Due to the large dataset and requiring a reasonable means of analysis, probability estimation is considered.
 
 \begin{figure}[ht]
-  \subfloat[Example python histogram of a univariate latency distribution showing counts]{
-	\begin{minipage}[c][1\width]{
-	   0.48\textwidth}
-	   \centering
-	   \includegraphics[width=1.0\linewidth]{../../code/tests/old/img2/histogram_counts.pdf}
-	\end{minipage}}
- \hfill 	
-  \subfloat[Histogram counts vary among various datasets when their sizes differ, so it would be a good idea to normalize it such that the area under the graph makes 1.0. The probability of the discrete data can also be estimated in a continuous probability density function (PDF) with the kernel density estimation.]{
-	\begin{minipage}[c][1\width]{
+  \subfloat[The probability of the discrete data can be estimated in a continuous probability density function (PDF) with the kernel density estimation.]{
+	\begin{minipage}[c][0.6\width]{
 	   0.48\textwidth}
 	   \centering
 	   \includegraphics[width=\linewidth]{../../code/tests/old/img2/probability_density_function_seaborn.pdf}
 	\end{minipage}}
-\captionof{figure}[Probability estimation on histogram latency sample]{Probability estimation on histogram latency sample}
+\hfill
+ \subfloat[Various types of kernel density estimation (KDE) all attempt to predict latency outcome with varying accuracy.]{
+	\begin{minipage}[c][0.6\width]{
+	   0.48\textwidth}
+	   \centering
+	   \includegraphics[width=\linewidth]{../../code/tests/old/img2/probability_density_function.pdf}
+	\end{minipage}}
+\captionof{figure}[Probability estimation on latency histogram sample]{Probability estimation on latency histogram sample}
 \end{figure}
 
 [](../../code/tests/old/img2/histogram_counts.png)
 
 [](../../code/tests/old/img2/probability_density_function_seaborn.png)
 
-\begin{figure}[ht]
-  \subfloat[Various types of kernel density estimation (KDE)]{
-	\begin{minipage}[c][1\width]{
-	   0.48\textwidth}
-	   \centering
-	   \includegraphics[width=\linewidth]{../../code/tests/old/img2/probability_density_function.pdf}
-	\end{minipage}}
- \hfill 	
-  \subfloat[Various types of kernel density estimation (KDE) with histogram and KDE normalized in attempted probability mass function]{
-	\begin{minipage}[c][1\width]{
-	   0.48\textwidth}
-	   \centering
-	   \includegraphics[width=\linewidth]{../../code/tests/old/img2/probability_mass_function.pdf}
-	\end{minipage}}
-\captionof{figure}[Probability estimation on histogram latency sample]{Probability estimation on histogram latency sample}
-\end{figure}
-
 [](../../code/tests/old/img2/probability_density_function.png)
-
-If the histogram bin values are normalized by dividing by the bin count, adding the values makes 1 instead of integrating along the x-axis. Similarly, multiplying the PDF by its x-axis gives the following result. Although all the plotted values are now truly under 1, the KDE is shifted and doesn't seem usable.  The integration to 1 visualization typical in statistics has to be used.
 
 [](../../code/tests/old/img2/probability_mass_function.png)
 
-In fact, good practice would be viewing the data as is and not trying to analyze it from what is essentially an entirely new perspective. Thus, the data will be viewed as 2D plotted points and histograms. Colour will be used to group the data according to attenuation and packet size.
+Good practice would be viewing the data as is and not trying to analyze it from what is essentially a modified new perspective. Considering how various methods and techniques are used to estimate probability, there will always be a degree of inaccuracy, and in future work machine learning models can be considered to predict UE device behavior. In this thesis, we offer a two-pronged approach where we would like to view the data as close as possible to its raw form, yet as simple as possible for comparison.
 
-#### K-Means Clustering
+#### K-Means Clustering {#kmeans}
 
-Instead of finding a single mean for all the entries and associated files, at least two means are specified (K=2) to take into account the outliers that some tests produce or more if discrete values are involved or isolated regions (K=3+).
+Instead of finding a single mean for all the entries and associated files, at least three means are specified (K=3) to take into account the outliers that some tests produce or more for isolated regions (K=4+).
 
 \begin{minipage}{\linewidth}
 \begin{center}
-\includegraphics[width=0.8\linewidth]{../../../masters/code/tests/plots/dpoints.pdf}
-\captionof{figure}[K-means clustering]{Trace entries per test. Absolute maximum of 1811 traces has been reduced by removing duplicates and applying thresholds. K-means clustering achieves the desired effect of reducing dimensionality and skewness induced from low latency sampling on the dataset for different tests, yet keeps most of the features of the thresholded max.}
+\includegraphics[width=0.65\linewidth]{../../../masters/code/tests/plots/dpoints.pdf}
+\captionof{figure}[K-means clustering]{Trace entries per test (CSV file). In this example, the absolute maximum of 1811 traces has been filtered by removing duplicates and applying thresholds. K-means clustering achieves the desired effect of reducing dimensionality and skewness induced from low latency sampling on the dataset for different tests, yet keeps most of the features of the thresholded max. This allows for easier visualization and unbiased feature comparison.}
 \label{fig:}
 \end{center}
 \end{minipage}
 
 [](../../../masters/code/tests/plots/dpoints.png)
 
-#### Plot Visualization {#plots}
-
-- what aspect is the plot trying to cover, what is it telling me on that topic, shows? observances?
-- purpose
-- data in the plot saying / deduce / narrative / story
-  - Example, Quectel, Vodacom is worse
-- 4 sentences
-- 4 sentences when comparing nw, and tehn again ues
-- What is the take home?
-
-
-
-* what aspect is the plot trying to cover
-* what is it telling me on that topic
-* purpose
-* data in the plot saying / deduce / narrative / story
-* 4 sentences
-* 4 sentences when comparing nw, and tehn again ues
-
-
+#### Plot Visualization: Jupyter {#plots}
 
 Jupyter is a python framework which is used for post-processing, and the following code snippet shows an example of the `9-plot` format used in the results (Chapter \ref{results}):
 
@@ -2425,45 +2297,13 @@ Table: Custom libraries imported by Jupyter and a description of their purpose {
 
 Other plots were more specialized and code was kept within the Jupyter file it was developed in.
 
----
-
-Since it appears that ECL is the ultimate factor that should influence latency and energy usage, it is the metric used for battery life estimation as well.
-
-
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
-<!-- ######################################################################### -->
+The goal of plots in general is to investigate observations and comparisons.
 
 \newpage
 
 # Results {#results}
 
-This chapter visualizes and analyses the results from the datasets obtained in Chapter \ref{design}. The visualization format can be found in \S\ref{plots}.
+This chapter visualizes and analyzes the results from the datasets obtained in Chapter \ref{design}. The visualization format can be found in \S\ref{plots}.
 
 ## Primary Metrics
 
@@ -2471,7 +2311,7 @@ This section looks at primary metrics as mentioned in \S\ref{proj_descr}.
 
 ### Latency and Delay
 
-This section handles measured and reported latencies versus signal strength to see the effect of different attenuation zones and telemetry test types for multiple UE and MNOs. Fig. \ref{fig:latency_boxplot} shows us latency values for the entire dataset, and Fig. \ref{fig:latencyECL_boxplot} shows an example in ECL 1 network conditions.
+This section presents measured and reported latencies versus signal strength to see the effect of different attenuation zones and telemetry test types for multiple UE and MNOs. Fig. \ref{fig:latency_boxplot} shows us latency values for the entire dataset, and Fig. \ref{fig:latencyECL_boxplot} shows an example in ECL 1 network conditions.
 
 \begin{figure}[ht]
   \subfloat[Latency measurements from Appendix \ref{appendix_measured_latency} with a baseline just over 1 second. Ublox and Quectel performing similarily.]{
@@ -2511,12 +2351,12 @@ This section handles measured and reported latencies versus signal strength to s
 \label{fig:latencyECL_boxplot}
 \end{figure}
 
-There is a large discrepancy in the datagram latency between MTN and Vodacom due to Nokia's poor performance. Ublox and Quectel show similar characteristics in measurements but differ in reported values with Quectel showing greater differentiation.
+There is a large discrepancy in the datagram latency between MTN and Vodacom due to Nokia's poor performance. Ublox reports similar characteristics to measurements, but Quectel reports characteristics worse than expected in measurements.
 
 ### Power Efficiency
 
 \begin{figure}[ht]
-  \subfloat[Measured average power from Appendix \ref{appendix_energy_MP}. Huawei has a lower 25\% baseline at 10 uWh.]{
+  \subfloat[Measured average power from Appendix \ref{appendix_energy_MP}. Huawei has a lower 25\% baseline at 10 $\mu{W}{h}$.]{
 	\begin{minipage}[c][0.6\width]{
 	   0.48\textwidth}
 	   \centering
@@ -2529,7 +2369,7 @@ There is a large discrepancy in the datagram latency between MTN and Vodacom due
 	   \centering
 	   \includegraphics[width=1\textwidth]{../../code/tests/box/avgpowerEst.pdf}
 	\end{minipage}}
-\caption{Average power of telemetry test datagrams with a 25\% baseline around 30 uWh. At least 50\% of values centered at median range from 30 uWh to 1000 uWh, except for Nokia extending up to 10 000 uWh in measurements. Quectel shows slightly better values than Ublox. MTN remains the leader for datagram power efficiency for various telemetry tests.}
+\caption{Average power of telemetry test datagrams with a 25\% baseline around 30 $\mu{W}{h}$. At least 50\% of values centered at median range from 30 $\mu{W}{h}$ to 1000 $\mu{W}{h}$, except for Nokia extending up to 10 000 $\mu{W}{h}$ in measurements. Quectel shows slightly better values than Ublox. MTN remains the leader for datagram power efficiency for various telemetry tests.}
 \end{figure}
 
 
@@ -2678,7 +2518,7 @@ Considering the variance in figure \ref{fig:udpsize}, taking the mean would make
 
 ## Estimations
 
-### Telemetry Interval
+### Telemetry Interval {#res_telem_int}
 
 [](../../code/tests/box/intervalECL1.png)
 
@@ -2701,7 +2541,7 @@ Considering the variance in figure \ref{fig:udpsize}, taking the mean would make
 \caption{Telemetry interval estimation sending 16-512 byte packet payloads in ECL 1 network conditions. LTE vendors require messages to be sent between 5 minutes to an hour to last a year on a 9.36 Wh battery (AA-sized), except for Nokia requiring a telemetry interval around 10 hours. Quectel is measured to be better than Ublox, yet Ublox reports better values than Quectel. MTN leads Vodacom due to Nokia's poor performance.}
 \end{figure}
 
-### Battery longevity
+### Battery longevity {#res_battery}
 
 [](../../code/tests/box/longevityECL1.png)
 
@@ -2753,7 +2593,7 @@ Compare NB-IoT to Dash7, which can be considered a prominent bi-directional cont
 
 # Conclusion {#conclusion}
 
-Attenuation does not affect performance as much as the ECL level does, and includes
+Attenuation does not affect performance as much as the ECL classes do, and includes
 degradation to latency, energy consumption and packet size.
 
 The inefficiency between the two South African MNOs can either be attributed to poor
@@ -2774,6 +2614,8 @@ When looking at SigFox, we see a technology with far range, but data rates that 
 NB-IoT is a very promising technology. It can coexist with 2G/GSM and LTE networks. When comparing to 2G it has 7 times greater range, and in power saving modes time to transmission is a few seconds, compared to about a minute for 2G. There are a few successful use cases for NB-IoT in South Africa, such as smart metering, asset tracking etc.
 
 There are also a couple of hurdles in the way. Although lauded as a mere software upgrade, it does require the latest basestations and licensing fees. There needs to be a substantial revenue model which ties in with demand.
+
+Since it appears that ECL is the ultimate factor that should influence latency and energy usage, it is the metric used for battery life estimation as well.
 
 \newpage
 
@@ -2846,7 +2688,7 @@ Table: Latency Measurement (s) {#tbl:txTime}
 ## Average Power
 
 
-Table: Average Power (uWh) {#tbl:energy}
+Table: Average Power ($\mu{W}{h}$) {#tbl:energy}
 
 |                  | 16 B   | 64 B   | 128 B   | 256 B   | 512 B   | Echo   | COPS   | eDRX   | PTAU   |
 |------------------|--------|--------|---------|---------|---------|--------|--------|--------|--------|
@@ -2900,7 +2742,7 @@ Table: Average Power (uWh) {#tbl:energy}
 |                  |        |        |         |         |         |        |        |        |        |
 
 \newpage
-## Telemetry Interval
+## Telemetry Interval {#appendix_telemetry_MT}
 
 
 Table: Interval Estimate (hours) using measured energy values for 9.36Wh AA battery (Lithium Thionyl Chloride) to last 1 year. {#tbl:energy_interval}
@@ -2957,7 +2799,7 @@ Table: Interval Estimate (hours) using measured energy values for 9.36Wh AA batt
 |                  |        |        |         |         |         |        |        |        |        |
 
 \newpage
-## Battery Longevity
+## Battery Longevity {#appendix_battery_MT}
 
 
 Table: Longevity Estimate (years) for 9.36Wh AA battery (Lithium Thionyl Chloride) with hourly uses. {#tbl:energy_longevity}
@@ -3132,7 +2974,7 @@ Table: RX Time (s) {#tbl:rxTimeNW}
 
 ## Average Power Estimate
 
-Table: Average Power (uWh) {#tbl:energyE}
+Table: Average Power ($\mu{W}{h}$) {#tbl:energyE}
 
 |                  | 16 B    | 64 B    | 128 B    | 256 B   | 512 B    | Echo    | COPS    | eDRX    | PTAU    |
 | ---------------- | ------- | ------- | -------- | ------- | -------- | ------- | ------- | ------- | ------- |
@@ -3186,7 +3028,7 @@ Table: Average Power (uWh) {#tbl:energyE}
 
 \newpage
 
-## Telemetry Interval
+## Telemetry Interval {#appendix_telemetry_RT}
 
 Table: Interval Estimate in minutes using reported RX, TX Time for 9.36Wh AA battery (Lithium Thionyl Chloride) to last 1 year. {#tbl:energy_interval}
 
@@ -3242,7 +3084,7 @@ Table: Interval Estimate in minutes using reported RX, TX Time for 9.36Wh AA bat
 
 \newpage
 
-## Battery Longevity
+## Battery Longevity {#appendix_battery_RT}
 
 Table: Longevity Estimate in years using Reported RX, TX Time for 9.36Wh AA battery (Lithium Thionyl Chloride) with hourly uses. {#tbl:energy_longevity}
 
@@ -3376,7 +3218,7 @@ This is the time spent consuming current and is measured externally.
 
 (A) Attenuation per decade is evident. (B) Vodacom latency is up to 5 times greater, excluding outliers. (C) All tests show variation in latency except eDRX. (D) ECL is influenced by RSRP on MTN networks, but does not affect latency. Vodacom's increased latency shows from ECL 1 onwards.
 
-As opposed to Figure \ref{fig:sinr_latency}, in Figure \ref{fig:latency_rsrp} (ABCF) the characteristics of each MNO is distributed more evenly. RSRP measurements are across a 50dBm range for MTN-ZTE and 40dBm for Vodacom-Nokia with the weakest signals around -130dBm and -110dBm respectively. (DE) Attenuation per decade is evident according to RSRP. This RF metric is most beneficial to compare against when measuring the outcome of attenuations. (GH) Tests are varied across RSRP. (G) eDRX paging cycles and PTAU have the quickest latencies under a few seconds whilst COPS has the longest up to 10 seconds. (H) Echo tests have outlier network (de)registrations at Vodacom-Nokia. UDP packet byte size has high variance, yet only has an effect on latency in the fastest transmissions. (I) Most of Vodacom-Nokia's dataset is on ECL 1, yet MTN-ZTE's ECL 1 has much lower latency and variance. Increased ECL levels do not necessarily correlate with latency. Closer inspection is needed per test.
+As opposed to Figure \ref{fig:sinr_latency}, in Figure \ref{fig:latency_rsrp} (ABCF) the characteristics of each MNO is distributed more evenly. RSRP measurements are across a 50dBm range for MTN-ZTE and 40dBm for Vodacom-Nokia with the weakest signals around -130dBm and -110dBm respectively. (DE) Attenuation per decade is evident according to RSRP. This RF metric is most beneficial to compare against when measuring the outcome of attenuations. (GH) Tests are varied across RSRP. (G) eDRX paging cycles and PTAU have the quickest latencies under a few seconds whilst COPS has the longest up to 10 seconds. (H) Echo tests have outlier network (de)registrations at Vodacom-Nokia. UDP packet byte size has high variance, yet only has an effect on latency in the fastest transmissions. (I) Most of Vodacom-Nokia's dataset is on ECL 1, yet MTN-ZTE's ECL 1 has much lower latency and variance. Increased ECL classes do not necessarily correlate with latency. Closer inspection is needed per test.
 
 Extended Coverage Levels (ECL) are determined by the network. The eNB (base station) sets the number of transmission repetitions (ECL) according to received signal strength reported by the UE.
 
@@ -3486,7 +3328,7 @@ Energy outliers mainly from Vodacom at ECL 1 and the COPS, PTAU or UDP packet te
 
 All in all, Vodacom uses up to 40 times (200 Joules) more than MTN (up to 5 Joules).
 
-On a generic 3.7V lithium battery with 4Ah of storage, it has 14800mWh in total. In worst case scenarios, at 14mWh it will last for 1057 transmissions, and at the outlying 200mWh it will last for 74 transmissions. In terms of MTN, at 5 Joules (1.4mWh) there are 10570 transmissions available, and with Vodacom at 200 Joules (56mWh) it will last for 266 transmissions.
+On a generic 3.7V lithium battery with 4Ah of storage, it has 14800$mWh$ in total. In worst case scenarios, at 14$mWh$ it will last for 1057 transmissions, and at the outlying 200$mWh$ it will last for 74 transmissions. In terms of MTN, at 5 Joules (1.4$mWh$) there are 10570 transmissions available, and with Vodacom at 200 Joules (56$mWh$) it will last for 266 transmissions.
 
 With daily transmissions, one can hope for a year when connected to Vodacom, and with MTN it far exceeds the 10 year 3GPP standard with 28 years. This leaves enough room for scheduled downlink transmissions using eDRX.
 
@@ -3594,7 +3436,7 @@ The UE maintains a max output power of 23 dBm when connected to Vodacom towers, 
 
 [](../../../masters/code/tests/plotterk/TX_power_histogram.png)
 
-Around -100 dBm devices decrease their output power at roughly 10 dBm per decade of RSRP amplification when connected to MTN towers. This might be attributable to the ECL level that the eNodeB sets for the UE. If the tests are repeated for RSRP signals greater than -70 dBm, it can be assumed that the transmit power will eventually decrease to -56 dBm according to the AT+UTEST command in the Ublox N2 datasheet. If the transmit power decreases linearly according to RSRP, minimum output power would be achieved at -20 dBm or greater.
+Around -100 dBm devices decrease their output power at roughly 10 dBm per decade of RSRP amplification when connected to MTN towers. This might be attributable to the ECL classes that the eNodeB sets for the UE. If the tests are repeated for RSRP signals greater than -70 dBm, it can be assumed that the transmit power will eventually decrease to -56 dBm according to the AT+UTEST command in the Ublox N2 datasheet. If the transmit power decreases linearly according to RSRP, minimum output power would be achieved at -20 dBm or greater.
 
 ### Throughput
 

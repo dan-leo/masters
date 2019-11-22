@@ -82,7 +82,7 @@ def test_cops_release(request):
 
 ############## dereg release ##############
 
-@pytest.mark.reg2
+@pytest.mark.reg3
 def test_cops_deregister(request):
     pytest.subtest = request.node.name.split('_')[-1] + '/'
 #     time.sleep(5)

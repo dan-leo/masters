@@ -10,6 +10,8 @@ tablenos-warning-level: 1
 tablenos-number-by-section: true
 ---
 
+<!-- TODO: check protect\hyperlink -->
+
 [](../images/whitespace.png)
 
 [](../images/UScrest-WM.jpg){width=25%}
@@ -187,7 +189,10 @@ All rights reserved.
 - **kbps** - kilobits per second
 - **mJ or J** - millijoules or joules
 - **s, ms, us** - second, millisecond, microsecond
-- **mWh** - average power in milliwatt-hours
+- **uWh, mWh** - average power in micro/milliwatt-hours
+- **dB** - decibel
+- **dBm** - decibel milliwatt
+- **MHz, GHz** - megahertz, gigahertz
 
 \newpage
 
@@ -364,7 +369,7 @@ Although LTE vendors are open to all UE manufacturers, mobile network operators 
 
 These UEs all share AT commands as the API to control their capabilities.
 
-* u-blox is a Swiss company that creates wireless semiconductors and modules for consumer, automotive and industrial markets. They operate as a fabless IC and design house. 
+* Ublox is a Swiss company that creates wireless semiconductors and modules for consumer, automotive and industrial markets. They operate as a fabless IC and design house. 
 * Quectel is the leading global supplier of cellular and GNSS modules, with a broad product portfolio covering the most recent wireless technologies of 5G, LTE/LTE-A, NB-IoT/LTE-M, UMTS/HSPA(+), GSM/GPRS and GNSS. As a professional IoT technology developer and cellular module supplier, Quectel is able to provide one-stop services for IoT cellular modules. Quectel products have been widely applied in IoT/M2M fields including smart payment, telematics and transport, smart energy, smart cities, security, wireless gateways, industry, healthcare, agriculture, and environment monitoring. 
 * Nordic Semiconductor is a fabless semiconductor company. The company specializes in ultra-low power performance wireless system on a chip and connectivity devices for the 2.4 GHz ISM band, with power consumption and cost being the main focus areas.
 * **SIMCom Wireless Solutions** is a subsidiary of SIM Technology Group Ltd. It is a fast-growing wireless M2M company, designing and offering a variety of wireless modules based on GSM/GPRS/EDGE,WCDMA/HSDPA and TD-SCDMA technical platforms.
@@ -628,6 +633,12 @@ $$P = \frac{E_{msg}}{T_{msg}}$$ {#eq:avgpower}
 
 From Durand's results it is clear that LoRaWAN SF7 is the most power-efficient, due to the short transmission burst. NB-IoT displays the worst power-consumption, due to the extended RRC-idle state [@Thomas2018]. This can be reduced using Release Assistance as in \S\ref{release_a}.
 
+If downlink latency is a critical component without battery life constraints, GPRS would be better suited as it requires constant signaling between BTS and UE device. Otherwise, applications requiring bidirectional communications of more than 120 bytes per day should use GPRS or NB-IoT, as LoRaWAN and SigFox are limited by duty-cycle since they use unlicensed frequencies. In deep coverage situations, SigFox and NB-IoT is recommended as it offers an MCL of more than 158 dBm [@Thomas2018]. In South Africa, GPRS and SigFox have similar levels of coverage, and the choice in wireless technology depends on data throughput. Low bandwidth wireless technologies typically have more range than their high data throughput counterparts. That's why SigFox requires few sites to cover vast areas, compared to GPRS or LTE networks. NB-IoT should be similar to SigFox in this regard, as they share similar MCLs.
+
+For IoT devices used in extended coverage situations, such as deep-indoor devices or remote locations, we recommend either Sigfox or NB-IoT, as they offer a maximum MCL of more than 158 dB. IoT devices for general use would benefit from the large-scale deployment of the GPRS network, which provides excellent coverage because of its legacy infrastructure. It is clear that the extra overhead available in Sigfox, LoRaWAN, and NB-IoT allows for better indoor coverage than GPRS, which means that the LPWAN devices can be used in less than optimal operating conditions. Measured MCL correlates with theoretical values.
+
+In terms of throughput, it's important to note that unlicensed spectrum LPWANs such as SigFox and LoRaWAN are heavily duty cycled, unlike cellular technologies such as NB-IoT or GPRS.
+
 
 ## Use Cases {#usecases}
 
@@ -765,7 +776,7 @@ radio using the AT+CFUN=0 command.
 After network registration or transmission of a data packet, the device usually enters RRC connected (C-DRX) for a network-specified `inactivity timeout` and receives all the base station (BTS) signalling. Sending and receiving messages in this mode is immediate, otherwise with no activity average power is typically ~50mA. If the RRC connection is left for 20 s of inactivity before the RRC is released, then this will consume about 1 mWh @ 3.6V. At the end of this period, if no messages are being transmitted from the module, the +CSCON response will be “0” to show the RRC connection has been released by the eNodeB.
 
 \hypertarget{power-saving-mechanisms}{%
-\subsubsection[Power-Saving Mechanisms: T3324 Active, T3412 PTAU, eDRX,PTW,Release-A]{Power-Saving Mechanisms}\label{power-saving-mechanisms}}  
+\subsubsection[Power-Saving Mechanisms: T3324 Active, T3412 PTAU, eDRX,PTW, Release-A]{Power-Saving Mechanisms}\label{power-saving-mechanisms}}  
 
 <!--### Power-Saving Mechanisms: T3324 Active, T3412 PTAU, eDRX, PTW, Release-A-->
 
@@ -930,6 +941,3 @@ With AT commands, UE devices can be controlled to an extent on the client-side e
 ## Summary
 
 With a deeper understanding of NB-IoT in this chapter, we can see how it exhibits variable characteristics as opposed to what theoretical analysis or simulations can provide due to the complexities of the underlying legacy LTE architecture and most notably in the energy consumption of datagram packets, besides other metrics. NB-IoT has a strong footprint in IoT due to its low-power bidirectionality which gives it an edge over other LPWANs, and this enables a broad variety of use cases. Since we can now better understand the different facets of NB-IoT, related concepts and literature as stated above, we can further investigate the change in variability across different UE devices and LTE vendors in Chapter \ref{design}.
-
-
-# References

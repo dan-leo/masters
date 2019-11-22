@@ -6,7 +6,7 @@ from test_ import *
 #     tcap(1000)
 
 big = False
-big = True
+# big = True
 
 @pytest.fixture(autouse=True)
 def _config(request):

@@ -115,7 +115,7 @@ In Table \ref{tbl:nw_parameters} we see three cell towers on the MTN-ZTE network
 
 [](../../../masters/code/tests/plotterk/PCI_histogram.png)
 
-#### C-DRX mode
+#### C-DRX mode {#des_cdrx}
 
 On the Vodafone network in connected-DRX (C-DRX) mode, the UE is observed to show peaks spaced at regular 2.048s intervals [@Martinez2019]. On both Vodacom and MTN networks, these peaks are not visible and instead a steady stream of peaks can be seen as on the following images.
 
@@ -184,11 +184,11 @@ Ericsson eNodeBs run Linux and their commands are accessible via MOShell, or the
 
 To get an idea of the complexity of a node (eNodeB) in a base station (BTS), running `$ get .` in the terminal of B06009-TESTPLANT returned 7037 `Managed Objects` (MOs) with 27989 parameters. See Appendix \ref{appendix_eNB} for an example code snippet of the first two `Managed Objects`. This highlights how easy it is for a BTS to produce different results in this study depending on the network configuration and environment.
 
-### Range Field Test
+### Range Field Test {#range_field_test}
 
 This gives a good idea as to the range expected according to RSRP, with more information in \S\ref{ping}.
 
-#### NB-IoT
+#### NB-IoT {#range_field_test_nbiot}
 
 Using a Quectel BG96, the following tests were taken on the rooftop described in Fig. \ref{fig:rooftop}[^zte_tests].
 
@@ -942,7 +942,7 @@ def test_cops_deregister(request):
 ...
 ```
 
-#### Echo
+#### Echo {#des_echo}
 
 This test is designed to measure client and server initiated echo requests.
 
@@ -1025,7 +1025,7 @@ Whilst the simple `Ping` command is useful to measure connectivity and latency, 
 
 Primary metrics power efficiency and latency are investigated as mentioned in \S\ref{proj_descr}. Primary and secondary metrics have a few preliminary tests performed using Ublox and Quectel devices on MTN-ZTE and Vodacom-Nokia networks.
 
-### Power Efficiency
+### Power Efficiency {#des_power}
 
 Power efficiency is one of the main metrics focused on in this study. This section outlines a few preliminary tests and the design for the final field tests comparing UEs and MNOs. Low power consumption is vital for battery longevity up to ~10 years or more. Power consumption is affect by various factors. In the hardware design, PCB layout, antenna matching and location will have an effect on the overall interference received by the module, SINR and ultimately transmit power. Transmit power also depends on the range and path loss to the UE device. With a weak signal, more repetitions are required, hence ECLs in \S\\ref{ECLs}. Other power saving mechanisms such as release assistance, PSM and eDRX mode work together to extend battery life as in \S\\ref{power-saving-mechanisms}.
 
@@ -1177,7 +1177,9 @@ Signal strength can be measured or reported from the UE device and the following
 
 #### MCL {#des_mcl}
 
-Maximum Coupling Link (MCL), as defined in \S\ref{lit_mcl} and by Eq. \ref{eq:mcl}, is the greatest link between UE device and eNodeB. This can be calculated by using the minimum values of SINR obtained in the field capture datasets in \S\ref{dataset}, excluding outliers.
+Maximum Coupling Link (MCL), as defined in \S\ref{lit_mcl} and by Eq. \ref{eq:mcl}, is the greatest link between UE device and eNodeB. This can be calculated by using the minimum values of SINR obtained in the field capture datasets in \S\ref{dataset}, excluding outliers. Downlink SINR is calculated, because uplink SINR values as received on the BTS are unavailable.
+
+$P_{TX}$ is set to 43 dBm.
 
 $Noise\ figure$ is defined as 5dB by 3GPP 45.820 7A [@realDiffs2016].
 
@@ -1225,7 +1227,7 @@ In Eq. \ref{eq:RSRQ}, N is the number of Physical Resource Blocks (PRBs) over wh
 
 Transmit power is the RF power output from the modem. It should be a lower number if within good coverage. Modems would typically consume ~230 mA for +23 dBm.
 
-#### ECLs
+#### ECLs {#des_ECLs}
 
 ECLs are equivalent to "PRACH coverage enhancement level" defined in 3GPP 36.321 [3] sub clause 5.1
 

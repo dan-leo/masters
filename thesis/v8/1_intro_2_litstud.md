@@ -26,7 +26,7 @@ tablenos-number-by-section: true
 
 \begin{center}
 \vspace{1cm}
-\huge{NB-IoT (LTE Cat-NB1 / Narrow-band IoT) Performance Evaluation}\\
+\huge{NB-IoT (LTE Cat-NB1 / Narrow-band IoT) Performance Evaluation of Variance in Multiple LTE Vendors, UE and MNOs}\\
 \vspace{0.5cm}
 \Large{by}\\
 \vspace{0.5cm}
@@ -70,7 +70,7 @@ All rights reserved.
 
 # Abstract {-#abstract}
 
-2G/GPRS is a sun-setting technology leaving behind a void for LPWANs such as LoRaWAN, SigFox and NB-IoT to fill. This empirical study investigated NB-IoT through metrics and estimations by comparing datasets of telemetry tests performed on long-term-evolution (LTE) vendors, using user-equipment (UE) devices, for mobile-network-operators (MNOs) in South Africa. LTE vendors include ZTE and Ericsson on MTN's network, and Nokia and Huawei on Vodacom's network. Similar UE devices, Ublox and Quectel, were used as a control to observe network changes via RF attenuation in decades. The study theorizes that networks are responsible for the variation found in metrics and estimations, due to the high underlying complexity of LTE architecture on which NB-IoT is based. This has resulted in analysis for metrics such as latency and power efficiency, as well as estimates for telemetry periodicity and battery longevity.
+2G/GPRS is a sun-setting technology leaving behind a void for LPWANs such as LoRaWAN, SigFox and NB-IoT to fill. This empirical study investigated NB-IoT through metrics and estimations by comparing datasets of telemetry tests performed on long-term-evolution (LTE) vendors, using user-equipment (UE) devices, for mobile-network-operators (MNOs) in South Africa. LTE vendors include ZTE and Ericsson on MTN's network, and Nokia and Huawei on Vodacom's network. Similar UE devices, Ublox and Quectel, were used as a control to observe network changes via RF attenuation in decades. The study theorizes that networks are responsible for the variation found in metrics and estimations, due to the high underlying complexity of LTE architecture on which NB-IoT is based. This has resulted in analysis for metrics such as latency, power efficiency, signal strength, enhanced coverage level (ECL) classes, throughput, data overhead as well as estimates for telemetry periodicity and battery longevity.
 
 \vspace{5cm}
 
@@ -167,6 +167,7 @@ All rights reserved.
 | **QXDM** | QUALCOMM eXtensible Diagnostic Monitor |
 | **RAN** | Radio Access Network |
 | **RRC** | Radio Resource Control |
+| **SF** | Spreading Factor |
 | **SIM** | Subscriber Identity Module |
 | **SMS** | Short Message Service |
 | **SNR** | Signal to Noise Ratio |

@@ -198,6 +198,10 @@ Using a Quectel BG96, the following tests were taken on the rooftop described in
 
 The tests involve sending a set of 10 pings multiple times at a certain attenuation and resulting RSSI measurement using a Quectel BG96 modem.
 
+[](C:\GIT\masters\thesis\images\rooftest1.png)
+
+[](C:\GIT\masters\thesis\images\rooftest2.png)
+
 \begin{figure}[ht]
   \subfloat[With an antenna and the attenuator set to 0dB, we find most of the values around the mean of 185.2ms, except for the tail at around 500ms which is the time of the first ping in a set of 10. ECL 0, RSRP -51 dBm.]{
 	\begin{minipage}[c][1\width]{
@@ -214,14 +218,7 @@ The tests involve sending a set of 10 pings multiple times at a certain attenuat
 	   \includegraphics[width=1.0\linewidth]{../images/rooftest2.png}
 	\label{fig:ping2}
 	\end{minipage}}
-\captionof{figure}[Ping tests]{Ping tests on Engineering rooftop}
-\end{figure}
-
-[](C:\GIT\masters\thesis\images\rooftest1.png)
-
-[](C:\GIT\masters\thesis\images\rooftest2.png)
-
-\begin{figure}[ht]
+\vspace{1mm}
   \subfloat[Removing the antenna from the attenuator, we find that the data has a slightly thicker tail, and averages around 207.1ms. ECL 0, RSRP -91 dBm.]{
 	\begin{minipage}[c][1\width]{
 	   0.48\textwidth}
@@ -1178,9 +1175,17 @@ Signal strength is affected by range and path loss. It also affects the ECL clas
 
 Signal strength can be measured or reported from the UE device and the following metrics are all related: MCL, RSRP, RSSI, RSRQ, SNR, TX Power and ECLs.
 
-#### MCL
+#### MCL {#des_mcl}
 
-Maximum Coupling Link (MCL), as defined in \S\ref{lit_mcl}, is the greatest link between UE device and eNodeB. This can be calculated by using the minimum values obtained in the field capture datasets in \S\ref{dataset}.
+Maximum Coupling Link (MCL), as defined in \S\ref{lit_mcl} and by Eq. \ref{eq:mcl}, is the greatest link between UE device and eNodeB. This can be calculated by using the minimum values of RSRP and SINR obtained in the field capture datasets in \S\ref{dataset}.
+
+$$MCL\ ( dB) \ =\ P_{TX} \ -\ ( Noise\ figure\ +\ SINR\ +\ Thermal\ Noise\ floor)$$ {#eq:mcl}
+
+$Noise\ figure$ is defined as 5dB by 3GPP 45.820 7A [@realDiffs2016].
+
+$$Thermal\ Noise\ floor\ =\ -174\ +\ 10log_{10}( Bandwidth)$$ {#eq:noise_floor}
+
+With $Bandwidth$ in Eq. \ref{eq:noise_floor} set to 180 kHz as defined in \S\ref{lpwan_comparison}, $Thermal\ Noise\ floor$ is equal to a value of -121.45 dB.
 
 #### RSRP
 
@@ -1374,3 +1379,4 @@ Table: Custom libraries imported by Jupyter and a description of their purpose {
 Other plots were more specialized and code was kept within the Jupyter file it was developed in.
 
 The goal of plots in general is to investigate observations and comparisons.
+

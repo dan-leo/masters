@@ -1,3 +1,29 @@
+- what aspect is the plot trying to cover, what is it telling me on that topic, shows? observances?
+- purpose
+- data in the plot saying / deduce / narrative / story
+  - Example, Quectel, Vodacom is worse
+- 4 sentences
+- 4 sentences when comparing nw, and tehn again ues
+- What is the take home?
+
+\-    This is what I am showing you (“The figure shows the latency distributions when running under….”)
+
+\-    Tell them what it is showing or what you are observing in the results (“ It can be seen that the the performance of the quectel modem is better….”). This you do for everything you want to highlight, everything tht is worth mentioning.
+
+\-    State the natural conclusion of what you are observing. (“ The impact of the higher throughput rate is that for the same duration of radio time, and therefore battery energy, more data can be pushed through” – just a hypothetical example).
+
+
+
+
+
+
+
+
+
+
+
+
+
 LTE Cat-NB (Narrowband) characterization of user equipment (UE) and mobile network operators (MNOs)
 
 
@@ -150,6 +176,16 @@ Table: Comparing means of MNOs
 
 
 # SINR
+
+ 3GPP TR 45.820 
+
+
+
+Results are presented at SNRs ranging from -6.3 dB to 3.7 dB, corresponding (see [6.2-5]) to coupling losses ranging from 164 dB (MCL) to 154 dB (GPRS reference level + 10 dB). 
+
+
+
+
 
 ![Vodacom Energy (J) vs SINR (dB)](../images/1568089425196.png)
 
@@ -963,3 +999,17 @@ If the histogram bin values are normalized by dividing by the bin count, adding 
 [](../../code/tests/old/img2/probability_mass_function.png)
 
 In fact, good practice would be viewing the data as is and not trying to analyze it from what is essentially an entirely new perspective. Thus, the data will be viewed as 2D plotted points and histograms. Colour will be used to group the data according to attenuation and packet size.
+
+
+
+
+
+
+
+ \hfill 	
+  \subfloat[Box plot showing ECL distribution is not as informative.]{
+	\begin{minipage}[t][0.65\width]{
+	   0.48\textwidth}
+	   \centering
+	   \includegraphics[width=1\textwidth]{../../code/tests/box/ecl.pdf}
+	\end{minipage}}

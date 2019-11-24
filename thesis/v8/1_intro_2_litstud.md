@@ -421,7 +421,7 @@ MTN NB-IoT sim cards can currently be obtained only for testing purposes, and it
 
 ## Thesis structure {#thesis-struct}
 
-NB-IoT is introduced to the reader in Chapter \ref{intro}. A literature study reviews the current empirical research in Chapter \ref{litstudy}. Design and methodology shows the steps taken to capture different metrics and process the resulting dataset in Chapter \ref{design}. Results are analyzed in Chapter \ref{results} and discussed with recommendations in Chapter \ref{#discussion}. Lastly, a conclusion is made in Chapter \ref{conclusion}.
+NB-IoT is introduced to the reader in Chapter \ref{intro}. A literature study reviews the current empirical research in Chapter \ref{litstudy}. Design and methodology shows the steps taken to capture different metrics and process the resulting dataset in Chapter \ref{design}. Results are analyzed and discussed in Chapter \ref{results}. Lastly, a conclusion is made in Chapter \ref{conclusion} with recommendations.
 
 \newpage
 
@@ -474,7 +474,10 @@ On the other hand, this does not slow the growth in number of devices connected 
 Matching emerging applications with existing technologies has become one of the
 main challenges for IoT initiatives, especially when a new technology appears in the landscape and the map must be redrawn. Massive IoT is the deployment of an immense number of low-powered devices with infrequent reporting and both NB-IoT and LTE Cat-M fulfill the requirements of 5G massive MTC/IoT.
 
-### Push-Pull Model and Edge/Fog Computing {#pushpull}
+<!--### Push-Pull Model and Edge/Fog Computing {#pushpull}-->
+
+\hypertarget{pushpull}{%
+\subsubsection{Push-Pull Model and Edge/Fog Computing}\label{pushpull}}
 
 Traditionally, IoT devices push data to the internet at regular intervals. This push model can be considered quite energy inefficient, especially when the data is only occasionally actionable. For example, in asset tracking or remote monitoring.
 
@@ -495,9 +498,7 @@ Table: Unidirectional and bidirectional LPWANs {#tbl:unibidirectional_lpwans}
 
 Most importantly when looking at bidirectionality vs unidirectionality is that transmit current is usually much more than the receive current required. By limiting TX transmissions such that the user only requests data on-demand when it is required, battery savings ensue. There are many LPWANs out there, but we can split them up into two groups as in Table \ref{tbl:unibidirectional_lpwans}. Later, we look at a few of these directional LPWANs in \S\ref{unidirectional_lpwans}-\ref{bidirectional_lpwans} and draw comparisons in \S\ref{lpwan_comparison}.
 
-<!-- ###  Edge/Fog Computing {#edge_computing} -->
-
----
+####  Edge/Fog Computing {#edge_computing}
 
 Edge computing is the practice of offloading cloud processes to the endpoint. It saves on data overhead, especially when there are data charges involved and battery longevity is desired.
 
@@ -523,9 +524,12 @@ A low-power wide-area network is a type of wireless telecommunication designed t
 * NB-Fi Protocol is an open LPWAN protocol, which operates in unlicensed ISM radio band. Using the NB-Fi Protocol in devices ensures stable data transmission range of up to 10 km in dense urban conditions, and up to 30 km in rural areas with up to 10 years on battery power [@Ikpehai2018b].
 * HaLow (pronounced halo) is a low-power, long-range version of the IEEE 802.11 Wi-Fi standard. HaLow is based on the Wi-Fi Alliance 802.11ah specification and is expected to play an important part in IoT. At this stage it has low market traction.
 
-### Unidirectional: LoRaWAN and SigFox {#unidirectional_lpwans}
+<!--Unidirectional: LoRaWAN and SigFox {#unidirectional_lpwans}-->
 
-<!-- #### LoRaWAN {#lorawan} -->
+\hypertarget{unidirectional_lpwans}{%
+\subsubsection[Unidirectional: LoRaWAN and SigFox]{Unidirectional LPWANs}\label{unidirectional_lpwans}}
+
+#### LoRaWAN {#lorawan}
 
 LoRa is a low-power wide-area network technology. It is based on spread spectrum modulation techniques derived from chirp spread spectrum technology. It was developed by Cycleo of Grenoble, France and acquired by Semtech the founding member of the LoRa Alliance. 
 
@@ -539,9 +543,7 @@ LoRaWAN is a contender for NB-IoT. It lacks bidirectionality and data rate.
 
 LoRaWAN uses chirp-spread-spectrum (CSS) and is publically accessible from networks such as The Things Network (TTN). Unfortunately, although that has the best coverage, it only uses class A which means it cannot listen for asynchronous downlink messages except after an uplink (which defeats the purpose of avoid unnecessary uplink transmissions which draw large current) [@Adelantado2017].
 
-<!-- #### SigFox {#sigfox} -->
-
----
+#### SigFox {#sigfox}
 
 Sigfox is a French global network operator founded in 2009 that builds wireless networks to connect low-power objects such as electricity meters and smartwatches, which need to be continuously on and emitting small amounts of data. Sigfox is based in Labège near Toulouse, France, and has over 375 employees.
 
@@ -549,17 +551,18 @@ Briefly, SigFox is an ultra-narrow-band wireless technology that one can send 14
 
 Simulations show that with 55,000 devices transmitting the base station would reach the 270 simultaneously transmitting devices that Sigfox claims is possible while still ensuring a 99.9% PDR [@Thomas2018].
 
-### Bidirectional: NB-IoT and Dash7 {#bidirectional_lpwans}
+<!--Bidirectional: NB-IoT and Dash7 {#bidirectional_lpwans}-->
 
-<!-- #### NB-IoT {#nbiot_lit} -->
+\hypertarget{bidirectional_lpwans}{%
+\subsubsection[Bidirectional: NB-IoT and Dash7]{Bidirectional LPWANs}\label{bidirectional_lpwans}}
+
+#### NB-IoT {#nbiot_lit}
 
 Narrowband Internet of Things is a Low Power Wide Area Network radio technology standard developed by 3GPP to enable a wide range of cellular devices and services. The specification was frozen in 3GPP Release 13, in June 2016. Other 3GPP IoT technologies include eMTC and EC-GSM-IoT. 
 
 NB-IoT is LTE's replacement for the power hungry GSM that some IoT devices still use. GSM is an aging technology which is being turned off in some parts of the world. It has 7 times better range and coverage, and power saving which can let a device last 10+ years on a single charge [@Wang2017c].
 
-<!-- #### Dash7 {#dash7_lit} -->
-
----
+#### Dash7 {#dash7_lit}
 
 DASH7 Alliance Protocol is an open source Wireless Sensor and Actuator Network protocol, which operates in the 433 MHz, 868 MHz and 915 MHz unlicensed ISM band/SRD band. 
 
@@ -840,7 +843,7 @@ Release assistance requests the eNodeB to release the RRC connection immediately
 
 ### Repetitions and Enhanced Coverage Levels {#ECLs}
 
-Enhanced Coverage Levels determine the number of repetitions in the uplink channel. Coverage levels range from 0 for normal operation and 2 for the worst case scenario, and repetitions range from 2 to 128. Although the network determines the ECL for the UE device, it is factors such as RF network conditions interference that influence the number of repetitions. Network operators should provide enough coverage to allow devices to be mostly in coverage class 0 or 1. Depending on the NB-IoT deployment, the network could have large areas, or devices located in deep locations which unfortunately mean they operate in Coverage Class 2. It would be best to minimize ECL 2 except for deep indoor penetration use cases due to the high energy usage since it uses high repetitions for the RACH process and also higher coding schemes when transmitting data.
+Enhanced Coverage Levels determine the number of repetitions in the uplink channel. Coverage levels range from 0 for normal operation and 2 for the worst case scenario, and repetitions range from 2 to 128 in uplink, and up to 2048 in downlink. Although the network determines the ECL for the UE device, it is factors such as RF network conditions interference that influence the number of repetitions. Network operators should provide enough coverage to allow devices to be mostly in coverage class 0 or 1. Depending on the NB-IoT deployment, the network could have large areas, or devices located in deep locations which unfortunately mean they operate in Coverage Class 2. It would be best to minimize ECL 2 except for deep indoor penetration use cases due to the high energy usage since it uses high repetitions for the RACH process and also higher coding schemes when transmitting data.
 
 An example of sending a 200 byte message in ECL 2 with good SNR can include 5 RACH transmission bursts, a Transmission Block Size ~43 bytes, one repetition and taking just over 1 second, consuming 200uWh. For the same example in bad SNR, the TBS allocated 32 bytes per chunk, with a repetition of 8 and 4. It took 5.5 seconds and consumed 1.07mWh -- fives times as much as before.
 

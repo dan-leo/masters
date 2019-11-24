@@ -22,7 +22,7 @@ tablenos-number-by-section: true
 
 # Results {#results}
 
-This chapter visualizes and analyzes the results from the datasets obtained in Chapter \ref{design}. The visualization format can be found in \S\ref{plots}.
+This chapter visualizes and analyzes the results from the datasets obtained in Chapter \ref{design}. The visualization format can be found in \S\ref{plots}. Metrics are analyzed using UE reports from the modem and measurements using the external energy capture device in \S\ref{energy_capture_device}. Analysis is performed in a two-pronged approach, with the entire dataset in Appendix \ref{appendix_plots}, and mean distributions in Appendix \ref{appendix_measured} and \ref{appendix_ue_reported}.
 
 ## Primary Metrics
 
@@ -33,62 +33,64 @@ This section looks at primary metrics as mentioned in \S\ref{proj_descr}.
 This section presents measured and reported latencies versus signal strength to see the effect of different attenuation zones and telemetry test types for multiple UE and MNOs. Fig. \ref{fig:latency_boxplot} shows us latency values for the entire dataset, and Fig. \ref{fig:latencyECL_boxplot} shows an example in ECL 1 network conditions.
 
 \begin{figure}[ht]
-  \subfloat[Latency measurements from Appendix \ref{appendix_measured_latency} with a baseline just over 1 second. Ublox and Quectel performing similarily.]{
+  \subfloat[The figure shows latency measurements from Appendix \ref{appendix_measured_latency} with the 25th percentile above 1 second. ZTE, Ericsson and Huawei have a central tendency at 2 seconds, with 95\% of values under 10 seconds. Nokia has a median at 8 seconds and 95th percentile at 60 seconds. Both Ublox and Quectel modems share similar distributions.]{
 	\begin{minipage}[c][0.6\width]{
 	   0.48\textwidth}
 	   \centering
 	   \includegraphics[width=1\textwidth]{../../code/tests/box/latency.pdf}
 	\end{minipage}}
  \hfill 	
-  \subfloat[UE reported latency from Appendix \ref{appendix_tx_latency} and \ref{appendix_rx_latency} with a baseline at 200 ms. Quectel slightly better than Ublox, but outliers extend further.]{
+  \subfloat[The figure shows UE reported latency from Appendix \ref{appendix_tx_latency} and \ref{appendix_rx_latency} with the 25th percentile above 200 ms. ZTE, Ericsson and Huawei have a central tendency between 600 and 700 ms, with 95\% or more values under 7 seconds. Nokia has a median at 2 seconds and 95th percentile over 100 seconds. The latency distribution of Quectel modems are slightly better than Ublox, but outliers extend further.]{
 	\begin{minipage}[c][0.6\width]{
 	   0.48\textwidth}
 	   \centering
 	   \includegraphics[width=1\textwidth]{../../code/tests/box/latencyEst.pdf}
 	\end{minipage}}
-\caption{Measured and UE reported latency from Appendix \ref{appendix_plots} with outliers extending up to 300 seconds. LTE vendors exhibit latencies under 10 seconds in 90\% of cases, except for Nokia achieving the target in only 50\% of cases. Nokia's poor performance results in MTN leading Vodacom in datagram latency.}
+\caption{Measured and UE reported latency using telemetry tests from Appendix \ref{appendix_plots} with outliers extending up to 300 seconds. LTE vendors exhibit satisfactory latencies under 10 seconds in 95\% of cases, except for Nokia achieving the target in only 50\% of measurements. Nokia's poor performance results in MTN leading Vodacom in datagram latency in both cases. Looking at the 25th percentile as a baseline, it appears that UE reported latencies are smaller than measured values by a factor up to 5.}
 \label{fig:latency_boxplot}
 \end{figure}
 
 
 
+There is a large discrepancy in the datagram latency between MTN and Vodacom in both Figure \ref{fig:latency_boxplot} and \ref{fig:latencyECL_boxplot} due to Nokia's poor performance. Although LTE vendors show satisfactory latency performance under 10 seconds, Nokia needs to be reconfigured for Vodacom. Ublox modem reports and measurements show similar characteristics to Quectel modem measurements, but the Quectel modem reports characteristics worse than expected in ECL Class 1 measurements. Latency impacts energy consumption and the ability of the UE to update cloud-based applications timeously.
+
+
+
 \begin{figure}[ht]
-  \subfloat[Latency measurements from Appendix \ref{appendix_latency_MT}. Nokia has around 20 seconds latency. At around 6 seconds, Quectel is performing slightly better than Ublox around 8 seconds.]{
+  \subfloat[The figure shows latency measurements from Appendix \ref{appendix_latency_MT}. Ericsson and Huawei show similar distributions with a median at 3 seconds. ZTE too shows a similar distribution, yet with a median extending to just above 1 second. On the other hand, Nokia has a median latency of 20 seconds and the entire distribution is above 10 seconds. With a median around 6 seconds, Quectel is performing slightly better than Ublox modems.]{
 	\begin{minipage}[c][0.6\width]{
 	   0.48\textwidth}
 	   \centering
 	   \includegraphics[width=1\textwidth]{../../code/tests/box/latencyECL1.pdf}
 	\end{minipage}}
  \hfill 	
-  \subfloat[UE reported latency from Appendix \ref{appendix_tx_latency_RT} and \ref{appendix_rx_latency_RT}. Nokia has around 100 seconds latency. Ublox is performing much better at 5 seconds than Quectel at 40 seconds.]{
+  \subfloat[The figure shows mean UE reported latency from Appendix \ref{appendix_tx_latency_RT} and \ref{appendix_rx_latency_RT}. ZTE, Ericsson and Huawei share similar mean latency distributions between 1 and 3 seconds, yet Nokia reports just under 100 seconds. Ublox is performing much better with a mean latency distribution at 5 seconds than Quectel at 40 seconds.]{
 	\begin{minipage}[c][0.6\width]{
 	   0.48\textwidth}
 	   \centering
 	   \includegraphics[width=1\textwidth]{../../code/tests/box/latencyEstECL1.pdf}
 	\end{minipage}}
-\caption{Latency in sending 16-512 byte packet payloads in ECL 1 network conditions with a baseline around 1 second.}
+\caption{Latency in sending 16-512 byte packet payloads in ECL Class 1 network conditions with a mean distribution baseline around 1 second and ranging up to 100 seconds. MTN shows a better mean latency distribution than Vodacom due to Nokia.}
 \label{fig:latencyECL_boxplot}
 \end{figure}
-
-There is a large discrepancy in the datagram latency between MTN and Vodacom due to Nokia's poor performance. Ublox reports similar characteristics to measurements, but Quectel reports characteristics worse than expected in measurements.
 
 ### Power Efficiency
 
 \begin{figure}[ht]
-  \subfloat[Measured average power from Appendix \ref{appendix_energy_MP}. Huawei has a lower 25\% baseline at 10 $\mu{W}{h}$.]{
+  \subfloat[The figure shows measured average power from Appendix \ref{appendix_energy_MP}. Ericsson and Huawei have central tendencies under 100 $\mu{W}{h}$, unlike ZTE and Nokia with 250 and 4000 $\mu{W}{h}$ respectively. Ublox and Quectel modems share similar average power measurement distributions, with Quectel slightly better.]{
 	\begin{minipage}[c][0.6\width]{
 	   0.48\textwidth}
 	   \centering
 	   \includegraphics[width=1\textwidth]{../../code/tests/box/avgpower.pdf}
 	\end{minipage}}
  \hfill 	
-  \subfloat[UE reported average power estimation from Appendix \ref{appendix_tx_latency} and \ref{appendix_rx_latency}. ]{
+  \subfloat[The figure shows UE reported average power estimation from Appendix \ref{appendix_tx_latency} and \ref{appendix_rx_latency}. ZTE, Ericsson and Huawei show similar central tendencies under 100 $\mu{W}{h}$, yet Nokia at 400 $\mu{W}{h}$ average power. Ublox and Quectel show similar reported average power distributions, with Quectel slightly better.]{
 	\begin{minipage}[c][0.6\width]{
 	   0.48\textwidth}
 	   \centering
 	   \includegraphics[width=1\textwidth]{../../code/tests/box/avgpowerEst.pdf}
 	\end{minipage}}
-\caption{Average power of telemetry test datagrams with a 25\% baseline around 30 $\mu{W}{h}$. At least 50\% of values centered at median range from 30 $\mu{W}{h}$ to 1000 $\mu{W}{h}$, except for Nokia extending up to 10 000 $\mu{W}{h}$ in measurements. Quectel shows slightly better values than Ublox. MTN remains the leader for datagram power efficiency for various telemetry tests.}
+\caption{Average power of telemetry test datagrams with a 25th percentile baseline around 30 $\mu{W}{h}$. LTE vendors show varying results between 30 $\mu{W}{h}$ and 10,000 $\mu{W}{h}$, yet Nokia shows average power consumption worse than ZTE, Ericsson and Huawei by a factor of 20 or more. Quectel shows slightly better values than Ublox modems, and MTN remains the leader for datagram power efficiency for various telemetry tests due to Nokia's poor performance..}
 \end{figure}
 
 
@@ -110,9 +112,7 @@ There is a large discrepancy in the datagram latency between MTN and Vodacom due
 \caption{Average power in sending 16-512 byte packet payloads in ECL 1 network conditions}
 \end{figure}
 
-There is a large discrepancy in the energy consumption between MTN and Vodacom.
-
-The inefficiency between the two South African MNOs can either be attributed to poor system configuration, or hardware fault. That is, if the network vendor meets the 3GPP's standards.
+There is a large discrepancy in the energy consumption between MTN and Vodacom. Average power measurements and reports from UE modems show that Nokia is consuming more energy than ZTE, Ericsson and Nokia by a factor of 20 or more. Ublox and Quectel show similar average power distributions when considering the entire dataset, yet vary in the mean average power distributions for ECL Class 1. Power consumption impacts battery longevity as in \S\ref{res_battery}.
 
 ## Secondary Metrics
 
@@ -126,7 +126,7 @@ It is important to know the signal strength behavior between UE devices and LTE 
 
 The RF link characteristics between the module and base station are useful in determining the range or indoor penetration the UE device can sustain.
 
-Table: MCL between LTE vendor-MNO pairs. {#tbl:mcl_results}
+Table: MCL between LTE vendor-MNO pairs and UE using process defined in \S\ref{des_mcl}. {#tbl:mcl_results}
 
 |                | MCL        |
 | -------------- | ---------- |
@@ -162,22 +162,15 @@ SINR was considered over RSSI and RSRQ. RSSI is RSRP with transmit power include
 
 #### Extended Coverage Level
 
-\begin{figure}[ht]
-  \subfloat[Bar chart showing ECL distribution.]{
-	\begin{minipage}[t][0.65\width]{
-	   0.48\textwidth}
-	   \centering
-	   \includegraphics[width=1\textwidth]{../../code/tests/box/ecl_bar.pdf}
-	\end{minipage}}
- \hfill 	
-  \subfloat[Box plot showing ECL distribution is not as informative.]{
-	\begin{minipage}[t][0.65\width]{
-	   0.48\textwidth}
-	   \centering
-	   \includegraphics[width=1\textwidth]{../../code/tests/box/ecl.pdf}
-	\end{minipage}}
-\caption{UE reported ECL. Notably, most of Nokia's dataset lies within ECL 1.}
-\end{figure}
+
+
+\begin{minipage}{\linewidth}
+\begin{center}
+\includegraphics[width=0.55\linewidth]{../../code/tests/box/ecl_bar.pdf}
+\captionof{figure}[UE reported ECL]{UE reported ECL. Notably, most of Nokia's dataset lies within ECL 1.}
+\label{fig:}
+\end{center}
+\end{minipage}
 
 Visible in Appendix \ref{appendix_plots} we can see how an RF connection will be treated as ECL 0 until approximately -90 dBm. From thence until -110 dBm it will be in ECL 1 and any last bit of link budget can be accessed in ECL 2 until disconnection at most at -130 dBm.
 
@@ -291,26 +284,7 @@ The study investigated the following metrics and estimations using a set of tele
 
 \newpage
 
-# Discussion and Recommendations {#discussion}
-
-Seeing that LTE Cat-M is on a par with NB-IoT, if not better in \S\ref{lit_standing}, it would be wise to consider LTE Cat-M for national coverage in South Africa in future.
-
-## Optimal Network Configuration and Setup
-
-Avoid -120 dBm - -130 dBm region
-
-* AT+COPS
-* Release / eDRX setup
-
-## Use Cases
-
-Use cases suitable for NB-IoT considering results
-
-## Future Work
-
-Compare NB-IoT to Dash7, which can be considered a prominent bi-directional contender. It has the capability of using LoRa's physical layer (RF frontend) so has the added benefit of long range.
-
-# Conclusion {#conclusion}
+# Conclusion and Recommendations {#conclusion}
 
 Attenuation does not affect performance as much as the ECL classes do, and includes
 degradation to latency, energy consumption and packet size.
@@ -336,9 +310,30 @@ There are also a couple of hurdles in the way. Although lauded as a mere softwar
 
 Since it appears that ECL is the ultimate factor that should influence latency and energy usage, it is the metric used for battery life estimation as well.
 
+
+
+
+
+Seeing that LTE Cat-M is on a par with NB-IoT, if not better in \S\ref{lit_standing}, it would be wise to consider LTE Cat-M for national coverage in South Africa in future.
+
+## Optimal Network Configuration and Setup
+
+Avoid -120 dBm - -130 dBm region
+
+* AT+COPS
+* Release / eDRX setup
+
+## Use Cases
+
+Use cases suitable for NB-IoT considering results
+
+## Future Work
+
+Compare NB-IoT to Dash7, which can be considered a prominent bi-directional contender. It has the capability of using LoRa's physical layer (RF frontend) so has the added benefit of long range.
+
 \newpage
 
-# References
+# References {-#references}
 
 <div id="refs"></div>
 \newpage

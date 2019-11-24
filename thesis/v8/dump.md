@@ -1,3 +1,5 @@
+# Plots
+
 - what aspect is the plot trying to cover, what is it telling me on that topic, shows? observances?
 - purpose
 - data in the plot saying / deduce / narrative / story
@@ -14,7 +16,58 @@
 
 
 
+# Conclusion
 
+comparing multiple LTE vendors, UE devices and MNOs.
+
+Attenuation does not affect performance as much as the ECL classes do, and includes
+degradation to latency, energy consumption and packet size.
+
+The telemetry interval estimate, which indicates the periodicity of telemetry messages to last a year on an AA battery, can be used to extend battery life prediction depending on the use case. A strong and overlooked use case is a push/pull model which incorporates edge computing. By pushing data only when complex queries arrive, much battery life is saved due to downlink energy being much less than uplink. This is furthered aided by the configurable eDRX interval which allows UE devices to be paged by the network serving cell(s) it is registered to.
+
+especially in strong signal conditions, yet variation increases in higher ECL Classes due to the dynamic number of repetitions, which calls into question the ability of the UE device to reach the targeted lifespan. Thus, application developers must take into account the longevity estimate of devices depending on their installation with respect to the nearest serving cell. 
+
+The inefficiency between the two South African MNOs can either be attributed to poor
+system configuration, or hardware fault. That is, if the network vendor meets the 3GPP's
+standards. Vodacom’s Nokia infrastructure has failed one of the most important
+requirements for NB-IoT being under 10 seconds latency for all network conditions.
+Secondly it is 10dBm RSRP less sensitive than MTN’s ZTE infrastructure, which has
+satisfactory performance overall. Since the findings are reflected similarly across the
+Ublox and Quectel UE, it implies that the discrepancies are as a result of the MNO
+vendor.
+
+* how well NB-IoT performs and facilitates these connections for IoT?
+
+2G/GSM is a sunsetting technology with great coverage and market penetration in SA. It certainly gathers a large share of revenue by calls and SMS.
+
+When looking at SigFox, we see a technology with far range, but data rates that could be considered too low for our application. LoRa has higher data rates, but is still subject to duty cycle limitations. Dash7 is a full-stack medium range wireless technology that overcomes many of the limitations, including the duty cycle by having listen-before-talk and adaptive data rates.
+
+NB-IoT is a very promising technology. It can coexist with 2G/GSM and LTE networks. When comparing to 2G it has 7 times greater range, and in power saving modes time to transmission is a few seconds, compared to about a minute for 2G. There are a few successful use cases for NB-IoT in South Africa, such as smart metering, asset tracking etc.
+
+There are also a couple of hurdles in the way. Although lauded as a mere software upgrade, it does require the latest basestations and licensing fees. There needs to be a substantial revenue model which ties in with demand.
+
+Since it appears that ECL is the ultimate factor that should influence latency and energy usage, it is the metric used for battery life estimation as well.
+
+
+
+
+
+Seeing that LTE Cat-M is on a par with NB-IoT, if not better in \S\ref{lit_standing}, it would be wise to consider LTE Cat-M for national coverage in South Africa in future.
+
+## Optimal Network Configuration and Setup
+
+Avoid -120 dBm - -130 dBm region
+
+* AT+COPS
+* Release / eDRX setup
+
+## Use Cases
+
+Use cases suitable for NB-IoT considering results
+
+## Future Work
+
+Compare NB-IoT to Dash7, which can be considered a prominent bi-directional contender. It has the capability of using LoRa's physical layer (RF frontend) so has the added benefit of long range.
 
 
 

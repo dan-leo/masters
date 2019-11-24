@@ -70,7 +70,7 @@ All rights reserved.
 
 # Abstract {-#abstract}
 
-2G/GPRS is a sun-setting technology leaving behind a void for LPWANs such as LoRaWAN and SigFox to fill. The viability of NB-IoT being such a technology for South Africa is investigated. A number of telemetry tests have been performed for multiple UEs (Ublox and Quectel), LTE vendors (ZTE, Nokia, Ericsson and Huawei) and MNOs (MTN and Vodacom) at different RF attenuation decades. This has resulted in analysis for metrics such as latency and power efficiency, as well as estimates for telemetry periodicity and battery longevity.
+2G/GPRS is a sun-setting technology leaving behind a void for LPWANs such as LoRaWAN, SigFox and NB-IoT to fill. This empirical study investigated NB-IoT through metrics and estimations by comparing datasets of telemetry tests performed on long-term-evolution (LTE) vendors, using user-equipment (UE) devices, for mobile-network-operators (MNOs) in South Africa. LTE vendors include ZTE and Ericsson on MTN's network, and Nokia and Huawei on Vodacom's network. Similar UE devices, Ublox and Quectel, were used as a control to observe network changes via RF attenuation in decades. The study theorizes that networks are responsible for the variation found in metrics and estimations, due to the high underlying complexity of LTE architecture on which NB-IoT is based. This has resulted in analysis for metrics such as latency and power efficiency, as well as estimates for telemetry periodicity and battery longevity.
 
 \vspace{5cm}
 
@@ -421,7 +421,7 @@ MTN NB-IoT sim cards can currently be obtained only for testing purposes, and it
 
 ## Thesis structure {#thesis-struct}
 
-NB-IoT is introduced to the reader in Chapter \ref{intro}. A literature study reviews the current empirical research in Chapter \ref{litstudy}. Design and methodology shows the steps taken to capture different metrics and process the resulting dataset in Chapter \ref{design}. Results are analyzed in Chapter \ref{results} and discussed with recommendations in Chapter \ref{#discussion}. Lastly, a conclusion is made in Chapter \ref{conclusion}.
+NB-IoT is introduced to the reader in Chapter \ref{intro}. A literature study reviews the current empirical research in Chapter \ref{litstudy}. Design and methodology shows the steps taken to capture different metrics and process the resulting dataset in Chapter \ref{design}. Results are analyzed and discussed in Chapter \ref{results}. Lastly, a conclusion is made in Chapter \ref{conclusion} with recommendations.
 
 \newpage
 
@@ -474,7 +474,10 @@ On the other hand, this does not slow the growth in number of devices connected 
 Matching emerging applications with existing technologies has become one of the
 main challenges for IoT initiatives, especially when a new technology appears in the landscape and the map must be redrawn. Massive IoT is the deployment of an immense number of low-powered devices with infrequent reporting and both NB-IoT and LTE Cat-M fulfill the requirements of 5G massive MTC/IoT.
 
-### Push-Pull Model and Edge/Fog Computing {#pushpull}
+<!--### Push-Pull Model and Edge/Fog Computing {#pushpull}-->
+
+\hypertarget{pushpull}{%
+\subsubsection{Push-Pull Model and Edge/Fog Computing}\label{pushpull}}
 
 Traditionally, IoT devices push data to the internet at regular intervals. This push model can be considered quite energy inefficient, especially when the data is only occasionally actionable. For example, in asset tracking or remote monitoring.
 
@@ -495,9 +498,7 @@ Table: Unidirectional and bidirectional LPWANs {#tbl:unibidirectional_lpwans}
 
 Most importantly when looking at bidirectionality vs unidirectionality is that transmit current is usually much more than the receive current required. By limiting TX transmissions such that the user only requests data on-demand when it is required, battery savings ensue. There are many LPWANs out there, but we can split them up into two groups as in Table \ref{tbl:unibidirectional_lpwans}. Later, we look at a few of these directional LPWANs in \S\ref{unidirectional_lpwans}-\ref{bidirectional_lpwans} and draw comparisons in \S\ref{lpwan_comparison}.
 
-<!-- ###  Edge/Fog Computing {#edge_computing} -->
-
----
+####  Edge/Fog Computing {#edge_computing}
 
 Edge computing is the practice of offloading cloud processes to the endpoint. It saves on data overhead, especially when there are data charges involved and battery longevity is desired.
 
@@ -523,9 +524,12 @@ A low-power wide-area network is a type of wireless telecommunication designed t
 * NB-Fi Protocol is an open LPWAN protocol, which operates in unlicensed ISM radio band. Using the NB-Fi Protocol in devices ensures stable data transmission range of up to 10 km in dense urban conditions, and up to 30 km in rural areas with up to 10 years on battery power [@Ikpehai2018b].
 * HaLow (pronounced halo) is a low-power, long-range version of the IEEE 802.11 Wi-Fi standard. HaLow is based on the Wi-Fi Alliance 802.11ah specification and is expected to play an important part in IoT. At this stage it has low market traction.
 
-### Unidirectional: LoRaWAN and SigFox {#unidirectional_lpwans}
+<!--Unidirectional: LoRaWAN and SigFox {#unidirectional_lpwans}-->
 
-<!-- #### LoRaWAN {#lorawan} -->
+\hypertarget{unidirectional_lpwans}{%
+\subsubsection[Unidirectional: LoRaWAN and SigFox]{Unidirectional LPWANs}\label{unidirectional_lpwans}}
+
+#### LoRaWAN {#lorawan}
 
 LoRa is a low-power wide-area network technology. It is based on spread spectrum modulation techniques derived from chirp spread spectrum technology. It was developed by Cycleo of Grenoble, France and acquired by Semtech the founding member of the LoRa Alliance. 
 
@@ -539,9 +543,7 @@ LoRaWAN is a contender for NB-IoT. It lacks bidirectionality and data rate.
 
 LoRaWAN uses chirp-spread-spectrum (CSS) and is publically accessible from networks such as The Things Network (TTN). Unfortunately, although that has the best coverage, it only uses class A which means it cannot listen for asynchronous downlink messages except after an uplink (which defeats the purpose of avoid unnecessary uplink transmissions which draw large current) [@Adelantado2017].
 
-<!-- #### SigFox {#sigfox} -->
-
----
+#### SigFox {#sigfox}
 
 Sigfox is a French global network operator founded in 2009 that builds wireless networks to connect low-power objects such as electricity meters and smartwatches, which need to be continuously on and emitting small amounts of data. Sigfox is based in Labège near Toulouse, France, and has over 375 employees.
 
@@ -549,17 +551,18 @@ Briefly, SigFox is an ultra-narrow-band wireless technology that one can send 14
 
 Simulations show that with 55,000 devices transmitting the base station would reach the 270 simultaneously transmitting devices that Sigfox claims is possible while still ensuring a 99.9% PDR [@Thomas2018].
 
-### Bidirectional: NB-IoT and Dash7 {#bidirectional_lpwans}
+<!--Bidirectional: NB-IoT and Dash7 {#bidirectional_lpwans}-->
 
-<!-- #### NB-IoT {#nbiot_lit} -->
+\hypertarget{bidirectional_lpwans}{%
+\subsubsection[Bidirectional: NB-IoT and Dash7]{Bidirectional LPWANs}\label{bidirectional_lpwans}}
+
+#### NB-IoT {#nbiot_lit}
 
 Narrowband Internet of Things is a Low Power Wide Area Network radio technology standard developed by 3GPP to enable a wide range of cellular devices and services. The specification was frozen in 3GPP Release 13, in June 2016. Other 3GPP IoT technologies include eMTC and EC-GSM-IoT. 
 
 NB-IoT is LTE's replacement for the power hungry GSM that some IoT devices still use. GSM is an aging technology which is being turned off in some parts of the world. It has 7 times better range and coverage, and power saving which can let a device last 10+ years on a single charge [@Wang2017c].
 
-<!-- #### Dash7 {#dash7_lit} -->
-
----
+#### Dash7 {#dash7_lit}
 
 DASH7 Alliance Protocol is an open source Wireless Sensor and Actuator Network protocol, which operates in the 433 MHz, 868 MHz and 915 MHz unlicensed ISM band/SRD band. 
 
@@ -840,7 +843,7 @@ Release assistance requests the eNodeB to release the RRC connection immediately
 
 ### Repetitions and Enhanced Coverage Levels {#ECLs}
 
-Enhanced Coverage Levels determine the number of repetitions in the uplink channel. Coverage levels range from 0 for normal operation and 2 for the worst case scenario, and repetitions range from 2 to 128. Although the network determines the ECL for the UE device, it is factors such as RF network conditions interference that influence the number of repetitions. Network operators should provide enough coverage to allow devices to be mostly in coverage class 0 or 1. Depending on the NB-IoT deployment, the network could have large areas, or devices located in deep locations which unfortunately mean they operate in Coverage Class 2. It would be best to minimize ECL 2 except for deep indoor penetration use cases due to the high energy usage since it uses high repetitions for the RACH process and also higher coding schemes when transmitting data.
+Enhanced Coverage Levels determine the number of repetitions in the uplink channel. Coverage levels range from 0 for normal operation and 2 for the worst case scenario, and repetitions range from 2 to 128 in uplink, and up to 2048 in downlink. Although the network determines the ECL for the UE device, it is factors such as RF network conditions interference that influence the number of repetitions. Network operators should provide enough coverage to allow devices to be mostly in coverage class 0 or 1. Depending on the NB-IoT deployment, the network could have large areas, or devices located in deep locations which unfortunately mean they operate in Coverage Class 2. It would be best to minimize ECL 2 except for deep indoor penetration use cases due to the high energy usage since it uses high repetitions for the RACH process and also higher coding schemes when transmitting data.
 
 An example of sending a 200 byte message in ECL 2 with good SNR can include 5 RACH transmission bursts, a Transmission Block Size ~43 bytes, one repetition and taking just over 1 second, consuming 200uWh. For the same example in bad SNR, the TBS allocated 32 bytes per chunk, with a repetition of 8 and 4. It took 5.5 seconds and consumed 1.07mWh -- fives times as much as before.
 
@@ -855,6 +858,10 @@ NB-IoT operation requires a minimum bandwidth of 180 kHz, which is equal to the 
 #### MCL {#lit_mcl}
 
 Maximum coupling loss (MCL) is defined as the maximal total channel loss between User Equipment (UE) and eNodeB (eNB) antenna ports at which the data service can still be delivered. Practically, it includes antenna gains, path loss, shadowing and any other impairments. The higher the MCL, the more robust the link is. 
+
+$$MCL\ ( dB) \ =\ P_{TX} \ -\ ( Noise\ figure\ +\ SINR\ +\ Thermal\ Noise\ floor)$$ {#eq:mcl}
+
+$$Thermal\ Noise\ floor\ =\ -174\ +\ 10log_{10}( Bandwidth)$$ {#eq:noise_floor}
 
 #### UE Device and Network Behavior
 
@@ -1122,6 +1129,10 @@ Using a Quectel BG96, the following tests were taken on the rooftop described in
 
 The tests involve sending a set of 10 pings multiple times at a certain attenuation and resulting RSSI measurement using a Quectel BG96 modem.
 
+[](C:\GIT\masters\thesis\images\rooftest1.png)
+
+[](C:\GIT\masters\thesis\images\rooftest2.png)
+
 \begin{figure}[ht]
   \subfloat[With an antenna and the attenuator set to 0dB, we find most of the values around the mean of 185.2ms, except for the tail at around 500ms which is the time of the first ping in a set of 10. ECL 0, RSRP -51 dBm.]{
 	\begin{minipage}[c][1\width]{
@@ -1138,14 +1149,7 @@ The tests involve sending a set of 10 pings multiple times at a certain attenuat
 	   \includegraphics[width=1.0\linewidth]{../images/rooftest2.png}
 	\label{fig:ping2}
 	\end{minipage}}
-\captionof{figure}[Ping tests]{Ping tests on Engineering rooftop}
-\end{figure}
-
-[](C:\GIT\masters\thesis\images\rooftest1.png)
-
-[](C:\GIT\masters\thesis\images\rooftest2.png)
-
-\begin{figure}[ht]
+\vspace{1mm}
   \subfloat[Removing the antenna from the attenuator, we find that the data has a slightly thicker tail, and averages around 207.1ms. ECL 0, RSRP -91 dBm.]{
 	\begin{minipage}[c][1\width]{
 	   0.48\textwidth}
@@ -2102,9 +2106,13 @@ Signal strength is affected by range and path loss. It also affects the ECL clas
 
 Signal strength can be measured or reported from the UE device and the following metrics are all related: MCL, RSRP, RSSI, RSRQ, SNR, TX Power and ECLs.
 
-#### MCL
+#### MCL {#des_mcl}
 
-Maximum Coupling Link (MCL), as defined in \S\ref{lit_mcl}, is the greatest link between UE device and eNodeB. This can be calculated by using the minimum values obtained in the field capture datasets in \S\ref{dataset}.
+Maximum Coupling Link (MCL), as defined in \S\ref{lit_mcl} and by Eq. \ref{eq:mcl}, is the greatest link between UE device and eNodeB. This can be calculated by using the minimum values of SINR obtained in the field capture datasets in \S\ref{dataset}, excluding outliers.
+
+$Noise\ figure$ is defined as 5dB by 3GPP 45.820 7A [@realDiffs2016].
+
+With $Bandwidth$ in Eq. \ref{eq:noise_floor} set to 180 kHz as defined in \S\ref{lpwan_comparison}, $Thermal\ Noise\ floor$ is equal to a value of -121.45 dB. Finally, $P_{TX}$ is defined as 
 
 #### RSRP
 
@@ -2303,76 +2311,79 @@ The goal of plots in general is to investigate observations and comparisons.
 
 # Results {#results}
 
-This chapter visualizes and analyzes the results from the datasets obtained in Chapter \ref{design}. The visualization format can be found in \S\ref{plots}.
+This chapter visualizes and analyzes the results from the datasets obtained in Chapter \ref{design}, with comparisons drawn against LTE vendors, UE and MNOs. Metrics are analyzed using UE reports from the modem and measurements using the external energy capture device in \S\ref{energy_capture_device}. The datasets are created using telemetry tests which are performed in various network conditions using RF attenuation, and in some cases an example is shown in ECL Class 1 due to its higher likelihood of being used. Analysis is performed in a two-pronged approach, with the entire dataset which is visualized (format in \S\ref{plots}) in Appendix \ref{appendix_plots}, and mean distributions in Appendix \ref{appendix_measured} and \ref{appendix_ue_reported}.
 
 ## Primary Metrics
 
-This section looks at primary metrics as mentioned in \S\ref{proj_descr}.
+This section looks at primary metrics as mentioned in \S\ref{proj_descr}. Power efficiency and Latency are primary metrics due to the fact that they can be compared between external measurements and UE reports.
 
 ### Latency and Delay
 
-This section presents measured and reported latencies versus signal strength to see the effect of different attenuation zones and telemetry test types for multiple UE and MNOs. Fig. \ref{fig:latency_boxplot} shows us latency values for the entire dataset, and Fig. \ref{fig:latencyECL_boxplot} shows an example in ECL 1 network conditions.
+This section presents measured and reported latencies versus signal strength to see the effect of different attenuation zones and telemetry test types for multiple UE and MNOs. Fig. \ref{fig:latency_boxplot} shows us latency values for the entire dataset, and Fig. \ref{fig:latencyECL_boxplot} shows an example in ECL Class 1 network conditions.
 
 \begin{figure}[ht]
-  \subfloat[Latency measurements from Appendix \ref{appendix_measured_latency} with a baseline just over 1 second. Ublox and Quectel performing similarily.]{
+  \subfloat[The figure shows latency measurements from Appendix \ref{appendix_measured_latency} with the 25th percentile above 1 second. ZTE, Ericsson and Huawei have a central tendency at 2 seconds, with 95\% of values under 10 seconds. Nokia has a median at 8 seconds and 95th percentile at 60 seconds. Both Ublox and Quectel modems share similar distributions.]{
 	\begin{minipage}[c][0.6\width]{
 	   0.48\textwidth}
 	   \centering
 	   \includegraphics[width=1\textwidth]{../../code/tests/box/latency.pdf}
 	\end{minipage}}
  \hfill 	
-  \subfloat[UE reported latency from Appendix \ref{appendix_tx_latency} and \ref{appendix_rx_latency} with a baseline at 200 ms. Quectel slightly better than Ublox, but outliers extend further.]{
+  \subfloat[The figure shows UE reported latency from Appendix \ref{appendix_tx_latency} and \ref{appendix_rx_latency} with the 25th percentile above 200 ms. ZTE, Ericsson and Huawei have a central tendency between 600 and 700 ms, with 95\% or more values under 7 seconds. Nokia has a median at 2 seconds and 95th percentile over 100 seconds. The latency distribution of Quectel modems are slightly better than Ublox, but outliers extend further.]{
 	\begin{minipage}[c][0.6\width]{
 	   0.48\textwidth}
 	   \centering
 	   \includegraphics[width=1\textwidth]{../../code/tests/box/latencyEst.pdf}
 	\end{minipage}}
-\caption{Measured and UE reported latency from Appendix \ref{appendix_plots} with outliers extending up to 300 seconds. LTE vendors exhibit latencies under 10 seconds in 90\% of cases, except for Nokia achieving the target in only 50\% of cases. Nokia's poor performance results in MTN leading Vodacom in datagram latency.}
+\caption{Measured and UE reported latency using telemetry tests from Appendix \ref{appendix_plots} with outliers extending up to 300 seconds. LTE vendors exhibit satisfactory latencies under 10 seconds in 95\% of cases, except for Nokia achieving the target in only 50\% of measurements. Nokia's poor performance results in MTN leading Vodacom in datagram latency in both cases. Looking at the 25th percentile as a baseline, it appears that UE reported latencies are smaller than measured values by a factor up to 5.}
 \label{fig:latency_boxplot}
 \end{figure}
 
 
 
+There is a large discrepancy in the datagram latency between MTN and Vodacom in both Figure \ref{fig:latency_boxplot} and \ref{fig:latencyECL_boxplot} due to Nokia's poor performance. Although LTE vendors show satisfactory latency performance under 10 seconds, Nokia needs to be reconfigured for Vodacom. Ublox modem reports and measurements show similar characteristics to Quectel modem measurements, but the Quectel modem reports characteristics worse than expected in ECL Class 1 measurements. Latency impacts energy consumption and the ability of the UE to update cloud-based applications timeously.
+
+
+
 \begin{figure}[ht]
-  \subfloat[Latency measurements from Appendix \ref{appendix_latency_MT}. Nokia has around 20 seconds latency. At around 6 seconds, Quectel is performing slightly better than Ublox around 8 seconds.]{
+  \subfloat[The figure shows latency measurements from Appendix \ref{appendix_latency_MT}. Ericsson and Huawei show similar distributions with a median at 3 seconds. ZTE too shows a similar distribution, yet with a median extending to just above 1 second. On the other hand, Nokia has a median latency of 20 seconds and the entire distribution is above 10 seconds. With a median around 6 seconds, Quectel is performing slightly better than Ublox modems.]{
 	\begin{minipage}[c][0.6\width]{
 	   0.48\textwidth}
 	   \centering
 	   \includegraphics[width=1\textwidth]{../../code/tests/box/latencyECL1.pdf}
 	\end{minipage}}
  \hfill 	
-  \subfloat[UE reported latency from Appendix \ref{appendix_tx_latency_RT} and \ref{appendix_rx_latency_RT}. Nokia has around 100 seconds latency. Ublox is performing much better at 5 seconds than Quectel at 40 seconds.]{
+  \subfloat[The figure shows mean UE reported latency from Appendix \ref{appendix_tx_latency_RT} and \ref{appendix_rx_latency_RT}. ZTE, Ericsson and Huawei share similar mean latency distributions between 1 and 3 seconds, yet Nokia reports just under 100 seconds. Ublox is performing much better with a mean latency distribution at 5 seconds than Quectel at 40 seconds.]{
 	\begin{minipage}[c][0.6\width]{
 	   0.48\textwidth}
 	   \centering
 	   \includegraphics[width=1\textwidth]{../../code/tests/box/latencyEstECL1.pdf}
 	\end{minipage}}
-\caption{Latency in sending 16-512 byte packet payloads in ECL 1 network conditions with a baseline around 1 second.}
+\caption{Latency in sending 16-512 byte packet payloads in ECL Class 1 network conditions with a mean distribution baseline around 1 second and ranging up to 100 seconds. MTN shows a better mean latency distribution than Vodacom due to Nokia.}
 \label{fig:latencyECL_boxplot}
 \end{figure}
-
-There is a large discrepancy in the datagram latency between MTN and Vodacom due to Nokia's poor performance. Ublox reports similar characteristics to measurements, but Quectel reports characteristics worse than expected in measurements.
 
 ### Power Efficiency
 
 \begin{figure}[ht]
-  \subfloat[Measured average power from Appendix \ref{appendix_energy_MP}. Huawei has a lower 25\% baseline at 10 $\mu{W}{h}$.]{
+  \subfloat[The figure shows measured average power from Appendix \ref{appendix_energy_MP}. Ericsson and Huawei have central tendencies under 100 $\mu{W}{h}$, unlike ZTE and Nokia with 250 and 4000 $\mu{W}{h}$ respectively. Ublox and Quectel modems share similar average power measurement distributions, with Quectel slightly better.]{
 	\begin{minipage}[c][0.6\width]{
 	   0.48\textwidth}
 	   \centering
 	   \includegraphics[width=1\textwidth]{../../code/tests/box/avgpower.pdf}
 	\end{minipage}}
  \hfill 	
-  \subfloat[UE reported average power estimation from Appendix \ref{appendix_tx_latency} and \ref{appendix_rx_latency}. ]{
+  \subfloat[The figure shows UE reported average power estimation from Appendix \ref{appendix_tx_latency} and \ref{appendix_rx_latency}. ZTE, Ericsson and Huawei show similar central tendencies under 100 $\mu{W}{h}$, yet Nokia is at 400 $\mu{W}{h}$ average power. Ublox and Quectel show similar reported average power distributions, with Quectel slightly better.]{
 	\begin{minipage}[c][0.6\width]{
 	   0.48\textwidth}
 	   \centering
 	   \includegraphics[width=1\textwidth]{../../code/tests/box/avgpowerEst.pdf}
 	\end{minipage}}
-\caption{Average power of telemetry test datagrams with a 25\% baseline around 30 $\mu{W}{h}$. At least 50\% of values centered at median range from 30 $\mu{W}{h}$ to 1000 $\mu{W}{h}$, except for Nokia extending up to 10 000 $\mu{W}{h}$ in measurements. Quectel shows slightly better values than Ublox. MTN remains the leader for datagram power efficiency for various telemetry tests.}
+\caption{Average power of telemetry test datagrams with a 25th percentile baseline around 30 $\mu{W}{h}$. LTE vendors show varying results between 30 $\mu{W}{h}$ and 10,000 $\mu{W}{h}$, yet Nokia shows average power consumption worse than ZTE, Ericsson and Huawei by a factor of 20 or more. Quectel shows slightly better values than Ublox modems, and MTN remains the leader for datagram power efficiency for various telemetry tests due to Nokia's poor performance..}
+\label{fig:res_avg}
 \end{figure}
 
-
+There is a large discrepancy in the energy consumption between MTN and Vodacom in Figure \ref{fig:res_avg} and \ref{fig:res_avgECL}. Average power measurements and reports from UE modems show that Nokia is consuming more energy than ZTE, Ericsson and Nokia by a factor of 20 or more. Ublox and Quectel show similar average power distributions when considering the entire dataset, yet vary in the mean average power distributions for ECL Class 1. Power consumption impacts battery longevity as in \S\ref{res_battery}.
 
 \begin{figure}[ht]
   \subfloat[Average power measurements from Appendix \ref{appendix_measured}]{
@@ -2388,12 +2399,11 @@ There is a large discrepancy in the datagram latency between MTN and Vodacom due
 	   \centering
 	   \includegraphics[width=1\textwidth]{../../code/tests/box/avgpowerEstECL1.pdf}
 	\end{minipage}}
-\caption{Average power in sending 16-512 byte packet payloads in ECL 1 network conditions}
+\caption{Average power in sending 16-512 byte packet payloads in ECL Class 1 network conditions}
+\label{fig:res_avgECL}
 \end{figure}
 
-There is a large discrepancy in the energy consumption between MTN and Vodacom.
-
-The inefficiency between the two South African MNOs can either be attributed to poor system configuration, or hardware fault. That is, if the network vendor meets the 3GPP's standards.
+\newpage
 
 ## Secondary Metrics
 
@@ -2401,120 +2411,140 @@ This section looks at secondary metrics as mentioned in \S\ref{proj_descr}.
 
 ### Signal Strength Metrics
 
-It is important to know the signal strength behavior between UE devices and LTE vendors due to varying network conditions in terms of MCL, SINR and transmit power.
+It is important to know the signal strength behavior between UE devices and LTE vendors due to varying network conditions in terms of MCL, RSRP, SINR and transmit power. RSSI showed similar characteristics to RSRP, and RSRQ to SINR, and therefore omitted.
 
 #### Maximum Coupling Link
 
 The RF link characteristics between the module and base station are useful in determining the range or indoor penetration the UE device can sustain.
 
-Table: MCL between LTE vendor-MNO pairs. {#tbl:mcl_results}
+Table: MCL between LTE vendor-MNO pairs and UE using process defined in \S\ref{des_mcl}. {#tbl:mcl_results}
 
-|                | MCL        |
-| -------------- | ---------- |
-| ZTE-MTN        | 157.6 dBm  |
-| Nokia-Vodacom  | 148.0 dBm  |
-| Ericsson-MTN   | 159.0 dBm  |
-| Huawei-Vodacom | 160.0 dBm  |
-| Ublox          | 160.0 dBm  |
-| Quectel        | 157.45 dBm |
+|                | SINR     | MCL        |
+| -------------- | -------- | ---------- |
+| ZTE-MTN        | -6.95 dB | 165.95 dBm |
+| Nokia-Vodacom  | -7.10 dB | 166.10 dBm |
+| Ericsson-MTN   | -6.10 dB | 165.10 dBm |
+| Huawei-Vodacom | -6.00 dB | 165.00 dBm |
+| Ublox          | -7.10 dB | 166.10 dBm |
+| Quectel        | -7.60 dB | 166.60 dBm |
 
-In terms of LTE vendors, Huawei-Vodacom and Ericsson-MTN performed best, with ZTE-MTN close behind and Vodacom-Nokia performing the worst. Ublox performed slightly better than Quectel.
+In terms of MCL, LTE vendors and UE devices are all performing satisfactorily by meeting the 164 dBm requirement. It should be noted that SINR is a proprietary measurement.
+
+#### Transmit Power
+
+Observing the results in Appendix \ref{appendix_transmit_power_RP}, UE devices decrease their output power at roughly 10 dBm per decade of RSRP amplification from -100 dBm onwards except for Vodacom-Nokia which maintains maximum output power.
 
 #### RSRP and SINR
 
-SINR was considered over RSSI and RSRQ. RSSI is RSRP with transmit power included, and RSRQ is a formula between RSRP and RSSI which includes the number of PRBs measured. SINR is satisfactory in showing network RF characteristics.
+Since RSSI combines RSRP and transmit power, they are shown separately instead with RSSI omitted. Similarly, since SINR and RSRQ (which is a ratio between RSRP and RSRQ) show similar characteristics, SINR is also sufficient to show.
+
+Table: Minimum RSRP values for LTE vendors and UE. {#tbl:min_rsrp}
+
+|                | Minimum RSRP |
+| -------------- | ------------ |
+| ZTE-MTN        | -129.6 dBm   |
+| Nokia-Vodacom  | -120.0 dBm   |
+| Ericsson-MTN   | -131.0 dBm   |
+| Huawei-Vodacom | -132.0 dBm   |
+| Ublox          | -132.0 dBm   |
+| Quectel        | -129.4 dBm   |
 
 \begin{figure}[ht]
-  \subfloat[UE reported RSRP. Although Ericsson RSRP extended up to -20 dBm due to laboratory conditions it is limited to -70 dBm.]{
+  \subfloat[The figure shows UE reported RSRP. Although Ericsson's RSRP extended up to -20 dBm due to laboratory conditions, it is limited to -70 dBm. LTE vendors have similar values at -130 dBm, except for Nokia at -120 dBm, with approximate minimum values shown in Table \ref{tbl:min_rsrp}.]{
 	\begin{minipage}[c][0.6\width]{
 	   0.48\textwidth}
 	   \centering
 	   \includegraphics[width=1\textwidth]{../../code/tests/box/RSRPperceived.pdf}
 	\end{minipage}}
  \hfill 	
-  \subfloat[With respect to LTE vendors, SINR is reported to be approximately from -5 dB to 15 dB. ]{
+  \subfloat[With respect to LTE vendors, SINR is reported to be approximately from -7 dB to 15 dB, with approximate minimum values shown in Table \ref{tbl:mcl_results}. SINR values are more evenly distributed than RSRP, yet with more outliers.]{
 	\begin{minipage}[c][0.6\width]{
 	   0.48\textwidth}
 	   \centering
 	   \includegraphics[width=1\textwidth]{../../code/tests/box/SINRperceived.pdf}
 	\end{minipage}}
-\caption{UE reported RSRP and SINR. Ublox and Quectel show similar values, unlike the defined disparity stated in \S\ref{design_sinr}. MTN and Vodacom also show similar values.}
+\caption{UE reported RSRP and SINR for LTE vendors, UE and MNOs. The maximum values depend on where the test took place, before signals are attenuated until disconnection. Ublox and Quectel show similar values, unlike the defined disparity stated in \S\ref{design_sinr}. MTN and Vodacom also show similar values, except for the 10 dBm deterioration in the Vodacom-Nokia RSRP. This deterioration could be as a result of NB-IoT being configured for in-band or guard-band instead of stand-alone. Overall, signal strength in terms of RSRP and SINR shows satisfactory performance, except for Vodacom-Nokia.}
 \end{figure}
 
-#### Extended Coverage Level
+#### Enhanced Coverage Levels
+
+ECL Classes (in \S\ref{ECLs} and \S\ref{des_ECLs}) increase repetition depending on signal strength between UE device and eNodeB. The section looks at the percentage distribution of ECL Classes in the different datasets and against RSRP. It was not considered to use SINR as it showed similar results.
 
 \begin{figure}[ht]
-  \subfloat[Bar chart showing ECL distribution.]{
-	\begin{minipage}[t][0.65\width]{
+  \subfloat[The figure shows the percentage distribution of ECL Classes for different datasets. Notably, about 90\% of Nokia's dataset lies within ECL Class 1, as opposed to roughly 50\% of ZTE, Ericsson and Huawei's distribution in ECL Class 0, which means Nokia will impact battery usage more for UE devices. It can be seen that 25\% of Quectel's distribution exists in ECL Class 2, with Ublox showing only half as much. This is significant because it means that Ublox devices fare better in deeper coverage situations than Quectel.]{
+	\begin{minipage}[c][0.6\width]{
 	   0.48\textwidth}
 	   \centering
 	   \includegraphics[width=1\textwidth]{../../code/tests/box/ecl_bar.pdf}
 	\end{minipage}}
  \hfill 	
-  \subfloat[Box plot showing ECL distribution is not as informative.]{
-	\begin{minipage}[t][0.65\width]{
+  \subfloat[The figure shows the distribution of ECL Classes against RSRP. Transitions between ECL Classes vary between LTE vendors depending on their network configuration and possibly another factor, as there is significant overlap between ECL Class 0 and 1. ECL Class 2 is more well defined, existing from roughly -110 dBm to -130 dBm, except for Nokia which shows values up to -80 dBm.]{
+	\begin{minipage}[c][0.6\width]{
 	   0.48\textwidth}
 	   \centering
-	   \includegraphics[width=1\textwidth]{../../code/tests/box/ecl.pdf}
+	   \includegraphics[width=1\textwidth]{../../code/tests/box/ecl_rsrp.pdf}
 	\end{minipage}}
-\caption{UE reported ECL. Notably, most of Nokia's dataset lies within ECL 1.}
+\captionof{figure}[UE reported ECL]{UE reported ECL in percentage distributions and against RSRP. The SINR distribution was considered as it may have been alternative factor influencing ECL, but due to similarities it is not shown henceforth. ECL Classes impact energy consumption, latency and battery longevity depending on location with respect to cell towers for static devices, and it is important that networks don't transition UE devices into higher ECL Classes too early as signal strength decreases.}
 \end{figure}
 
-Visible in Appendix \ref{appendix_plots} we can see how an RF connection will be treated as ECL 0 until approximately -90 dBm. From thence until -110 dBm it will be in ECL 1 and any last bit of link budget can be accessed in ECL 2 until disconnection at most at -130 dBm.
+It is also visible in Appendix \ref{appendix_plots} how an RF connection will be treated as ECL Class 0 until approximately -90 dBm. From thence until -110 dBm it will be in ECL Class 1 and any last bit of link budget can be accessed in ECL Class 2 until disconnection at most at -130 dBm. Unfortunately, due to the overlap between ECL Classes, there is only a partial correlation with signal strength, and LTE vendors should work with UE manufacturers to ensure a smoother transition between classes.
 
+Table: The table shows the highest RSRP level at which ECL Classes transition for LTE vendors, as well as when assuming a base RSRP of -70 dBm for a typical device, the indoor penetration is measured before ECL 2 is reached, which results in deep penetration until disconnection. {#tbl:ecl_transitions}
 
-#### Transmit Power
+|                | ECL Class 1 | ECL Class 2 | Indoor Penetration | Deep Penetration |
+| -------------- | ----------- | ----------- | ------------------ | ---------------- |
+| ZTE-MTN        | -85 dBm     | -110 dBm    | 40 dB              | 20 dB            |
+| Nokia-Vodacom  | -70 dBm     | -75 dBm     | 5 dB               | 45 dB            |
+| Ericsson-MTN   | -90 dbm     | -100 dBm    | 30 dB              | 20 dB            |
+| Huawei-Vodacom | -80 dBm     | -120 dBm    | 50 dB              | 10 dB            |
 
-Observing the results in Appendix \ref{appendix_transmit_power_RP}, UE devices decrease their output power at roughly 10 dBm per decade of RSRP amplification from -100 dBm onwards except for Vodacom-Nokia which maintains maximum output power.
+In Table \ref{tbl:ecl_transitions}, ECL Class transitions and signal penetration is observed. Interestingly, ECL Class 1 transitions are quite high which show the overlap with ECL Class 0. In indoor penetration the device will still use relatively low power until deep penetration in ECL Class 2. Application developers will generally want to avoid using deep penetration unless absolutely necessary, due to the high number of repetitions and energy consumption.
 
 ### Throughput
 
-It displays the throughput measurement for the RLC and MAC physical layers.
-
-These values provide an indication of the efficiency of the radio link. With bad BLER, these values will
-be low. With very good BLER, these values will be near the theoretical throughput of NB-IoT – and
-because of this, may not change over time, as it does not take into account the time to wake up,
-scan for base station, etc. This is simply over the protocol stack itself. As stated in \S\ref{lpwan_comparison}, NB-IoT has an uplink and downlink throughput of ~250kbps.
+This section displays the throughput measurement for the combined RLC and MAC physical layers. These values provide an indication of the efficiency of the radio link. With bad block error rate (BLER > 10\%), these values will be low. With a very good BLER ( < 1\%), these values will be near the theoretical throughput of NB-IoT. It is only over the protocol stack itself and does not take into account the time to wake up, scan for base stations and so forth. As stated in \S\ref{lpwan_comparison}, NB-IoT has a theoretical uplink and downlink throughput of ~250kbps.
 
 \begin{figure}[ht]
-  \subfloat[RLC and MAC uplink throughput]{
+  \subfloat[The figure shows RLC and MAC uplink throughput, with 95\% of values under 10 kbps. ZTE is performing best with a central tendency at 4 kbps, and Huawei the least at 1 kbps. It is shown that Nokia, Ericsson, Ublox, Quectel and Vodacom have similar central tendency distributions at 2 kbps, while MTN leads with 3 kbps.]{
 	\begin{minipage}[c][0.6\width]{
 	   0.48\textwidth}
 	   \centering
 	   \includegraphics[width=1\textwidth]{../../code/tests/box/mac_rlc_ul.pdf}
 	\end{minipage}}
  \hfill 	
-  \subfloat[RLC and MAC downlink throughput]{
+  \subfloat[The figure shows RLC and MAC downlink throughput, with 95\% of values under 10 kbps, except for Huawei with 50\% of values just over 10 kbps. Nokia, Ericsson, Ublox, Quectel, MTN and Vodacom all share similar distributions with a central tendency at 500 bps, and with ZTE at just over 1 kbps. Quectel and MTN have 95\% of values at 3 kbps as opposed to Ublox and Vodacom at 10 kbps.]{
 	\begin{minipage}[c][0.6\width]{
 	   0.48\textwidth}
 	   \centering
 	   \includegraphics[width=1\textwidth]{../../code/tests/box/mac_rlc_dl.pdf}
 	\end{minipage}}
-\caption{RLC and MAC layer throughput. 90\% of values under 10 kbps, except for Huawei taking the lead in downlink throughput. Quectel and Ublox exhibit similar characteristics and MTN leads Vodacom marginally.}
+\caption{The figure shows RLC and MAC layer throughput for LTE vendors, UE and MNOs. 95\% of values under 10 kbps, and although Huawei performs the least in uplink at a 1 kbps central tendency, Huawei surprisingly takes the lead in downlink throughput at just over 10 kbps. Quectel and Ublox exhibit similar characteristics and MTN leads Vodacom marginally by a difference of roughly 1 kbps.}
 \end{figure}
 
-UE reported throughput values under 10 kbps are well under the 250 kbps speeds claimed by NB-IoT manufacturers.
+UE reported throughput values under 10 kbps are well under the 250 kbps speeds claimed by NB-IoT manufacturers in general. However, it is more in line with the Quectel modem claiming single tone uplink and downlink of 21.25 and 15.625 kbps, respectively. On the other hand, although Ublox and Quectel show similar distributions, Ublox claims uplink and downlink of 62.5 and 27.2 kbps, respectively, which shows that Ublox is underperforming. Throughput is necessary to take into account for large data transfers such as captured data, images and FoTA updates, and with low values it would affect energy consumption and latency.
 
 ### Data Overhead
 
-Considering the variance in figure \ref{fig:udpsize}, taking the mean would make for a simpler representation per UDP size as in Appendix \ref{appendix_ue_reported}. However, a boxplot representation shows the characteristics of the data more fully.
-
 \begin{figure}[ht]
-  \subfloat[Transmission bytes with at least 50\% of values centered between 100 and 1000 bytes. Nokia extends up to 5000 bytes, or more in outliers.]{
+  \subfloat[Transmission bytes of all manufacturers and operators, with at least 50\% of values centered between 100 and 1000 bytes except for Nokia which extends further, having a 95th percentile at 10,000 bytes or more in outliers.]{
 	\begin{minipage}[c][0.6\width]{
 	   0.48\textwidth}
 	   \centering
 	   \includegraphics[width=1\textwidth]{../../code/tests/box/txBytes.pdf}
 	\end{minipage}}
  \hfill 	
-  \subfloat[Receive bytes with at least 50\% of values centered between 50 and 200 bytes. Nokia extends up to 2000 bytes, or more in outliers.]{
+  \subfloat[Receive bytes of all manufacturers and operators, with at least 50\% of values centered between 50 and 200 bytes except for Nokia which extends up to a 95th percentile at 2000 bytes, or more in outliers.]{
 	\begin{minipage}[c][0.6\width]{
 	   0.48\textwidth}
 	   \centering
 	   \includegraphics[width=1\textwidth]{../../code/tests/box/rxBytes.pdf}
 	\end{minipage}}
-\caption{Byte size distribution of telemetry test set across different MNOs, LTE Vendors and UE devices with 512 byte limit line (purple). Ublox and Quectel show equal characteristics. MTN leads Vodacom marginally. In general, 25\% of uplink datagrams extend above 512 byte line as well as less than 5\% of downlink datagram outliers. Nokia extends well past the 512 byte limit to a few thousand bytes due to the repetition caused by the ECL mechanism.}
+\caption{Byte size distribution of telemetry test set across different MNOs, LTE Vendors and UE devices with 512 byte limit line (purple). Ublox and Quectel show equal distribution characteristics, while MTN leads Vodacom marginally. In general, 25\% of uplink datagrams extend above 512 byte line and 25\% of downlink datagrams extend past 200 bytes. Nokia extends well past the 512 byte limit to a few thousand bytes in both cases due to repetition caused by the ECL mechanism.}
 \end{figure}
+
+Considering the variance in figure \ref{fig:udpsize}, taking the mean would make for a simpler representation per UDP size as in Appendix \ref{appendix_ue_reported}. However, a boxplot representation shows the characteristics of the data more fully with respect to LTE vendors, UE and MNOs. Since the largest UDP packets are 512 bytes in size, a line is drawn at this value for comparison. Data overhead is observed for all telemetry tests at once.
+
+\newpage
 
 ## Estimations
 
@@ -2525,20 +2555,20 @@ Considering the variance in figure \ref{fig:udpsize}, taking the mean would make
 [](../../code/tests/box/intervalEstECL1.png)
 
 \begin{figure}[ht]
-  \subfloat[Energy measurements from Appendix A]{
+  \subfloat[The figure shows estimated telemetry interval using energy measurements from Appendix \ref{appendix_measured}. ZTE, Ericsson and Huawei require messages to be sent within every 5 minutes to an hour to last a year on a 9.36 Wh battery (AA-sized), while Nokia requires a telemetry interval around 10 hours. In these measuremed estimations, Quectel shows better values than Ublox.]{
 	\begin{minipage}[c][0.6\width]{
 	   0.48\textwidth}
 	   \centering
 	   \includegraphics[width=1\textwidth]{../../code/tests/box/intervalECL1.pdf}
 	\end{minipage}}
  \hfill 	
-  \subfloat[Reported RF time from Appendix B]{
+  \subfloat[The figure shows telemetry interval estimations for UE reported RF time from Appendix \ref{appendix_ue_reported}. ZTE, Ericsson and Huawei require messages to be sent within every 5 to 30 minutes, while Nokia expects a telemetry interval every 6 hours. In these estimations from UE reports, the Ublox modem is shown to be better than the Quectel modem.]{
 	\begin{minipage}[c][0.6\width]{
 	   0.48\textwidth}
 	   \centering
 	   \includegraphics[width=1\textwidth]{../../code/tests/box/intervalEstECL1.pdf}
 	\end{minipage}}
-\caption{Telemetry interval estimation sending 16-512 byte packet payloads in ECL 1 network conditions. LTE vendors require messages to be sent between 5 minutes to an hour to last a year on a 9.36 Wh battery (AA-sized), except for Nokia requiring a telemetry interval around 10 hours. Quectel is measured to be better than Ublox, yet Ublox reports better values than Quectel. MTN leads Vodacom due to Nokia's poor performance.}
+\caption{Telemetry interval estimation sending 16-512 byte packet payloads in ECL Class 1 network conditions.  Quectel is measured to be better than Ublox, yet Ublox reports better values than Quectel. MTN leads Vodacom due to Nokia's poor performance.}
 \end{figure}
 
 ### Battery longevity {#res_battery}
@@ -2550,76 +2580,54 @@ Considering the variance in figure \ref{fig:udpsize}, taking the mean would make
 
 
 \begin{figure}[ht]
-  \subfloat[Energy measurements from Appendix A]{
+  \subfloat[The figure shows battery longevity estimations using energy measurements from Appendix \ref{appendix_measured} up to 10 years. ZTE, Ericsson and Huawei show results distributed roughly between 1 to 10 years, while Nokia sits between 2 to 8 weeks. In these measured estimations, the Quectel  modem shows better values than the Ublox modem.]{
 	\begin{minipage}[c][0.6\width]{
 	   0.48\textwidth}
 	   \centering
 	   \includegraphics[width=1\textwidth]{../../code/tests/box/longevityECL1.pdf}
 	\end{minipage}}
  \hfill 	
-  \subfloat[Reported RF time from Appendix B]{
+  \subfloat[The figure shows UE reported RF time from Appendix \ref{appendix_ue_reported} up to 10 years. ZTE, Ericsson and Huawei show results distributed roughly between 2 to 10 years, while Nokia sits at around 8 weeks. In these estimations from UE reports, the Ublox modem is shown to be better than the Quectel modem.]{
 	\begin{minipage}[c][0.6\width]{
 	   0.48\textwidth}
 	   \centering
 	   \includegraphics[width=1\textwidth]{../../code/tests/box/longevityEstECL1.pdf}
 	\end{minipage}}
-\caption{Battery longevity estimation sending 16-512 byte packet payloads in ECL 1 network conditions. According to LTE vendor results, UE devices will last a couple of years up to 10 except for Nokia which will only last a few months. Measurements show Quectel is better than Ublox, yet Ublox reports better results than Quectel. MTN leads Vodacom due to Nokia's dismal performance.}
+\caption{Battery longevity estimation sending 16-512 byte packet payloads in ECL Class 1 network conditions. According to LTE vendor results, UE devices will last a couple of years up to 10, except for Nokia which will only last a few months. Measurements show Quectel is better than Ublox, yet Ublox reports better results than Quectel. MTN leads Vodacom due to Nokia's dismal performance. Estimation results from UE reports tend to underestimate measured values, and this should be taken into account when a developer uses UE reports in their application.}
 \end{figure}
+
+\newpage
 
 ## Summary
 
-The study investigated the following metrics and estimations using a set of telemetry tests performed on LTE vendors by UE devices: power efficiency, latency, signal strength, throughput, data overhead, telemetry interval and battery longevity with significant variation observed on all of these. Most clearly visible is how MTN leads Vodacom in results due to Nokia's poor performance. Even so, there still exists a significant degree of variation among LTE vendors which supports the notion that the complexities of network configuration itself do affect quality of service as it is mandatory for LTE vendors to meet 3GPP requirements. More than one UE device was chosen to determine if variation is further exacerbated by type of UE, namely Ublox and Quectel, although these devices return relatively similar results. This shows that the cause of variation lies merely with the LTE vendors and how MNOs have them configured. Power efficiency tests show that devices can last 10 years on an AA battery, especially in strong signal conditions, yet variation increases in ECL 1 and ECL 2 which calls into question the ability of the UE to reach the targeted lifespan. Application developers must take into account the longevity estimate of devices depending on their installation with respect to the nearest serving cell. The telemetry interval estimate, which indicates the periodicity of telemetry messages to last a year on an AA battery, can be used to extend battery life prediction depending on the use case. A strong and overlooked use case is a push/pull model which incorporates edge computing. By pushing data only when complex queries arrive, much battery life is saved due to downlink energy being much less than uplink. This is furthered aided by the configurable eDRX interval which allows UE devices to be paged by the network serving cell(s) it is registered to.
+The study investigated the following metrics and estimations using a set of telemetry tests performed on LTE vendors by UE devices: power efficiency, latency, signal strength, throughput, data overhead, telemetry interval and battery longevity with significant variation observed on all of these. Most clearly visible is how MTN leads Vodacom in results due to Nokia's poor performance. Even so, there still exists a significant degree of variation among LTE vendors which supports the notion that the complexities of network configuration itself do affect quality of service as it is mandatory for LTE vendors to meet 3GPP requirements. More than one UE device was chosen to determine if variation is further exacerbated by type of UE, namely Ublox and Quectel, although these devices return relatively similar results. This shows that the cause of variation lies most likely with the LTE vendors and how MNOs have them configured. 
+
+With regard to the main metrics in this study, power efficiency tests show that UE devices connected to Vodacom-Nokia are using up to 20 times more energy than other LTE vendors. ZTE, Ericsson, and Huawei perform satisfactorily in latency tests, with 95\% of datagrams under the 10 seconds standard by 3GPP, while Nokia results in a 95th percentile at 100 seconds. 
+
+In terms of signal strength, LTE vendors and UE perform satisfactorily by meeting the 164 dBm MCL requirement, yet Vodacom-Nokia shows a minimum RSRP at -120 dBm as opposed to the others at -130 dBm. 90% of Nokia’s dataset lies within ECL Class 1, as opposed to roughly 50% of ZTE, Ericsson and Huawei's distribution in ECL Class 0, which means Nokia will impact battery usage more for UE devices. Due to the overlap in ECL Classes according to RSRP[^sinr_overlap], it suggests only a partial correlation, which means there is another unknown factor[^hysteresis] which influences the dynamic ECL Class provisioning by the network. Nevertheless, looking at the highest RSRP before an ECL Class transitions, it is observed that Nokia can potentially be in ECL Class 2 after 5 dB of attenuation in a typical environment of -70 dBm RSRP, while Huawei is looking at 50 dB of attenuation before requiring deep penetration in ECL Class 2 until -130 dBm RSRP. In terms of transmit power, UE devices generally transmit at max 23 dBm power from -130 dBm to -100 dBm RSRP, whereby they decrease their output power by 10 dB per decade of RSRP amplification from -100 dBm RSRP upwards except for Vodacom-Nokia which maintains maximum output power.
+
+In terms of throughput, UE devices and LTE vendors report a central uplink and downlink averaging 2 kbps and 500 bps, respectively, and extending up to 10 kbps. Surprisingly, although Huawei averages the least at 1 kbps in uplink, it averages 10 kbps in the downlink. Throughput needs to be considered for real-time applications when limited by uplink and downlink speed, and it also affects latency. In observing the data overhead in the telemetry test set, 25% of uplink datagrams extend above 512 byte line and 25% of downlink datagrams extend past 200 bytes. Nokia is shown to be the exception, extending well past a few thousand bytes in both transmission and receive bytes. This has a significant effect on airtime data cost.
+
+The telemetry interval estimate, which indicates the periodicity of telemetry messages to last a year on a 9.36 Wh AA battery, shows that ZTE, Ericsson and Huawei can have UE devices transmit a 16-512 byte message every 5 to 60 minutes. Nokia, on the other hand, requires devices to send a message every 10 hours. Finally, battery longevity estimates which indicate how long a UE device can survive transmitting 16-512 bytes hourly, show that devices connected to a network via ZTE, Ericsson and Huawei can last up to 10 years on a 9.36 Wh AA battery, however, devices on Vodacom-Nokia will only last 2-8 weeks.
+
+[^sinr_overlap]: SINR showed similar values to RSRP.
+[^hysteresis]: The test captures did show a degree of hysteresis (a few seconds) in RSRP values when changing attenuations, and this could potentially be a factor.
 
 \newpage
 
-# Discussion and Recommendations {#discussion}
+# Conclusion and Recommendations {#conclusion}
 
-Seeing that LTE Cat-M is on a par with NB-IoT, if not better in \S\ref{lit_standing}, it would be wise to consider LTE Cat-M for national coverage in South Africa in future.
+This empirical study investigated NB-IoT through metrics and estimations by comparing datasets of telemetry tests performed on long-term-evolution (LTE) vendors, using user-equipment (UE) devices, for mobile-network-operators (MNOs) in South Africa. Research shows that most literature on NB-IoT is based on mathematical models, analysis or simulations. Thus, this study proposes an investigation comparing LTE vendors including ZTE and Ericsson on MTN's network, Nokia and Huawei on Vodacom's network and similar UE devices, Ublox and Quectel, to be used as a control to observe network changes via RF attenuation. The study theorizes that networks are responsible for the variation found in metrics and estimations, due to the high underlying complexity of LTE architecture on which NB-IoT is based. Metrics include power efficiency, latency, signal strength, throughput, data overhead and estimations include telemetry interval and battery longevity. 
 
-## Optimal Network Configuration and Setup
+Most clearly visible in the tests is how MTN leads Vodacom in results due to Nokia’s subpar performance. Power efficiency and latency shows that when connected to Vodacom-Nokia, results can factor up 20 and 10 times worse, respectively. Otherwise, ZTE, Ericsson and Huawei show satisfactory latency under the 10 second 3GPP standard. Although LTE vendors meet the 164 dBm MCL requirement, Vodacom-Nokia has 10 dB less receive sensitivity, with the rest at -130 dBm. Transmit power increases at 10 dBm per RSRP decade until its maximum at 23 dBm, except for Nokia which remains at full power. ECL Classes overlap with respect to RSRP, yet partially correlate, which suggests an unknown network factor or hysteresis in the test captures. Nevertheless, Nokia is mostly in ECL Class 1, while others are a mix of ECL Class 0 and 1. This has an impact on the number of dynamic repetitions of messages between UE devices and cell-tower eNodeBs. Throughput is under 10 kbps, which is half or less than UE device claims by manufacturers. A quarter of datagrams in the telemetry test set show protocol overhead by extending over 512 bytes in uplink and 200 bytes in downlink, except for Nokia extending up to 10,000 bytes. Telemetry interval and battery longevity estimates on a 9.36 Wh AA battery suggest that ZTE, Ericsson and Huawei can transmit 16-512 bytes every 5 to 30 minutes to last a year, or hourly to last up to 10 years, however, a device that transmits hourly on the Vodacom-Nokia network will only last 2 months.
 
-Avoid -120 dBm - -130 dBm region
+With these results in mind, it is visible how NB-IoT can certainly be a competitor to other LPWANs such as SigFox and LoRaWAN. Unfortunately the variation induced by network changes, such as from deeper coverage and penetration requirements, are a cause for concern. It is suggested that LTE vendors and UE device manufacturers work together to create an optimum solution, considering that much of the equipment is not open to the public. Nevertheless.. (write-up about what application developers can do already for each metric.)
 
-* AT+COPS
-* Release / eDRX setup
-
-## Use Cases
-
-Use cases suitable for NB-IoT considering results
-
-## Future Work
-
-Compare NB-IoT to Dash7, which can be considered a prominent bi-directional contender. It has the capability of using LoRa's physical layer (RF frontend) so has the added benefit of long range.
-
-# Conclusion {#conclusion}
-
-Attenuation does not affect performance as much as the ECL classes do, and includes
-degradation to latency, energy consumption and packet size.
-
-The inefficiency between the two South African MNOs can either be attributed to poor
-system configuration, or hardware fault. That is, if the network vendor meets the 3GPP's
-standards. Vodacom’s Nokia infrastructure has failed one of the most important
-requirements for NB-IoT being under 10 seconds latency for all network conditions.
-Secondly it is 20dBm RSRP less sensitive than MTN’s ZTE infrastructure, which has
-satisfactory performance overall. Since the findings are reflected similarly across the
-Ublox and Quectel UE, it implies that the discrepancies are as a result of the MNO
-vendor.
-
-* how well NB-IoT performs and facilitates these connections for IoT?
-
-2G/GSM is a sunsetting technology with great coverage and market penetration in SA. It certainly gathers a large share of revenue by calls and SMS.
-
-When looking at SigFox, we see a technology with far range, but data rates that could be considered too low for our application. LoRa has higher data rates, but is still subject to duty cycle limitations. Dash7 is a full-stack medium range wireless technology that overcomes many of the limitations, including the duty cycle by having listen-before-talk and adaptive data rates.
-
-NB-IoT is a very promising technology. It can coexist with 2G/GSM and LTE networks. When comparing to 2G it has 7 times greater range, and in power saving modes time to transmission is a few seconds, compared to about a minute for 2G. There are a few successful use cases for NB-IoT in South Africa, such as smart metering, asset tracking etc.
-
-There are also a couple of hurdles in the way. Although lauded as a mere software upgrade, it does require the latest basestations and licensing fees. There needs to be a substantial revenue model which ties in with demand.
-
-Since it appears that ECL is the ultimate factor that should influence latency and energy usage, it is the metric used for battery life estimation as well.
+South Africa is ready for MNOs to deploy national NB-IoT coverage using ZTE, Ericsson and Huawei, but not Nokia. With a satisfactory inter-cell tower distance, UE devices avoid having to use dynamic repetitions in higher ECL Classes, thus keeping the variation that affects many of the metrics and estimates in the study to a minimum.
 
 \newpage
 
-# References
+# References {-#references}
 
 <div id="refs"></div>
 \newpage
@@ -2654,7 +2662,7 @@ Table: Latency Measurement (s) {#tbl:txTime}
 | *Quectel*        | 13.8 | 5.06 | 6.78  | 8.23  | 7.62  | 8.40 | 4.19 | 1.29 | 10.1 |
 | MTN              | 5.77 | 2.64 | 2.72  | 5.82  | 3.47  | 10.4 | 9.66 | 0.43 | 5.89 |
 | Vodacom          | 18.4 | 8.23 | 14.2  | 25.6  | 10.1  | 15.1 | 28.3 | 2.71 | 9.94 |
-| **ECL 0**        |      |      |       |       |       |      |      |      |      |
+| **ECL Class 0**        |      |      |       |       |       |      |      |      |      |
 | ZTE              | 8.97 | 1.77 | 2.81  | 9.52  | 2.40  | 2.52 | 11.6 | 0.19 | 43.4 |
 | Nokia            |      | 1.17 | 2.75  | 1.38  |       | 19.8 |      | 33.1 | 3.39 |
 | Ericsson         | 2.03 | 1.76 | 1.82  | 1.90  | 1.89  | 3.20 | 5.89 | 0.35 | 1.36 |
@@ -2663,7 +2671,7 @@ Table: Latency Measurement (s) {#tbl:txTime}
 | *Quectel*        | 1.17 | 1.02 | 2.34  | 1.98  | 0.94  | 9.99 | 1.98 | 16.7 | 23.1 |
 | MTN              | 5.50 | 1.76 | 2.31  | 5.71  | 2.14  | 2.86 | 8.77 | 0.27 | 22.4 |
 | Vodacom          | 0.35 | 0.84 | 1.65  | 0.95  | 0.40  | 16.6 | 2.19 | 16.7 | 2.72 |
-| **ECL 1**        |      |      |       |       |       |      |      |      |      |
+| **ECL Class 1**        |      |      |       |       |       |      |      |      |      |
 | ZTE              | 1.18 | 1.30 | 1.23  | 5.50  | 2.93  | 1.21 | 2.02 | 0.12 | 1.45 |
 | Nokia            | 20.5 | 12.4 | 21.1  | 41.7  | 13.7  | 19.3 | 26.0 | 0.42 | 9.71 |
 | Ericsson         | 2.84 | 2.54 | 2.81  | 3.08  | 3.76  | 19.0 | 2.26 | 0.27 | 2.25 |
@@ -2672,7 +2680,7 @@ Table: Latency Measurement (s) {#tbl:txTime}
 | *Quectel*        | 6.79 | 4.29 | 4.64  | 6.82  | 5.76  | 6.71 | 4.63 | 0.44 | 3.94 |
 | MTN              | 2.01 | 1.92 | 2.02  | 4.29  | 3.34  | 10.1 | 2.14 | 0.20 | 1.85 |
 | Vodacom          | 11.2 | 7.45 | 12.0  | 24.3  | 8.57  | 11.0 | 17.3 | 0.51 | 5.87 |
-| **ECL 2**        |      |      |       |       |       |      |      |      |      |
+| **ECL Class 2**        |      |      |       |       |       |      |      |      |      |
 | ZTE              | 1.67 | 1.42 | 1.76  | 2.14  | 13.6  | 0.93 | 1.23 | 0.48 | 3.44 |
 | Nokia            | 3.88 |      | 4.66  | 8.49  | 7.42  | 23.5 | 55.4 | 3.32 | 45.0 |
 | Ericsson         | 1.73 | 1.67 | 1.58  | 1.58  | 2.18  | 15.4 |      |      | 1.31 |
@@ -2710,7 +2718,7 @@ Table: Average Power ($\mu{W}{h}$) {#tbl:energy}
 | MTN              | 2381.2 | 573.55 | 463.29  | 3434.1  | 878.30  | 3935.3 | 4223.8 | 61.895 | 3576.9 |
 | Vodacom          | 9752.9 | 3866.3 | 5500.4  | 10291.  | 5087.1  | 9578.8 | 13460. | 1466.5 | 6699.2 |
 |                  |        |        |         |         |         |        |        |        |        |
-| **ECL 0**        |        |        |         |         |         |        |        |        |        |
+| **ECL Class 0**        |        |        |         |         |         |        |        |        |        |
 | ZTE              | 4321   | 704.   | 484.    | 6634    | 434.    | 1359   | 5798   | 20.9   | 3543   |
 | Nokia            |        | 93.6   | 680.    | 153.    |         | 2118   |        | 1164   | 1110   |
 | Ericsson         | 83.3   | 64.6   | 75.9    | 85.0    | 93.3    | 794.   | 1659   | 100.   | 40.4   |
@@ -2720,7 +2728,7 @@ Table: Average Power ($\mu{W}{h}$) {#tbl:energy}
 | MTN              | 2202   | 384.   | 280.    | 3359    | 264.    | 1077   | 3728   | 60.7   | 1773   |
 | Vodacom          | 7.20   | 50.0   | 342.    | 111.    | 18.0    | 1257   | 268.   | 5821   | 596.   |
 |                  |        |        |         |         |         |        |        |        |        |
-| **ECL 1**        |        |        |         |         |         |        |        |        |        |
+| **ECL Class 1**        |        |        |         |         |         |        |        |        |        |
 | ZTE              | 162.   | 217.   | 161.    | 3201    | 581.    | 305.   | 1254   | 0.95   | 228.   |
 | Nokia            | 1090   | 7046   | 7968    | 1919    | 8949    | 1199   | 2395   | 23.7   | 6469   |
 | Ericsson         | 428.   | 354.   | 465.    | 735.    | 1275    | 7568   | 337.   | 2.03   | 253.   |
@@ -2730,7 +2738,7 @@ Table: Average Power ($\mu{W}{h}$) {#tbl:energy}
 | MTN              | 295.   | 285.   | 313.    | 1968    | 928.    | 3937   | 796.   | 1.49   | 240.   |
 | Vodacom          | 5551   | 3567   | 4057    | 1011    | 4743    | 6217   | 1400   | 12.7   | 3276   |
 |                  |        |        |         |         |         |        |        |        |        |
-| **ECL 2**        |        |        |         |         |         |        |        |        |        |
+| **ECL Class 2**        |        |        |         |         |         |        |        |        |        |
 | ZTE              | 678.   | 300.   | 461.    | 878.    | 7359    | 521.   | 562.   | 51.3   | 2073   |
 | Nokia            | 2022   |        | 3527    | 1753    | 648.    | 1583   | 2017   | 168.   | 5076   |
 | Ericsson         | 311.   | 238.   | 276.    | 223.    | 620.    | 6184   |        |        | 98.4   |
@@ -2767,7 +2775,7 @@ Table: Interval Estimate (hours) using measured energy values for 9.36Wh AA batt
 | MTN              | 2.2286 | 0.5367 | 0.4335  | 3.2139  | 0.8205  | 3.6830 | 3.9531 | 0.0579 | 3.3476 |
 | Vodacom          | 9.1277 | 3.6184 | 5.1478  | 9.6317  | 4.7610  | 8.9647 | 12.597 | 1.3725 | 6.2697 |
 |                  |        |        |         |         |         |        |        |        |        |
-| **ECL 0**        |        |        |         |         |         |        |        |        |        |
+| **ECL Class 0**        |        |        |         |         |         |        |        |        |        |
 | ZTE              | 4.04   | 0.65   | 0.45    | 6.20    | 0.40    | 1.27   | 5.42   | 0.01   | 33.1   |
 | Nokia            |        | 0.08   | 0.63    | 0.14    |         | 19.8   |        | 10.8   | 1.03   |
 | Ericsson         | 0.07   | 0.06   | 0.07    | 0.07    | 0.08    | 0.74   | 1.55   | 0.09   | 0.03   |
@@ -2777,7 +2785,7 @@ Table: Interval Estimate (hours) using measured energy values for 9.36Wh AA batt
 | MTN              | 2.06   | 0.36   | 0.26    | 3.14    | 0.24    | 1.00   | 3.48   | 0.05   | 16.6   |
 | Vodacom          |        | 0.04   | 0.32    | 0.10    | 0.01    | 11.7   | 0.25   | 5.44   | 0.55   |
 |                  |        |        |         |         |         |        |        |        |        |
-| **ECL 1**        |        |        |         |         |         |        |        |        |        |
+| **ECL Class 1**        |        |        |         |         |         |        |        |        |        |
 | ZTE              | 0.15   | 0.20   | 0.15    | 2.99    | 0.54    | 0.28   | 1.17   |        | 0.21   |
 | Nokia            | 10.2   | 6.59   | 7.45    | 17.9    | 8.37    | 11.2   | 22.4   | 0.02   | 6.05   |
 | Ericsson         | 0.40   | 0.33   | 0.43    | 0.68    | 1.19    | 7.08   | 0.31   |        | 0.23   |
@@ -2787,7 +2795,7 @@ Table: Interval Estimate (hours) using measured energy values for 9.36Wh AA batt
 | MTN              | 0.27   | 0.26   | 0.29    | 1.84    | 0.86    | 3.68   | 0.74   |        | 0.22   |
 | Vodacom          | 5.19   | 3.33   | 3.79    | 9.47    | 4.43    | 5.81   | 13.1   | 0.01   | 3.06   |
 |                  |        |        |         |         |         |        |        |        |        |
-| **ECL 2**        |        |        |         |         |         |        |        |        |        |
+| **ECL Class 2**        |        |        |         |         |         |        |        |        |        |
 | ZTE              | 0.63   | 0.28   | 0.43    | 0.82    | 6.88    | 0.48   | 0.52   | 0.04   | 1.94   |
 | Nokia            | 1.89   |        | 3.30    | 1.64    | 0.60    | 14.8   | 18.8   | 0.16   | 47.5   |
 | Ericsson         | 0.29   | 0.22   | 0.25    | 0.20    | 0.58    | 5.78   |        |        | 0.09   |
@@ -2824,7 +2832,7 @@ Table: Longevity Estimate (years) for 9.36Wh AA battery (Lithium Thionyl Chlorid
 | MTN              | 0.448  | 1.862  | 2.306   | 0.311   | 1.216   | 0.271  | 0.252  | 17.26  | 0.298  |
 | Vodacom          | 0.109  | 0.276  | 0.194   | 0.103   | 0.210   | 0.111  | 0.079  | 0.728  | 0.159  |
 |                  |        |        |         |         |         |        |        |        |        |
-| **ECL 0**        |        |        |         |         |         |        |        |        |        |
+| **ECL Class 0**        |        |        |         |         |         |        |        |        |        |
 | ZTE              | 0.24   | 1.51   | 2.20    | 0.16    | 2.45    | 0.78   | 0.18   | 51.1   | 0.03   |
 | Nokia            |        | 11.4   | 1.57    | 6.97    |         | 0.05   |        | 0.09   | 0.96   |
 | Ericsson         | 12.8   | 16.5   | 14.0    | 12.5    | 11.4    | 1.34   | 0.64   | 10.6   | 26.4   |
@@ -2834,7 +2842,7 @@ Table: Longevity Estimate (years) for 9.36Wh AA battery (Lithium Thionyl Chlorid
 | MTN              | 0.48   | 2.77   | 3.81    | 0.31    | 4.04    | 0.99   | 0.28   | 17.5   | 0.06   |
 | Vodacom          | 148.   | 21.3   | 3.11    | 9.61    | 59.2    | 0.08   | 3.98   | 0.18   | 1.79   |
 |                  |        |        |         |         |         |        |        |        |        |
-| **ECL 1**        |        |        |         |         |         |        |        |        |        |
+| **ECL Class 1**        |        |        |         |         |         |        |        |        |        |
 | ZTE              | 6.58   | 4.92   | 6.59    | 0.33    | 1.83    | 3.50   | 0.85   | 1116   | 4.67   |
 | Nokia            | 0.09   | 0.15   | 0.13    | 0.05    | 0.11    | 0.08   | 0.04   | 44.8   | 0.16   |
 | Ericsson         | 2.49   | 3.01   | 2.29    | 1.45    | 0.83    | 0.14   | 3.16   | 523.   | 4.22   |
@@ -2844,7 +2852,7 @@ Table: Longevity Estimate (years) for 9.36Wh AA battery (Lithium Thionyl Chlorid
 | MTN              | 3.61   | 3.73   | 3.40    | 0.54    | 1.15    | 0.27   | 1.34   | 713.   | 4.43   |
 | Vodacom          | 0.19   | 0.29   | 0.26    | 0.10    | 0.22    | 0.17   | 0.07   | 83.5   | 0.32   |
 |                  |        |        |         |         |         |        |        |        |        |
-| **ECL 2**        |        |        |         |         |         |        |        |        |        |
+| **ECL Class 2**        |        |        |         |         |         |        |        |        |        |
 | ZTE              | 1.57   | 3.55   | 2.31    | 1.21    | 0.14    | 2.04   | 1.90   | 20.7   | 0.51   |
 | Nokia            | 0.52   |        | 0.30    | 0.60    | 1.64    | 0.06   | 0.05   | 6.32   | 0.02   |
 | Ericsson         | 3.43   | 4.48   | 3.86    | 4.79    | 1.72    | 0.17   |        |        | 10.8   |
@@ -2882,7 +2890,7 @@ Table: TX Time (s) {#tbl:txTimeNW}
 | MTN              | 0.56 | 0.46 | 0.58  | 0.79  | 0.85  | 0.69 | 0.25 | 0.22 | 0.26 |
 | Vodacom          | 1.37 | 0.70 | 0.98  | 1.07  | 1.33  | 1.56 | 1.56 | 0.69 | 1.30 |
 |                  |      |      |       |       |       |      |      |      |      |
-| **ECL 0**        |      |      |       |       |       |      |      |      |      |
+| **ECL Class 0**        |      |      |       |       |       |      |      |      |      |
 | ZTE              | 0.64 | 0.32 | 0.54  | 0.64  | 0.45  | 0.21 | 0.13 |      | 0.12 |
 | Nokia            |      |      |       |       |       | 2.70 |      | 0.11 | 0.38 |
 | Ericsson         | 0.17 | 0.18 | 0.20  | 0.25  | 0.33  | 0.20 | 0.12 |      | 0.14 |
@@ -2892,7 +2900,7 @@ Table: TX Time (s) {#tbl:txTimeNW}
 | MTN              | 0.40 | 0.25 | 0.37  | 0.45  | 0.39  | 0.21 | 0.12 |      | 0.13 |
 | Vodacom          | 0.07 | 0.04 | 0.08  | 0.05  | 0.08  | 1.74 |      | 0.05 | 0.25 |
 |                  |      |      |       |       |       |      |      |      |      |
-| **ECL 1**        |      |      |       |       |       |      |      |      |      |
+| **ECL Class 1**        |      |      |       |       |       |      |      |      |      |
 | ZTE              | 1.08 | 0.12 | 0.17  | 0.15  | 0.27  | 0.04 | 0.07 |      | 0.06 |
 | Nokia            | 2.07 | 0.87 | 1.06  | 1.37  | 1.88  | 0.78 | 0.49 | 1.28 | 1.71 |
 | Ericsson         | 0.55 | 0.61 | 0.75  | 1.08  | 1.57  | 0.29 | 0.56 |      | 0.48 |
@@ -2902,7 +2910,7 @@ Table: TX Time (s) {#tbl:txTimeNW}
 | MTN              | 0.82 | 0.36 | 0.46  | 0.62  | 0.92  | 0.16 | 0.31 |      | 0.27 |
 | Vodacom          | 1.18 | 0.55 | 0.74  | 0.84  | 1.27  | 0.87 | 0.28 | 0.64 | 1.01 |
 |                  |      |      |       |       |       |      |      |      |      |
-| **ECL 2**        |      |      |       |       |       |      |      |      |      |
+| **ECL Class 2**        |      |      |       |       |       |      |      |      |      |
 | ZTE              | 2.88 | 0.40 | 0.53  | 4.34  | 1.25  | 0.21 | 0.12 | 0.44 | 0.28 |
 | Nokia            |      |      |       |       |       | 2.51 | 4.90 |      |      |
 | Ericsson         | 0.22 | 0.22 | 0.27  | 0.37  | 0.52  | 2.27 |      |      | 0.18 |
@@ -2939,7 +2947,7 @@ Table: RX Time (s) {#tbl:rxTimeNW}
 | MTN              | 2.49 | 2.40 | 2.53  | 2.19  | 2.76  | 5.43 | 1.12 | 0.28 | 1.11 |
 | Vodacom          | 53.6 | 45.1 | 47.3  | 42.8  | 45.5  | 27.3 | 3.25 | 5.35 | 6.66 |
 |                  |      |      |       |       |       |      |      |      |      |
-| **ECL 0**        |      |      |       |       |       |      |      |      |      |
+| **ECL Class 0**        |      |      |       |       |       |      |      |      |      |
 | ZTE              | 3.60 | 2.68 | 3.69  | 3.22  | 3.01  | 0.86 | 0.75 | 0.09 | 1.16 |
 | Nokia            | 13.7 |      |       |       |       | 3.29 |      |      | 1.92 |
 | Ericsson         | 1.16 | 1.10 | 1.06  | 1.13  | 1.09  | 5.19 | 0.45 | 0.27 | 0.84 |
@@ -2949,7 +2957,7 @@ Table: RX Time (s) {#tbl:rxTimeNW}
 | MTN              | 2.38 | 1.89 | 2.38  | 2.18  | 2.05  | 3.03 | 0.60 | 0.18 | 1.00 |
 | Vodacom          | 7.00 | 0.08 | 0.43  | 0.09  | 0.16  | 21.3 |      | 0.05 | 1.59 |
 |                  |      |      |       |       |       |      |      |      |      |
-| **ECL 1**        |      |      |       |       |       |      |      |      |      |
+| **ECL Class 1**        |      |      |       |       |       |      |      |      |      |
 | ZTE              | 0.84 | 0.87 | 0.88  | 0.69  | 0.90  | 0.07 | 0.71 | 0.07 | 0.75 |
 | Nokia            | 102. | 88.1 | 92.5  | 81.6  | 88.1  | 2.65 | 2.99 | 17.7 | 6.90 |
 | Ericsson         | 1.65 | 1.36 | 1.45  | 1.34  | 1.61  | 4.52 | 2.16 | 0.22 | 1.26 |
@@ -2959,7 +2967,7 @@ Table: RX Time (s) {#tbl:rxTimeNW}
 | MTN              | 1.25 | 1.11 | 1.16  | 1.01  | 1.26  | 2.30 | 1.44 | 0.14 | 1.00 |
 | Vodacom          | 51.6 | 44.5 | 46.9  | 41.3  | 44.7  | 24.7 | 2.89 | 9.13 | 4.05 |
 |                  |      |      |       |       |       |      |      |      |      |
-| **ECL 2**        |      |      |       |       |       |      |      |      |      |
+| **ECL Class 2**        |      |      |       |       |       |      |      |      |      |
 | ZTE              | 0.93 | 0.79 | 0.87  | 4.21  | 11.5  | 0.09 | 0.49 | 0.26 | 0.59 |
 | Nokia            | 20.4 |      |       |       |       | 0.93 | 3.60 | 1.08 | 28.7 |
 | Ericsson         | 1.04 | 0.92 | 0.95  | 0.88  | 1.02  | 5.48 |      |      | 0.73 |
@@ -2996,7 +3004,7 @@ Table: Average Power ($\mu{W}{h}$) {#tbl:energyE}
 | MTN              | 289.40  | 259.00  | 296.80   | 328.90  | 378.10   | 498.30  | 129.70  | 16.80   | 131.60  |
 | Vodacom          | 3558.50 | 2881.00 | 3083.00  | 2835.50 | 3062.50  | 2028.00 | 585.00  | 321.00  | 724.60  |
 |                  |         |         |          |         |          |         |         |         |         |
-| **ECL   0**      |         |         |          |         |          |         |         |         |         |
+| **ECL Class 0**      |         |         |          |         |          |         |         |         |         |
 | ZTE              | 376.00  | 240.80  | 356.40   | 353.20  | 293.10   | 104.10  | 77.50   | 5.40    | 99.60   |
 | Nokia            | 822.00  |         |          |         |          | 872.40  |         |         | 210.20  |
 | Ericsson         | 112.10  | 111.00  | 113.60   | 130.30  | 147.90   | 361.40  | 57.00   | 16.20   | 85.40   |
@@ -3006,7 +3014,7 @@ Table: Average Power ($\mu{W}{h}$) {#tbl:energyE}
 | MTN              | 242.80  | 175.90  | 235.30   | 243.30  | 220.50   | 234.30  | 66.00   | 10.80   | 92.50   |
 | Vodacom          | 437.50  | 14.80   | 45.80    | 17.90   | 29.60    | 1713.00 |         | 3.00    | 157.90  |
 |                  |         |         |          |         |          |         |         |         |         |
-| **ECL   1**      |         |         |          |         |          |         |         |         |         |
+| **ECL Class 1**      |         |         |          |         |          |         |         |         |         |
 | ZTE              | 320.40  | 82.20   | 95.30    | 78.90   | 121.50   | 14.20   | 60.10   | 4.20    | 60.00   |
 | Nokia            | 6637.50 | 5503.50 | 5815.00  | 5238.50 | 5756.00  | 354.00  | 301.90  | 1062.00 | 841.50  |
 | Ericsson         | 236.50  | 234.10  | 274.50   | 350.40  | 489.10   | 343.70  | 269.60  | 13.20   | 195.60  |
@@ -3016,7 +3024,7 @@ Table: Average Power ($\mu{W}{h}$) {#tbl:energyE}
 | MTN              | 280.00  | 156.60  | 184.60   | 215.60  | 305.60   | 178.00  | 163.90  | 8.40    | 127.50  |
 | Vodacom          | 3391.00 | 2807.50 | 2999.00  | 2688.00 | 2999.50  | 1699.50 | 243.40  | 547.80  | 495.50  |
 |                  |         |         |          |         |          |         |         |         |         |
-| **ECL   2**      |         |         |          |         |          |         |         |         |         |
+| **ECL Class 2**      |         |         |          |         |          |         |         |         |         |
 | ZTE              | 775.80  | 147.40  | 184.70   | 1337.60 | 1002.50  | 57.90   | 59.40   | 15.60   | 105.40  |
 | Nokia            | 1224.00 |         |          |         |          | 683.30  | 1441.00 | 64.80   | 1722.00 |
 | Ericsson         | 117.40  | 110.20  | 124.50   | 145.30  | 191.20   | 896.30  |         |         | 88.80   |
@@ -3052,7 +3060,7 @@ Table: Interval Estimate in minutes using reported RX, TX Time for 9.36Wh AA bat
 | MTN              | 16.25  | 14.54  | 16.67  | 18.47  | 21.23  | 27.98  | 7.28  | 0.94  | 7.39  |
 | Vodacom          | 199.82 | 161.78 | 173.12 | 159.22 | 171.97 | 113.88 | 32.85 | 18.03 | 40.69 |
 |                  |        |        |        |        |        |        |       |       |       |
-| **ECL 0**        |        |        |        |        |        |        |       |       |       |
+| **ECL Class 0**        |        |        |        |        |        |        |       |       |       |
 | ZTE              | 21.11  | 13.52  | 20.01  | 19.83  | 16.46  | 5.85   | 4.35  | 0.30  | 5.59  |
 | Nokia            | 46.16  |        |        |        |        | 48.99  |       |       | 11.80 |
 | Ericsson         | 6.29   | 6.23   | 6.38   | 7.32   | 8.31   | 20.29  | 3.20  | 0.91  | 4.80  |
@@ -3062,7 +3070,7 @@ Table: Interval Estimate in minutes using reported RX, TX Time for 9.36Wh AA bat
 | MTN              | 13.63  | 9.88   | 13.21  | 13.66  | 12.38  | 13.16  | 3.71  | 0.61  | 5.19  |
 | Vodacom          | 24.57  | 0.83   | 2.57   | 1.01   | 1.66   | 96.19  |       | 0.17  | 8.87  |
 |                  |        |        |        |        |        |        |       |       |       |
-| **ECL 1**        |        |        |        |        |        |        |       |       |       |
+| **ECL Class 1**        |        |        |        |        |        |        |       |       |       |
 | ZTE              | 17.99  | 4.62   | 5.35   | 4.43   | 6.82   | 0.80   | 3.37  | 0.24  | 3.37  |
 | Nokia            | 372.72 | 309.04 | 326.53 | 294.16 | 323.22 | 19.88  | 16.95 | 59.64 | 47.25 |
 | Ericsson         | 13.28  | 13.15  | 15.41  | 19.68  | 27.46  | 19.30  | 15.14 | 0.74  | 10.98 |
@@ -3072,7 +3080,7 @@ Table: Interval Estimate in minutes using reported RX, TX Time for 9.36Wh AA bat
 | MTN              | 15.72  | 8.79   | 10.37  | 12.11  | 17.16  | 10.00  | 9.20  | 0.47  | 7.16  |
 | Vodacom          | 190.42 | 157.65 | 168.41 | 150.94 | 168.43 | 95.43  | 13.67 | 30.76 | 27.82 |
 |                  |        |        |        |        |        |        |       |       |       |
-| **ECL 2**        |        |        |        |        |        |        |       |       |       |
+| **ECL Class 2**        |        |        |        |        |        |        |       |       |       |
 | ZTE              | 43.56  | 8.28   | 10.37  | 75.11  | 56.29  | 3.25   | 3.34  | 0.88  | 5.92  |
 | Nokia            | 68.73  |        |        |        |        | 38.37  | 80.92 | 3.64  | 96.70 |
 | Ericsson         | 6.59   | 6.19   | 6.99   | 8.16   | 10.74  | 50.33  |       |       | 4.99  |
@@ -3108,7 +3116,7 @@ Table: Longevity Estimate in years using Reported RX, TX Time for 9.36Wh AA batt
 | MTN              | 3.69  | 4.13  | 3.60  | 3.25  | 2.83  | 2.14  | 8.24  | 63.60  | 8.12  |
 | Vodacom          | 0.30  | 0.37  | 0.35  | 0.38  | 0.35  | 0.53  | 1.83  | 3.33   | 1.47  |
 |                  |       |       |       |       |       |       |       |        |       |
-| **ECL   0**      |       |       |       |       |       |       |       |        |       |
+| **ECL Class 0**      |       |       |       |       |       |       |       |        |       |
 | ZTE              | 2.84  | 4.44  | 3.00  | 3.03  | 3.65  | 10.26 | 13.79 | 197.87 | 10.73 |
 | Nokia            | 1.30  |       |       |       |       | 1.22  |       |        | 5.08  |
 | Ericsson         | 9.53  | 9.63  | 9.41  | 8.20  | 7.22  | 2.96  | 18.75 | 65.96  | 12.51 |
@@ -3118,7 +3126,7 @@ Table: Longevity Estimate in years using Reported RX, TX Time for 9.36Wh AA batt
 | MTN              | 4.40  | 6.07  | 4.54  | 4.39  | 4.85  | 4.56  | 16.19 | 98.93  | 11.55 |
 | Vodacom          | 2.44  | 72.20 | 23.33 | 59.69 | 36.10 | 0.62  |       | 356.16 | 6.77  |
 |                  |       |       |       |       |       |       |       |        |       |
-| **ECL   1**      |       |       |       |       |       |       |       |        |       |
+| **ECL Class 1**      |       |       |       |       |       |       |       |        |       |
 | ZTE              | 3.33  | 13.00 | 11.21 | 13.54 | 8.79  | 75.25 | 17.78 | 254.40 | 17.81 |
 | Nokia            | 0.16  | 0.19  | 0.18  | 0.20  | 0.19  | 3.02  | 3.54  | 1.01   | 1.27  |
 | Ericsson         | 4.52  | 4.56  | 3.89  | 3.05  | 2.18  | 3.11  | 3.96  | 80.95  | 5.46  |
@@ -3128,7 +3136,7 @@ Table: Longevity Estimate in years using Reported RX, TX Time for 9.36Wh AA batt
 | MTN              | 3.82  | 6.82  | 5.79  | 4.96  | 3.50  | 6.00  | 6.52  | 127.20 | 8.38  |
 | Vodacom          | 0.32  | 0.38  | 0.36  | 0.40  | 0.36  | 0.63  | 4.39  | 1.95   | 2.16  |
 |                  |       |       |       |       |       |       |       |        |       |
-| **ECL   2**      |       |       |       |       |       |       |       |        |       |
+| **ECL Class 2**      |       |       |       |       |       |       |       |        |       |
 | ZTE              | 1.38  | 7.25  | 5.79  | 0.80  | 1.07  | 18.45 | 17.99 | 68.49  | 10.14 |
 | Nokia            | 0.87  |       |       |       |       | 1.56  | 0.74  | 16.49  | 0.62  |
 | Ericsson         | 9.10  | 9.70  | 8.58  | 7.35  | 5.59  | 1.19  |       |        | 12.03 |
@@ -3164,7 +3172,7 @@ Table: SINR (dB) {#tbl:SINR}
 | MTN              | 13.755 | 13.613 | 13.462 | 13.673 | 13.442 | 6.7953 | 13.002 | 11.382 | 13.028 |
 | Vodacom          | 2.5918 | 2.4462 | 2.0337 | 3.4952 | 3.6662 | 4.9075 | 3.8950 | 3.7541 | 6.7838 |
 |                  |        |        |        |        |        |        |        |        |        |
-| **ECL 0**        |        |        |        |        |        |        |        |        |        |
+| **ECL Class 0**        |        |        |        |        |        |        |        |        |        |
 | ZTE              | 7.21   | 2.44   | 5.77   | 7.07   | 7.48   | 0.89   | 1.98   | 0.91   | 6.92   |
 | Nokia            | 3.47   | 4.05   | 3.75   | 3.70   |        | 8.59   |        | 9.49   | 6.73   |
 | Ericsson         | 28.1   | 28.2   | 28.0   | 28.0   | 27.9   | 12.7   | 26.2   | 23.1   | 28.1   |
@@ -3174,7 +3182,7 @@ Table: SINR (dB) {#tbl:SINR}
 | MTN              | 17.6   | 15.3   | 16.8   | 17.5   | 17.7   | 6.83   | 14.1   | 12.0   | 17.5   |
 | Vodacom          | 5.49   | 3.94   | 5.65   | 5.61   | 2.03   | 8.27   | 5.74   | 7.48   | 9.23   |
 |                  |        |        |        |        |        |        |        |        |        |
-| **ECL 1**        |        |        |        |        |        |        |        |        |        |
+| **ECL Class 1**        |        |        |        |        |        |        |        |        |        |
 | ZTE              | 3.14   | 2.56   | 2.46   | 0.31   | 2.90   | 1.17   | 0.64   | 1.13   | 3.43   |
 | Nokia            | 3.03   | 2.24   | 2.10   | 4.65   | 5.58   | 6.36   | 2.10   | 4.34   | 5.70   |
 | Ericsson         | 17.1   | 17.9   | 17.7   | 17.9   | 18.0   | 7.06   | 7.26   | 4.65   | 17.5   |
@@ -3184,7 +3192,7 @@ Table: SINR (dB) {#tbl:SINR}
 | MTN              | 10.1   | 10.2   | 10.1   | 9.15   | 10.5   | 4.12   | 3.95   | 2.89   | 10.4   |
 | Vodacom          | 3.53   | 3.34   | 2.70   | 3.56   | 4.27   | 5.22   | 3.49   | 5.50   | 8.09   |
 |                  |        |        |        |        |        |        |        |        |        |
-| **ECL 2**        |        |        |        |        |        |        |        |        |        |
+| **ECL Class 2**        |        |        |        |        |        |        |        |        |        |
 | ZTE              | -0.6   | 0.07   | -0.0   | 0.16   | -4.8   | 0.61   | 0.86   | -0.4   | -0.0   |
 | Nokia            | -1.1   |        | -1.8   | -0.4   | -2.8   | -3.4   | -1.5   | -1.4   | 3.87   |
 | Ericsson         | 3.46   | 3.58   | 3.79   | 3.53   | 3.71   | 2.43   | 3.44   |        | 3.41   |
@@ -3216,9 +3224,9 @@ This is the time spent consuming current and is measured externally.
 
 [](../../../masters/code/tests/plotterk/txTime_histogram.png)
 
-(A) Attenuation per decade is evident. (B) Vodacom latency is up to 5 times greater, excluding outliers. (C) All tests show variation in latency except eDRX. (D) ECL is influenced by RSRP on MTN networks, but does not affect latency. Vodacom's increased latency shows from ECL 1 onwards.
+(A) Attenuation per decade is evident. (B) Vodacom latency is up to 5 times greater, excluding outliers. (C) All tests show variation in latency except eDRX. (D) ECL is influenced by RSRP on MTN networks, but does not affect latency. Vodacom's increased latency shows from ECL Class 1 onwards.
 
-As opposed to Figure \ref{fig:sinr_latency}, in Figure \ref{fig:latency_rsrp} (ABCF) the characteristics of each MNO is distributed more evenly. RSRP measurements are across a 50dBm range for MTN-ZTE and 40dBm for Vodacom-Nokia with the weakest signals around -130dBm and -110dBm respectively. (DE) Attenuation per decade is evident according to RSRP. This RF metric is most beneficial to compare against when measuring the outcome of attenuations. (GH) Tests are varied across RSRP. (G) eDRX paging cycles and PTAU have the quickest latencies under a few seconds whilst COPS has the longest up to 10 seconds. (H) Echo tests have outlier network (de)registrations at Vodacom-Nokia. UDP packet byte size has high variance, yet only has an effect on latency in the fastest transmissions. (I) Most of Vodacom-Nokia's dataset is on ECL 1, yet MTN-ZTE's ECL 1 has much lower latency and variance. Increased ECL classes do not necessarily correlate with latency. Closer inspection is needed per test.
+As opposed to Figure \ref{fig:sinr_latency}, in Figure \ref{fig:latency_rsrp} (ABCF) the characteristics of each MNO is distributed more evenly. RSRP measurements are across a 50dBm range for MTN-ZTE and 40dBm for Vodacom-Nokia with the weakest signals around -130dBm and -110dBm respectively. (DE) Attenuation per decade is evident according to RSRP. This RF metric is most beneficial to compare against when measuring the outcome of attenuations. (GH) Tests are varied across RSRP. (G) eDRX paging cycles and PTAU have the quickest latencies under a few seconds whilst COPS has the longest up to 10 seconds. (H) Echo tests have outlier network (de)registrations at Vodacom-Nokia. UDP packet byte size has high variance, yet only has an effect on latency in the fastest transmissions. (I) Most of Vodacom-Nokia's dataset is on ECL Class 1, yet MTN-ZTE's ECL Class 1 has much lower latency and variance. Increased ECL classes do not necessarily correlate with latency. Closer inspection is needed per test.
 
 Extended Coverage Levels (ECL) are determined by the network. The eNB (base station) sets the number of transmission repetitions (ECL) according to received signal strength reported by the UE.
 
@@ -3252,7 +3260,7 @@ The UE reports TX and RX time via the `AT+NUESTATS="RADIO"` command. It is the t
 
 [](../../../masters/code/tests/plotterk/Signal_power_txTimeNW_plot.png)
 
-In Figure \ref{fig:txTimeNW}, (AF) the effect of K-means clustering can be seen as it simplifies the variance around -110 to -130dBm as more tests had been take than necessary. Nevertheless, this coincides with (I) higher ECL 2 values. However, ECL is not the only metric that affects latency as there are ECL 0 values in that range as well. As a whole, the UE have low latency and means under 1 second with MTN-ZTE. (BF) Ublox shows poorer performance than Quectel here, yet both have means around 2-3 seconds. (C) The data is almost mutually exclusive and only shares a boundary with TX times under 2 seconds. (DE) Attenuation zones are clearly defined per decade. (GH) UDP packet transmissions are reported greater than 5 seconds, and the rest of the tests as less. (I) ECL might affect latency according to reported TX time.
+In Figure \ref{fig:txTimeNW}, (AF) the effect of K-means clustering can be seen as it simplifies the variance around -110 to -130dBm as more tests had been take than necessary. Nevertheless, this coincides with (I) higher ECL Class 2 values. However, ECL is not the only metric that affects latency as there are ECL Class 0 values in that range as well. As a whole, the UE have low latency and means under 1 second with MTN-ZTE. (BF) Ublox shows poorer performance than Quectel here, yet both have means around 2-3 seconds. (C) The data is almost mutually exclusive and only shares a boundary with TX times under 2 seconds. (DE) Attenuation zones are clearly defined per decade. (GH) UDP packet transmissions are reported greater than 5 seconds, and the rest of the tests as less. (I) ECL might affect latency according to reported TX time.
 
 Although the UE reports satisfactory TX time according to 3GPP standards (under 10 seconds) it is not indicative of the measured latency and it is likely necessary to look at RX time as well. Data for both MNOs falls within the first 5 seconds, unlike what was measured. It is possible that actual on-air time is less than when measuring latency from external energy measurements because the signals are modulated in the time domain (duty cycle, pulse width).
 
@@ -3284,7 +3292,7 @@ In Figure \ref{fig:txTimeNW_otl}, (ADFG) MTN-ZTE shows no outliers, but (BC) Vod
 
 [](../../../masters/code/tests/plotterk/Signal_power_rxTimeNW_plot.png)
 
-(A) Attenuation zones clearly defined per decade. (B) MTN RX and TX time mainly within 2.5 seconds. Vodacom mainly up to 10 seconds. (C) All tests show variation in RX time except eDRX. (D) ECL does not affect RX time on MTN, however most of the tests at Vodacom show ECL 1 and above.
+(A) Attenuation zones clearly defined per decade. (B) MTN RX and TX time mainly within 2.5 seconds. Vodacom mainly up to 10 seconds. (C) All tests show variation in RX time except eDRX. (D) ECL does not affect RX time on MTN, however most of the tests at Vodacom show ECL Class 1 and above.
 
 The on-air time for receiving from the network is at least twice as much as the TX time metric. It is more comparable to the external energy-latency measurements and suggests that more energy is spent on receiving than necessary.
 
@@ -3292,7 +3300,7 @@ The on-air time for receiving from the network is at least twice as much as the 
 
 [](../../../masters/code/tests/plotterk/rxTimeNW_histogram.png)
 
-Outliers show RX time up to almost 400 seconds and majority when connected to Vodacom towers. It includes mostly the UDP packet tests and at ECL 1.
+Outliers show RX time up to almost 400 seconds and majority when connected to Vodacom towers. It includes mostly the UDP packet tests and at ECL Class 1.
 
 \begin{minipage}{1.0\linewidth}
 \begin{center}
@@ -3318,13 +3326,13 @@ Outliers show RX time up to almost 400 seconds and majority when connected to Vo
 
 [](../../../masters/code/tests/plotterk/Signal_power_energy_plot.png)
 
-(A) Attenuation zones per decade evident. (B) Vodacom energy consumption up to 10 times greater, excluding outliers. (C) All tests show variation in energy consumption except eDRX. (D) Vodacom at mostly ECL 1, yet MTN has varied ECL.
+(A) Attenuation zones per decade evident. (B) Vodacom energy consumption up to 10 times greater, excluding outliers. (C) All tests show variation in energy consumption except eDRX. (D) Vodacom at mostly ECL Class 1, yet MTN has varied ECL.
 
 
 
 [](../../../masters/code/tests/plotterk/Signal_power_energy_outliers.png)
 
-Energy outliers mainly from Vodacom at ECL 1 and the COPS, PTAU or UDP packet test.
+Energy outliers mainly from Vodacom at ECL Class 1 and the COPS, PTAU or UDP packet test.
 
 All in all, Vodacom uses up to 40 times (200 Joules) more than MTN (up to 5 Joules).
 
@@ -3430,7 +3438,7 @@ SNR is spread relatively evenly for the different attenuation zones.
 
 [](../../../masters/code/tests/joplotterk/Signal_power_TX_power_plot.png)
 
-(A) Transmit power decreases proportional to RSRP from around -100 dBm and stronger. (B) Attenuation/RSRP affects transmit power on MTN, and Vodacom remains at the 23 dBm max. (C) Variation in all tests. (D) ECL 0 and 1 uses less power but ECL 2 remains at max power.
+(A) Transmit power decreases proportional to RSRP from around -100 dBm and stronger. (B) Attenuation/RSRP affects transmit power on MTN, and Vodacom remains at the 23 dBm max. (C) Variation in all tests. (D) ECL Class 0 and 1 uses less power but ECL Class 2 remains at max power.
 
 The UE maintains a max output power of 23 dBm when connected to Vodacom towers, and decreases proportional to RSRP/RSSI on MTN towers. When comparing energy and latency to transmit power, both show variation at 23 dBm and decrease at lower powers which indicates that although it is a contributing factor it is definitely more affected by time on air.
 
@@ -3466,7 +3474,7 @@ It displays the BLER and total number of bytes transmitted and received by the R
 Physical Layer.
 
 Using this statistic it is possible to see if the module is having difficulty in communicating with the
-base station. Even if the module is in good coverage, ECL 0, there still might be issues causing the
+base station. Even if the module is in good coverage, ECL Class 0, there still might be issues causing the
 messages not to be sent or received.
 
 **TX bytes**

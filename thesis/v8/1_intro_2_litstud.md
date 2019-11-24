@@ -70,7 +70,7 @@ All rights reserved.
 
 # Abstract {-#abstract}
 
-2G/GPRS is a sun-setting technology leaving behind a void for LPWANs such as LoRaWAN and SigFox to fill. The viability of NB-IoT being such a technology for South Africa is investigated. A number of telemetry tests have been performed for multiple UEs (Ublox and Quectel), LTE vendors (ZTE, Nokia, Ericsson and Huawei) and MNOs (MTN and Vodacom) at different RF attenuation decades. This has resulted in analysis for metrics such as latency and power efficiency, as well as estimates for telemetry periodicity and battery longevity.
+2G/GPRS is a sun-setting technology leaving behind a void for LPWANs such as LoRaWAN, SigFox and NB-IoT to fill. This empirical study investigated NB-IoT through metrics and estimations by comparing datasets of telemetry tests performed on long-term-evolution (LTE) vendors, using user-equipment (UE) devices, for mobile-network-operators (MNOs) in South Africa. LTE vendors include ZTE and Ericsson on MTN's network, and Nokia and Huawei on Vodacom's network. Similar UE devices, Ublox and Quectel, were used as a control to observe network changes via RF attenuation in decades. The study theorizes that networks are responsible for the variation found in metrics and estimations, due to the high underlying complexity of LTE architecture on which NB-IoT is based. This has resulted in analysis for metrics such as latency and power efficiency, as well as estimates for telemetry periodicity and battery longevity.
 
 \vspace{5cm}
 

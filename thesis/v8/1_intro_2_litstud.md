@@ -859,6 +859,10 @@ NB-IoT operation requires a minimum bandwidth of 180 kHz, which is equal to the 
 
 Maximum coupling loss (MCL) is defined as the maximal total channel loss between User Equipment (UE) and eNodeB (eNB) antenna ports at which the data service can still be delivered. Practically, it includes antenna gains, path loss, shadowing and any other impairments. The higher the MCL, the more robust the link is. 
 
+$$MCL\ ( dB) \ =\ P_{TX} \ -\ ( Noise\ figure\ +\ SINR\ +\ Thermal\ Noise\ floor)$$ {#eq:mcl}
+
+$$Thermal\ Noise\ floor\ =\ -174\ +\ 10log_{10}( Bandwidth)$$ {#eq:noise_floor}
+
 #### UE Device and Network Behavior
 
 Users can monitor the status of the module’s connection, registration and PSM state by

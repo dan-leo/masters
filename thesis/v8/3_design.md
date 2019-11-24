@@ -1177,15 +1177,11 @@ Signal strength can be measured or reported from the UE device and the following
 
 #### MCL {#des_mcl}
 
-Maximum Coupling Link (MCL), as defined in \S\ref{lit_mcl} and by Eq. \ref{eq:mcl}, is the greatest link between UE device and eNodeB. This can be calculated by using the minimum values of RSRP and SINR obtained in the field capture datasets in \S\ref{dataset}.
-
-$$MCL\ ( dB) \ =\ P_{TX} \ -\ ( Noise\ figure\ +\ SINR\ +\ Thermal\ Noise\ floor)$$ {#eq:mcl}
+Maximum Coupling Link (MCL), as defined in \S\ref{lit_mcl} and by Eq. \ref{eq:mcl}, is the greatest link between UE device and eNodeB. This can be calculated by using the minimum values of SINR obtained in the field capture datasets in \S\ref{dataset}, excluding outliers.
 
 $Noise\ figure$ is defined as 5dB by 3GPP 45.820 7A [@realDiffs2016].
 
-$$Thermal\ Noise\ floor\ =\ -174\ +\ 10log_{10}( Bandwidth)$$ {#eq:noise_floor}
-
-With $Bandwidth$ in Eq. \ref{eq:noise_floor} set to 180 kHz as defined in \S\ref{lpwan_comparison}, $Thermal\ Noise\ floor$ is equal to a value of -121.45 dB.
+With $Bandwidth$ in Eq. \ref{eq:noise_floor} set to 180 kHz as defined in \S\ref{lpwan_comparison}, $Thermal\ Noise\ floor$ is equal to a value of -121.45 dB. Finally, $P_{TX}$ is defined as 
 
 #### RSRP
 

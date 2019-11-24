@@ -49,10 +49,12 @@ def plot(mdb, kx, ky, xlabel='', ylabel='', scale=[1,1], invert=[True,False], co
     hytest, hyuenw, hyatt = [], [], []
     hxtest, hxuenw, hxatt = [], [], []
     hytw = []
+    hxtw = []
     hecl = [[], [], [], []]
     ecl_list = []
     ecl_listo = []
     ally = []
+    allx = []
     folder = folder + '/' if len(folder) else 'plotter3/'
     ffolder = folder
     kkx, kky = kx, ky
@@ -61,6 +63,7 @@ def plot(mdb, kx, ky, xlabel='', ylabel='', scale=[1,1], invert=[True,False], co
         for ti, test in enumerate(mdb):
             if oi:
                 hytw.append([])
+                hxtw.append([])
                 for i in range(4):
                     hecl[i].append([])
                 hytest.append([])
@@ -68,10 +71,12 @@ def plot(mdb, kx, ky, xlabel='', ylabel='', scale=[1,1], invert=[True,False], co
             for ui, uenw in enumerate(test):
                 if oi:
                     hytw[ti].append([])
+                    hxtw[ti].append([])
                     for i in range(4):
                         hecl[i][ti].append([])
                     if not ti:
                         ally.append([])
+                        allx.append([])
                         hyuenw.append([])
                         hxuenw.append([])
                 for ai, att in enumerate(uenw):
@@ -129,6 +134,10 @@ def plot(mdb, kx, ky, xlabel='', ylabel='', scale=[1,1], invert=[True,False], co
                                                 # hy = hy / 1000 if ui >= 4 else hy
                                                 ally[ui].append(hy)
                                                 hytw[ti][ui].append(hy)
+                                    if x.size:
+                                        for hx in x:
+                                            allx[ui].append(hx)
+                                            hxtw[ti][ui].append(hx)
                             except TypeError as e:
                                 print(e, atd[kx])
                         except (KeyError, TypeError) as e:
@@ -150,7 +159,7 @@ def plot(mdb, kx, ky, xlabel='', ylabel='', scale=[1,1], invert=[True,False], co
     # print(tabulate([np.insert([str(np.mean(m)) for m in [mean[:2], mean[2:4]]], 0, ylabel)], ['MTN', 'Vodacom'], tablefmt="github"))
     # print(xlabel)
     print([str(np.mean(m))[:4] for m in ally])
-    return ally, hytw, hecl
+    return ally, hytw, hecl, #allx, hxtw
     # for si in range(2):
     #     ax = axo if si else axp
     #     ax[1][2].boxplot(ally)

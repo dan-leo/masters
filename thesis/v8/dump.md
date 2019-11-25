@@ -1,3 +1,5 @@
+Thesis_Narrowband_IoT_Performance_Evaluation_of_Variability_by_Daniel_Leonard_Robinson.pdf
+
 # Plots
 
 - what aspect is the plot trying to cover, what is it telling me on that topic, shows? observances?
@@ -13,6 +15,16 @@
 \-    Tell them what it is showing or what you are observing in the results (“ It can be seen that the the performance of the quectel modem is better….”). This you do for everything you want to highlight, everything tht is worth mentioning.
 
 \-    State the natural conclusion of what you are observing. (“ The impact of the higher throughput rate is that for the same duration of radio time, and therefore battery energy, more data can be pushed through” – just a hypothetical example).
+
+
+
+# turnitititin
+
+
+
+Durand's results show that LoRaWAN SF7 is the most power-efficient, due to the short transmission burst, and with NB-IoT the worst power-consumption due to the length RRC-idle mode [@Thomas2018]. This can be reduced using Release Assistance as in \S\ref{release_a}.
+
+
 
 
 

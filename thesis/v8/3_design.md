@@ -539,7 +539,7 @@ A 100 kb file is downloaded at a rate of around 3kB/s. The script continues down
 
 ## Example Application
 
-An example application was built to test and understand NB-IoT. See schematic and board layout in Appendix \ref{appendix_SCH_BRD}. The board includes not just NB-IoT but also LTE Cat-M, GPRS/EDGE, SigFox, LoRa, and Dash7. Initally designed to compare LPWANs, it was decided to focus more purely on NB-IoT as there is a great deal of variance among UEs and LTE vendors already.
+An example application was built to test and understand NB-IoT. See schematic and board layout in Appendix \ref{appendix_SCH_BRD}. The board includes not just NB-IoT but also LTE Cat-M, GPRS/EDGE, SigFox, LoRa, and Dash7. Initally designed to compare LPWANs, it was decided to focus more purely on NB-IoT as there is a great deal of variability among UEs and LTE vendors already.
 
 Notable components include:
 
@@ -1189,7 +1189,7 @@ With $Bandwidth$ in Eq. \ref{eq:noise_floor} set to 180 kHz as defined in \S\ref
 
 Reference Signal Receive Power (RSRP) or "Signal Power" is an average power measurement of the received power level in an LTE network, via a single reference signal in dBm.
 
-![RSRP distribution using Ublox and Quectel UE on ZTE-MTN and Nokia-Vodacom infrastructure as well as attenuation and telemetry test set. RSRP and telemetry tests have a relatively even distribution, although RSRP still has about 20 dBm variance per attenuation decade. ZTE signals have higher MCL than Nokia.](../../../masters/code/tests/plotterk/Signal_power_histogram.png)
+![RSRP distribution using Ublox and Quectel UE on ZTE-MTN and Nokia-Vodacom infrastructure as well as attenuation and telemetry test set. RSRP and telemetry tests have a relatively even distribution, although RSRP still has about 20 dBm variability per attenuation decade. ZTE signals have higher MCL than Nokia.](../../../masters/code/tests/plotterk/Signal_power_histogram.png)
 
 #### RSSI
 

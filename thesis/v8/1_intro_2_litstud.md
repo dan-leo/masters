@@ -26,7 +26,7 @@ tablenos-number-by-section: true
 
 \begin{center}
 \vspace{1cm}
-\huge{NB-IoT (LTE Cat-NB1 / Narrow-band IoT) Performance Evaluation of Variance in Multiple LTE Vendors, UE and MNOs}\\
+\huge{NB-IoT (LTE Cat-NB1 / Narrow-band IoT) Performance Evaluation of Variability in Multiple LTE Vendors, UE devices and MNOs}\\
 \vspace{0.5cm}
 \Large{by}\\
 \vspace{0.5cm}
@@ -39,9 +39,11 @@ tablenos-number-by-section: true
 \end{center}
 \end{minipage}
 
-\vspace{2cm}
+\vspace{1.5cm}
 \Large{Thesis presented in partial fulfillment of the requirements for the degree of Masters of Engineering (Research) in the Department of Electrical and Electronic Engineering at Stellenbosch University}\\
 \vspace{1cm}
+\Large{Supervisor: Prof. M.J. Booysen}\\
+\vspace{0.5cm}
 \Large{November 2019}\\
 \end{center}
 
@@ -56,7 +58,7 @@ By submitting this report electronically, I declare that the entirety of the wor
 
 \vspace{1cm}
 
-Date: .......................................................
+Date: ................. 25/11/2019 ...........
 
 
 
@@ -70,13 +72,27 @@ All rights reserved.
 
 # Abstract {-#abstract}
 
-2G/GPRS is a sun-setting technology leaving behind a void for LPWANs such as LoRaWAN, SigFox and NB-IoT to fill. This empirical study investigated NB-IoT through metrics and estimations by comparing datasets of telemetry tests performed on long-term-evolution (LTE) vendors, using user-equipment (UE) devices, for mobile-network-operators (MNOs) in South Africa. LTE vendors include ZTE and Ericsson on MTN's network, and Nokia and Huawei on Vodacom's network. Similar UE devices, Ublox and Quectel, were used as a control to observe network changes via RF attenuation in decades. The study theorizes that networks are responsible for the variation found in metrics and estimations, due to the high underlying complexity of LTE architecture on which NB-IoT is based. This has resulted in analysis for metrics such as latency, power efficiency, signal strength, enhanced coverage level (ECL) classes, throughput, data overhead as well as estimates for telemetry periodicity and battery longevity.
+Cellular 2G/GPRS is a sun-setting technology worldwide leaving behind a void for wireless low-power wide-area-networks (LPWANs) such as LoRaWAN, SigFox and NB-IoT to fill. With NB-IoT on the roadmap towards 5G New Radio (NR), it is a promising contender due to its bidirectionality, power-saving mechanisms and ease of integration with existing equipment, yet there still exists a general uncertainty with regard to adoption. Research shows that most literature on NB-IoT is based on precise mathematical models, analysis or simulations, except for a few empirical performance evaluations which find variability in devices connected to a single network. The study theorizes that networks are responsible for the variation found in metrics and estimations, due to the high underlying complexity of Long-Term Evolution (LTE) architecture on which NB-IoT is based. Thus, the study proposes an empirical investigation using mobile-network operators (MNOs) in South Africa by comparing multiple top LTE vendors including Ericsson and ZTE on MTN's network, and on Vodacom's network Huawei and Nokia. Furthermore, similar user equipment (UE) devices such as Ublox and Quectel are used as a control to observe network changes via RF attenuation. A set of telemetry tests are developed to capture various metrics and estimations into datasets for comparison, which include differently sized UDP packet datagrams, cellular operator selection (COPS), extended discontinuous reception (eDRX) and periodic tracking-area-updates (PTAU). Data is measured using an external energy capture device or reported by the UE device for post-processing and analysis in plots, mean distribution tables and boxplots. Metrics such as latency, power efficiency, signal strength, enhanced coverage level (ECL) classes, throughput and data overhead are included, as well as estimates for telemetry interval periodicity and battery longevity. K-means clustering is applied to the datasets to reduce the skewness induced by the increased number of low-latency values during captures to normalize the number of unique features for comparison.
 
-\vspace{5cm}
+Most clearly visible in the tests is how MTN leads Vodacom in NB-IoT performance due to Nokia’s subpar results. Power efficiency and latency metrics show that when connected to Vodacom-Nokia, results can factor up 20 and 10 times worse, respectively. Otherwise, ZTE, Ericsson and Huawei show satisfactory latency under the 10 second 3GPP standard. Although LTE vendors meet the 164 dBm MCL requirement, Vodacom-Nokia has 10 dB less receive sensitivity, with the rest at -130 dBm. Transmit power increases at 10 dBm per RSRP decade until its maximum at 23 dBm, except for Nokia which remains at full power. ECL classes overlap with respect to RSRP, yet partially correlate, which suggests an unknown network factor or hysteresis of a few seconds in the test captures. Nevertheless, Nokia is mostly in ECL class 1, while others are a mix of ECL class 0 and 1. This has an impact on the number of dynamic repetitions of messages between UE devices and cell-tower eNodeBs. Throughput is under 10 kbps, which is half or less than UE device claims by manufacturers. A quarter of datagrams in the telemetry test set show protocol overhead extending over 512 bytes in uplink and 200 bytes in downlink, except for Nokia extending up to 10,000 bytes. Telemetry interval and battery longevity estimates on a 9.36 Wh AA battery suggest that ZTE, Ericsson and Huawei can transmit 16-512 bytes between every 5 to 30 minutes to last at least a year, or hourly to last up to 10 years, however, a device that transmits hourly on the Vodacom-Nokia network will only last 2 months. The study provides recommendations based on these results.
+
+Finally, South Africa is ready for mobile network operators to deploy national NB-IoT coverage using ZTE, Ericsson and Huawei, but not using Nokia. With a satisfactory inter-cell tower distance, UE devices avoid having to use dynamic repetitions in higher ECL classes, thus keeping the variability that affects many of the metrics and estimates in the study to a minimum.
+
+
+
+<!--\vspace{5cm}-->
+
+\newpage
 
 # Uittreksel {-#uittreksel}
 
-\vspace{10cm}
+<!--\vspace{10cm}-->
+
+Sellulêre 2G/GPRS is 'n einde-van-leeftyd tegnologie wat wêreldwyd 'n leemte agterlaat, wat deur draadlose lae-krag-wye-netwerke (LPWAN's) soos LoRaWAN, SigFox en NB-IoT gevul sal word. NB-IoT se prominensie op die padkaart na 5G New Radio (NR), maak dit 'n belowende aanspraakmaker vanweë die tweerigtingkommunikasie, kragbesparingsmeganismes en die gemak van integrasie met bestaande toerusting, maar daar bestaan steeds 'n algemene onsekerheid oor die aanvaarbaarheid daarvan. Navorsing toon dat die meeste literatuur oor NB-IoT gebaseer is op presiese wiskundige modelle, analise of simulasies, behalwe vir 'n paar empiriese prestasiebeoordelings wat wisselvalligheid vind in toestelle wat aan 'n enkele netwerk gekoppel is. Hierdie studie stel voor dat netwerke verantwoordelik is vir die variasie in statistieke en beramings as gevolg van die hoë onderliggende kompleksiteit van die Long-Term Evolution (LTE) argitektuur waarop NB-IoT gebaseer is. Die studie stel dus 'n empiriese ondersoek in Suid-Afrika voor, wat gebruik maak van mobiele netwerkoperateurs (MNO's) en deur verskeie top-LTE-verkopers, waaronder Ericsson en ZTE, op MTN se netwerk en op Vodacom se netwerk Huawei en Nokia te vergelyk. Verder word soortgelyke toestelle vir gebruiker-toerusting (UE) soos Ublox en Quectel gebruik om 'n netwerkverandering via RF-demping te waarneem. 'n Stel telemetrie-toetse word ontwikkel om verskillende statistieke en beramings op te stel in datastelle vir vergelyking, wat verskillende grootte UDP-pakkedatagramme, seleksie van sellulêre operateurs (COPS), uitgebreide diskontinue ontvangs (eDRX) en periodieke opdaterings vir opsporing van gebiede (PTAU) insluit. Data word gemeet met behulp van 'n eksterne energie metingstoestel of deur die UE-apparaat gerapporteer vir na-verwerking en ontleding en analises. Maatstawwe soos latensie, drywingseffektiwiteit, seinsterkte, verbeterde dekkingvlakklasse (ECL), deurset data en oorhoofse data is gebruik, sowel as skattings van telemetrie-intervalperiode en batteryleeftyd. K-gemiddelde-groepering word op die datastelle toegepas om die skeefheid wat veroorsaak word deur die verhoogde aantal lae-latenstydwaardes tydens opnames te verminder, om die aantal unieke eienskappe te vergelyk.
+
+Die toetse dui duidelik aan aan hoe MTN se NB-IoT beter vaar as Vodacom sŉ, as gevolg van Nokia se ondergeskikte resultate. Kragdoeltreffendheids- en latenstatistieke toon dat die resultate, as dit met Vodacom-Nokia gekoppel is, onderskeidelik 20 en 10 keer erger kan wees. Andersins vertoon ZTE, Ericsson en Huawei bevredigende vertraging onder die 10 sekonde 3GPP-standaard. Alhoewel LTE-verkopers aan die MCL-vereiste van 164 dBm voldoen, het Vodacom-Nokia 10 dB minder sensitiwiteit, met die ander op -130 dBm. Transmissiedrwying neem toe met 10 dBm per RSRP dekade tot die maksimum op 23 dBm, behalwe vir Nokia wat op volle krag bly. ECL-klasse oorvleuel ten opsigte van RSRP, maar korreleer tog gedeeltelik, wat dui op 'n onbekende netwerk eienskap of histerese van enkele sekondes in die toetsopnames. Nietemin, is Nokia meestal in ECL-klas 1, terwyl die ander 'n mengsel van ECL-klasse 0 en 1 is. Dit het 'n invloed op die aantal dinamiese herhalings van boodskappe tussen UE-toestelle en eNodeBs. Die deurset is minder as 10 kbps, wat die helfte of minder is as wat UE-toestelle se vervaardigers beweer. 'n Kwart van die diagramme in die telemetrie-toetsstel toon die oorhoofse protokol wat strek oor 512 bytes in oplaaikanaal en 200 bytes in aflaaikanaal, behalwe vir Nokia wat tot 10.000 grepe strek. Telemetrie-interval- en batteryleeftydberamings dui daarop dat ZTE, Ericsson en Huawei 16-512 byte tussen elke 5 tot 30 minute kan oordra met 'n 9.36 Wh AA-battery wat minstens 'n jaar sal hou, of uurlikse transmissie wat tot tien jaar sal duur. ŉ Toestel wat uurliks op die Vodacom-Nokia-netwerk uitstuur, sal slegs 2 maande duur. Die studie bied aanbevelings gebaseer op hierdie resultate.
+
+Ten slotte, is Suid-Afrika gereed vir mobiele netwerkoperateurs om die nasionale NB-IoT-dekking te gebruik met behulp van ZTE, Ericsson en Huawei, maar nie Nokia nie. Met 'n bevredigende afstand tussen die toring van die sel, vermy UE-toestelle om dinamiese herhalings in hoër ECL-klasse te gebruik, en sodoende word die veranderlikheid wat baie van die statistieke en ramings in die studie beïnvloed tot 'n minimum beperk.
 
 
 
@@ -313,9 +329,7 @@ This section looks at how user equipment (UE devices in \S\ref{ue_devices}) is c
 
 The following MNOs have NB-IoT coverage in South Africa which will be expanded upon in \S\ref{coverage}, namely MTN and Vodacom. NB-IoT uses their LTE infrastructure, and this will be expanded upon in \S\ref{lte-vendors}.
 
-MTN Group Limited, formerly M-Cell, is a South African multinational mobile telecommunications company, operating in many African countries and the Middle East. Its head office is in Johannesburg. 
-
-Vodacom Group Limited is a South African mobile communications company, providing voice, messaging, data and converged services to over 55 million customers part of the international Vodafone Group.
+MTN Group Limited and Vodacom Group Limited are both mobile telecommunication companies trialing the use of NB-IoT in South Africa. While they are both based in South Africa with headquarters in Johannesburg, MTN operates in many African countries and the Middle East, and Vodacom is part of the International Vodafone Group with over 55 million customers.
 
 \hypertarget{lte-vendors}{%
 \subsubsection[LTE Vendors: ZTE, Nokia, Ericsson, Huawei]{Long Term Evolution (LTE) Vendors}\label{lte-vendors}}  
@@ -326,7 +340,7 @@ Table \ref{tbl:telemetry_ue_lte} gives the following LTE vendors which are among
 
 In South Africa, there are two mobile network operators trialing NB-IoT and combined they use four of these top LTE vendors. Samsung has started using NB-IoT only as recently as May 2019, announcing a partnership with [KT to create a Public Safety](https://enterpriseiotinsights.com/20190506/nb-iot/samsung-kt-launch-nbiot-service-through-ps-lte-network-korea) (PS-LTE) network. They're also implementing device-to-device (D2D) communications to increase connectivity in unfavourable conditions.
 
-Table: MNOs and their LTE base station (BTS) Vendors {#tbl:mno_bts}
+Table: MNOs and their LTE base station (BTS) vendors in South Africa {#tbl:mno_bts}
 
 | BTS Vendors | Cellular operator (MNO) |
 | ----------- | ----------------------- |
@@ -335,17 +349,18 @@ Table: MNOs and their LTE base station (BTS) Vendors {#tbl:mno_bts}
 | Huawei      | Vodacom                 |
 | Ericsson    | MTN                     |
 
-![Top LTE vendors in the world showing VoIP and IMS equipment revenue share worldwide in 2017. \textcopyright{Statista, IHS Markit}](../images/chartoftheday_17097_voip_worldwide_revenue_n-1572347674712.jpg){width=80%}
+![Top LTE vendors in the world showing the worldwide revenue share of VoIP and IMS equipment in 2017. \textcopyright{Statista, IHS Markit}](../images/chartoftheday_17097_voip_worldwide_revenue_n-1572347674712.jpg){width=80%}
 
-* ZTE Corporation is a Chinese multinational telecommunications equipment and systems company headquartered in Shenzhen, Guangdong, China. It is one of China's leading telecom equipment manufacturers.
-* Nokia Corporation is a Finnish multinational telecommunications, information technology, and consumer electronics company, founded in 1865. Nokia's headquarters are in Espoo, in the greater Helsinki metropolitan area.
-* Telefonaktiebolaget LM Ericsson, doing business as Ericsson, is a Swedish multinational networking and telecommunications company headquartered in Stockholm.
-* Huawei Technologies Co., Ltd. is a Chinese multinational technology company that provides telecommunications equipment and sells consumer electronics, including smartphones and is headquartered in Shenzhen, Guangdong province. The company was founded in 1987 by Ren Zhengfei. 
+ZTE, Nokia, Ericsson and Huawei are all multinational telecommunication, equipment, systems and consumer electronics companies, with:
+
+* ZTE Corporation and Huawei Technologies Co. Ltd. were founded in 1985 and 1987 respectively, and are both headquartered in Shenzhen, Guangdong province, China.
+* Nokia Corporation, founded in 1865, is headquartered in Espoo, Helsinki, Finland.
+* Telefonaktiebolaget LM Ericsson, founded in 1876, is headquartered in Stockholm, Sweden.
 
 
 Theoretically, one can assume that these manufacturers meet 3GPP's specifications. With a more rigorous testing framework, one can evaluate these capabilities in a transparent manner for both developers and cellular operators alike and work towards improving the quality thereof.
 
-Other vendors include: Broadcom Corporation, Cisco Systems, Gemalto NV, Intel Corporation, KDDI Corporation, LG Electronics, MediaTek, Oberthur Technologies, Ooredoo, Orange, Samsung Electronics, Saudi Telecom Company, Sierra Wireless, Telit Communications and VimpelCom.
+Other vendors include: Cisco Systems, Sierra Wireless, Intel Corporation, Samsung Electronics, Telit Communications, Saudi Telecom Company, Oberthur Technologies, Broadcom Corporation KDDI Corporation, LG Electronics, Gemalto NV, VimpelCom, MediaTek, Ooredoo, and Orange.
 
 \hypertarget{ue_devices}{%
 \subsubsection[UE Device Manufacturers: Ublox, Quectel, Nordic, SimCom]{UE Device Manufacturers}\label{ue_devices}}  
@@ -366,14 +381,14 @@ and the following recommended in future:
 - Mediatek MT2625
 - Sierra Wireless 7702
 
-Although LTE vendors are open to all UE manufacturers, mobile network operators (MNOs) are still in control of LTE vendor equipment and some aspects of UE devices via RF signalling. Thus it is important for MNOs to recognize the effect they have on the technologies they use, especially when it differs from theory.
+Although LTE vendors are open to all UE manufacturers, mobile network operators (MNOs) are still in control of LTE vendor equipment and some aspects of UE devices via RF signalling. Thus it is important for MNOs to recognize the effect they have on the technologies they use, especially when it differs from theory. UEs devices typically use AT commands as the API to control their capabilities.
 
-These UEs all share AT commands as the API to control their capabilities.
+These UE device manufacturers are considered:
 
-* Ublox is a Swiss company that creates wireless semiconductors and modules for consumer, automotive and industrial markets. They operate as a fabless IC and design house. 
-* Quectel is the leading global supplier of cellular and GNSS modules, with a broad product portfolio covering the most recent wireless technologies of 5G, LTE/LTE-A, NB-IoT/LTE-M, UMTS/HSPA(+), GSM/GPRS and GNSS. As a professional IoT technology developer and cellular module supplier, Quectel is able to provide one-stop services for IoT cellular modules. Quectel products have been widely applied in IoT/M2M fields including smart payment, telematics and transport, smart energy, smart cities, security, wireless gateways, industry, healthcare, agriculture, and environment monitoring. 
-* Nordic Semiconductor is a fabless semiconductor company. The company specializes in ultra-low power performance wireless system on a chip and connectivity devices for the 2.4 GHz ISM band, with power consumption and cost being the main focus areas.
-* **SIMCom Wireless Solutions** is a subsidiary of SIM Technology Group Ltd. It is a fast-growing wireless M2M company, designing and offering a variety of wireless modules based on GSM/GPRS/EDGE,WCDMA/HSDPA and TD-SCDMA technical platforms.
+* Ublox, founded in Switzerland, 1997, is a fabless semiconductor company that creates user equipment for telecommunications in consumer, automotive and industrial markets, and leads in GNSS.
+* Quectel, founded in China, 2010, is a comprehensive supplier of user equipment for the cellular industry, with a wide range of modems covering 5G, LTE, NB-IoT/LTE-M, UMTS/HSPA+, GSM/GPRS and GNSS; it leads in production of UE modems, but not GNSS.
+* Nordic Semiconductor, founded in Norway, 1983, is a fabless semiconductor company specializing in ultra-low power bluetooth low energy (BLE) and 2.4 GHz devices, as well as the low-powered cellular industry (NB-IoT/LTE-M).
+* SIMCom Wireless Solutions, founded in China, 2002, is a wireless M2M company offering a variety of wireless modems based on GSM/GPRS, WCDMA/HSDPA, TD-SCDMA and NB-IoT/LTE-M.
 
 \hypertarget{metrics_est}{%
 \subsubsection[Metrics and Estimations: Power, Latency, Secondary and Interval, Longevity]{Metrics and Estimations}\label{metrics_est}} 
@@ -395,7 +410,7 @@ The different types of telemetry messages in Table \ref{tbl:telemetry_ue_lte} in
 
 Although NB-IoT joined LPWANs circa 2016-2017, world-wide coverage is still growing. This can be seen in Fig. \ref{fig:worldwide_coverage}.  [AT&T announced](https://blog.nordicsemi.com/getconnected/att-launches-nb-iot-network-in-usa) nation-wide coverage of NB-IoT in the USA, alongside its existing LTE Cat-M coverage. Deutsche Telekom and Vodafone cover Europe and China enables millions more IoT devices [@china2019].
 
- ![Countries with deployed/launched NB-IoT and LTE-M networks \textcopyright{GSA, 2019} \newline\textcopyright{GeoNames, HERE, MSFT, Microsoft, NavInfo, Thinkware Extract} \label{fig:worldwide_coverage}](../images/countries-deployed-nb-iot-lte-m-networks.jpg){ width=80% } 
+ ![Countries around the world with NB-IoT and LTE-M networks deployed \textcopyright{GSA, 2019} \newline\textcopyright{GeoNames, HERE, MSFT, Microsoft, NavInfo, Thinkware Extract} \label{fig:worldwide_coverage}](../images/countries-deployed-nb-iot-lte-m-networks.jpg){ width=80% } 
 
 ### Connectivity in South Africa {#connectivity}
 
@@ -432,15 +447,15 @@ This chapter will look at NB-IoT performance-related literature, IoT, LPWANs, us
 
 ## Related Literature
 
-Considering current literature, several studies provide theoretical models not only for the energy consumption of NB-IoT networks [@Andres-Maldonado2017], but also for their latency and delay bounds [@Feltrin2019], impact of coverage extensions [@Andres-Maldonado2018b], coverage performance [@Adhikary2016], battery lifetimes [@Yeoh2018d],[@Lauridsen2018], theoretically optimal configuration strategies [@Feltrin2018] and overall performance for particular verticals [@Soussi2018],[@Beyene2017b].
+Considering current literature in NB-IoT, several studies investigate mathematic models and theoretical analysis in terms of energy consumption[@Andres-Maldonado2017], latency [@Feltrin2019], impact of ECL classes [@Andres-Maldonado2018b], coverage performance [@Adhikary2016], battery lifetimes [@Yeoh2018d],[@Lauridsen2018], theoretically optimized configurations [@Feltrin2018] and general performance in particular applications [@Soussi2018],[@Beyene2017b].
 
-Only Martinez [@Martinez2019] focuses effort on the adopter and presents an operational and empirical analysis of the technology when it is deployed in a real network (such as Vodafone in the Metropolitan area of Barcelona). Durand [@Thomas2018] compares different LPWANs empirically including NB-IoT. Despite the unquestionable value of the theoretical models (for example, to understand orders of magnitude or to guess the theoretical upper and lower bounds), an empirical approach provides real insights into the variability that a UE device experiences when deployed in real conditions. This work therefore complements Martinez and related works, and it further provides empirical measurements for UEs that are deployed using a real-world NB-IoT network always while taking the perspective of an application developer.
+Only Martinez [@Martinez2019] focuses efforts on the application developer and presents an empirical evaluation of the technology when it is deployed on a single network (Vodafone in the Metropolitan area of Barcelona). Durand [@Thomas2018] compares different LPWANs empirically including NB-IoT. Although theoretical models help to understand the inner workings of a technology with an attempt to predict the behavior, an empirical approach shows hands-on how a technology behaves in real conditions, and ultimately the variability in UE devices. Thus, this work complements Martinez and related works by investigating variability with respect to various LTE vendors and providing empirical measurements and estimates, always while taking the perspective of an adopter in the technology.
 
 Whilst this research is funded by MTN and being aware of internal documentation, this is an independent study which should aid any potential adopters of the technology.
 
 ## Internet of Things{#iot}
 
-The Internet of Things (IoT), as briefly outlined in \S\ref{terminology}, is an ecosystem of smart devices that connect to the internet/cloud in various ways. Although IoT's requirements (\S\ref{iot_requirements}) are loosely defined due to the large variety of use cases (\S\ref{usecases}), it is still important to see how well NB-IoT performs and facilitates these connections for IoT (discussion in \S\ref{discussion}). This section looks at these requirements and other facets of IoT relevant to NB-IoT.
+The Internet of Things (IoT), as briefly outlined in \S\ref{terminology}, is an ecosystem of smart devices that connect to the internet/cloud in various ways. Although IoT's requirements (\S\ref{iot_requirements}) are loosely defined due to the large variety of use cases (\S\ref{usecases}), it is still important to see how well NB-IoT performs and facilitates these connections for IoT (discussion in \S\ref{conclusion}). This section looks at these requirements and other facets of IoT relevant to NB-IoT.
 
 Since IoT is advancing in popularity (\S\ref{iot_requirements}), stakeholders in NB-IoT can be rest assured that the technology will be useful for years to come.
 
@@ -458,7 +473,7 @@ IoT requires scalable smart devices to collect data and interact with the physic
 
 IoT has surged in popularity over recent years as an interconnected system of devices that transfer data over a network without requiring human interaction.
 
-Looking at Gartner's analysis of technology expectations with regards to NB-IoT and related technologies, in 2014 Gartner estimated that Internet of Things (IoT) had reached the height of inflated expectations, and the hype it generated lives on in a rich ecosystem of emerging technologies. As of July 2018, NB-IoT and IoT has falling interest (and hype) in Fig. \ref{fig:gartner_ictAfrica}, yet it will reach productivity in 2-10 years time. Since new coverage has not been rolled out for almost two years to date, we believe there is a strong chance for renewed NB-IoT interest in Africa. Gartner predicts that there will be more than 20.8 billions of smart things that will be connected to Internet by 2020, whereas the worldwide number of devices was 6.4 billions in 2016 [@Ayoub2018c].
+Looking at Gartner's analysis of technology expectations with regards to NB-IoT and related technologies, in 2014 Gartner estimated that Internet of Things (IoT) had reached the height of inflated expectations, and the hype it generated lives on in a rich ecosystem of emerging technologies. As of July 2018, NB-IoT and IoT has falling interest (and hype) in Fig. \ref{fig:gartner_ictAfrica}, yet it will reach productivity in 2-10 years time. Since new coverage has not been rolled out for almost two years to date, we believe there is a strong chance for renewed NB-IoT interest in Africa. Although predictions vary, Gartner estimates there will be over 21 billion smart devices connected to the internet by 2020, whereas the worldwide number of devices was under 7 billion in 2016 [@Ayoub2018c].
 
 [](../images/hype-cycle-2014-100371840-large.idge.jpeg)
 
@@ -472,8 +487,7 @@ On the other hand, this does not slow the growth in number of devices connected 
 
 ![Exponential growth of IoT is estimated [@Ali2015]. \label{fig:iot_growth}](../images/Expected-number-of-connected-devices-to-the-Internet-This-chart-is-obtained-from-recent.png){ width=80% }
 
-Matching emerging applications with existing technologies has become one of the
-main challenges for IoT initiatives, especially when a new technology appears in the landscape and the map must be redrawn. Massive IoT is the deployment of an immense number of low-powered devices with infrequent reporting and both NB-IoT and LTE Cat-M fulfill the requirements of 5G massive MTC/IoT.
+New and emerging applications in IoT are challenged by the number of existing technologies to choose from, and vice versa for existing applications when new wireless technologies appear. Massive IoT is the deployment of an immense number of low-powered devices with infrequent reporting and both NB-IoT and LTE Cat-M fulfill the requirements of 5G massive MTC/IoT.
 
 <!--### Push-Pull Model and Edge/Fog Computing {#pushpull}-->
 
@@ -501,29 +515,23 @@ Most importantly when looking at bidirectionality vs unidirectionality is that t
 
 ####  Edge/Fog Computing {#edge_computing}
 
-Edge computing is the practice of offloading cloud processes to the endpoint. It saves on data overhead, especially when there are data charges involved and battery longevity is desired.
+Edge/Fog computing is the practice of offloading cloud processes to the endpoint. It saves on data overhead, especially when there are data charges involved and battery longevity is desired.
 
-Since NB-IoT is optimized for downlink communications, it can be the ideal candidate. Downlink communications use much less energy than uplink, and at higher throughput too. Usually data has to be periodically sent to the cloud in unidirectional networks and processing done thereafter, but with the push-pull model, one can send a specialized request and devices can send back processed data, saving energy and lowering data costs, hence edge computing.
-
-Fog computing is considered a good solution to address the demand for massive connections and low-latency applications by pushing some computing or processing tasks from the cloud servers to the Fog nodes, or close to the mobile edge. A Fog node can be viewed as a reduced capability of a cloud server and/or integrated with a small cell for handling the telecommunication services. There are several potential applications of the Fog computing node technology associated with NB-IoT small cell and the cloud services for smart parking, smart home, and smart retail and delivery services [@Chang2017].
+Since NB-IoT is optimized for downlink communications, it can be the ideal candidate. Downlink communications use much less energy than uplink, and at higher throughput too. Usually data has to be periodically sent to the cloud in unidirectional networks and processing done thereafter, but with the push-pull model, one can send a specialized request to devices on the edge of the cloud and devices can send back processed data, saving energy and lowering data costs, hence edge/fog computing [@Chang2017].
 
 ### Satellite IoT {#satellite_iot}
 
-The potential use of constellations of satellites for IoT applications is of growing interest. With booming development in the IoT sector and as a powerful supplement to terrestrial systems, LEO constellation-based IoT is worth being focused and studied. To make this topic become a reliable cost-benefit solution, further research is required in transmission scheme, system security and low power consumption design. [@Qu2017c]
-
-Compared to LPWANs, Satellite IoT has global coverage. In terms of packet payload size, a typical system such as the Iridium 9602/9603 will transmit up to 270 bytes or receive 340 bytes via AT commands. A supercapacitor is necessary for the initial 7.5W burst for 10ms which opens a session, and with an open sky messages can be sent every 10 seconds. It even features a 'Ring Alert' feature, similar to eDRX in NB-IoT in that modems listen for when incoming messages are available, for satellites to page a modem when a mobile terminated (MT) message is available from an internet-facing endpoint. Although Ring Alerts are sent to the position of the last known transmission, an Iridium satellite spot beam is about 400km in diameter meaning devices would have to travel quite far before requiring a simple re-registration transmission. The greatest drawback is the upfront, rental and per byte costs looking at \pounds159, \pounds12/month and \pounds0.14 per 50 byte credit respectively on Rock Seven Mobile Services Ltd, and the high power draw compared to NB-IoT.
-
-NB-IoT is not the only network that can replace satellite IoT or 2G/GPRS with coverage in broad areas (ideally nationally), and this will be explored further in \ref{lpwans}.
+Compared to LPWANs, Satellite IoT has global coverage and is of growing interesting for connecting 'things' to the internet due to its ease of connectivity [@Qu2017c]. In terms of packet payload size, a typical system such as the Iridium 9602/9603 will transmit up to 270 bytes or receive 340 bytes via AT commands. A supercapacitor is necessary for the initial 7.5W burst for 10ms which opens a session, and with an open sky messages can be sent every 10 seconds. It even features a 'Ring Alert' feature, similar to eDRX in NB-IoT in that modems listen for when incoming messages are available, for satellites to page a modem when a mobile terminated (MT) message is available from an internet-facing endpoint. Although Ring Alerts are sent to the position of the last known transmission, an Iridium satellite spot beam is about 400km in diameter meaning devices would have to travel quite far before requiring a simple re-registration transmission. The greatest drawback is the upfront, rental and per byte costs looking at \pounds159, \pounds12/month and \pounds0.14 per 50 byte credit respectively on Rock Seven Mobile Services Ltd, and the high power draw compared to NB-IoT. Furthermore, NB-IoT is not the only network that can replace satellite IoT or 2G/GPRS with coverage in broad areas (ideally nationally), and this will be explored further in \ref{lpwans}.
 
 ## Low-Powered Wide-Area Networks {#lpwans}
 
-A low-power wide-area network is a type of wireless telecommunication designed to allow long-range communications at a low bit rate among things, such as sensors operated on a battery. This section will compare a few prominent cellular and unlicensed frequency LPWANs against NB-IoT besides the following alternatives:
+A low-power wide-area network (LPWAN) allows long range communications at low bit rates for sensors and other devices operating on battery power. This section will compare a few prominent cellular and unlicensed frequency LPWANs against NB-IoT besides the following alternatives:
 
 * EC-GSM-IoT is a form of eGPRS optimized for the IoT. It is still in the trial stages of development, however [@Bergman2017].
 * RPMA by Ingenu is a 2.4GHz technology for M2M communications. It is primarily used in North America for the oil & gas industry, amongst others [@Ingenu2016]. It is equivalent to cellular standard but expensive.
 * Weightless SIG reuses TV whitespace, and NB-IoT is actually formed off this protocol [@Weightless2015], [@Raza2017].
-* NB-Fi Protocol is an open LPWAN protocol, which operates in unlicensed ISM radio band. Using the NB-Fi Protocol in devices ensures stable data transmission range of up to 10 km in dense urban conditions, and up to 30 km in rural areas with up to 10 years on battery power [@Ikpehai2018b].
-* HaLow (pronounced halo) is a low-power, long-range version of the IEEE 802.11 Wi-Fi standard. HaLow is based on the Wi-Fi Alliance 802.11ah specification and is expected to play an important part in IoT. At this stage it has low market traction.
+* NB-Fi Protocol is an open standard, operating in unlicensed ISM frequencies. The NB-Fi Protocol ensures up to 10 km range of data transmission in urban areas, 30 km in rural areas and up to 10 years battery lifetime [@Ikpehai2018b].
+* HaLow is a long range and low power version of the IEEE 802.11 Wi-Fi standard, specified by WiFi Alliance 802.11ah. Although it has great potential in IoT, at this stage it has low market traction.
 
 <!--Unidirectional: LoRaWAN and SigFox {#unidirectional_lpwans}-->
 
@@ -532,25 +540,21 @@ A low-power wide-area network is a type of wireless telecommunication designed t
 
 #### LoRaWAN {#lorawan}
 
-LoRa is a low-power wide-area network technology. It is based on spread spectrum modulation techniques derived from chirp spread spectrum technology. It was developed by Cycleo of Grenoble, France and acquired by Semtech the founding member of the LoRa Alliance. 
+LoRa is a low-power wide-area network technology. It is based on spread spectrum modulation techniques derived from chirp spread spectrum technology. 
 
-LoRaWAN is a contender for NB-IoT. It lacks bidirectionality and data rate.
+LoRa is an LPWAN based on chirp spread spectrum modulation techniques developed in France by Cycleo, founded in 2009, and acquired by Semtech which founded the LoRa Alliance. Although it is a contender for NB-IoT, it lacks bidirectionality and data rate.
 
-* LoRaWAN performs better for short messages, but it is subjected to a very high penalty when
-  more than one message per data block is required.
-* Second, the LoRaWAN reliability mechanism must be ensured at the
-  upper layers, and thus may incur higher energy costs.
-* Lower (sub-500 devices per gateway) scalability of LoRaWAN per base station compared to NB-IoT and GPRS. This low scalability is due to the limited number of channels and the lack of any scheduling between devices. To compensate for the low scalability, an increase in spatially diverse base stations would allow packets to be received by multiple base stations at varying received power levels.
+* Although LoRaWAN performs better for brief messages, it incurs high energy usage when multiple messages are required.
+* Secondly, LoRaWAN messages are not guaranteed, and ensuring reliability on a hier level consumes even more energy in the use of user-defined acknowledgements.
+* LoRaWAN is only scalable to under 500 devices per gateway compared to NB-IoT and GPRS which can handle 100 times more. This is due the lack of scheduling between devices, duty-cycle limits and few channels. A suggestion is to increase the number of base stations in an area.
 
 LoRaWAN uses chirp-spread-spectrum (CSS) and is publically accessible from networks such as The Things Network (TTN). Unfortunately, although that has the best coverage, it only uses class A which means it cannot listen for asynchronous downlink messages except after an uplink (which defeats the purpose of avoid unnecessary uplink transmissions which draw large current) [@Adelantado2017].
 
 #### SigFox {#sigfox}
 
-Sigfox is a French global network operator founded in 2009 that builds wireless networks to connect low-power objects such as electricity meters and smartwatches, which need to be continuously on and emitting small amounts of data. Sigfox is based in Labège near Toulouse, France, and has over 375 employees.
+Sigfox, headquarted in France and founded in 2009, is a global network operator that has over 375 employees. In South Africa, its subsidiary is known as SquidNet. Briefly, SigFox is an ultra-narrow-band wireless technology that one can send 140 12-byte messages per day due to the duty cycle limitation of unlicensed frequencies. One can also receive 4 downlink ack messages, but this is not good enough when looking to optimize the sending of GPS/GNSS updates [@SigFox2016]. SigFox is a contender for NB-IoT, but it lacks bidirectionality and datarate.
 
-Briefly, SigFox is an ultra-narrow-band wireless technology that one can send 140 12-byte messages per day due to the duty cycle limitation of unlicensed frequencies. One can also receive 4 downlink ack messages, but this is not good enough when looking to optimize the sending of GPS/GNSS updates [@SigFox2016]. SigFox is a contender for NB-IoT, but it lacks bidirectionality and datarate.
-
-Simulations show that with 55,000 devices transmitting the base station would reach the 270 simultaneously transmitting devices that Sigfox claims is possible while still ensuring a 99.9% PDR [@Thomas2018].
+Simulations show that with the random transmissions of 55k devices, a base station can still receive and process 270 simultaneous messages while still ensuring a 99.9% PDR [@Thomas2018].
 
 <!--Bidirectional: NB-IoT and Dash7 {#bidirectional_lpwans}-->
 
@@ -559,19 +563,13 @@ Simulations show that with 55,000 devices transmitting the base station would re
 
 #### NB-IoT {#nbiot_lit}
 
-Narrowband Internet of Things is a Low Power Wide Area Network radio technology standard developed by 3GPP to enable a wide range of cellular devices and services. The specification was frozen in 3GPP Release 13, in June 2016. Other 3GPP IoT technologies include eMTC and EC-GSM-IoT. 
+Narrowband Internet of Things is an LPWAN radio technology standard developed by the 3GPP to enable a wide range of low-power devices and user applications in the cellular industry. The specification of LTE Cat-NB1 was frozen in June 2016 with 3GPP Release 13. Other IoT technologies developed by the 3GPP include LTE-M/eMTC and EC-GSM-IoT.
 
 NB-IoT is LTE's replacement for the power hungry GSM that some IoT devices still use. GSM is an aging technology which is being turned off in some parts of the world. It has 7 times better range and coverage, and power saving which can let a device last 10+ years on a single charge [@Wang2017c].
 
 #### Dash7 {#dash7_lit}
 
-DASH7 Alliance Protocol is an open source Wireless Sensor and Actuator Network protocol, which operates in the 433 MHz, 868 MHz and 915 MHz unlicensed ISM band/SRD band. 
-
-* Bidirectional
-
-Dash7 is a military RFID standard that has also grown into a medium range LPWAN [@noraird7].
-
-Dash7 is considered a medium range LPWAN and is made for the full networking stack. It delivers an open standard for ultra low power mid-range sensor and actuator communication known as DASH7 Alliance Protocol (D7AP). D7AP is based on active RFID standards ISO 18000-7 for 433 MHz communication, however it has been significantly extended. It was originally intended by the US Department of Defense for container inventory and grew to become a medium range bidirectional wireless network system [@Weyn2015] useful in the indoor-outdoor realm. D7AP is modelled after a BLAST (Burst, Light, Asynchronous, Stealth, and Transitional) communication system which enables it to be a LPWAN competitor. D7AP is a full-stack protocol defining the complete OSI model, with support for three sub-GHz ISM bands, and three data rates (9.6 kbps, 55.55 kbps, and 166.67 kbps), as discussed above. D7AP uses 2-GFSK, the modulation schemes. D7AP can also re-use the PHY layer (radio frontend) of other LPWANs. Also, according to Cortus it should be possible to reuse the RF PHY layer (MSK downlink, OFDM uplink) of NB-IoT for Dash7's OSI stack, and in asset tracking, for example, it results in a compressed tracking solution that works well both indoors and outdoors. Dash7 claims 1m indoor accuracy by using vertex data from reference nodes for RSSI & RF fingerprinting.
+DASH7 Alliance Protocol (D7AP) is a patented, bidirectional, full-stack and open source protocol which operates in unlicensed frequencies. It was developed from a military RFID standard into a medium range LPWAN [@noraird7],[@Weyn2015] useful in the indoor and outdoor realm. D7AP communication is modelled after "BLAST" (Burst, Light, Asynchronous, Stealth, and Transitional) systems which enables it to be a LPWAN competitor. D7AP uses the 2-GFSK modulation schemes, yet itcan also re-use the PHY layer (radio frontend) of other LPWANs such as LoRa. Also, according to Cortus it should be possible to reuse the RF PHY layer (MSK downlink, OFDM uplink) of NB-IoT for Dash7's OSI stack, and in asset tracking, for example, it results in a compressed tracking solution that works well both indoors and outdoors. Dash7 claims 1m indoor accuracy by using vertex data from reference nodes for RSSI & RF fingerprinting.
 
 Wizzilab is one of three main developers of Dash7. It offers the only full-kit open to development (at least in the form of an application processor). Haystack is another Dash7 developer with [https://github.com/jpnorair/OpenTag](https://github.com/jpnorair/OpenTag). Finally, the developer community with [https://github.com/MOSAIC-LoPoW/dash7-ap-open-source-stack](https://github.com/MOSAIC-LoPoW/dash7-ap-open-source-stack).
 
@@ -625,23 +623,17 @@ Table: LPWAN strengths with \checkmark,  $\times$  denoting best and worst case 
 | LoRaWAN SF12 | \checkmark                      | $\times$ |                                 | $\times$ |
 | SigFox       | \checkmark                      | \checkmark  |                                 |            |
 
-Competition in the LPWAN space, regional momentum and IoT demand will ensure that the various technologies will continue to develop and improve to support more features and expand the network coverage.
-
-Selected uptake of LPWANs is expected in specific use cases and results show that each technology is better suited to specific applications and their accompanying requirements. Sigfox, NB-IoT, and LoraWAN SF12 performed equally well for applications where MCL (range) is paramount, with LoraWAN SF7 doing slightly worse. In applications where the main consideration is scalability, Sigfox, and NB-IoT substantially outperformed the LoraWAN varieties. However, if battery life is the most important consideration, LoraWAN SF7 seems to have the edge, with NB-IoT performing worse. NB-IoT performed the best for uplink throughput, with LoraWAN SF7 coming in second. For the downlink throughput and firmware upgradability metric, NB-IoT performs substantially better than the other technologies. All in all, NB-IoT outperforms SigFox and LoRaWAN in UL/DL throughput, scalability, MCL range and FoTA updates. It is superseded by LoRaWAN in battery life for SF7. If NB-IoT worked with the mobile network operators to reduce its RRC-idle phase, it could develop a minimal power consumption to compare with that of LoRaWAN and Sigfox [@Thomas2018]. By finding ways to increase battery life, it may just be the 'silver bullet' for all IoT use cases.
+The competitive nature of LPWANs, IoT demand, various use cases and expansion into other territories will ensure that various wireless technologies will continue to grow and increase network coverage. Selected uptake of LPWANs is expected in specific use cases due to the uniqueness of each technology. Despite this, NB-IoT outperforms SigFox and LoRaWAN in UL/DL throughput, scalability, MCL range and FoTA updates and is only superseded by LoRaWAN in battery life for SF7. Durand suggests that if the RRC-idle phase could be reduced, it could develop a minimal power consumption comparable to SigFox and LoRaWAN [@Thomas2018], and this is possible true using Release Assistance in \S\ref{#release_a}. By finding ways to increase battery life, it may just be the 'silver bullet' for all IoT use cases.
 
 In places requiring deep indoor penetration with 30 dBm path loss, NB-IoT performs well with 8\% outage, while SigFox, LoRaWAN, GPRS are unable to cover 13\%, 20\% and 60\% of locations, respectively, in a 7800 km\textsuperscript{2} area simulated by Lauridsen [@Lauridsen2017].
 
-NB-IoT's mean energy values are similar to LoRaWAN devices transmitting in SF12 configuration. However, best case results (in 5th percentile) are comparable to LoRaWAN in SF8. NB-IoT has peak transmission at 220 mA, whilst LoRaWAN at 40 mA [@Martinez2019]. Although LoRaWAN has the predictable chirp spread spectrum (CSS) modulated signal, NB-IoT only uses this peak power in it's initial physical random access channel (PRACH) [@Thomas2018]. This shows that with further investigation into the variation, NB-IoT can certainly be on par with LoRaWAN in terms of energy consumption. Nevertheless, NB-IoT does guarantee packet delivery if within range while LoRaWAN has a variable packet delivery ratio (PDR). The expected achievable lifespan (on average) for a NB-IoT is on the order 2-3 years, depending on the datagram size. Nevertheless, sending larger messages (up to 512 bytes) has almost no impact on NB-IoT. Simple periodic-reporting applications can model the average power approximately by Eq. \ref{eq:avgpower}:
+NB-IoT's mean energy values are similar to LoRaWAN devices transmitting in SF12 configuration. However, best case results (in 5th percentile) are comparable to LoRaWAN in SF8. NB-IoT has peak transmission at 220 mA, whilst LoRaWAN at 40 mA [@Martinez2019]. Although LoRaWAN has the predictable chirp spread spectrum (CSS) modulated signal, NB-IoT only uses this peak power in it's initial physical random access channel (PRACH) [@Thomas2018]. This shows that with further investigation into the variation, NB-IoT can certainly be on par with LoRaWAN in terms of energy consumption. Nevertheless, NB-IoT does guarantee packet delivery if within range while LoRaWAN has a variable packet delivery ratio (PDR). The mean achievable lifespan for NB-IoT is on the order of 2.5 years, depending on datagram size. Nevertheless, the transmission of larger datagram payloads (up to 512 bytes) had almost no impact on NB-IoT [@Martinez2019]. Finally, simple periodic-reporting applications can model the average power approximately by Eq. \ref{eq:avgpower}:
 
 $$P = \frac{E_{msg}}{T_{msg}}$$ {#eq:avgpower}
 
-From Durand's results it is clear that LoRaWAN SF7 is the most power-efficient, due to the short transmission burst. NB-IoT displays the worst power-consumption, due to the extended RRC-idle state [@Thomas2018]. This can be reduced using Release Assistance as in \S\ref{release_a}.
-
 If downlink latency is a critical component without battery life constraints, GPRS would be better suited as it requires constant signaling between BTS and UE device. Otherwise, applications requiring bidirectional communications of more than 120 bytes per day should use GPRS or NB-IoT, as LoRaWAN and SigFox are limited by duty-cycle since they use unlicensed frequencies. In deep coverage situations, SigFox and NB-IoT is recommended as it offers an MCL of more than 158 dBm [@Thomas2018]. In South Africa, GPRS and SigFox have similar levels of coverage, and the choice in wireless technology depends on data throughput. Low bandwidth wireless technologies typically have more range than their high data throughput counterparts. That's why SigFox requires few sites to cover vast areas, compared to GPRS or LTE networks. NB-IoT should be similar to SigFox in this regard, as they share similar MCLs.
 
-For IoT devices used in extended coverage situations, such as deep-indoor devices or remote locations, we recommend either Sigfox or NB-IoT, as they offer a maximum MCL of more than 158 dB. IoT devices for general use would benefit from the large-scale deployment of the GPRS network, which provides excellent coverage because of its legacy infrastructure. It is clear that the extra overhead available in Sigfox, LoRaWAN, and NB-IoT allows for better indoor coverage than GPRS, which means that the LPWAN devices can be used in less than optimal operating conditions. Measured MCL correlates with theoretical values.
-
-In terms of throughput, it's important to note that unlicensed spectrum LPWANs such as SigFox and LoRaWAN are heavily duty cycled, unlike cellular technologies such as NB-IoT or GPRS.
+In South Africa, IoT devices in deep coverage situations are recommended to use either SigFox or NB-IoT as they offer a maximum MCL more than 158 dB. For general use, GPRS provides wide area coverage due to its matured infrastructure. In terms of throughput, it's important to note that unlicensed spectrum LPWANs such as SigFox and LoRaWAN are heavily duty cycled, unlike cellular technologies such as NB-IoT or GPRS.
 
 
 ## Use Cases {#usecases}
@@ -654,9 +646,9 @@ One of the simplest and most popular use cases in IoT is smart metering. Periodi
 
 Smart metering can be easily applied to most LPWANs, but only a few have synchronous downlink capabilities, and NB-IoT can be considered well suited for bidirectional uses cases such as actuator control.
 
-### Actuator Control
+### Actuator Control {#actuatorcontrol}
 
-An *actuator* is a component of a machine that is responsible for moving and *controlling* a mechanism or system, for example by opening a valve. In this use case, actuator control requires bidirectionality for its downlink controllability. Suprisingly, this bidirectionality can be applied to many fields as in Table \ref{tbl:use_cases_list}.
+An actuator is a machine component that controls a mechanism or element, such as a valve. In this use case, actuator control requires bidirectionality for its downlink controllability. Suprisingly, this bidirectionality can be applied to many fields as in Table \ref{tbl:use_cases_list}.
 
 Table: List of Use Cases {#tbl:use_cases_list}
 
@@ -676,7 +668,7 @@ Table: List of Use Cases {#tbl:use_cases_list}
 
 ### Asset tracking {#asset_tracking}
 
-Many use cases in the Internet of Things (IoT) require or benefit from location information, making positioning a vital dimension in the IoT. The 3GPP has dedicated a significant effort during its Release 14 to enhance positioning support for its IoT technologies. There are still design challenges with regard to positioning support in LTE-M and NB-IoT that need to be taken into consideration. Nevertheless, the 3GPP is working on enhancing position support such as OTDOA, which is a downlink based positioning method. The OTDOA positioning reference signals can also be simulated to illustrate the positioning performance [@Lin2017],[@Miao2018].
+Many use cases in IoT benefit from the location whereabouts of a device, making positioning a vital aspect. 3GPP has dedicated a significant effort during its Release 14 to enhance location support for LPWAN technologies, such as NB-IoT and LTE-M. Although there are still design challenges that need to be taken into consideration, the 3GPP is working on enhancing location support such as the downlink-based OTDOA positioning method. OTDOA positioning reference signals can also be simulated to illustrate positioning performance [@Lin2017],[@Miao2018].
 
 TDoA, ToF, Aoa, RSSI, are all land-based techniques for pinpointing the location of an endpoint. They require real-time clocks accurate to the millionth of a second as well as expensive gateway hardware. Depending on the frequencies, wireless network and modulation, one can get different ranges. This is useful for the indoors. Unfortunately, range is sacrificed for accuracy.
 
@@ -708,7 +700,7 @@ Taking it one step further, the 3GPP defined two device categories, namely Cat N
 - Push-to-talk voice messaging
 - Multicast transmission to multiple devices simultaneously.
 
-NB-IoT devices are seen as stationary, only small chunks of data are intermittently transmitted and applications are envisaged as delay-tolerant. NB-IoT technology is designed such that it can be used in areas beyond the radio coverage of current cellular standards and in devices which must run from battery power for many years. The devices will generally send small amounts of data infrequently; a typical usage scenario might be 100 to 200 bytes sent twice per day for battery powered devices. For mains powered devices the limit is not based on battery size, but cost and network bandwidth/resources.
+NB-IoT devices are seen as static, delay tolerant with periodic reporting of small chunks of data. The technology is designed such that it can be used in areas which extend beyond the reach of standard cellular networks and last up to 10 years on a battery. Devices will generally send small amounts of data infrequently; with a typical usage scenario sending 100 to 200 bytes twice per day for battery powered devices. For mains powered devices the limit is not based on battery size, but cost and network bandwidth/resources.
 
 ![IoT Wireless Technology Representation [@Martinez2019] \label{fig:nbiot_positioning}](../images/1559246290186.png){width=85%}
 
@@ -836,7 +828,7 @@ Table: Configuring the T3324 Active Timer. Bits 5 to 1 represent the binary code
 
 #### eDRX Cycles and PTW {#lit_edrx_ptw}
 
-Extended Discontinuous Reception (eDRX) mode means that paging windows can be scheduled such that the modem can be contacted by the server. A single eDRX cycle is composed of an active phase, controlled by a Paging Time Window (PTW) timer, followed by a sleep phase until the end of the eDRX cycle. Within the PTW, the standard LTE paging is observed. DRX intervals are network controlled, and are usually set to every 1.28, 2.56, 5.12 or 10.24 seconds. Paging Time Windows (PTW), ranging from 2.56 s to 40.96 s, control the number of DRX intervals followed by a sleep phase until the end of the eDRX cycle, ranging from 10.24 seconds to 2621.44 seconds (43.69 minutes).
+Extended Discontinuous Reception (eDRX) mode means that paging windows can be scheduled such that the modem can be contacted by the server. A single eDRX cycle is composed of an active and sleep phase. The active phase is controlled by a Paging Time Window (PTW) timer, followed by a sleep phase until the end of the eDRX cycle, ranging from 10.24 seconds to 2621.44 seconds (43.69 minutes). Standard LTE paging is observed within Paging Time Windows (PTW), ranging from 2.56 s to 40.96 s, and control the number of DRX intervals within the window. DRX intervals are network controlled, and are usualyl set to every 1.28, 2.56, 5.12 or 10.24 seconds.
 
 #### Release Assistance {#release_a}
 
@@ -850,15 +842,13 @@ An example of sending a 200 byte message in ECL 2 with good SNR can include 5 RA
 
 ### RF Characteristics, MCL and monitoring network behavior {#rf_characteristics}
 
-When only a fraction of the existing LTE cell sites support NB-IoT, devices cannot attach to the best cell if that cell does not support NB-IoT. As a result, the path loss can be very high. In addition, they also suffer from high interference from non-NB-IoT cells [@Mangalvedhe2016a].
+Path loss can be high if many LTE cells exist in an area. This causes interference, and devices cannot register on the best cell if it does not support NB-IoT [@Mangalvedhe2016a]. In the uplink, there are two physical layer channels. The random access channel connects to the base station and the uplink channel contains the data and control information. In downlink there are four channels. Synchronization is used by the endpoint to estimate symbol timing and carrier frequency and obtain the cell identity and frame boundary. The broadcast channel contains the master information block (MIB). The control channel carries downlink control information and can be repeated 2048 times, as well as the data channel which contains the payload, paging, system information and the random access response. [@Adhikary2016].
 
-In the uplink, there are two physical layer channels. The random access channel connects to the base station and the uplink channel contains the data and control information. In downlink there are four channels. Synchronization is used by the endpoint to estimate symbol timing and carrier frequency and obtain the cell identity and frame boundary. The broadcast channel contains the master information block (MIB). The control channel carries downlink control information and can be repeated 2048 times, as well as the data channel which contains the payload, paging, system information and the random access response. [@Adhikary2016].
-
-NB-IoT operation requires a minimum bandwidth of 180 kHz, which is equal to the size of the smallest LTE Physical Resource Block (PRB). Depending on the availability of spectrum, NB-IoT can be either deployed on its own (“standalone operation”), in the guard carriers of existing LTE/UMTS spectrum (“guardband operation”) or within an existing LTE carrier by replacing one or more PRBs (“inband operation”). In order to support such flexible deployment scenarios, NB- IoT reuses the LTE design extensively, such as the OFDM (Orthogonal Frequency Division Multiplexing) type of modulation in downlink, SC-FDMA (Single Carrier Frequency Division Multiple Access) in uplink, channel coding, rate matching and interleaving. In addition, a host of new features are added to ensure the demands of IoT based applications. Key design changes from LTE include the synchronization sequences, the random access preamble, the broadcast channel and the control channel. These changes are primarily motivated by the fact that NB-IoT is required to operate on a minimum bandwidth of 180 kHz (1 PRB), whereas many channels in LTE were designed to span multiple PRBs occupying greater bandwidth compared to 180 kHz. These design changes achieve the IoT requirements while ensuring best co-existence performance with the existing LTE system [@Adhikary2016].
+Nb-IoT requires at minimum bandwidth of 180 kHz to operate, which is equal to the size of the smallest Physical Resource Block (PRB) in 3GPP. It has three modes of operation, "in-band", "guard-band" or "standalone", with operation within, between or separate from LTE carrier signals, respectively. To support this, NB-IoT uses legacy LTE design such as the OFDM modulation (Orthogonal Frequency Division Multiplexing) in downlink, SC-FDMA (Single Carrier Frequency Division Multiple Access) in uplink, dynamic throughput, interleaving and channel codes. Major design changes from LTE include synchronization, broadcast, the random access preamble and the control channel. Although these design changes take into account the limited bandwidth offered unlike legacy LTE, they achieve the IoT requirements with decent co-existence entire system [@Adhikary2016].
 
 #### MCL {#lit_mcl}
 
-Maximum coupling loss (MCL) is defined as the maximal total channel loss between User Equipment (UE) and eNodeB (eNB) antenna ports at which the data service can still be delivered. Practically, it includes antenna gains, path loss, shadowing and any other impairments. The higher the MCL, the more robust the link is. 
+Maximum coupling loss (MCL) is defined as the maximal total channel loss between UE devices and eNodeB cell antenna ports at which operation is still possible. In practice, it includes antenna gains, shadowing, path loss, noise and any other sources of signal deterioration. Robust links are associated with high MCLs.
 
 $$MCL\ ( dB) \ =\ P_{TX} \ -\ ( Noise\ figure\ +\ SINR\ +\ Thermal\ Noise\ floor)$$ {#eq:mcl}
 

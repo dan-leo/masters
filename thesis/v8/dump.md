@@ -24,7 +24,19 @@ Thesis_Narrowband_IoT_Performance_Evaluation_of_Variability_by_Daniel_Leonard_Ro
 
 Durand's results show that LoRaWAN SF7 is the most power-efficient, due to the short transmission burst, and with NB-IoT the worst power-consumption due to the length RRC-idle mode [@Thomas2018]. This can be reduced using Release Assistance as in \S\ref{release_a}.
 
+Measured MCL correlates with theoretical values.
 
+
+
+#### Dash7
+
+Since Dash7 was a curiosity at the time, a Dash7 field test was performed using a Murata CMWX1ZZABZ-091, but due to 10dBm transmit power it limited range to about 300m.
+
+![Dash7 field test reaching 300m max NLOS range](../images/1571685763894.png){width=65%}
+
+Although Dash7 is considered a viable alternative, it fell short on range expectations.
+
+Haystack Technologies has developed a Dash7-over-LoRa implementation that expects ranges of over a few kilometers and can be considered in future research.
 
 
 

@@ -188,8 +188,6 @@ To get an idea of the complexity of a node (eNodeB) in a base station (BTS), run
 
 This gives a good idea as to the range expected according to RSRP, with more information in \S\ref{ping}.
 
-#### NB-IoT {#range_field_test_nbiot}
-
 Using a Quectel BG96, the following tests were taken on the rooftop described in Fig. \ref{fig:rooftop}[^zte_tests].
 
 ![Rooftop outside the HF RF lab on the 5th floor of the Electrical & Electronic Engineering building. The base station it connected to is on the General Building, and is just over 150m away at the same elevation with a single building blocking line-of-sight. The base station is situated on the bottom left of the picture at an altitude of approximately 138m. \label{fig:rooftop}](C:\GIT\masters\thesis\images\rooftop_maps.JPG){width=60%}
@@ -341,16 +339,6 @@ To be able to attenuate the signal until disconnection, one must increase the ra
 
 This means that in an urban area, NB-IoT satisfies the 2-5 km range specification.
 
-#### Dash7
-
-Since Dash7 was a curiosity at the time, a Dash7 field test was performed using a Murata CMWX1ZZABZ-091, but due to 10dBm transmit power it limited range to about 300m.
-
-![Dash7 field test reaching 300m max NLOS range](../images/1571685763894.png){width=65%}
-
-Although Dash7 is considered a viable alternative, it fell short on range expectations.
-
-Haystack Technologies has developed a Dash7-over-LoRa implementation that expects ranges of over a few kilometers and can be considered in future research.
-
 ### RF Spectrum Tests
 
 Using an RTL2832 SDR dongle, we can capture RF signals. At the very least we can visualise how the signal propogates through the airspace.
@@ -360,12 +348,6 @@ Using an RTL2832 SDR dongle, we can capture RF signals. At the very least we can
 ![SigFox and LoRa RF signals \@868 MHz](../images/image-20191104223939783.png){width=30%}
 
 Each technology has their own modulation scheme and unique features, and with that their own set of advantages and disadvantages. More can be found in \S\ref{lpwans}.
-
-### Terrestrial Localization
-
-Localization can be useful for asset tracking as discussed in \S\ref{asset_tracking}. Of the prominent LPWANs, SigFox is the only one that offers a simple localization service. NB-IoT will offer one when upgraded to 3GPP Release 14. Unfortunately SigFox has poor accuracy as can be seen in Fig. \ref{fig:sigfox_map}.
-
-![With a 17.783km radius in this example, SigFox is poor when it comes to being considered as a source of localization using RSSI triangulation, and it may be better to use TOF techniques such as in OTDOA in NB-IoT \label{fig:sigfox_map}](../images/image-20191105141405835.png){width=80%}
 
 ### Power Saving Mechanisms
 
@@ -1153,6 +1135,12 @@ Power efficiency is one of the main metrics focused on in this study. This secti
 
 [](../../../masters/code/tests/plotterk/maxCurrent_histogram.png)
 
+#### Average Power {#avg_power}
+
+Average power is either measured, or estimated by assuming the following conditions: voltage is 3.6 V, transmit current is 250 mA and receive current is set to 60 mA.
+
+$$Average\ Power\ =\ P\cdot{t}\ =\ V\cdot{I}\cdot{t}\ = V\cdot(I_{TX}\cdot{t_{TX}}\ +\ I_{RX}\cdot{t_{RX}})$${#eq:avgpwr}
+
 ### Latency and Timing
 
 Latency and timing is also one of the main metrics focused on in this study. This section outlines a few preliminary tests and the final design of field tests. Latency was measured externally using energy capture device (\S\ref{energy_capture_device}) and UE reported values. UE reported values are extracted from `AT+NUESTATS="RADIO"` and relevant variables include `TX Time` and `RX Time` which are expressed in milliseconds since boot. `TX Time` is the duration for which the modem has been transmitting RF signals. `RX Time` is the duration for which the modem's receiver has monitored the downlink channel for activity. Together these time values can be used to assess latency and estimate the power consumed by the module.
@@ -1243,7 +1231,7 @@ However, the UE reports RLC and MAC uplink and downlink separately, and therefor
 
 #### FOTA Upgrades
 
-GPRS and NB-IoT are able to offer FOTA upgrades to IoT devices, as Sigfox has limited bandwidth. This feature is supported by LoRaWAN, through the fragmentation of large payloads [22]. Since no correlation was found by Durand [@Thomas2018] with repect to downlink throughput and received signal power, that downlink latency is much less due to the higher bandwidth the eNodeB can provide and that FoTA updates are insignificantly infrequent, they will not be investigated in this study, although it can be in future.
+GPRS and NB-IoT are able to offer FOTA upgrades to IoT devices, as Sigfox has limited bandwidth. This feature is supported by LoRaWAN, through the fragmentation of large payloads [22]. Since no correlation was found by Durand [@Durand2019] with repect to downlink throughput and received signal power, that downlink latency is much less due to the higher bandwidth the eNodeB can provide and that FoTA updates are insignificantly infrequent, they will not be investigated in this study, although it can be in future.
 
 ### Data Overhead
 
@@ -1274,9 +1262,9 @@ Ublox and Quectel data has been captured for:
 
 The total dataset can be better represented visually in Figures \ref{fig:dataset1} and \ref{fig:dataset2}.
 
-![Visual representation of dataset. Five telemetry tests performed to at least five attenuation zone decades on two UE devices, four LTE vendors and two MNOs in Cape Town and Johannesburg. \label{fig:dataset1}](../images/image-20191122053300705.png){width=85%}
+![Visual representation of dataset. Five telemetry tests performed to at least five attenuation zone decades on two UE devices, four LTE vendors and two MNOs in Cape Town and Johannesburg. \label{fig:dataset1}](../images/image-20191125221319263.png){width=85%}
 
-![Each telemtry test takes in readings from the external energy capture device and UE reported values and through attenuation zone decades, UEs, LTE vendors and MNOs we extract power efficiency, latency, secondary metrics and estimations. \label{fig:dataset2}](../images/image-20191122054556494.png)
+![Each telemtry test takes in readings from the external energy capture device and UE reported values and through attenuation zone decades, UEs, LTE vendors and MNOs we extract power efficiency, latency, secondary metrics and estimations. \label{fig:dataset2}](../images/image-20191125221715715.png)
 
 Every UE device and MNO pair (8 total) has 9 telemetry tests (of which 5 are differently-sized UDP datagrams) and each has its own attenuation zone decade (at least 5). The Cape Town dataset alone contains 424 files with 1811 trace entries, 40 possible submetrics (`AT+NUESTATS`, energy and timings combined in CSV files) and 79921 values. With the Johannesburg dataset included, there are 1390 CSV files in total.
 
@@ -1374,7 +1362,12 @@ Table: Custom libraries imported by Jupyter and a description of their purpose {
 | plotter    | gathering data into single dictionary database for plotting |
 | plotter4   | plotting data in 9-plot format, K-means clustering          |
 
-Other plots were more specialized and code was kept within the Jupyter file it was developed in.
+Other plots were more specialized and code was kept within the Jupyter file it was developed in. The goal of plots in general is to investigate observations and comparisons.
 
-The goal of plots in general is to investigate observations and comparisons.
+In the top left corner of the `9-plots` exists a box which shows the number of k-means cluster filtered data points out of the total number of possible filtered points, as well the 'K' value in the filtering process. Each diagram is marked from 'A' to 'I', with 'F' showing boxplots of Ublox and Quectel distributions on the relevant MTN and Vodacom network, depending on if the data was captured in Cape Town or Johannesburg.
+
+* ABC shows UE device and MNO comparisons
+* DE shows plots with data points by attenuation decade
+* GH shows plots with data points by telemetry test set
+* ADG and BEH shows two different types of LTE vendor, respectively.
 

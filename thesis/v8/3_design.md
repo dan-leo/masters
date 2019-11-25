@@ -1362,7 +1362,7 @@ Table: Custom libraries imported by Jupyter and a description of their purpose {
 | plotter    | gathering data into single dictionary database for plotting |
 | plotter4   | plotting data in 9-plot format, K-means clustering          |
 
-Other plots were more specialized and code was kept within the Jupyter file it was developed in. The goal of plots in general is to investigate observations and comparisons.
+Other plots were more specialized and code was kept within the Jupyter file it was developed in. Although the goal of plots in general is to investigate observations and comparisons, it is intended for visualisation of the results in Chapter \ref{results}. A short description is occasionally written about the plots of the datasets captured in Cape Town, with the second set of `9-plots` showing the results in Johannesburg left up to the interpretation of the reader. If plots are omitted, they show quite similar information, and duplication is not necessary.
 
 In the top left corner of the `9-plots` exists a box which shows the number of k-means cluster filtered data points out of the total number of possible filtered points, as well the 'K' value in the filtering process. Each diagram is marked from 'A' to 'I', with 'F' showing boxplots of Ublox and Quectel distributions on the relevant MTN and Vodacom network, depending on if the data was captured in Cape Town or Johannesburg.
 

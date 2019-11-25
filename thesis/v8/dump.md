@@ -40,6 +40,24 @@ Haystack Technologies has developed a Dash7-over-LoRa implementation that expect
 
 
 
+
+
+
+
+(A) Attenuation per decade is evident. (B) Vodacom latency is up to 5 times greater, excluding outliers. (C) All tests show variation in latency except eDRX. (D) ECL is influenced by RSRP on MTN networks, but does not affect latency. Vodacom's increased latency shows from ECL class 1 onwards.
+
+
+
+
+
+Since the only difference between the outliers of latency versus SINR (Figure \ref{fig:sinr_latency}) and latency versus RSRP is the fact that the attenuation zones are evident per decade, it is not necessary to show here.
+
+
+
+In Figure \ref{fig:txTimeNW_otl}, (ADFG) MTN-ZTE shows no outliers, but (BC) Vodacom-Nokia shows outliers for both Ublox and Quectel. (E) Attenuation does not affect TX time. (H) If not a lengthy UDP packet transmission, both eDRX and PTAU have a single outlier which could be a result of an RRC connection with a long inactivity timer, synchronization error or else.
+
+
+
 # Conclusion
 
 comparing multiple LTE vendors, UE devices and MNOs.
@@ -983,6 +1001,40 @@ t --> t5{PTAU}
 
 ```
 
+
+```mermaid
+graph LR
+U(Ublox)
+Q(Quectel)
+Z[ZTE]
+N[Nokia]
+E[Ericsson]
+H[Huawei]
+M[MTN]
+V[Vodacom]
+Z --> U
+Z --> Q
+N --> U
+N --> Q
+E --> U
+E --> Q
+H --> U
+H --> Q
+M -- CPT --> Z
+V -- CPT --> N
+M -- JHB --> E
+V -- JHB --> H
+a[Attenuation decades] 
+U --> a
+Q --> a
+a --> t1[UDP]
+a --> t2[Echo]
+a --> t3[COPS]
+a --> t4[eDRX]
+a --> t5[PTAU]
+```
+
+
 ```mermaid
 graph LR
 U(Ublox)
@@ -1018,7 +1070,7 @@ t5[PTAU] --> a
 graph LR
 a[Energy] --> b[Telemetry Tests]
 c[Timings] --> b
-d[AT+NUESTATS] --> b
+d[UE Reports] --> b
 b --> e[Attenuation Decades]
 e --> f[UEs, LTE vendors, MNOS]
 f --> g[Power]

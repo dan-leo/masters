@@ -48,10 +48,11 @@ See Appendix \ref{appendix_sibs} for examples of NB-IoT SIB blocks.
 * Uplink `rrcConnectionRequest`
 * Downlink `rrcConnectionSetup`
 
-Table: System Information Blocks description {#tbl:sib_descr}
+Table: System Information Blocks description [@Schwarz2016] {#tbl:sib_descr}
 
 | SIB    | Description                                                  |
 | ------ | ------------------------------------------------------------ |
+| MIB    | Master Information Block which sends essential information required to receive further SIBs |
 | SIB-1  | Cell access related parameters and scheduling of other SIBs  |
 | SIB-2  | Common and shared channel configuration, RACH related configuration are present |
 | SIB-3  | Parameters required for intra-frequency, inter-frequency and I-RAT cell re-selections |
@@ -150,9 +151,9 @@ On the Vodafone network in connected-DRX (C-DRX) mode, the UE is observed to sho
 
 In Fig. \ref{fig:cdrx1}, the Ublox UE uses 73.6mA at 110dB attenuation with the RF shield enclosure door slightly open and in Fig. \ref{fig:cdrx2}, with the same environment the Quectel UE uses 73.6mA. Observing C-DRX on the Nokia-Vodacom network, we have slightly different results as can be seen summarized in Table \ref{tbl:cdrx_vals}. It seems that on ZTE-MTN and Nokia-Vodacom that cycles are of length 16ms and 256ms respectively.
 
-Table: C-DRX values {#tbl:cdrx_vals}
+Table: Table showing a summary of C-DRX values {#tbl:cdrx_vals}
 
-|               | MTN-ZTE | Nokia-Vodacom |
+|               | ZTE-MTN | Nokia-Vodacom |
 | ------------- | ------- | ------------- |
 | **Ublox**     |         |               |
 | Peak current  | 73.6 mA | 72 mA         |
@@ -190,49 +191,51 @@ This gives a good idea as to the range expected according to RSRP, with more inf
 
 Using a Quectel BG96, the following tests were taken on the rooftop described in Fig. \ref{fig:rooftop}[^zte_tests].
 
-![Rooftop outside the HF RF lab on the 5th floor of the Electrical & Electronic Engineering building. The base station it connected to is on the General Building, and is just over 150m away at the same elevation with a single building blocking line-of-sight. The base station is situated on the bottom left of the picture at an altitude of approximately 138m. \label{fig:rooftop}](C:\GIT\masters\thesis\images\rooftop_maps.JPG){width=60%}
+![Rooftop outside the HF RF lab on the 5th floor of the Electrical & Electronic Engineering building. The base station it connected to is on the General Building, and is just over 150m away at the same elevation with a single building blocking line-of-sight. The base station is situated on the bottom left of the picture at an altitude of approximately 138m. \label{fig:rooftop}](C:\GIT\masters\thesis\images\rooftop_maps.JPG){width=55%}
 
 [^zte_tests]: The MTN-ZTE test dataset \S\ref{dataset} was captured inside the RF enclosure inside the HF RF lab.
 
 The tests involve sending a set of 10 pings multiple times at a certain attenuation and resulting RSSI measurement using a Quectel BG96 modem.
+
+![Looking at the ICMP ping response according to different RSSI values, we see high jitter of a few seconds from -80dBm or less. This means that in an urban area, NB-IoT satisfies the 2-5 km range specification.](C:\GIT\masters\thesis\images\jitter.png){width=50%}
 
 [](C:\GIT\masters\thesis\images\rooftest1.png)
 
 [](C:\GIT\masters\thesis\images\rooftest2.png)
 
 \begin{figure}[ht]
-  \subfloat[With an antenna and the attenuator set to 0dB, we find most of the values around the mean of 185.2ms, except for the tail at around 500ms which is the time of the first ping in a set of 10. ECL 0, RSRP -51 dBm.]{
-	\begin{minipage}[c][1\width]{
+  \subfloat[0 dB attenuation test in ECL class 0 at -51 dBm RSRP. With an antenna and the attenuator set to 0dB, we find most of the values around the mean of 185.2ms, except for the tail at around 500ms which is the time of the first ping in a set of 10.]{
+	\begin{minipage}[c][0.7\width]{
 	   0.48\textwidth}
 	   \centering
 	   \includegraphics[width=1.0\linewidth]{../images/rooftest1.png}
 	\label{fig:ping1}
 	\end{minipage}}
  \hfill 	
-  \subfloat[Setting the attenuator to the max of 110dB, we see no change in the ping measurements which have a mean of 185.9ms. The tail has increased to a max of just over 600ms. ECL 0, RSRP -85 dBm.]{
-	\begin{minipage}[c][1\width]{
+  \subfloat[110 dB attenuation test in ECL 0, at -85 dBm RSRP. Setting the attenuator to the max of 110dB, we see no change in the ping measurements which have a mean of 185.9ms. The tail has increased to a max of just over 600ms.]{
+	\begin{minipage}[c][0.7\width]{
 	   0.48\textwidth}
 	   \centering
 	   \includegraphics[width=1.0\linewidth]{../images/rooftest2.png}
 	\label{fig:ping2}
 	\end{minipage}}
 \vspace{1mm}
-  \subfloat[Removing the antenna from the attenuator, we find that the data has a slightly thicker tail, and averages around 207.1ms. ECL 0, RSRP -91 dBm.]{
-	\begin{minipage}[c][1\width]{
+  \subfloat[Attenuator and no antenna test in ECL 0 at -91 dBm RSRP. Removing the antenna from the attenuator, we find that the data has a slightly thicker tail, and averages around 207.1ms.]{
+	\begin{minipage}[c][0.7\width]{
 	   0.48\textwidth}
 	   \centering
 	   \includegraphics[width=1.0\linewidth]{../images/rooftest3.png}
 	\label{fig:ping3}
 	\end{minipage}}
  \hfill 	
-  \subfloat[Lastly, having no attenuator nor antenna we still have a connection at -107dBm with a mean of 190.6ms. ECL 1, RSRP -107 dBm.]{
-	\begin{minipage}[c][1\width]{
+  \subfloat[No attenuator and no antenna test in ECL 1 at -107 dBm RSRP. Lastly, having no attenuator nor antenna we still have a connection at -107dBm with a mean of 190.6ms. ]{
+	\begin{minipage}[c][0.7\width]{
 	   0.48\textwidth}
 	   \centering
 	   \includegraphics[width=1.0\linewidth]{../images/rooftest4.png}
 	\label{fig:ping4}
 	\end{minipage}}
-\captionof{figure}[Ping tests]{Ping tests on Engineering rooftop}
+\captionof{figure}[Ping tests]{Ping tests on Engineering rooftop with time in milliseconds on x-axis and the percentage frequency on the y-axis. Here we see how ECL class 0 and ECL clsas 1 is quite similar.}
 \end{figure}
 
 [](C:\GIT\masters\thesis\images\rooftest3.png)
@@ -257,28 +260,28 @@ To be able to attenuate the signal until disconnection, one must increase the ra
 	   \includegraphics[width=1.0\linewidth]{../images/jamestown_map.PNG}
 	\label{fig:map_jamestown}
 	\end{minipage}}
-\captionof{figure}[Long-range tests map]{Long-range tests map}
+\captionof{figure}[Long-range tests map]{Long-distance tests were performed, and these two maps show the maximum distance that signals travelled.}
 \end{figure}
 
 [](C:\GIT\masters\thesis\images\techno_map4.8km.JPG){width=50%}
 
 \begin{figure}[ht]
-  \subfloat[In Technopark, at 0dB attenuation the data has a mean of 196.7ms and a tail just above 500ms in ECL 0, RSRP -93 dBm.]{
-	\begin{minipage}[c][1\width]{
+  \subfloat[0 dB attenuation test in Technopark at -93 dBm RSRP in ECL class 0. With no attenuation, the data has a mean of 196.7ms and a tail just above 500ms.]{
+	\begin{minipage}[c][0.7\width]{
 	   0.48\textwidth}
 	   \centering
 	   \includegraphics[width=1.0\linewidth]{../images/techno1.png}
 	\label{fig:ping5}
 	\end{minipage}}
  \hfill 	
-  \subfloat[In Technopark, at 10dB the data is more spread out from 200 - 500ms with a mean of 396.4ms and a tail at just under 1000ms in ECL 1, RSRP -101 dBm.]{
-	\begin{minipage}[c][1\width]{
+  \subfloat[10 dB attenuation test in Technopark at -101 dBm RSRP in ECL class 1. In this condition, the data is more spread out from 200 - 500ms with a mean of 396.4ms and a tail at just under 1000ms.]{
+	\begin{minipage}[c][0.7\width]{
 	   0.48\textwidth}
 	   \centering
 	   \includegraphics[width=1.0\linewidth]{../images/techno2.png}
 	\label{fig:ping6}
 	\end{minipage}}
-\captionof{figure}[Long-range ping tests]{Long-range ping tests}
+\captionof{figure}[Long-range ping tests]{Long-range ping tests in Technopark starting from 0 dB attenuation and adding 10 dB.}
 \end{figure}
 
 
@@ -288,22 +291,22 @@ To be able to attenuate the signal until disconnection, one must increase the ra
 [](C:\GIT\masters\thesis\images\techno2.png)
 
 \begin{figure}[ht]
-  \subfloat[In Technopark, at 20dB attenuation, the data is more spread across 350 - 1000ms with a mean of 793.4ms and a tail that extends to over 4500ms in ECL 2, RSRP -107 dBm. Any more attenuation and the signal is lost.]{
-	\begin{minipage}[c][1\width]{
+  \subfloat[20 dB attenuation test in Technopark at -107 dBm RSRP in ECL 2. At 20dB attenuation, the data is more spread across 350 - 1000ms with a mean of 793.4ms and a tail that extends to over 4500ms. Any more attenuation and the signal is lost.]{
+	\begin{minipage}[c][0.7\width]{
 	   0.48\textwidth}
 	   \centering
 	   \includegraphics[width=1.0\linewidth]{../images/techno3.png}
 	\label{fig:ping7}
 	\end{minipage}}
  \hfill 	
-  \subfloat[At the furthest point in Fig. \ref{fig:map_jamestown}, the signal strength increased to -89dBm and resumed a mean of around 209.6ms with a tail around 500ms. ECL 0]{
-	\begin{minipage}[c][1\width]{
+  \subfloat[0 dB attenuation test at Stellenbosch Square R44 intersection at -89 dBm in ECL 0. At the furthest point in Fig. \ref{fig:map_jamestown}, the signal strength increased to -89dBm and resumed a mean of around 209.6ms with a tail around 500ms.]{
+	\begin{minipage}[c][0.7\width]{
 	   0.48\textwidth}
 	   \centering
 	   \includegraphics[width=1.0\linewidth]{../images/stelliesquare.png}
 	\label{fig:ping8}
 	\end{minipage}}
-\captionof{figure}[Long-range ping tests]{Long-range ping tests}
+\captionof{figure}[Long-range ping tests]{Long-range ping tests in Technopark up to 20 dB attenuation and at Stellenbosch Square R44 intersection not surviving more than 0 dB attenuation.}
 \end{figure}
 
 [](C:\GIT\masters\thesis\images\techno3.png)
@@ -313,8 +316,8 @@ To be able to attenuate the signal until disconnection, one must increase the ra
 [](C:\GIT\masters\thesis\images\stelliesquare.png)
 
 \begin{figure}[ht]
-  \subfloat[A similar pattern was seen 3.0 km away at Parmalat, although driving closer there were a few spots where connection was lost or many retries were needed such that the tail extended up to almost 3000ms for the ICMP ping time.]{
-	\begin{minipage}[c][1\width]{
+  \subfloat[0 dB attenuation test at Parmalat at -87 dBm in ECL 0. A similar pattern was seen 3.0 km away from the base station at Parmalat, although driving closer there were a few spots where connection was lost or many retries were needed such that the tail extended up to almost 3000ms for the ICMP ping time.]{
+	\begin{minipage}[c][0.7\width]{
 	   0.48\textwidth}
 	   \centering
 	   \includegraphics[width=1.0\linewidth]{../images/parmalat.png}
@@ -322,22 +325,21 @@ To be able to attenuate the signal until disconnection, one must increase the ra
 	\end{minipage}}
  \hfill 	
   \subfloat[Lastly, all the test data (including on the way to Technopark and back), we see a similar form except with a tail extending to almost 10 seconds, which is within 3GPP specifications.]{
-	\begin{minipage}[c][1\width]{
+	\begin{minipage}[c][0.7\width]{
 	   0.48\textwidth}
 	   \centering
 	   \includegraphics[width=1.0\linewidth]{../images/alltests2.png}
 	\label{fig:ping10}
 	\end{minipage}}
-\captionof{figure}[Long-range ping tests]{Long-range ping tests}
+\captionof{figure}[Long-range ping tests]{Long-range ping tests show a few results at ECL class 2, which shows how different ECL class 2 from class 1 and 0, with the differentiating factor beign a couple of seconds latency as opposed to a few hundred milliseconds. and thus a factor 10 difference.}
 \end{figure}
 
 [](C:\GIT\masters\thesis\images\parmalat.png)
 
 [](C:\GIT\masters\thesis\images\alltests2.png)
 
-![Looking at the ICMP ping response according to different RSSI values, we see high jitter of a few seconds from -80dBm or less.](C:\GIT\masters\thesis\images\jitter.png){width=50%}
 
-This means that in an urban area, NB-IoT satisfies the 2-5 km range specification.
+\newpage
 
 ### RF Spectrum Tests
 
@@ -345,9 +347,11 @@ Using an RTL2832 SDR dongle, we can capture RF signals. At the very least we can
 
 ![5 dB SINR NB-IoT transmissions using Sierra Wireless WP7702 at 908.2 MHz and EARFCN 3734 of length 2282ms, 1560ms and 1380ms respectively.](../images/image-20191105144302036.png)
 
-![SigFox and LoRa RF signals \@868 MHz](../images/image-20191104223939783.png){width=30%}
+![SigFox and LoRa RF signals \@868 MHz on a waterfall diagram, with the x-axis showing frequencies at 868 MHz and the y-axis over time. The SigFox signals (vertical) take about 2 seconds to transmit, and the LoRa signals (horizontal) take a few hundred milliseconds.](../images/image-20191104223939783.png){width=30%}
 
 Each technology has their own modulation scheme and unique features, and with that their own set of advantages and disadvantages. More can be found in \S\ref{lpwans}.
+
+\newpage
 
 ### Power Saving Mechanisms
 
@@ -428,6 +432,8 @@ AT+CEREG says that the timer is 32s, or 2 seconds * 16 binary coded timer value.
 +CEREG: 5,1,"8CA7","28C465",7,,,"00010000","00101010"
 ```
 
+\newpage
+
 In the debug logs we see the timer expires after exactly 32 seconds.
 
 ```c
@@ -441,15 +447,13 @@ In the debug logs we see the timer expires after exactly 32 seconds.
 
 [](C:\Users\d7rob\AppData\Roaming\Typora\typora-user-images\1555569718434.png){width=50%}
 
-![Irregular eDRX time if not properly configured. \label{fig:irregular_edrx}](../images/image-20191105162759288.png)
+![This test shows eDRX events until 800 minutes, measured externally. It shows an irregular eDRX time when not properly configured. \label{fig:irregular_edrx}](../images/image-20191105162759288.png)
 
 It is important to note that if eDRX time is not configured properly, then the outcome does not show as expected as in Fig. \ref{fig:irregular_edrx}.
 
-![Typical eDRX current profile. \label{fig:edrx_pattern}](../images/image-20191105163855934.png){width=65%}
+![Typical eDRX current profile with a 277.8 ms duration. This shows how for the first few microseconds there is a large transmission current spike to synchronize, before receiving paging information from the cell tower. \label{fig:edrx_pattern}](../images/image-20191105163855934.png){width=65%}
 
-Finally, an eDRX event has a typical current profile as shown in Fig. \ref{fig:edrx_pattern}. This shows how for the first few microseconds there is a large current spike.
-
-The debug trace, every 2.56 seconds for ZTE-MTN, shows the following information. Besides logs showing time synchronization and other network information, the serving cell logs show signal strength metrics.
+Considering an eDRX event with a typical current profile as shown in Fig. \ref{fig:edrx_pattern}, the debug trace shown here every 2.56 seconds for ZTE (same for Ericsson and Huawei but Nokia has a cycle every 10 seconds), shows the following information. Besides logs showing time synchronization and other network information, the serving cell logs show signal strength metrics.
 
 ```c
 102332,03:20.082306,LL1_EXIT_LOW_POWER_MODE
@@ -467,23 +471,19 @@ The debug trace, every 2.56 seconds for ZTE-MTN, shows the following information
 102385,03:20.207458,RRC_DBG_RESELECTION_MEASUREMENTS
 ```
 
-*Todo: add Debug trace of PTAU*
-
 ### Ultra-low Current Sleep Measurements
 
 During deep sleep, UE devices typically use only a couple of microamps.
 
 Using an MX 58HD DMM, one can measure the microamp sleep currents of UE devices. Testing the accuracy of the DMM, 4.501 mA is measured through a 4615 ohm resistor at 21.15V. Theoretically it should be 4.582 mA so that gives an error tolerance of 1.82% or ~2%.
 
-*Todo: measure sleep current of UE devices*
+The Ublox device consumed about 3.6 uA, and Quectel consumed 4.2 uA, which is close to manufacturer specifications.
 
 ### Mobility Tests
 
-The Sierra Wireless 7702 has a Qualcomm 9206 modem which supports LTE Cat M1, NB1 and EC-GSM.
+There was a brief test done on mobility to show how NB-IoT devices can transition to different radio access technologies (RATs).
 
-Using a Sierra Wireless WP7702 on Ericsson Test BTS 'L06009A3' and EARFCN 3734/3752, the UE had to periodically ping an internet-facing server and the dead time was measured before it reconnected and received a response. The RSRP was in the range -50 to -80 dBm and in ECL 0.
-
-The tests took place within a faraday cage to isolate the test network from the live RAN, else by opening the door of the faraday cage it deregistered from the network and MME.
+The Sierra Wireless 7702 has a Qualcomm 9206 modem which supports LTE Cat M1, NB1 and EC-GSM. Using a Sierra Wireless WP7702 on Ericsson Test BTS 'L06009A3' and EARFCN 3734/3752, the UE had to periodically ping an internet-facing server and the dead time was measured before it reconnected and received a response. The RSRP was in the range -50 to -80 dBm and in ECL 0. The tests took place within a faraday cage to isolate the test network from the live RAN, else by opening the door of the faraday cage it deregistered from the network and MME.
 
 Table: NB-IoT and LTE Cat-M handover. {#tbl:mobility}
 
@@ -493,6 +493,8 @@ Table: NB-IoT and LTE Cat-M handover. {#tbl:mobility}
 | In-band to Standalone | ~ 11 s |
 
 ### Throughput
+
+An initial throughput test was performed *not* using AT commands, but a linux script.
 
 NB-IoT downloading was tested on the Sierra Wireless 7702 using the following script.
 
@@ -511,13 +513,15 @@ A 100 kb file is downloaded at a rate of around 3kB/s. The script continues down
 
 [^yocto]: It's not an embedded solution. Rather, it creates a custom one for you, regardless of hardware architecture [@yocto1].
 
+Table: Table showing preliminary throughput tests for GPRS, NB-IoT and LTE-M {#tbl:prelim_thp}
+
 |        | Uplink         | Downlink       |
 | ------ | -------------- | -------------- |
 | GPRS   | 158 kbps       | 254 kbps       |
 | NB-IoT | 56 / 65 kbps   | 24 / 27 kbps   |
-| LTE-M1 | 293 / 375 kbps | 264 / 300 kbps |
+| LTE-M  | 293 / 375 kbps | 264 / 300 kbps |
 
-
+The Sierra Wireless 7702 is a powerful board, and it showed satisfactory throughput rates.
 
 ## Example Application
 
@@ -532,13 +536,13 @@ Notable components include:
 
 [](../images/image-20191105153024907.png){width=75%}
 
- ![PCB application](../images/0_MX60dijDFSoBKpuZ.jpg){width=75%} 
+ ![This is a PCB application developed as an example.](../images/0_MX60dijDFSoBKpuZ.jpg){width=75%} 
 
 By adding a DHT22 temperature and humidity sensor, button and buzzer for and example application, we see the following dashboard result in Fig. \ref{fig:dashboard_thingsboard}.
 
-![Communication via MQTT to Thingsboard cloud with temperature, humidity, push button and downlink buzzer control \label{fig:dashboard_thingsboard}](../images/image-20191105143716571.png){width=65%}
+![Dashboard showing communication between NB-IoT PCB and Thingsboard cloud via MQTT with temperature, humidity, push button and downlink buzzer control \label{fig:dashboard_thingsboard}](../images/image-20191105143716571.png){width=65%}
 
-Luckily UE manufacturers usually provide a development kit with open source schemetics and board layouts. This study will use development kits so that tests are easily reproduceable.
+Luckily UE manufacturers usually provide a development kit with open source schematics and board layouts. This study will use development kits so that tests are easily reproduceable.
 
 ## Setup Procedure
 
@@ -563,18 +567,36 @@ By measuring current, the field tests can measure the energy usage of each datag
 ![Block diagram of current consumption setup for SARA-N2 \ref{fig:current_setup}](../images/1555535660456.png){width=65%}
 
 
-
 The digital multimeter in Fig. \ref{fig:current_setup} is replaced with a ZXCT1008 high-side current monitor in series with the modem. 
 
-![ZXCT1008  high-side current monitor https://www.diodes.com/assets/Datasheets/ZXCT1008.pdf](../images/arduino86-1-1571303569557.png){width=25%}
+<!-- ![Diagram of the ZXCT1008  high-side current monitor which can be found on https://www.diodes.com/assets/Datasheets/ZXCT1008.pdf](../images/arduino86-1-1571303569557.png){width=25%} -->
+
+\begin{figure}[ht]
+  \subfloat[ZXCT1008 high-side current monitor schematic]{
+	\begin{minipage}[c][0.8\width]{
+	   0.48\textwidth}
+	   \centering
+	   \includegraphics[width=1.0\linewidth]{../images/1555535660456.png}
+	\label{fig:edrx1}
+	\end{minipage}}
+ \hfill 	
+  \subfloat[ZXCT1008 high-side current monitor in action]{
+	\begin{minipage}[c][0.8\width]{
+	   0.48\textwidth}
+	   \centering
+	   \includegraphics[width=1.0\linewidth]{../images/zxct1008.jpeg}
+	\label{fig:edrx2}
+	\end{minipage}}
+\captionof{figure}{Diagrams shows ZXCT1008 high-side current monitor which can be found on https://www.diodes.com/assets/Datasheets/ZXCT1008.pdf}
+\end{figure}
 
 Rs is set to a 1 ohm resistor and Rg is set as a 1k ohm resistor such that 100mA supplied to the modem makes 1V.
 
 $$V_{out} = I_{load} [mA] * 10 [\frac{V}{mA}]$$ {#eq:iload_vout}
 
-![ZXCT1008 in action](..\images\zxct1008.jpeg)
+<!-- ![ZXCT1008 in action](..\images\zxct1008.jpeg) -->
 
-
+\newpage
 
 #### Energy Capture Device {#energy_capture_device}
 
@@ -582,7 +604,6 @@ The energy capture device measures the energy of each packet, and also returns t
 
 `PlatformIO` compiles code for the microcontroller, and in this case it is a simple Atmel ATmega328P 8-bit microcontroller.
 
-Code can be found on [https://github.com/daniel-leonard-robinson/masters/tree/master/code/edge/src](https://github.com/daniel-leonard-robinson/masters/tree/master/code/edge/src). It connects to the ZXCT1008 mentioned in \S\ref{current_measurements} and converts the results to energy measurements. It also returns via serial to the PyTest framework the timings of each datagram packet.
 
 ```c
 void energyLoop(boolean pause) {
@@ -620,9 +641,13 @@ void energyLoop(boolean pause) {
 }
 ```
 
+Code can be found on [https://github.com/daniel-leonard-robinson/masters/tree/master/code/edge/src](https://github.com/daniel-leonard-robinson/masters/tree/master/code/edge/src). It connects to the ZXCT1008 mentioned in \S\ref{current_measurements} and converts the results to energy measurements. It also returns via serial to the PyTest framework the timings of each datagram packet.
+
+\newpage
+
 ### Network Registration
 
-As mentioned in \S\ref{connectivity}, the right SIM cards are necessary. It may even be possible to use e-SIMs as in Fig. \ref{fig:hologram_esim}.
+Network registration is important before a device can send data to the internet. As mentioned in \S\ref{connectivity}, the right SIM cards are necessary. It may even be possible to use e-SIMs as in Fig. \ref{fig:hologram_esim}.
 
 ![Hologram worldwide e-SIM \label{fig:hologram_esim}](../images/image-20191105152621948.png){width=40%}
 
@@ -630,9 +655,11 @@ Finally, the right APNs are necessary. To use MTN's test network, the APN `rflab
 
 ### PyTest Framework
 
-PyTest is a unit testing framework used to setup the UE for each test using AT commands and can be found on  [https://github.com/daniel-leonard-robinson/masters/tree/master/code/tests](https://github.com/daniel-leonard-robinson/masters/tree/master/code/tests). Although the testing framework is quite extensive, a few snippets of code will be discussed in this section to at least give an idea to the reader how this was developed.
+A software framework was necessary to wrap AT commands into telemetry tests, include setup procedures.
 
 ![`Python PyTest` framework written in `Microsoft VS Code` and test output can be seen in bottom-left window. `PlatformIO` compiles microcontroller code and uploads via `avrdude` as can be seen in bottom-right window.](../images/image-20191106145454691.png)
+
+PyTest is a unit testing framework used to setup the UE for each test using AT commands and can be found on  [https://github.com/daniel-leonard-robinson/masters/tree/master/code/tests](https://github.com/daniel-leonard-robinson/masters/tree/master/code/tests). Although the testing framework is quite extensive, a few snippets of code will be discussed in this section to at least give an idea to the reader how this was developed.
 
 Every test fixture includes the following setup and teardown code to open a serial connection to the UE. It automatically detects the COM port based on the USB vid.
 
@@ -780,7 +807,7 @@ def receiveTIM():
 
 ### Telemetry Tests
 
-Telemetry tests measure various aspects of the required metrics. Running the following commands in Table \ref{tbl:pytest_run} will run through the desired telemetry test.
+The telemetry tests measure various aspects of the required metrics. Running the following commands in Table \ref{tbl:pytest_run} will run through the desired telemetry test.
 
 Table: PyTest telemetry test commands to be run in terminal {#tbl:pytest_run}
 
@@ -790,7 +817,7 @@ Table: PyTest telemetry test commands to be run in terminal {#tbl:pytest_run}
 | pytest -svk ptau    | Run PTAU test                       |
 | pytest -svk drx     | Run eDRX test                       |
 | pytest -svm reg     | Run COPS test                       |
-| pytest -svk echo    | Runs echo test                      |
+| pytest -svk echo    | Runs Echo test                      |
 
 
 #### UDP {#udp}
@@ -801,7 +828,7 @@ To test the capability of sending to the internet for multiple UEs, a simple pro
 
 This test sends a UDP packet to an internet accessible IP address. The IP is 1.1.1.1 and it belongs to Warp which claims to be the fastest DNS resolver in the world, with OpenDNS, Google and Verisign taking the next respective rankings.
 
-As an alternative, data can be sent to the u-blox echo server at echo.u-blox.com. Because there is no DNS lookup function in the SARA-N2 module series, the server IP address that must be used is 195.34.89.241.
+As an alternative, data can be sent to the u-blox echo server at `udp://echo.u-blox.com`. Because there is no DNS lookup function in the SARA-N2 module series, the server IP address that must be used is `195.34.89.241`.
 
 UDP datagrams are sent with payloads of size 1, 16, 64, 128, 256 and 512 bytes.
 
@@ -926,13 +953,15 @@ def test_cops_deregister(request):
 
 #### Echo {#des_echo}
 
-This test is designed to measure client and server initiated echo requests.
+This test is designed to measure client and server initiated echo requests. The custom echo server replies immediately, then waits 10 seconds before sending another reply, hence a server initiated echo. Unfortunately, the inactivity timer resets and a UDP datagram with the Release Assistance flag set has to be sent.
 
 [](../../code/tests/logs/huawei_vodacom/quellerina/ublox/echo/3.bmp)
 
-![Echo Test](../images/image-20191106153552851.png){width=50%}
+![An oscilloscope measurement of the Echo test in progress. Notice the four DRX cycles before the second Echo response. Echoes worked successfully every time, and did not take another 2.56 seconds DRX cycle longer than the 10 second delay that the echo server induced.](../images/image-20191106153552851.png){width=50%}
 
-The following snippet shows how the framework sends to a custom echo server which responds immediately and then the echo server responds again after a ten second delay.
+\newpage
+
+The following snippet shows how the framework sends to a custom echo server (on `Google Cloud`) which responds immediately and then the echo server responds again after a ten second delay.
 
 ```python
 ...
@@ -991,6 +1020,8 @@ def start(args):
     ...
 ```
 
+\newpage
+
 #### Ping {#ping}
 
 The +NPING AT command can be issued to check if the module is able to send and receive data via the internet, or an internal network location.
@@ -1044,6 +1075,14 @@ Power efficiency is one of the main metrics focused on in this study. This secti
 \captionof{figure}[UDP Datagram energy-sizes]{UDP Datagram energy for different datagram packet sizes. Note the steady increase in energy consumption on the baseline, and the high variation. Although there is a slight trend in Fig. \ref{fig:udpsize}, it is not significant compared to the total variation for each datagram packet size.}
 \label{fig:udpsize}
 \end{figure}
+
+\begin{minipage}{\linewidth}
+\begin{center}
+\includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/maxCurrent_histogram.pdf}
+\captionof{figure}[Histogram showing peak current corresponding to datagram packets]{Peak energy measurements from roughly 70mA and skewed towards 128mA. These high peak energies shouldn't affect the average power much as peak current occurs only during the first few microseconds of the random access preamble (PRACH).}
+\label{fig:}
+\end{center}
+\end{minipage}
 
 [](../images/1568090120083.png){width=45%}
 
@@ -1125,15 +1164,9 @@ Power efficiency is one of the main metrics focused on in this study. This secti
 
 [](../../../masters/code/tests/plotterk/Signal_power_maxCurrent_plot.png)
 
-\begin{minipage}{\linewidth}
-\begin{center}
-\includegraphics[width=1.0\linewidth]{../../../masters/code/tests/plotterk/maxCurrent_histogram.pdf}
-\captionof{figure}[Histogram showing peak current corresponding to datagram packets]{Peak energy measurements from roughly 70mA and skewed towards 128mA. These high peak energies shouldn't affect the average power much as peak current occurs only during the first few microseconds of the random access preamble (PRACH).}
-\label{fig:}
-\end{center}
-\end{minipage}
-
 [](../../../masters/code/tests/plotterk/maxCurrent_histogram.png)
+
+\newpage
 
 #### Average Power {#avg_power}
 
@@ -1148,8 +1181,6 @@ Latency and timing is also one of the main metrics focused on in this study. Thi
 Initial network registration will show `RX Time` increasing as it scans for a BTS. Once found, `TX Time` will start to increase until successful registration.
 
 ![Latency per datagram as a function of the SINR (dB) as reported by the UE on the (D) MTN-ZTE and (E) Vodacom-Nokia network respectively. In Fig. \ref{fig:latency_sinr_comp}, there is a poor distinction between attenuation zones as the SINR varies throughout the reported RSRP range. Grouping the data according to attenuation decade is important to see the effect of network conditions clearly. \label{fig:latency_sinr_comp}](../images/1571781751620.png){width=50%}
-
-
 
 ## Secondary Metrics
 
@@ -1179,6 +1210,8 @@ Reference Signal Receive Power (RSRP) or "Signal Power" is an average power meas
 
 ![RSRP distribution using Ublox and Quectel UE on ZTE-MTN and Nokia-Vodacom infrastructure as well as attenuation and telemetry test set. RSRP and telemetry tests have a relatively even distribution, although RSRP still has about 20 dBm variability per attenuation decade. ZTE signals have higher MCL than Nokia.](../../../masters/code/tests/plotterk/Signal_power_histogram.png)
 
+\newpage
+
 #### RSSI
 
 Received Signal Strength Indicator (RSSI) or "Total Power", is the radio signal strength within the receive bandwidth. It usually combines the value of transmit power in the index. From this the signal to noise ratio (SINR) can be calculated.
@@ -1196,6 +1229,8 @@ Signal-to-interference-plus-noise ratio (SINR) is a measure of signal quality. I
 
 
 Unfortunately, it has been implemented in various different ways which aren't trivially comparable. For example, using a synchronization signal (based off a PCI assigned by eNodeB) instead of a reference signal in estimation already results in a different SINR [@lte_rsrq_sinr2019].
+
+\newpage
 
 #### RSRQ
 
@@ -1220,6 +1255,8 @@ Transmit power is the RF power output from the modem. It should be a lower numbe
 ECLs are equivalent to "PRACH coverage enhancement level" defined in 3GPP 36.321 [3] sub clause 5.1
 
 As observed in \S\ref{pre_ECL}, ECLs seem unaffected by RSRP. Due to repetition, it should have an impact on energy consumption and latency.
+
+\newpage
 
 ### Throughput
 

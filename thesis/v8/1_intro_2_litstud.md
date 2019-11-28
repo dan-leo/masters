@@ -252,9 +252,7 @@ The beginnings of these new cellular LPWANs started when GSM was first deployed 
 \centering
 \includegraphics[width=0.5\textwidth,height=\textheight]{C:/GIT/masters/thesis/images/ims voip.jpg}
 \caption[A simplified representation of the transition from 2G to LTE]{A simplified representation of the transition from 2G to LTE with regard to technologies that keep people and `things' in contact.
-Red-orange-blue-green indicates the path that M2M took through the
-cellular industry linking it to LPWANs. Grey for internet-based
-communications and white for circuit-switched.
+Red-orange-blue-green indicates the path that M2M took through the cellular industry linking it to LPWANs. Grey for internet-based communications and white for circuit-switched.
 \label{fig:2G_LTE_transition}}
 \end{figure}
 
@@ -512,6 +510,7 @@ A pull model is ideal for dynamic rule engines, pulling data only when necessary
 
 Most LPWANs are unidirectional, meaning they transmit data in one direction only. This is especially true in the case of LoRaWAN and SigFox and means they use a push model. A push model is bad for the battery when periodically sending data. It does help to make the data transmissions event-based, however. NB-IoT and Dash7 for example, are bidirectional which means they can stay quiet for longer and only send data on-demand ~ when it is needed. This would make it a pull model and is useful for critical use cases as well [@Mekki2018a].
 
+
 Table: Unidirectional and bidirectional LPWANs {#tbl:unibidirectional_lpwans}
 
 | Unidirectional | Bidirectional  |
@@ -547,6 +546,8 @@ A low-power wide-area network (LPWAN) allows long range communications at low bi
 
 <!--Unidirectional: LoRaWAN and SigFox {#unidirectional_lpwans}-->
 
+\newpage
+
 \hypertarget{unidirectional_lpwans}{%
 \subsubsection[Unidirectional: LoRaWAN and SigFox]{Unidirectional LPWANs}\label{unidirectional_lpwans}}
 
@@ -570,7 +571,16 @@ Simulations show that with the random transmissions of 55k devices, a base stati
 
 Localization can be useful for asset tracking as discussed in \S\ref{asset_tracking}. Of the prominent LPWANs, SigFox is the only one that offers a simple localization service. NB-IoT will offer one when upgraded to 3GPP Release 14. Unfortunately SigFox has poor accuracy as can be seen in Fig. \ref{fig:sigfox_map}.
 
-![With a 17.783km radius in this example, SigFox is poor when it comes to being considered as a source of localization using RSSI triangulation, and it may be better to use TOF techniques such as in OTDOA in NB-IoT \label{fig:sigfox_map}](../images/image-20191105141405835.png){width=80%}
+<!-- ![With a 17.783km radius in this example, SigFox is poor when it comes to being considered as a source of localization using RSSI triangulation, and it may be better to use TOF techniques such as in OTDOA in NB-IoT \label{fig:sigfox_map}](../images/image-20191105141405835.png){width=80%} -->
+
+\begin{figure}
+\centering
+\includegraphics[width=0.8\textwidth,height=\textheight]{../images/image-20191105141405835.png}
+\caption[Sigfox RSSI triangulation]{With a 17.783km radius in this example, SigFox is poor when it
+comes to being considered as a source of localization using RSSI
+triangulation, and it may be better to use TOF techniques such as in
+OTDOA in NB-IoT \label{fig:sigfox_map}}
+\end{figure}
 
 <!--Bidirectional: NB-IoT and Dash7 {#bidirectional_lpwans}-->
 
@@ -639,11 +649,9 @@ Table: LPWAN strengths with \checkmark,  $\times$  denoting best and worst case 
 | LoRaWAN SF12 | \checkmark                      | $\times$ |                                 | $\times$ |
 | SigFox       | \checkmark                      | \checkmark  |                                 |            |
 
-The competitive nature of LPWANs, IoT demand, various use cases and expansion into other territories will ensure that various wireless technologies will continue to grow and increase network coverage. Selected uptake of LPWANs is expected in specific use cases due to the uniqueness of each technology. Despite this, NB-IoT outperforms SigFox and LoRaWAN in UL/DL throughput, scalability, MCL range and FoTA updates and is only superseded by LoRaWAN in battery life for SF7. Durand suggests that if the RRC-idle phase could be reduced, it could develop a minimal power consumption comparable to SigFox and LoRaWAN [@Durand2019], and this is possible true using Release Assistance in \S\ref{#release_a}. By finding ways to increase battery life, it may just be the 'silver bullet' for all IoT use cases.
+The competitive nature of LPWANs, IoT demand, various use cases and expansion into other territories will ensure that various wireless technologies will continue to grow and increase network coverage. Selected uptake of LPWANs is expected in specific use cases due to the uniqueness of each technology. Despite this, NB-IoT outperforms SigFox and LoRaWAN in UL/DL throughput, scalability, MCL range and FoTA updates and is only superseded by LoRaWAN in battery life for SF7. Durand suggests that if the RRC-idle phase could be reduced, it could develop a minimal power consumption comparable to SigFox and LoRaWAN [@Durand2019], and this is possible true using Release Assistance in \S\ref{#release_a}. By finding ways to increase battery life, it may just be the 'silver bullet' for all IoT use cases. 
 
-In places requiring deep indoor penetration with 30 dBm path loss, NB-IoT performs well with 8\% outage, while SigFox, LoRaWAN, GPRS are unable to cover 13\%, 20\% and 60\% of locations, respectively, in a 7800 km\textsuperscript{2} area simulated by Lauridsen [@Lauridsen2017].
-
-NB-IoT's mean energy values are similar to LoRaWAN devices transmitting in SF12 configuration. However, best case results (in 5th percentile) are comparable to LoRaWAN in SF8. NB-IoT has peak transmission at 220 mA, whilst LoRaWAN at 40 mA [@Martinez2019]. Although LoRaWAN has the predictable chirp spread spectrum (CSS) modulated signal, NB-IoT only uses this peak power in it's initial physical random access channel (PRACH) [@Durand2019]. This shows that with further investigation into the variation, NB-IoT can certainly be on par with LoRaWAN in terms of energy consumption. Nevertheless, NB-IoT does guarantee packet delivery if within range while LoRaWAN has a variable packet delivery ratio (PDR). The mean achievable lifespan for NB-IoT is on the order of 2.5 years, depending on datagram size. Nevertheless, the transmission of larger datagram payloads (up to 512 bytes) had almost no impact on NB-IoT [@Martinez2019]. Finally, simple periodic-reporting applications can model the average power approximately by Eq. \ref{eq:avgpower}:
+In places requiring deep indoor penetration with 30 dBm path loss, NB-IoT performs well with 8\% outage, while SigFox, LoRaWAN, GPRS are unable to cover 13\%, 20\% and 60\% of locations, respectively, in a 7800 km\textsuperscript{2} area simulated by Lauridsen [@Lauridsen2017]. NB-IoT's mean energy values are similar to LoRaWAN devices transmitting in SF12 configuration. However, best case results (in 5th percentile) are comparable to LoRaWAN in SF8. NB-IoT has peak transmission at 220 mA, whilst LoRaWAN at 40 mA [@Martinez2019]. Although LoRaWAN has the predictable chirp spread spectrum (CSS) modulated signal, NB-IoT only uses this peak power in it's initial physical random access channel (PRACH) [@Durand2019]. This shows that with further investigation into the variation, NB-IoT can certainly be on par with LoRaWAN in terms of energy consumption. Nevertheless, NB-IoT does guarantee packet delivery if within range while LoRaWAN has a variable packet delivery ratio (PDR). The mean achievable lifespan for NB-IoT is on the order of 2.5 years, depending on datagram size. Nevertheless, the transmission of larger datagram payloads (up to 512 bytes) had almost no impact on NB-IoT [@Martinez2019]. Finally, simple periodic-reporting applications can model the average power approximately by Eq. \ref{eq:avgpower}:
 
 $$P = \frac{E_{msg}}{T_{msg}}$$ {#eq:avgpower}
 
@@ -767,11 +775,11 @@ This subsection looks at hardware specific to the UE device.
 
 [](../images/image-20191105225743913.png)
 
-![Current usage decreases depending on eDRX power saving configuration. In this case, it is the SimCom 7020E modem.](../images/image-20191106012315421.png){width=60%}
+![This diagram shows how current usage decreases depending on eDRX power saving configuration. (Based on SimCom 7020E modem datasheet values.)](../images/image-20191106012315421.png){width=60%}
 
-![Current usage across different LTE bands \label{fig:current_band}](../images/image-20191106005828336.png){width=100%}
+![This diagram shows how current usage across different LTE bands changes depending on output power. \label{fig:current_band}](../images/image-20191106005828336.png){width=100%}
 
-![Current versus transmit power for NB-IoT modems \label{fig:current_txpower}](../images/image-20191106012023102.png)
+![This diagram shows how current versus transmit power for NB-IoT modems remains stable under 0 dBm and increases exponentially until 23 dBm. \label{fig:current_txpower}](../images/image-20191106012023102.png)
 
 As seen in Figure \ref{fig:current_band}, \ref{fig:current_txpower}, Ublox and Quectel share similar traits, unlike Nordic and SimCom. Since Ublox and Quectel share similar traits, it is suitable for a comparison of LTE vendors.
 
@@ -794,7 +802,7 @@ After network registration or transmission of a data packet, the device usually 
 
 NB-IoT allows for various power saving mechanisms design to prolong the lifetime of battery-powered devices. Except for release assistance, the module automatically enters the different states depending on defined configuration. Release assistance, as explained in \S\ref{release_a}, terminates the network defined `inactivty timer` such that it enters into the states shown in Fig. \ref{fig:power_saving_mechanisms}.
 
-![Power Saving Mechanisms \label{fig:power_saving_mechanisms}](C:\Users\d7rob\AppData\Roaming\Typora\typora-user-images\1555540836196.png){width=80%}
+![This diagram shows power saving mechanisms for NB-IoT, including paging windows, eDRX cycles, active timer and PSM mode. \label{fig:power_saving_mechanisms}](C:\Users\d7rob\AppData\Roaming\Typora\typora-user-images\1555540836196.png){width=80%}
 
 It is recommended to order the network configuration values of the following from smallest to largest for proper operation:
 
@@ -946,9 +954,9 @@ Table: Suggested application power saving modes [@Martinez2019]. It should be no
 
 | Mode       | NW Configuration                                             |
 | ---------- | ------------------------------------------------------------ |
-| **Mode 1** | Inactivity timer = 20s (network default)\newline T3324 = 0s (disabled)\newline C-DRX = 2.048s (network default) |
-| **Mode 2** | Inactivity timer = Immediate Release\newline T3324 = 8s\newline I-DRX = 2.56s\newline eDRX/PTW = Disabled |
-| **Mode 3** | Inactivity timer = Immediate Release\newline T3324 = 0s (disabled) |
+| **Mode 1** | Inactivity timer = 20s (network default)\newline T3324 Active timer = 0s (disabled)\newline C-DRX = 2.048s (network default) |
+| **Mode 2** | Inactivity timer = Immediate Release\newline T3324 Active timer = 8s\newline I-DRX = 2.56s\newline eDRX/PTW = Disabled |
+| **Mode 3** | Inactivity timer = Immediate Release\newline T3324 Active timer = 0s (disabled) |
 
 With AT commands, UE devices can be controlled to an extent on the client-side except for LTE network-side settings, transmit power and message latency. This loss of control comes at the cost of energy consumption, yet guarantee of message acknowledgement. Luckily, server-side applications can be aware of devices too and send updated configurations and firmware-over-the-air (FoTA) updates for adaptability to devices due to their bidirectionality.
 

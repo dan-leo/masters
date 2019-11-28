@@ -179,7 +179,7 @@ Table: Minimum RSRP values for LTE vendors and UE. {#tbl:min_rsrp}
 	   \centering
 	   \includegraphics[width=1\textwidth]{../../code/tests/box/SINRperceived.pdf}
 	\end{minipage}\label{fig:sinr1}}
-\caption{UE reported RSRP and SINR for LTE vendors, UE and MNOs. The maximum values depend on where the test took place, before signals are attenuated until disconnection. Ublox and Quectel show similar values, unlike the defined disparity stated in \S\ref{design_sinr}. MTN and Vodacom also show similar values, except for the 10 dBm deterioration in the Vodacom-Nokia RSRP. This deterioration could be as a result of NB-IoT being configured for in-band or guard-band instead of stand-alone. Overall, signal strength in terms of RSRP and SINR shows satisfactory performance, except for Vodacom-Nokia.}
+\caption[UE reported RSRP and SINR for LTE vendors, UE and MNOs.]{UE reported RSRP and SINR for LTE vendors, UE and MNOs. The maximum values depend on where the test took place, before signals are attenuated until disconnection. Ublox and Quectel show similar values, unlike the defined disparity stated in \S\ref{design_sinr}. MTN and Vodacom also show similar values, except for the 10 dBm deterioration in the Vodacom-Nokia RSRP. This deterioration could be as a result of NB-IoT being configured for in-band or guard-band instead of stand-alone. Overall, signal strength in terms of RSRP and SINR shows satisfactory performance, except for Vodacom-Nokia.}
 \end{figure}
 
 #### Enhanced Coverage Levels
@@ -234,7 +234,7 @@ This section displays the throughput measurement for the combined RLC and MAC ph
 	   \centering
 	   \includegraphics[width=1\textwidth]{../../code/tests/box/mac_rlc_dl.pdf}
 	\end{minipage}\label{fig:thp2}}
-\caption{The figure shows RLC and MAC layer throughput for LTE vendors, UE and MNOs. 95\% of values under 10 kbps, and although Huawei performs the least in uplink at a 1 kbps central tendency, Huawei surprisingly takes the lead in downlink throughput at just over 10 kbps. Quectel and Ublox exhibit similar characteristics and MTN leads Vodacom marginally by a difference of roughly 1 kbps.}
+\caption[The figure shows RLC and MAC layer throughput for LTE vendors, UE and MNOs.]{The figure shows RLC and MAC layer throughput for LTE vendors, UE and MNOs. 95\% of values under 10 kbps, and although Huawei performs the least in uplink at a 1 kbps central tendency, Huawei surprisingly takes the lead in downlink throughput at just over 10 kbps. Quectel and Ublox exhibit similar characteristics and MTN leads Vodacom marginally by a difference of roughly 1 kbps.}
 \end{figure}
 
 UE reported throughput values under 10 kbps are well under the 250 kbps speeds claimed by NB-IoT manufacturers in general. However, it is more in line with the Quectel modem claiming single tone uplink and downlink of 21.25 and 15.625 kbps, respectively. On the other hand, although Ublox and Quectel show similar distributions, Ublox claims uplink and downlink of 62.5 and 27.2 kbps, respectively, which shows that Ublox is underperforming. Throughput is necessary to take into account for large data transfers such as captured data, images and FoTA updates, and with low values it would affect energy consumption and latency.
@@ -257,7 +257,7 @@ This section presents transmitted and received byte counts for datagrams distrib
 	   \centering
 	   \includegraphics[width=1\textwidth]{../../code/tests/box/rxBytes.pdf}
 	\end{minipage}\label{fig:dat2}}
-\caption{Byte size distribution of telemetry test set across different MNOs, LTE Vendors and UE devices with 512 byte limit line (purple). Ublox and Quectel show equal distribution characteristics, while MTN leads Vodacom marginally. In general, 25\% of uplink datagrams extend above 512 byte line and 25\% of downlink datagrams extend past 200 bytes. Nokia extends well past the 512 byte limit to a few thousand bytes in both cases due to repetition caused by the ECL mechanism.}
+\caption[Byte size distribution of telemetry test set across different MNOs, LTE Vendors and UE devices]{Byte size distribution of telemetry test set across different MNOs, LTE Vendors and UE devices with 512 byte limit line (purple). Ublox and Quectel show equal distribution characteristics, while MTN leads Vodacom marginally. In general, 25\% of uplink datagrams extend above 512 byte line and 25\% of downlink datagrams extend past 200 bytes. Nokia extends well past the 512 byte limit to a few thousand bytes in both cases due to repetition caused by the ECL mechanism.}
 \label{fig:dataoverhead}
 \end{figure}
 
@@ -285,7 +285,7 @@ This section presents transmitted and received byte counts for datagrams distrib
 	   \centering
 	   \includegraphics[width=1\textwidth]{../../code/tests/box/intervalEstECL1.pdf}
 	\end{minipage}\label{fig:tele2}}
-\caption{Telemetry interval estimation sending 16-512 byte packet payloads in ECL class 1 network conditions.  Quectel is measured to be better than Ublox, yet Ublox reports better values than Quectel. MTN leads Vodacom due to Nokia's poor performance.}
+\caption[Telemetry interval estimation sending 16-512 byte packet payloads in ECL class 1 network conditions.]{Telemetry interval estimation sending 16-512 byte packet payloads in ECL class 1 network conditions.  Quectel is measured to be better than Ublox, yet Ublox reports better values than Quectel. MTN leads Vodacom due to Nokia's poor performance.}
 \end{figure}
 
 ### Battery longevity {#res_battery}
@@ -310,7 +310,7 @@ This section presents transmitted and received byte counts for datagrams distrib
 	   \centering
 	   \includegraphics[width=1\textwidth]{../../code/tests/box/longevityEstECL1.pdf}
 	\end{minipage}\label{fig:bat2}}
-\caption{Battery longevity estimation sending 16-512 byte packet payloads in ECL class 1 network conditions. According to LTE vendor results, UE devices will last a couple of years up to 10, except for Nokia which will only last a few months. Measurements show Quectel is better than Ublox, yet Ublox reports better results than Quectel. MTN leads Vodacom due to Nokia's dismal performance. Estimation results from UE reports tend to underestimate measured values, and this should be taken into account when a developer uses UE reports in their application.}
+\caption[Battery longevity estimation sending 16-512 byte packet payloads in ECL class 1 network conditions.]{Battery longevity estimation sending 16-512 byte packet payloads in ECL class 1 network conditions. According to LTE vendor results, UE devices will last a couple of years up to 10, except for Nokia which will only last a few months. Measurements show Quectel is better than Ublox, yet Ublox reports better results than Quectel. MTN leads Vodacom due to Nokia's dismal performance. Estimation results from UE reports tend to underestimate measured values, and this should be taken into account when a developer uses UE reports in their application.}
 \end{figure}
 
 \newpage

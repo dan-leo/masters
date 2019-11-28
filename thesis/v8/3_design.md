@@ -191,13 +191,28 @@ This gives a good idea as to the range expected according to RSRP, with more inf
 
 Using a Quectel BG96, the following tests were taken on the rooftop described in Fig. \ref{fig:rooftop}[^zte_tests].
 
-![Rooftop outside the HF RF lab on the 5th floor of the Electrical & Electronic Engineering building. The base station it connected to is on the General Building, and is just over 150m away at the same elevation with a single building blocking line-of-sight. The base station is situated on the bottom left of the picture at an altitude of approximately 138m. \label{fig:rooftop}](C:\GIT\masters\thesis\images\rooftop_maps.JPG){width=55%}
+<!-- ![Rooftop outside the HF RF lab on the 5th floor of the Electrical & Electronic Engineering building. The base station it connected to is on the General Building, and is just over 150m away at the same elevation with a single building blocking line-of-sight. The base station is situated on the bottom left of the picture at an altitude of approximately 138m. \label{fig:rooftop}](C:\GIT\masters\thesis\images\rooftop_maps.JPG){width=55%} -->
+
+\begin{figure}
+\centering
+\includegraphics[width=0.55\textwidth,height=\textheight]{C:/GIT/masters/thesis/images/rooftop_maps.JPG}
+\captionof{figure}[Rooftop outside the HF RF lab test]{Rooftop outside the HF RF lab on the 5th floor of the Electrical \& Electronic Engineering building. The base station it connected to is on the General Building, and is just over 150m away at the same elevation with a single building blocking line-of-sight. The base station is situated on the bottom left of the picture at an altitude of approximately 138m. \label{fig:rooftop}}
+\end{figure}
 
 [^zte_tests]: The MTN-ZTE test dataset \S\ref{dataset} was captured inside the RF enclosure inside the HF RF lab.
 
 The tests involve sending a set of 10 pings multiple times at a certain attenuation and resulting RSSI measurement using a Quectel BG96 modem.
 
-![Looking at the ICMP ping response according to different RSSI values, we see high jitter of a few seconds from -80dBm or less. This means that in an urban area, NB-IoT satisfies the 2-5 km range specification.](C:\GIT\masters\thesis\images\jitter.png){width=50%}
+<!-- ![Looking at the ICMP ping response according to different RSSI values, we see high jitter of a few seconds from -80dBm or less. This means that in an urban area, NB-IoT satisfies the 2-5 km range specification.](C:\GIT\masters\thesis\images\jitter.png){width=50%} -->
+
+\begin{figure}
+\centering
+\includegraphics[width=0.5\textwidth,height=\textheight]{C:/GIT/masters/thesis/images/jitter.png}
+\captionof{figure}[ICMP ping response jitter]{Looking at the ICMP ping response according to different RSSI
+values, we see high jitter of a few seconds from -80dBm or less. This
+means that in an urban area, NB-IoT satisfies the 2-5 km range
+specification.}
+\end{figure}
 
 [](C:\GIT\masters\thesis\images\rooftest1.png)
 
@@ -235,7 +250,7 @@ The tests involve sending a set of 10 pings multiple times at a certain attenuat
 	   \includegraphics[width=1.0\linewidth]{../images/rooftest4.png}
 	\label{fig:ping4}
 	\end{minipage}}
-\captionof{figure}[Ping tests]{Ping tests on Engineering rooftop with time in milliseconds on x-axis and the percentage frequency on the y-axis. Here we see how ECL class 0 and ECL clsas 1 is quite similar.}
+\captionof{figure}[Short-range ping tests]{Ping tests on Engineering rooftop with time in milliseconds on x-axis and the percentage frequency on the y-axis. Here we see how ECL class 0 and ECL clsas 1 is quite similar.}
 \end{figure}
 
 [](C:\GIT\masters\thesis\images\rooftest3.png)
@@ -345,9 +360,26 @@ To be able to attenuate the signal until disconnection, one must increase the ra
 
 Using an RTL2832 SDR dongle, we can capture RF signals. At the very least we can visualise how the signal propogates through the airspace.
 
-![5 dB SINR NB-IoT transmissions using Sierra Wireless WP7702 at 908.2 MHz and EARFCN 3734 of length 2282ms, 1560ms and 1380ms respectively.](../images/image-20191105144302036.png)
+<!-- ![5 dB SINR NB-IoT transmissions using Sierra Wireless WP7702 at 908.2 MHz and EARFCN 3734 of length 2282ms, 1560ms and 1380ms respectively.](../images/image-20191105144302036.png) -->
 
-![SigFox and LoRa RF signals \@868 MHz on a waterfall diagram, with the x-axis showing frequencies at 868 MHz and the y-axis over time. The SigFox signals (vertical) take about 2 seconds to transmit, and the LoRa signals (horizontal) take a few hundred milliseconds.](../images/image-20191104223939783.png){width=30%}
+<!-- ![SigFox and LoRa RF signals \@868 MHz on a waterfall diagram, with the x-axis showing frequencies at 868 MHz and the y-axis over time. The SigFox signals (vertical) take about 2 seconds to transmit, and the LoRa signals (horizontal) take a few hundred milliseconds.](../images/image-20191104223939783.png){width=30%} -->
+
+\begin{figure}
+\centering
+\includegraphics{../images/image-20191105144302036.png}
+\caption[NB-IoT transmissions on RF spectrum]{5 dB SINR NB-IoT transmissions using Sierra Wireless WP7702 at
+908.2 MHz and EARFCN 3734 of length 2282ms, 1560ms and 1380ms
+respectively.}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=0.3\textwidth,height=\textheight]{../images/image-20191104223939783.png}
+\caption[SigFox and LoRa transmissions on RF spectrum]{SigFox and LoRa RF signals @868 MHz on a waterfall diagram,
+with the x-axis showing frequencies at 868 MHz and the y-axis over time.
+The SigFox signals (vertical) take about 2 seconds to transmit, and the
+LoRa signals (horizontal) take a few hundred milliseconds.}
+\end{figure}
 
 Each technology has their own modulation scheme and unique features, and with that their own set of advantages and disadvantages. More can be found in \S\ref{lpwans}.
 
@@ -447,11 +479,29 @@ In the debug logs we see the timer expires after exactly 32 seconds.
 
 [](C:\Users\d7rob\AppData\Roaming\Typora\typora-user-images\1555569718434.png){width=50%}
 
-![This test shows eDRX events until 800 minutes, measured externally. It shows an irregular eDRX time when not properly configured. \label{fig:irregular_edrx}](../images/image-20191105162759288.png)
+<!-- ![This test shows eDRX events until 800 minutes, measured externally. It shows an irregular eDRX time when not properly configured. \label{fig:irregular_edrx}](../images/image-20191105162759288.png) -->
+
+\begin{figure}
+\centering
+\includegraphics{../images/image-20191105162759288.png}
+\caption[Irregular eDRX events]{This test shows eDRX events until 800 minutes, measured
+externally. It shows an irregular eDRX time when not properly
+configured. \label{fig:irregular_edrx}}
+\end{figure}
+
 
 It is important to note that if eDRX time is not configured properly, then the outcome does not show as expected as in Fig. \ref{fig:irregular_edrx}.
 
-![Typical eDRX current profile with a 277.8 ms duration. This shows how for the first few microseconds there is a large transmission current spike to synchronize, before receiving paging information from the cell tower. \label{fig:edrx_pattern}](../images/image-20191105163855934.png){width=65%}
+<!-- ![Typical eDRX current profile with a 277.8 ms duration. This shows how for the first few microseconds there is a large transmission current spike to synchronize, before receiving paging information from the cell tower. \label{fig:edrx_pattern}](../images/image-20191105163855934.png){width=65%} -->
+
+\begin{figure}
+\centering
+\includegraphics[width=0.65\textwidth,height=\textheight]{../images/image-20191105163855934.png}
+\caption[Typical eDRX current profile]{Typical eDRX current profile with a 277.8 ms duration. This
+shows how for the first few microseconds there is a large transmission
+current spike to synchronize, before receiving paging information from
+the cell tower. \label{fig:edrx_pattern}}
+\end{figure}
 
 Considering an eDRX event with a typical current profile as shown in Fig. \ref{fig:edrx_pattern}, the debug trace shown here every 2.56 seconds for ZTE (same for Ericsson and Huawei but Nokia has a cycle every 10 seconds), shows the following information. Besides logs showing time synchronization and other network information, the serving cell logs show signal strength metrics.
 
@@ -587,7 +637,7 @@ The digital multimeter in Fig. \ref{fig:current_setup} is replaced with a ZXCT10
 	   \includegraphics[width=1.0\linewidth]{../images/zxct1008.jpeg}
 	\label{fig:edrx2}
 	\end{minipage}}
-\captionof{figure}{Diagrams shows ZXCT1008 high-side current monitor which can be found on https://www.diodes.com/assets/Datasheets/ZXCT1008.pdf}
+\captionof{figure}[ZXCT1008 high-side current monitor]{Diagrams shows ZXCT1008 high-side current monitor which can be found on https://www.diodes.com/assets/Datasheets/ZXCT1008.pdf}
 \end{figure}
 
 Rs is set to a 1 ohm resistor and Rg is set as a 1k ohm resistor such that 100mA supplied to the modem makes 1V.

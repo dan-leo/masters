@@ -16,7 +16,7 @@ tablenos-number-by-section: true
 
 [](../images/UScrest-WM.jpg){width=25%}
 
- \pagenumbering{gobble}
+\pagenumbering{gobble}
 
 \begin{minipage}{\linewidth}
 \begin{center}
@@ -802,7 +802,7 @@ After network registration or transmission of a data packet, the device usually 
 
 NB-IoT allows for various power saving mechanisms design to prolong the lifetime of battery-powered devices. Except for release assistance, the module automatically enters the different states depending on defined configuration. Release assistance, as explained in \S\ref{release_a}, terminates the network defined `inactivty timer` such that it enters into the states shown in Fig. \ref{fig:power_saving_mechanisms}.
 
-![This diagram shows power saving mechanisms for NB-IoT, including paging windows, eDRX cycles, active timer and PSM mode. \label{fig:power_saving_mechanisms}](C:\Users\d7rob\AppData\Roaming\Typora\typora-user-images\1555540836196.png){width=80%}
+![This diagram shows power saving mechanisms for NB-IoT, including paging windows, eDRX cycles, active timer and PSM mode. \label{fig:power_saving_mechanisms}](../images/edrx_cycle_diag.png){width=80%}
 
 It is recommended to order the network configuration values of the following from smallest to largest for proper operation:
 
